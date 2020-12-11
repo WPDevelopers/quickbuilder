@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Wp React Form
+ * Plugin Name:     WP React Form
  * Plugin URI:      PLUGIN SITE HERE
  * Description:     PLUGIN DESCRIPTION HERE
  * Author:          YOUR NAME HERE

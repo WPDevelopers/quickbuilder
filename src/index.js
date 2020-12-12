@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { __ } from "@wordpress/i18n";
-import WPReactForm from './wp-react-form/index';
+import WPReactForm from "./wp-react-form";
 
 const items = [
 	{

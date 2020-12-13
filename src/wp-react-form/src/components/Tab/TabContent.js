@@ -1,4 +1,6 @@
 import React from "react";
+import Fields from '../Fields';
+import Submit from './../Submit';
 
 const TabContent = ({ activeTab, tabs }) => {
 	if (tabs == undefined) {
@@ -7,19 +9,20 @@ const TabContent = ({ activeTab, tabs }) => {
 	
 	return (
 		<div className={`wrf-tab-content-wrap`}>
-			{tabs.map((tab) => (
+			{tabs.map(({ key, fields }) => (
 				<div
-					className={`wrf-tab-content ${tab.key}${
-						tab.key === activeTab ? " active-tab" : ""
+					className={`wrf-tab-content ${key}${
+						key === activeTab ? " active-tab" : ""
 					}`}
-					key={tab.key}
+					key={key}
 				>
 					<div className={`wrf-tab-content-inner`}>
-						<h1>Lalal</h1>
-						{/* <Fields fields={tab.fields} /> */}
+						<Fields fields={fields} />
 					</div>
 				</div>
 			))}
+
+			<Submit />
 		</div>
 	);
 };

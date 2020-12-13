@@ -275,16 +275,19 @@ var tabs = [{
   icon: "",
   classes: "wrf-menu",
   fields: [{
+    label: "First Name",
     name: "first_name",
     type: "text",
     css_class: "input-field",
     placeholder: "blah blah"
   }, {
+    label: "Last Name",
     name: "last_name",
     type: "text",
     css_class: "input-field",
     value: "blah blah"
   }, {
+    label: "Message",
     name: "message",
     type: "textarea",
     css_class: "input-field",
@@ -295,16 +298,13 @@ var tabs = [{
   key: "tab_2",
   icon: "",
   fields: [{
+    label: "First Name",
     name: "first_name",
     type: "text",
     css_class: "input-field",
     placeholder: "blah blah"
   }, {
-    name: "last_name",
-    type: "text",
-    css_class: "input-field",
-    value: "blah blah"
-  }, {
+    label: "Last Name",
     name: "message",
     type: "textarea",
     css_class: "input-field",
@@ -336,9 +336,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _src_components_Tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./src/components/Tab */ "./src/wp-react-form/src/components/Tab/index.js");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _src_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./src/store */ "./src/wp-react-form/src/store/index.js");
+/* harmony import */ var _src_MyTextControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/MyTextControl */ "./src/wp-react-form/src/MyTextControl.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _src_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./src/store */ "./src/wp-react-form/src/store/index.js");
+
 
 
 
@@ -348,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["registerStore"])("wp-react-form-store", _src_store__WEBPACK_IMPORTED_MODULE_4__["default"]);
+Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["registerStore"])("wp-react-form-store", _src_store__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
 var WPReactForm = function WPReactForm(_ref) {
   var tabs = _ref.tabs;
@@ -360,6 +362,143 @@ var WPReactForm = function WPReactForm(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (WPReactForm);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/MyTextControl.js":
+/*!************************************************!*\
+  !*** ./src/wp-react-form/src/MyTextControl.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var MyTextControl = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__["withState"])({
+  name: ''
+})(function (props) {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, console.log(props), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
+    label: "Additional CSS Class",
+    value: props.name,
+    onChange: function onChange(name) {
+      return props.setState({
+        name: name
+      });
+    }
+  }));
+});
+/* harmony default export */ __webpack_exports__["default"] = (MyTextControl);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/index.js":
+/*!**********************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/index.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var Fields = function Fields(_ref) {
+  var fields = _ref.fields;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      formState = _useState2[0],
+      setFormState = _useState2[1];
+
+  var handleChange = function handleChange(e, name) {
+    console.log(e);
+    console.log(name);
+  };
+
+  var allFields = fields.map(function (_ref2) {
+    var css_class = _ref2.css_class,
+        name = _ref2.name,
+        type = _ref2.type,
+        value = _ref2.value,
+        placeholder = _ref2.placeholder,
+        label = _ref2.label;
+
+    switch (type) {
+      case "text":
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["TextControl"], {
+          label: label,
+          placeholder: placeholder ? placeholder : "",
+          className: css_class,
+          name: name,
+          value: value,
+          onChange: function onChange(e) {
+            return handleChange(e, name);
+          }
+        });
+
+      case "textarea":
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["TextareaControl"], {
+          label: label,
+          placeholder: placeholder ? placeholder : "",
+          className: css_class,
+          name: name,
+          value: value,
+          onChange: function onChange(e) {
+            return handleChange(e);
+          }
+        });
+
+      default:
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", null);
+    }
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, allFields);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Fields);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Submit/index.js":
+/*!**********************************************************!*\
+  !*** ./src/wp-react-form/src/components/Submit/index.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+    type: "submit"
+  }, "Submit");
+});
 
 /***/ }),
 
@@ -376,6 +515,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Fields__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Fields */ "./src/wp-react-form/src/components/Fields/index.js");
+/* harmony import */ var _Submit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../Submit */ "./src/wp-react-form/src/components/Submit/index.js");
+
+
 
 
 
@@ -389,14 +532,18 @@ var TabContent = function TabContent(_ref) {
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wrf-tab-content-wrap"
-  }, tabs.map(function (tab) {
+  }, tabs.map(function (_ref2) {
+    var key = _ref2.key,
+        fields = _ref2.fields;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "wrf-tab-content ".concat(tab.key).concat(tab.key === activeTab ? " active-tab" : ""),
-      key: tab.key
+      className: "wrf-tab-content ".concat(key).concat(key === activeTab ? " active-tab" : ""),
+      key: key
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "wrf-tab-content-inner"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "Lalal")));
-  }));
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      fields: fields
+    })));
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TabContent);
@@ -562,6 +709,28 @@ var store = {
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (store);
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!*********************************************!*\
+  !*** external {"this":["wp","components"]} ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["components"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/compose":
+/*!******************************************!*\
+  !*** external {"this":["wp","compose"]} ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = this["wp"]["compose"]; }());
 
 /***/ }),
 

@@ -1,5 +1,6 @@
 import React from "react";
 import Tabs from "./src/components/Tab";
+import MyTextControl from './src/MyTextControl';
 
 /**
  * Registering a store.
@@ -12,6 +13,7 @@ const WPReactForm = ({ tabs }) => {
 	return (
 		<div className={`wp-react-form wrf-tabs-wrapper`}>
 			<Tabs tabs={tabs} />
+			{/* <MyTextControl ddd="mmmm" /> */}
 		</div>
 	);
 };

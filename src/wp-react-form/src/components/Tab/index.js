@@ -13,7 +13,10 @@ const Tabs = ({ tabs }) => {
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 			/>
-			<TabContent tabs={tabs} activeTab={activeTab} />
+			<TabContent
+				tabs={tabs}
+				activeTab={activeTab}
+			/>
 		</>
 	);
 };

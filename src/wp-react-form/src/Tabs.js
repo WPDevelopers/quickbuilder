@@ -14,6 +14,9 @@ const Tabs = ({ items, price }) => {
 					}`}
 					data-key={tab.key}
 					key={tab.key}
+					onClick={() =>
+						dispatch("wp-react-form-store").setPrice(2000)
+					}
 				>
 					{tab.label}
 				</li>
@@ -21,7 +24,6 @@ const Tabs = ({ items, price }) => {
 		</ul>
 	);
 };
-
 export default withDispatch((dispatch) => {
 	dispatch("wp-react-form-store").setPrice(1000);
 })(

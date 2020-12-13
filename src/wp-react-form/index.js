@@ -1,5 +1,5 @@
 import React from "react";
-import Tabs from "./src/Tabs";
+import TabBuilder from "./src/TabBuilder";
 /**
  * Registering a store.
  */
@@ -10,7 +10,7 @@ registerStore("wp-react-form-store", store);
 const WPReactForm = ({ items }) => {
 	return (
 		<div className={`wp-react-form wrf-tabs-wrapper`}>
-			<Tabs items={items} />
+			<TabBuilder items={items} />
 		</div>
 	);
 };

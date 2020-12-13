@@ -1,0 +1,27 @@
+.wp-react-form {
+	&.wrf-tabs-wrapper {
+		display: flex;
+		padding: 15px;
+		.wrf-tab-nav {
+			flex-basis: 15%;
+			margin:0 15px 0 0;
+			li {
+				border: 1px solid lightgrey;
+				padding: 10px 15px;
+				cursor: pointer;
+			}
+		}
+
+		.wrf-tab-content-wrap {
+			flex-basis: 85%;
+			background: #fffcfc61;
+			padding: 15px;
+			.wrf-tab-content {
+				display: none;
+				&.active-tab {
+					display: block;
+				}
+			}
+		}
+	}
+}

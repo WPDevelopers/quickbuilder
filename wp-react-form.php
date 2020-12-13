@@ -19,7 +19,7 @@ add_action('admin_menu', function(){
 });
 
 function wp_react_form_display(){
-    echo '<div id="root">Hello</div>';
+    echo '<div id="root"></div>';
 }
 
 add_action('admin_enqueue_scripts', function( $hook ){
@@ -28,4 +28,5 @@ add_action('admin_enqueue_scripts', function( $hook ){
     }
     $dependencies = require_once __DIR__ . '/build/index.asset.php';
     wp_enqueue_script('wp-react-form', plugin_dir_url( __FILE__ ) . '/build/index.js', $dependencies['dependencies'], $dependencies['version'], true);
+    wp_enqueue_style('wp-react-form', plugin_dir_url( __FILE__ ) . '/build/index.css', [], $dependencies['version'], 'all');
 });

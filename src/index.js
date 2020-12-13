@@ -3,13 +3,12 @@ import ReactDOM from "react-dom";
 import { __ } from "@wordpress/i18n";
 import WPReactForm from "./wp-react-form";
 
-const items = [
+const tabs = [
 	{
 		label: "Tab 1",
 		key: "tab_1",
 		icon: "",
 		classes: "wrf-menu",
-		action: "blahblah",
 		fields: [
 			{
 				name: "first_name",
@@ -35,7 +34,6 @@ const items = [
 		label: "Tab 2",
 		key: "tab_2",
 		icon: "",
-		action: "blahblah",
 		fields: [
 			{
 				name: "first_name",
@@ -59,8 +57,6 @@ const items = [
 	},
 ];
 
-const App = () => {
-	return <WPReactForm items={items} />;
-};
+const App = () => <WPReactForm tabs={tabs} />;
 
 ReactDOM.render(<App />, document.getElementById("root"));

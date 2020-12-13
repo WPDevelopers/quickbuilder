@@ -1,0 +1,21 @@
+.wp-react-form.wrf-tabs-wrapper {
+  display: flex;
+  padding: 15px; }
+  .wp-react-form.wrf-tabs-wrapper .wrf-tab-nav {
+    flex-basis: 15%;
+    margin: 0 15px 0 0; }
+    .wp-react-form.wrf-tabs-wrapper .wrf-tab-nav li {
+      border: 1px solid lightgrey;
+      padding: 10px 15px;
+      cursor: pointer; }
+  .wp-react-form.wrf-tabs-wrapper .wrf-tab-content-wrap {
+    flex-basis: 85%;
+    background: #fffcfc61;
+    padding: 15px; }
+    .wp-react-form.wrf-tabs-wrapper .wrf-tab-content-wrap .wrf-tab-content {
+      display: none; }
+      .wp-react-form.wrf-tabs-wrapper .wrf-tab-content-wrap .wrf-tab-content.active-tab {
+        display: block; }
+
+
+/*# sourceMappingURL=index.css.map*/

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TextControl, TextareaControl } from "@wordpress/components";
 
-const GenerateForm = ({ fields }) => {
+const Fields = ({ fields }) => {
 	const allFields = fields.map(
 		({ css_class, name, type, value, placeholder, label }) => {
 			switch (type) {
@@ -33,4 +33,4 @@ const GenerateForm = ({ fields }) => {
 	return <>{allFields}</>;
 };
 
-export default GenerateForm;
+export default Fields;

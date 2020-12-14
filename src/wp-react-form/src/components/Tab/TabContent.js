@@ -21,7 +21,7 @@ const TabContent = ({ activeTab, config }) => {
 					</div>
 				</div>
 			))}
-			<Submit />
+			{config.submit && <Submit config={config.submit} />}
 		</div>
 	);
 };

@@ -60,8 +60,10 @@ const builder = {
 	tabs,
 	submit: {
 		label: "Save Changes",
+		// onSubmit: (e) => { // this is for custom submit
+		// 	console.log("from builder obj", e);
+		// },
 	},
-	onSubmit: () => {},
 };
 const App = () => <WPReactForm config={builder} />;
 ReactDOM.render(<App />, document.getElementById("root"));

@@ -314,9 +314,11 @@ var tabs = [{
 var builder = {
   tabs: tabs,
   submit: {
-    label: "Save Changes"
-  },
-  onSubmit: function onSubmit() {}
+    label: "Save Changes" // onSubmit: (e) => { // this is for custom submit
+    // 	console.log("from builder obj", e);
+    // },
+
+  }
 };
 
 var App = function App() {
@@ -483,13 +485,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
 
 
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
-    type: "submit"
-  }, "Submit");
-});
+
+
+
+var Submit = function Submit(_ref) {
+  var config = _ref.config;
+
+  /**
+   * This is default submit function
+   */
+  if (!config.hasOwnProperty("onSubmit")) {
+    config.onSubmit = function (evt) {
+      console.log("from submit button itself", evt);
+    };
+  }
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    onClick: function onClick(evt) {
+      return config.onSubmit(evt);
+    }
+  }, config.label);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Submit);
 
 /***/ }),
 
@@ -534,7 +558,9 @@ var TabContent = function TabContent(_ref) {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_2__["default"], {
       fields: fields
     })));
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  }), config.submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    config: config.submit
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TabContent);

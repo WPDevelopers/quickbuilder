@@ -1,15 +1,15 @@
 import React from "react";
-import Fields from '../Fields';
-import Submit from './../Submit';
+import Fields from "../Fields";
+import Submit from "./../Submit";
 
-const TabContent = ({ activeTab, tabs }) => {
-	if (tabs == undefined) {
+const TabContent = ({ activeTab, config }) => {
+	if (config.tabs == undefined) {
 		return "";
 	}
-	
+
 	return (
 		<div className={`wrf-tab-content-wrap`}>
-			{tabs.map(({ key, fields }) => (
+			{config.tabs.map(({ key, fields }) => (
 				<div
 					className={`wrf-tab-content ${key}${
 						key === activeTab ? " active-tab" : ""
@@ -21,7 +21,6 @@ const TabContent = ({ activeTab, tabs }) => {
 					</div>
 				</div>
 			))}
-
 			<Submit />
 		</div>
 	);

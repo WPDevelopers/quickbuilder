@@ -1,13 +1,12 @@
 const DEFAULT_STATE = {
-	price: 0,
-	discountPercent: 0,
+	formState: {},
 };
 
 const actions = {
-	setPrice(price) {
+	setFormState(formState) {
 		return {
-			type: "SET_PRICE",
-			payload: price,
+			type: "SET_FORM_STATE",
+			payload: formState,
 		};
 	},
 };
@@ -15,10 +14,10 @@ const actions = {
 const store = {
 	reducer(state = DEFAULT_STATE, action) {
 		switch (action.type) {
-			case "SET_PRICE":
+			case "SET_FORM_STATE":
 				return {
 					...state,
-					price: action.payload,
+					formState: action.payload,
 				};
 		}
 
@@ -28,14 +27,9 @@ const store = {
 	actions,
 
 	selectors: {
-		getPrice(state) {
-			const { price, discountPercent } = state;
-			return price;
+		getFormState(state) {
+			return state.formState;
 		},
-		// setPrice(price) {
-		// 	// const { price, discountPercent } = state;
-		// 	return actions.setPrice(price);
-		// },
 	},
 };
 

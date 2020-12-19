@@ -1,5 +1,13 @@
 const DEFAULT_STATE = {
-	formState: {},
+	depends_on: {
+		message: {
+			target: "is_checked",
+			value: true,
+		},
+	},
+	formState: {
+		last_name: "Mukul",
+	},
 };
 
 const actions = {
@@ -29,6 +37,25 @@ const store = {
 	selectors: {
 		getFormState(state) {
 			return state.formState;
+		},
+		getInputState(state, name) {
+			return state.formState.hasOwnProperty(name)
+				? state.formState[name]
+				: null;
+		},
+		inputCanVisible(state, current) {
+			if (!state.depends_on.hasOwnProperty(current)) {
+				return true;
+			}
+
+			return (
+				state.depends_on.hasOwnProperty(current) &&
+				state.formState.hasOwnProperty(
+					state.depends_on[current].target
+				) &&
+				state.depends_on[current].value ===
+					state.formState[state.depends_on[current].target]
+			);
 		},
 	},
 };

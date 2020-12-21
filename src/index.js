@@ -40,6 +40,40 @@ const tabs = [
 				depends_on: "is_checked",
 				depended_value: true,
 			},
+			{
+				label: "User type",
+				name: "heading_color",
+				type: "radio",
+				css_class: "input-field",
+				help: "The type of the current user",
+				options : [
+					{ label: "Author", value: "a" },
+					{ label: "Editor", value: "e" },
+				]
+			},
+			{
+				label: "User type",
+				name: "header_size",
+				type: "slider",
+				min: 2,
+				max: 100
+			},
+			{
+				label: "User type",
+				name: "header_size",
+				type: "alignment"
+			},
+			{
+				label: "More",
+				name: "more_excerpt",
+				type: "icon-button",
+				icon: "ellipsis"
+			},
+			{
+				label: "Color",
+				name: "color_indicator",
+				type: "color-indicator"
+			},
 		],
 	},
 	{

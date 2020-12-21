@@ -4,6 +4,11 @@ import {
 	TextControl,
 	TextareaControl,
 	CheckboxControl,
+	ColorPicker,
+	RadioControl,
+	RangeControl,
+	Button,
+	ColorIndicator
 } from "@wordpress/components";
 import { useCallback } from "@wordpress/element";
 
@@ -42,6 +47,16 @@ const Field = (props) => {
 			return <TextareaControl {...controlProps} />;
 		case "checkbox":
 			return <CheckboxControl {...controlProps} />;
+		case "colorpicker":
+			return <ColorPicker {...controlProps} />;
+		case "radio":
+			return <RadioControl {...controlProps} />;
+		case "slider":
+			return <RangeControl {...controlProps} />;
+		case "icon-button":
+			return <Button {...controlProps} />;
+		case "color-indicator":
+			<ColorIndicator colorValue="#0073aa" />
 		default:
 			return <div></div>;
 	}

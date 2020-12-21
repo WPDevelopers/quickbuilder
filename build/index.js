@@ -300,6 +300,38 @@ var tabs = [{
     value: "blah blah",
     depends_on: "is_checked",
     depended_value: true
+  }, {
+    label: "User type",
+    name: "heading_color",
+    type: "radio",
+    css_class: "input-field",
+    help: "The type of the current user",
+    options: [{
+      label: "Author",
+      value: "a"
+    }, {
+      label: "Editor",
+      value: "e"
+    }]
+  }, {
+    label: "User type",
+    name: "header_size",
+    type: "slider",
+    min: 2,
+    max: 100
+  }, {
+    label: "User type",
+    name: "header_size",
+    type: "alignment"
+  }, {
+    label: "More",
+    name: "more_excerpt",
+    type: "icon-button",
+    icon: "ellipsis"
+  }, {
+    label: "Color",
+    name: "color_indicator",
+    type: "color-indicator"
   }]
 }, {
   label: "Tab 2",
@@ -443,6 +475,23 @@ var Field = function Field(props) {
 
     case "checkbox":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["CheckboxControl"], controlProps);
+
+    case "colorpicker":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ColorPicker"], controlProps);
+
+    case "radio":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RadioControl"], controlProps);
+
+    case "slider":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RangeControl"], controlProps);
+
+    case "icon-button":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], controlProps);
+
+    case "color-indicator":
+      Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ColorIndicator"], {
+        colorValue: "#0073aa"
+      });
 
     default:
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", null);
@@ -769,68 +818,68 @@ var store = {
 /***/ }),
 
 /***/ "@wordpress/components":
-/*!*********************************************!*\
-  !*** external {"this":["wp","components"]} ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["components"]; }());
-
-/***/ }),
-
-/***/ "@wordpress/data":
-/*!***************************************!*\
-  !*** external {"this":["wp","data"]} ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["data"]; }());
-
-/***/ }),
-
-/***/ "@wordpress/element":
-/*!******************************************!*\
-  !*** external {"this":["wp","element"]} ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["element"]; }());
-
-/***/ }),
-
-/***/ "@wordpress/i18n":
-/*!***************************************!*\
-  !*** external {"this":["wp","i18n"]} ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["i18n"]; }());
-
-/***/ }),
-
-/***/ "react":
-/*!*********************************!*\
-  !*** external {"this":"React"} ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["React"]; }());
-
-/***/ }),
-
-/***/ "react-dom":
 /*!************************************!*\
-  !*** external {"this":"ReactDOM"} ***!
+  !*** external ["wp","components"] ***!
   \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-(function() { module.exports = this["ReactDOM"]; }());
+(function() { module.exports = window["wp"]["components"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["data"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["element"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["i18n"]; }());
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["React"]; }());
+
+/***/ }),
+
+/***/ "react-dom":
+/*!***************************!*\
+  !*** external "ReactDOM" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["ReactDOM"]; }());
 
 /***/ })
 

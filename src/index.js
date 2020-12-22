@@ -10,20 +10,20 @@ const tabs = [
 		icon: "",
 		classes: "wrf-menu",
 		fields: [
-			{
-				label: "First Name",
-				name: "first_name",
-				type: "text",
-				css_class: "input-field",
-				placeholder: "blah blah",
-			},
-			{
-				label: "Last Name",
-				name: "last_name",
-				type: "text",
-				css_class: "input-field",
-				value: "blah blah",
-			},
+			// {
+			// 	label: "First Name",
+			// 	name: "first_name",
+			// 	type: "text",
+			// 	css_class: "input-field",
+			// 	placeholder: "blah blah",
+			// },
+			// {
+			// 	label: "Last Name",
+			// 	name: "last_name",
+			// 	type: "text",
+			// 	css_class: "input-field",
+			// 	value: "blah blah",
+			// },
 			{
 				label: "Is Checked?",
 				name: "is_checked",
@@ -31,37 +31,37 @@ const tabs = [
 				css_class: "input-field",
 				value: false,
 			},
-			{
-				label: "Message",
-				name: "message",
-				type: "textarea",
-				css_class: "input-field",
-				value: "blah blah",
-				depends_on: "is_checked",
-				depended_value: true,
-			},
-			{
-				label: "User type",
-				name: "heading_color",
-				type: "radio",
-				css_class: "input-field",
-				help: "The type of the current user",
-				options : [
-					{ label: "Author", value: "a" },
-					{ label: "Editor", value: "e" },
-				]
-			},
+			// {
+			// 	label: "Message",
+			// 	name: "message",
+			// 	type: "textarea",
+			// 	css_class: "input-field",
+			// 	value: "blah blah",
+			// 	depends_on: "is_checked",
+			// 	depended_value: true,
+			// },
+			// {
+			// 	label: "User type",
+			// 	name: "heading_color",
+			// 	type: "radio",
+			// 	css_class: "input-field",
+			// 	help: "The type of the current user",
+			// 	options : [
+			// 		{ label: "Author", value: "a" },
+			// 		{ label: "Editor", value: "e" },
+			// 	]
+			// },
+			// {
+			// 	label: "User type",
+			// 	name: "header_size",
+			// 	type: "slider",
+			// 	min: 2,
+			// 	max: 100
+			// },
 			{
 				label: "User type",
 				name: "header_size",
-				type: "slider",
-				min: 2,
-				max: 100
-			},
-			{
-				label: "User type",
-				name: "header_size",
-				type: "alignment"
+				type: "colorpicker"
 			},
 			{
 				label: "More",
@@ -70,9 +70,9 @@ const tabs = [
 				icon: "ellipsis"
 			},
 			{
-				label: "Color",
-				name: "color_indicator",
-				type: "color-indicator"
+				label: "Switch",
+				name: "switch_control",
+				type: "toggle",
 			},
 		],
 	},

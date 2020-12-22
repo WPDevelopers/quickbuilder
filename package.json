@@ -18,6 +18,7 @@
     "grunt-wp-readme-to-markdown": "~1.0.0"
   },
   "dependencies": {
-    "@wordpress/scripts": "^12.5.0"
+    "@wordpress/scripts": "^12.5.0",
+    "react-color": "^2.19.3"
   }
 }

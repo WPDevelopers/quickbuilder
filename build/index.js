@@ -1,6 +1,81 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["style-index"],{
+
+/***/ "./node_modules/@wordpress/components/build-style/style.css":
+/*!******************************************************************!*\
+  !*** ./node_modules/@wordpress/components/build-style/style.css ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ })
+
+}]);
+
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		return result;
+/******/ 	}
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"index": 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -79,9 +154,18 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push(["./src/index.js","style-index"]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -274,64 +358,66 @@ var tabs = [{
   key: "tab_1",
   icon: "",
   classes: "wrf-menu",
-  fields: [{
-    label: "First Name",
-    name: "first_name",
-    type: "text",
-    css_class: "input-field",
-    placeholder: "blah blah"
-  }, {
-    label: "Last Name",
-    name: "last_name",
-    type: "text",
-    css_class: "input-field",
-    value: "blah blah"
-  }, {
+  fields: [// {
+  // 	label: "First Name",
+  // 	name: "first_name",
+  // 	type: "text",
+  // 	css_class: "input-field",
+  // 	placeholder: "blah blah",
+  // },
+  // {
+  // 	label: "Last Name",
+  // 	name: "last_name",
+  // 	type: "text",
+  // 	css_class: "input-field",
+  // 	value: "blah blah",
+  // },
+  {
     label: "Is Checked?",
     name: "is_checked",
     type: "checkbox",
     css_class: "input-field",
     value: false
-  }, {
-    label: "Message",
-    name: "message",
-    type: "textarea",
-    css_class: "input-field",
-    value: "blah blah",
-    depends_on: "is_checked",
-    depended_value: true
-  }, {
-    label: "User type",
-    name: "heading_color",
-    type: "radio",
-    css_class: "input-field",
-    help: "The type of the current user",
-    options: [{
-      label: "Author",
-      value: "a"
-    }, {
-      label: "Editor",
-      value: "e"
-    }]
-  }, {
+  }, // {
+  // 	label: "Message",
+  // 	name: "message",
+  // 	type: "textarea",
+  // 	css_class: "input-field",
+  // 	value: "blah blah",
+  // 	depends_on: "is_checked",
+  // 	depended_value: true,
+  // },
+  // {
+  // 	label: "User type",
+  // 	name: "heading_color",
+  // 	type: "radio",
+  // 	css_class: "input-field",
+  // 	help: "The type of the current user",
+  // 	options : [
+  // 		{ label: "Author", value: "a" },
+  // 		{ label: "Editor", value: "e" },
+  // 	]
+  // },
+  // {
+  // 	label: "User type",
+  // 	name: "header_size",
+  // 	type: "slider",
+  // 	min: 2,
+  // 	max: 100
+  // },
+  {
     label: "User type",
     name: "header_size",
-    type: "slider",
-    min: 2,
-    max: 100
-  }, {
-    label: "User type",
-    name: "header_size",
-    type: "alignment"
+    type: "colorpicker"
   }, {
     label: "More",
     name: "more_excerpt",
     type: "icon-button",
     icon: "ellipsis"
   }, {
-    label: "Color",
-    name: "color_indicator",
-    type: "color-indicator"
+    label: "Switch",
+    name: "switch_control",
+    type: "toggle"
   }]
 }, {
   label: "Tab 2",
@@ -431,12 +517,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_wordpress_components_build_style_style_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../node_modules/@wordpress/components/build-style/style.css */ "./node_modules/@wordpress/components/build-style/style.css");
+/* harmony import */ var _node_modules_wordpress_components_build_style_style_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_wordpress_components_build_style_style_css__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 
 
@@ -458,7 +547,14 @@ var Field = function Field(props) {
     }
   });
 
-  console.log("Field for", props.name);
+  var checkedProps = {
+    // ...props,
+    checked: props[props.name],
+    onChange: function onChange(inputValue) {
+      return handleChange(inputValue.currentTarget ? inputValue.currentTarget.checked : inputValue, props.name);
+    }
+  };
+  console.log("Field for", props.name, props);
 
   if (!props.canVisible) {
     return "";
@@ -474,10 +570,11 @@ var Field = function Field(props) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["TextareaControl"], controlProps);
 
     case "checkbox":
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["CheckboxControl"], controlProps);
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["CheckboxControl"], checkedProps);
 
     case "colorpicker":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ColorPicker"], controlProps);
+    // return <ColorPicker color={ '#f00' } />
 
     case "radio":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RadioControl"], controlProps);
@@ -488,10 +585,8 @@ var Field = function Field(props) {
     case "icon-button":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], controlProps);
 
-    case "color-indicator":
-      Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ColorIndicator"], {
-        colorValue: "#0073aa"
-      });
+    case "toggle":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["FormToggle"], checkedProps);
 
     default:
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", null);

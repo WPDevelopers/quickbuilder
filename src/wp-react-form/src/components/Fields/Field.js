@@ -8,8 +8,11 @@ import {
 	RadioControl,
 	RangeControl,
 	Button,
-	ColorIndicator
+	FormToggle,
 } from "@wordpress/components";
+
+import '../../../../../node_modules/@wordpress/components/build-style/style.css'
+
 import { useCallback } from "@wordpress/element";
 
 const Field = (props) => {
@@ -31,8 +34,13 @@ const Field = (props) => {
 		value: props[props.name],
 		onChange: (inputValue) => handleChange(inputValue, props.name),
 	};
+	let checkedProps = {
+		// ...props,
+		checked: props[props.name],
+		onChange: (inputValue) => handleChange(inputValue.currentTarget ? inputValue.currentTarget.checked : inputValue, props.name),
+	};
 
-	console.log("Field for", props.name);
+	console.log("Field for", props.name, props);
 
 	if (!props.canVisible) {
 		return "";
@@ -46,17 +54,18 @@ const Field = (props) => {
 		case "textarea":
 			return <TextareaControl {...controlProps} />;
 		case "checkbox":
-			return <CheckboxControl {...controlProps} />;
+			return <CheckboxControl {...checkedProps} />;
 		case "colorpicker":
 			return <ColorPicker {...controlProps} />;
+			// return <ColorPicker color={ '#f00' } />
 		case "radio":
 			return <RadioControl {...controlProps} />;
 		case "slider":
 			return <RangeControl {...controlProps} />;
 		case "icon-button":
 			return <Button {...controlProps} />;
-		case "color-indicator":
-			<ColorIndicator colorValue="#0073aa" />
+		case "toggle":
+			return <FormToggle  {...checkedProps}/>
 		default:
 			return <div></div>;
 	}

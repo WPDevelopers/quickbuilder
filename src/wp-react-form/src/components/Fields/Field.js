@@ -1,19 +1,6 @@
 import React, { useEffect } from "react";
 import { withSelect, dispatch } from "@wordpress/data";
-import {
-	TextControl,
-	TextareaControl,
-	CheckboxControl,
-	ColorPicker,
-	RadioControl,
-	RangeControl,
-	Button,
-	FormToggle,
-	DateTimePicker
-} from "@wordpress/components";
-
-import '../../../../../node_modules/@wordpress/components/build-style/style.css'
-import './radio.scss';
+import { TextControl, TextareaControl, Checkbox, RadioBasic } from "./Controls";
 
 import { useCallback } from "@wordpress/element";
 
@@ -36,11 +23,6 @@ const Field = (props) => {
 		value: props[props.name],
 		onChange: (inputValue) => handleChange(inputValue, props.name),
 	};
-	let checkedProps = {
-		// ...props,
-		checked: props[props.name],
-		onChange: (inputValue) => handleChange(inputValue.currentTarget ? inputValue.currentTarget.checked : inputValue, props.name),
-	};
 
 	// console.log("Field for", props.name, props);
 
@@ -48,25 +30,27 @@ const Field = (props) => {
 		return "";
 	}
 
+	// console.log( 'props.type', props.type );
+
 	switch (props.type) {
 		case "text":
 			return <TextControl {...controlProps} />;
+
 		case "textarea":
 			return <TextareaControl {...controlProps} />;
+
 		case "checkbox":
-			return <CheckboxControl {...checkedProps} />;
+			return <Checkbox {...controlProps} />;
+
+		case "radio-basic":
+			return <RadioBasic {...controlProps} />;
+
 		case "colorpicker":
-			return <ColorPicker {...controlProps} />;
-		case "radio":
-			return <div className={`${controlProps.css_class}${ ` ${controlProps.style || `default`}` }`}><RadioControl {...controlProps} /></div>;
+
 		case "slider":
-			return <RangeControl {...controlProps} />;
 		case "button":
-			return <Button {...controlProps} />;
 		case "toggle":
-			return <FormToggle  {...checkedProps}/>;
 		case "date":
-			return <DateTimePicker {...checkedProps}/>
 		default:
 			return <div></div>;
 	}

@@ -1,29 +1,35 @@
-.notifications-type.style-card .components-radio-control__option {
-  display: inline-block;
-  width: 228px;
-  height: 80px;
-  border: 1px solid #f2f2f2;
-  background: #fff;
-  position: relative;
-  margin: 10px;
+.wprf-control .wprf-input-label {
+  display: block;
+  padding: 5px;
+  margin-bottom: 10px;
 }
-.notifications-type.style-card .components-radio-control__option label {
-  height: 100%;
+.wprf-control .wprf-input-text-field {
+  display: block;
   width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: none;
+  border: 1px solid #f2f2f2;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  padding: 8px;
+  line-height: 1;
+  font-size: 14px;
 }
-.notifications-type.style-card .components-radio-control__input {
-  display: none;
+.wprf-control .wprf-input-label {
+  display: block;
+  padding: 5px;
+  margin-bottom: 10px;
 }
-.notifications-type.style-card .components-radio-control__input:selected + label {
-  background-color: #0ccf9f;
-  color: #fff;
+.wprf-control .wprf-textarea-field {
+  display: block;
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid #f2f2f2;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  padding: 8px;
+  line-height: 1;
+  font-size: 14px;
 }
+
+
 .wp-react-form.wrf-tabs-wrapper {
   display: flex;
   padding: 15px;

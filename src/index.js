@@ -10,20 +10,42 @@ const tabs = [
 		icon: "",
 		classes: "wrf-menu",
 		fields: [
-			// {
-			// 	label: "First Name",
-			// 	name: "first_name",
-			// 	type: "text",
-			// 	css_class: "input-field",
-			// 	placeholder: "blah blah",
-			// },
-			// {
-			// 	label: "Last Name",
-			// 	name: "last_name",
-			// 	type: "text",
-			// 	css_class: "input-field",
-			// 	value: "blah blah",
-			// },
+			{
+				label: "Last Name",
+				name: "last_name",
+				type: "text",
+				classes: "input-field",
+				value: "blah blah",
+			},
+			{
+				label: "Comments",
+				name: "comments",
+				type: "textarea",
+				classes: "inputdd-field",
+				value: "blah blah",
+				lala: "lala",
+				max: 30
+			},
+			{
+				label: "Are you sure?",
+				name: "consent",
+				type: "checkbox",
+				classes: "inputdd-field",
+				value: "blah blah",
+				lala: "lala",
+				max: 30
+			},
+			{
+				label: "Gender",
+				name: "genderrr",
+				type: "radio-basic",
+				classes: "input-field",
+				options: [
+					{label: "Male", value: 'male'},
+					{label: "Female", value: 'female'},
+					{label: "Others", value: 'others'},
+				]
+			},
 			// {
 			// 	label: "Is Checked?",
 			// 	name: "is_checked",
@@ -40,20 +62,20 @@ const tabs = [
 			// 	depends_on: "is_checked",
 			// 	depended_value: true,
 			// },
-			{
-				// label: "Notification Type",
-				name: "notification_type",
-				type: "radio",
-				css_class: "notifications-type",
-				style: "style-card",
-				options : [
-					{ label: "Sales Notification", value: "sales-notification" },
-					{ label: "Comments", value: "comments" },
-					{ label: "Reviews", value: "reviews" },
-					{ label: "Download Stats", value: "download-stats" },
-					{ label: "Donations", value: "donations" },
-				]
-			},
+			// {
+			// 	// label: "Notification Type",
+			// 	name: "notification_type",
+			// 	type: "radio",
+			// 	css_class: "notifications-type",
+			// 	style: "style-card",
+			// 	options : [
+			// 		{ label: "Sales Notification", value: "sales-notification" },
+			// 		{ label: "Comments", value: "comments" },
+			// 		{ label: "Reviews", value: "reviews" },
+			// 		{ label: "Download Stats", value: "download-stats" },
+			// 		{ label: "Donations", value: "donations" },
+			// 	]
+			// },
 			// {
 			// 	label: "User type",
 			// 	name: "header_size",
@@ -89,20 +111,20 @@ const tabs = [
 		key: "tab_2",
 		icon: "",
 		fields: [
-			{
-				label: "First Name",
-				name: "first_name",
-				type: "text",
-				css_class: "input-field",
-				placeholder: "blah blah",
-			},
-			{
-				label: "Last Name",
-				name: "message",
-				type: "textarea",
-				css_class: "input-field",
-				value: "blah blah",
-			},
+			// {
+			// 	label: "First Name",
+			// 	name: "first_name",
+			// 	type: "text",
+			// 	css_class: "input-field",
+			// 	placeholder: "blah blah",
+			// },
+			// {
+			// 	label: "Last Name",
+			// 	name: "message",
+			// 	type: "textarea",
+			// 	css_class: "input-field",
+			// 	value: "blah blah",
+			// },
 		],
 	},
 ];

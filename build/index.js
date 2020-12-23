@@ -372,13 +372,14 @@ var tabs = [{
   // 	css_class: "input-field",
   // 	value: "blah blah",
   // },
-  {
-    label: "Is Checked?",
-    name: "is_checked",
-    type: "checkbox",
-    css_class: "input-field",
-    value: false
-  }, // {
+  // {
+  // 	label: "Is Checked?",
+  // 	name: "is_checked",
+  // 	type: "checkbox",
+  // 	css_class: "input-field",
+  // 	value: false,
+  // },
+  // {
   // 	label: "Message",
   // 	name: "message",
   // 	type: "textarea",
@@ -387,38 +388,57 @@ var tabs = [{
   // 	depends_on: "is_checked",
   // 	depended_value: true,
   // },
-  // {
-  // 	label: "User type",
-  // 	name: "heading_color",
-  // 	type: "radio",
-  // 	css_class: "input-field",
-  // 	help: "The type of the current user",
-  // 	options : [
-  // 		{ label: "Author", value: "a" },
-  // 		{ label: "Editor", value: "e" },
-  // 	]
-  // },
-  // {
+  {
+    // label: "Notification Type",
+    name: "notification_type",
+    type: "radio",
+    css_class: "notifications-type",
+    style: "style-card",
+    options: [{
+      label: "Sales Notification",
+      value: "sales-notification"
+    }, {
+      label: "Comments",
+      value: "comments"
+    }, {
+      label: "Reviews",
+      value: "reviews"
+    }, {
+      label: "Download Stats",
+      value: "download-stats"
+    }, {
+      label: "Donations",
+      value: "donations"
+    }]
+  } // {
   // 	label: "User type",
   // 	name: "header_size",
   // 	type: "slider",
   // 	min: 2,
   // 	max: 100
   // },
-  {
-    label: "User type",
-    name: "header_size",
-    type: "colorpicker"
-  }, {
-    label: "More",
-    name: "more_excerpt",
-    type: "icon-button",
-    icon: "ellipsis"
-  }, {
-    label: "Switch",
-    name: "switch_control",
-    type: "toggle"
-  }]
+  // {
+  // 	label: "User type",
+  // 	name: "header_size",
+  // 	type: "colorpicker"
+  // },
+  // {
+  // 	label: "More",
+  // 	name: "more_excerpt",
+  // 	type: "icon-button",
+  // 	icon: "ellipsis"
+  // },
+  // {
+  // 	label: "Switch",
+  // 	name: "switch_control",
+  // 	type: "toggle",
+  // },
+  // {
+  // 	label: "Birthday",
+  // 	name: "birthday",
+  // 	type: "date",
+  // },
+  ]
 }, {
   label: "Tab 2",
   key: "tab_2",
@@ -519,12 +539,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _node_modules_wordpress_components_build_style_style_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../node_modules/@wordpress/components/build-style/style.css */ "./node_modules/@wordpress/components/build-style/style.css");
 /* harmony import */ var _node_modules_wordpress_components_build_style_style_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_wordpress_components_build_style_style_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _radio_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./radio.scss */ "./src/wp-react-form/src/components/Fields/radio.scss");
+/* harmony import */ var _radio_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_radio_scss__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 
 
@@ -553,14 +576,11 @@ var Field = function Field(props) {
     onChange: function onChange(inputValue) {
       return handleChange(inputValue.currentTarget ? inputValue.currentTarget.checked : inputValue, props.name);
     }
-  };
-  console.log("Field for", props.name, props);
+  }; // console.log("Field for", props.name, props);
 
   if (!props.canVisible) {
     return "";
   }
-
-  console.log("Field for dd", props.name);
 
   switch (props.type) {
     case "text":
@@ -574,19 +594,23 @@ var Field = function Field(props) {
 
     case "colorpicker":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ColorPicker"], controlProps);
-    // return <ColorPicker color={ '#f00' } />
 
     case "radio":
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RadioControl"], controlProps);
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+        className: "".concat(controlProps.css_class, " ".concat(controlProps.style || "default"))
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RadioControl"], controlProps));
 
     case "slider":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RangeControl"], controlProps);
 
-    case "icon-button":
+    case "button":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], controlProps);
 
     case "toggle":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["FormToggle"], checkedProps);
+
+    case "date":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["DateTimePicker"], checkedProps);
 
     default:
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", null);
@@ -631,6 +655,17 @@ var Fields = function Fields(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(Fields));
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/radio.scss":
+/*!************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/radio.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 

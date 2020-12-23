@@ -9,9 +9,11 @@ import {
 	RangeControl,
 	Button,
 	FormToggle,
+	DateTimePicker
 } from "@wordpress/components";
 
 import '../../../../../node_modules/@wordpress/components/build-style/style.css'
+import './radio.scss';
 
 import { useCallback } from "@wordpress/element";
 
@@ -40,13 +42,11 @@ const Field = (props) => {
 		onChange: (inputValue) => handleChange(inputValue.currentTarget ? inputValue.currentTarget.checked : inputValue, props.name),
 	};
 
-	console.log("Field for", props.name, props);
+	// console.log("Field for", props.name, props);
 
 	if (!props.canVisible) {
 		return "";
 	}
-
-	console.log("Field for dd", props.name);
 
 	switch (props.type) {
 		case "text":
@@ -57,15 +57,16 @@ const Field = (props) => {
 			return <CheckboxControl {...checkedProps} />;
 		case "colorpicker":
 			return <ColorPicker {...controlProps} />;
-			// return <ColorPicker color={ '#f00' } />
 		case "radio":
-			return <RadioControl {...controlProps} />;
+			return <div className={`${controlProps.css_class}${ ` ${controlProps.style || `default`}` }`}><RadioControl {...controlProps} /></div>;
 		case "slider":
 			return <RangeControl {...controlProps} />;
-		case "icon-button":
+		case "button":
 			return <Button {...controlProps} />;
 		case "toggle":
-			return <FormToggle  {...checkedProps}/>
+			return <FormToggle  {...checkedProps}/>;
+		case "date":
+			return <DateTimePicker {...checkedProps}/>
 		default:
 			return <div></div>;
 	}

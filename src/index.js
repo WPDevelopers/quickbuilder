@@ -24,13 +24,13 @@ const tabs = [
 			// 	css_class: "input-field",
 			// 	value: "blah blah",
 			// },
-			{
-				label: "Is Checked?",
-				name: "is_checked",
-				type: "checkbox",
-				css_class: "input-field",
-				value: false,
-			},
+			// {
+			// 	label: "Is Checked?",
+			// 	name: "is_checked",
+			// 	type: "checkbox",
+			// 	css_class: "input-field",
+			// 	value: false,
+			// },
 			// {
 			// 	label: "Message",
 			// 	name: "message",
@@ -40,17 +40,20 @@ const tabs = [
 			// 	depends_on: "is_checked",
 			// 	depended_value: true,
 			// },
-			// {
-			// 	label: "User type",
-			// 	name: "heading_color",
-			// 	type: "radio",
-			// 	css_class: "input-field",
-			// 	help: "The type of the current user",
-			// 	options : [
-			// 		{ label: "Author", value: "a" },
-			// 		{ label: "Editor", value: "e" },
-			// 	]
-			// },
+			{
+				// label: "Notification Type",
+				name: "notification_type",
+				type: "radio",
+				css_class: "notifications-type",
+				style: "style-card",
+				options : [
+					{ label: "Sales Notification", value: "sales-notification" },
+					{ label: "Comments", value: "comments" },
+					{ label: "Reviews", value: "reviews" },
+					{ label: "Download Stats", value: "download-stats" },
+					{ label: "Donations", value: "donations" },
+				]
+			},
 			// {
 			// 	label: "User type",
 			// 	name: "header_size",
@@ -58,22 +61,27 @@ const tabs = [
 			// 	min: 2,
 			// 	max: 100
 			// },
-			{
-				label: "User type",
-				name: "header_size",
-				type: "colorpicker"
-			},
-			{
-				label: "More",
-				name: "more_excerpt",
-				type: "icon-button",
-				icon: "ellipsis"
-			},
-			{
-				label: "Switch",
-				name: "switch_control",
-				type: "toggle",
-			},
+			// {
+			// 	label: "User type",
+			// 	name: "header_size",
+			// 	type: "colorpicker"
+			// },
+			// {
+			// 	label: "More",
+			// 	name: "more_excerpt",
+			// 	type: "icon-button",
+			// 	icon: "ellipsis"
+			// },
+			// {
+			// 	label: "Switch",
+			// 	name: "switch_control",
+			// 	type: "toggle",
+			// },
+			// {
+			// 	label: "Birthday",
+			// 	name: "birthday",
+			// 	type: "date",
+			// },
 		],
 	},
 	{

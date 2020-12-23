@@ -27,4 +27,4 @@ const TabContent = ({ activeTab, config }) => {
 	);
 };
 
-export default React.memo(TabContent);
+export default TabContent;

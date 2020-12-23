@@ -8,4 +8,4 @@ const Fields = ({ fields }) => {
 	return <>{allFields}</>;
 };
 
-export default React.memo(Fields);
+export default Fields;

@@ -40,11 +40,9 @@ const Field = (props) => {
 	}
 };
 
-export default React.memo(
-	withSelect((select, ownProps) => {
-		return {
-			[ownProps.name]: select("wprf-store").getFieldValu(ownProps.name),
-			isVisible: select("wprf-store").isVisible(ownProps.name),
-		};
-	})(withCommon(Field))
-);
+export default withSelect((select, ownProps) => {
+	return {
+		[ownProps.name]: select("wprf-store").getFieldValu(ownProps.name),
+		isVisible: select("wprf-store").isVisible(ownProps.name),
+	};
+})(withCommon(Field));

@@ -1185,11 +1185,11 @@ var Field = function Field(props) {
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["withSelect"])(function (select, ownProps) {
+/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["withSelect"])(function (select, ownProps) {
   var _ref;
 
   return _ref = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, ownProps.name, select("wprf-store").getFieldValu(ownProps.name)), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, "isVisible", select("wprf-store").isVisible(ownProps.name)), _ref;
-})(Object(_Hooks_withCommon__WEBPACK_IMPORTED_MODULE_5__["default"])(Field))));
+})(Object(_Hooks_withCommon__WEBPACK_IMPORTED_MODULE_5__["default"])(Field)));
 
 /***/ }),
 
@@ -1219,7 +1219,7 @@ var Fields = function Fields(_ref) {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, allFields);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_1___default.a.memo(Fields));
+/* harmony default export */ __webpack_exports__["default"] = (Fields);
 
 /***/ }),
 
@@ -1324,7 +1324,7 @@ var TabContent = function TabContent(_ref) {
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(TabContent));
+/* harmony default export */ __webpack_exports__["default"] = (TabContent);
 
 /***/ }),
 

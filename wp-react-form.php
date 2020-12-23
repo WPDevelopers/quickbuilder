@@ -28,6 +28,6 @@ add_action('admin_enqueue_scripts', function( $hook ){
     }
     $dependencies = require_once __DIR__ . '/build/index.asset.php';
     wp_enqueue_script('wp-react-form', plugin_dir_url( __FILE__ ) . '/build/index.js', $dependencies['dependencies'], $dependencies['version'], true);
-    wp_enqueue_style('wp-react-form-wp-default', plugin_dir_url( __FILE__ ) . '/build/style-index.css', [], $dependencies['version'], 'all');
+    // wp_enqueue_style('wp-react-form-wp-default', plugin_dir_url( __FILE__ ) . '/build/style-index.css', [], $dependencies['version'], 'all');
     wp_enqueue_style('wp-react-form', plugin_dir_url( __FILE__ ) . '/build/index.css', [], $dependencies['version'], 'all');
 });

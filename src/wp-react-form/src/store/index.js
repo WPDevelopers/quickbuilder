@@ -5,16 +5,21 @@ const DEFAULT_STATE = {
 			value: true,
 		},
 	},
-	formState: {
-		last_name: "Mukul",
-	},
+	values: {},
+	touched: {},
 };
 
 const actions = {
-	setFormState(formState) {
+	setFieldValue(payload) {
 		return {
-			type: "SET_FORM_STATE",
-			payload: formState,
+			type: "SET_FIELD_VALUE",
+			payload,
+		};
+	},
+	setFieldTouched(payload) {
+		return {
+			type: "FIELD_TOUCHED",
+			payload,
 		};
 	},
 };
@@ -22,10 +27,15 @@ const actions = {
 const store = {
 	reducer(state = DEFAULT_STATE, action) {
 		switch (action.type) {
-			case "SET_FORM_STATE":
+			case "SET_FIELD_VALUE":
 				return {
 					...state,
-					formState: action.payload,
+					values: { ...state.values, ...action.payload },
+				};
+			case "FIELD_TOUCHED":
+				return {
+					...state,
+					touched: { ...state.touched, ...action.payload },
 				};
 		}
 
@@ -35,26 +45,29 @@ const store = {
 	actions,
 
 	selectors: {
-		getFormState(state) {
-			return state.formState;
+		getValues(state) {
+			return state.values;
 		},
-		getInputState(state, name) {
-			return state.formState.hasOwnProperty(name)
-				? state.formState[name]
+		getFieldValu(state, name) {
+			return state.values.hasOwnProperty(name)
+				? state.values[name]
 				: null;
 		},
-		inputCanVisible(state, current) {
+		isTouched(state, current) {
+			return (
+				state.touched.hasOwnProperty(current) && state.touched[current]
+			);
+		},
+		isVisible(state, current) {
 			if (!state.depends_on.hasOwnProperty(current)) {
 				return true;
 			}
 
 			return (
 				state.depends_on.hasOwnProperty(current) &&
-				state.formState.hasOwnProperty(
-					state.depends_on[current].target
-				) &&
+				state.values.hasOwnProperty(state.depends_on[current].target) &&
 				state.depends_on[current].value ===
-					state.formState[state.depends_on[current].target]
+					state.values[state.depends_on[current].target]
 			);
 		},
 	},

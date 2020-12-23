@@ -122,6 +122,69 @@ module.exports = _arrayWithHoles;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/classCallCheck.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/createClass.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
@@ -174,6 +237,52 @@ function _extends() {
 }
 
 module.exports = _extends;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/inherits.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf */ "./node_modules/@babel/runtime/helpers/setPrototypeOf.js");
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
 
 /***/ }),
 
@@ -288,6 +397,49 @@ module.exports = _objectWithoutPropertiesLoose;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/setPrototypeOf.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
 /*!**************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
@@ -308,6 +460,33 @@ function _slicedToArray(arr, i) {
 }
 
 module.exports = _slicedToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/typeof.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
 
 /***/ }),
 
@@ -362,25 +541,32 @@ var tabs = [{
   icon: "",
   classes: "wrf-menu",
   fields: [{
+    label: "First Name",
+    name: "first_name",
+    type: "text",
+    classes: "input-field",
+    value: "Priyo",
+    placeholder: "First Name"
+  }, {
     label: "Last Name",
     name: "last_name",
     type: "text",
     classes: "input-field",
-    value: "blah blah"
+    value: "Mukul",
+    placeholder: "Last Name"
   }, {
     label: "Comments",
     name: "comments",
     type: "textarea",
     classes: "inputdd-field",
     value: "blah blah",
-    lala: "lala",
     max: 30
   }, {
     label: "Are you sure?",
     name: "consent",
     type: "checkbox",
     classes: "inputdd-field",
-    value: "blah blah",
+    value: true,
     lala: "lala",
     max: 30
   }, {
@@ -388,15 +574,16 @@ var tabs = [{
     name: "genderrr",
     type: "radio-basic",
     classes: "input-field",
+    value: "male",
     options: [{
       label: "Male",
-      value: 'male'
+      value: "male"
     }, {
       label: "Female",
-      value: 'female'
+      value: "female"
     }, {
       label: "Others",
-      value: 'others'
+      value: "others"
     }]
   } // {
   // 	label: "Is Checked?",
@@ -480,7 +667,9 @@ var tabs = [{
 var builder = {
   tabs: tabs,
   submit: {
-    label: "Save Changes" // onSubmit: (e) => { // this is for custom submit
+    label: "Save Changes" // onSubmit: (e) => {
+    // 	e.preventDefault();
+    // 	// this is for custom submit
     // 	console.log("from builder obj", e);
     // },
 
@@ -538,6 +727,111 @@ var WPReactForm = function WPReactForm(_ref) {
 
 /***/ }),
 
+/***/ "./src/wp-react-form/src/Hooks/withCommon.js":
+/*!***************************************************!*\
+  !*** ./src/wp-react-form/src/Hooks/withCommon.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_10__);
+
+
+
+
+
+
+
+
+
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default()(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+
+
+
+var withCommon = function withCommon(WrappedComponent) {
+  var WithCommon = /*#__PURE__*/function (_Component) {
+    _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(WithCommon, _Component);
+
+    var _super = _createSuper(WithCommon);
+
+    function WithCommon() {
+      var _this;
+
+      _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, WithCommon);
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      _this = _super.call.apply(_super, [this].concat(args));
+
+      _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), "onChange", function (value) {
+        Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_10__["dispatch"])("wprf-store").setFieldValue(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, value));
+      });
+
+      _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), "onBlur", function (event) {
+        console.log("on blur field validation: event", event);
+      });
+
+      return _this;
+    }
+
+    _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(WithCommon, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        if (this.props.value && this.props[this.props.name] == null) {
+          Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_10__["dispatch"])("wprf-store").setFieldValue(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, this.props.name, this.props.value));
+        }
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])("div", {
+          className: "wprf-control ".concat(this.props.classes != undefined ? this.props.classes : "")
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, this.props, {
+          onChange: this.onChange,
+          onBlur: this.onBlur
+        })));
+      }
+    }]);
+
+    return WithCommon;
+  }(react__WEBPACK_IMPORTED_MODULE_9__["Component"]);
+
+  return WithCommon;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (withCommon);
+
+/***/ }),
+
 /***/ "./src/wp-react-form/src/components/Fields/Controls/Checkbox/checkbox.scss":
 /*!*********************************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/Checkbox/checkbox.scss ***!
@@ -569,14 +863,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Index(_ref) {
-  var classes = _ref.classes,
-      name = _ref.name,
+  var name = _ref.name,
       label = _ref.label,
-      checked = _ref.checked,
-      onChange = _ref.onChange;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "wprf-control ".concat(classes)
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
+      _onChange = _ref.onChange,
+      value = _ref.value;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
     class: "wprf-input-label",
     htmlFor: name
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
@@ -584,9 +875,11 @@ function Index(_ref) {
     id: name,
     className: "wprf-input-field wprf-input-checkbox",
     name: name,
-    onChange: onChange,
-    checked: checked
-  }), " ", label));
+    onChange: function onChange(event) {
+      return _onChange(event.target.checked);
+    },
+    checked: value
+  }), "\xA0", label));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -613,14 +906,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Index(_ref) {
-  var classes = _ref.classes,
-      name = _ref.name,
+  var name = _ref.name,
       label = _ref.label,
       options = _ref.options,
-      onChange = _ref.onChange;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "wprf-control ".concat(classes)
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h4", {
+      _onChange = _ref.onChange,
+      value = _ref.value;
+  var savedValue = value;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h4", {
     class: "wprf-input-label"
   }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wprf-input-radio-set-wrap"
@@ -632,11 +924,14 @@ function Index(_ref) {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
       key: index,
       type: "radio",
+      checked: value === savedValue,
       id: "wprf-input-radio-".concat(index),
       className: "wprf-input-field wprf-input-radio",
       value: value,
       name: name,
-      onChange: onChange
+      onChange: function onChange(event) {
+        return _onChange(event.target.value);
+      }
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
       className: "wprf-input-radio-label",
       htmlFor: "wprf-input-radio-".concat(index)
@@ -668,35 +963,42 @@ function Index(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text.scss */ "./src/wp-react-form/src/components/Fields/Controls/TextControl/text.scss");
-/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_text_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js");
+/* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./text.scss */ "./src/wp-react-form/src/components/Fields/Controls/TextControl/text.scss");
+/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_text_scss__WEBPACK_IMPORTED_MODULE_4__);
+
+
 
 
 
 
 function Index(_ref) {
-  var classes = _ref.classes,
-      name = _ref.name,
+  var name = _ref.name,
       label = _ref.label,
       value = _ref.value,
-      onChange = _ref.onChange;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "wprf-control ".concat(classes)
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
+      _onChange = _ref.onChange,
+      rest = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["name", "label", "value", "onChange"]);
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("label", {
     class: "wprf-input-label",
     htmlFor: name
-  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
+  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("input", _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, rest, {
     type: "text",
     id: name,
     className: "wprf-input-field wprf-input-text-field",
     name: name,
-    onChange: onChange,
+    onChange: function onChange(event) {
+      return _onChange(event.target.value);
+    },
     value: value
-  }));
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -739,17 +1041,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function TextareaControl(_ref) {
-  var classes = _ref.classes,
-      name = _ref.name,
+function Index(_ref) {
+  var name = _ref.name,
       label = _ref.label,
       value = _ref.value,
-      onChange = _ref.onChange,
-      rest = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["classes", "name", "label", "value", "onChange"]);
+      _onChange = _ref.onChange,
+      rest = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["name", "label", "value", "onChange"]);
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
-    className: "wprf-control ".concat(classes)
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("label", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("label", {
     class: "wprf-input-label",
     htmlFor: name
   }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("textarea", _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -757,11 +1056,13 @@ function TextareaControl(_ref) {
     id: name,
     className: "wprf-input-field wprf-textarea-field",
     name: name,
-    onChange: onChange
+    onChange: function onChange(event) {
+      return _onChange(event.target.value);
+    }
   }, rest), value));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (TextareaControl);
+/* harmony default export */ __webpack_exports__["default"] = (Index);
 
 /***/ }),
 
@@ -837,6 +1138,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Controls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Controls */ "./src/wp-react-form/src/components/Fields/Controls/index.js");
+/* harmony import */ var _Hooks_withCommon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Hooks/withCommon */ "./src/wp-react-form/src/Hooks/withCommon.js");
 
 
 
@@ -850,25 +1152,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 var Field = function Field(props) {
-  // useEffect(() => {
-  // 	console.log("Field for", props.name);
-  // }, []);
-  var handleChange = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (value, name) {
-    Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])("wprf-store").setFormState(_objectSpread(_objectSpread({}, props.formState), {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, name, value)));
-  }, [props]);
+  if (!props.isVisible) {
+    return "";
+  }
 
   var controlProps = _objectSpread(_objectSpread({}, props), {}, {
-    value: props[props.name],
-    onChange: function onChange(inputValue) {
-      return handleChange(inputValue, props.name);
-    }
-  }); // console.log("Field for", props.name, props);
+    value: props[props.name] !== null ? props[props.name] : props.value !== undefined ? props.value : null
+  });
 
-
-  if (!props.canVisible) {
-    return "";
-  } // console.log( 'props.type', props.type );
-
+  console.log("console from Field Comp controlProps", controlProps);
 
   switch (props.type) {
     case "text":
@@ -896,10 +1188,8 @@ var Field = function Field(props) {
 /* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["withSelect"])(function (select, ownProps) {
   var _ref;
 
-  return _ref = {
-    formState: select("wprf-store").getFormState()
-  }, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, ownProps.name, select("wprf-store").getInputState(ownProps.name)), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, "canVisible", select("wprf-store").inputCanVisible(ownProps.name)), _ref;
-})(Field)));
+  return _ref = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, ownProps.name, select("wprf-store").getFieldValu(ownProps.name)), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, "isVisible", select("wprf-store").isVisible(ownProps.name)), _ref;
+})(Object(_Hooks_withCommon__WEBPACK_IMPORTED_MODULE_5__["default"])(Field))));
 
 /***/ }),
 
@@ -923,7 +1213,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var Fields = function Fields(_ref) {
   var fields = _ref.fields;
-  console.log("Fields Loops");
   var allFields = fields.map(function (item) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_2__["default"], item);
   });
@@ -957,22 +1246,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Submit = function Submit(_ref) {
-  var config = _ref.config,
-      formState = _ref.formState;
+  var config = _ref.config;
 
   /**
    * This is default submit function
    */
-  if (!config.hasOwnProperty("onSubmit")) {
-    config.onSubmit = function (evt) {
-      console.log(formState);
-      console.log("from submit button itself", evt);
-    };
-  }
+  var onSubmit = function onSubmit(evt) {
+    console.log("on confirm validation: form validation");
+
+    if (!config.hasOwnProperty("onSubmit")) {
+      console.log("form has no onsubmit, run default one");
+      console.log("values", Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])("wprf-store").getValues());
+      console.log("event", evt);
+    } else {
+      console.log("form has an onsubmit func implemented, run thats one");
+      config.onSubmit(evt);
+    }
+  };
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     onClick: function onClick(evt) {
-      return config.onSubmit(evt);
+      return onSubmit(evt);
     }
   }, config.label);
 };
@@ -1014,13 +1308,13 @@ var TabContent = function TabContent(_ref) {
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wrf-tab-content-wrap"
-  }, console.log("activeTab tab-content", activeTab), config.tabs.map(function (_ref2) {
+  }, config.tabs.map(function (_ref2) {
     var key = _ref2.key,
         fields = _ref2.fields;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "wrf-tab-content ".concat(key).concat(key === activeTab ? " active-tab" : ""),
       key: key
-    }, console.log("tab-content", key), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "wrf-tab-content-inner"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_3__["default"], {
       fields: fields
@@ -1030,12 +1324,7 @@ var TabContent = function TabContent(_ref) {
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(TabContent // withSelect((select) => {
-// 	return {
-// 		formState: select("wprf-store").getFormState(),
-// 	};
-// })(TabContent)
-));
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_2___default.a.memo(TabContent));
 
 /***/ }),
 
@@ -1165,15 +1454,20 @@ var DEFAULT_STATE = {
       value: true
     }
   },
-  formState: {
-    last_name: "Mukul"
-  }
+  values: {},
+  touched: {}
 };
 var actions = {
-  setFormState: function setFormState(formState) {
+  setFieldValue: function setFieldValue(payload) {
     return {
-      type: "SET_FORM_STATE",
-      payload: formState
+      type: "SET_FIELD_VALUE",
+      payload: payload
+    };
+  },
+  setFieldTouched: function setFieldTouched(payload) {
+    return {
+      type: "FIELD_TOUCHED",
+      payload: payload
     };
   }
 };
@@ -1183,9 +1477,14 @@ var store = {
     var action = arguments.length > 1 ? arguments[1] : undefined;
 
     switch (action.type) {
-      case "SET_FORM_STATE":
+      case "SET_FIELD_VALUE":
         return _objectSpread(_objectSpread({}, state), {}, {
-          formState: action.payload
+          values: _objectSpread(_objectSpread({}, state.values), action.payload)
+        });
+
+      case "FIELD_TOUCHED":
+        return _objectSpread(_objectSpread({}, state), {}, {
+          touched: _objectSpread(_objectSpread({}, state.touched), action.payload)
         });
     }
 
@@ -1193,18 +1492,21 @@ var store = {
   },
   actions: actions,
   selectors: {
-    getFormState: function getFormState(state) {
-      return state.formState;
+    getValues: function getValues(state) {
+      return state.values;
     },
-    getInputState: function getInputState(state, name) {
-      return state.formState.hasOwnProperty(name) ? state.formState[name] : null;
+    getFieldValu: function getFieldValu(state, name) {
+      return state.values.hasOwnProperty(name) ? state.values[name] : null;
     },
-    inputCanVisible: function inputCanVisible(state, current) {
+    isTouched: function isTouched(state, current) {
+      return state.touched.hasOwnProperty(current) && state.touched[current];
+    },
+    isVisible: function isVisible(state, current) {
       if (!state.depends_on.hasOwnProperty(current)) {
         return true;
       }
 
-      return state.depends_on.hasOwnProperty(current) && state.formState.hasOwnProperty(state.depends_on[current].target) && state.depends_on[current].value === state.formState[state.depends_on[current].target];
+      return state.depends_on.hasOwnProperty(current) && state.values.hasOwnProperty(state.depends_on[current].target) && state.depends_on[current].value === state.values[state.depends_on[current].target];
     }
   }
 };

@@ -11,11 +11,20 @@ const tabs = [
 		classes: "wrf-menu",
 		fields: [
 			{
+				label: "First Name",
+				name: "first_name",
+				type: "text",
+				classes: "input-field",
+				value: "Priyo",
+				placeholder: "First Name",
+			},
+			{
 				label: "Last Name",
 				name: "last_name",
 				type: "text",
 				classes: "input-field",
-				value: "blah blah",
+				value: "Mukul",
+				placeholder: "Last Name",
 			},
 			{
 				label: "Comments",
@@ -23,28 +32,28 @@ const tabs = [
 				type: "textarea",
 				classes: "inputdd-field",
 				value: "blah blah",
-				lala: "lala",
-				max: 30
+				max: 30,
 			},
 			{
 				label: "Are you sure?",
 				name: "consent",
 				type: "checkbox",
 				classes: "inputdd-field",
-				value: "blah blah",
+				value: true,
 				lala: "lala",
-				max: 30
+				max: 30,
 			},
 			{
 				label: "Gender",
 				name: "genderrr",
 				type: "radio-basic",
 				classes: "input-field",
+				value: "male",
 				options: [
-					{label: "Male", value: 'male'},
-					{label: "Female", value: 'female'},
-					{label: "Others", value: 'others'},
-				]
+					{ label: "Male", value: "male" },
+					{ label: "Female", value: "female" },
+					{ label: "Others", value: "others" },
+				],
 			},
 			// {
 			// 	label: "Is Checked?",
@@ -133,7 +142,9 @@ const builder = {
 	tabs,
 	submit: {
 		label: "Save Changes",
-		// onSubmit: (e) => { // this is for custom submit
+		// onSubmit: (e) => {
+		// 	e.preventDefault();
+		// 	// this is for custom submit
 		// 	console.log("from builder obj", e);
 		// },
 	},

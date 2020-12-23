@@ -10,7 +10,6 @@ const TabContent = ({ activeTab, config }) => {
 
 	return (
 		<div className={`wrf-tab-content-wrap`}>
-			{console.log("activeTab tab-content", activeTab)}
 			{config.tabs.map(({ key, fields }) => (
 				<div
 					className={`wrf-tab-content ${key}${
@@ -18,7 +17,6 @@ const TabContent = ({ activeTab, config }) => {
 					}`}
 					key={key}
 				>
-					{console.log("tab-content", key)}
 					<div className={`wrf-tab-content-inner`}>
 						<Fields fields={fields} />
 					</div>
@@ -29,11 +27,4 @@ const TabContent = ({ activeTab, config }) => {
 	);
 };
 
-export default React.memo(
-	TabContent
-	// withSelect((select) => {
-	// 	return {
-	// 		formState: select("wprf-store").getFormState(),
-	// 	};
-	// })(TabContent)
-);
+export default React.memo(TabContent);

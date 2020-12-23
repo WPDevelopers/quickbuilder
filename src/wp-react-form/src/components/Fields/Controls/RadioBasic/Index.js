@@ -1,29 +1,34 @@
 import React from "react";
 import "./radio-basic.scss";
 
-function Index({ classes, name, label, options, onChange }) {
+function Index({ name, label, options, onChange, value }) {
+	let savedValue = value;
 	return (
-		<div className={`wprf-control ${classes}`}>
-			<h4 class="wprf-input-label">
-				{label}
-			</h4>
+		<>
+			<h4 class="wprf-input-label">{label}</h4>
 			<div className="wprf-input-radio-set-wrap">
 				{options.map(({ label, value }, index) => (
 					<div className="wprf-input-radio-set">
 						<input
 							key={index}
 							type="radio"
+							checked={value === savedValue}
 							id={`wprf-input-radio-${index}`}
-                            className="wprf-input-field wprf-input-radio"
-                            value={value}
+							className="wprf-input-field wprf-input-radio"
+							value={value}
 							name={name}
-							onChange={onChange}
+							onChange={(event) => onChange(event.target.value)}
 						/>
-						<label className="wprf-input-radio-label" htmlFor={`wprf-input-radio-${index}`}>{label}</label>
+						<label
+							className="wprf-input-radio-label"
+							htmlFor={`wprf-input-radio-${index}`}
+						>
+							{label}
+						</label>
 					</div>
 				))}
 			</div>
-		</div>
+		</>
 	);
 }
 

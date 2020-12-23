@@ -1,12 +1,22 @@
 import React from "react";
-import './text.scss';
+import "./text.scss";
 
-function Index({ classes, name, label, value, onChange }) {
+function Index({ name, label, value, onChange, ...rest }) {
 	return (
-		<div className={`wprf-control ${classes}`}>
-			<label class="wprf-input-label" htmlFor={name}>{label}</label>
-			<input type="text" id={name} className="wprf-input-field wprf-input-text-field" name={name} onChange={onChange} value={value} />
-		</div>
+		<>
+			<label class="wprf-input-label" htmlFor={name}>
+				{label}
+			</label>
+			<input
+				{...rest}
+				type="text"
+				id={name}
+				className="wprf-input-field wprf-input-text-field"
+				name={name}
+				onChange={(event) => onChange(event.target.value)}
+				value={value}
+			/>
+		</>
 	);
 }
 

@@ -1,50 +1,34 @@
-import React, { useEffect } from "react";
-import { withSelect, dispatch } from "@wordpress/data";
+import React from "react";
+import { withSelect } from "@wordpress/data";
 import { TextControl, TextareaControl, Checkbox, RadioBasic } from "./Controls";
-
-import { useCallback } from "@wordpress/element";
+import withCommon from "../../Hooks/withCommon";
 
 const Field = (props) => {
-	// useEffect(() => {
-	// 	console.log("Field for", props.name);
-	// }, []);
-	const handleChange = useCallback(
-		(value, name) => {
-			dispatch("wprf-store").setFormState({
-				...props.formState,
-				[name]: value,
-			});
-		},
-		[props]
-	);
-
-	let controlProps = {
-		...props,
-		value: props[props.name],
-		onChange: (inputValue) => handleChange(inputValue, props.name),
-	};
-
-	// console.log("Field for", props.name, props);
-
-	if (!props.canVisible) {
+	if (!props.isVisible) {
 		return "";
 	}
 
-	// console.log( 'props.type', props.type );
+	let controlProps = {
+		...props,
+		value:
+			props[props.name] !== null
+				? props[props.name]
+				: props.value !== undefined
+				? props.value
+				: null,
+	};
+
+	console.log("console from Field Comp controlProps", controlProps);
 
 	switch (props.type) {
 		case "text":
 			return <TextControl {...controlProps} />;
-
 		case "textarea":
 			return <TextareaControl {...controlProps} />;
-
 		case "checkbox":
 			return <Checkbox {...controlProps} />;
-
 		case "radio-basic":
 			return <RadioBasic {...controlProps} />;
-
 		case "colorpicker":
 
 		case "slider":
@@ -59,9 +43,8 @@ const Field = (props) => {
 export default React.memo(
 	withSelect((select, ownProps) => {
 		return {
-			formState: select("wprf-store").getFormState(),
-			[ownProps.name]: select("wprf-store").getInputState(ownProps.name),
-			canVisible: select("wprf-store").inputCanVisible(ownProps.name),
+			[ownProps.name]: select("wprf-store").getFieldValu(ownProps.name),
+			isVisible: select("wprf-store").isVisible(ownProps.name),
 		};
-	})(Field)
+	})(withCommon(Field))
 );

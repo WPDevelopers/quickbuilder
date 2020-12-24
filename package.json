@@ -20,8 +20,6 @@
   },
   "dependencies": {
     "@wordpress/scripts": "^12.5.0",
-    "react-color": "^2.19.3",
-    "validator": "^13.5.2",
     "yup": "^0.32.8"
   },
   "plugins": [

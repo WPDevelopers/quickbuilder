@@ -6,12 +6,8 @@ const DEFAULT_STATE = {
 		},
 	},
 	values: {},
-	touched: {
-		consent: true,
-	},
-	errors: {
-		consent: "You should checked this.",
-	},
+	touched: {},
+	errors: {},
 };
 
 const actions = {
@@ -78,7 +74,7 @@ const store = {
 			return state.values;
 		},
 		getFieldValue(state, name) {
-			return state.values.hasOwnProperty(name) ? state.values[name] : "";
+			return state.values[name];
 		},
 		isTouched(state, current) {
 			return (

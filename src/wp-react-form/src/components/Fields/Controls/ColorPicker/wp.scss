@@ -1,0 +1,247 @@
+@import '../scss/mixins';
+@import '../scss/common';
+
+.wprf-colorpicker-wrap {
+    .components-color-picker {
+        width: 100%;
+
+        * {
+            box-sizing: border-box;
+        }
+    }
+
+    .components-color-picker__saturation {
+        width: 100%;
+        padding-bottom: 55%;
+        position: relative;
+    }
+
+    .components-color-picker__body {
+        padding: 16px 16px 12px;
+    }
+
+    .components-color-picker__controls {
+        display: flex;
+    }
+
+    .components-color-picker__saturation-pointer,
+    .components-color-picker__hue-pointer,
+    .components-color-picker__alpha-pointer {
+        padding: 0;
+        position: absolute;
+        cursor: pointer;
+        box-shadow: none;
+        border: none;
+    }
+
+    /* CURRENT COLOR COMPONENT */
+    .components-color-picker__swatch {
+        margin-right: 8px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        background-image:
+            linear-gradient(45deg, #ddd 25%, transparent 25%),
+            linear-gradient(-45deg, #ddd 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #ddd 75%),
+            linear-gradient(-45deg, transparent 75%, #ddd 75%);
+        background-size: 10px 10px;
+        background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+
+        .is-alpha-disabled & {
+            width: 12px;
+            height: 12px;
+            margin-top: 0;
+        }
+    }
+
+    .components-color-picker__active {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+    }
+
+    /* SATURATION COMPONENT */
+    .components-color-picker__saturation-color,
+    .components-color-picker__saturation-white,
+    .components-color-picker__saturation-black {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .components-color-picker__saturation-color {
+        overflow: visible;
+    }
+
+    .components-color-picker__saturation-white {
+        /*rtl:ignore*/
+        background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+    }
+
+    .components-color-picker__saturation-black {
+        background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+    }
+
+    // Needs specificity.
+    .components-button.components-color-picker__saturation-pointer {
+        width: 14px;
+        height: 14px;
+        padding: 0;
+        border-radius: 50%;
+        background-color: transparent;
+        transform: translate(-50%, -50%);
+
+        box-shadow:
+            0 0 0 1px #FFF,
+            inset 0 0 0 1px #000,
+            0 0 0 2px #000;
+
+        &:focus:not(:disabled) {
+            box-shadow:
+                0 0 0 2px #FFF,
+                inset 0 0 0 1px #000,
+                0 0 0 3px #000;
+        }
+    }
+
+    /* HUE & ALPHA BARS */
+    .components-color-picker__toggles {
+        flex: 1;
+    }
+
+    .components-color-picker__alpha {
+        background-image:
+            linear-gradient(45deg, #ddd 25%, transparent 25%),
+            linear-gradient(-45deg, #ddd 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #ddd 75%),
+            linear-gradient(-45deg, transparent 75%, #ddd 75%);
+        background-size: 10px 10px;
+        background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+    }
+
+    .components-color-picker__hue-gradient,
+    .components-color-picker__alpha-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .components-color-picker__hue,
+    .components-color-picker__alpha {
+        height: 12px;
+        position: relative;
+    }
+
+    .is-alpha-enabled .components-color-picker__hue {
+        margin-bottom: 8px;
+    }
+
+    .components-color-picker__hue-bar,
+    .components-color-picker__alpha-bar {
+        position: relative;
+        margin: 0 3px;
+        height: 100%;
+        padding: 0 2px;
+    }
+
+    .components-color-picker__hue-gradient {
+        /*rtl:ignore*/
+        background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+    }
+
+    .components-color-picker__hue-pointer,
+    .components-color-picker__alpha-pointer {
+        /*rtl:ignore*/
+        left: 0;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+        background: #fff;
+        transform: translate(-7px, -1px);
+    }
+
+    .components-color-picker__hue-pointer,
+    .components-color-picker__saturation-pointer {
+        transition: box-shadow 0.1s linear;
+        @include reduce-motion("transition");
+    }
+
+    .components-color-picker__saturation-pointer:focus {
+        box-shadow:
+            0 0 0 2px #fff,
+            0 0 0 4px var(--wp-admin-theme-color),
+            0 0 5px 0 var(--wp-admin-theme-color),
+            inset 0 0 1px 1px rgba(0, 0, 0, 0.3),
+            0 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .components-color-picker__hue-pointer:focus,
+    .components-color-picker__alpha-pointer:focus {
+        border-color: var(--wp-admin-theme-color);
+        box-shadow:
+            0 0 0 2px var(--wp-admin-theme-color),
+            0 0 3px 0 var(--wp-admin-theme-color);
+        outline: 2px solid transparent;
+        outline-offset: -2px;
+    }
+
+    /* INPUTS COMPONENT */
+    .components-color-picker__inputs-wrapper {
+        margin: 0 -4px;
+        padding-top: 16px;
+        display: flex;
+        align-items: flex-end;
+        min-width: 255px;
+
+        fieldset {
+            flex: 1;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .components-color-picker__inputs-fields .components-text-control__input[type="number"] {
+            padding: 6px 3px;
+            margin: 0;
+        }
+    }
+
+    .components-color-picker__inputs-field {
+        width: 100%;
+    }
+
+    .components-color-picker__inputs-fields {
+        display: flex;
+        /*rtl:ignore*/
+        direction: ltr;
+        flex-grow: 1;
+        margin-right: 4px;
+
+        .components-base-control + .components-base-control {
+            margin-top: 0;
+        }
+
+        .components-base-control__field {
+            margin: 0 2px;
+        }
+    }
+
+
+    .components-color-picker__inputs-toggle {
+        height: 30px;
+        padding: 0 5px;
+    }
+}

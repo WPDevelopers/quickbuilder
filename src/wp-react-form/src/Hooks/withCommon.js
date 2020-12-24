@@ -5,7 +5,7 @@ import { dispatch, select } from "@wordpress/data";
 const withCommon = (WrappedComponent) => {
 	class WithCommon extends Component {
 		componentDidMount() {
-			if (this.props.value && this.props[this.props.name] == null) {
+			if (this.props.value) {
 				dispatch("wprf-store").setFieldValue({
 					[this.props.name]: this.props.value,
 				});
@@ -15,9 +15,11 @@ const withCommon = (WrappedComponent) => {
 			if (this.props.errorMessage) {
 				dispatch("wprf-store").removeError(this.props.name);
 			}
-			dispatch("wprf-store").setFieldValue({
-				[this.props.name]: value,
-			});
+			if (value) {
+				dispatch("wprf-store").setFieldValue({
+					[this.props.name]: value,
+				});
+			}
 		};
 
 		makeValidationRules = (rules) => {
@@ -51,10 +53,9 @@ const withCommon = (WrappedComponent) => {
 				});
 				validationSchema
 					.validate({
-						[this.props.name]: this.props[this.props.name],
+						[this.props.name]: this.props.value,
 					})
 					.catch((err) => {
-						console.log("err", err.message);
 						dispatch("wprf-store").setError({
 							[this.props.name]: err.message,
 						});

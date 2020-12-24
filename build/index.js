@@ -9174,30 +9174,25 @@ var tabs = [{
     value: true,
     lala: "lala",
     max: 30
-  }, {
-    label: "Gender",
-    name: "genderrr",
-    type: "radio-basic",
-    classes: "input-field",
-    value: "male",
-    options: [{
-      label: "Male",
-      value: "male"
-    }, {
-      label: "Female",
-      value: "female"
-    }, {
-      label: "Others",
-      value: "others"
-    }]
-  } // {
-  // 	label: "Is Checked?",
-  // 	name: "is_checked",
-  // 	type: "checkbox",
-  // 	css_class: "input-field",
-  // 	value: false,
+  }, // {
+  // 	label: "Gender",
+  // 	name: "genderrr",
+  // 	type: "radio-basic",
+  // 	classes: "input-field",
+  // 	value: "male",
+  // 	options: [
+  // 		{ label: "Male", value: "male" },
+  // 		{ label: "Female", value: "female" },
+  // 		{ label: "Others", value: "others" },
+  // 	],
   // },
-  // {
+  {
+    label: "Heading Color",
+    name: "heading_color_large",
+    type: "colorpicker",
+    css_class: "input-field",
+    value: "red"
+  } // {
   // 	label: "Message",
   // 	name: "message",
   // 	type: "textarea",
@@ -9406,7 +9401,9 @@ var withCommon = function withCommon(WrappedComponent) {
           Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_11__["dispatch"])("wprf-store").removeError(_this.props.name);
         }
 
-        Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_11__["dispatch"])("wprf-store").setFieldValue(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, value));
+        if (value) {
+          Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_11__["dispatch"])("wprf-store").setFieldValue(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, value));
+        }
       });
 
       _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), "makeValidationRules", function (rules) {
@@ -9434,8 +9431,7 @@ var withCommon = function withCommon(WrappedComponent) {
 
         if (_this.props.validation_rules) {
           var validationSchema = yup__WEBPACK_IMPORTED_MODULE_10__["object"]().shape(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, _this.makeValidationRules(_this.props.validation_rules)));
-          validationSchema.validate(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, _this.props[_this.props.name])).catch(function (err) {
-            console.log("err", err.message);
+          validationSchema.validate(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, _this.props.value)).catch(function (err) {
             Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_11__["dispatch"])("wprf-store").setError(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, err.message));
           });
         }
@@ -9449,7 +9445,7 @@ var withCommon = function withCommon(WrappedComponent) {
     _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(WithCommon, [{
       key: "componentDidMount",
       value: function componentDidMount() {
-        if (this.props.value && this.props[this.props.name] == null) {
+        if (this.props.value) {
           Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_11__["dispatch"])("wprf-store").setFieldValue(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, this.props.name, this.props.value));
         }
       }
@@ -9539,6 +9535,130 @@ function Index(_ref) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/ColorPicker/colorpicker.scss":
+/*!***************************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/ColorPicker/colorpicker.scss ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/ColorPicker/index.js":
+/*!*******************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/ColorPicker/index.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _colorpicker_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./colorpicker.scss */ "./src/wp-react-form/src/components/Fields/Controls/ColorPicker/colorpicker.scss");
+/* harmony import */ var _colorpicker_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_colorpicker_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wp_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./wp.scss */ "./src/wp-react-form/src/components/Fields/Controls/ColorPicker/wp.scss");
+/* harmony import */ var _wp_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wp_scss__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+
+function Index(_ref) {
+  var name = _ref.name,
+      label = _ref.label,
+      onChange = _ref.onChange,
+      value = _ref.value;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      showPicker = _useState2[0],
+      setShowPicker = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(value),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 1),
+      defaultValue = _useState4[0];
+
+  var closeRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])(null);
+
+  var handleCloseRef = function handleCloseRef(ref) {
+    Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+      var handleClickOutside = function handleClickOutside(ev) {
+        if (ref.current && !ref.current.contains(ev.target)) {
+          setShowPicker(false);
+        }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return function () {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    onChange(value);
+  }, [value]);
+  handleCloseRef(closeRef);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("label", {
+    htmlFor: name
+  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-colorpicker-wrap",
+    ref: closeRef
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("input", {
+    type: "hidden",
+    value: value,
+    name: name,
+    id: name
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", {
+    className: "wprf-picker-display",
+    style: {
+      backgroundColor: value,
+      borderColor: value
+    },
+    onClick: function onClick() {
+      return setShowPicker(!showPicker);
+    }
+  }), showPicker && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "wprf-colorpicker-reset",
+    onClick: function onClick(e) {
+      e.preventDefault();
+      setShowPicker(false);
+      onChange(defaultValue);
+    }
+  }, "Reset"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ColorPicker"], {
+    color: value,
+    onChangeComplete: function onChangeComplete(event) {
+      return onChange(event.hex);
+    }
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/ColorPicker/wp.scss":
+/*!******************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/ColorPicker/wp.scss ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -9748,7 +9868,7 @@ function Index(_ref) {
 /*!*******************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/index.js ***!
   \*******************************************************************/
-/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic */
+/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9766,6 +9886,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _RadioBasic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RadioBasic */ "./src/wp-react-form/src/components/Fields/Controls/RadioBasic/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadioBasic", function() { return _RadioBasic__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _ColorPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ColorPicker */ "./src/wp-react-form/src/components/Fields/Controls/ColorPicker/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorPicker", function() { return _ColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
 
 
 
@@ -9812,11 +9936,12 @@ var Field = function Field(props) {
     return "";
   }
 
-  var controlProps = _objectSpread(_objectSpread({}, props), {}, {
-    value: props[props.name] !== null ? props[props.name] : props.value !== undefined ? props.value : null
-  });
+  var controlProps = _objectSpread({}, props); // console.log(
+  // 	"from Field Comp controlProps",
+  // 	controlProps.name,
+  // 	controlProps
+  // );
 
-  console.log("console from Field Comp controlProps", controlProps);
 
   switch (props.type) {
     case "text":
@@ -9832,6 +9957,8 @@ var Field = function Field(props) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["RadioBasic"], controlProps);
 
     case "colorpicker":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["ColorPicker"], controlProps);
+
     case "slider":
     case "button":
     case "toggle":
@@ -9842,9 +9969,14 @@ var Field = function Field(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["withSelect"])(function (select, ownProps) {
-  var _ref;
-
-  return _ref = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, ownProps.name, select("wprf-store").getFieldValue(ownProps.name)), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, "isVisible", select("wprf-store").isVisible(ownProps.name)), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, "isTouched", select("wprf-store").isTouched(ownProps.name)), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_ref, "errorMessage", select("wprf-store").getError(ownProps.name)), _ref;
+  var savedValue = select("wprf-store").getFieldValue(ownProps.name);
+  var mapsToProps = {
+    value: savedValue || ownProps.value,
+    isVisible: select("wprf-store").isVisible(ownProps.name),
+    isTouched: select("wprf-store").isTouched(ownProps.name),
+    errorMessage: select("wprf-store").getError(ownProps.name)
+  };
+  return mapsToProps;
 })(Object(_Hooks_withCommon__WEBPACK_IMPORTED_MODULE_5__["default"])(Field)));
 
 /***/ }),
@@ -10111,12 +10243,8 @@ var DEFAULT_STATE = {
     }
   },
   values: {},
-  touched: {
-    consent: true
-  },
-  errors: {
-    consent: "You should checked this."
-  }
+  touched: {},
+  errors: {}
 };
 var actions = {
   setFieldValue: function setFieldValue(payload) {
@@ -10182,7 +10310,7 @@ var store = {
       return state.values;
     },
     getFieldValue: function getFieldValue(state, name) {
-      return state.values.hasOwnProperty(name) ? state.values[name] : "";
+      return state.values[name];
     },
     isTouched: function isTouched(state, current) {
       return state.touched.hasOwnProperty(current) && state.touched[current];

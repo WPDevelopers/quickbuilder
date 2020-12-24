@@ -1,6 +1,12 @@
 import React from "react";
 import { withSelect } from "@wordpress/data";
-import { TextControl, TextareaControl, Checkbox, RadioBasic } from "./Controls";
+import {
+	TextControl,
+	TextareaControl,
+	Checkbox,
+	RadioBasic,
+	ColorPicker,
+} from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
 const Field = (props) => {
@@ -10,15 +16,13 @@ const Field = (props) => {
 
 	let controlProps = {
 		...props,
-		value:
-			props[props.name] !== null
-				? props[props.name]
-				: props.value !== undefined
-				? props.value
-				: null,
 	};
 
-	console.log("console from Field Comp controlProps", controlProps);
+	// console.log(
+	// 	"from Field Comp controlProps",
+	// 	controlProps.name,
+	// 	controlProps
+	// );
 
 	switch (props.type) {
 		case "text":
@@ -30,8 +34,9 @@ const Field = (props) => {
 		case "radio-basic":
 			return <RadioBasic {...controlProps} />;
 		case "colorpicker":
-
+			return <ColorPicker {...controlProps} />;
 		case "slider":
+
 		case "button":
 		case "toggle":
 		case "date":
@@ -41,10 +46,12 @@ const Field = (props) => {
 };
 
 export default withSelect((select, ownProps) => {
-	return {
-		[ownProps.name]: select("wprf-store").getFieldValue(ownProps.name),
+	let savedValue = select("wprf-store").getFieldValue(ownProps.name);
+	const mapsToProps = {
+		value: savedValue || ownProps.value,
 		isVisible: select("wprf-store").isVisible(ownProps.name),
 		isTouched: select("wprf-store").isTouched(ownProps.name),
 		errorMessage: select("wprf-store").getError(ownProps.name),
 	};
+	return mapsToProps;
 })(withCommon(Field));

@@ -6,13 +6,18 @@ const DEFAULT_STATE = {
 		},
 	},
 	values: {},
-	touched: {},
+	touched: {
+		consent: true,
+	},
+	errors: {
+		consent: "You should checked this.",
+	},
 };
 
 const actions = {
 	setFieldValue(payload) {
 		return {
-			type: "SET_FIELD_VALUE",
+			type: "FIELD_VALUE",
 			payload,
 		};
 	},
@@ -22,17 +27,41 @@ const actions = {
 			payload,
 		};
 	},
+	setError(payload) {
+		return {
+			type: "FIELD_ERROR",
+			payload,
+		};
+	},
+	removeError(payload) {
+		return {
+			type: "REMOVE_FIELD_ERROR",
+			payload,
+		};
+	},
 };
 
 const store = {
 	reducer(state = DEFAULT_STATE, action) {
 		switch (action.type) {
-			case "SET_FIELD_VALUE":
+			case "FIELD_VALUE":
 				return {
 					...state,
 					values: { ...state.values, ...action.payload },
 				};
+			case "FIELD_ERROR":
+				return {
+					...state,
+					errors: { ...state.errors, ...action.payload },
+				};
+			case "REMOVE_FIELD_ERROR":
+				let updatedState = { ...state };
+				delete updatedState.errors[action.payload];
+				return updatedState;
 			case "FIELD_TOUCHED":
+				console.log("state.values", state.values);
+				console.log("state.values keys", Object.keys(state.values));
+
 				return {
 					...state,
 					touched: { ...state.touched, ...action.payload },
@@ -48,14 +77,17 @@ const store = {
 		getValues(state) {
 			return state.values;
 		},
-		getFieldValu(state, name) {
-			return state.values.hasOwnProperty(name)
-				? state.values[name]
-				: null;
+		getFieldValue(state, name) {
+			return state.values.hasOwnProperty(name) ? state.values[name] : "";
 		},
 		isTouched(state, current) {
 			return (
 				state.touched.hasOwnProperty(current) && state.touched[current]
+			);
+		},
+		getError(state, current) {
+			return (
+				state.errors.hasOwnProperty(current) && state.errors[current]
 			);
 		},
 		isVisible(state, current) {

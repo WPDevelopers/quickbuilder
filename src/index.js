@@ -11,12 +11,16 @@ const tabs = [
 		classes: "wrf-menu",
 		fields: [
 			{
-				label: "First Name",
+				label: "Label First Name",
 				name: "first_name",
 				type: "text",
 				classes: "input-field",
-				value: "Priyo",
+				// value: "Priyo",
 				placeholder: "First Name",
+				validation_rules: {
+					required: "Field should not be empty.",
+					"min:20": "Value has to 20 character in length",
+				},
 			},
 			{
 				label: "Last Name",
@@ -25,6 +29,10 @@ const tabs = [
 				classes: "input-field",
 				value: "Mukul",
 				placeholder: "Last Name",
+				validation_rules: {
+					required: "Field should not be empty.",
+					"min:2": "Value has to 2 character in length",
+				},
 			},
 			{
 				label: "Comments",
@@ -120,20 +128,20 @@ const tabs = [
 		key: "tab_2",
 		icon: "",
 		fields: [
-			// {
-			// 	label: "First Name",
-			// 	name: "first_name",
-			// 	type: "text",
-			// 	css_class: "input-field",
-			// 	placeholder: "blah blah",
-			// },
-			// {
-			// 	label: "Last Name",
-			// 	name: "message",
-			// 	type: "textarea",
-			// 	css_class: "input-field",
-			// 	value: "blah blah",
-			// },
+			{
+				label: "First Name New",
+				name: "first_name_new",
+				type: "text",
+				css_class: "input-field",
+				placeholder: "blah blah",
+			},
+			{
+				label: "Last Name New",
+				name: "last_name_new",
+				type: "textarea",
+				css_class: "input-field",
+				value: "blah blah",
+			},
 		],
 	},
 ];

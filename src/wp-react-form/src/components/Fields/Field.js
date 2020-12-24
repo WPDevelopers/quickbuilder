@@ -42,7 +42,9 @@ const Field = (props) => {
 
 export default withSelect((select, ownProps) => {
 	return {
-		[ownProps.name]: select("wprf-store").getFieldValu(ownProps.name),
+		[ownProps.name]: select("wprf-store").getFieldValue(ownProps.name),
 		isVisible: select("wprf-store").isVisible(ownProps.name),
+		isTouched: select("wprf-store").isTouched(ownProps.name),
+		errorMessage: select("wprf-store").getError(ownProps.name),
 	};
 })(withCommon(Field));

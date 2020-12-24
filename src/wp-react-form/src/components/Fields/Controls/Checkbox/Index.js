@@ -1,11 +1,12 @@
 import React from "react";
 import "./checkbox.scss";
 
-function Index({ name, label, onChange, value }) {
+function Index({ name, label, onChange, value, ...rest }) {
 	return (
 		<>
 			<label class="wprf-input-label" htmlFor={name}>
 				<input
+					{...rest}
 					type="checkbox"
 					id={name}
 					className="wprf-input-field wprf-input-checkbox"

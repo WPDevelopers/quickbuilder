@@ -1,6 +1,6 @@
 import React from "react";
 import { withSelect } from "@wordpress/data";
-import { TextControl, TextareaControl, Checkbox, RadioBasic } from "./Controls";
+import { TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
 const Field = (props) => {
@@ -18,7 +18,7 @@ const Field = (props) => {
 				: null,
 	};
 
-	console.log("console from Field Comp controlProps", controlProps);
+	// console.log("console from Field Comp controlProps", controlProps);
 
 	switch (props.type) {
 		case "text":
@@ -30,8 +30,9 @@ const Field = (props) => {
 		case "radio-basic":
 			return <RadioBasic {...controlProps} />;
 		case "colorpicker":
-
+			return <ColorPicker {...controlProps} />;
 		case "slider":
+
 		case "button":
 		case "toggle":
 		case "date":

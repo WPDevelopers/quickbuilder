@@ -30,6 +30,28 @@
 }
 
 
+.wprf-colorpicker-wrap {
+  position: relative;
+}
+.wprf-colorpicker-wrap .wprf-picker-display {
+  width: 28px;
+  height: 28px;
+  margin-right: 14px;
+  margin-bottom: 14px;
+  transform: scale(1);
+  transition: transform 100ms ease 0s;
+  border: 0px solid;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+}
+.wprf-colorpicker-wrap .wprf-picker-display:hover {
+  transform: scale(1.1);
+}
+.wprf-colorpicker-wrap .chrome-picker {
+  position: absolute;
+  top: 30px;
+}
 .wp-react-form.wrf-tabs-wrapper {
   display: flex;
   padding: 15px;

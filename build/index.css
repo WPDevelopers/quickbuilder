@@ -340,6 +340,21 @@
 .wprf-input-radio-set-wrap .wprf-input-radio-set .wprf-input-radio-label .wprf-radio-card-image {
   max-width: 100%;
 }
+.wprf-control-section .wprf-section-title {
+  display: flex;
+  align-items: center;
+}
+.wprf-control-section .wprf-section-title > h4 {
+  flex: 1;
+}
+.wprf-control-section .wprf-section-fields {
+  height: auto;
+  transition: all 0.3s ease 0s;
+}
+.wprf-control-section.wprf-section-collapsed .wprf-section-fields {
+  height: 0;
+  overflow: hidden;
+}
 .wp-react-form.wrf-tabs-wrapper {
   display: flex;
   padding: 15px;

@@ -1,4 +1,3 @@
-import { withSelect } from "@wordpress/data";
 import React from "react";
 import "./text.scss";
 

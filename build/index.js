@@ -9138,74 +9138,89 @@ var tabs = [{
   icon: "",
   classes: "wrf-menu",
   fields: [{
-    label: "Label First Name",
-    name: "first_name",
-    type: "text",
-    classes: "input-field",
-    // value: "Priyo",
-    placeholder: "First Name",
-    validation_rules: {
-      required: "Field should not be empty.",
-      "min:20": "Value has to 20 character in length"
-    }
+    type: "section",
+    label: "Select Source",
+    collapsible: true,
+    fields: [{
+      label: "Label First Name",
+      name: "first_name",
+      type: "text",
+      classes: "input-field",
+      // value: "Priyo",
+      placeholder: "First Name",
+      validation_rules: {
+        required: "Field should not be empty.",
+        "min:20": "Value has to 20 character in length"
+      }
+    }, {
+      label: "Last Name",
+      name: "last_name",
+      type: "text",
+      classes: "input-field",
+      value: "Mukul",
+      placeholder: "Last Name",
+      validation_rules: {
+        required: "Field should not be empty.",
+        "min:2": "Value has to 2 character in length"
+      }
+    }, {
+      label: "Comments",
+      name: "comments",
+      type: "textarea",
+      classes: "inputdd-field",
+      value: "blah blah",
+      max: 30
+    }, {
+      label: "Are you sure?",
+      name: "consent",
+      type: "checkbox",
+      classes: "inputdd-field",
+      value: true,
+      lala: "lala",
+      max: 30
+    }, {
+      label: "Gender",
+      name: "gender",
+      type: "radio-basic",
+      classes: "input-field",
+      value: "male",
+      options: [{
+        label: "Male",
+        value: "male"
+      }, {
+        label: "Female",
+        value: "female"
+      }, {
+        label: "Others",
+        value: "others"
+      }]
+    }]
   }, {
-    label: "Last Name",
-    name: "last_name",
-    type: "text",
-    classes: "input-field",
-    value: "Mukul",
-    placeholder: "Last Name",
-    validation_rules: {
-      required: "Field should not be empty.",
-      "min:2": "Value has to 2 character in length"
-    }
-  }, {
-    label: "Comments",
-    name: "comments",
-    type: "textarea",
-    classes: "inputdd-field",
-    value: "blah blah",
-    max: 30
-  }, {
-    label: "Are you sure?",
-    name: "consent",
-    type: "checkbox",
-    classes: "inputdd-field",
-    value: true,
-    lala: "lala",
-    max: 30
-  }, // {
-  // 	label: "Gender",
-  // 	name: "genderrr",
-  // 	type: "radio-basic",
-  // 	classes: "input-field",
-  // 	value: "male",
-  // 	options: [
-  // 		{ label: "Male", value: "male" },
-  // 		{ label: "Female", value: "female" },
-  // 		{ label: "Others", value: "others" },
-  // 	],
-  // },
-  {
-    label: "Heading Color",
-    name: "heading_color_large",
-    type: "colorpicker",
-    css_class: "input-field",
-    value: "red"
-  }, {
-    label: "Is Checked?",
-    name: "is_checked",
-    type: "checkbox"
-  }, {
-    label: "Message",
-    name: "message",
-    type: "textarea",
-    css_class: "input-field",
-    value: "Hello World",
-    condition: {
-      is_checked: true,
-      consent: true
-    }
+    type: "section",
+    label: "Select Source",
+    collapsible: true,
+    collapsed: true,
+    fields: [{
+      label: "Heading Color",
+      name: "heading_color_large",
+      type: "colorpicker",
+      css_class: "input-field",
+      value: "red"
+    }, {
+      label: "Is Checked?",
+      name: "is_checked",
+      type: "checkbox"
+    }, {
+      label: "Message",
+      name: "message",
+      type: "textarea",
+      css_class: "input-field",
+      value: "Hello World",
+      condition: {
+        is_checked: true,
+        consent: true
+      }
+    }]
   }, {
     label: "Notification Type",
     name: "notification_type",
@@ -9516,8 +9531,9 @@ var withCommon = function withCommon(WrappedComponent) {
         delete props.validation_rules;
         delete props.errorMessage;
         delete props.condition;
+        var classes = ["wprf-control", this.props.classes != undefined ? this.props.classes : ""];
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])("div", {
-          className: "wprf-control ".concat(this.props.classes != undefined ? this.props.classes : "")
+          className: classes.join(" ")
         }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
           onChange: this.onChange,
           onBlur: this.onBlur
@@ -9925,6 +9941,77 @@ function Index(_ref) {
 
 /***/ }),
 
+/***/ "./src/wp-react-form/src/components/Fields/Controls/SectionView/index.js":
+/*!*******************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/SectionView/index.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Field */ "./src/wp-react-form/src/components/Fields/Field.js");
+/* harmony import */ var _section_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./section.scss */ "./src/wp-react-form/src/components/Fields/Controls/SectionView/section.scss");
+/* harmony import */ var _section_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_section_scss__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+
+function Index(_ref) {
+  var fields = _ref.fields,
+      label = _ref.label,
+      collapsible = _ref.collapsible,
+      collapsed = _ref.collapsed;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(collapsed !== null && collapsed !== void 0 ? collapsed : false),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      isCollapse = _useState2[0],
+      setCollapse = _useState2[1];
+
+  var allFields = fields.map(function (item) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], item);
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-control-section ".concat(collapsible ? isCollapse ? "wprf-section-collapsed" : "" : "")
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-section-title"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h4", null, label), collapsible && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("button", {
+    onClick: function onClick() {
+      return setCollapse(!isCollapse);
+    }
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
+    icon: "arrow-".concat(isCollapse ? "down" : "up", "-alt2")
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-section-fields"
+  }, allFields));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/SectionView/section.scss":
+/*!***********************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/SectionView/section.scss ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/wp-react-form/src/components/Fields/Controls/TextControl/index.js":
 /*!*******************************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/TextControl/index.js ***!
@@ -9940,13 +10027,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./text.scss */ "./src/wp-react-form/src/components/Fields/Controls/TextControl/text.scss");
-/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_text_scss__WEBPACK_IMPORTED_MODULE_5__);
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./text.scss */ "./src/wp-react-form/src/components/Fields/Controls/TextControl/text.scss");
+/* harmony import */ var _text_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_text_scss__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -10068,7 +10152,7 @@ function Index(_ref) {
 /*!*******************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/index.js ***!
   \*******************************************************************/
-/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker, RadioCard, GroupControl */
+/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker, RadioCard, GroupControl, SectionView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10095,6 +10179,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _GroupControl__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./GroupControl */ "./src/wp-react-form/src/components/Fields/Controls/GroupControl/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GroupControl", function() { return _GroupControl__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+/* harmony import */ var _SectionView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SectionView */ "./src/wp-react-form/src/components/Fields/Controls/SectionView/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SectionView", function() { return _SectionView__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
 
 
 
@@ -10152,6 +10240,9 @@ var Field = function Field(props) {
 
 
   switch (props.type) {
+    case "section":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["SectionView"], controlProps);
+
     case "text":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["TextControl"], controlProps);
 

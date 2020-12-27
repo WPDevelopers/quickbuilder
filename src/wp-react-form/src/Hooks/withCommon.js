@@ -70,14 +70,13 @@ const withCommon = (WrappedComponent) => {
 			delete props.errorMessage;
 			delete props.condition;
 
+			let classes = [
+				"wprf-control",
+				this.props.classes != undefined ? this.props.classes : "",
+			];
+
 			return (
-				<div
-					className={`wprf-control ${
-						this.props.classes != undefined
-							? this.props.classes
-							: ""
-					}`}
-				>
+				<div className={classes.join(" ")}>
 					<WrappedComponent
 						{...props}
 						onChange={this.onChange}

@@ -8,6 +8,7 @@ import {
 	ColorPicker,
 	RadioCard,
 	GroupControl,
+	SectionView,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
@@ -27,6 +28,8 @@ const Field = (props) => {
 	// );
 
 	switch (props.type) {
+		case "section":
+			return <SectionView {...controlProps} />;
 		case "text":
 			return <TextControl {...controlProps} />;
 		case "textarea":

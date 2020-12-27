@@ -7,13 +7,12 @@ function Index({ name, label, options, onChange, value }) {
 		<>
 			<h4 class="wprf-input-label">{label}</h4>
 			<div className="wprf-input-radio-set-wrap">
-				{options.map(({ label, value }, index) => (
-					<div className="wprf-input-radio-set">
+				{options.map(({ label, value, icon }, index) => (
+					<div className="wprf-input-radio-set" key={index}>
 						<input
-							key={index}
 							type="radio"
 							checked={value === savedValue}
-							id={`wprf-input-radio-${index}`}
+							id={`wprf-input-radio-${value}`}
 							className="wprf-input-field wprf-input-radio"
 							value={value}
 							name={name}
@@ -21,9 +20,17 @@ function Index({ name, label, options, onChange, value }) {
 						/>
 						<label
 							className="wprf-input-radio-label"
-							htmlFor={`wprf-input-radio-${index}`}
+							htmlFor={`wprf-input-radio-${value}`}
 						>
-							{label}
+							{icon ? (
+								<img
+									className={`wprf-radio-card-image`}
+									src={icon}
+									alt={label}
+								/>
+							) : (
+								label
+							)}
 						</label>
 					</div>
 				))}

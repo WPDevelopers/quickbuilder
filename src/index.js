@@ -92,17 +92,31 @@ const tabs = [
 				type: "radio-card",
 				css_class: "notifications-type",
 				style: "style-card",
-				value: "sales-notification",
 				options: [
 					{
 						label: "Sales Notification",
 						value: "sales-notification",
-						icon: "imageURL",
+						icon:
+							"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
 					},
 					{ label: "Comments", value: "comments" },
 					{ label: "Reviews", value: "reviews" },
 					{ label: "Download Stats", value: "download-stats" },
 					{ label: "Donations", value: "donations" },
+				],
+			},
+			{
+				label: "Salse Source",
+				name: "sales_source",
+				type: "radio-card",
+				css_class: "notifications-type",
+				value: "woocommerce",
+				options: [
+					{
+						label: "WooCommerce",
+						value: "woocommerce",
+					},
+					{ label: "EDD", value: "edd" },
 				],
 			},
 			{

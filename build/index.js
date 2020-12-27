@@ -9212,11 +9212,10 @@ var tabs = [{
     type: "radio-card",
     css_class: "notifications-type",
     style: "style-card",
-    value: "sales-notification",
     options: [{
       label: "Sales Notification",
       value: "sales-notification",
-      icon: "imageURL"
+      icon: "https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg"
     }, {
       label: "Comments",
       value: "comments"
@@ -9229,6 +9228,19 @@ var tabs = [{
     }, {
       label: "Donations",
       value: "donations"
+    }]
+  }, {
+    label: "Salse Source",
+    name: "sales_source",
+    type: "radio-card",
+    css_class: "notifications-type",
+    value: "woocommerce",
+    options: [{
+      label: "WooCommerce",
+      value: "woocommerce"
+    }, {
+      label: "EDD",
+      value: "edd"
     }]
   }, {
     label: "Group Control",
@@ -9872,14 +9884,15 @@ function Index(_ref) {
     className: "wprf-input-radio-set-wrap"
   }, options.map(function (_ref2, index) {
     var label = _ref2.label,
-        value = _ref2.value;
+        value = _ref2.value,
+        icon = _ref2.icon;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "wprf-input-radio-set"
+      className: "wprf-input-radio-set",
+      key: index
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
-      key: index,
       type: "radio",
       checked: value === savedValue,
-      id: "wprf-input-radio-".concat(index),
+      id: "wprf-input-radio-".concat(value),
       className: "wprf-input-field wprf-input-radio",
       value: value,
       name: name,
@@ -9888,8 +9901,12 @@ function Index(_ref) {
       }
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
       className: "wprf-input-radio-label",
-      htmlFor: "wprf-input-radio-".concat(index)
-    }, label));
+      htmlFor: "wprf-input-radio-".concat(value)
+    }, icon ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+      className: "wprf-radio-card-image",
+      src: icon,
+      alt: label
+    }) : label));
   })));
 }
 

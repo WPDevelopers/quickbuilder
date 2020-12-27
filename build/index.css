@@ -337,6 +337,9 @@
   font-size: 18px;
   border-radius: 5px;
 }
+.wprf-input-radio-set-wrap .wprf-input-radio-set .wprf-input-radio-label .wprf-radio-card-image {
+  max-width: 100%;
+}
 .wp-react-form.wrf-tabs-wrapper {
   display: flex;
   padding: 15px;

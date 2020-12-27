@@ -9209,7 +9209,8 @@ var tabs = [{
     style: "style-card",
     options: [{
       label: "Sales Notification",
-      value: "sales-notification"
+      value: "sales-notification",
+      icon: "http://localhost/builder/wp-content/plugins/notificationx/admin/assets/img/themes/nx-comment-theme-2.jpg"
     }, {
       label: "Comments",
       value: "comments"
@@ -9770,7 +9771,8 @@ function Index(_ref) {
     className: "wprf-input-radio-set-wrap"
   }, options.map(function (_ref2, index) {
     var label = _ref2.label,
-        value = _ref2.value;
+        value = _ref2.value,
+        icon = _ref2.icon;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "wprf-input-radio-set"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
@@ -9787,7 +9789,11 @@ function Index(_ref) {
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
       className: "wprf-input-radio-label",
       htmlFor: "wprf-input-radio-".concat(index)
-    }, label));
+    }, icon ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+      className: "wprf-radio-card-image",
+      src: icon,
+      alt: label
+    }) : label));
   })));
 }
 

@@ -86,7 +86,7 @@ const tabs = [
 				css_class: "notifications-type",
 				style: "style-card",
 				options : [
-					{ label: "Sales Notification", value: "sales-notification" },
+					{ label: "Sales Notification", value: "sales-notification", icon: "http://localhost/builder/wp-content/plugins/notificationx/admin/assets/img/themes/nx-comment-theme-2.jpg" },
 					{ label: "Comments", value: "comments" },
 					{ label: "Reviews", value: "reviews" },
 					{ label: "Download Stats", value: "download-stats" },

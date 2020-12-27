@@ -52,7 +52,10 @@
 			transition: background 0.3s ease 0s;
 			background: #fff;
 			font-size: 18px;
-			border-radius: 5px;
+            border-radius: 5px;
+            .wprf-radio-card-image {
+                max-width: 100%;
+            }
 		}
 	}
 }

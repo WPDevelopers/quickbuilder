@@ -21,6 +21,8 @@ const Field = (props) => {
 		...props,
 	};
 
+	// console.log("controlProps", controlProps);
+
 	// console.log(
 	// 	"from Field Comp controlProps",
 	// 	controlProps.name,
@@ -56,12 +58,19 @@ const Field = (props) => {
 
 export default withSelect((select, ownProps) => {
 	let savedValue = select("wprf-store").getFieldValue(ownProps.name);
-	const mapsToProps = {
+	let mapsToProps = {
 		value: savedValue ?? ownProps.value,
-		// default: ownProps.value,
 		isVisible: select("wprf-store").isVisible(ownProps, ownProps.name),
 		isTouched: select("wprf-store").isTouched(ownProps.name),
 		errorMessage: select("wprf-store").getError(ownProps.name),
 	};
+
+	if (ownProps.parent) {
+		mapsToProps = {
+			...mapsToProps,
+			parentValue: select("wprf-store").getFieldValue(ownProps.parent),
+		};
+	}
+
 	return mapsToProps;
 })(withCommon(Field));

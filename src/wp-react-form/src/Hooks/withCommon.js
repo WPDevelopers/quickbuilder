@@ -11,7 +11,11 @@ const withCommon = (WrappedComponent) => {
 				});
 			}
 		}
-		onChange = (value) => {
+		onChange = (value, args) => {
+			if (args?.is_pro) {
+				alert("IsPro");
+				return;
+			}
 			if (this.props.errorMessage) {
 				dispatch("wprf-store").removeError(this.props.name);
 			}

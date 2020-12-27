@@ -9132,226 +9132,273 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var tabs = [{
-  label: "Tab 1",
-  key: "tab_1",
-  icon: "",
-  classes: "wrf-menu",
-  fields: [{
-    type: "section",
-    label: "Select Source",
-    collapsible: true,
-    fields: [{
-      label: "Label First Name",
-      name: "first_name",
-      type: "text",
-      classes: "input-field",
-      // value: "Priyo",
-      placeholder: "First Name",
-      validation_rules: {
-        required: "Field should not be empty.",
-        "min:20": "Value has to 20 character in length"
-      }
-    }, {
-      label: "Last Name",
-      name: "last_name",
-      type: "text",
-      classes: "input-field",
-      value: "Mukul",
-      placeholder: "Last Name",
-      validation_rules: {
-        required: "Field should not be empty.",
-        "min:2": "Value has to 2 character in length"
-      }
-    }, {
-      label: "Comments",
-      name: "comments",
-      type: "textarea",
-      classes: "inputdd-field",
-      value: "blah blah",
-      max: 30
-    }, {
-      label: "Are you sure?",
-      name: "consent",
-      type: "checkbox",
-      classes: "inputdd-field",
-      value: true,
-      lala: "lala",
-      max: 30
-    }, {
-      label: "Gender",
-      name: "gender",
-      type: "radio-basic",
-      classes: "input-field",
-      value: "male",
-      options: [{
-        label: "Male",
-        value: "male"
-      }, {
-        label: "Female",
-        value: "female"
-      }, {
-        label: "Others",
-        value: "others"
-      }]
-    }]
-  }, {
-    type: "section",
-    label: "Select Source",
-    collapsible: true,
-    collapsed: true,
-    fields: [{
-      label: "Heading Color",
-      name: "heading_color_large",
-      type: "colorpicker",
-      css_class: "input-field",
-      value: "red"
-    }, {
-      label: "Is Checked?",
-      name: "is_checked",
-      type: "checkbox"
-    }, {
-      label: "Message",
-      name: "message",
-      type: "textarea",
-      css_class: "input-field",
-      value: "Hello World",
-      condition: {
-        is_checked: true,
-        consent: true
-      }
-    }]
-  }, {
-    label: "Notification Type",
-    name: "notification_type",
-    type: "radio-card",
-    css_class: "notifications-type",
-    style: "style-card",
-    options: [{
-      label: "Sales Notification",
-      value: "sales-notification",
-      icon: "https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg"
-    }, {
-      label: "Comments",
-      value: "comments"
-    }, {
-      label: "Reviews",
-      value: "reviews"
-    }, {
-      label: "Download Stats",
-      value: "download-stats"
-    }, {
-      label: "Donations",
-      value: "donations"
-    }]
-  }, {
-    label: "Salse Source",
-    name: "sales_source",
-    type: "radio-card",
-    css_class: "notifications-type",
-    value: "woocommerce",
-    options: [{
-      label: "WooCommerce",
-      value: "woocommerce"
-    }, {
-      label: "EDD",
-      value: "edd"
-    }]
-  }, {
-    label: "Group Control",
-    name: "group_control",
-    type: "group",
-    condition: {
-      notification_type: "comments"
-    },
-    fields: [{
-      label: "First Name",
-      name: "first_name",
-      type: "text",
-      value: "hello",
-      validation_rules: {
-        required: null,
-        label: "First Name",
-        // FIXME: this label has to be taken from field label dynamically.
-        "min:3": "Has to be minimum 3 character long."
-      }
-    }, {
-      label: "Last Name",
-      name: "last_name",
-      type: "text",
-      validation_rules: {
-        required: "Last name can not be empty",
-        "min:3": "Has to be minimum 3 character long."
-      }
-    }]
-  } // {
-  // 	label: "User type",
-  // 	name: "header_size",
-  // 	type: "slider",
-  // 	min: 2,
-  // 	max: 100
-  // },
-  // {
-  // 	label: "User type",
-  // 	name: "header_size",
-  // 	type: "colorpicker"
-  // },
-  // {
-  // 	label: "More",
-  // 	name: "more_excerpt",
-  // 	type: "icon-button",
-  // 	icon: "ellipsis"
-  // },
-  // {
-  // 	label: "Switch",
-  // 	name: "switch_control",
-  // 	type: "toggle",
-  // },
-  // {
-  // 	label: "Birthday",
-  // 	name: "birthday",
-  // 	type: "date",
-  // },
-  ]
-}, {
-  label: "Tab 2",
-  key: "tab_2",
-  icon: "",
-  fields: [// {
-    // 	label: "First Name New",
-    // 	name: "first_name_new",
-    // 	type: "text",
-    // 	css_class: "input-field",
-    // 	placeholder: "blah blah",
+
+(function () {
+  var tabs = [{
+    label: "Tab 1",
+    key: "tab_1",
+    icon: "",
+    classes: "wrf-menu",
+    fields: [// {
+    // 	type: "section",
+    // 	label: "Select Source",
+    // 	collapsible: true,
+    // 	fields: [
+    // 		{
+    // 			label: "Label First Name",
+    // 			name: "first_name",
+    // 			type: "text",
+    // 			classes: "input-field",
+    // 			// value: "Priyo",
+    // 			placeholder: "First Name",
+    // 			validation_rules: {
+    // 				required: "Field should not be empty.",
+    // 				"min:20": "Value has to 20 character in length",
+    // 			},
+    // 		},
+    // 		{
+    // 			label: "Last Name",
+    // 			name: "last_name",
+    // 			type: "text",
+    // 			classes: "input-field",
+    // 			value: "Mukul",
+    // 			placeholder: "Last Name",
+    // 			validation_rules: {
+    // 				required: "Field should not be empty.",
+    // 				"min:2": "Value has to 2 character in length",
+    // 			},
+    // 		},
+    // 		{
+    // 			label: "Comments",
+    // 			name: "comments",
+    // 			type: "textarea",
+    // 			classes: "inputdd-field",
+    // 			value: "blah blah",
+    // 			max: 30,
+    // 		},
+    // 		{
+    // 			label: "Are you sure?",
+    // 			name: "consent",
+    // 			type: "checkbox",
+    // 			classes: "inputdd-field",
+    // 			value: true,
+    // 			lala: "lala",
+    // 			max: 30,
+    // 		},
+    // 		{
+    // 			label: "Gender",
+    // 			name: "gender",
+    // 			type: "radio-basic",
+    // 			classes: "input-field",
+    // 			value: "male",
+    // 			options: [
+    // 				{ label: "Male", value: "male" },
+    // 				{ label: "Female", value: "female" },
+    // 				{ label: "Others", value: "others" },
+    // 			],
+    // 		},
+    // 	],
     // },
     // {
-    // 	label: "Last Name New",
-    // 	name: "last_name_new",
-    // 	type: "textarea",
-    // 	css_class: "input-field",
-    // 	value: "blah blah",
+    // 	type: "section",
+    // 	label: "Select Source",
+    // 	collapsible: true,
+    // 	collapsed: true,
+    // 	fields: [
+    // 		{
+    // 			label: "Heading Color",
+    // 			name: "heading_color_large",
+    // 			type: "colorpicker",
+    // 			css_class: "input-field",
+    // 			value: "red",
+    // 		},
+    // 		{
+    // 			label: "Is Checked?",
+    // 			name: "is_checked",
+    // 			type: "checkbox",
+    // 		},
+    // 		{
+    // 			label: "Message",
+    // 			name: "message",
+    // 			type: "textarea",
+    // 			css_class: "input-field",
+    // 			value: "Hello World",
+    // 			condition: {
+    // 				is_checked: true,
+    // 				consent: true,
+    // 			},
+    // 		},
+    // 	],
     // },
-  ]
-}];
-var builder = {
-  tabs: tabs,
-  submit: {
-    label: "Save Changes" // onSubmit: (e) => {
-    // 	e.preventDefault();
-    // 	// this is for custom submit
-    // 	console.log("from builder obj", e);
+    {
+      label: "Notification Type",
+      name: "notification_type",
+      type: "radio-card",
+      css_class: "notifications-type",
+      style: "style-card",
+      value: "sales",
+      options: [{
+        label: "Sales Notification",
+        value: "sales",
+        icon: "https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg"
+      }, {
+        label: "Comments",
+        value: "comments"
+      }, {
+        label: "Reviews",
+        value: "reviews"
+      }, {
+        label: "Download Stats",
+        value: "download-stats"
+      }, {
+        label: "Donations",
+        value: "donations",
+        is_pro: true
+      }]
+    }, {
+      label: "Source",
+      name: "source",
+      type: "radio-card",
+      css_class: "notifications-type",
+      parent: "notification_type",
+      options: {
+        sales: [{
+          label: "WooCommerce",
+          value: "woocommerce",
+          default: true
+        }, {
+          label: "EDD",
+          value: "edd"
+        }],
+        comments: [{
+          label: "WordPress.org",
+          value: "wordpress"
+        }, {
+          label: "WordPress C",
+          value: "new_c"
+        }],
+        reviews: [{
+          label: "WordPress.org Reviews",
+          value: "wordpress",
+          default: true
+        }, {
+          label: "WooCommerce Reviews",
+          value: "woo"
+        }],
+        "download-stats": [{
+          label: "WordPress.org Stats",
+          value: "wordpress"
+        }, {
+          label: "Freemius Stats",
+          value: "freemius"
+        }],
+        donations: [{
+          label: "GiveWP",
+          value: "give"
+        }, {
+          label: "NewG",
+          value: "newg"
+        }]
+      } // condition: {
+      // 	notification_type: "sales",
+      // },
+
+    } // {
+    // 	label: "Group Control",
+    // 	name: "group_control",
+    // 	type: "group",
+    // 	fields: [
+    // 		{
+    // 			label: "First Name",
+    // 			name: "first_name",
+    // 			type: "text",
+    // 			value: "hello",
+    // 			validation_rules: {
+    // 				required: null,
+    // 				label: "First Name", // FIXME: this label has to be taken from field label dynamically.
+    // 				"min:3": "Has to be minimum 3 character long.",
+    // 			},
+    // 		},
+    // 		{
+    // 			label: "Last Name",
+    // 			name: "last_name",
+    // 			type: "text",
+    // 			validation_rules: {
+    // 				required: "Last name can not be empty",
+    // 				"min:3": "Has to be minimum 3 character long.",
+    // 			},
+    // 		},
+    // 	],
     // },
+    // {
+    // 	label: "User type",
+    // 	name: "header_size",
+    // 	type: "slider",
+    // 	min: 2,
+    // 	max: 100
+    // },
+    // {
+    // 	label: "User type",
+    // 	name: "header_size",
+    // 	type: "colorpicker"
+    // },
+    // {
+    // 	label: "More",
+    // 	name: "more_excerpt",
+    // 	type: "icon-button",
+    // 	icon: "ellipsis"
+    // },
+    // {
+    // 	label: "Switch",
+    // 	name: "switch_control",
+    // 	type: "toggle",
+    // },
+    // {
+    // 	label: "Birthday",
+    // 	name: "birthday",
+    // 	type: "date",
+    // },
+    ]
+  }, {
+    label: "Tab 2",
+    key: "tab_2",
+    icon: "",
+    fields: [// {
+      // 	label: "First Name New",
+      // 	name: "first_name_new",
+      // 	type: "text",
+      // 	css_class: "input-field",
+      // 	placeholder: "blah blah",
+      // },
+      // {
+      // 	label: "Last Name New",
+      // 	name: "last_name_new",
+      // 	type: "textarea",
+      // 	css_class: "input-field",
+      // 	value: "blah blah",
+      // },
+    ]
+  }];
+  var builder = {
+    tabs: tabs,
+    submit: {
+      label: "Save Changes" // onSubmit: (e) => {
+      // 	e.preventDefault();
+      // 	// this is for custom submit
+      // 	console.log("from builder obj", e);
+      // },
 
-  }
-};
+    }
+  };
 
-var App = function App() {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    config: builder
-  });
-};
+  var App = function App() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      config: builder
+    });
+  };
 
-react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(App, null), document.getElementById("root"));
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(App, null), document.getElementById("root"));
+})();
 
 /***/ }),
 
@@ -9463,13 +9510,18 @@ var withCommon = function withCommon(WrappedComponent) {
 
       _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_1___default()(this, WithCommon);
 
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
+      for (var _len = arguments.length, _args = new Array(_len), _key = 0; _key < _len; _key++) {
+        _args[_key] = arguments[_key];
       }
 
-      _this = _super.call.apply(_super, [this].concat(args));
+      _this = _super.call.apply(_super, [this].concat(_args));
 
-      _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), "onChange", function (value) {
+      _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), "onChange", function (value, args) {
+        if (args !== null && args !== void 0 && args.is_pro) {
+          alert("IsPro");
+          return;
+        }
+
         if (_this.props.errorMessage) {
           Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_11__["dispatch"])("wprf-store").removeError(_this.props.name);
         }
@@ -9877,48 +9929,71 @@ function Index(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./radio-card.scss */ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/radio-card.scss");
-/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_radio_card_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./radio-card.scss */ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/radio-card.scss");
+/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_radio_card_scss__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
-function Index(_ref) {
-  var name = _ref.name,
-      label = _ref.label,
-      options = _ref.options,
-      _onChange = _ref.onChange,
-      value = _ref.value;
+
+function Index(props) {
+  var name = props.name,
+      label = props.label,
+      options = props.options,
+      _onChange = props.onChange,
+      value = props.value,
+      parentValue = props.parentValue;
   var savedValue = value;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h4", {
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      fields = _useState2[0],
+      setFields = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    if (options.length) {
+      setFields(options);
+    }
+
+    if (parentValue && !(options !== null && options !== void 0 && options.length)) {
+      setFields(options === null || options === void 0 ? void 0 : options[parentValue]);
+    }
+  }, [parentValue]);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h4", {
     class: "wprf-input-label"
-  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wprf-input-radio-set-wrap"
-  }, options.map(function (_ref2, index) {
-    var label = _ref2.label,
-        value = _ref2.value,
-        icon = _ref2.icon;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  }, fields.map(function (_ref, index) {
+    var label = _ref.label,
+        value = _ref.value,
+        icon = _ref.icon,
+        d = _ref.default,
+        is_pro = _ref.is_pro;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
       className: "wprf-input-radio-set",
       key: index
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("input", {
       type: "radio",
-      checked: value === savedValue,
+      checked: d ? true : value === savedValue,
       id: "wprf-input-radio-".concat(value),
       className: "wprf-input-field wprf-input-radio",
       value: value,
       name: name,
       onChange: function onChange(event) {
-        return _onChange(event.target.value);
+        return _onChange(event.target.value, {
+          is_pro: is_pro
+        });
       }
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("label", {
       className: "wprf-input-radio-label",
       htmlFor: "wprf-input-radio-".concat(value)
-    }, icon ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+    }, icon ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("img", {
       className: "wprf-radio-card-image",
       src: icon,
       alt: label
@@ -10232,7 +10307,8 @@ var Field = function Field(props) {
     return "";
   }
 
-  var controlProps = _objectSpread({}, props); // console.log(
+  var controlProps = _objectSpread({}, props); // console.log("controlProps", controlProps);
+  // console.log(
   // 	"from Field Comp controlProps",
   // 	controlProps.name,
   // 	controlProps
@@ -10277,11 +10353,17 @@ var Field = function Field(props) {
   var savedValue = select("wprf-store").getFieldValue(ownProps.name);
   var mapsToProps = {
     value: savedValue !== null && savedValue !== void 0 ? savedValue : ownProps.value,
-    // default: ownProps.value,
     isVisible: select("wprf-store").isVisible(ownProps, ownProps.name),
     isTouched: select("wprf-store").isTouched(ownProps.name),
     errorMessage: select("wprf-store").getError(ownProps.name)
   };
+
+  if (ownProps.parent) {
+    mapsToProps = _objectSpread(_objectSpread({}, mapsToProps), {}, {
+      parentValue: select("wprf-store").getFieldValue(ownProps.parent)
+    });
+  }
+
   return mapsToProps;
 })(Object(_Hooks_withCommon__WEBPACK_IMPORTED_MODULE_5__["default"])(Field)));
 

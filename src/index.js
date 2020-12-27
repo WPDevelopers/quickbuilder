@@ -70,28 +70,70 @@ const tabs = [
 				css_class: "input-field",
 				value: "red",
 			},
-			// {
-			// 	label: "Message",
-			// 	name: "message",
-			// 	type: "textarea",
-			// 	css_class: "input-field",
-			// 	value: "blah blah",
-			// 	depends_on: "is_checked",
-			// 	depended_value: true,
-			// },
+			{
+				label: "Is Checked?",
+				name: "is_checked",
+				type: "checkbox",
+			},
+			{
+				label: "Message",
+				name: "message",
+				type: "textarea",
+				css_class: "input-field",
+				value: "Hello World",
+				condition: {
+					is_checked: true,
+					consent: true,
+				},
+			},
 			{
 				label: "Notification Type",
 				name: "notification_type",
 				type: "radio-card",
 				css_class: "notifications-type",
 				style: "style-card",
-				options : [
-					{ label: "Sales Notification", value: "sales-notification" },
+				value: "sales-notification",
+				options: [
+					{
+						label: "Sales Notification",
+						value: "sales-notification",
+						icon: "imageURL",
+					},
 					{ label: "Comments", value: "comments" },
 					{ label: "Reviews", value: "reviews" },
 					{ label: "Download Stats", value: "download-stats" },
 					{ label: "Donations", value: "donations" },
-				]
+				],
+			},
+			{
+				label: "Group Control",
+				name: "group_control",
+				type: "group",
+				condition: {
+					notification_type: "comments",
+				},
+				fields: [
+					{
+						label: "First Name",
+						name: "first_name",
+						type: "text",
+						value: "hello",
+						validation_rules: {
+							required: null,
+							label: "First Name", // FIXME: this label has to be taken from field label dynamically.
+							"min:3": "Has to be minimum 3 character long.",
+						},
+					},
+					{
+						label: "Last Name",
+						name: "last_name",
+						type: "text",
+						validation_rules: {
+							required: "Last name can not be empty",
+							"min:3": "Has to be minimum 3 character long.",
+						},
+					},
+				],
 			},
 			// {
 			// 	label: "User type",
@@ -128,20 +170,20 @@ const tabs = [
 		key: "tab_2",
 		icon: "",
 		fields: [
-			{
-				label: "First Name New",
-				name: "first_name_new",
-				type: "text",
-				css_class: "input-field",
-				placeholder: "blah blah",
-			},
-			{
-				label: "Last Name New",
-				name: "last_name_new",
-				type: "textarea",
-				css_class: "input-field",
-				value: "blah blah",
-			},
+			// {
+			// 	label: "First Name New",
+			// 	name: "first_name_new",
+			// 	type: "text",
+			// 	css_class: "input-field",
+			// 	placeholder: "blah blah",
+			// },
+			// {
+			// 	label: "Last Name New",
+			// 	name: "last_name_new",
+			// 	type: "textarea",
+			// 	css_class: "input-field",
+			// 	value: "blah blah",
+			// },
 		],
 	},
 ];

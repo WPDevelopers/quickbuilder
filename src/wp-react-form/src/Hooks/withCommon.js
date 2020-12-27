@@ -15,17 +15,14 @@ const withCommon = (WrappedComponent) => {
 			if (this.props.errorMessage) {
 				dispatch("wprf-store").removeError(this.props.name);
 			}
-			if (value) {
-				dispatch("wprf-store").setFieldValue({
-					[this.props.name]: value,
-				});
-			}
+			dispatch("wprf-store").setFieldValue({
+				[this.props.name]: value,
+			});
 		};
 
 		makeValidationRules = (rules) => {
 			let tempYup = Yup.string();
 			Object.keys(rules).map((rule) => {
-				console.log("rule", rule);
 				const ruleSet = rule.split(":");
 				let functionName = ruleSet[0];
 				let firstArg =
@@ -68,8 +65,10 @@ const withCommon = (WrappedComponent) => {
 		};
 
 		render() {
-			let props = { ...this.props };
+			let props = { ...this.props, id: this.props.id ?? this.props.name };
 			delete props.validation_rules;
+			delete props.errorMessage;
+			delete props.condition;
 
 			return (
 				<div

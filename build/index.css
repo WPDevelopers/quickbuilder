@@ -83,6 +83,10 @@
   word-wrap: normal !important;
 }
 
+.wprf-error-message {
+  color: red;
+}
+
 .wprf-colorpicker-wrap {
   /* CURRENT COLOR COMPONENT */
   /* SATURATION COMPONENT */

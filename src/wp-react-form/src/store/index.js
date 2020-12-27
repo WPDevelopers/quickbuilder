@@ -1,10 +1,13 @@
 const DEFAULT_STATE = {
-	depends_on: {
-		message: {
-			target: "is_checked",
-			value: true,
-		},
-	},
+	// conditions: { // Optional, we are checking condition from field props itself.
+	// 	message: {
+	// 		consent: true,
+	// 		is_checked: true,
+	// 	},
+	// 	group_control: {
+	// 		notification_type: "comments",
+	// 	},
+	// },
 	values: {},
 	touched: {},
 	errors: {},
@@ -55,9 +58,6 @@ const store = {
 				delete updatedState.errors[action.payload];
 				return updatedState;
 			case "FIELD_TOUCHED":
-				console.log("state.values", state.values);
-				console.log("state.values keys", Object.keys(state.values));
-
 				return {
 					...state,
 					touched: { ...state.touched, ...action.payload },
@@ -77,26 +77,22 @@ const store = {
 			return state.values[name];
 		},
 		isTouched(state, current) {
-			return (
-				state.touched.hasOwnProperty(current) && state.touched[current]
-			);
+			return state.touched?.[current];
 		},
 		getError(state, current) {
-			return (
-				state.errors.hasOwnProperty(current) && state.errors[current]
-			);
+			return state.errors?.[current];
 		},
-		isVisible(state, current) {
-			if (!state.depends_on.hasOwnProperty(current)) {
+		isVisible(state, props) {
+			if (!props.condition) {
 				return true;
 			}
-
-			return (
-				state.depends_on.hasOwnProperty(current) &&
-				state.values.hasOwnProperty(state.depends_on[current].target) &&
-				state.depends_on[current].value ===
-					state.values[state.depends_on[current].target]
-			);
+			let isTrue = true;
+			Object.keys(props.condition).map((condition) => {
+				if (state.values?.[condition] !== props.condition[condition]) {
+					isTrue = false;
+				}
+			});
+			return isTrue;
 		},
 	},
 };

@@ -3,7 +3,7 @@ import { ColorPicker } from "@wordpress/components";
 import "./colorpicker.scss";
 import "./wp.scss";
 
-function Index({ name, label, onChange, value }) {
+function Index({ id, name, label, onChange, value }) {
 	const [showPicker, setShowPicker] = useState(false);
 	const [defaultValue] = useState(value);
 	const closeRef = useRef(null);
@@ -31,9 +31,9 @@ function Index({ name, label, onChange, value }) {
 
 	return (
 		<>
-			<label htmlFor={name}>{label}</label>
+			<label htmlFor={id}>{label}</label>
 			<div className="wprf-colorpicker-wrap" ref={closeRef}>
-				<input type="hidden" value={value} name={name} id={name} />
+				<input type="hidden" value={value} name={name} id={id} />
 				<span
 					className="wprf-picker-display"
 					style={{ backgroundColor: value, borderColor: value }}

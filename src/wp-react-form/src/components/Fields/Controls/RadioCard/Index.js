@@ -1,5 +1,5 @@
 import React from "react";
-import "./radio-basic.scss";
+import "./radio-card.scss";
 
 function Index({ name, label, options, onChange, value }) {
 	let savedValue = value;

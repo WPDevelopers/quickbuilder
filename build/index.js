@@ -9192,7 +9192,7 @@ var tabs = [{
     type: "colorpicker",
     css_class: "input-field",
     value: "red"
-  } // {
+  }, // {
   // 	label: "Message",
   // 	name: "message",
   // 	type: "textarea",
@@ -9201,21 +9201,29 @@ var tabs = [{
   // 	depends_on: "is_checked",
   // 	depended_value: true,
   // },
-  // {
-  // 	// label: "Notification Type",
-  // 	name: "notification_type",
-  // 	type: "radio",
-  // 	css_class: "notifications-type",
-  // 	style: "style-card",
-  // 	options : [
-  // 		{ label: "Sales Notification", value: "sales-notification" },
-  // 		{ label: "Comments", value: "comments" },
-  // 		{ label: "Reviews", value: "reviews" },
-  // 		{ label: "Download Stats", value: "download-stats" },
-  // 		{ label: "Donations", value: "donations" },
-  // 	]
-  // },
-  // {
+  {
+    label: "Notification Type",
+    name: "notification_type",
+    type: "radio-card",
+    css_class: "notifications-type",
+    style: "style-card",
+    options: [{
+      label: "Sales Notification",
+      value: "sales-notification"
+    }, {
+      label: "Comments",
+      value: "comments"
+    }, {
+      label: "Reviews",
+      value: "reviews"
+    }, {
+      label: "Download Stats",
+      value: "download-stats"
+    }, {
+      label: "Donations",
+      value: "donations"
+    }]
+  } // {
   // 	label: "User type",
   // 	name: "header_size",
   // 	type: "slider",
@@ -9632,7 +9640,7 @@ function Index(_ref) {
     onClick: function onClick() {
       return setShowPicker(!showPicker);
     }
-  }), showPicker && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }), showPicker && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("button", {
     className: "wprf-colorpicker-reset",
     onClick: function onClick(e) {
       e.preventDefault();
@@ -9723,6 +9731,74 @@ function Index(_ref) {
 /*!**************************************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/RadioBasic/radio-basic.scss ***!
   \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/index.js":
+/*!*****************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/RadioCard/index.js ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./radio-card.scss */ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/radio-card.scss");
+/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_radio_card_scss__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+function Index(_ref) {
+  var name = _ref.name,
+      label = _ref.label,
+      options = _ref.options,
+      _onChange = _ref.onChange,
+      value = _ref.value;
+  var savedValue = value;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h4", {
+    class: "wprf-input-label"
+  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "wprf-input-radio-set-wrap"
+  }, options.map(function (_ref2, index) {
+    var label = _ref2.label,
+        value = _ref2.value;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "wprf-input-radio-set"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
+      key: index,
+      type: "radio",
+      checked: value === savedValue,
+      id: "wprf-input-radio-".concat(index),
+      className: "wprf-input-field wprf-input-radio",
+      value: value,
+      name: name,
+      onChange: function onChange(event) {
+        return _onChange(event.target.value);
+      }
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
+      className: "wprf-input-radio-label",
+      htmlFor: "wprf-input-radio-".concat(index)
+    }, label));
+  })));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/radio-card.scss":
+/*!************************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/RadioCard/radio-card.scss ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9868,7 +9944,7 @@ function Index(_ref) {
 /*!*******************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/index.js ***!
   \*******************************************************************/
-/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker */
+/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker, RadioCard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9889,6 +9965,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _ColorPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ColorPicker */ "./src/wp-react-form/src/components/Fields/Controls/ColorPicker/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorPicker", function() { return _ColorPicker__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _RadioCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RadioCard */ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RadioCard", function() { return _RadioCard__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
 
 
 
@@ -9955,6 +10035,9 @@ var Field = function Field(props) {
 
     case "radio-basic":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["RadioBasic"], controlProps);
+
+    case "radio-card":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["RadioCard"], controlProps);
 
     case "colorpicker":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["ColorPicker"], controlProps);

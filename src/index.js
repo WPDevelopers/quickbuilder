@@ -79,20 +79,20 @@ const tabs = [
 			// 	depends_on: "is_checked",
 			// 	depended_value: true,
 			// },
-			// {
-			// 	// label: "Notification Type",
-			// 	name: "notification_type",
-			// 	type: "radio",
-			// 	css_class: "notifications-type",
-			// 	style: "style-card",
-			// 	options : [
-			// 		{ label: "Sales Notification", value: "sales-notification" },
-			// 		{ label: "Comments", value: "comments" },
-			// 		{ label: "Reviews", value: "reviews" },
-			// 		{ label: "Download Stats", value: "download-stats" },
-			// 		{ label: "Donations", value: "donations" },
-			// 	]
-			// },
+			{
+				label: "Notification Type",
+				name: "notification_type",
+				type: "radio-card",
+				css_class: "notifications-type",
+				style: "style-card",
+				options : [
+					{ label: "Sales Notification", value: "sales-notification" },
+					{ label: "Comments", value: "comments" },
+					{ label: "Reviews", value: "reviews" },
+					{ label: "Download Stats", value: "download-stats" },
+					{ label: "Donations", value: "donations" },
+				]
+			},
 			// {
 			// 	label: "User type",
 			// 	name: "header_size",

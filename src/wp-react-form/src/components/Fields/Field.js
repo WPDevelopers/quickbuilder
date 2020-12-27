@@ -6,6 +6,7 @@ import {
 	Checkbox,
 	RadioBasic,
 	ColorPicker,
+	RadioCard,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
@@ -33,6 +34,8 @@ const Field = (props) => {
 			return <Checkbox {...controlProps} />;
 		case "radio-basic":
 			return <RadioBasic {...controlProps} />;
+		case "radio-card":
+			return <RadioCard {...controlProps} />;
 		case "colorpicker":
 			return <ColorPicker {...controlProps} />;
 		case "slider":

@@ -290,8 +290,11 @@
   display: none;
 }
 .wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label {
-  background: #0ccf9f;
+  background-color: #0ccf9f;
   color: #fff;
+}
+.wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label.with-wprf-radio-card-image {
+  background-color: transparent;
 }
 .wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:after {
   content: "";

@@ -20,7 +20,7 @@ function Index({ name, label, options, onChange, value }) {
 							onChange={(event) => onChange(event.target.value)}
 						/>
 						<label
-							className="wprf-input-radio-label"
+							className={`wprf-input-radio-label ${icon ? 'with-wprf-radio-card-image' : ''}`}
 							htmlFor={`wprf-input-radio-${index}`}
 						>
 							{icon ? <img className={`wprf-radio-card-image`} src={icon} alt={label} /> : label}

@@ -9787,7 +9787,7 @@ function Index(_ref) {
         return _onChange(event.target.value);
       }
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
-      className: "wprf-input-radio-label",
+      className: "wprf-input-radio-label ".concat(icon ? 'with-wprf-radio-card-image' : ''),
       htmlFor: "wprf-input-radio-".concat(index)
     }, icon ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
       className: "wprf-radio-card-image",

@@ -1,19 +1,19 @@
 import React from "react";
 import "./text.scss";
 
-function Index({ name, label, value, onChange, ...rest }) {
+function Index({ id, name, label, value, onChange, ...rest }) {
 	return (
 		<>
-			<label class="wprf-input-label" htmlFor={name}>
+			<label class="wprf-input-label" htmlFor={id}>
 				{label}
 			</label>
 			<input
 				{...rest}
 				type="text"
-				id={name}
+				id={id}
 				className="wprf-input-field wprf-input-text-field"
 				name={name}
-				onChange={(event) => onChange(event.target.value)}
+				onChange={(event) => onChange(event.target.value, name)}
 				value={value}
 			/>
 		</>

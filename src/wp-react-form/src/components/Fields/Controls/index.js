@@ -5,6 +5,8 @@ import Checkbox from "./Checkbox";
 import RadioBasic from "./RadioBasic";
 import ColorPicker from "./ColorPicker";
 import RadioCard from "./RadioCard";
+import GroupControl from "./GroupControl";
+import SectionView from "./SectionView";
 
 export {
 	TextControl,
@@ -13,4 +15,6 @@ export {
 	RadioBasic,
 	ColorPicker,
 	RadioCard,
+	GroupControl,
+	SectionView,
 };

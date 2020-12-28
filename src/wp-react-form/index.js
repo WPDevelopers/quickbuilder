@@ -1,5 +1,6 @@
 import React from "react";
 import TabBuilder from "./src/components/Tab";
+import Field from "./src/components/Fields/Field";
 
 /**
  * Registering a store.

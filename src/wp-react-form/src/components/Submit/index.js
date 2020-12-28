@@ -7,7 +7,7 @@ const Submit = ({ config }) => {
 	 */
 	const onSubmit = (evt) => {
 		console.log("on confirm validation: form validation");
-		if (!config.hasOwnProperty("onSubmit")) {
+		if (!config?.onSubmit) {
 			console.log("form has no onsubmit, run default one");
 			console.log("values", select("wprf-store").getValues());
 			console.log("event", evt);

@@ -7,6 +7,8 @@ import {
 	RadioBasic,
 	ColorPicker,
 	RadioCard,
+	GroupControl,
+	SectionView,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
@@ -26,6 +28,8 @@ const Field = (props) => {
 	// );
 
 	switch (props.type) {
+		case "section":
+			return <SectionView {...controlProps} />;
 		case "text":
 			return <TextControl {...controlProps} />;
 		case "textarea":
@@ -43,6 +47,8 @@ const Field = (props) => {
 		case "button":
 		case "toggle":
 		case "date":
+		case "group":
+			return <GroupControl {...controlProps} />;
 		default:
 			return <div></div>;
 	}
@@ -51,8 +57,9 @@ const Field = (props) => {
 export default withSelect((select, ownProps) => {
 	let savedValue = select("wprf-store").getFieldValue(ownProps.name);
 	const mapsToProps = {
-		value: savedValue || ownProps.value,
-		isVisible: select("wprf-store").isVisible(ownProps.name),
+		value: savedValue ?? ownProps.value,
+		// default: ownProps.value,
+		isVisible: select("wprf-store").isVisible(ownProps, ownProps.name),
 		isTouched: select("wprf-store").isTouched(ownProps.name),
 		errorMessage: select("wprf-store").getError(ownProps.name),
 	};

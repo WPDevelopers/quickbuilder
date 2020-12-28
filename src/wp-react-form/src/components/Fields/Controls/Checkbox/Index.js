@@ -1,14 +1,14 @@
 import React from "react";
 import "./checkbox.scss";
 
-function Index({ name, label, onChange, value, ...rest }) {
+function Index({ id, name, label, onChange, value, ...rest }) {
 	return (
 		<>
-			<label class="wprf-input-label" htmlFor={name}>
+			<label class="wprf-input-label" htmlFor={id}>
 				<input
 					{...rest}
 					type="checkbox"
-					id={name}
+					id={id}
 					className="wprf-input-field wprf-input-checkbox"
 					name={name}
 					onChange={(event) => onChange(event.target.checked)}

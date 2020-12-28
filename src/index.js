@@ -183,11 +183,12 @@ const tabs = [
 			// 	type: "icon-button",
 			// 	icon: "ellipsis"
 			// },
-			// {
-			// 	label: "Switch",
-			// 	name: "switch_control",
-			// 	type: "toggle",
-			// },
+			{
+				label: "Switch",
+				name: "switch_control",
+				type: "toggle",
+				valule: true
+			},
 			// {
 			// 	label: "Birthday",
 			// 	name: "birthday",

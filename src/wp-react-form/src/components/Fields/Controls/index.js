@@ -7,6 +7,7 @@ import ColorPicker from "./ColorPicker";
 import RadioCard from "./RadioCard";
 import GroupControl from "./GroupControl";
 import SectionView from "./SectionView";
+import Toggle from "./Toggle";
 
 export {
 	TextControl,
@@ -17,4 +18,5 @@ export {
 	RadioCard,
 	GroupControl,
 	SectionView,
+	Toggle
 };

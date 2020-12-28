@@ -9284,7 +9284,7 @@ var tabs = [{
         "min:3": "Has to be minimum 3 character long."
       }
     }]
-  } // {
+  }, // {
   // 	label: "User type",
   // 	name: "header_size",
   // 	type: "slider",
@@ -9302,12 +9302,12 @@ var tabs = [{
   // 	type: "icon-button",
   // 	icon: "ellipsis"
   // },
-  // {
-  // 	label: "Switch",
-  // 	name: "switch_control",
-  // 	type: "toggle",
-  // },
-  // {
+  {
+    label: "Switch",
+    name: "switch_control",
+    type: "toggle",
+    valule: true
+  } // {
   // 	label: "Birthday",
   // 	name: "birthday",
   // 	type: "date",
@@ -10137,6 +10137,71 @@ function Index(_ref) {
 
 /***/ }),
 
+/***/ "./src/wp-react-form/src/components/Fields/Controls/Toggle/index.js":
+/*!**************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/Toggle/index.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _toggle_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./toggle.scss */ "./src/wp-react-form/src/components/Fields/Controls/Toggle/toggle.scss");
+/* harmony import */ var _toggle_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_toggle_scss__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+function Index(_ref) {
+  var label = _ref.label,
+      name = _ref.name,
+      valule = _ref.valule;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(valule || false),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      checked = _useState2[0],
+      setChecked = _useState2[1];
+
+  var handleChange = function handleChange() {
+    setChecked(!checked);
+  };
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-toggle-wrap ".concat(checked ? "checked" : "not-checked")
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("label", {
+    for: name
+  }, label, " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("input", {
+    type: "checkbox",
+    id: name,
+    name: name,
+    onChange: function onChange() {
+      return handleChange();
+    }
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/Toggle/toggle.scss":
+/*!*****************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/Toggle/toggle.scss ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/wp-react-form/src/components/Fields/Controls/controls.scss":
 /*!************************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/controls.scss ***!
@@ -10152,7 +10217,7 @@ function Index(_ref) {
 /*!*******************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/index.js ***!
   \*******************************************************************/
-/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker, RadioCard, GroupControl, SectionView */
+/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker, RadioCard, GroupControl, SectionView, Toggle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10182,6 +10247,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _SectionView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SectionView */ "./src/wp-react-form/src/components/Fields/Controls/SectionView/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SectionView", function() { return _SectionView__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+/* harmony import */ var _Toggle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Toggle */ "./src/wp-react-form/src/components/Fields/Controls/Toggle/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Toggle", function() { return _Toggle__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+
 
 
 
@@ -10261,9 +10330,11 @@ var Field = function Field(props) {
     case "colorpicker":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["ColorPicker"], controlProps);
 
+    case "toggle":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["Toggle"], controlProps);
+
     case "slider":
     case "button":
-    case "toggle":
     case "date":
     case "group":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["GroupControl"], controlProps);

@@ -9239,8 +9239,9 @@ __webpack_require__.r(__webpack_exports__);
       value: "sales",
       options: [{
         label: "Sales Notification",
-        value: "sales",
-        icon: "https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg"
+        value: "sales" // icon:
+        // "https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
+
       }, {
         label: "Comments",
         value: "comments"
@@ -9261,45 +9262,58 @@ __webpack_require__.r(__webpack_exports__);
       type: "radio-card",
       css_class: "notifications-type",
       parent: "notification_type",
-      options: {
-        sales: [{
-          label: "WooCommerce",
-          value: "woocommerce",
-          default: true
-        }, {
-          label: "EDD",
-          value: "edd"
-        }],
-        comments: [{
-          label: "WordPress.org",
-          value: "wordpress"
-        }, {
-          label: "WordPress C",
-          value: "new_c"
-        }],
-        reviews: [{
-          label: "WordPress.org Reviews",
-          value: "wordpress",
-          default: true
-        }, {
-          label: "WooCommerce Reviews",
-          value: "woo"
-        }],
-        "download-stats": [{
-          label: "WordPress.org Stats",
-          value: "wordpress"
-        }, {
-          label: "Freemius Stats",
-          value: "freemius"
-        }],
-        donations: [{
-          label: "GiveWP",
-          value: "give"
-        }, {
-          label: "NewG",
-          value: "newg"
-        }]
-      } // condition: {
+      options: [{
+        label: "WooCommerce",
+        value: "woocommerce",
+        dependency: ["sales", "comments"]
+      }, {
+        label: "EDD",
+        value: "edd",
+        dependency: "sales"
+      }, {
+        label: "WordPress",
+        value: "wp",
+        dependency: "comments"
+      }] // options: {
+      // 	sales: [
+      // 		{
+      // 			label: "WooCommerce",
+      // 			value: "woocommerce",
+      // 			default: true,
+      // 		},
+      // 		{ label: "EDD", value: "edd" },
+      // 	],
+      // 	comments: [
+      // 		{ label: "WordPress.org", value: "wordpress" },
+      // 		{ label: "WordPress C", value: "new_c" },
+      // 	],
+      // 	reviews: [
+      // 		{
+      // 			label: "WordPress.org Reviews",
+      // 			value: "wordpress",
+      // 			default: true,
+      // 		},
+      // 		{
+      // 			label: "WooCommerce Reviews",
+      // 			value: "woo",
+      // 		},
+      // 	],
+      // 	"download-stats": [
+      // 		{
+      // 			label: "WordPress.org Stats",
+      // 			value: "wordpress",
+      // 		},
+      // 		{
+      // 			label: "Freemius Stats",
+      // 			value: "freemius",
+      // 		},
+      // 	],
+      // 	donations: [
+      // 		{ label: "GiveWP", value: "give" },
+      // 		{ label: "NewG", value: "newg" },
+      // 	],
+      // },
+      // condition: {
       // 	notification_type: "sales",
       // },
 
@@ -9392,6 +9406,23 @@ __webpack_require__.r(__webpack_exports__);
   };
 
   var App = function App() {
+    // const [tabs, setTabs] = useState([]);
+    // useEffect(() => {
+    // 	fetch(
+    // 		"https://cors-anywhere.herokuapp.com/https://nx.alim.dev/wp-admin/admin-ajax.php?action=nx",
+    // 		{
+    // 			headers: {
+    // 				"no-cors": true,
+    // 			},
+    // 		}
+    // 	)
+    // 		.then((res) => res.json())
+    // 		.then((res) => {
+    // 			console.log(res);
+    // 			setTabs(res);
+    // 		});
+    // }, []);
+    // builder.tabs = tabs;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
       config: builder
     });
@@ -9929,14 +9960,17 @@ function Index(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./radio-card.scss */ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/radio-card.scss");
-/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_radio_card_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./radio-card.scss */ "./src/wp-react-form/src/components/Fields/Controls/RadioCard/radio-card.scss");
+/* harmony import */ var _radio_card_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_radio_card_scss__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -9951,36 +9985,42 @@ function Index(props) {
       parentValue = props.parentValue;
   var savedValue = value;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
-      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(options),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
       fields = _useState2[0],
       setFields = _useState2[1];
 
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     if (options.length) {
       setFields(options);
     }
 
-    if (parentValue && !(options !== null && options !== void 0 && options.length)) {
-      setFields(options === null || options === void 0 ? void 0 : options[parentValue]);
+    if (parentValue) {
+      var newOptions = options.filter(function (item) {
+        if (_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(item.dependency) == "object") {
+          return item.dependency.includes(parentValue);
+        } else {
+          return item.dependency === parentValue;
+        }
+      });
+      setFields(newOptions);
     }
   }, [parentValue]);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h4", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("h4", {
     class: "wprf-input-label"
-  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-input-radio-set-wrap"
   }, fields.map(function (_ref, index) {
     var label = _ref.label,
         value = _ref.value,
         icon = _ref.icon,
-        d = _ref.default,
         is_pro = _ref.is_pro;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
       className: "wprf-input-radio-set",
       key: index
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("input", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("input", {
       type: "radio",
-      checked: d ? true : value === savedValue,
+      checked: value === savedValue,
       id: "wprf-input-radio-".concat(value),
       className: "wprf-input-field wprf-input-radio",
       value: value,
@@ -9990,10 +10030,10 @@ function Index(props) {
           is_pro: is_pro
         });
       }
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("label", {
-      className: "wprf-input-radio-label",
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("label", {
+      className: "wprf-input-radio-label ".concat(icon ? "with-wprf-radio-card-image" : ""),
       htmlFor: "wprf-input-radio-".concat(value)
-    }, icon ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("img", {
+    }, icon ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("img", {
       className: "wprf-radio-card-image",
       src: icon,
       alt: label
@@ -10212,6 +10252,71 @@ function Index(_ref) {
 
 /***/ }),
 
+/***/ "./src/wp-react-form/src/components/Fields/Controls/Toggle/index.js":
+/*!**************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/Toggle/index.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _toggle_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./toggle.scss */ "./src/wp-react-form/src/components/Fields/Controls/Toggle/toggle.scss");
+/* harmony import */ var _toggle_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_toggle_scss__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+function Index(_ref) {
+  var label = _ref.label,
+      name = _ref.name,
+      valule = _ref.valule;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(valule || false),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      checked = _useState2[0],
+      setChecked = _useState2[1];
+
+  var handleChange = function handleChange() {
+    setChecked(!checked);
+  };
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-toggle-wrap ".concat(checked ? "checked" : "not-checked")
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("label", {
+    for: name
+  }, label, " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("input", {
+    type: "checkbox",
+    id: name,
+    name: name,
+    onChange: function onChange() {
+      return handleChange();
+    }
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Index);
+
+/***/ }),
+
+/***/ "./src/wp-react-form/src/components/Fields/Controls/Toggle/toggle.scss":
+/*!*****************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/Toggle/toggle.scss ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/wp-react-form/src/components/Fields/Controls/controls.scss":
 /*!************************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/controls.scss ***!
@@ -10227,7 +10332,7 @@ function Index(_ref) {
 /*!*******************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/index.js ***!
   \*******************************************************************/
-/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker, RadioCard, GroupControl, SectionView */
+/*! exports provided: TextControl, TextareaControl, Checkbox, RadioBasic, ColorPicker, RadioCard, GroupControl, SectionView, Toggle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10257,6 +10362,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _SectionView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SectionView */ "./src/wp-react-form/src/components/Fields/Controls/SectionView/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SectionView", function() { return _SectionView__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+/* harmony import */ var _Toggle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Toggle */ "./src/wp-react-form/src/components/Fields/Controls/Toggle/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Toggle", function() { return _Toggle__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+
 
 
 
@@ -10337,9 +10446,11 @@ var Field = function Field(props) {
     case "colorpicker":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["ColorPicker"], controlProps);
 
+    case "toggle":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["Toggle"], controlProps);
+
     case "slider":
     case "button":
-    case "toggle":
     case "date":
     case "group":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_4__["GroupControl"], controlProps);

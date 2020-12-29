@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { __ } from "@wordpress/i18n";
 import WPReactForm from "./wp-react-form";
@@ -114,8 +114,8 @@ import WPReactForm from "./wp-react-form";
 						{
 							label: "Sales Notification",
 							value: "sales",
-							icon:
-								"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
+							// icon:
+							// "https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
 						},
 						{ label: "Comments", value: "comments" },
 						{ label: "Reviews", value: "reviews" },
@@ -133,45 +133,62 @@ import WPReactForm from "./wp-react-form";
 					type: "radio-card",
 					css_class: "notifications-type",
 					parent: "notification_type",
-					options: {
-						sales: [
-							{
-								label: "WooCommerce",
-								value: "woocommerce",
-								default: true,
-							},
-							{ label: "EDD", value: "edd" },
-						],
-						comments: [
-							{ label: "WordPress.org", value: "wordpress" },
-							{ label: "WordPress C", value: "new_c" },
-						],
-						reviews: [
-							{
-								label: "WordPress.org Reviews",
-								value: "wordpress",
-								default: true,
-							},
-							{
-								label: "WooCommerce Reviews",
-								value: "woo",
-							},
-						],
-						"download-stats": [
-							{
-								label: "WordPress.org Stats",
-								value: "wordpress",
-							},
-							{
-								label: "Freemius Stats",
-								value: "freemius",
-							},
-						],
-						donations: [
-							{ label: "GiveWP", value: "give" },
-							{ label: "NewG", value: "newg" },
-						],
-					},
+					options: [
+						{
+							label: "WooCommerce",
+							value: "woocommerce",
+							dependency: ["sales", "comments"],
+						},
+						{
+							label: "EDD",
+							value: "edd",
+							dependency: "sales",
+						},
+						{
+							label: "WordPress",
+							value: "wp",
+							dependency: "comments",
+						},
+					],
+					// options: {
+					// 	sales: [
+					// 		{
+					// 			label: "WooCommerce",
+					// 			value: "woocommerce",
+					// 			default: true,
+					// 		},
+					// 		{ label: "EDD", value: "edd" },
+					// 	],
+					// 	comments: [
+					// 		{ label: "WordPress.org", value: "wordpress" },
+					// 		{ label: "WordPress C", value: "new_c" },
+					// 	],
+					// 	reviews: [
+					// 		{
+					// 			label: "WordPress.org Reviews",
+					// 			value: "wordpress",
+					// 			default: true,
+					// 		},
+					// 		{
+					// 			label: "WooCommerce Reviews",
+					// 			value: "woo",
+					// 		},
+					// 	],
+					// 	"download-stats": [
+					// 		{
+					// 			label: "WordPress.org Stats",
+					// 			value: "wordpress",
+					// 		},
+					// 		{
+					// 			label: "Freemius Stats",
+					// 			value: "freemius",
+					// 		},
+					// 	],
+					// 	donations: [
+					// 		{ label: "GiveWP", value: "give" },
+					// 		{ label: "NewG", value: "newg" },
+					// 	],
+					// },
 					// condition: {
 					// 	notification_type: "sales",
 					// },
@@ -267,6 +284,27 @@ import WPReactForm from "./wp-react-form";
 			// },
 		},
 	};
-	const App = () => <WPReactForm config={builder} />;
+	const App = () => {
+		// const [tabs, setTabs] = useState([]);
+		// useEffect(() => {
+		// 	fetch(
+		// 		"https://cors-anywhere.herokuapp.com/https://nx.alim.dev/wp-admin/admin-ajax.php?action=nx",
+		// 		{
+		// 			headers: {
+		// 				"no-cors": true,
+		// 			},
+		// 		}
+		// 	)
+		// 		.then((res) => res.json())
+		// 		.then((res) => {
+		// 			console.log(res);
+		// 			setTabs(res);
+		// 		});
+		// }, []);
+
+		// builder.tabs = tabs;
+
+		return <WPReactForm config={builder} />;
+	};
 	ReactDOM.render(<App />, document.getElementById("root"));
 })();

@@ -9,6 +9,7 @@ import {
 	RadioCard,
 	GroupControl,
 	SectionView,
+	Toggle,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
@@ -44,10 +45,11 @@ const Field = (props) => {
 			return <RadioCard {...controlProps} />;
 		case "colorpicker":
 			return <ColorPicker {...controlProps} />;
+		case "toggle":
+			return <Toggle {...controlProps} />;
 		case "slider":
 
 		case "button":
-		case "toggle":
 		case "date":
 		case "group":
 			return <GroupControl {...controlProps} />;

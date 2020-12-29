@@ -10,8 +10,11 @@
 		input[type="radio"] {
 			display: none;
 			&:checked + .wprf-input-radio-label {
-				background: #0ccf9f;
+				background-color: #0ccf9f;
 				color: #fff;
+				&.with-wprf-radio-card-image {
+					background-color: transparent;
+				}
 				&:after {
 					content: "";
 					display: inline-block;

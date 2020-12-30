@@ -410,6 +410,49 @@
 .wprf-select-wrapper .wprf-select__input > input {
   box-shadow: none;
 }
+
+.wprf-slider-control .components-base-control {
+  float: left;
+  width: calc(100% - 75px);
+}
+
+.wprf-slider-control {
+  overflow: hidden;
+}
+
+.wprf-slider-control-reset-button {
+  background: #ffffff;
+  color: #006ba1;
+  height: 30px;
+  line-height: 22px;
+  padding: 0 8px;
+  font-size: 11px;
+  outline: 1px solid transparent;
+  border-radius: 2px;
+  border: 1px solid;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.wprf-slider-control-head {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wprf-slider-control-head .wprf-slider-units {
+  margin-left: auto;
+  margin-bottom: 8px;
+}
+.wprf-slider-control-head .wprf-slider-units button {
+  border: none;
+  background: transparent;
+  color: #007cba;
+  outline: none;
+  cursor: pointer;
+  font-size: 11px;
+}
+.wprf-slider-control-head .wprf-slider-units button.unit-active {
+  font-weight: 700;
+}
 .wp-react-form.wrf-tabs-wrapper {
   display: flex;
   padding: 15px;

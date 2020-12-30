@@ -6,119 +6,242 @@ const tabs = [
 		classes: "wrf-menu",
 		fields: [
 			{
+				type: "section",
+				label: "Select Source",
+				collapsible: true,
+				fields: [
+					// {
+					// 	label: "Content Typography",
+					// 	type: "typography"
+					// },
+					{
+						label: "Icon Size",
+						type: "slider",
+						name: "icon_size",
+						min: 2,
+						max: 10,
+						defaults: {
+							value: 5,
+							unit: 'px'
+						},
+						units: [
+							'px',
+							'%',
+							'em'
+						]
+					},
+					// {
+					// 	label: "Label First Name",
+					// 	name: "first_name",
+					// 	type: "text",
+					// 	classes: "input-field",
+					// 	// value: "Priyo",
+					// 	placeholder: "First Name",
+					// 	validation_rules: {
+					// 		required: "Field should not be empty.",
+					// 		"min:20": "Value has to 20 character in length",
+					// 	},
+					// },
+					// {
+					// 	label: "Last Name",
+					// 	name: "last_name",
+					// 	type: "text",
+					// 	classes: "input-field",
+					// 	value: "Mukul",
+					// 	placeholder: "Last Name",
+					// 	validation_rules: {
+					// 		required: "Field should not be empty.",
+					// 		"min:2": "Value has to 2 character in length",
+					// 	},
+					// },
+					// {
+					// 	label: "Comments",
+					// 	name: "comments",
+					// 	type: "textarea",
+					// 	classes: "inputdd-field",
+					// 	value: "blah blah",
+					// 	max: 30,
+					// },
+					// {
+					// 	label: "Are you sure?",
+					// 	name: "consent",
+					// 	type: "checkbox",
+					// 	classes: "inputdd-field",
+					// 	value: true,
+					// 	lala: "lala",
+					// 	max: 30,
+					// },
+					// {
+					// 	label: "Gender",
+					// 	name: "gender",
+					// 	type: "radio-basic",
+					// 	classes: "input-field",
+					// 	value: "male",
+					// 	options: [
+					// 		{ label: "Male", value: "male" },
+					// 		{ label: "Female", value: "female" },
+					// 		{ label: "Others", value: "others" },
+					// 	],
+					// },
+					// {
+					// 	label: "Gender",
+					// 	name: "gender",
+					// 	type: "select",
+					// 	classes: "input-field",
+					// 	value: "male",
+					// 	options: [
+					// 		{ label: "Male", value: "male" },
+					// 		{ label: "Female", value: "female" },
+					// 		{ label: "Others", value: "others" },
+					// 	],
+					// },
+				],
+			},
+			{
+				type: "section",
+				label: "Select Source",
+				collapsible: true,
+				collapsed: true,
+				fields: [
+					{
+						label: "Heading Color",
+						name: "heading_color_large",
+						type: "colorpicker",
+						css_class: "input-field",
+						value: "red",
+					},
+					{
+						label: "Is Checked?",
+						name: "is_checked",
+						type: "checkbox",
+					},
+					{
+						label: "Message",
+						name: "message",
+						type: "textarea",
+						css_class: "input-field",
+						value: "Hello World",
+						condition: {
+							is_checked: true,
+							consent: true,
+						},
+					},
+				],
+			},
+
+			{
 				label: "Notification Type",
 				name: "notification_type",
 				type: "radio-card",
 				css_class: "notifications-type",
 				style: "style-card",
-				value: "sales",
 				options: [
 					{
 						label: "Sales Notification",
-						value: "sales",
+						value: "sales-notification",
+						icon:
+							"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
 					},
 					{ label: "Comments", value: "comments" },
 					{ label: "Reviews", value: "reviews" },
 					{ label: "Download Stats", value: "download-stats" },
-					{
-						label: "Donations",
-						value: "donations",
-						is_pro: true,
-					},
+					{ label: "Donations", value: "donations" },
 				],
 			},
 			{
-				label: "Source",
-				name: "source",
+				label: "Salse Source",
+				name: "sales_source",
 				type: "radio-card",
 				css_class: "notifications-type",
-				parent: "notification_type",
 				value: "woocommerce",
 				options: [
 					{
 						label: "WooCommerce",
 						value: "woocommerce",
-						condition: {
-							notification_type: "sales",
-						},
 					},
-					{
-						label: "EDD",
-						value: "edd",
-						// dependency: "sales",
-						condition: {
-							notification_type: ["edd", "reviews", "sales"],
-						},
-					},
-					{
-						label: "WordPress",
-						value: "wp",
-						// dependency: "comments",
-						condition: {
-							notification_type: "comments",
-						},
-					},
-					{
-						label: "WP.org",
-						value: "wporg",
-						// dependency: "comments",
-						condition: {
-							notification_type: "comments",
-						},
-					},
+					{ label: "EDD", value: "edd" },
 				],
-				validation_rules: {
-					required: "This Is Required",
-				},
 			},
 			{
-				label: "Themes",
-				name: "themes",
-				type: "radio-card",
-				parent: ["notification_type", "source"],
-				value: "theme-one",
-				options: [
+				label: "Group Control",
+				name: "group_control",
+				type: "group",
+				condition: {
+					notification_type: "comments",
+				},
+				fields: [
 					{
-						label: "Theme One",
-						value: "theme-one",
-						condition: {
-							notification_type: "sales",
+						label: "First Name",
+						name: "first_name",
+						type: "text",
+						value: "hello",
+						validation_rules: {
+							required: null,
+							label: "First Name", // FIXME: this label has to be taken from field label dynamically.
+							"min:3": "Has to be minimum 3 character long.",
 						},
 					},
 					{
-						label: "Theme Two",
-						value: "theme-two",
-						condition: {
-							source: ["edd", "woocommerce"],
-							notification_type: ["sales", "comments", "reviews"],
-						},
-					},
-					{
-						label: "Theme Three",
-						value: "theme-three",
-						condition: {
-							notification_type: "sales",
-						},
-					},
-					{
-						label: "Theme Four",
-						value: "theme-four",
-						condition: {
-							notification_type: "sales",
-						},
-					},
-					{
-						label: "Theme Five",
-						value: "theme-five",
-						condition: {
-							notification_type: "sales",
+						label: "Last Name",
+						name: "last_name",
+						type: "text",
+						validation_rules: {
+							required: "Last name can not be empty",
+							"min:3": "Has to be minimum 3 character long.",
 						},
 					},
 				],
-				validation_rules: {
-					required: "This Is Required",
-				},
 			},
+			// {
+			// 	label: "User type",
+			// 	name: "header_size",
+			// 	type: "slider",
+			// 	min: 2,
+			// 	max: 100
+			// },
+			// {
+			// 	label: "User type",
+			// 	name: "header_size",
+			// 	type: "colorpicker"
+			// },
+			// {
+			// 	label: "More",
+			// 	name: "more_excerpt",
+			// 	type: "icon-button",
+			// 	icon: "ellipsis"
+			// },
+			{
+				label: "Switch",
+				name: "switch_control",
+				type: "toggle",
+				valule: true
+			},
+			// {
+			// 	label: "Birthday",
+			// 	name: "birthday",
+			// 	type: "date",
+			// },
+		],
+	},
+	{
+		label: "Tab 2",
+		key: "tab_2",
+		icon: "",
+		fields: [
+			// {
+			// 	label: "First Name New",
+			// 	name: "first_name_new",
+			// 	type: "text",
+			// 	css_class: "input-field",
+			// 	placeholder: "blah blah",
+			// },
+			// {
+			// 	label: "Last Name New",
+			// 	name: "last_name_new",
+			// 	type: "textarea",
+			// 	css_class: "input-field",
+			// 	value: "blah blah",
+			// },
 		],
 	},
 ];

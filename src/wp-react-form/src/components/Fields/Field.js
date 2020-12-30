@@ -11,11 +11,12 @@ import {
 	SectionView,
 	Toggle,
 	SelectControl,
+	Typography,
+	Slider,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
 const Field = (props) => {
-	console.log("props", props);
 	if (!props.isVisible) {
 		return "";
 	}
@@ -49,7 +50,10 @@ const Field = (props) => {
 			return <ColorPicker {...controlProps} />;
 		case "toggle":
 			return <Toggle {...controlProps} />;
+		case "typography":
+			return <Typography {...controlProps} />;
 		case "slider":
+			return <Slider {...controlProps} />;
 		case "button":
 		case "date":
 		case "group":

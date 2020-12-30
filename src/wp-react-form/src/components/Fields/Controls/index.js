@@ -9,6 +9,8 @@ import GroupControl from "./GroupControl";
 import SectionView from "./SectionView";
 import Toggle from "./Toggle";
 import SelectControl from "./SelectControl";
+import Typography from "./Typography";
+import Slider from "./Slider";
 
 export {
 	TextControl,
@@ -21,4 +23,6 @@ export {
 	SectionView,
 	Toggle,
 	SelectControl,
+	Typography,
+	Slider,
 };

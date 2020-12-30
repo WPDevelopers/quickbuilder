@@ -32,6 +32,23 @@ const fields = [
 			"min:20": "Your Input is too short. Make it 20Character Bigger.",
 		},
 	},
+	{
+		type: "radio-basic", // Required
+		name: "radio_basic", // Required
+		label: "Radio Basic Control",
+		placeholder: "Radio Basic Control Placeholder",
+		options: [
+			{ label: "One", value: "one" },
+			{ label: "Two", value: "two" },
+			{ label: "Three", value: "three" },
+		],
+		value: "one",
+		default: false, // not implemented [ i will do it, lots of things need to changes ]
+		validation_rules: {
+			required: "This Fields is Required", // Message
+			"min:20": "Your Input is too short. Make it 20Character Bigger.",
+		},
+	},
 ];
 
 export { fields };

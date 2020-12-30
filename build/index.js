@@ -12968,7 +12968,11 @@ var tabs = [{
       name: "icon_size",
       min: 2,
       max: 10,
-      value: 5
+      defaults: {
+        value: 5,
+        unit: 'px'
+      },
+      units: ['px', '%', 'em']
     } // {
     // 	label: "Label First Name",
     // 	name: "first_name",
@@ -14022,26 +14026,47 @@ function Index(_ref) {
       name = _ref.name,
       min = _ref.min,
       max = _ref.max,
-      value = _ref.value;
+      units = _ref.units,
+      defaults = _ref.defaults;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(value),
+  var _ref2 = defaults || {},
+      value = _ref2.value,
+      unit = _ref2.unit;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(value || 0),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
-      fvalue = _useState2[0],
+      svalue = _useState2[0],
       setValue = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(unit || ""),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
+      sunit = _useState4[0],
+      setSunit = _useState4[1];
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wprf-slider-wrap"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-slider-control-head"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("label", {
     htmlFor: name,
     className: "wprf-slider-label"
-  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+  }, label), units && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-slider-units"
+  }, units.map(function (unit) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("button", {
+      onClick: function onClick() {
+        return setSunit(unit);
+      },
+      className: unit == sunit ? "unit-active" : ""
+    }, unit);
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wprf-slider-control"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["RangeControl"], {
     min: min,
     max: max,
-    value: fvalue,
-    onChange: function onChange(fvalue) {
-      return setValue(fvalue);
+    value: svalue,
+    onChange: function onChange(svalue) {
+      return setValue(svalue);
     }
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("button", {
     className: "wprf-slider-control-reset-button",

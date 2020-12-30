@@ -1,6 +1,6 @@
 .wprf-slider-control .components-base-control {
     float: left;
-    width: calc(100% - 80px);
+    width: calc(100% - 75px);
 }
 
 .wprf-slider-control {
@@ -19,4 +19,25 @@
     border: 1px solid;
     cursor: pointer;
     margin-left: 30px;
+}
+
+.wprf-slider-control-head {
+    display: flex;
+    flex-wrap: wrap;
+    .wprf-slider-units {
+        margin-left: auto;
+        margin-bottom: 8px;
+
+        button {
+            border: none;
+            background: transparent;
+            color: #007cba;
+            outline: none;
+            cursor: pointer;
+            font-size: 11px;
+            &.unit-active {
+                font-weight: 700;
+            }
+        }
+    }
 }

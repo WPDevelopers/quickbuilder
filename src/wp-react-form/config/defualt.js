@@ -20,7 +20,15 @@ const tabs = [
 						name: "icon_size",
 						min: 2,
 						max: 10,
-						value: 5
+						defaults: {
+							value: 5,
+							unit: 'px'
+						},
+						units: [
+							'px',
+							'%',
+							'em'
+						]
 					},
 					// {
 					// 	label: "Label First Name",

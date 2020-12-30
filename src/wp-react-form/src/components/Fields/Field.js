@@ -68,9 +68,20 @@ export default withSelect((select, ownProps) => {
 	};
 
 	if (ownProps.parent) {
+		let parentsData = undefined;
+		if (typeof ownProps.parent === "object") {
+			parentsData = {};
+			ownProps.parent.map((parent) => {
+				parentsData[parent] = select("wprf-store").getFieldValue(
+					parent
+				);
+			});
+		}
 		mapsToProps = {
 			...mapsToProps,
-			parentValue: select("wprf-store").getFieldValue(ownProps.parent),
+			parentValue:
+				parentsData ??
+				select("wprf-store").getFieldValue(ownProps.parent),
 		};
 	}
 

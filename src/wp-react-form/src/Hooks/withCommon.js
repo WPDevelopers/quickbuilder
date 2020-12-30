@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as Yup from "yup";
 import { dispatch, select } from "@wordpress/data";
+import { SweetAlert } from "../core/functions";
 
 const withCommon = (WrappedComponent) => {
 	class WithCommon extends Component {
@@ -13,10 +14,13 @@ const withCommon = (WrappedComponent) => {
 		}
 		onChange = (value, args) => {
 			if (args?.is_pro) {
-				alert("IsPro");
-				return;
+				return SweetAlert({
+					title: "Hello World",
+					text: "Hello World Content",
+					icon: "error",
+				});
 			}
-			if (this.props.errorMessage) {
+			if (this.props?.errorMessage) {
 				dispatch("wprf-store").removeError(this.props.name);
 			}
 			dispatch("wprf-store").setFieldValue({
@@ -67,12 +71,33 @@ const withCommon = (WrappedComponent) => {
 				[this.props.name]: true,
 			});
 		};
+		/**
+		 * Unveiled Properties to Input Types.
+		 */
+		unveiledProps = ["validation_rules", "errorMessage", "condition"];
+		/**
+		 * Filter for Object || {}
+		 *
+		 * @param {function} func
+		 * @param {Object} thisObj
+		 */
+		filter = (func, thisObj) => {
+			let newObj = {};
+			Object.keys(thisObj)
+				.filter((item) => func(item))
+				.map((item) => {
+					newObj[item] = thisObj[item];
+				});
+			return newObj;
+		};
 
 		render() {
 			let props = { ...this.props, id: this.props.id ?? this.props.name };
-			delete props.validation_rules;
-			delete props.errorMessage;
-			delete props.condition;
+
+			let verifiedProps = this.filter(
+				(prop) => !this.unveiledProps.includes(prop),
+				props
+			);
 
 			let classes = [
 				"wprf-control",
@@ -82,7 +107,7 @@ const withCommon = (WrappedComponent) => {
 			return (
 				<div className={classes.join(" ")}>
 					<WrappedComponent
-						{...props}
+						{...verifiedProps}
 						onChange={this.onChange}
 						onBlur={this.onBlur}
 					/>

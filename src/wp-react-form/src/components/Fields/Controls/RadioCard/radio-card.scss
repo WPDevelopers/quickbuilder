@@ -9,11 +9,11 @@
 		box-shadow: 0 0 25px 0 rgba(0, 9, 78, 0.08);
 		input[type="radio"] {
 			display: none;
-			&:checked + .wprf-input-radio-label {
+			&:checked + .wprf-input-label {
 				background-color: #0ccf9f;
 				color: #fff;
 				&.with-wprf-radio-card-image {
-					background-color: transparent;
+					background-color: white;
 				}
 				&:after {
 					content: "";
@@ -43,7 +43,7 @@
 				}
 			}
 		}
-		.wprf-input-radio-label {
+		.wprf-input-label {
 			position: absolute;
 			left: 0;
 			top: 0;

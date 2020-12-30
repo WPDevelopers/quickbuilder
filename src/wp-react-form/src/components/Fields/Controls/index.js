@@ -1,4 +1,5 @@
 import "./controls.scss";
+import Input from "./Input/Input";
 import TextControl from "./TextControl";
 import TextareaControl from "./TextareaControl";
 import Checkbox from "./Checkbox";
@@ -13,6 +14,7 @@ import Typography from "./Typography";
 import Slider from "./Slider";
 
 export {
+	Input,
 	TextControl,
 	TextareaControl,
 	Checkbox,

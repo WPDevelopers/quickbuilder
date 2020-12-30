@@ -293,14 +293,14 @@
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio] {
   display: none;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label {
   background-color: #0ccf9f;
   color: #fff;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label.with-wprf-radio-card-image {
-  background-color: transparent;
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label.with-wprf-radio-card-image {
+  background-color: white;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:after {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label:after {
   content: "";
   display: inline-block;
   transform: rotate(45deg);
@@ -312,7 +312,7 @@
   right: -3px;
   top: -6px;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:before {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label:before {
   content: "";
   position: absolute;
   right: -10px;
@@ -326,7 +326,7 @@
   background: #09dca8;
   border-radius: 50%;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-radio-label {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-label {
   position: absolute;
   left: 0;
   top: 0;
@@ -342,7 +342,7 @@
   padding: 10px;
   box-sizing: border-box;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-radio-label .wprf-radio-card-image {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-label .wprf-radio-card-image {
   max-width: 100%;
 }
 .wprf-control-section .wprf-section-title {
@@ -421,19 +421,22 @@
   background: #fff;
   padding: 12px;
 }
+.wprf-typography-wrap .wprf-typography-modal > .wprf-fieldset-control {
+  margin-bottom: 15px;
+}
+.wprf-typography-wrap .wprf-typography-modal > .wprf-fieldset-control:last-of-type {
+  margin-bottom: 0px;
+}
 .wprf-typography-wrap .wprf-typography-modal h5 {
   margin: 0;
-}
-.wprf-slider-wrap {
-  padding: 10px;
 }
 .wprf-slider-wrap .wprf-slider-control-head {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 .wprf-slider-wrap .wprf-slider-control-head .wprf-slider-units {
   margin-left: auto;
-  margin-bottom: 8px;
 }
 .wprf-slider-wrap .wprf-slider-control-head .wprf-slider-units button {
   border: none;
@@ -447,11 +450,18 @@
   font-weight: 700;
 }
 .wprf-slider-wrap .wprf-slider-control {
-  overflow: hidden;
+  display: flex;
 }
 .wprf-slider-wrap .wprf-slider-control .components-base-control {
   float: left;
-  width: calc(100% - 75px);
+  flex: 1;
+  margin: 1px;
+}
+.wprf-slider-wrap .wprf-slider-control .components-base-control > div {
+  margin-bottom: 0px;
+}
+.wprf-slider-wrap .wprf-slider-control .components-base-control > div > span {
+  display: flex;
 }
 .wprf-slider-wrap .wprf-slider-control .wprf-slider-control-reset-button {
   background: #ffffff;
@@ -464,7 +474,7 @@
   border-radius: 2px;
   border: 1px solid;
   cursor: pointer;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 .wp-react-form.wrf-tabs-wrapper {
   display: flex;

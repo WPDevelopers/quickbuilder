@@ -8,7 +8,12 @@ const DEFAULT_STATE = {
 	// 		notification_type: "comments",
 	// 	},
 	// },
-	values: {},
+	savedValues: {},
+	values: {
+		content_typography: {
+			"font-family": "female",
+		},
+	},
 	touched: {},
 	errors: {},
 };
@@ -17,6 +22,12 @@ const actions = {
 	setFieldValue(payload) {
 		return {
 			type: "FIELD_VALUE",
+			payload,
+		};
+	},
+	resetFieldValue(payload) {
+		return {
+			type: "RESET_FIELD_VALUE",
 			payload,
 		};
 	},
@@ -48,6 +59,17 @@ const store = {
 					...state,
 					values: { ...state.values, ...action.payload },
 				};
+			case "RESET_FIELD_VALUE": {
+				let updatedState = { ...state };
+				if (updatedState.values?.[action.payload]) {
+					delete updatedState.values[action.payload];
+					if (updatedState.savedValues?.[action.payload]) {
+						updatedState.values[action.payload] =
+							updatedState.savedValues[action.payload];
+					}
+				}
+				return updatedState;
+			}
 			case "FIELD_ERROR":
 				return {
 					...state,

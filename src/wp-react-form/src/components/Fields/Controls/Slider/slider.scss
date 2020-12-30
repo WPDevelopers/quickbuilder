@@ -1,13 +1,11 @@
 
 .wprf-slider-wrap {
-    padding: 10px;
     .wprf-slider-control-head {
         display: flex;
         flex-wrap: wrap;
+        margin-bottom: 10px;
         .wprf-slider-units {
             margin-left: auto;
-            margin-bottom: 8px;
-    
             button {
                 border: none;
                 background: transparent;
@@ -22,10 +20,17 @@
         }
     }
     .wprf-slider-control {
-        overflow: hidden;
+        display: flex;
         .components-base-control {
             float: left;
-            width: calc(100% - 75px);
+            flex: 1;
+            margin: 1px;
+            & > div {
+                margin-bottom: 0px;
+                & > span {
+                    display: flex;
+                }
+            }
         }
         .wprf-slider-control-reset-button {
             background: #ffffff;
@@ -38,7 +43,7 @@
             border-radius: 2px;
             border: 1px solid;
             cursor: pointer;
-            margin-left: 30px;
+            margin-left: 10px;
         }
     }
 }

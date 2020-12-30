@@ -3,6 +3,12 @@
     margin: 5px 0;
     position: relative;
     .wprf-typography-modal {
+        & > .wprf-fieldset-control  {
+            margin-bottom: 15px;
+            &:last-of-type {
+                margin-bottom: 0px;
+            }
+        }
         position: absolute;
         width: 260px;
         background: #fff;

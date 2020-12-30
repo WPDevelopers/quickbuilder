@@ -6,7 +6,7 @@ function Index({ name, label, options, onChange, value }) {
 	return (
 		<>
 			<h4 class="wprf-input-label">{label}</h4>
-			<div className="wprf-input-radio-set-wrap">
+			<div className="wprf-input-radio-set-wrap wprf-radio-card">
 				{options.map(({ label, value, icon }, index) => (
 					<div className="wprf-input-radio-set" key={index}>
 						<input

@@ -68,6 +68,18 @@ const tabs = [
 							{ label: "Others", value: "others" },
 						],
 					},
+					{
+						label: "Gender",
+						name: "gender",
+						type: "select",
+						classes: "input-field",
+						value: "male",
+						options: [
+							{ label: "Male", value: "male" },
+							{ label: "Female", value: "female" },
+							{ label: "Others", value: "others" },
+						],
+					},
 				],
 			},
 			{

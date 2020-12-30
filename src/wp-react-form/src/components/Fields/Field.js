@@ -12,6 +12,8 @@ import {
 	Toggle,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
+import { SelectControl } from "@wordpress/components";
+import '../../../../../node_modules/@wordpress/components/build-style/style.css';
 
 const Field = (props) => {
 	if (!props.isVisible) {
@@ -46,6 +48,18 @@ const Field = (props) => {
 		case "toggle":
 			return <Toggle {...controlProps} />;
 		case "slider":
+
+		case "select":
+			return (
+				<SelectControl
+					options={[
+						{ label: "Big", value: "100%" },
+						{ label: "Medium", value: "50%" },
+						{ label: "Small", value: "25%" },
+					]}
+					// multiple={true}
+				/>
+			);
 
 		case "button":
 		case "date":

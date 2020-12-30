@@ -39,7 +39,6 @@ const notification_type_source_themes = [
 			{
 				label: "EDD",
 				value: "edd",
-				// dependency: "sales",
 				condition: {
 					notification_type: ["edd", "reviews", "sales"],
 				},
@@ -47,7 +46,6 @@ const notification_type_source_themes = [
 			{
 				label: "WordPress",
 				value: "wp",
-				// dependency: "comments",
 				condition: {
 					notification_type: "comments",
 				},
@@ -55,7 +53,6 @@ const notification_type_source_themes = [
 			{
 				label: "WP.org",
 				value: "wporg",
-				// dependency: "comments",
 				condition: {
 					notification_type: "comments",
 				},
@@ -83,7 +80,7 @@ const notification_type_source_themes = [
 				label: "Theme Two",
 				value: "theme-two",
 				condition: {
-					source: ["edd", "woocommerce"],
+					source: ["edd"],
 					notification_type: ["sales", "comments", "reviews"],
 				},
 			},
@@ -120,7 +117,8 @@ const select_fields = [
 		label: "Notification Type",
 		name: "notification_select",
 		type: "select",
-		// parent: "notification_type",
+		parent: "notification_type",
+		// value: "comments",
 		// search: true,
 		// placeholder: "Placeholder Select",
 		// multiple: true, // for multi option select
@@ -176,10 +174,7 @@ const tabs = [
 		key: "tab_1",
 		icon: "",
 		classes: "wrf-menu",
-		fields: [
-			//...notification_type_source_themes,
-			...select_fields,
-		],
+		fields: [...notification_type_source_themes, ...select_fields],
 	},
 ];
 

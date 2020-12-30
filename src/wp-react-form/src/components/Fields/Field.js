@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { withSelect } from "@wordpress/data";
 import {
 	TextControl,
@@ -13,6 +13,8 @@ import {
 	SelectControl,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
+
+import { ObjectFilter } from "../../core/functions";
 
 const Field = (props) => {
 	if (!props.isVisible) {
@@ -71,6 +73,7 @@ export default withSelect((select, ownProps) => {
 
 	if (ownProps.parent) {
 		let parentsData = undefined;
+		let parentValue = select("wprf-store").getFieldValue(ownProps.parent);
 		if (typeof ownProps.parent === "object") {
 			parentsData = {};
 			ownProps.parent.map((parent) => {
@@ -78,12 +81,11 @@ export default withSelect((select, ownProps) => {
 					parent
 				);
 			});
+			parentValue = parentsData;
 		}
 		mapsToProps = {
 			...mapsToProps,
-			parentValue:
-				parentsData ??
-				select("wprf-store").getFieldValue(ownProps.parent),
+			parentValue,
 		};
 	}
 

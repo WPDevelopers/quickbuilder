@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { dispatch, select } from "@wordpress/data";
 import { SweetAlert } from "../core/functions";
 
-const withCommon = (WrappedComponent) => {
+const withCommon = (WrappedComponent, withParent = true) => {
 	class WithCommon extends Component {
 		componentDidMount() {
 			if (this.props.value) {
@@ -105,18 +105,38 @@ const withCommon = (WrappedComponent) => {
 			];
 
 			return (
-				<div className={classes.join(" ")}>
-					<WrappedComponent
-						{...verifiedProps}
-						onChange={this.onChange}
-						onBlur={this.onBlur}
-					/>
-					{this.props.isTouched && this.props.errorMessage && (
-						<div className="wprf-error-message">
-							{this.props.errorMessage}
+				<>
+					{withParent && (
+						<div className={classes.join(" ")}>
+							<WrappedComponent
+								{...verifiedProps}
+								onChange={this.onChange}
+								onBlur={this.onBlur}
+							/>
+							{this.props.isTouched &&
+								this.props.errorMessage && (
+									<div className="wprf-error-message">
+										{this.props.errorMessage}
+									</div>
+								)}
 						</div>
 					)}
-				</div>
+					{!withParent && (
+						<>
+							<WrappedComponent
+								{...verifiedProps}
+								onChange={this.onChange}
+								onBlur={this.onBlur}
+							/>
+							{this.props.isTouched &&
+								this.props.errorMessage && (
+									<div className="wprf-error-message">
+										{this.props.errorMessage}
+									</div>
+								)}
+						</>
+					)}
+				</>
 			);
 		}
 	}

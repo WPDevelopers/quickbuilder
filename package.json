@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "@wordpress/scripts": "^12.5.0",
+    "axios": "^0.21.1",
+    "sweetalert2": "^10.12.6",
     "yup": "^0.32.8"
   },
   "plugins": [

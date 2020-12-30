@@ -304,22 +304,22 @@
   content: "";
   display: inline-block;
   transform: rotate(45deg);
-  height: 12px;
-  width: 6px;
+  height: 6px;
+  width: 3px;
   border-bottom: 3.5px solid #fff;
   border-right: 3.5px solid #fff;
   position: absolute;
-  right: -5px;
-  top: -10px;
+  right: -3px;
+  top: -6px;
 }
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:before {
   content: "";
   position: absolute;
-  right: -15px;
-  top: -15px;
+  right: -10px;
+  top: -10px;
   left: auto;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border: 0;
   box-sizing: border-box;
   transition: all 0.3s ease 0s;
@@ -337,8 +337,10 @@
   justify-content: center;
   transition: background 0.3s ease 0s;
   background: #fff;
-  font-size: 18px;
+  font-size: 14px;
   border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-radio-label .wprf-radio-card-image {
   max-width: 100%;

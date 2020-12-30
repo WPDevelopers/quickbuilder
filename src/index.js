@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { __ } from "@wordpress/i18n";
 import WPReactForm from "./wp-react-form";
 // import axios from "axios";
-import { builder } from "./wp-react-form/config";
+import { priyo as builder } from "./wp-react-form/config";
 
 (function () {
 	const App = () => {

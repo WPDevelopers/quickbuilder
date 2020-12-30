@@ -8,6 +8,7 @@ import RadioCard from "./RadioCard";
 import GroupControl from "./GroupControl";
 import SectionView from "./SectionView";
 import Toggle from "./Toggle";
+import SelectControl from "./SelectControl";
 
 export {
 	TextControl,
@@ -18,5 +19,6 @@ export {
 	RadioCard,
 	GroupControl,
 	SectionView,
-	Toggle
+	Toggle,
+	SelectControl,
 };

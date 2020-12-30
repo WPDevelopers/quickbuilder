@@ -10,10 +10,12 @@ import {
 	GroupControl,
 	SectionView,
 	Toggle,
+	SelectControl,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 
 const Field = (props) => {
+	console.log("props", props);
 	if (!props.isVisible) {
 		return "";
 	}
@@ -53,6 +55,8 @@ const Field = (props) => {
 		case "date":
 		case "group":
 			return <GroupControl {...controlProps} />;
+		case "select":
+			return <SelectControl {...controlProps} />;
 		default:
 			return <div></div>;
 	}

@@ -78,7 +78,7 @@ function Index(props) {
 	return (
 		<>
 			<h4 class="wprf-input-label">{label}</h4>
-			<div className="wprf-input-radio-set-wrap">
+			<div className="wprf-input-radio-set-wrap wprf-radio-card">
 				{fields.map(({ label, value, icon, is_pro }, index) => (
 					<div className="wprf-input-radio-set" key={index}>
 						<input

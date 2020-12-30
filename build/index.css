@@ -279,28 +279,28 @@
   height: 30px;
   padding: 0 5px;
 }
-.wprf-input-radio-set-wrap {
+.wprf-input-radio-set-wrap.wprf-radio-card {
   display: flex;
   flex-wrap: wrap;
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set {
   height: 80px;
   width: 20%;
   position: relative;
   margin: 10px 10px 10px;
   box-shadow: 0 0 25px 0 rgba(0, 9, 78, 0.08);
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio] {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio] {
   display: none;
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label {
   background-color: #0ccf9f;
   color: #fff;
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label.with-wprf-radio-card-image {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label.with-wprf-radio-card-image {
   background-color: transparent;
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:after {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:after {
   content: "";
   display: inline-block;
   transform: rotate(45deg);
@@ -312,7 +312,7 @@
   right: -3px;
   top: -6px;
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:before {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-radio-label:before {
   content: "";
   position: absolute;
   right: -10px;
@@ -326,7 +326,7 @@
   background: #09dca8;
   border-radius: 50%;
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set .wprf-input-radio-label {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-radio-label {
   position: absolute;
   left: 0;
   top: 0;
@@ -342,7 +342,7 @@
   padding: 10px;
   box-sizing: border-box;
 }
-.wprf-input-radio-set-wrap .wprf-input-radio-set .wprf-input-radio-label .wprf-radio-card-image {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-radio-label .wprf-radio-card-image {
   max-width: 100%;
 }
 .wprf-control-section .wprf-section-title {
@@ -399,7 +399,7 @@
   content: "";
   position: absolute;
   left: -38px;
-  top: 2px;
+  top: 3px;
   width: 26px;
   height: 26px;
   border-radius: 50%;

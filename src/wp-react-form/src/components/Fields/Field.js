@@ -50,7 +50,6 @@ const Field = (props) => {
 		case "toggle":
 			return <Toggle {...controlProps} />;
 		case "slider":
-
 		case "button":
 		case "date":
 		case "group":

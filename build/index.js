@@ -22571,7 +22571,7 @@ function Index(props) {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("h4", {
     class: "wprf-input-label"
   }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("div", {
-    className: "wprf-input-radio-set-wrap"
+    className: "wprf-input-radio-set-wrap wprf-radio-card"
   }, fields.map(function (_ref, index) {
     var label = _ref.label,
         value = _ref.value,

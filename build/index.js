@@ -21591,7 +21591,7 @@ __webpack_require__.r(__webpack_exports__);
 (function () {
   var App = function App() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["builder"]
+      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["priyo"]
     });
   };
 

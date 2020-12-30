@@ -21591,7 +21591,7 @@ __webpack_require__.r(__webpack_exports__);
 (function () {
   var App = function App() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["priyo"]
+      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["builder"]
     });
   };
 
@@ -21618,177 +21618,171 @@ var tabs = [{
     type: "section",
     label: "Select Source",
     collapsible: true,
-    fields: [// {
-    // 	label: "Content Typography",
-    // 	type: "typography"
-    // },
-    {
-      label: "Icon Size",
-      type: "slider",
-      name: "icon_size",
-      min: 2,
-      max: 10,
-      defaults: {
-        value: 5,
-        unit: 'px'
-      },
-      units: ['px', '%', 'em']
-    } // {
-    // 	label: "Label First Name",
-    // 	name: "first_name",
-    // 	type: "text",
-    // 	classes: "input-field",
-    // 	// value: "Priyo",
-    // 	placeholder: "First Name",
-    // 	validation_rules: {
-    // 		required: "Field should not be empty.",
-    // 		"min:20": "Value has to 20 character in length",
-    // 	},
-    // },
-    // {
-    // 	label: "Last Name",
-    // 	name: "last_name",
-    // 	type: "text",
-    // 	classes: "input-field",
-    // 	value: "Mukul",
-    // 	placeholder: "Last Name",
-    // 	validation_rules: {
-    // 		required: "Field should not be empty.",
-    // 		"min:2": "Value has to 2 character in length",
-    // 	},
-    // },
-    // {
-    // 	label: "Comments",
-    // 	name: "comments",
-    // 	type: "textarea",
-    // 	classes: "inputdd-field",
-    // 	value: "blah blah",
-    // 	max: 30,
-    // },
-    // {
-    // 	label: "Are you sure?",
-    // 	name: "consent",
-    // 	type: "checkbox",
-    // 	classes: "inputdd-field",
-    // 	value: true,
-    // 	lala: "lala",
-    // 	max: 30,
-    // },
-    // {
-    // 	label: "Gender",
-    // 	name: "gender",
-    // 	type: "radio-basic",
-    // 	classes: "input-field",
-    // 	value: "male",
-    // 	options: [
-    // 		{ label: "Male", value: "male" },
-    // 		{ label: "Female", value: "female" },
-    // 		{ label: "Others", value: "others" },
-    // 	],
-    // },
-    // {
-    // 	label: "Gender",
-    // 	name: "gender",
-    // 	type: "select",
-    // 	classes: "input-field",
-    // 	value: "male",
-    // 	options: [
-    // 		{ label: "Male", value: "male" },
-    // 		{ label: "Female", value: "female" },
-    // 		{ label: "Others", value: "others" },
-    // 	],
-    // },
-    ]
-  }, {
-    type: "section",
-    label: "Select Source",
-    collapsible: true,
-    collapsed: true,
     fields: [{
-      label: "Heading Color",
-      name: "heading_color_large",
-      type: "colorpicker",
-      css_class: "input-field",
-      value: "red"
-    }, {
-      label: "Is Checked?",
-      name: "is_checked",
-      type: "checkbox"
-    }, {
-      label: "Message",
-      name: "message",
-      type: "textarea",
-      css_class: "input-field",
-      value: "Hello World",
-      condition: {
-        is_checked: true,
-        consent: true
-      }
-    }]
-  }, {
-    label: "Notification Type",
-    name: "notification_type",
-    type: "radio-card",
-    css_class: "notifications-type",
-    style: "style-card",
-    options: [{
-      label: "Sales Notification",
-      value: "sales-notification",
-      icon: "https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg"
-    }, {
-      label: "Comments",
-      value: "comments"
-    }, {
-      label: "Reviews",
-      value: "reviews"
-    }, {
-      label: "Download Stats",
-      value: "download-stats"
-    }, {
-      label: "Donations",
-      value: "donations"
-    }]
-  }, {
-    label: "Salse Source",
-    name: "sales_source",
-    type: "radio-card",
-    css_class: "notifications-type",
-    value: "woocommerce",
-    options: [{
-      label: "WooCommerce",
-      value: "woocommerce"
-    }, {
-      label: "EDD",
-      value: "edd"
-    }]
-  }, {
-    label: "Group Control",
-    name: "group_control",
-    type: "group",
-    condition: {
-      notification_type: "comments"
-    },
-    fields: [{
-      label: "First Name",
+      label: "Label First Name",
       name: "first_name",
       type: "text",
-      value: "hello",
+      classes: "input-field",
+      // value: "Priyo",
+      placeholder: "First Name",
       validation_rules: {
-        required: null,
-        label: "First Name",
-        // FIXME: this label has to be taken from field label dynamically.
-        "min:3": "Has to be minimum 3 character long."
+        required: "Field should not be empty.",
+        "min:20": "Value has to 20 character in length"
       }
     }, {
       label: "Last Name",
       name: "last_name",
       type: "text",
+      classes: "input-field",
+      value: "Mukul",
+      placeholder: "Last Name",
       validation_rules: {
-        required: "Last name can not be empty",
-        "min:3": "Has to be minimum 3 character long."
+        required: "Field should not be empty.",
+        "min:2": "Value has to 2 character in length"
       }
+    }, {
+      label: "Comments",
+      name: "comments",
+      type: "textarea",
+      classes: "inputdd-field",
+      value: "blah blah",
+      max: 30
+    }, {
+      label: "Are you sure?",
+      name: "consent",
+      type: "checkbox",
+      classes: "inputdd-field",
+      value: true,
+      lala: "lala",
+      max: 30
+    }, {
+      label: "Gender",
+      name: "gender",
+      type: "radio-basic",
+      classes: "input-field",
+      value: "male",
+      options: [{
+        label: "Male",
+        value: "male"
+      }, {
+        label: "Female",
+        value: "female"
+      }, {
+        label: "Others",
+        value: "others"
+      }]
+    }, {
+      label: "Gender",
+      name: "gender",
+      type: "select",
+      classes: "input-field",
+      value: "male",
+      options: [{
+        label: "Male",
+        value: "male"
+      }, {
+        label: "Female",
+        value: "female"
+      }, {
+        label: "Others",
+        value: "others"
+      }]
     }]
   }, // {
+  // 	type: "section",
+  // 	label: "Select Source",
+  // 	collapsible: true,
+  // 	collapsed: true,
+  // 	fields: [
+  // 		{
+  // 			label: "Heading Color",
+  // 			name: "heading_color_large",
+  // 			type: "colorpicker",
+  // 			css_class: "input-field",
+  // 			value: "red",
+  // 		},
+  // 		{
+  // 			label: "Is Checked?",
+  // 			name: "is_checked",
+  // 			type: "checkbox",
+  // 		},
+  // 		{
+  // 			label: "Message",
+  // 			name: "message",
+  // 			type: "textarea",
+  // 			css_class: "input-field",
+  // 			value: "Hello World",
+  // 			condition: {
+  // 				is_checked: true,
+  // 				consent: true,
+  // 			},
+  // 		},
+  // 	],
+  // },
+  // {
+  // 	label: "Notification Type",
+  // 	name: "notification_type",
+  // 	type: "radio-card",
+  // 	css_class: "notifications-type",
+  // 	style: "style-card",
+  // 	options: [
+  // 		{
+  // 			label: "Sales Notification",
+  // 			value: "sales-notification",
+  // 			icon:
+  // 				"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
+  // 		},
+  // 		{ label: "Comments", value: "comments" },
+  // 		{ label: "Reviews", value: "reviews" },
+  // 		{ label: "Download Stats", value: "download-stats" },
+  // 		{ label: "Donations", value: "donations" },
+  // 	],
+  // },
+  // {
+  // 	label: "Salse Source",
+  // 	name: "sales_source",
+  // 	type: "radio-card",
+  // 	css_class: "notifications-type",
+  // 	value: "woocommerce",
+  // 	options: [
+  // 		{
+  // 			label: "WooCommerce",
+  // 			value: "woocommerce",
+  // 		},
+  // 		{ label: "EDD", value: "edd" },
+  // 	],
+  // },
+  // {
+  // 	label: "Group Control",
+  // 	name: "group_control",
+  // 	type: "group",
+  // 	condition: {
+  // 		notification_type: "comments",
+  // 	},
+  // 	fields: [
+  // 		{
+  // 			label: "First Name",
+  // 			name: "first_name",
+  // 			type: "text",
+  // 			value: "hello",
+  // 			validation_rules: {
+  // 				required: null,
+  // 				label: "First Name", // FIXME: this label has to be taken from field label dynamically.
+  // 				"min:3": "Has to be minimum 3 character long.",
+  // 			},
+  // 		},
+  // 		{
+  // 			label: "Last Name",
+  // 			name: "last_name",
+  // 			type: "text",
+  // 			validation_rules: {
+  // 				required: "Last name can not be empty",
+  // 				"min:3": "Has to be minimum 3 character long.",
+  // 			},
+  // 		},
+  // 	],
+  // },
+  // {
   // 	label: "User type",
   // 	name: "header_size",
   // 	type: "slider",
@@ -21806,36 +21800,46 @@ var tabs = [{
   // 	type: "icon-button",
   // 	icon: "ellipsis"
   // },
-  {
-    label: "Switch",
-    name: "switch_control",
-    type: "toggle",
-    valule: true
-  } // {
+  // {
+  // 	label: "Switch",
+  // 	name: "switch_control",
+  // 	type: "toggle",
+  // 	valule: true,
+  // },
+  // {
+  // 	label: "Slider",
+  // 	name: "icon_size",
+  // 	type: "slider",
+  // 	units: ["px", "em", "%"],
+  // },
+  // {
   // 	label: "Birthday",
   // 	name: "birthday",
   // 	type: "date",
   // },
-  ]
+  {
+    label: "Content",
+    name: "content_typography",
+    type: "typography"
+  }]
 }, {
   label: "Tab 2",
   key: "tab_2",
   icon: "",
   fields: [// {
-    // 	label: "First Name New",
-    // 	name: "first_name_new",
-    // 	type: "text",
-    // 	css_class: "input-field",
-    // 	placeholder: "blah blah",
-    // },
-    // {
-    // 	label: "Last Name New",
-    // 	name: "last_name_new",
-    // 	type: "textarea",
-    // 	css_class: "input-field",
-    // 	value: "blah blah",
-    // },
-  ]
+  // 	label: "First Name New",
+  // 	name: "first_name_new",
+  // 	type: "text",
+  // 	css_class: "input-field",
+  // 	placeholder: "blah blah",
+  // },
+  {
+    label: "Last Name New",
+    name: "last_name_new",
+    type: "textarea",
+    css_class: "input-field",
+    value: "blah blah"
+  }]
 }];
 var builder = {
   tabs: tabs,
@@ -23257,23 +23261,134 @@ function Index(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./typography.scss */ "./src/wp-react-form/src/components/Fields/Controls/Typography/typography.scss");
-/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_typography_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Field */ "./src/wp-react-form/src/components/Fields/Field.js");
+/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./typography.scss */ "./src/wp-react-form/src/components/Fields/Controls/Typography/typography.scss");
+/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_typography_scss__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
 
 
 
 
 function Index(_ref) {
   var label = _ref.label;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      show = _useState2[0],
+      setShow = _useState2[1];
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wprf-typography-wrap"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  }, show && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-typography-modal"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-fieldset-font-family"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h5", null, "Font Family"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "select",
+    options: [{
+      label: "Male",
+      value: "male"
+    }, {
+      label: "Female",
+      value: "female"
+    }, {
+      label: "Others",
+      value: "others"
+    }]
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-fieldset-font-size"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    label: "Font Size",
+    type: "slider",
+    units: ["px", "%", "em"],
+    max: 100
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-fieldset-font-weight"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h5", null, "Font Weight"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "select",
+    options: [{
+      label: "Lighter",
+      value: "lighter"
+    }, {
+      label: "Normal",
+      value: "normal"
+    }, {
+      label: "Bold",
+      value: "bold"
+    }, {
+      label: "Bolder",
+      value: "bolder"
+    }]
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-fieldset-text-transform"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h5", null, "Text Transform"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "select",
+    options: [{
+      label: "None",
+      value: "none"
+    }, {
+      label: "Capitalize",
+      value: "capitalize"
+    }, {
+      label: "Upper Case",
+      value: "upper-case"
+    }, {
+      label: "Lower Case",
+      value: "lower-case"
+    }]
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-fieldset-text-decoration"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h5", null, "Text Decoration"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "select",
+    options: [{
+      label: "Initial",
+      value: "initial"
+    }, {
+      label: "Overline",
+      value: "overline"
+    }, {
+      label: "Line through",
+      value: "line-through"
+    }, {
+      label: "Underline",
+      value: "underline"
+    }, {
+      label: "Underline Overline",
+      value: "underline-overline"
+    }]
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-fieldset-letter-spacing"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    label: "Letter",
+    type: "slider",
+    units: ["px", "%", "em"],
+    max: 100
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "wprf-fieldset-line-height"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    label: "Line Height",
+    type: "slider",
+    units: ["px", "%", "em"],
+    max: 100
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wprf-typography-trigger"
-  }, label)));
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("button", {
+    onClick: function onClick() {
+      return setShow(!show);
+    }
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Dashicon"], {
+    icon: "edit"
+  })))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);

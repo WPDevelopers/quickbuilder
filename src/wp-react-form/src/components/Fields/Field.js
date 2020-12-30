@@ -15,7 +15,6 @@ import {
 import withCommon from "../../Hooks/withCommon";
 
 const Field = (props) => {
-	console.log("props", props);
 	if (!props.isVisible) {
 		return "";
 	}

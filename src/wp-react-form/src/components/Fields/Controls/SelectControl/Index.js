@@ -20,6 +20,7 @@ function Index({
 }) {
 	const [fields, setFields] = useState([]);
 	const [savedValue, setSavedValue] = useState(value);
+	const [svalue, setValue] = useState(value);
 	const instanceId = useInstanceId(Index);
 
 	useEffect(() => {
@@ -30,7 +31,6 @@ function Index({
 				true
 			).length > 0
 		) {
-			// console.log("parentValue", parentValue);
 			let newOptions = options.filter((item, i) => {
 				if (item?.condition) {
 					let isVisible = true;
@@ -55,9 +55,6 @@ function Index({
 							}
 						}
 					});
-					// if (props.name == "themes") {
-					// 	console.log("condtion", item.value, isVisible);
-					// }
 					return isVisible;
 				} else {
 					return item;
@@ -87,6 +84,12 @@ function Index({
 		setSavedValue(value);
 	}, [value]);
 
+	useEffect(() => {
+		if (svalue) {
+			onChange(svalue.value);
+		}
+	}, [svalue]);
+
 	return (
 		<div className="wprf-select-wrapper">
 			<label class="wprf-input-label" htmlFor={id}>
@@ -100,8 +103,8 @@ function Index({
 				isMulti={multiple ?? false}
 				placeholder={placeholder}
 				options={fields}
-				value={value}
-				onChange={(option) => onChange(option)}
+				value={svalue}
+				onChange={(option) => setValue(option)}
 			/>
 		</div>
 	);

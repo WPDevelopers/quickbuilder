@@ -18,7 +18,6 @@ function Index(props) {
 				true
 			).length > 0
 		) {
-			// console.log("parentValue", parentValue);
 			let newOptions = options.filter((item, i) => {
 				if (item?.condition) {
 					let isVisible = true;
@@ -43,9 +42,6 @@ function Index(props) {
 							}
 						}
 					});
-					// if (props.name == "themes") {
-					// 	console.log("condtion", item.value, isVisible);
-					// }
 					return isVisible;
 				} else {
 					return item;

@@ -120,7 +120,7 @@ const select_fields = [
 		label: "Notification Type",
 		name: "notification_select",
 		type: "select",
-		parent: "notification_type",
+		// parent: "notification_type",
 		// search: true,
 		// placeholder: "Placeholder Select",
 		// multiple: true, // for multi option select
@@ -142,6 +142,32 @@ const select_fields = [
 			},
 		],
 	},
+	{
+		label: "Notification Type",
+		name: "notification_select_2",
+		type: "select",
+		// parent: "notification_select",
+		// search: true,
+		// placeholder: "Placeholder Select",
+		// multiple: true, // for multi option select
+		condition: {
+			notification_select: "comments",
+		},
+		options: [
+			{
+				label: "Sales Notification",
+				value: "sales",
+			},
+			{ label: "Comments", value: "comments" },
+			{ label: "Reviews", value: "reviews" },
+			{ label: "Download Stats", value: "download-stats" },
+			{
+				label: "Donations",
+				value: "donations",
+				is_pro: true,
+			},
+		],
+	},
 ];
 
 const tabs = [
@@ -150,7 +176,10 @@ const tabs = [
 		key: "tab_1",
 		icon: "",
 		classes: "wrf-menu",
-		fields: [...notification_type_source_themes, ...select_fields],
+		fields: [
+			//...notification_type_source_themes,
+			...select_fields,
+		],
 	},
 ];
 

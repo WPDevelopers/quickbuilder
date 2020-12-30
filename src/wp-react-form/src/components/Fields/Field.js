@@ -10,10 +10,12 @@ import {
 	GroupControl,
 	SectionView,
 	Toggle,
+	Typography,
+	Slider
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 import { SelectControl } from "@wordpress/components";
-import '../../../../../node_modules/@wordpress/components/build-style/style.css';
+import "../../../../../node_modules/@wordpress/components/build-style/style.css";
 
 const Field = (props) => {
 	if (!props.isVisible) {
@@ -49,8 +51,10 @@ const Field = (props) => {
 			return <ColorPicker {...controlProps} />;
 		case "toggle":
 			return <Toggle {...controlProps} />;
+		case "typography":
+			return <Typography {...controlProps} />;
 		case "slider":
-
+			return <Slider {...controlProps} />
 		case "select":
 			return (
 				<SelectControl

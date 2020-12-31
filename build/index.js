@@ -22735,8 +22735,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _radio_basic_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./radio-basic.scss */ "./src/wp-react-form/src/components/Fields/Controls/RadioBasic/radio-basic.scss");
-/* harmony import */ var _radio_basic_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_radio_basic_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Input_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Input/Input */ "./src/wp-react-form/src/components/Fields/Controls/Input/Input.js");
+/* harmony import */ var _core_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../core/Label */ "./src/wp-react-form/src/core/Label.js");
+/* harmony import */ var _radio_basic_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./radio-basic.scss */ "./src/wp-react-form/src/components/Fields/Controls/RadioBasic/radio-basic.scss");
+/* harmony import */ var _radio_basic_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_radio_basic_scss__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
 
 
 
@@ -22748,6 +22755,7 @@ function Index(_ref) {
       _onChange = _ref.onChange,
       value = _ref.value;
   var savedValue = value;
+  var instanceID = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__["useInstanceId"])(Index);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h4", {
     class: "wprf-input-label"
   }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
@@ -22756,22 +22764,21 @@ function Index(_ref) {
     var label = _ref2.label,
         value = _ref2.value;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "wprf-input-radio-set"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("input", {
-      key: index,
+      className: "wprf-input-radio-set",
+      key: index
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Input_Input__WEBPACK_IMPORTED_MODULE_3__["default"], {
       type: "radio",
       checked: value === savedValue,
-      id: "wprf-input-radio-".concat(index),
-      className: "wprf-input-field wprf-input-radio",
+      unique_id: "".concat(instanceID, "-").concat(index),
       value: value,
       name: name,
       onChange: function onChange(event) {
         return _onChange(event.target.value);
       }
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
-      className: "wprf-input-radio-label",
-      htmlFor: "wprf-input-radio-".concat(index)
-    }, label));
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_core_Label__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      htmlFor: "wprf-input-radio-".concat(instanceID, "-").concat(index),
+      label: label
+    }));
   })));
 }
 

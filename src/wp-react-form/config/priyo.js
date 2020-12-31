@@ -74,6 +74,8 @@ const notification_type_source_themes = [
 			{
 				label: "Theme One",
 				value: "theme-one",
+				icon:
+					"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/themes/nx-comment-theme-2.jpg",
 				condition: {
 					notification_type: "sales",
 				},
@@ -172,18 +174,10 @@ const select_fields = [
 
 const commonFields = [
 	{
-		type: "checkbox",
-		label: "Checkbox Control",
-		name: "checkbox_control",
-	},
-	{
 		type: "text",
 		label: "Text Control",
 		name: "text_control",
 		// size: "large", // large: 100%,
-		condition: {
-			checkbox_control: true,
-		},
 		validation_rules: {
 			required: "This is required",
 			"min:3": "Has to be min 3 char long.",
@@ -197,6 +191,37 @@ const commonFields = [
 		// 	required: "This is required",
 		// 	"min:3": "Has to be min 3 char long.",
 		// },
+	},
+	{
+		type: "slider",
+		label: "Slider Control",
+		name: "slider_control",
+		units: ["px", "em"],
+		// validation_rules: {
+		// 	required: "This is required",
+		// 	"min:3": "Has to be min 3 char long.",
+		// },
+	},
+	{
+		type: "textarea",
+		label: "TextArea Control",
+		name: "textarea_control",
+		placeholder: "Textarea Control Placeholder",
+		value: "Textarea Control Value",
+		// validation_rules: {
+		// 	required: "This is required",
+		// 	"min:3": "Has to be min 3 char long.",
+		// },
+	},
+	{
+		type: "checkbox",
+		label: "Checkbox Control",
+		name: "checkbox_control",
+		// size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
 	},
 ];
 

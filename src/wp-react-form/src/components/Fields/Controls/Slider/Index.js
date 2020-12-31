@@ -28,13 +28,13 @@ function Index({
 		if (isValue === undefined && (reset ?? true)) {
 			onReset(name);
 		}
-	}, [isValue]);
+	}, [isValue, sunit]);
 
 	return (
 		<>
 			<div className={`wprf-slider-wrap`}>
 				<div className="wprf-slider-control-head">
-					<Label htmlFor={name} label={label} />
+					<Label htmlFor={name}>{label}</Label>
 					{typeof units === "object" && units.length > 0 && (
 						<div className="wprf-slider-units">
 							{units.map((unit, index) => (

@@ -1,7 +1,7 @@
 .wprf-control {
 	.wprf-input-field {
-	}
-	.wprf-input-text {
-
+		&.wprf-input-text {
+			padding: 10px;
+		}
 	}
 }

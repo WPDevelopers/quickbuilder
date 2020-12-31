@@ -1,0 +1,11 @@
+.wprf-control-checkbox {
+    & > label {
+        display: flex;
+        align-items: center;
+    }
+    .wprf-input-checkbox {
+        & + span {
+            margin-left: 10px;
+        }
+    }
+}

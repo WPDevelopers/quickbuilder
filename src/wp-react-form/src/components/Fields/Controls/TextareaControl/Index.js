@@ -1,22 +1,28 @@
 import React from "react";
+import Label from "../../../../core/Label";
+import Input from "../Input/Input";
+import classNames from "classnames";
+
 import "./textarea.scss";
 
-function Index({ id, name, label, value, onChange, ...rest }) {
+function Index({ id, name, label, onChange, ...rest }) {
 	return (
 		<>
-			<label class="wprf-input-label" htmlFor={id}>
-				{label}
-			</label>
-			<textarea
-				type="text"
-				id={id}
-				className="wprf-input-field wprf-textarea-field"
-				name={name}
-				onChange={(event) => onChange(event.target.value)}
-				{...rest}
-			>
-				{value}
-			</textarea>
+			<Label htmlFor={name}>{label}</Label>
+			<Input
+				type="textarea"
+				{...{
+					id: name,
+					name,
+					size: "large",
+					rows: 5,
+					className: classNames(rest?.className, {
+						"resize-none": rest?.resize === false,
+					}),
+					onChange: (evt) => onChange(evt.target.value),
+					...rest,
+				}}
+			/>
 		</>
 	);
 }

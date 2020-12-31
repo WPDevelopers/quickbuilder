@@ -1,25 +1,67 @@
-.wprf-control .wprf-input-label {
-  display: block;
-  padding: 5px;
-  margin-bottom: 10px;
+.wprf-control {
+  margin-bottom: 20px;
 }
-
-.wprf-control .wprf-input-label {
-  display: block;
-  padding: 5px;
-  margin-bottom: 10px;
+.wprf-control:last-of-type {
+  margin-bottom: 0px;
 }
-.wprf-control .wprf-textarea-field {
-  display: block;
-  width: 100%;
+.wprf-control .wprf-input-field {
   box-shadow: none;
   border: 1px solid #f2f2f2;
   transition: border linear 0.2s, box-shadow linear 0.2s;
   padding: 8px;
   line-height: 1;
   font-size: 14px;
+  margin: 0px;
 }
-
+.wprf-control .wprf-input-field.wprf-large {
+  width: 100%;
+}
+.wprf-control .wprf-input-field:focus {
+  box-shadow: none;
+  outline: none;
+}
+.wprf-control .clearfix::after, .wprf-control .clearfix::before {
+  display: table;
+  content: "";
+}
+.wprf-control .clearfix::after {
+  clear: both;
+}
+.wprf-control .wprf-input-label {
+  display: block;
+  margin-bottom: 10px;
+}
+.wprf-control .wprf-input-label .wprf-label-image {
+  max-width: 100%;
+}
+.wprf-control .wprf-row {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.wprf-control .wprf-flex {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.wprf-control .wprf-error-message {
+  color: red;
+}
+.wprf-control .wprf-input-field.wprf-input-text {
+  padding: 10px;
+}
+.wprf-control .wprf-input-field.wprf-input-textarea {
+  padding: 15px;
+}
+.wprf-control .wprf-input-field.wprf-input-textarea.resize-none {
+  resize: none;
+}
+.wprf-control-checkbox > label {
+  display: flex;
+  align-items: center;
+}
+.wprf-control-checkbox .wprf-input-checkbox + span {
+  margin-left: 10px;
+}
 
 .wprf-colorpicker-wrap {
   position: relative;
@@ -60,22 +102,6 @@
 /**
  * Allows users to opt-out of animations via OS-level preferences.
  */
-.wprf-control .wprf-input-field {
-  box-shadow: none;
-  border: 1px solid #f2f2f2;
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-  padding: 8px;
-  line-height: 1;
-  font-size: 14px;
-}
-.wprf-control .wprf-input-field.large {
-  width: 100%;
-}
-.wprf-control .wprf-input-field:focus {
-  box-shadow: none;
-  outline: none;
-}
-
 .components-visually-hidden {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
@@ -88,10 +114,6 @@
   position: absolute;
   width: 1px;
   word-wrap: normal !important;
-}
-
-.wprf-error-message {
-  color: red;
 }
 
 .wprf-colorpicker-wrap {
@@ -297,46 +319,42 @@
   margin: 10px 10px 10px;
   box-shadow: 0 0 25px 0 rgba(0, 9, 78, 0.08);
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio] {
-  display: none;
-}
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label {
-  background-color: #0ccf9f;
-  color: #fff;
-}
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label.wprf-label-has-image {
-  background-color: white;
-}
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label:after {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected:after, .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected:before {
   content: "";
-  display: inline-block;
-  transform: rotate(45deg);
+  position: absolute;
+}
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected:after {
   height: 6px;
   width: 3px;
-  border-bottom: 3.5px solid #fff;
-  border-right: 3.5px solid #fff;
-  position: absolute;
   right: -3px;
   top: -6px;
+  display: inline-block;
+  transform: rotate(45deg);
+  border-bottom: 3.5px solid #fff;
+  border-right: 3.5px solid #fff;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label:before {
-  content: "";
-  position: absolute;
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected:before {
   right: -10px;
   top: -10px;
   left: auto;
   width: 20px;
   height: 20px;
-  border: 0;
   box-sizing: border-box;
   transition: all 0.3s ease 0s;
   background: #09dca8;
   border-radius: 50%;
 }
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected .wprf-input-label {
+  background-color: #0ccf9f;
+  color: #fff;
+}
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected .wprf-input-label.wprf-label-has-image {
+  background-color: white;
+}
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input.wprf-input-radio {
+  display: none;
+}
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label {
-  position: absolute;
-  left: 0;
-  top: 0;
   height: 100%;
   width: 100%;
   display: flex;
@@ -349,8 +367,8 @@
   padding: 10px;
   box-sizing: border-box;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label .wprf-radio-card-image {
-  max-width: 100%;
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label.wprf-label-has-image {
+  padding: 0;
 }
 .wprf-control-section .wprf-section-title {
   display: flex;
@@ -441,6 +459,9 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 10px;
+}
+.wprf-slider-wrap .wprf-slider-control-head > .wprf-input-label {
+  margin-bottom: 0px;
 }
 .wprf-slider-wrap .wprf-slider-control-head .wprf-slider-units {
   margin-left: auto;

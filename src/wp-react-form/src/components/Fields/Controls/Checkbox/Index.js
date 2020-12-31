@@ -3,19 +3,17 @@ import Label from "../../../../core/Label";
 import Input from "../Input/Input";
 import "./checkbox.scss";
 
-function Index({ id, name, label, onChange, value, ...rest }) {
+function Index({ label, onChange, value, ...rest }) {
 	return (
 		<>
-			<Label htmlFor={id}>
+			<Label htmlFor={rest?.id}>
 				<Input
 					type="checkbox"
-					id={id}
-					name={name}
 					onChange={(event) => onChange(event.target.checked)}
 					checked={value}
 					{...rest}
 				/>
-				{label}
+				<span>{label}</span>
 			</Label>
 		</>
 	);

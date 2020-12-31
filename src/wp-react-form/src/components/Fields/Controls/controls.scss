@@ -1,9 +1,52 @@
 $white: '#FFF';
 
 .wprf-control {
+	margin-bottom: 20px;
+	&:last-of-type {
+		margin-bottom: 0px;
+	}
+	.wprf-input-field {
+		box-shadow: none;
+		border: 1px solid #f2f2f2;
+		transition: border linear 0.2s, box-shadow linear 0.2s;
+		padding: 8px;
+		line-height: 1;
+		font-size: 14px;
+		margin: 0px;
+		&.wprf-large {
+			width: 100%;
+		}
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
+	}
+	.clearfix {
+		&::after, &::before {
+			display: table;
+			content: "",
+		}
+		&::after {
+			clear: both;
+		}
+	}
 	.wprf-input-label {
 		display: block;
-		padding: 5px;
 		margin-bottom: 10px;
+		.wprf-label-image {
+			max-width: 100%;
+		}
+	}
+	.wprf-row {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+	.wprf-flex {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+	}
+	.wprf-error-message {
+		color: red
 	}
 }

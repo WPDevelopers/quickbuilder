@@ -20,10 +20,16 @@ const Input = (props) => {
 
 	const componentClasses = classNames([
 		"wprf-input-field",
-		{ [`wprf-input-${props.type}`]: props?.type ?? false },
+		{
+			[`wprf-input-${props.type}`]: props?.type ?? false,
+			[`wprf-${props?.size}`]: props?.size,
+		},
 		props?.className,
-		props?.size,
 	]);
+
+	if (props.type == "textarea") {
+		return <textarea {...props} id={id} className={componentClasses} />;
+	}
 
 	return <input {...props} id={id} className={componentClasses} />;
 };

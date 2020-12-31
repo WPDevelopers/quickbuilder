@@ -1,14 +1,7 @@
 .wprf-control {
 	.wprf-input-field {
-	}
-	.wprf-input-text-field {
-		display: block;
-		width: 100%;
-		box-shadow: none;
-		border: 1px solid #f2f2f2;
-		transition: border linear 0.2s, box-shadow linear 0.2s;
-		padding: 8px;
-		line-height: 1;
-		font-size: 14px;
+		&.wprf-input-text {
+			padding: 10px;
+		}
 	}
 }

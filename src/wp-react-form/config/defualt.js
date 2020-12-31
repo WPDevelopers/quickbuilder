@@ -177,11 +177,7 @@ const tabs = [
 				type: "slider",
 				min: 2,
 				max: 100,
-				units: [
-					"px",
-					"%",
-					"em"
-				]
+				units: ["px", "%", "em"],
 			},
 			// {unit}{value}
 			// {
@@ -244,6 +240,9 @@ const tabs = [
 
 const builder = {
 	tabs,
+	tabConfig: {
+		sidebar: true,
+	},
 	submit: {
 		label: "Save Changes",
 		// onSubmit: (e) => {

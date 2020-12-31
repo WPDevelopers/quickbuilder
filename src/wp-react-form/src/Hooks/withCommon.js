@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { useInstanceId } from "@wordpress/compose";
+import classNames from "classnames";
 import * as Yup from "yup";
-import { dispatch, select } from "@wordpress/data";
+import { dispatch } from "@wordpress/data";
 import { SweetAlert } from "../core/functions";
 
 const withCommon = (WrappedComponent, withParent = true) => {
@@ -15,9 +17,13 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		onChange = (value, args) => {
 			if (args?.is_pro) {
 				return SweetAlert({
-					title: "Hello World",
-					text: "Hello World Content",
+					title: "Oppps...",
+					text:
+						"You need to upgrade to the Premium version to use this module",
 					icon: "error",
+					showDenyButton: true,
+					denyButtonText: "Close",
+					showConfirmButton: false,
 				});
 			}
 			if (this.props?.errorMessage) {
@@ -80,6 +86,12 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		 */
 		unveiledProps = ["validation_rules", "errorMessage", "condition"];
 		/**
+		 * Default Style Props
+		 */
+		defaultStyles = {
+			// Nothing New Now
+		};
+		/**
 		 * Filter for Object || {}
 		 *
 		 * @param {function} func
@@ -96,22 +108,27 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		};
 
 		render() {
-			let props = { ...this.props, id: this.props.id ?? this.props.name };
+			let props = {
+				...this.props,
+				id: this.props.id ?? this.props.name,
+				// style: this.props.style ?? this.defaultStyles, // Not Needed
+			};
 
 			let verifiedProps = this.filter(
 				(prop) => !this.unveiledProps.includes(prop),
 				props
 			);
 
-			let classes = [
+			const componentClasses = classNames(
 				"wprf-control",
-				this.props.classes != undefined ? this.props.classes : "",
-			];
+				`wprf-control-${this.props.type}`,
+				this.props.classes
+			);
 
 			return (
 				<>
 					{withParent && (
-						<div className={classes.join(" ")}>
+						<div className={componentClasses}>
 							<WrappedComponent
 								{...verifiedProps}
 								onChange={this.onChange}

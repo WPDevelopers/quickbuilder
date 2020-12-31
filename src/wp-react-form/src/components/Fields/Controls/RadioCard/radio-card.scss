@@ -1,52 +1,46 @@
 .wprf-input-radio-set-wrap.wprf-radio-card {
-	display: flex;
-	flex-wrap: wrap;
-	.wprf-input-radio-set {
+	.wprf-input-radio-option {
 		height: 80px;
-		width: 20%;
 		position: relative;
-		margin: 10px 10px 10px;
 		box-shadow: 0 0 25px 0 rgba(0, 9, 78, 0.08);
-		input[type="radio"] {
-			display: none;
-			&:checked + .wprf-input-label {
+		&.wprf-option-selected {
+			&:after, &:before {
+				content: "";
+				position: absolute;
+			}
+			&:after {
+				height: 6px;
+				width: 3px;
+				right: -3px;
+				top: -6px;
+				display: inline-block;
+				transform: rotate(45deg);
+				border-bottom: 3.5px solid #fff;
+				border-right: 3.5px solid #fff;
+			}
+			&:before {
+				right: -10px;
+				top: -10px;
+				left: auto;
+				width: 20px;
+				height: 20px;
+				box-sizing: border-box;
+				transition: all 0.3s ease 0s;
+				background: #09dca8;
+				border-radius: 50%;
+			}
+			.wprf-input-label {
 				background-color: #0ccf9f;
 				color: #fff;
-				&.with-wprf-radio-card-image {
+				&.wprf-label-has-image {
 					background-color: white;
-				}
-				&:after {
-					content: "";
-					display: inline-block;
-					transform: rotate(45deg);
-					height: 6px;
-					width: 3px;
-					border-bottom: 3.5px solid #fff;
-					border-right: 3.5px solid #fff;
-					position: absolute;
-					right: -3px;
-					top: -6px;
-				}
-				&:before {
-					content: "";
-					position: absolute;
-					right: -10px;
-					top: -10px;
-					left: auto;
-					width: 20px;
-					height: 20px;
-					border: 0;
-					box-sizing: border-box;
-					transition: all 0.3s ease 0s;
-					background: #09dca8;
-					border-radius: 50%;
 				}
 			}
 		}
+		input.wprf-input-field {
+			display: none;
+		}
 		.wprf-input-label {
-			position: absolute;
-			left: 0;
-			top: 0;
 			height: 100%;
 			width: 100%;
 			display: flex;
@@ -57,10 +51,11 @@
 			font-size: 14px;
 			border-radius: 5px;
 			padding: 10px;
+			margin-bottom: 0;
+			&.wprf-label-has-image {
+				padding: 0;
+			}
 			box-sizing: border-box;
-            .wprf-radio-card-image {
-				max-width: 100%;
-            }
 		}
 	}
 }

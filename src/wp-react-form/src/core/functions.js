@@ -9,6 +9,7 @@ export const SweetAlert = (args = {}) => {
 		text: args?.text ?? "Test Goes Here: text",
 		icon: args?.icon ?? "success",
 		timer: args?.timer ?? null,
+		...args,
 	});
 };
 

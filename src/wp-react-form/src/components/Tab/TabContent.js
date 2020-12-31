@@ -9,15 +9,15 @@ const TabContent = ({ activeTab, config }) => {
 	}
 
 	return (
-		<div className={`wrf-tab-content-wrap`}>
+		<div className={`wprf-tab-content-wrapper`}>
 			{config.tabs.map(({ key, fields }) => (
 				<div
-					className={`wrf-tab-content ${key}${
-						key === activeTab ? " active-tab" : ""
+					className={`wprf-tab-content ${key}${
+						key === activeTab ? " wprf-active-content" : ""
 					}`}
 					key={key}
 				>
-					<div className={`wrf-tab-content-inner`}>
+					<div className={`wprf-tab-content-inner`}>
 						<Fields fields={fields} />
 					</div>
 				</div>

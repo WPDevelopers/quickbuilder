@@ -49,6 +49,19 @@ const fields = [
 			"min:20": "Your Input is too short. Make it 20Character Bigger.",
 		},
 	},
+	{
+		type: "textarea",
+		label: "TextArea Control",
+		name: "textarea_control",
+		placeholder: "Textarea Control Placeholder",
+		value: "Textarea Control Value",
+		rows: 30, // default : 10
+		resize: false, // default: true,
+		// validation_rules: {
+		// 	required: "This is required",
+		// 	"min:3": "Has to be min 3 char long.",
+		// },
+	},
 ];
 
 export { fields };

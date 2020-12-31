@@ -10,6 +10,8 @@ const notification_type_source_themes = [
 			{
 				label: "Sales Notification",
 				value: "sales",
+				icon:
+					"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
 			},
 			{ label: "Comments", value: "comments" },
 			{ label: "Reviews", value: "reviews" },
@@ -72,6 +74,8 @@ const notification_type_source_themes = [
 			{
 				label: "Theme One",
 				value: "theme-one",
+				icon:
+					"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/themes/nx-comment-theme-2.jpg",
 				condition: {
 					notification_type: "sales",
 				},
@@ -168,18 +172,144 @@ const select_fields = [
 	},
 ];
 
+const commonFields = [
+	{
+		type: "text",
+		label: "Text Control",
+		name: "text_control",
+		// size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
+	},
+	{
+		type: "number",
+		label: "Number Control",
+		name: "number_control",
+		// validation_rules: {
+		// 	required: "This is required",
+		// 	"min:3": "Has to be min 3 char long.",
+		// },
+	},
+	{
+		type: "slider",
+		label: "Slider Control",
+		name: "slider_control",
+		units: ["px", "em"],
+		// validation_rules: {
+		// 	required: "This is required",
+		// 	"min:3": "Has to be min 3 char long.",
+		// },
+	},
+	{
+		type: "textarea",
+		label: "TextArea Control",
+		name: "textarea_control",
+		placeholder: "Textarea Control Placeholder",
+		value: "Textarea Control Value",
+		// validation_rules: {
+		// 	required: "This is required",
+		// 	"min:3": "Has to be min 3 char long.",
+		// },
+	},
+	{
+		type: "checkbox",
+		label: "Checkbox Control",
+		name: "checkbox_control",
+		// size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
+	},
+	{
+		type: "toggle",
+		label: "Toggle Control",
+		multiple: true,
+		style: {
+			label: {
+				position: "right",
+			},
+			option: {
+				column: 4, // 2, 3, 4, 6, 12
+			},
+		},
+		options: [
+			{
+				label: "Option One",
+				value: "option_one",
+			},
+			{
+				label: "Option Two",
+				disabled: true,
+				value: "option_two",
+			},
+			{
+				label: "Option Three",
+				value: "option_three",
+			},
+			{
+				label: "Option Four",
+				value: "option_four",
+			},
+		],
+		name: "toggle_control",
+		value: {
+			option_three: true,
+		},
+		// size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
+	},
+	{
+		type: "toggle",
+		label: "Toggle Control 2",
+		// multiple: true,
+		options: [
+			{
+				label: "Option One",
+				value: "option_one",
+			},
+			{
+				label: "Option Two",
+				value: "option_two",
+			},
+		],
+		name: "toggle_control_2",
+		// size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
+	},
+];
+
 const tabs = [
 	{
 		label: "Tab 1",
 		key: "tab_1",
 		icon: "",
 		classes: "wrf-menu",
-		fields: [...notification_type_source_themes, ...select_fields],
+		fields: [
+			// Text Controls
+			// ...commonFields,
+			// Radio Card
+			...notification_type_source_themes,
+			// Select
+			// ...select_fields
+		],
 	},
 ];
 
 const builder = {
 	tabs,
+	tabConfig: {
+		sidebar: true,
+	},
+	is_pro_active: true,
 	submit: {
 		label: "Save Changes",
 		// onSubmit: (e) => {

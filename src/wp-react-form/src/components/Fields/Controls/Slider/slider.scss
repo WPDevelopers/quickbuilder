@@ -4,6 +4,9 @@
         display: flex;
         flex-wrap: wrap;
         margin-bottom: 10px;
+        & > .wprf-input-label {
+            margin-bottom: 0px;
+        }
         .wprf-slider-units {
             margin-left: auto;
             button {

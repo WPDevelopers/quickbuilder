@@ -17,9 +17,13 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		onChange = (value, args) => {
 			if (args?.is_pro) {
 				return SweetAlert({
-					title: "Hello World",
-					text: "Hello World Content",
+					title: "Oppps...",
+					text:
+						"You need to upgrade to the Premium version to use this module",
 					icon: "error",
+					showDenyButton: true,
+					denyButtonText: "Close",
+					showConfirmButton: false,
 				});
 			}
 			if (this.props?.errorMessage) {
@@ -82,6 +86,12 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		 */
 		unveiledProps = ["validation_rules", "errorMessage", "condition"];
 		/**
+		 * Default Style Props
+		 */
+		defaultStyles = {
+			// Nothing New Now
+		};
+		/**
 		 * Filter for Object || {}
 		 *
 		 * @param {function} func
@@ -98,7 +108,11 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		};
 
 		render() {
-			let props = { ...this.props, id: this.props.id ?? this.props.name };
+			let props = {
+				...this.props,
+				id: this.props.id ?? this.props.name,
+				// style: this.props.style ?? this.defaultStyles, // Not Needed
+			};
 
 			let verifiedProps = this.filter(
 				(prop) => !this.unveiledProps.includes(prop),

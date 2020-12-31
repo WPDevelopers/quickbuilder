@@ -223,6 +223,68 @@ const commonFields = [
 			"min:3": "Has to be min 3 char long.",
 		},
 	},
+	{
+		type: "toggle",
+		label: "Toggle Control",
+		multiple: true,
+		style: {
+			label: {
+				position: "right",
+			},
+			option: {
+				column: 4, // 2, 3, 4, 6, 12
+			},
+		},
+		options: [
+			{
+				label: "Option One",
+				value: "option_one",
+			},
+			{
+				label: "Option Two",
+				disabled: true,
+				value: "option_two",
+			},
+			{
+				label: "Option Three",
+				value: "option_three",
+			},
+			{
+				label: "Option Four",
+				value: "option_four",
+			},
+		],
+		name: "toggle_control",
+		value: {
+			option_three: true,
+		},
+		// size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
+	},
+	{
+		type: "toggle",
+		label: "Toggle Control 2",
+		// multiple: true,
+		options: [
+			{
+				label: "Option One",
+				value: "option_one",
+			},
+			{
+				label: "Option Two",
+				value: "option_two",
+			},
+		],
+		name: "toggle_control_2",
+		// size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
+	},
 ];
 
 const tabs = [
@@ -233,7 +295,7 @@ const tabs = [
 		classes: "wrf-menu",
 		fields: [
 			// Text Controls
-			...commonFields,
+			// ...commonFields,
 			// Radio Card
 			...notification_type_source_themes,
 			// Select

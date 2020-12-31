@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import classNames from "classnames";
 import { Button } from "@wordpress/components";
 import { select } from "@wordpress/data";
-const Submit = ({ config }) => {
+
+// SCSS
+import "./submit.scss";
+
+const Submit = ({ config, ...rest }) => {
+	const [isSubmit, setSubmit] = useState(false);
+	// const [isDisabled, setDisabled] = useState(false);
 	/**
 	 * This is default submit function
 	 */
 	const onSubmit = (evt) => {
+		setSubmit(true); // Set Submit is True
 		console.log("on confirm validation: form validation");
 		if (!config?.onSubmit) {
 			console.log("form has no onsubmit, run default one");
@@ -15,8 +23,16 @@ const Submit = ({ config }) => {
 			console.log("form has an onsubmit func implemented, run thats one");
 			config.onSubmit(evt);
 		}
+		setSubmit(false);
 	};
 
-	return <Button onClick={(evt) => onSubmit(evt)}>{config.label}</Button>;
+	const componentClasses = classNames("wprf-submit-button", rest?.className, {
+		"wprf-form-submitting": isSubmit,
+	});
+	return (
+		<Button className={componentClasses} onClick={(evt) => onSubmit(evt)}>
+			{config.label}
+		</Button>
+	);
 };
 export default Submit;

@@ -4,7 +4,7 @@ import withConditionedFields from "../../../../Hooks/withConditionedFields";
 import classNames from "classnames";
 
 import Input from "../Input/Input";
-import Label from "../../../../core/Label";
+import { Label, Row, Column } from "../../../../core";
 
 import "./radio-card.scss";
 
@@ -22,36 +22,44 @@ function Index(props) {
 		<>
 			<h4 class="wprf-input-label">{label}</h4>
 			<div className={componentClasses}>
-				<div className="wprf-row clearfix wprf-flex">
+				<Row>
 					{options.map(({ label, value, icon, is_pro }, index) => (
-						<div
-							className={classNames("wprf-input-radio-option", {
-								"wprf-option-selected": value === savedValue,
-							})}
-							key={index}
-						>
-							<Input
-								type="radio"
-								checked={value === savedValue}
-								unique_id={`${instanceId}-${index}`}
-								value={value}
-								name={name}
-								onChange={(event) =>
-									onChange(event?.target?.value, { is_pro })
-								}
-							/>
-							<Label
-								className={classNames({
-									"wprf-label-has-image": icon ?? false,
-								})}
-								htmlFor={`wprf-input-radio-${instanceId}-${index}`}
-								src={icon}
+						<Column>
+							<div
+								className={classNames(
+									"wprf-input-radio-option",
+									{
+										"wprf-option-selected":
+											value === savedValue,
+									}
+								)}
+								key={index}
 							>
-								{label}
-							</Label>
-						</div>
+								<Input
+									type="radio"
+									checked={value === savedValue}
+									unique_id={`${instanceId}-${index}`}
+									value={value}
+									name={name}
+									onChange={(event) =>
+										onChange(event?.target?.value, {
+											is_pro,
+										})
+									}
+								/>
+								<Label
+									className={classNames({
+										"wprf-label-has-image": icon ?? false,
+									})}
+									htmlFor={`wprf-input-radio-${instanceId}-${index}`}
+									src={icon}
+								>
+									{label}
+								</Label>
+							</div>
+						</Column>
 					))}
-				</div>
+				</Row>
 			</div>
 		</>
 	);

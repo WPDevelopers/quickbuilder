@@ -3,10 +3,10 @@ import classNames from "classnames";
 
 const Input = (props) => {
 	if (!props?.type) {
-		throw "No Type( :type ) Defined";
+		throw Error("No Type( :type ) Defined");
 	}
 	if (!props?.name) {
-		throw "No Name( :name ) Defined";
+		throw Error("No Name( :name ) Defined");
 	}
 	let id;
 	if (!props?.id) {

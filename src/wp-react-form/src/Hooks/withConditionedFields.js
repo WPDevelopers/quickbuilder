@@ -53,7 +53,7 @@ const withConditionedFields = (WrappedComponent) => {
 				setFields(newOptions);
 			} else {
 				setFields(options);
-				if (options?.[0]?.value && !savedValue) {
+				if (options?.[0]?.value && !savedValue && !props?.multiple) {
 					onChange(options?.[0]?.value);
 				}
 			}
@@ -67,7 +67,19 @@ const withConditionedFields = (WrappedComponent) => {
 				if (0 === isExists.length) {
 					if (fields?.[0]?.value) {
 						setSavedValue(fields[0].value);
-						if (props.type !== "select") {
+						if (props.type !== "select" && !props?.multiple) {
+							onChange(fields[0].value);
+						}
+					}
+				}
+			} else if (parentValue) {
+				let isExists = [...fields].filter(
+					(field) => field.value === savedValue
+				);
+				if (0 === isExists.length) {
+					if (fields?.[0]?.value) {
+						setSavedValue(fields[0].value);
+						if (props.type !== "select" && !props?.multiple) {
 							onChange(fields[0].value);
 						}
 					}

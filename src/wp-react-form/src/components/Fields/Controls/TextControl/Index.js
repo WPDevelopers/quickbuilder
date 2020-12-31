@@ -14,6 +14,7 @@ function Index({ id, name, label, value, onChange, ...rest }) {
 				name={name}
 				onChange={(event) => onChange(event.target.value)}
 				value={value}
+				size={rest?.size ?? "large"}
 				{...rest}
 			/>
 		</>

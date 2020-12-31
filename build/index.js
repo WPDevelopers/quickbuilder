@@ -22116,10 +22116,9 @@ var commonFields = [{
   type: "text",
   label: "Text Control",
   name: "text_control",
-  size: "large",
-  // large: 100%,
+  // size: "large", // large: 100%,
   condition: {
-    checkbox_control: false
+    checkbox_control: true
   },
   validation_rules: {
     required: "This is required",
@@ -23371,6 +23370,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Index(_ref) {
+  var _rest$size;
+
   var id = _ref.id,
       name = _ref.name,
       label = _ref.label,
@@ -23387,7 +23388,8 @@ function Index(_ref) {
     onChange: function onChange(event) {
       return _onChange(event.target.value);
     },
-    value: value
+    value: value,
+    size: (_rest$size = rest === null || rest === void 0 ? void 0 : rest.size) !== null && _rest$size !== void 0 ? _rest$size : "large"
   }, rest)));
 }
 

@@ -180,9 +180,9 @@ const commonFields = [
 		type: "text",
 		label: "Text Control",
 		name: "text_control",
-		size: "large", // large: 100%,
+		// size: "large", // large: 100%,
 		condition: {
-			checkbox_control: false,
+			checkbox_control: true,
 		},
 		validation_rules: {
 			required: "This is required",

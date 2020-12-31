@@ -592,28 +592,60 @@
   box-shadow: none;
   border: 0;
 }
-.wp-react-form.wrf-tabs-wrapper {
+.toplevel_page_wp-react-form #wpcontent {
+  padding-left: 0px;
+}
+
+.wp-react-form.wprf-tabs-wrapper {
   display: flex;
+  flex-direction: column;
   padding: 15px;
 }
-.wp-react-form.wrf-tabs-wrapper .wrf-tab-nav {
-  flex-basis: 15%;
-  margin: 0 15px 0 0;
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-menu-wrapper {
+  margin-bottom: 5px;
 }
-.wp-react-form.wrf-tabs-wrapper .wrf-tab-nav li {
-  border: 1px solid lightgrey;
-  padding: 10px 15px;
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-menu-wrapper .wprf-tab-nav {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-menu-wrapper .wprf-tab-nav .wprf-tab-nav-item {
+  padding: 15px 25px;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
+  margin-bottom: 0;
+  background-color: #f8fafb;
+  color: #516378;
+  border-top: 2px solid #FFF;
 }
-.wp-react-form.wrf-tabs-wrapper .wrf-tab-content-wrap {
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-menu-wrapper .wprf-tab-nav .wprf-tab-nav-item.wprf-active-nav {
+  border-color: #6648fe;
+  background-color: #FFF;
+  color: #516378;
+}
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-menu-wrapper.wprf-tab-menu-sidebar {
+  flex-basis: 15%;
+  background-color: #f8fafb;
+}
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-menu-wrapper.wprf-tab-menu-sidebar .wprf-tab-nav {
+  display: block;
+}
+.wp-react-form.wprf-tabs-wrapper.wprf-tab-menu-as-sidebar {
+  flex-direction: row;
+  background-color: #FFF;
+  padding: 0px;
+}
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-content-wrapper {
+  flex: 1;
   flex-basis: 85%;
-  background: #fffcfc61;
-  padding: 15px;
+  background: #FFF;
+  padding: 30px;
 }
-.wp-react-form.wrf-tabs-wrapper .wrf-tab-content-wrap .wrf-tab-content {
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-content-wrapper .wprf-tab-content {
   display: none;
 }
-.wp-react-form.wrf-tabs-wrapper .wrf-tab-content-wrap .wrf-tab-content.active-tab {
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-content-wrapper .wprf-tab-content.wprf-active-content {
   display: block;
 }
 

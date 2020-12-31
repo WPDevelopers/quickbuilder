@@ -239,6 +239,9 @@ const tabs = [
 
 const builder = {
 	tabs,
+	tabConfig: {
+		sidebar: true,
+	},
 	submit: {
 		label: "Save Changes",
 		// onSubmit: (e) => {

@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Image from "./Image";
 
 const Label = (props) => {
-	const componentClasses = classNames(["wprf-input-label", props?.className]);
+	const componentClasses = classNames("wprf-input-label", props?.className);
 
 	return (
 		<label htmlFor={props?.htmlFor} className={componentClasses}>

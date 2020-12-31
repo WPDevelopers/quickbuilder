@@ -10,6 +10,8 @@ const notification_type_source_themes = [
 			{
 				label: "Sales Notification",
 				value: "sales",
+				icon:
+					"https://notificationx.test/wp-content/plugins/notificationx/admin/assets/img/sources/woocommerce.jpg",
 			},
 			{ label: "Comments", value: "comments" },
 			{ label: "Reviews", value: "reviews" },
@@ -168,13 +170,42 @@ const select_fields = [
 	},
 ];
 
+const commonFields = [
+	{
+		type: "text",
+		label: "Text Control",
+		name: "text_control",
+		size: "large", // large: 100%,
+		validation_rules: {
+			required: "This is required",
+			"min:3": "Has to be min 3 char long.",
+		},
+	},
+	{
+		type: "number",
+		label: "Number Control",
+		name: "number_control",
+		// validation_rules: {
+		// 	required: "This is required",
+		// 	"min:3": "Has to be min 3 char long.",
+		// },
+	},
+];
+
 const tabs = [
 	{
 		label: "Tab 1",
 		key: "tab_1",
 		icon: "",
 		classes: "wrf-menu",
-		fields: [...notification_type_source_themes, ...select_fields],
+		fields: [
+			// Text Controls
+			...commonFields,
+			// Radio Card
+			...notification_type_source_themes,
+			// Select
+			// ...select_fields
+		],
 	},
 ];
 

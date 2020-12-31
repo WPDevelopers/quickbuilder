@@ -1,7 +1,7 @@
 .wprf-input-radio-set-wrap.wprf-radio-card {
 	display: flex;
 	flex-wrap: wrap;
-	.wprf-input-radio-set {
+	.wprf-input-radio-option {
 		height: 80px;
 		width: 20%;
 		position: relative;
@@ -12,7 +12,7 @@
 			&:checked + .wprf-input-label {
 				background-color: #0ccf9f;
 				color: #fff;
-				&.with-wprf-radio-card-image {
+				&.wprf-label-has-image {
 					background-color: white;
 				}
 				&:after {

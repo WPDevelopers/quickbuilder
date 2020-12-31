@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { withSelect } from "@wordpress/data";
 import {
 	TextControl,
@@ -13,10 +13,9 @@ import {
 	SelectControl,
 	Typography,
 	Slider,
+	Number,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
-
-import { ObjectFilter } from "../../core/functions";
 
 const Field = (props) => {
 	if (!props.isVisible) {
@@ -62,6 +61,8 @@ const Field = (props) => {
 			return <GroupControl {...controlProps} />;
 		case "select":
 			return <SelectControl {...controlProps} />;
+		case "number":
+			return <Number {...controlProps} />;
 		default:
 			return <div></div>;
 	}

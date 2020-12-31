@@ -1,18 +1,15 @@
 import React from "react";
 import Label from "../../../../core/Label";
-import { Input } from "../../Controls";
+import Input from "../Input/Input";
 
-import "./text.scss";
-
-function Index({ id, name, label, value, onChange, ...rest }) {
+function Index({ name, label, onChange, value, ...rest }) {
 	return (
 		<>
 			<Label htmlFor={name}>{label}</Label>
 			<Input
-				type="text"
-				id={name}
+				type="number"
 				name={name}
-				onChange={(event) => onChange(event.target.value)}
+				onChange={(event) => onChange(+event.target.value)}
 				value={value}
 				{...rest}
 			/>

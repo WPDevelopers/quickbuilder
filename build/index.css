@@ -3,16 +3,7 @@
   padding: 5px;
   margin-bottom: 10px;
 }
-.wprf-control .wprf-input-text-field {
-  display: block;
-  width: 100%;
-  box-shadow: none;
-  border: 1px solid #f2f2f2;
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-  padding: 8px;
-  line-height: 1;
-  font-size: 14px;
-}
+
 .wprf-control .wprf-input-label {
   display: block;
   padding: 5px;
@@ -69,6 +60,22 @@
 /**
  * Allows users to opt-out of animations via OS-level preferences.
  */
+.wprf-control .wprf-input-field {
+  box-shadow: none;
+  border: 1px solid #f2f2f2;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  padding: 8px;
+  line-height: 1;
+  font-size: 14px;
+}
+.wprf-control .wprf-input-field.large {
+  width: 100%;
+}
+.wprf-control .wprf-input-field:focus {
+  box-shadow: none;
+  outline: none;
+}
+
 .components-visually-hidden {
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);
@@ -283,24 +290,24 @@
   display: flex;
   flex-wrap: wrap;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option {
   height: 80px;
   width: 20%;
   position: relative;
   margin: 10px 10px 10px;
   box-shadow: 0 0 25px 0 rgba(0, 9, 78, 0.08);
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio] {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio] {
   display: none;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label {
   background-color: #0ccf9f;
   color: #fff;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label.with-wprf-radio-card-image {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label.wprf-label-has-image {
   background-color: white;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label:after {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label:after {
   content: "";
   display: inline-block;
   transform: rotate(45deg);
@@ -312,7 +319,7 @@
   right: -3px;
   top: -6px;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set input[type=radio]:checked + .wprf-input-label:before {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option input[type=radio]:checked + .wprf-input-label:before {
   content: "";
   position: absolute;
   right: -10px;
@@ -326,7 +333,7 @@
   background: #09dca8;
   border-radius: 50%;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-label {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label {
   position: absolute;
   left: 0;
   top: 0;
@@ -342,7 +349,7 @@
   padding: 10px;
   box-sizing: border-box;
 }
-.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-set .wprf-input-label .wprf-radio-card-image {
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label .wprf-radio-card-image {
   max-width: 100%;
 }
 .wprf-control-section .wprf-section-title {

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { useInstanceId } from "@wordpress/compose";
+import classNames from "classnames";
 import * as Yup from "yup";
-import { dispatch, select } from "@wordpress/data";
+import { dispatch } from "@wordpress/data";
 import { SweetAlert } from "../core/functions";
 
 const withCommon = (WrappedComponent, withParent = true) => {
@@ -13,6 +15,7 @@ const withCommon = (WrappedComponent, withParent = true) => {
 			}
 		}
 		onChange = (value, args) => {
+			console.log(value);
 			if (args?.is_pro) {
 				return SweetAlert({
 					title: "Hello World",
@@ -103,15 +106,16 @@ const withCommon = (WrappedComponent, withParent = true) => {
 				props
 			);
 
-			let classes = [
+			const componentClasses = classNames(
 				"wprf-control",
-				this.props.classes != undefined ? this.props.classes : "",
-			];
+				`wprf-control-${this.props.type}`,
+				this.props.classes
+			);
 
 			return (
 				<>
 					{withParent && (
-						<div className={classes.join(" ")}>
+						<div className={componentClasses}>
 							<WrappedComponent
 								{...verifiedProps}
 								onChange={this.onChange}

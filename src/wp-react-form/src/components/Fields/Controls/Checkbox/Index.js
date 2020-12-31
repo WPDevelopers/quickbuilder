@@ -13,6 +13,7 @@ function Index({ id, name, label, onChange, value, ...rest }) {
 					name={name}
 					onChange={(event) => onChange(event.target.checked)}
 					checked={value}
+					{...rest}
 				/>
 			</Label>
 		</>

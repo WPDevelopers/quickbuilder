@@ -12,6 +12,7 @@ import Toggle from "./Toggle";
 import SelectControl from "./SelectControl";
 import Typography from "./Typography";
 import Slider from "./Slider";
+import Number from "./Number";
 
 export {
 	Input,
@@ -27,4 +28,5 @@ export {
 	SelectControl,
 	Typography,
 	Slider,
+	Number,
 };

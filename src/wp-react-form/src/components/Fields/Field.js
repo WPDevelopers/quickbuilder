@@ -52,8 +52,8 @@ const Field = (props) => {
 			return <ColorPicker {...controlProps} />;
 		case "toggle":
 			return <Toggle {...controlProps} />;
-		// case "typography":
-		// 	return <Typography {...controlProps} />;
+		case "typography":
+			return <Typography {...controlProps} />;
 		case "slider":
 			return <Slider {...controlProps} />;
 		case "button":

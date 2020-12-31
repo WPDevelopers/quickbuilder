@@ -1,20 +1,105 @@
 .wprf-typography-wrap {
-    padding: 10px 0;
-    margin: 5px 0;
-    position: relative;
-    .wprf-typography-modal {
-        & > .wprf-fieldset-control  {
-            margin-bottom: 15px;
-            &:last-of-type {
-                margin-bottom: 0px;
+	padding: 10px 0;
+	margin: 5px 0;
+	position: relative;
+	.wprf-typography-modal {
+		border: 1px solid #ccc;
+		box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+		border-radius: 3px;
+		position: absolute;
+		width: 260px;
+		background: #fff;
+		top: 36px;
+		.wprf-typography-header {
+			justify-content: space-between;
+			align-items: center;
+			font-weight: 700;
+			font-size: 12px;
+			padding: 10px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			margin-bottom: 15px;
+			h4 {
+				margin: 0;
+			}
+		}
+		.wprf-fieldset-control > h5,
+		.wprf-fieldset-control label {
+			font-size: 11px;
+			line-height: 1;
+			margin-bottom: 8px;
+			margin-right: 100px;
+			font-weight: 500;
+		}
+		.wprf-fieldset-control > h5 {
+			margin-right: auto;
+			margin-bottom: 0px;
+		}
+		& > .wprf-fieldset-control {
+			padding: 0 20px 15px;
+			display: flex;
+			flex-wrap: wrap;
+			&:last-of-type {
+				margin-bottom: 0px;
+			}
+		}
+		h5 {
+			margin: 0;
+			& + div {
+				flex-basis: 55%;
+			}
+		}
+
+		.wprf-typography-select__control {
+			min-height: 27px;
+			height: 27px;
+			margin-top: 0;
+			margin-bottom: 0;
+
+			.wprf-typography-select__indicators {
+				height: 27px !important;
+				padding: 0;
+			}
+			.wprf-typography-select__indicator.wprf-typography-select__dropdown-indicator {
+				padding: 5px 5px;
+			}
+
+			.wprf-typography-select__input > input {
+				min-height: 20px;
+				height: 20px;
+				outline: none;
+				box-shadow: none;
+			}
+			.wprf-typography-select__input {
+				height: 17px;
+			}
+			.wprf-typography-select__value-container.wprf-typography-select__value-container--has-value {
+				height: 27px;
+				font-size: 11px;
+				line-height: 1;
+				white-space: nowrap;
+			}
+			.wprf-typography-select__placeholder {
+				transform: translateY(-45%);
+				top: 45%;
+				font-size: 11px;
+				line-height: 1;
+				white-space: nowrap;
+				& + div {
+					height: 20px;
+				}
+			}
+		}
+
+		.wprf-fieldset-control {
+			.components-input-control.components-number-control.components-range-control__number {
+				width: 55px;
+				.components-input-control__container {
+					font-size: 10px;
+				}
             }
-        }
-        position: absolute;
-        width: 260px;
-        background: #fff;
-        padding: 12px;
-        h5 {
-            margin: 0;
-        }
-    }
+            .components-range-control__wrapper {
+                margin-left: 0;
+            }
+		}
+	}
 }

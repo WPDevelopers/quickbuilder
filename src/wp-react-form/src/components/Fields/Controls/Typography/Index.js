@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Dashicon } from "@wordpress/components";
+import { Dashicon, RangeControl } from "@wordpress/components";
+import Select from "react-select";
 
 import "./typography.scss";
 
@@ -18,6 +19,15 @@ const handleValue = (prev, size, property) => {
 	};
 	return prevState;
 };
+
+// const selectStyle = {
+// 	control: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	option: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	input: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	indicator: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	placeholder: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	singleValue: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// };
 
 function Index({ label, onChange, value }) {
 	const [show, setShow] = useState(false);
@@ -47,15 +57,21 @@ function Index({ label, onChange, value }) {
 			<div className={`wprf-typography-wrap`}>
 				{show && (
 					<div className="wprf-typography-modal">
-						<h5>{label}</h5>
+						<div className="wprf-typography-header">
+							<h4>Typography</h4>
+						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-family">
-							<Field
-								label="Font Family"
-								type="select"
+							<h5>Font Family</h5>
+							<Select
+								classNamePrefix="wprf-typography-select"
+								isSearchable={true}
+								name={`font-family`}
+								isMulti={false}
+								placeholder="Select Font Family"
 								onChange={(option) =>
 									console.log("option", option)
 								}
-								value={value}
+								// value={value}
 								options={[
 									{ label: "Male", value: "male" },
 									{ label: "Female", value: "female" },
@@ -64,30 +80,33 @@ function Index({ label, onChange, value }) {
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-size">
-							<Field
+							<RangeControl
 								label="Font Size"
-								type="slider"
-								reset={false}
-								units={["px", "%", "em"]}
-								onChange={(size) =>
-									setTypographyValue((prev) =>
-										handleValue(prev, size, "font-size")
-									)
-								}
+								// units={["px", "%", "em"]}
+								allowReset={true}
 								max={100}
+								// onChange={(size) =>
+								// 	setTypographyValue((prev) =>
+								// 		handleValue(prev, size, "font-size")
+								// 	)
+								// }
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-weight">
-							<Field
-								label="Font Weight"
-								type="select"
+							<h5>Font Weight</h5>
+							<Select
+								classNamePrefix="wprf-typography-select"
+								isSearchable={true}
+								name={`font-weight`}
+								isMulti={false}
+								placeholder="Select Font Weight"
+								value={{ label: "Normal", value: "normal" }}
 								onChange={(option) =>
 									setTypographyValue((old) => ({
 										...old,
 										"font-weight": option,
 									}))
 								}
-								value={{ label: "Normal", value: "normal" }}
 								options={[
 									{ label: "Lighter", value: "lighter" },
 									{ label: "Normal", value: "normal" },
@@ -97,16 +116,20 @@ function Index({ label, onChange, value }) {
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-text-transform">
-							<Field
-								label="Text Transform"
-								type="select"
+							<h5>Text Transform</h5>
+							<Select
+								classNamePrefix="wprf-typography-select"
+								isSearchable={true}
+								name={`text-transform`}
+								isMulti={false}
+								placeholder="Select Text Transform"
+								value={{ label: "None", value: "none" }}
 								onChange={(option) =>
 									setTypographyValue((old) => ({
 										...old,
 										"text-transform": option,
 									}))
 								}
-								value={{ label: "None", value: "none" }}
 								options={[
 									{ label: "None", value: "none" },
 									{
@@ -125,15 +148,14 @@ function Index({ label, onChange, value }) {
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-text-decoration">
-							<Field
-								label="Text Decoration"
-								type="select"
-								onChange={(option) =>
-									setTypographyValue((old) => ({
-										...old,
-										"text-decoration": option,
-									}))
-								}
+							<h5>Text Decoration</h5>
+
+							<Select
+								classNamePrefix="wprf-typography-select"
+								isSearchable={true}
+								name={`text-decoration`}
+								isMulti={false}
+								placeholder="Select Text Decoration"
 								value={{ label: "Initial", value: "initial" }}
 								options={[
 									{ label: "Initial", value: "initial" },
@@ -144,38 +166,42 @@ function Index({ label, onChange, value }) {
 									},
 									{ label: "Underline", value: "underline" },
 								]}
+								onChange={(option) =>
+									setTypographyValue((old) => ({
+										...old,
+										"text-decoration": option,
+									}))
+								}
 							/>
 						</div>
+
 						<div className="wprf-fieldset-control wprf-fieldset-letter-spacing">
-							<Field
+							{/* <h5>Letter Spacing</h5> */}
+							<RangeControl
 								label="Letter Spacing"
-								type="slider"
-								units={["px", "%", "em"]}
-								onReset={(name) => onReset("letter-spacing")}
-								onChange={(size) =>
-									setTypographyValue((prev) =>
-										handleValue(
-											prev,
-											size,
-											"letter-spacing"
-										)
-									)
-								}
+								allowReset={true}
 								max={100}
+								// onReset={(name) => onReset("letter-spacing")}
+								onChange={(option) =>
+									setTypographyValue((old) => ({
+										...old,
+										"letter-spacing": option,
+									}))
+								}
 							/>
 						</div>
+
 						<div className="wprf-fieldset-control wprf-fieldset-line-height">
-							<Field
+							<RangeControl
 								label="Line Height"
-								type="slider"
-								units={["px", "%", "em"]}
-								onReset={(name) => onReset("line-height")}
-								onChange={(size) =>
-									setTypographyValue((prev) =>
-										handleValue(prev, size, "line-height")
-									)
-								}
+								allowReset={true}
 								max={100}
+								onReset={(name) => onReset("line-height")}
+								// onChange={(size) =>
+								// 	setTypographyValue((prev) =>
+								// 		handleValue(prev, size, "line-height")
+								// 	)
+								// }
 							/>
 						</div>
 					</div>

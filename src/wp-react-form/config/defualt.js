@@ -5,78 +5,78 @@ const tabs = [
 		icon: "",
 		classes: "wrf-menu",
 		fields: [
-			{
-				type: "section",
-				label: "Select Source",
-				collapsible: true,
-				fields: [
-					{
-						label: "Label First Name",
-						name: "first_name",
-						type: "text",
-						classes: "input-field",
-						// value: "Priyo",
-						placeholder: "First Name",
-						validation_rules: {
-							required: "Field should not be empty.",
-							"min:20": "Value has to 20 character in length",
-						},
-					},
-					{
-						label: "Last Name",
-						name: "last_name",
-						type: "text",
-						classes: "input-field",
-						value: "Mukul",
-						placeholder: "Last Name",
-						validation_rules: {
-							required: "Field should not be empty.",
-							"min:2": "Value has to 2 character in length",
-						},
-					},
-					{
-						label: "Comments",
-						name: "comments",
-						type: "textarea",
-						classes: "inputdd-field",
-						value: "blah blah",
-						max: 30,
-					},
-					{
-						label: "Are you sure?",
-						name: "consent",
-						type: "checkbox",
-						classes: "inputdd-field",
-						value: true,
-						lala: "lala",
-						max: 30,
-					},
-					{
-						label: "Gender",
-						name: "gender",
-						type: "radio-basic",
-						classes: "input-field",
-						value: "male",
-						options: [
-							{ label: "Male", value: "male" },
-							{ label: "Female", value: "female" },
-							{ label: "Others", value: "others" },
-						],
-					},
-					{
-						label: "Gender",
-						name: "gender",
-						type: "select",
-						classes: "input-field",
-						value: "male",
-						options: [
-							{ label: "Male", value: "male" },
-							{ label: "Female", value: "female" },
-							{ label: "Others", value: "others" },
-						],
-					},
-				],
-			},
+			// {
+			// 	type: "section",
+			// 	label: "Select Source",
+			// 	collapsible: true,
+			// 	fields: [
+			// 		{
+			// 			label: "Label First Name",
+			// 			name: "first_name",
+			// 			type: "text",
+			// 			classes: "input-field",
+			// 			// value: "Priyo",
+			// 			placeholder: "First Name",
+			// 			validation_rules: {
+			// 				required: "Field should not be empty.",
+			// 				"min:20": "Value has to 20 character in length",
+			// 			},
+			// 		},
+			// 		{
+			// 			label: "Last Name",
+			// 			name: "last_name",
+			// 			type: "text",
+			// 			classes: "input-field",
+			// 			value: "Mukul",
+			// 			placeholder: "Last Name",
+			// 			validation_rules: {
+			// 				required: "Field should not be empty.",
+			// 				"min:2": "Value has to 2 character in length",
+			// 			},
+			// 		},
+			// 		{
+			// 			label: "Comments",
+			// 			name: "comments",
+			// 			type: "textarea",
+			// 			classes: "inputdd-field",
+			// 			value: "blah blah",
+			// 			max: 30,
+			// 		},
+			// 		{
+			// 			label: "Are you sure?",
+			// 			name: "consent",
+			// 			type: "checkbox",
+			// 			classes: "inputdd-field",
+			// 			value: true,
+			// 			lala: "lala",
+			// 			max: 30,
+			// 		},
+			// 		{
+			// 			label: "Gender",
+			// 			name: "gender",
+			// 			type: "radio-basic",
+			// 			classes: "input-field",
+			// 			value: "male",
+			// 			options: [
+			// 				{ label: "Male", value: "male" },
+			// 				{ label: "Female", value: "female" },
+			// 				{ label: "Others", value: "others" },
+			// 			],
+			// 		},
+			// 		{
+			// 			label: "Gender",
+			// 			name: "gender",
+			// 			type: "select",
+			// 			classes: "input-field",
+			// 			value: "male",
+			// 			options: [
+			// 				{ label: "Male", value: "male" },
+			// 				{ label: "Female", value: "female" },
+			// 				{ label: "Others", value: "others" },
+			// 			],
+			// 		},
+			// 	],
+			// },
 			// {
 			// 	type: "section",
 			// 	label: "Select Source",
@@ -108,7 +108,6 @@ const tabs = [
 			// 		},
 			// 	],
 			// },
-
 			// {
 			// 	label: "Notification Type",
 			// 	name: "notification_type",
@@ -172,13 +171,19 @@ const tabs = [
 			// 		},
 			// 	],
 			// },
-			// {
-			// 	label: "User type",
-			// 	name: "header_size",
-			// 	type: "slider",
-			// 	min: 2,
-			// 	max: 100
-			// },
+			{
+				label: "User type",
+				name: "header_size",
+				type: "slider",
+				min: 2,
+				max: 100,
+				units: [
+					"px",
+					"%",
+					"em"
+				]
+			},
+			// {unit}{value}
 			// {
 			// 	label: "User type",
 			// 	name: "header_size",
@@ -214,27 +219,27 @@ const tabs = [
 			},
 		],
 	},
-	{
-		label: "Tab 2",
-		key: "tab_2",
-		icon: "",
-		fields: [
-			// {
-			// 	label: "First Name New",
-			// 	name: "first_name_new",
-			// 	type: "text",
-			// 	css_class: "input-field",
-			// 	placeholder: "blah blah",
-			// },
-			{
-				label: "Last Name New",
-				name: "last_name_new",
-				type: "textarea",
-				css_class: "input-field",
-				value: "blah blah",
-			},
-		],
-	},
+	// {
+	// 	label: "Tab 2",
+	// 	key: "tab_2",
+	// 	icon: "",
+	// 	fields: [
+	// 		// {
+	// 		// 	label: "First Name New",
+	// 		// 	name: "first_name_new",
+	// 		// 	type: "text",
+	// 		// 	css_class: "input-field",
+	// 		// 	placeholder: "blah blah",
+	// 		// },
+	// 		{
+	// 			label: "Last Name New",
+	// 			name: "last_name_new",
+	// 			type: "textarea",
+	// 			css_class: "input-field",
+	// 			value: "blah blah",
+	// 		},
+	// 	],
+	// },
 ];
 
 const builder = {

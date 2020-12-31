@@ -21591,7 +21591,7 @@ __webpack_require__.r(__webpack_exports__);
 (function () {
   var App = function App() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["priyo"]
+      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["builder"]
     });
   };
 
@@ -21614,81 +21614,79 @@ var tabs = [{
   key: "tab_1",
   icon: "",
   classes: "wrf-menu",
-  fields: [{
-    type: "section",
-    label: "Select Source",
-    collapsible: true,
-    fields: [{
-      label: "Label First Name",
-      name: "first_name",
-      type: "text",
-      classes: "input-field",
-      // value: "Priyo",
-      placeholder: "First Name",
-      validation_rules: {
-        required: "Field should not be empty.",
-        "min:20": "Value has to 20 character in length"
-      }
-    }, {
-      label: "Last Name",
-      name: "last_name",
-      type: "text",
-      classes: "input-field",
-      value: "Mukul",
-      placeholder: "Last Name",
-      validation_rules: {
-        required: "Field should not be empty.",
-        "min:2": "Value has to 2 character in length"
-      }
-    }, {
-      label: "Comments",
-      name: "comments",
-      type: "textarea",
-      classes: "inputdd-field",
-      value: "blah blah",
-      max: 30
-    }, {
-      label: "Are you sure?",
-      name: "consent",
-      type: "checkbox",
-      classes: "inputdd-field",
-      value: true,
-      lala: "lala",
-      max: 30
-    }, {
-      label: "Gender",
-      name: "gender",
-      type: "radio-basic",
-      classes: "input-field",
-      value: "male",
-      options: [{
-        label: "Male",
-        value: "male"
-      }, {
-        label: "Female",
-        value: "female"
-      }, {
-        label: "Others",
-        value: "others"
-      }]
-    }, {
-      label: "Gender",
-      name: "gender",
-      type: "select",
-      classes: "input-field",
-      value: "male",
-      options: [{
-        label: "Male",
-        value: "male"
-      }, {
-        label: "Female",
-        value: "female"
-      }, {
-        label: "Others",
-        value: "others"
-      }]
-    }]
-  }, // {
+  fields: [// {
+  // 	type: "section",
+  // 	label: "Select Source",
+  // 	collapsible: true,
+  // 	fields: [
+  // 		{
+  // 			label: "Label First Name",
+  // 			name: "first_name",
+  // 			type: "text",
+  // 			classes: "input-field",
+  // 			// value: "Priyo",
+  // 			placeholder: "First Name",
+  // 			validation_rules: {
+  // 				required: "Field should not be empty.",
+  // 				"min:20": "Value has to 20 character in length",
+  // 			},
+  // 		},
+  // 		{
+  // 			label: "Last Name",
+  // 			name: "last_name",
+  // 			type: "text",
+  // 			classes: "input-field",
+  // 			value: "Mukul",
+  // 			placeholder: "Last Name",
+  // 			validation_rules: {
+  // 				required: "Field should not be empty.",
+  // 				"min:2": "Value has to 2 character in length",
+  // 			},
+  // 		},
+  // 		{
+  // 			label: "Comments",
+  // 			name: "comments",
+  // 			type: "textarea",
+  // 			classes: "inputdd-field",
+  // 			value: "blah blah",
+  // 			max: 30,
+  // 		},
+  // 		{
+  // 			label: "Are you sure?",
+  // 			name: "consent",
+  // 			type: "checkbox",
+  // 			classes: "inputdd-field",
+  // 			value: true,
+  // 			lala: "lala",
+  // 			max: 30,
+  // 		},
+  // 		{
+  // 			label: "Gender",
+  // 			name: "gender",
+  // 			type: "radio-basic",
+  // 			classes: "input-field",
+  // 			value: "male",
+  // 			options: [
+  // 				{ label: "Male", value: "male" },
+  // 				{ label: "Female", value: "female" },
+  // 				{ label: "Others", value: "others" },
+  // 			],
+  // 		},
+  // 		{
+  // 			label: "Gender",
+  // 			name: "gender",
+  // 			type: "select",
+  // 			classes: "input-field",
+  // 			value: "male",
+  // 			options: [
+  // 				{ label: "Male", value: "male" },
+  // 				{ label: "Female", value: "female" },
+  // 				{ label: "Others", value: "others" },
+  // 			],
+  // 		},
+  // 	],
+  // },
+  // {
   // 	type: "section",
   // 	label: "Select Source",
   // 	collapsible: true,
@@ -21782,13 +21780,14 @@ var tabs = [{
   // 		},
   // 	],
   // },
-  // {
-  // 	label: "User type",
-  // 	name: "header_size",
-  // 	type: "slider",
-  // 	min: 2,
-  // 	max: 100
-  // },
+  {
+    label: "User type",
+    name: "header_size",
+    type: "slider",
+    min: 2,
+    max: 100,
+    units: ["px", "%", "em"]
+  }, // {unit}{value}
   // {
   // 	label: "User type",
   // 	name: "header_size",
@@ -21822,25 +21821,28 @@ var tabs = [{
     name: "content_typography",
     type: "typography"
   }]
-}, {
-  label: "Tab 2",
-  key: "tab_2",
-  icon: "",
-  fields: [// {
-  // 	label: "First Name New",
-  // 	name: "first_name_new",
-  // 	type: "text",
-  // 	css_class: "input-field",
-  // 	placeholder: "blah blah",
-  // },
-  {
-    label: "Last Name New",
-    name: "last_name_new",
-    type: "textarea",
-    css_class: "input-field",
-    value: "blah blah"
-  }]
-}];
+} // {
+// 	label: "Tab 2",
+// 	key: "tab_2",
+// 	icon: "",
+// 	fields: [
+// 		// {
+// 		// 	label: "First Name New",
+// 		// 	name: "first_name_new",
+// 		// 	type: "text",
+// 		// 	css_class: "input-field",
+// 		// 	placeholder: "blah blah",
+// 		// },
+// 		{
+// 			label: "Last Name New",
+// 			name: "last_name_new",
+// 			type: "textarea",
+// 			css_class: "input-field",
+// 			value: "blah blah",
+// 		},
+// 	],
+// },
+];
 var builder = {
   tabs: tabs,
   submit: {
@@ -23372,8 +23374,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./typography.scss */ "./src/wp-react-form/src/components/Fields/Controls/Typography/typography.scss");
-/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_typography_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.browser.esm.js");
+/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./typography.scss */ "./src/wp-react-form/src/components/Fields/Controls/Typography/typography.scss");
+/* harmony import */ var _typography_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_typography_scss__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -23381,6 +23384,7 @@ __webpack_require__.r(__webpack_exports__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 
 
@@ -23398,7 +23402,15 @@ var handleValue = function handleValue(prev, size, property) {
 
   prevState = _objectSpread(_objectSpread({}, prevState), {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({}, property, "".concat(size.value).concat(size.unit)));
   return prevState;
-};
+}; // const selectStyle = {
+// 	control: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	option: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	input: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	indicator: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	placeholder: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// 	singleValue: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
+// };
+
 
 function Index(_ref) {
   var label = _ref.label,
@@ -23441,15 +23453,20 @@ function Index(_ref) {
     className: "wprf-typography-wrap"
   }, show && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-typography-modal"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("h5", null, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+    className: "wprf-typography-header"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("h4", null, "Typography")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-fieldset-control wprf-fieldset-font-family"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Field, {
-    label: "Font Family",
-    type: "select",
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("h5", null, "Font Family"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    classNamePrefix: "wprf-typography-select",
+    isSearchable: true,
+    name: "font-family",
+    isMulti: false,
+    placeholder: "Select Font Family",
     onChange: function onChange(option) {
       return console.log("option", option);
-    },
-    value: value,
+    } // value={value}
+    ,
     options: [{
       label: "Male",
       value: "male"
@@ -23462,32 +23479,34 @@ function Index(_ref) {
     }]
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-fieldset-control wprf-fieldset-font-size"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Field, {
-    label: "Font Size",
-    type: "slider",
-    reset: false,
-    units: ["px", "%", "em"],
-    onChange: function onChange(size) {
-      return setTypographyValue(function (prev) {
-        return handleValue(prev, size, "font-size");
-      });
-    },
-    max: 100
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RangeControl"], {
+    label: "Font Size" // units={["px", "%", "em"]}
+    ,
+    allowReset: true,
+    max: 100 // onChange={(size) =>
+    // 	setTypographyValue((prev) =>
+    // 		handleValue(prev, size, "font-size")
+    // 	)
+    // }
+
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-fieldset-control wprf-fieldset-font-weight"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Field, {
-    label: "Font Weight",
-    type: "select",
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("h5", null, "Font Weight"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    classNamePrefix: "wprf-typography-select",
+    isSearchable: true,
+    name: "font-weight",
+    isMulti: false,
+    placeholder: "Select Font Weight",
+    value: {
+      label: "Normal",
+      value: "normal"
+    },
     onChange: function onChange(option) {
       return setTypographyValue(function (old) {
         return _objectSpread(_objectSpread({}, old), {}, {
           "font-weight": option
         });
       });
-    },
-    value: {
-      label: "Normal",
-      value: "normal"
     },
     options: [{
       label: "Lighter",
@@ -23504,19 +23523,22 @@ function Index(_ref) {
     }]
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-fieldset-control wprf-fieldset-text-transform"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Field, {
-    label: "Text Transform",
-    type: "select",
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("h5", null, "Text Transform"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    classNamePrefix: "wprf-typography-select",
+    isSearchable: true,
+    name: "text-transform",
+    isMulti: false,
+    placeholder: "Select Text Transform",
+    value: {
+      label: "None",
+      value: "none"
+    },
     onChange: function onChange(option) {
       return setTypographyValue(function (old) {
         return _objectSpread(_objectSpread({}, old), {}, {
           "text-transform": option
         });
       });
-    },
-    value: {
-      label: "None",
-      value: "none"
     },
     options: [{
       label: "None",
@@ -23533,16 +23555,12 @@ function Index(_ref) {
     }]
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-fieldset-control wprf-fieldset-text-decoration"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Field, {
-    label: "Text Decoration",
-    type: "select",
-    onChange: function onChange(option) {
-      return setTypographyValue(function (old) {
-        return _objectSpread(_objectSpread({}, old), {}, {
-          "text-decoration": option
-        });
-      });
-    },
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("h5", null, "Text Decoration"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    classNamePrefix: "wprf-typography-select",
+    isSearchable: true,
+    name: "text-decoration",
+    isMulti: false,
+    placeholder: "Select Text Decoration",
     value: {
       label: "Initial",
       value: "initial"
@@ -23559,37 +23577,42 @@ function Index(_ref) {
     }, {
       label: "Underline",
       value: "underline"
-    }]
+    }],
+    onChange: function onChange(option) {
+      return setTypographyValue(function (old) {
+        return _objectSpread(_objectSpread({}, old), {}, {
+          "text-decoration": option
+        });
+      });
+    }
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-fieldset-control wprf-fieldset-letter-spacing"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Field, {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RangeControl"], {
     label: "Letter Spacing",
-    type: "slider",
-    units: ["px", "%", "em"],
-    onReset: function onReset(name) {
-      return _onReset("letter-spacing");
-    },
-    onChange: function onChange(size) {
-      return setTypographyValue(function (prev) {
-        return handleValue(prev, size, "letter-spacing");
+    allowReset: true,
+    max: 100 // onReset={(name) => onReset("letter-spacing")}
+    ,
+    onChange: function onChange(option) {
+      return setTypographyValue(function (old) {
+        return _objectSpread(_objectSpread({}, old), {}, {
+          "letter-spacing": option
+        });
       });
-    },
-    max: 100
+    }
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-fieldset-control wprf-fieldset-line-height"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Field, {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RangeControl"], {
     label: "Line Height",
-    type: "slider",
-    units: ["px", "%", "em"],
+    allowReset: true,
+    max: 100,
     onReset: function onReset(name) {
       return _onReset("line-height");
-    },
-    onChange: function onChange(size) {
-      return setTypographyValue(function (prev) {
-        return handleValue(prev, size, "line-height");
-      });
-    },
-    max: 100
+    } // onChange={(size) =>
+    // 	setTypographyValue((prev) =>
+    // 		handleValue(prev, size, "line-height")
+    // 	)
+    // }
+
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "wprf-typography-trigger"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("button", {
@@ -23768,8 +23791,9 @@ var Field = function Field(props) {
 
     case "toggle":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_5__["Toggle"], controlProps);
-    // case "typography":
-    // 	return <Typography {...controlProps} />;
+
+    case "typography":
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_5__["Typography"], controlProps);
 
     case "slider":
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_Controls__WEBPACK_IMPORTED_MODULE_5__["Slider"], controlProps);

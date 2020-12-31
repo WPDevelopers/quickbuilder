@@ -15,7 +15,6 @@ const withCommon = (WrappedComponent, withParent = true) => {
 			}
 		}
 		onChange = (value, args) => {
-			console.log(value);
 			if (args?.is_pro) {
 				return SweetAlert({
 					title: "Hello World",

@@ -72,7 +72,7 @@ export default withSelect((select, ownProps) => {
 	let savedValue = select("wprf-store").getFieldValue(ownProps.name);
 	let mapsToProps = {
 		value: savedValue ?? ownProps.value,
-		isVisible: select("wprf-store").isVisible(ownProps, ownProps.name),
+		isVisible: select("wprf-store").isVisible(ownProps),
 		isTouched: select("wprf-store").isTouched(ownProps.name),
 		errorMessage: select("wprf-store").getError(ownProps.name),
 	};

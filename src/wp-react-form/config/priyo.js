@@ -172,10 +172,18 @@ const select_fields = [
 
 const commonFields = [
 	{
+		type: "checkbox",
+		label: "Checkbox Control",
+		name: "checkbox_control",
+	},
+	{
 		type: "text",
 		label: "Text Control",
 		name: "text_control",
 		size: "large", // large: 100%,
+		condition: {
+			checkbox_control: false,
+		},
 		validation_rules: {
 			required: "This is required",
 			"min:3": "Has to be min 3 char long.",

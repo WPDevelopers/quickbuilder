@@ -5,8 +5,6 @@ import Image from "./Image";
 const Label = (props) => {
 	const componentClasses = classNames(["wprf-input-label", props?.className]);
 
-	console.log("label", props);
-
 	return (
 		<label htmlFor={props?.htmlFor} className={componentClasses}>
 			{!props?.src && props?.children}

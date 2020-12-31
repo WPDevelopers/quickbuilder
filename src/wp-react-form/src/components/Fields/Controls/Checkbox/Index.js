@@ -6,7 +6,7 @@ import "./checkbox.scss";
 function Index({ id, name, label, onChange, value, ...rest }) {
 	return (
 		<>
-			<Label htmlFor={id} right label={label}>
+			<Label htmlFor={id}>
 				<Input
 					type="checkbox"
 					id={id}
@@ -15,6 +15,7 @@ function Index({ id, name, label, onChange, value, ...rest }) {
 					checked={value}
 					{...rest}
 				/>
+				{label}
 			</Label>
 		</>
 	);

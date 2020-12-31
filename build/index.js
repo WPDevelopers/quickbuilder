@@ -22109,11 +22109,18 @@ var select_fields = [{
   }]
 }];
 var commonFields = [{
+  type: "checkbox",
+  label: "Checkbox Control",
+  name: "checkbox_control"
+}, {
   type: "text",
   label: "Text Control",
   name: "text_control",
   size: "large",
   // large: 100%,
+  condition: {
+    checkbox_control: false
+  },
   validation_rules: {
     required: "This is required",
     "min:3": "Has to be min 3 char long."
@@ -22275,8 +22282,6 @@ var withCommon = function withCommon(WrappedComponent) {
 
       _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), "onChange", function (value, args) {
         var _this$props;
-
-        console.log(value);
 
         if (args !== null && args !== void 0 && args.is_pro) {
           return Object(_core_functions__WEBPACK_IMPORTED_MODULE_14__["SweetAlert"])({
@@ -22571,9 +22576,7 @@ function Index(_ref) {
       rest = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["id", "name", "label", "onChange", "value"]);
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_core_Label__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    htmlFor: id,
-    right: true,
-    label: label
+    htmlFor: id
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_Input_Input__WEBPACK_IMPORTED_MODULE_5__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({
     type: "checkbox",
     id: id,
@@ -22582,7 +22585,7 @@ function Index(_ref) {
       return _onChange(event.target.checked);
     },
     checked: value
-  }, rest))));
+  }, rest)), label));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -23973,7 +23976,7 @@ var Field = function Field(props) {
   var savedValue = select("wprf-store").getFieldValue(ownProps.name);
   var mapsToProps = {
     value: savedValue !== null && savedValue !== void 0 ? savedValue : ownProps.value,
-    isVisible: select("wprf-store").isVisible(ownProps, ownProps.name),
+    isVisible: select("wprf-store").isVisible(ownProps),
     isTouched: select("wprf-store").isTouched(ownProps.name),
     errorMessage: select("wprf-store").getError(ownProps.name)
   };
@@ -24296,7 +24299,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var Label = function Label(props) {
   var componentClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()(["wprf-input-label", props === null || props === void 0 ? void 0 : props.className]);
-  console.log("label", props);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
     htmlFor: props === null || props === void 0 ? void 0 : props.htmlFor,
     className: componentClasses
@@ -24506,11 +24508,9 @@ var store = {
 
       var isTrue = true;
       Object.keys(props.condition).map(function (condition) {
-        var _state$values;
+        var _state$values$conditi, _state$values;
 
-        if (((_state$values = state.values) === null || _state$values === void 0 ? void 0 : _state$values[condition]) !== props.condition[condition]) {
-          isTrue = false;
-        }
+        isTrue = !(((_state$values$conditi = (_state$values = state.values) === null || _state$values === void 0 ? void 0 : _state$values[condition]) !== null && _state$values$conditi !== void 0 ? _state$values$conditi : false) !== props.condition[condition]);
       });
       return isTrue;
     }

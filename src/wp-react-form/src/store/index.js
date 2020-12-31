@@ -110,9 +110,10 @@ const store = {
 			}
 			let isTrue = true;
 			Object.keys(props.condition).map((condition) => {
-				if (state.values?.[condition] !== props.condition[condition]) {
-					isTrue = false;
-				}
+				isTrue = !(
+					(state.values?.[condition] ?? false) !==
+					props.condition[condition]
+				);
 			});
 			return isTrue;
 		},

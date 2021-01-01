@@ -16,8 +16,8 @@ function Index({
 	...rest
 }) {
 	const { unit } = defaults || {};
-	const [isValue, setValue] = useState(value ?? rest?.min ?? 0);
-	const [sunit, setSunit] = useState(unit || "px");
+	const [isValue, setValue] = useState(value?.value ?? rest?.min ?? 0);
+	const [sunit, setSunit] = useState(value?.unit || unit || "px");
 
 	useEffect(() => {
 		if (isValue >= 0) {

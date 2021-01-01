@@ -1,28 +1,33 @@
-import { withSelect } from "@wordpress/data";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import classNames from "classnames";
+
 import Fields from "../Fields";
 import Submit from "./../Submit";
 
-const TabContent = ({ activeTab, config }) => {
-	if (config.tabs == undefined) {
+const TabContent = ({ tabs, submit }) => {
+	if (tabs === undefined || Object.keys(tabs).length === 0) {
 		return "";
 	}
 
+	if (!tabs?.id) {
+		throw Error("Each Tab Must Have an Unique ID. i.e: id: tab_one");
+	}
+
 	return (
-		<div className={`wprf-tab-content-wrapper`}>
-			{config.tabs.map(({ key, fields }) => (
-				<div
-					className={`wprf-tab-content ${key}${
-						key === activeTab ? " wprf-active-content" : ""
-					}`}
-					key={key}
-				>
-					<div className={`wprf-tab-content-inner`}>
-						<Fields fields={fields} />
-					</div>
+		<div className="wprf-tab-content-wrapper">
+			<div
+				id={tabs?.id}
+				className={classNames(
+					"wprf-tab-content",
+					`wprf-tab-${tabs?.id}`
+				)}
+				key={tabs?.id}
+			>
+				<div className="wprf-tab-content-inner">
+					<Fields fields={tabs?.fields} />
 				</div>
-			))}
-			{config.submit && <Submit config={config.submit} />}
+			</div>
+			{submit && <Submit config={submit} />}
 		</div>
 	);
 };

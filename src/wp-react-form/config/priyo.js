@@ -290,9 +290,8 @@ const commonFields = [
 const tabs = [
 	{
 		label: "Tab 1",
-		key: "tab_1",
+		id: "tab_1",
 		icon: "",
-		classes: "wrf-menu",
 		fields: [
 			// Text Controls
 			// ...commonFields,
@@ -302,11 +301,25 @@ const tabs = [
 			// ...select_fields
 		],
 	},
+	{
+		label: "Tab 2",
+		id: "tab_2",
+		icon: "",
+		fields: [
+			// Text Controls
+			...commonFields,
+			// Radio Card
+			// ...notification_type_source_themes,
+			// Select
+			// ...select_fields
+		],
+	},
 ];
 
 const builder = {
 	tabs,
 	tabConfig: {
+		active: "tab_1",
 		sidebar: true,
 	},
 	is_pro_active: true,

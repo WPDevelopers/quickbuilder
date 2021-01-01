@@ -23,11 +23,11 @@ const TabMenu = (props) => {
 					<li
 						className={classNames("wprf-tab-nav-item", {
 							[`${tab.classes}`]: tab.classes,
-							"wprf-active-nav": activeTab === tab.key,
+							"wprf-active-nav": activeTab === tab.id,
 						})}
-						data-key={tab.key}
-						key={tab.key}
-						onClick={() => setActiveTab(tab.key)}
+						data-key={tab.id}
+						key={tab.id}
+						onClick={() => setActiveTab(tab.id)}
 					>
 						{tab.label}
 					</li>

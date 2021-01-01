@@ -21653,7 +21653,7 @@ __webpack_require__.r(__webpack_exports__);
 (function () {
   var App = function App() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["builder"]
+      config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["priyo"]
     });
   };
 
@@ -21675,7 +21675,6 @@ var tabs = [{
   label: "Tab 1",
   key: "tab_1",
   icon: "",
-  classes: "wrf-menu",
   fields: [// {
   // 	type: "section",
   // 	label: "Select Source",
@@ -21883,32 +21882,29 @@ var tabs = [{
     name: "content_typography",
     type: "typography"
   }]
-} // {
-// 	label: "Tab 2",
-// 	key: "tab_2",
-// 	icon: "",
-// 	fields: [
-// 		// {
-// 		// 	label: "First Name New",
-// 		// 	name: "first_name_new",
-// 		// 	type: "text",
-// 		// 	css_class: "input-field",
-// 		// 	placeholder: "blah blah",
-// 		// },
-// 		{
-// 			label: "Last Name New",
-// 			name: "last_name_new",
-// 			type: "textarea",
-// 			css_class: "input-field",
-// 			value: "blah blah",
-// 		},
-// 	],
-// },
-];
+}, {
+  label: "Tab 2",
+  key: "tab_2",
+  icon: "",
+  fields: [{
+    label: "First Name New",
+    name: "first_name_new",
+    type: "text",
+    css_class: "input-field",
+    placeholder: "blah blah"
+  }, {
+    label: "Last Name New",
+    name: "last_name_new",
+    type: "textarea",
+    css_class: "input-field",
+    value: "blah blah"
+  }]
+}];
 var builder = {
   tabs: tabs,
   tabConfig: {
-    sidebar: true
+    active: "tab_1",
+    sidebar: false
   },
   submit: {
     label: "Save Changes" // onSubmit: (e) => {
@@ -22215,14 +22211,19 @@ var commonFields = [{
 }];
 var tabs = [{
   label: "Tab 1",
-  key: "tab_1",
+  id: "tab_1",
   icon: "",
-  classes: "wrf-menu",
   fields: [].concat(notification_type_source_themes)
+}, {
+  label: "Tab 2",
+  id: "tab_2",
+  icon: "",
+  fields: [].concat(commonFields)
 }];
 var builder = {
   tabs: tabs,
   tabConfig: {
+    active: "tab_1",
     sidebar: true
   },
   is_pro_active: true,
@@ -23378,7 +23379,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Index(_ref) {
-  var _ref3;
+  var _ref3, _value$value;
 
   var label = _ref.label,
       name = _ref.name,
@@ -23394,12 +23395,12 @@ function Index(_ref) {
   var _ref2 = defaults || {},
       unit = _ref2.unit;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])((_ref3 = value !== null && value !== void 0 ? value : rest === null || rest === void 0 ? void 0 : rest.min) !== null && _ref3 !== void 0 ? _ref3 : 0),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])((_ref3 = (_value$value = value === null || value === void 0 ? void 0 : value.value) !== null && _value$value !== void 0 ? _value$value : rest === null || rest === void 0 ? void 0 : rest.min) !== null && _ref3 !== void 0 ? _ref3 : 0),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default()(_useState, 2),
       isValue = _useState2[0],
       setValue = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(unit || "px"),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])((value === null || value === void 0 ? void 0 : value.unit) || unit || "px"),
       _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default()(_useState3, 2),
       sunit = _useState4[0],
       setSunit = _useState4[1];
@@ -24435,10 +24436,10 @@ var Submit = function Submit(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Fields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Fields */ "./src/wp-react-form/src/components/Fields/index.js");
 /* harmony import */ var _Submit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../Submit */ "./src/wp-react-form/src/components/Submit/index.js");
 
@@ -24448,28 +24449,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TabContent = function TabContent(_ref) {
-  var activeTab = _ref.activeTab,
-      config = _ref.config;
+  var tabs = _ref.tabs,
+      submit = _ref.submit;
 
-  if (config.tabs == undefined) {
+  if (tabs === undefined || Object.keys(tabs).length === 0) {
     return "";
+  }
+
+  if (!(tabs !== null && tabs !== void 0 && tabs.id)) {
+    throw Error("Each Tab Must Have an Unique ID. i.e: id: tab_one");
   }
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wprf-tab-content-wrapper"
-  }, config.tabs.map(function (_ref2) {
-    var key = _ref2.key,
-        fields = _ref2.fields;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "wprf-tab-content ".concat(key).concat(key === activeTab ? " wprf-active-content" : ""),
-      key: key
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "wprf-tab-content-inner"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      fields: fields
-    })));
-  }), config.submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    config: config.submit
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    id: tabs === null || tabs === void 0 ? void 0 : tabs.id,
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wprf-tab-content", "wprf-tab-".concat(tabs === null || tabs === void 0 ? void 0 : tabs.id)),
+    key: tabs === null || tabs === void 0 ? void 0 : tabs.id
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "wprf-tab-content-inner"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    fields: tabs === null || tabs === void 0 ? void 0 : tabs.fields
+  }))), submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    config: submit
   }));
 };
 
@@ -24520,11 +24522,11 @@ var TabMenu = function TabMenu(props) {
     var _classNames;
 
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("li", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_3___default()("wprf-tab-nav-item", (_classNames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classNames, "".concat(tab.classes), tab.classes), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classNames, "wprf-active-nav", activeTab === tab.key), _classNames)),
-      "data-key": tab.key,
-      key: tab.key,
+      className: classnames__WEBPACK_IMPORTED_MODULE_3___default()("wprf-tab-nav-item", (_classNames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classNames, "".concat(tab.classes), tab.classes), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classNames, "wprf-active-nav", activeTab === tab.id), _classNames)),
+      "data-key": tab.id,
+      key: tab.id,
       onClick: function onClick() {
-        return setActiveTab(tab.key);
+        return setActiveTab(tab.id);
       }
     }, tab.label);
   })));
@@ -24561,20 +24563,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TabBuilder = function TabBuilder(_ref) {
+  var _config$tabConfig;
+
   var config = _ref.config;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])("tab_1"),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(config === null || config === void 0 ? void 0 : (_config$tabConfig = config.tabConfig) === null || _config$tabConfig === void 0 ? void 0 : _config$tabConfig.active),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
       activeTab = _useState2[0],
       setActiveTab = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
+      tabs = _useState4[0],
+      setTab = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    if (activeTab) {
+      var currentTabs = config === null || config === void 0 ? void 0 : config.tabs.filter(function (tab) {
+        return tab.id === activeTab;
+      });
+      setTab(currentTabs === null || currentTabs === void 0 ? void 0 : currentTabs[0]);
+    }
+  }, [activeTab]);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_TabMenu__WEBPACK_IMPORTED_MODULE_3__["default"], {
     config: config,
     activeTab: activeTab,
     setActiveTab: setActiveTab
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_TabContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    config: config,
-    activeTab: activeTab
+    tabs: tabs,
+    submit: config === null || config === void 0 ? void 0 : config.submit
   }));
 };
 

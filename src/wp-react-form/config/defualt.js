@@ -3,7 +3,6 @@ const tabs = [
 		label: "Tab 1",
 		key: "tab_1",
 		icon: "",
-		classes: "wrf-menu",
 		fields: [
 			// {
 			// 	type: "section",
@@ -215,33 +214,34 @@ const tabs = [
 			},
 		],
 	},
-	// {
-	// 	label: "Tab 2",
-	// 	key: "tab_2",
-	// 	icon: "",
-	// 	fields: [
-	// 		// {
-	// 		// 	label: "First Name New",
-	// 		// 	name: "first_name_new",
-	// 		// 	type: "text",
-	// 		// 	css_class: "input-field",
-	// 		// 	placeholder: "blah blah",
-	// 		// },
-	// 		{
-	// 			label: "Last Name New",
-	// 			name: "last_name_new",
-	// 			type: "textarea",
-	// 			css_class: "input-field",
-	// 			value: "blah blah",
-	// 		},
-	// 	],
-	// },
+	{
+		label: "Tab 2",
+		key: "tab_2",
+		icon: "",
+		fields: [
+			{
+				label: "First Name New",
+				name: "first_name_new",
+				type: "text",
+				css_class: "input-field",
+				placeholder: "blah blah",
+			},
+			{
+				label: "Last Name New",
+				name: "last_name_new",
+				type: "textarea",
+				css_class: "input-field",
+				value: "blah blah",
+			},
+		],
+	},
 ];
 
 const builder = {
 	tabs,
 	tabConfig: {
-		sidebar: true,
+		active: "tab_1",
+		sidebar: false,
 	},
 	submit: {
 		label: "Save Changes",

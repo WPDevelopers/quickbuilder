@@ -28,3 +28,7 @@ export const ObjectFilter = (thisObj, func, returnArr = false) => {
 	}
 	return newObj;
 };
+
+export const isArray = (args) => {
+	return typeof args === "object" && Array.isArray(args);
+};

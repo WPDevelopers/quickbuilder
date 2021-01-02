@@ -13,6 +13,10 @@ const TabContent = ({ tabs, submit }) => {
 		throw Error("Each Tab Must Have an Unique ID. i.e: id: tab_one");
 	}
 
+	if (!tabs?.fields) {
+		throw Error("Each tab must have some fields.");
+	}
+
 	return (
 		<div className="wprf-tab-content-wrapper">
 			<div
@@ -23,9 +27,7 @@ const TabContent = ({ tabs, submit }) => {
 				)}
 				key={tabs?.id}
 			>
-				<div className="wprf-tab-content-inner">
-					<Fields fields={tabs?.fields} />
-				</div>
+				<Fields fields={tabs?.fields} />
 			</div>
 			{submit && <Submit config={submit} />}
 		</div>

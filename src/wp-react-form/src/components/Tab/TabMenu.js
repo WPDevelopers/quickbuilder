@@ -11,9 +11,7 @@ const TabMenu = (props) => {
 	const componentClasses = classNames(
 		"wprf-tab-menu-wrapper",
 		props?.className,
-		{
-			"wprf-tab-menu-sidebar": config?.tabConfig?.sidebar,
-		}
+		{ "wprf-tab-menu-sidebar": config?.tabConfig?.sidebar }
 	);
 
 	return (

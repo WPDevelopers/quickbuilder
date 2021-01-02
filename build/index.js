@@ -24460,17 +24460,19 @@ var TabContent = function TabContent(_ref) {
     throw Error("Each Tab Must Have an Unique ID. i.e: id: tab_one");
   }
 
+  if (!(tabs !== null && tabs !== void 0 && tabs.fields)) {
+    throw Error("Each tab must have some fields.");
+  }
+
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wprf-tab-content-wrapper"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     id: tabs === null || tabs === void 0 ? void 0 : tabs.id,
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wprf-tab-content", "wprf-tab-".concat(tabs === null || tabs === void 0 ? void 0 : tabs.id)),
     key: tabs === null || tabs === void 0 ? void 0 : tabs.id
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "wprf-tab-content-inner"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_3__["default"], {
     fields: tabs === null || tabs === void 0 ? void 0 : tabs.fields
-  }))), submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })), submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
     config: submit
   }));
 };

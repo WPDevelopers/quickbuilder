@@ -209,8 +209,15 @@ const tabs = [
 			// },
 			{
 				label: "Content",
+				name: "heading_typography",
+				type: "typography",
+				value: "lalal"
+			},
+			{
+				label: "Heading",
 				name: "content_typography",
 				type: "typography",
+				value: "lalal"
 			},
 		],
 	},

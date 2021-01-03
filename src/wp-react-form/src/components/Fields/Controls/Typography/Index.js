@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Dashicon, RangeControl } from "@wordpress/components";
 import Select from "react-select";
 
+import { FONTS, TRANSFORMS } from "./Fonts";
 import "./typography.scss";
-
-/**
- * TODO: This control have to rewrite.
- */
 
 const handleValue = (prev, size, property) => {
 	if (!property) {
@@ -20,26 +17,58 @@ const handleValue = (prev, size, property) => {
 	return prevState;
 };
 
-// const selectStyle = {
-// 	control: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	option: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	input: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	indicator: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	placeholder: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	singleValue: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// };
-
 function Index({ label, onChange, value }) {
 	const [show, setShow] = useState(false);
 	const [typographyValue, setTypographyValue] = useState(value);
 	const [savedValue, setSavedValue] = useState({});
 
+	const textTransforms = useMemo(() => TRANSFORMS, []);
+
+	const typographySavedVal = (key) => {
+		return typographyValue?.[key];
+	};
+
+	let fonts = [
+		{ value: "", label: "Default" },
+		{ value: "Arial", label: "Arial" },
+		{ value: "Helvetica", label: "Helvetica" },
+		{ value: "Times New Roman", label: "Times New Roman" },
+		{ value: "Georgia", label: "Georgia" },
+	];
+
+	//Add Google Fonts
+	Object.keys(FONTS).map((k) => {
+		fonts.push({ value: k, label: k });
+	});
+
 	useEffect(() => {
-		if (show) {
-			onChange(typographyValue);
+		let selectedFonts = fonts.filter(
+			(font) => font.value === typographySavedVal("font-family")
+		);
+
+		if (selectedFonts.length > 0) {
+			setSavedValue((prev) => ({
+				...prev,
+				"font-family": selectedFonts?.[0],
+			}));
 		}
-		console.log("typographyValue", typographyValue);
+
+		let selectedFontsWeight = FONTS[typographySavedVal("font-family")]?.weight.filter( (weight) => weight.value === typographySavedVal("font-weight") );
+
+		if (selectedFontsWeight?.length > 0) {
+			setSavedValue((prev) => ({
+				...prev,
+				"font-weight": selectedFontsWeight?.[0],
+			}));
+		}
+
 	}, [typographyValue]);
+
+	// useEffect(() => {
+	// 	if (show) {
+	// 		onChange(typographyValue);
+	// 	}
+	// }, [typographyValue]);
 
 	const onReset = useCallback(
 		(name) => {
@@ -69,14 +98,13 @@ function Index({ label, onChange, value }) {
 								isMulti={false}
 								placeholder="Select Font Family"
 								onChange={(option) =>
-									console.log("option", option)
+									setTypographyValue((old) => ({
+										...old,
+										"font-family": option.value,
+									}))
 								}
-								// value={value}
-								options={[
-									{ label: "Male", value: "male" },
-									{ label: "Female", value: "female" },
-									{ label: "Others", value: "others" },
-								]}
+								value={savedValue["font-family"]}
+								options={fonts}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-size">
@@ -100,19 +128,17 @@ function Index({ label, onChange, value }) {
 								name={`font-weight`}
 								isMulti={false}
 								placeholder="Select Font Weight"
-								value={{ label: "Normal", value: "normal" }}
+								value={savedValue?.["font-weight"]}
 								onChange={(option) =>
 									setTypographyValue((old) => ({
 										...old,
-										"font-weight": option,
+										"font-weight": option.value,
 									}))
 								}
-								options={[
-									{ label: "Lighter", value: "lighter" },
-									{ label: "Normal", value: "normal" },
-									{ label: "Bold", value: "bold" },
-									{ label: "Bolder", value: "bolder" },
-								]}
+								options={
+									FONTS[typographySavedVal("font-family")]
+										?.weight
+								}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-text-transform">
@@ -123,28 +149,14 @@ function Index({ label, onChange, value }) {
 								name={`text-transform`}
 								isMulti={false}
 								placeholder="Select Text Transform"
-								value={{ label: "None", value: "none" }}
+								value={typographySavedVal('text-transform')}
 								onChange={(option) =>
 									setTypographyValue((old) => ({
 										...old,
 										"text-transform": option,
 									}))
 								}
-								options={[
-									{ label: "None", value: "none" },
-									{
-										label: "Capitalize",
-										value: "capitalize",
-									},
-									{
-										label: "Upper Case",
-										value: "upper-case",
-									},
-									{
-										label: "Lower Case",
-										value: "lower-case",
-									},
-								]}
+								options={textTransforms}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-text-decoration">
@@ -156,7 +168,7 @@ function Index({ label, onChange, value }) {
 								name={`text-decoration`}
 								isMulti={false}
 								placeholder="Select Text Decoration"
-								value={{ label: "Initial", value: "initial" }}
+								value={typographySavedVal('text-decoration')}
 								options={[
 									{ label: "Initial", value: "initial" },
 									{ label: "Overline", value: "overline" },
@@ -207,6 +219,7 @@ function Index({ label, onChange, value }) {
 					</div>
 				)}
 				<div className="wprf-typography-trigger">
+					{label}{" "}
 					<button onClick={() => setShow(!show)}>
 						<Dashicon icon="edit" />
 					</button>

@@ -11,7 +11,7 @@ const DEFAULT_STATE = {
 	savedValues: {},
 	values: {
 		content_typography: {
-			"font-family": "female",
+			"font-family": "Arial",
 		},
 	},
 	touched: {},

@@ -1,3 +1,5 @@
+import { isArray } from "../core/functions";
+
 const DEFAULT_STATE = {
 	// conditions: { // Optional, we are checking condition from field props itself.
 	// 	message: {
@@ -104,16 +106,23 @@ const store = {
 		getError(state, current) {
 			return state.errors?.[current];
 		},
-		isVisible(state, props) {
+		isVisible(state, props, parentValue) {
 			if (!props.condition) {
 				return true;
 			}
 			let isTrue = true;
+
 			Object.keys(props.condition).map((condition) => {
-				isTrue = !(
-					(state.values?.[condition] ?? false) !==
-					props.condition[condition]
-				);
+				if (!isArray(props.condition[condition])) {
+					isTrue = !(
+						(state.values?.[condition] ?? false) !==
+						props.condition[condition]
+					);
+				} else {
+					isTrue = props.condition[condition].includes(
+						state.values?.[condition]
+					);
+				}
 			});
 			return isTrue;
 		},

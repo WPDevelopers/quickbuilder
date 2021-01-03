@@ -92,8 +92,13 @@ export default withSelect((select, ownProps) => {
 		mapsToProps = {
 			...mapsToProps,
 			parentValue,
+			isVisible: select("wprf-store").isVisible(ownProps, parentValue),
 		};
 	}
+
+	mapsToProps = {
+		...mapsToProps,
+	};
 
 	return mapsToProps;
 })(withCommon(Field));

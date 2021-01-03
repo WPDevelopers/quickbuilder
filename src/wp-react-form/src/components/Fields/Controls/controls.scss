@@ -5,6 +5,10 @@ $white: '#FFF';
 	&:last-of-type {
 		margin-bottom: 0px;
 	}
+	.wprf-control-label {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 	.wprf-input-field {
 		box-shadow: none;
 		border: 1px solid #f2f2f2;

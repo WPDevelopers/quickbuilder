@@ -20,7 +20,7 @@ function Index(props) {
 
 	return (
 		<>
-			<h4 class="wprf-input-label">{label}</h4>
+			<h4 class="wprf-control-label">{label}</h4>
 			<div className={componentClasses}>
 				<Row>
 					{options.map(({ label, value, icon, is_pro }, index) => (

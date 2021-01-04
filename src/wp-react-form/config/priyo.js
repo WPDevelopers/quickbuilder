@@ -184,6 +184,27 @@ const commonFields = [
 		},
 	},
 	{
+		label: "Content",
+		name: "content_typography",
+		type: "typography",
+		value: {
+			"font-size": "100px",
+		},
+	},
+	{
+		label: "Heading Color",
+		name: "heading_color_large",
+		type: "colorpicker",
+		css_class: "input-field",
+		value: "red",
+	},
+	{
+		label: "Heading",
+		name: "heading_typography",
+		type: "typography",
+		// value: "lalal",
+	},
+	{
 		type: "number",
 		label: "Number Control",
 		name: "number_control",

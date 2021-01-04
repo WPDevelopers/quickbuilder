@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Dashicon, RangeControl } from "@wordpress/components";
 import Select from "react-select";
 
-import "./typography.scss";
+import Slider from "./Slider";
 
-/**
- * TODO: This control have to rewrite.
- */
+import { FONTS, TRANSFORMS } from "./Fonts";
+import "./typography.scss";
 
 const handleValue = (prev, size, property) => {
 	if (!property) {
@@ -20,37 +19,66 @@ const handleValue = (prev, size, property) => {
 	return prevState;
 };
 
-// const selectStyle = {
-// 	control: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	option: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	input: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	indicator: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	placeholder: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// 	singleValue: (style) => ({ ...style, minHeight: "auto", height: "auto" }),
-// };
-
 function Index({ label, onChange, value }) {
 	const [show, setShow] = useState(false);
+	const [sliderValue, setSliderValue] = useState({});
 	const [typographyValue, setTypographyValue] = useState(value);
-	const [savedValue, setSavedValue] = useState({});
+	const [savedValue, setSavedValue] = useState(value);
+
+	const textTransforms = useMemo(() => TRANSFORMS, []);
 
 	useEffect(() => {
-		if (show) {
-			onChange(typographyValue);
+		setSavedValue((prev) => ({ ...prev, ...sliderValue }));
+	}, [sliderValue]);
+
+	const typographySavedVal = (key) => {
+		return typographyValue?.[key];
+	};
+
+	let fonts = [
+		{ value: "", label: "Default" },
+		{ value: "Arial", label: "Arial" },
+		{ value: "Helvetica", label: "Helvetica" },
+		{ value: "Times New Roman", label: "Times New Roman" },
+		{ value: "Georgia", label: "Georgia" },
+	];
+
+	//Add Google Fonts
+	Object.keys(FONTS).map((k) => {
+		fonts.push({ value: k, label: k });
+	});
+
+	useEffect(() => {
+		let selectedFonts = fonts.filter(
+			(font) => font.value === typographySavedVal("font-family")
+		);
+
+		if (selectedFonts.length > 0) {
+			setSavedValue((prev) => ({
+				...prev,
+				"font-family": selectedFonts?.[0],
+			}));
 		}
-		console.log("typographyValue", typographyValue);
+
+		let selectedFontsWeight = FONTS[
+			typographySavedVal("font-family")
+		]?.weight.filter(
+			(weight) => weight.value === typographySavedVal("font-weight")
+		);
+
+		if (selectedFontsWeight?.length > 0) {
+			setSavedValue((prev) => ({
+				...prev,
+				"font-weight": selectedFontsWeight?.[0],
+			}));
+		}
 	}, [typographyValue]);
 
-	const onReset = useCallback(
-		(name) => {
-			let values = { ...typographyValue };
-			if (values?.[name]) {
-				delete values[name];
-				setTypographyValue(values);
-			}
-		},
-		[typographyValue]
-	);
+	// useEffect(() => {
+	// 	if (show) {
+	// 		onChange(typographyValue);
+	// 	}
+	// }, [typographyValue]);
 
 	return (
 		<>
@@ -69,27 +97,20 @@ function Index({ label, onChange, value }) {
 								isMulti={false}
 								placeholder="Select Font Family"
 								onChange={(option) =>
-									console.log("option", option)
+									setTypographyValue((old) => ({
+										...old,
+										"font-family": option.value,
+									}))
 								}
-								// value={value}
-								options={[
-									{ label: "Male", value: "male" },
-									{ label: "Female", value: "female" },
-									{ label: "Others", value: "others" },
-								]}
+								value={savedValue["font-family"]}
+								options={fonts}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-size">
-							<RangeControl
-								label="Font Size"
-								// units={["px", "%", "em"]}
-								allowReset={true}
-								max={100}
-								// onChange={(size) =>
-								// 	setTypographyValue((prev) =>
-								// 		handleValue(prev, size, "font-size")
-								// 	)
-								// }
+							<Slider
+								value={savedValue["font-size"]}
+								name="font-size"
+								setSliderValue={(res) => setSliderValue(res)}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-weight">
@@ -100,19 +121,17 @@ function Index({ label, onChange, value }) {
 								name={`font-weight`}
 								isMulti={false}
 								placeholder="Select Font Weight"
-								value={{ label: "Normal", value: "normal" }}
+								value={savedValue?.["font-weight"]}
 								onChange={(option) =>
 									setTypographyValue((old) => ({
 										...old,
-										"font-weight": option,
+										"font-weight": option.value,
 									}))
 								}
-								options={[
-									{ label: "Lighter", value: "lighter" },
-									{ label: "Normal", value: "normal" },
-									{ label: "Bold", value: "bold" },
-									{ label: "Bolder", value: "bolder" },
-								]}
+								options={
+									FONTS[typographySavedVal("font-family")]
+										?.weight
+								}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-text-transform">
@@ -123,28 +142,14 @@ function Index({ label, onChange, value }) {
 								name={`text-transform`}
 								isMulti={false}
 								placeholder="Select Text Transform"
-								value={{ label: "None", value: "none" }}
+								value={typographySavedVal("text-transform")}
 								onChange={(option) =>
 									setTypographyValue((old) => ({
 										...old,
 										"text-transform": option,
 									}))
 								}
-								options={[
-									{ label: "None", value: "none" },
-									{
-										label: "Capitalize",
-										value: "capitalize",
-									},
-									{
-										label: "Upper Case",
-										value: "upper-case",
-									},
-									{
-										label: "Lower Case",
-										value: "lower-case",
-									},
-								]}
+								options={textTransforms}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-text-decoration">
@@ -156,7 +161,7 @@ function Index({ label, onChange, value }) {
 								name={`text-decoration`}
 								isMulti={false}
 								placeholder="Select Text Decoration"
-								value={{ label: "Initial", value: "initial" }}
+								value={typographySavedVal("text-decoration")}
 								options={[
 									{ label: "Initial", value: "initial" },
 									{ label: "Overline", value: "overline" },
@@ -177,36 +182,24 @@ function Index({ label, onChange, value }) {
 
 						<div className="wprf-fieldset-control wprf-fieldset-letter-spacing">
 							{/* <h5>Letter Spacing</h5> */}
-							<RangeControl
-								label="Letter Spacing"
-								allowReset={true}
-								max={100}
-								// onReset={(name) => onReset("letter-spacing")}
-								onChange={(option) =>
-									setTypographyValue((old) => ({
-										...old,
-										"letter-spacing": option,
-									}))
-								}
+							<Slider
+								value={savedValue["letter-spacing"]}
+								name="letter-spacing"
+								setSliderValue={(res) => setSliderValue(res)}
 							/>
 						</div>
 
 						<div className="wprf-fieldset-control wprf-fieldset-line-height">
-							<RangeControl
-								label="Line Height"
-								allowReset={true}
-								max={100}
-								onReset={(name) => onReset("line-height")}
-								// onChange={(size) =>
-								// 	setTypographyValue((prev) =>
-								// 		handleValue(prev, size, "line-height")
-								// 	)
-								// }
+							<Slider
+								value={savedValue["line-height"]}
+								name="line-height"
+								setSliderValue={(res) => setSliderValue(res)}
 							/>
 						</div>
 					</div>
 				)}
 				<div className="wprf-typography-trigger">
+					{label}{" "}
 					<button onClick={() => setShow(!show)}>
 						<Dashicon icon="edit" />
 					</button>

@@ -512,6 +512,7 @@
   width: 260px;
   background: #fff;
   top: 36px;
+  z-index: 9;
 }
 .wprf-typography-wrap .wprf-typography-modal .wprf-typography-header {
   justify-content: space-between;

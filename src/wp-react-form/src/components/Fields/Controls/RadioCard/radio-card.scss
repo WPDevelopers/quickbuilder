@@ -1,9 +1,12 @@
 .wprf-input-radio-set-wrap.wprf-radio-card {
 	.wprf-input-radio-option {
-		height: 80px;
+		min-height: 80px;
 		position: relative;
 		box-shadow: 0 0 25px 0 rgba(0, 9, 78, 0.08);
 		margin-top: 20px;
+		line-height: 60px;
+		display: flex;
+		align-items: center;
 		&.wprf-option-selected {
 			&:after, &:before {
 				content: "";

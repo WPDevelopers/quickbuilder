@@ -24,7 +24,7 @@ function Index(props) {
 			<div className={componentClasses}>
 				<Row>
 					{options.map(({ label, value, icon, is_pro }, index) => (
-						<Column>
+						<Column column="4">
 							<div
 								className={classNames(
 									"wprf-input-radio-option",

@@ -4,6 +4,10 @@
 .wprf-control:last-of-type {
   margin-bottom: 0px;
 }
+.wprf-control .wprf-control-label {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .wprf-control .wprf-input-field {
   box-shadow: none;
   border: 1px solid #f2f2f2;
@@ -353,6 +357,7 @@
   height: 80px;
   position: relative;
   box-shadow: 0 0 25px 0 rgba(0, 9, 78, 0.08);
+  margin-top: 20px;
 }
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected:after, .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option.wprf-option-selected:before {
   content: "";

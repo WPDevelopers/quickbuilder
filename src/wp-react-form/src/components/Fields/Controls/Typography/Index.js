@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Dashicon, RangeControl } from "@wordpress/components";
 import Select from "react-select";
 
+import Slider from "./Slider";
+
 import { FONTS, TRANSFORMS } from "./Fonts";
 import "./typography.scss";
 
@@ -19,10 +21,15 @@ const handleValue = (prev, size, property) => {
 
 function Index({ label, onChange, value }) {
 	const [show, setShow] = useState(false);
+	const [sliderValue, setSliderValue] = useState({});
 	const [typographyValue, setTypographyValue] = useState(value);
-	const [savedValue, setSavedValue] = useState({});
+	const [savedValue, setSavedValue] = useState(value);
 
 	const textTransforms = useMemo(() => TRANSFORMS, []);
+
+	useEffect(() => {
+		setSavedValue((prev) => ({ ...prev, ...sliderValue }));
+	}, [sliderValue]);
 
 	const typographySavedVal = (key) => {
 		return typographyValue?.[key];
@@ -53,7 +60,11 @@ function Index({ label, onChange, value }) {
 			}));
 		}
 
-		let selectedFontsWeight = FONTS[typographySavedVal("font-family")]?.weight.filter( (weight) => weight.value === typographySavedVal("font-weight") );
+		let selectedFontsWeight = FONTS[
+			typographySavedVal("font-family")
+		]?.weight.filter(
+			(weight) => weight.value === typographySavedVal("font-weight")
+		);
 
 		if (selectedFontsWeight?.length > 0) {
 			setSavedValue((prev) => ({
@@ -61,7 +72,6 @@ function Index({ label, onChange, value }) {
 				"font-weight": selectedFontsWeight?.[0],
 			}));
 		}
-
 	}, [typographyValue]);
 
 	// useEffect(() => {
@@ -69,17 +79,6 @@ function Index({ label, onChange, value }) {
 	// 		onChange(typographyValue);
 	// 	}
 	// }, [typographyValue]);
-
-	const onReset = useCallback(
-		(name) => {
-			let values = { ...typographyValue };
-			if (values?.[name]) {
-				delete values[name];
-				setTypographyValue(values);
-			}
-		},
-		[typographyValue]
-	);
 
 	return (
 		<>
@@ -108,16 +107,10 @@ function Index({ label, onChange, value }) {
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-size">
-							<RangeControl
-								label="Font Size"
-								// units={["px", "%", "em"]}
-								allowReset={true}
-								max={100}
-								// onChange={(size) =>
-								// 	setTypographyValue((prev) =>
-								// 		handleValue(prev, size, "font-size")
-								// 	)
-								// }
+							<Slider
+								value={savedValue["font-size"]}
+								name="font-size"
+								setSliderValue={(res) => setSliderValue(res)}
 							/>
 						</div>
 						<div className="wprf-fieldset-control wprf-fieldset-font-weight">
@@ -149,7 +142,7 @@ function Index({ label, onChange, value }) {
 								name={`text-transform`}
 								isMulti={false}
 								placeholder="Select Text Transform"
-								value={typographySavedVal('text-transform')}
+								value={typographySavedVal("text-transform")}
 								onChange={(option) =>
 									setTypographyValue((old) => ({
 										...old,
@@ -168,7 +161,7 @@ function Index({ label, onChange, value }) {
 								name={`text-decoration`}
 								isMulti={false}
 								placeholder="Select Text Decoration"
-								value={typographySavedVal('text-decoration')}
+								value={typographySavedVal("text-decoration")}
 								options={[
 									{ label: "Initial", value: "initial" },
 									{ label: "Overline", value: "overline" },
@@ -189,31 +182,18 @@ function Index({ label, onChange, value }) {
 
 						<div className="wprf-fieldset-control wprf-fieldset-letter-spacing">
 							{/* <h5>Letter Spacing</h5> */}
-							<RangeControl
-								label="Letter Spacing"
-								allowReset={true}
-								max={100}
-								// onReset={(name) => onReset("letter-spacing")}
-								onChange={(option) =>
-									setTypographyValue((old) => ({
-										...old,
-										"letter-spacing": option,
-									}))
-								}
+							<Slider
+								value={savedValue["letter-spacing"]}
+								name="letter-spacing"
+								setSliderValue={(res) => setSliderValue(res)}
 							/>
 						</div>
 
 						<div className="wprf-fieldset-control wprf-fieldset-line-height">
-							<RangeControl
-								label="Line Height"
-								allowReset={true}
-								max={100}
-								onReset={(name) => onReset("line-height")}
-								// onChange={(size) =>
-								// 	setTypographyValue((prev) =>
-								// 		handleValue(prev, size, "line-height")
-								// 	)
-								// }
+							<Slider
+								value={savedValue["line-height"]}
+								name="line-height"
+								setSliderValue={(res) => setSliderValue(res)}
 							/>
 						</div>
 					</div>

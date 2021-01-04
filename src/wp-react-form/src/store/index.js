@@ -19,10 +19,11 @@ const DEFAULT_STATE = {
 };
 
 const actions = {
-	setFieldValue(payload) {
+	setFieldValue({ name, value }) {
 		return {
 			type: "FIELD_VALUE",
-			payload,
+			name,
+			payload: value,
 		};
 	},
 	resetFieldValue(payload) {
@@ -54,11 +55,34 @@ const actions = {
 const store = {
 	reducer(state = DEFAULT_STATE, action) {
 		switch (action.type) {
-			case "FIELD_VALUE":
-				return {
-					...state,
-					values: { ...state.values, ...action.payload },
-				};
+			case "FIELD_VALUE": {
+				console.log("action.payload", action);
+
+				let updatedState = { ...state };
+
+				const { payload, name } = action;
+
+				if (
+					updatedState?.values?.[name] &&
+					typeof updatedState?.values?.[name] === "object"
+				) {
+					let newValues = {
+						...updatedState?.values?.[name],
+						...payload,
+					};
+					updatedState = {
+						...updatedState,
+						[name]: newValues,
+					};
+				} else {
+					updatedState = {
+						...updatedState,
+						values: { ...updatedState?.values, ...payload },
+					};
+				}
+
+				return updatedState;
+			}
 			case "RESET_FIELD_VALUE": {
 				let updatedState = { ...state };
 				if (updatedState.values?.[action.payload]) {

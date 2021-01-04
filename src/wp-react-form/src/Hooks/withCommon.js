@@ -10,7 +10,8 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		componentDidMount() {
 			if (this.props.value) {
 				dispatch("wprf-store").setFieldValue({
-					[this.props.name]: this.props.value,
+					name: this.props.name,
+					value: { [this.props.name]: this.props.value },
 				});
 			}
 		}
@@ -30,7 +31,8 @@ const withCommon = (WrappedComponent, withParent = true) => {
 				dispatch("wprf-store").removeError(this.props.name);
 			}
 			dispatch("wprf-store").setFieldValue({
-				[this.props.name]: value,
+				name: this.props.name,
+				value: { [this.props.name]: value },
 			});
 		};
 

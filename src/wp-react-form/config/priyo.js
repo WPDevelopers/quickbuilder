@@ -187,6 +187,9 @@ const commonFields = [
 		label: "Content",
 		name: "content_typography",
 		type: "typography",
+		value: {
+			"font-size": "100px",
+		},
 	},
 	{
 		label: "Heading Color",
@@ -199,7 +202,7 @@ const commonFields = [
 		label: "Heading",
 		name: "heading_typography",
 		type: "typography",
-		value: "lalal"
+		// value: "lalal",
 	},
 	{
 		type: "number",

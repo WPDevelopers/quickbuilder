@@ -58,20 +58,28 @@ const store = {
 	reducer(state = DEFAULT_STATE, action) {
 		switch (action.type) {
 			case "FIELD_VALUE": {
-				console.log("action.payload", action);
-
 				let updatedState = { ...state };
-
 				const { payload, name } = action;
-
 				if (
 					updatedState?.values?.[name] &&
 					typeof updatedState?.values?.[name] === "object"
 				) {
-					let newValues = {
-						...updatedState?.values?.[name],
-						...payload,
-					};
+					let newValues;
+					if (
+						isArray(updatedState?.values?.[name]) &&
+						isArray(payload)
+					) {
+						newValues = [
+							...updatedState?.values?.[name],
+							...payload,
+						];
+					} else {
+						newValues = {
+							...updatedState?.values?.[name],
+							...payload,
+						};
+					}
+
 					updatedState = {
 						...updatedState,
 						[name]: newValues,

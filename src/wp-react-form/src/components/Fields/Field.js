@@ -16,6 +16,7 @@ import {
 	Number,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
+import { isArray } from "../../core/functions";
 
 const Field = (props) => {
 	if (!props.isVisible) {
@@ -70,8 +71,21 @@ const Field = (props) => {
 
 export default withSelect((select, ownProps) => {
 	let savedValue = select("wprf-store").getFieldValue(ownProps.name);
+
+	let value;
+
+	if (typeof ownProps.value === "object" && savedValue != undefined) {
+		if (isArray(ownProps.value)) {
+			value = [...ownProps.value, ...savedValue];
+		} else {
+			value = { ...ownProps.value, ...savedValue };
+		}
+	} else {
+		value = savedValue ?? ownProps.value;
+	}
+
 	let mapsToProps = {
-		value: savedValue ?? ownProps.value,
+		value,
 		isVisible: select("wprf-store").isVisible(ownProps),
 		isTouched: select("wprf-store").isTouched(ownProps.name),
 		errorMessage: select("wprf-store").getError(ownProps.name),

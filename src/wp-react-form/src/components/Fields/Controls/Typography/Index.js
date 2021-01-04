@@ -28,6 +28,11 @@ function Index({ label, onChange, value }) {
 	const textTransforms = useMemo(() => TRANSFORMS, []);
 
 	useEffect(() => {
+		// setSavedValue((prev) => ({ ...prev, ...sliderValue }));
+		// console.log("savedValue", slider);
+	}, []);
+
+	useEffect(() => {
 		setSavedValue((prev) => ({ ...prev, ...sliderValue }));
 	}, [sliderValue]);
 
@@ -74,11 +79,11 @@ function Index({ label, onChange, value }) {
 		}
 	}, [typographyValue]);
 
-	// useEffect(() => {
-	// 	if (show) {
-	// 		onChange(typographyValue);
-	// 	}
-	// }, [typographyValue]);
+	useEffect(() => {
+		if (typographyValue) {
+			onChange(typographyValue);
+		}
+	}, [typographyValue]);
 
 	return (
 		<>

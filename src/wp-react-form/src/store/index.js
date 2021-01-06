@@ -15,6 +15,9 @@ const DEFAULT_STATE = {
 		content_typography: {
 			"font-family": "Arial",
 		},
+		"notification-type": "conversions",
+		source: "woocommerce",
+		// notification_select: ["sales"],
 	},
 	touched: {},
 	errors: {},
@@ -60,36 +63,41 @@ const store = {
 			case "FIELD_VALUE": {
 				let updatedState = { ...state };
 				const { payload, name } = action;
-				if (
-					updatedState?.values?.[name] &&
-					typeof updatedState?.values?.[name] === "object"
-				) {
-					let newValues;
-					if (
-						isArray(updatedState?.values?.[name]) &&
-						isArray(payload)
-					) {
-						newValues = [
-							...updatedState?.values?.[name],
-							...payload,
-						];
-					} else {
-						newValues = {
-							...updatedState?.values?.[name],
-							...payload,
-						};
-					}
+				// console.log("payload", payload);
+				// if (
+				// 	updatedState?.values?.[name] &&
+				// 	typeof updatedState?.values?.[name] === "object"
+				// ) {
+				// 	let newValues;
+				// 	if (
+				// 		isArray(updatedState?.values?.[name]) &&
+				// 		isArray(payload?.[name])
+				// 	) {
+				// 		newValues = [
+				// 			...updatedState?.values?.[name],
+				// 			...payload[name],
+				// 		];
+				// 	} else {
+				// 		newValues = {
+				// 			...updatedState?.values?.[name],
+				// 			...payload,
+				// 		};
+				// 	}
 
-					updatedState = {
-						...updatedState,
-						[name]: newValues,
-					};
-				} else {
-					updatedState = {
-						...updatedState,
-						values: { ...updatedState?.values, ...payload },
-					};
-				}
+				// 	updatedState = {
+				// 		...updatedState,
+				// 		values: { ...updatedState.values, [name]: newValues },
+				// 	};
+				// } else {
+				// 	updatedState = {
+				// 		...updatedState,
+				// 		values: { ...updatedState?.values, ...payload },
+				// 	};
+				// }
+				updatedState = {
+					...updatedState,
+					values: { ...updatedState?.values, ...payload },
+				};
 
 				return updatedState;
 			}
@@ -130,7 +138,7 @@ const store = {
 			return state.values;
 		},
 		getFieldValue(state, name) {
-			return state.values[name];
+			return state.values?.[name];
 		},
 		isTouched(state, current) {
 			return state.touched?.[current];

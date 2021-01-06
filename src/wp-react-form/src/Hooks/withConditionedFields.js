@@ -1,25 +1,16 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { ObjectFilter } from "../core/functions";
+import { isExists, ObjectFilter } from "../core/functions";
 
 const withConditionedFields = (WrappedComponent) => {
 	const WithConditionedFields = (props) => {
 		const { options, onChange, value, parentValue } = props;
-		const isParentValueExists = useMemo(
-			() =>
-				ObjectFilter(
-					parentValue,
-					(item) => parentValue[item] != undefined,
-					true
-				).length > 0,
-			[parentValue]
-		);
-		const [fields, setFields] = useState(
-			isParentValueExists ? [] : options
-		);
+		const [fields, setFields] = useState(options);
 		const [savedValue, setSavedValue] = useState(value);
+		let selectedOption = fields.filter((field) => field.value === value);
+		const [option, setOption] = useState(selectedOption?.[0]);
 
 		useEffect(() => {
-			if (isParentValueExists) {
+			if (options?.length > 0) {
 				let newOptions = options.filter((item, i) => {
 					if (item?.condition) {
 						let isVisible = true;
@@ -29,58 +20,48 @@ const withConditionedFields = (WrappedComponent) => {
 								typeof parentValue === "object"
 									? parentValue[type]
 									: parentValue;
+
 							if (item?.condition?.[type]) {
-								let condTypeof = typeof item?.condition?.[type];
 								if (
-									condTypeof === "object" &&
-									!item?.condition?.[type].includes(typeValue)
-								) {
-									isVisible = false;
-								}
-								if (
-									condTypeof === "string" &&
-									item?.condition?.[type] !== typeValue
+									!isExists(
+										item?.condition?.[type],
+										typeValue
+									)
 								) {
 									isVisible = false;
 								}
 							}
 						});
+
 						return isVisible;
 					} else {
 						return item;
 					}
 				});
 				setFields(newOptions);
+				// if (newOptions?.[0]?.value && !savedValue && !props?.multiple) {
+				// 	setOption(newOptions?.[0]);
+				// }
 			} else {
 				setFields(options);
-				if (options?.[0]?.value && !savedValue && !props?.multiple) {
-					onChange(options?.[0]?.value);
-				}
+				// if (options?.[0]?.value && !savedValue && !props?.multiple) {
+				// 	setOption(options?.[0]);
+				// }
 			}
 		}, [parentValue]);
 
 		useEffect(() => {
-			if (parentValue && typeof parentValue !== "object") {
+			if (fields?.length > 0) {
 				let isExists = [...fields].filter(
 					(field) => field.value === savedValue
 				);
-				if (0 === isExists.length) {
-					if (fields?.[0]?.value) {
-						setSavedValue(fields[0].value);
-						if (props.type !== "select" && !props?.multiple) {
-							onChange(fields[0].value);
-						}
-					}
-				}
-			} else if (parentValue) {
-				let isExists = [...fields].filter(
-					(field) => field.value === savedValue
-				);
-				if (0 === isExists.length) {
-					if (fields?.[0]?.value) {
-						setSavedValue(fields[0].value);
-						if (props.type !== "select" && !props?.multiple) {
-							onChange(fields[0].value);
+				if (parentValue) {
+					if (0 === isExists.length) {
+						if (fields?.[0]?.value) {
+							setSavedValue(fields[0].value);
+							if (!props?.multiple) {
+								setOption({ ...fields[0] });
+							}
 						}
 					}
 				}
@@ -88,13 +69,22 @@ const withConditionedFields = (WrappedComponent) => {
 		}, [fields]);
 
 		useEffect(() => {
-			setSavedValue(value);
+			if (value) {
+				setSavedValue(value);
+			}
 		}, [value]);
+
+		useEffect(() => {
+			if (option?.value && !props?.multiple) {
+				onChange(option.value);
+			}
+		}, [option]);
 
 		return (
 			<WrappedComponent
 				{...props}
 				options={fields}
+				value={option}
 				savedValue={savedValue}
 			/>
 		);

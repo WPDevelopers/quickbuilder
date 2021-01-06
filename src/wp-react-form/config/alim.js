@@ -73,7 +73,10 @@ const tabs = [
 								is_pro: false,
 							},
 						],
-						validation_rules: { required: true, label: "Type" },
+						validation_rules: {
+							required: true,
+							label: "Type",
+						},
 					},
 					{
 						label: "Source",
@@ -82,7 +85,9 @@ const tabs = [
 						type: "radio-card",
 						options: [
 							{
-								condition: { "notification-type": ["form"] },
+								condition: {
+									"notification-type": ["form"],
+								},
 								label: "Contact Form 7",
 								icon: "",
 								value: "cf7",
@@ -96,7 +101,9 @@ const tabs = [
 								value: "convertkit",
 							},
 							{
-								condition: { "notification-type": ["custom"] },
+								condition: {
+									"notification-type": ["custom"],
+								},
 								label: "Custom Notification",
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/custom.jpg",
@@ -134,7 +141,9 @@ const tabs = [
 								value: "freemius",
 							},
 							{
-								condition: { "notification-type": ["form"] },
+								condition: {
+									"notification-type": ["form"],
+								},
 								label: "Gravity Forms",
 								icon: "",
 								value: "grvf",
@@ -183,7 +192,9 @@ const tabs = [
 								value: "mailchimp",
 							},
 							{
-								condition: { "notification-type": ["form"] },
+								condition: {
+									"notification-type": ["form"],
+								},
 								label: "Ninja Forms",
 								icon: "",
 								value: "njf",
@@ -197,7 +208,9 @@ const tabs = [
 								value: "press_bar",
 							},
 							{
-								condition: { "notification-type": ["reviews"] },
+								condition: {
+									"notification-type": ["reviews"],
+								},
 								label: "ReviewX",
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/reviewx.png",
@@ -213,7 +226,9 @@ const tabs = [
 								value: "tutor",
 							},
 							{
-								condition: { "notification-type": ["form"] },
+								condition: {
+									"notification-type": ["form"],
+								},
 								label: "WPForms",
 								icon: "",
 								value: "wpf",
@@ -223,7 +238,6 @@ const tabs = [
 									"notification-type": [
 										"conversions",
 										"reviews",
-										"comments",
 									],
 								},
 								label: "WooCommerce",
@@ -241,7 +255,9 @@ const tabs = [
 								value: "wp_comments",
 							},
 							{
-								condition: { "notification-type": ["reviews"] },
+								condition: {
+									"notification-type": ["reviews"],
+								},
 								label: "WP.Org Reviews",
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/wordpress.jpg",
@@ -266,7 +282,10 @@ const tabs = [
 								value: "zapier",
 							},
 						],
-						validation_rules: { required: true, label: "Source" },
+						validation_rules: {
+							required: true,
+							label: "Source",
+						},
 					},
 				],
 			},
@@ -1142,14 +1161,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-2.jpg",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1161,14 +1175,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-1.jpg",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1180,14 +1189,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-3.jpg",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1199,14 +1203,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-4.jpg",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1218,14 +1217,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-5.jpg",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1237,14 +1231,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-6.jpg",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1256,14 +1245,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-four.png",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1275,14 +1259,9 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-five.png",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
@@ -1294,20 +1273,18 @@ const tabs = [
 								icon:
 									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/maps-theme-comments.png",
 								condition: {
-									"notification-type": [
-										"custom",
-										"comments",
-										"comments",
-									],
+									"notification-type": ["custom", "comments"],
 									source: [
 										"custom_notification",
-										"woocommerce",
 										"wp_comments",
 									],
 								},
 							},
 						],
-						validation_rules: { required: true, label: "Theme" },
+						validation_rules: {
+							required: true,
+							label: "Theme",
+						},
 					},
 				],
 			},
@@ -1338,8 +1315,82 @@ const tabs = [
 								priority: 1,
 								default: "tag_name",
 								options: [
-									{ value: "tag_custom", label: "Custom" },
+									{
+										value: "tag_custom",
+										label: "Custom",
+									},
+									{
+										value: "tag_name",
+										label: "Full Name",
+										condition: {
+											"notification-type": [
+												"conversions",
+												// "comments",
+											],
+											source: [
+												"edd",
+												"freemius",
+												// "woocommerce",
+												// "wp_comments",
+											],
+										},
+									},
+									{
+										value: "tag_first_name",
+										label: "First Name",
+										condition: {
+											"notification-type": [
+												"conversions",
+												"conversions",
+												"conversions",
+												"comments",
+											],
+											source: [
+												"edd",
+												"freemius",
+												"woocommerce",
+												"wp_comments",
+											],
+										},
+									},
+									{
+										value: "tag_last_name",
+										label: "Last Name",
+										condition: {
+											"notification-type": [
+												"conversions",
+												"conversions",
+												"conversions",
+												"comments",
+											],
+											source: [
+												"edd",
+												"freemius",
+												"woocommerce",
+												"wp_comments",
+											],
+										},
+									},
+									{
+										value: "tag_display_name",
+										label: "Display Name",
+										condition: {
+											"notification-type": [
+												"conversions",
+												"conversions",
+												"conversions",
+												"comments",
+											],
+											source: [
+												"edd",
+												"freemius",
+												"woocommerce",
+												"wp_comments",
+											],
+										},
+									},
 								],
+								// parent: ["notification-type", "source"],
 							},
 							{
 								label: "Custom First Parameter",
@@ -1353,64 +1404,201 @@ const tabs = [
 										"tag_custom",
 								},
 							},
-							{
-								label: "Second Param",
-								name: "second_param",
-								type: "text",
-								priority: 10,
-								default: "recently purchased",
-							},
-							{
-								label: "Third Parameter",
-								name: "third_param",
-								type: "select",
-								priority: 15,
-								default: "tag_title",
-								options: [
-									{ value: "tag_custom", label: "Custom" },
-								],
-							},
-							{
-								label: "Custom Third Param",
-								name: "custom_third_param",
-								type: "text",
-								priority: 20,
-								default: "Some time ago",
-								parent: "notification-template[third_param]",
-								condition: {
-									"notification-template[third_param]":
-										"tag_custom",
-								},
-							},
-							{
-								label: "Fourth Parameter",
-								name: "fourth_param",
-								type: "select",
-								priority: 25,
-								default: "tag_time",
-								options: [
-									{
-										value: "tag_time",
-										label: "Definite Time",
-									},
-									{
-										value: "tag_sometime",
-										label: "Some time ago",
-									},
-								],
-							},
-							{
-								label: "Custom Fourth Parameter",
-								name: "custom_fourth_param",
-								type: "text",
-								priority: 30,
-								default: "Some time ago",
-								parent: "notification-template[fourth_param]",
-								condition: {
-									"notification-template[fourth_param]":
-										"tag_sometime",
-								},
-							},
+							// {
+							// 	label: "Second Param",
+							// 	name: "second_param",
+							// 	type: "text",
+							// 	priority: 10,
+							// 	default: "recently purchased",
+							// },
+							// {
+							// 	label: "Third Parameter",
+							// 	name: "third_param",
+							// 	type: "select",
+							// 	priority: 20,
+							// 	default: "tag_title",
+							// 	options: [
+							// 		{
+							// 			value: "tag_custom",
+							// 			label: "Custom",
+							// 		},
+							// 		{
+							// 			value: "tag_post_title",
+							// 			label: "Post Title",
+							// 			condition: {
+							// 				"notification-type": [
+							// 					"conversions",
+							// 					"conversions",
+							// 					"conversions",
+							// 					"comments",
+							// 				],
+							// 				source: [
+							// 					"edd",
+							// 					"freemius",
+							// 					"woocommerce",
+							// 					"wp_comments",
+							// 				],
+							// 			},
+							// 		},
+							// 		{
+							// 			value: "tag_post_comment",
+							// 			label: "Post Comment",
+							// 			condition: {
+							// 				"notification-type": [
+							// 					"conversions",
+							// 					"conversions",
+							// 					"conversions",
+							// 					"comments",
+							// 				],
+							// 				source: [
+							// 					"edd",
+							// 					"freemius",
+							// 					"woocommerce",
+							// 					"wp_comments",
+							// 				],
+							// 			},
+							// 		},
+							// 		{
+							// 			value: "tag_anonymous_post",
+							// 			label: "Anonymous Post",
+							// 			condition: {
+							// 				"notification-type": [
+							// 					"conversions",
+							// 					"conversions",
+							// 					"conversions",
+							// 					"comments",
+							// 				],
+							// 				source: [
+							// 					"edd",
+							// 					"freemius",
+							// 					"woocommerce",
+							// 					"wp_comments",
+							// 				],
+							// 			},
+							// 		},
+							// 	],
+							// 	parent: ["notification-type", "source"],
+							// },
+							// {
+							// 	label: "Custom Third Param",
+							// 	name: "custom_third_param",
+							// 	type: "text",
+							// 	priority: 25,
+							// 	default: "Some time ago",
+							// 	parent: "notification-template[third_param]",
+							// 	condition: {
+							// 		"notification-template[third_param]":
+							// 			"tag_custom",
+							// 	},
+							// },
+							// {
+							// 	label: "Fourth Parameter",
+							// 	name: "fourth_param",
+							// 	type: "select",
+							// 	priority: 30,
+							// 	default: "tag_time",
+							// 	options: [
+							// 		{
+							// 			value: "tag_custom",
+							// 			label: "Custom",
+							// 		},
+							// 		{
+							// 			value: "tag_time",
+							// 			label: "Definite Time",
+							// 			condition: {
+							// 				"notification-type": [
+							// 					"conversions",
+							// 					"conversions",
+							// 					"conversions",
+							// 					"comments",
+							// 				],
+							// 				source: [
+							// 					"edd",
+							// 					"freemius",
+							// 					"woocommerce",
+							// 					"wp_comments",
+							// 				],
+							// 			},
+							// 		},
+							// 		{
+							// 			value: "tag_sometime",
+							// 			label: "Some time ago",
+							// 			condition: {
+							// 				"notification-type": [
+							// 					"conversions",
+							// 					"conversions",
+							// 					"conversions",
+							// 					"comments",
+							// 				],
+							// 				source: [
+							// 					"edd",
+							// 					"freemius",
+							// 					"woocommerce",
+							// 					"wp_comments",
+							// 				],
+							// 			},
+							// 		},
+							// 	],
+							// 	parent: ["notification-type", "source"],
+							// },
+							// {
+							// 	label: "Custom Fourth Parameter",
+							// 	name: "custom_fourth_param",
+							// 	type: "text",
+							// 	priority: 35,
+							// 	default: "Some time ago",
+							// 	parent: "notification-template[fourth_param]",
+							// 	condition: {
+							// 		"notification-template[fourth_param]":
+							// 			"tag_custom",
+							// 	},
+							// },
+							// {
+							// 	label: "Fifth Parameter",
+							// 	name: "fifth_param",
+							// 	type: "select",
+							// 	priority: 40,
+							// 	options: [
+							// 		{
+							// 			value: "tag_custom",
+							// 			label: "Custom",
+							// 		},
+							// 	],
+							// },
+							// {
+							// 	label: "Custom Fifth Parameter",
+							// 	name: "custom_fifth_param",
+							// 	type: "text",
+							// 	priority: 45,
+							// 	parent: "notification-template[fifth_param]",
+							// 	condition: {
+							// 		"notification-template[fifth_param]":
+							// 			"tag_custom",
+							// 	},
+							// },
+							// {
+							// 	label: "Sixth Parameter",
+							// 	name: "sixth_param",
+							// 	type: "select",
+							// 	priority: 50,
+							// 	options: [
+							// 		{
+							// 			value: "tag_custom",
+							// 			label: "Custom",
+							// 		},
+							// 	],
+							// },
+							// {
+							// 	label: "Custom Sixth Parameter",
+							// 	name: "custom_sixth_param",
+							// 	type: "text",
+							// 	priority: 55,
+							// 	parent: "notification-template[sixth_param]",
+							// 	condition: {
+							// 		"notification-template[sixth_param]":
+							// 			"tag_custom",
+							// 	},
+							// },
 						],
 					},
 				],
@@ -1433,10 +1621,16 @@ const tabs = [
 						label: "Show On",
 						name: "show_on",
 						type: "select",
-						value: "on_selected",
+						value: "",
 						options: [
-							{ value: "everywhere", label: "Show Everywhere" },
-							{ value: "on_selected", label: "Show On Selected" },
+							{
+								value: "everywhere",
+								label: "Show Everywhere",
+							},
+							{
+								value: "on_selected",
+								label: "Show On Selected",
+							},
 							{
 								value: "hide_on_selected",
 								label: "Hide On Selected",
@@ -1447,33 +1641,57 @@ const tabs = [
 						label: "Locations",
 						name: "all_locations",
 						type: "select",
-						// value: ["is_front_page", "is_home"],
+						value: "",
+						parent: "show_on",
 						multiple: true,
-						// parent: "show_on",
 						condition: {
 							show_on: ["on_selected", "hide_on_selected"],
 						},
 						options: [
-							{ value: "is_front_page", label: "Front page" },
-							{ value: "is_home", label: "Blog page" },
+							{
+								value: "is_front_page",
+								label: "Front page",
+							},
+							{
+								value: "is_home",
+								label: "Blog page",
+							},
 							{
 								value: "is_singular",
 								label: "All posts, pages and custom post types",
 							},
-							{ value: "is_single", label: "All posts" },
-							{ value: "is_page", label: "All pages" },
+							{
+								value: "is_single",
+								label: "All posts",
+							},
+							{
+								value: "is_page",
+								label: "All pages",
+							},
 							{
 								value: "is_attachment",
 								label: "All attachments",
 							},
-							{ value: "is_search", label: "Search results" },
-							{ value: "is_404", label: "404 error page" },
-							{ value: "is_archive", label: "All archives" },
+							{
+								value: "is_search",
+								label: "Search results",
+							},
+							{
+								value: "is_404",
+								label: "404 error page",
+							},
+							{
+								value: "is_archive",
+								label: "All archives",
+							},
 							{
 								value: "is_category",
 								label: "All category archives",
 							},
-							{ value: "is_tag", label: "All tag archives" },
+							{
+								value: "is_tag",
+								label: "All tag archives",
+							},
 						],
 					},
 					{
@@ -1482,7 +1700,10 @@ const tabs = [
 						type: "select",
 						value: "",
 						options: [
-							{ value: "always", label: "Everyone" },
+							{
+								value: "always",
+								label: "Everyone",
+							},
 							{
 								value: "logged_out_user",
 								label: "Logged Out User",
@@ -1516,7 +1737,9 @@ const tabs = [
 						description:
 							"If checked, this will show in notifications.",
 						parent: "show_default_image",
-						condition: { show_default_image: true },
+						condition: {
+							show_default_image: true,
+						},
 						options: [
 							{
 								value: "verified.svg",
@@ -1556,7 +1779,9 @@ const tabs = [
 						type: "media",
 						value: "",
 						parent: "show_default_image",
-						condition: { show_default_image: true },
+						condition: {
+							show_default_image: true,
+						},
 					},
 					{
 						label: "Image",
@@ -1564,11 +1789,22 @@ const tabs = [
 						type: "select",
 						value: "",
 						parent: "show_default_image",
-						condition: { show_default_image: false },
+						condition: {
+							show_default_image: false,
+						},
 						options: [
-							{ value: "product_image", label: "Featured Image" },
-							{ value: "gravatar", label: "Gravatar" },
-							{ value: "none", label: "None" },
+							{
+								value: "product_image",
+								label: "Featured Image",
+							},
+							{
+								value: "gravatar",
+								label: "Gravatar",
+							},
+							{
+								value: "none",
+								label: "None",
+							},
 						],
 					},
 				],
@@ -1598,12 +1834,16 @@ const tabs = [
 							{
 								label: "Top",
 								value: "top",
-								condition: { "notification-type": "press_bar" },
+								condition: {
+									"notification-type": "press_bar",
+								},
 							},
 							{
 								label: "Bottom",
 								value: "bottom",
-								condition: { "notification-type": "press_bar" },
+								condition: {
+									"notification-type": "press_bar",
+								},
 							},
 							{
 								label: "Bottom Left",
@@ -1688,7 +1928,9 @@ const tabs = [
 				type: "section",
 				priority: 200,
 				parent: "global_queue_active",
-				condition: { global_queue_active: false },
+				condition: {
+					global_queue_active: false,
+				},
 				fields: [
 					{
 						label: "Delay Before First Notification",
@@ -1719,7 +1961,9 @@ const tabs = [
 						description: "seconds",
 						help: "Hide after 60 seconds",
 						parent: "auto_hide",
-						condition: { auto_hide: true },
+						condition: {
+							auto_hide: true,
+						},
 					},
 					{
 						name: "display_for",

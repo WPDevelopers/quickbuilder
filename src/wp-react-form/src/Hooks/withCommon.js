@@ -61,7 +61,7 @@ const withCommon = (WrappedComponent, withParent = true) => {
 		};
 
 		onBlur = (event) => {
-			console.log("on blur field validation: event", event);
+			// console.log("on blur field validation: event", event);
 			if (this.props.validation_rules) {
 				const validationSchema = Yup.object().shape({
 					[this.props.name]: this.makeValidationRules(

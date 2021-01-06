@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useInstanceId } from "@wordpress/compose";
 import Select from "react-select";
 
 import withConditionedFields from "../../../../Hooks/withConditionedFields";
 
-import "./select.scss";
 import Label from "../../../../core/Label";
 import { isArray } from "../../../../core/functions";
 
+import "./select.scss";
 function Index(props) {
 	const {
 		id,
@@ -19,27 +18,30 @@ function Index(props) {
 		placeholder,
 		search,
 		options,
-		savedValue,
 	} = props;
 	const [option, setOption] = useState(value);
 
 	useEffect(() => {
-		if (savedValue && options.length > 0) {
-			if (!multiple && typeof savedValue === "string") {
-				let currentOption = options.filter(
-					(option) => option.value === savedValue
-				);
-				setOption(currentOption[0]);
-			} else {
-				if (isArray(savedValue)) {
-					let currentOptions = options.filter((option) =>
-						savedValue.includes(option.value)
-					);
-					setOption(currentOptions);
-				}
-			}
-		}
-	}, []);
+		setOption(value);
+	}, [value]);
+
+	// useEffect(() => {
+	// 	if (savedValue && options.length > 0) {
+	// 		if (!multiple && typeof savedValue === "string") {
+	// 			let currentOption = options.filter(
+	// 				(option) => option.value === savedValue
+	// 			);
+	// 			setOption(currentOption[0]);
+	// 		} else {
+	// 			if (isArray(savedValue)) {
+	// 				let currentOptions = options.filter((option) =>
+	// 					savedValue.includes(option.value)
+	// 				);
+	// 				setOption(currentOptions);
+	// 			}
+	// 		}
+	// 	}
+	// }, []);
 
 	useEffect(() => {
 		if (option) {

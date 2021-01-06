@@ -21652,6 +21652,23 @@ __webpack_require__.r(__webpack_exports__);
 
 (function () {
   var App = function App() {
+    // const [tabs, setTabs] = useState([]);
+    // useEffect(() => {
+    // 	fetch(
+    // 		"https://cors-anywhere.herokuapp.com/https://nx.alim.dev/wp-admin/admin-ajax.php?action=nx",
+    // 		{
+    // 			headers: {
+    // 				"no-cors": true,
+    // 			},
+    // 		}
+    // 	)
+    // 		.then((res) => res.json())
+    // 		.then((res) => {
+    // 			console.log(res);
+    // 			setTabs(res);
+    // 		});
+    // }, []);
+    // builder.tabs = tabs;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wp_react_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
       config: _wp_react_form_config__WEBPACK_IMPORTED_MODULE_5__["priyo"]
     });
@@ -21659,6 +21676,1458 @@ __webpack_require__.r(__webpack_exports__);
 
   react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(App, null), document.getElementById("root"));
 })();
+
+/***/ }),
+
+/***/ "./src/wp-react-form/config/alim.js":
+/*!******************************************!*\
+  !*** ./src/wp-react-form/config/alim.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var tabs = [{
+  label: "Source",
+  id: "tab-source",
+  icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/icons/database.svg",
+  classes: "tab-source",
+  fields: [{
+    label: "Select Source",
+    name: "select-source",
+    type: "section",
+    fields: [{
+      label: "Notification Type",
+      name: "notification-type",
+      type: "radio-card",
+      value: "conversions",
+      options: [{
+        value: "form",
+        label: "Contact Form",
+        is_pro: false
+      }, {
+        value: "email_subscription",
+        label: "Email Subscription",
+        is_pro: false
+      }, {
+        value: "custom",
+        label: "Custom Notification",
+        is_pro: false
+      }, {
+        value: "conversions",
+        label: "Sales Notification",
+        is_pro: false
+      }, {
+        value: "reviews",
+        label: "Reviews",
+        is_pro: false
+      }, {
+        value: "download_stats",
+        label: "Download Stats",
+        is_pro: false
+      }, {
+        value: "donation",
+        label: "Donations",
+        is_pro: false
+      }, {
+        value: "page_analytics",
+        label: "Page Analytics",
+        is_pro: false
+      }, {
+        value: "elearning",
+        label: "eLearning",
+        is_pro: false
+      }, {
+        value: "press_bar",
+        label: "Notification Bar",
+        is_pro: false
+      }, {
+        value: "comments",
+        label: "Comments",
+        is_pro: false
+      }],
+      validation_rules: {
+        required: true,
+        label: "Type"
+      }
+    }, {
+      label: "Source",
+      name: "source",
+      parent: "notification-type",
+      type: "radio-card",
+      options: [{
+        condition: {
+          "notification-type": ["form"]
+        },
+        label: "Contact Form 7",
+        icon: "",
+        value: "cf7"
+      }, {
+        condition: {
+          "notification-type": ["email_subscription"]
+        },
+        label: "ConvertKit",
+        icon: "",
+        value: "convertkit"
+      }, {
+        condition: {
+          "notification-type": ["custom"]
+        },
+        label: "Custom Notification",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/custom.jpg",
+        value: "custom_notification"
+      }, {
+        condition: {
+          "notification-type": ["conversions"]
+        },
+        label: "Easy Digital Downloads",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/edd.jpg",
+        value: "edd"
+      }, {
+        condition: {
+          "notification-type": ["email_subscription"]
+        },
+        label: "Envato",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/envato.png",
+        value: "envato"
+      }, {
+        condition: {
+          "notification-type": ["reviews", "download_stats", "conversions"]
+        },
+        label: "Freemius",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/freemius.jpg",
+        value: "freemius"
+      }, {
+        condition: {
+          "notification-type": ["form"]
+        },
+        label: "Gravity Forms",
+        icon: "",
+        value: "grvf"
+      }, {
+        condition: {
+          "notification-type": ["donation"]
+        },
+        label: "Give",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/give.png",
+        value: "give"
+      }, {
+        condition: {
+          "notification-type": ["page_analytics"]
+        },
+        label: "Google Analytics",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/google-analytics.jpg",
+        value: "google"
+      }, {
+        condition: {
+          "notification-type": ["email_subscription"]
+        },
+        label: "IFTTT",
+        icon: "",
+        value: "ifttt"
+      }, {
+        condition: {
+          "notification-type": ["elearning"]
+        },
+        label: "LearnDash",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/learndash.png",
+        value: "learndash"
+      }, {
+        condition: {
+          "notification-type": ["email_subscription"]
+        },
+        label: "MailChimp",
+        icon: "",
+        value: "mailchimp"
+      }, {
+        condition: {
+          "notification-type": ["form"]
+        },
+        label: "Ninja Forms",
+        icon: "",
+        value: "njf"
+      }, {
+        condition: {
+          "notification-type": ["press_bar"]
+        },
+        label: "Press Bar",
+        icon: "",
+        value: "press_bar"
+      }, {
+        condition: {
+          "notification-type": ["reviews"]
+        },
+        label: "ReviewX",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/reviewx.png",
+        value: "reviewx"
+      }, {
+        condition: {
+          "notification-type": ["elearning"]
+        },
+        label: "Tutor",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/tutor.png",
+        value: "tutor"
+      }, {
+        condition: {
+          "notification-type": ["form"]
+        },
+        label: "WPForms",
+        icon: "",
+        value: "wpf"
+      }, {
+        condition: {
+          "notification-type": ["conversions", "reviews"]
+        },
+        label: "WooCommerce",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/woocommerce.jpg",
+        value: "woocommerce"
+      }, {
+        condition: {
+          "notification-type": ["comments"]
+        },
+        label: "WP Comments",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/wordpress.jpg",
+        value: "wp_comments"
+      }, {
+        condition: {
+          "notification-type": ["reviews"]
+        },
+        label: "WP.Org Reviews",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/wordpress.jpg",
+        value: "wp_reviews"
+      }, {
+        condition: {
+          "notification-type": ["download_stats"]
+        },
+        label: "WP.Org Stats",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/wordpress.jpg",
+        value: "wp_stats"
+      }, {
+        condition: {
+          "notification-type": ["email_subscription"]
+        },
+        label: "Zapier",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/sources/zapier.png",
+        value: "zapier"
+      }],
+      validation_rules: {
+        required: true,
+        label: "Source"
+      }
+    }]
+  }]
+}, {
+  label: "Design",
+  id: "tab-design",
+  icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/icons/magic-wand.svg",
+  classes: "tab-design",
+  fields: [{
+    label: "Themes",
+    name: "themes",
+    type: "section",
+    fields: [{
+      label: "Themes",
+      name: "themes",
+      type: "radio-card",
+      value: "",
+      parent: ["notification-type", "source"],
+      options: [{
+        label: "form_theme-one",
+        value: "form_theme-one",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-two.jpg",
+        condition: {
+          "notification-type": ["form", "custom", "form", "form", "form"],
+          source: ["cf7", "custom_notification", "grvf", "njf", "wpf"]
+        }
+      }, {
+        label: "form_theme-two",
+        value: "form_theme-two",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-one.jpg",
+        condition: {
+          "notification-type": ["form", "custom", "form", "form", "form"],
+          source: ["cf7", "custom_notification", "grvf", "njf", "wpf"]
+        }
+      }, {
+        label: "form_theme-three",
+        value: "form_theme-three",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-three.jpg",
+        condition: {
+          "notification-type": ["form", "custom", "form", "form", "form"],
+          source: ["cf7", "custom_notification", "grvf", "njf", "wpf"]
+        }
+      }, {
+        label: "conversions_theme-one",
+        value: "conversions_theme-one",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-2.jpg",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_theme-two",
+        value: "conversions_theme-two",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-1.jpg",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_theme-three",
+        value: "conversions_theme-three",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-3.jpg",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_theme-four",
+        value: "conversions_theme-four",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-four.png",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_theme-five",
+        value: "conversions_theme-five",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-five.png",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_conv-theme-six",
+        value: "conversions_conv-theme-six",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-6.jpg",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_maps_theme",
+        value: "conversions_maps_theme",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/maps-theme.png",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_conv-theme-seven",
+        value: "conversions_conv-theme-seven",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-7.png",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_conv-theme-eight",
+        value: "conversions_conv-theme-eight",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-8.png",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "conversions_conv-theme-nine",
+        value: "conversions_conv-theme-nine",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-9.png",
+        condition: {
+          "notification-type": ["custom", "conversions", "conversions", "conversions"],
+          source: ["custom_notification", "edd", "freemius", "woocommerce"]
+        }
+      }, {
+        label: "reviews_total-rated",
+        value: "reviews_total-rated",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/total-rated.png",
+        condition: {
+          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
+          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+        }
+      }, {
+        label: "reviews_reviewed",
+        value: "reviews_reviewed",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/reviewed.png",
+        condition: {
+          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
+          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+        }
+      }, {
+        label: "reviews_review_saying",
+        value: "reviews_review_saying",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/saying-review.png",
+        condition: {
+          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
+          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+        }
+      }, {
+        label: "reviews_review-comment",
+        value: "reviews_review-comment",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/review-with-comment.jpg",
+        condition: {
+          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
+          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+        }
+      }, {
+        label: "reviews_review-comment-2",
+        value: "reviews_review-comment-2",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/review-with-comment-2.jpg",
+        condition: {
+          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
+          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+        }
+      }, {
+        label: "reviews_review-comment-3",
+        value: "reviews_review-comment-3",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/review-with-comment-3.jpg",
+        condition: {
+          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
+          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+        }
+      }, {
+        label: "download_stats_today-download",
+        value: "download_stats_today-download",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/today-download.png",
+        condition: {
+          "notification-type": ["custom", "download_stats", "download_stats"],
+          source: ["custom_notification", "freemius", "wp_stats"]
+        }
+      }, {
+        label: "download_stats_7day-download",
+        value: "download_stats_7day-download",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/7day-download.png",
+        condition: {
+          "notification-type": ["custom", "download_stats", "download_stats"],
+          source: ["custom_notification", "freemius", "wp_stats"]
+        }
+      }, {
+        label: "download_stats_actively_using",
+        value: "download_stats_actively_using",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/actively-using.png",
+        condition: {
+          "notification-type": ["custom", "download_stats", "download_stats"],
+          source: ["custom_notification", "freemius", "wp_stats"]
+        }
+      }, {
+        label: "download_stats_total-download",
+        value: "download_stats_total-download",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/total-download.png",
+        condition: {
+          "notification-type": ["custom", "download_stats", "download_stats"],
+          source: ["custom_notification", "freemius", "wp_stats"]
+        }
+      }, {
+        label: "donation_theme-one",
+        value: "donation_theme-one",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-1.jpg",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_theme-two",
+        value: "donation_theme-two",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-2.jpg",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_theme-three",
+        value: "donation_theme-three",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-3.jpg",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_theme-four",
+        value: "donation_theme-four",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-4.png",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_theme-five",
+        value: "donation_theme-five",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-5.png",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_conv-theme-six",
+        value: "donation_conv-theme-six",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-6.jpg",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_maps_theme",
+        value: "donation_maps_theme",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/maps-theme.png",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_conv-theme-seven",
+        value: "donation_conv-theme-seven",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-7.png",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_conv-theme-eight",
+        value: "donation_conv-theme-eight",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-8.png",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "donation_conv-theme-nine",
+        value: "donation_conv-theme-nine",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-9.png",
+        condition: {
+          "notification-type": ["custom", "donation"],
+          source: ["custom_notification", "give"]
+        }
+      }, {
+        label: "elearning_theme-one",
+        value: "elearning_theme-one",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-1.jpg",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_theme-two",
+        value: "elearning_theme-two",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-2.jpg",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_theme-three",
+        value: "elearning_theme-three",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-3.jpg",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_theme-four",
+        value: "elearning_theme-four",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-4.png",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_theme-five",
+        value: "elearning_theme-five",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-5.png",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_conv-theme-six",
+        value: "elearning_conv-theme-six",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-6.png",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_maps_theme",
+        value: "elearning_maps_theme",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/maps-theme.png",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_conv-theme-seven",
+        value: "elearning_conv-theme-seven",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-7.png",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_conv-theme-eight",
+        value: "elearning_conv-theme-eight",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-8.png",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "elearning_conv-theme-nine",
+        value: "elearning_conv-theme-nine",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-9.png",
+        condition: {
+          "notification-type": ["custom", "elearning", "elearning"],
+          source: ["custom_notification", "learndash", "tutor"]
+        }
+      }, {
+        label: "press_bar_theme-one",
+        value: "press_bar_theme-one",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-one.jpg",
+        condition: {
+          "notification-type": ["custom", "press_bar"],
+          source: ["custom_notification", "press_bar"]
+        }
+      }, {
+        label: "press_bar_theme-two",
+        value: "press_bar_theme-two",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-two.jpg",
+        condition: {
+          "notification-type": ["custom", "press_bar"],
+          source: ["custom_notification", "press_bar"]
+        }
+      }, {
+        label: "press_bar_theme-three",
+        value: "press_bar_theme-three",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-three.jpg",
+        condition: {
+          "notification-type": ["custom", "press_bar"],
+          source: ["custom_notification", "press_bar"]
+        }
+      }, {
+        label: "comments_theme-one",
+        value: "comments_theme-one",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-2.jpg",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_theme-two",
+        value: "comments_theme-two",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-1.jpg",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_theme-three",
+        value: "comments_theme-three",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-3.jpg",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_theme-six-free",
+        value: "comments_theme-six-free",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-4.jpg",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_theme-seven-free",
+        value: "comments_theme-seven-free",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-5.jpg",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_theme-eight-free",
+        value: "comments_theme-eight-free",
+        is_pro: null,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-6.jpg",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_theme-four",
+        value: "comments_theme-four",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-four.png",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_theme-five",
+        value: "comments_theme-five",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-five.png",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }, {
+        label: "comments_maps_theme",
+        value: "comments_maps_theme",
+        is_pro: true,
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/maps-theme-comments.png",
+        condition: {
+          "notification-type": ["custom", "comments"],
+          source: ["custom_notification", "wp_comments"]
+        }
+      }],
+      validation_rules: {
+        required: true,
+        label: "Theme"
+      }
+    }]
+  }]
+}, {
+  label: "Content",
+  id: "tab-content",
+  icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/icons/pencil.svg",
+  classes: "tab-content",
+  fields: [{
+    label: "Content",
+    name: "content",
+    type: "section",
+    priority: 90,
+    fields: [{
+      label: "Notification Template",
+      name: "notification-template",
+      type: "group",
+      fields: [{
+        label: "First Parameter",
+        name: "first_param",
+        type: "select",
+        priority: 1,
+        default: "tag_name",
+        options: [{
+          value: "tag_custom",
+          label: "Custom"
+        }, {
+          value: "tag_name",
+          label: "Full Name",
+          condition: {
+            "notification-type": ["conversions" // "comments",
+            ],
+            source: ["edd", "freemius" // "woocommerce",
+            // "wp_comments",
+            ]
+          }
+        }, {
+          value: "tag_first_name",
+          label: "First Name",
+          condition: {
+            "notification-type": ["conversions", "conversions", "conversions", "comments"],
+            source: ["edd", "freemius", "woocommerce", "wp_comments"]
+          }
+        }, {
+          value: "tag_last_name",
+          label: "Last Name",
+          condition: {
+            "notification-type": ["conversions", "conversions", "conversions", "comments"],
+            source: ["edd", "freemius", "woocommerce", "wp_comments"]
+          }
+        }, {
+          value: "tag_display_name",
+          label: "Display Name",
+          condition: {
+            "notification-type": ["conversions", "conversions", "conversions", "comments"],
+            source: ["edd", "freemius", "woocommerce", "wp_comments"]
+          }
+        }] // parent: ["notification-type", "source"],
+
+      }, {
+        label: "Custom First Parameter",
+        name: "custom_first_param",
+        type: "text",
+        priority: 5,
+        default: "Someone",
+        parent: "notification-template[first_param]",
+        condition: {
+          "notification-template[first_param]": "tag_custom"
+        }
+      } // {
+      // 	label: "Second Param",
+      // 	name: "second_param",
+      // 	type: "text",
+      // 	priority: 10,
+      // 	default: "recently purchased",
+      // },
+      // {
+      // 	label: "Third Parameter",
+      // 	name: "third_param",
+      // 	type: "select",
+      // 	priority: 20,
+      // 	default: "tag_title",
+      // 	options: [
+      // 		{
+      // 			value: "tag_custom",
+      // 			label: "Custom",
+      // 		},
+      // 		{
+      // 			value: "tag_post_title",
+      // 			label: "Post Title",
+      // 			condition: {
+      // 				"notification-type": [
+      // 					"conversions",
+      // 					"conversions",
+      // 					"conversions",
+      // 					"comments",
+      // 				],
+      // 				source: [
+      // 					"edd",
+      // 					"freemius",
+      // 					"woocommerce",
+      // 					"wp_comments",
+      // 				],
+      // 			},
+      // 		},
+      // 		{
+      // 			value: "tag_post_comment",
+      // 			label: "Post Comment",
+      // 			condition: {
+      // 				"notification-type": [
+      // 					"conversions",
+      // 					"conversions",
+      // 					"conversions",
+      // 					"comments",
+      // 				],
+      // 				source: [
+      // 					"edd",
+      // 					"freemius",
+      // 					"woocommerce",
+      // 					"wp_comments",
+      // 				],
+      // 			},
+      // 		},
+      // 		{
+      // 			value: "tag_anonymous_post",
+      // 			label: "Anonymous Post",
+      // 			condition: {
+      // 				"notification-type": [
+      // 					"conversions",
+      // 					"conversions",
+      // 					"conversions",
+      // 					"comments",
+      // 				],
+      // 				source: [
+      // 					"edd",
+      // 					"freemius",
+      // 					"woocommerce",
+      // 					"wp_comments",
+      // 				],
+      // 			},
+      // 		},
+      // 	],
+      // 	parent: ["notification-type", "source"],
+      // },
+      // {
+      // 	label: "Custom Third Param",
+      // 	name: "custom_third_param",
+      // 	type: "text",
+      // 	priority: 25,
+      // 	default: "Some time ago",
+      // 	parent: "notification-template[third_param]",
+      // 	condition: {
+      // 		"notification-template[third_param]":
+      // 			"tag_custom",
+      // 	},
+      // },
+      // {
+      // 	label: "Fourth Parameter",
+      // 	name: "fourth_param",
+      // 	type: "select",
+      // 	priority: 30,
+      // 	default: "tag_time",
+      // 	options: [
+      // 		{
+      // 			value: "tag_custom",
+      // 			label: "Custom",
+      // 		},
+      // 		{
+      // 			value: "tag_time",
+      // 			label: "Definite Time",
+      // 			condition: {
+      // 				"notification-type": [
+      // 					"conversions",
+      // 					"conversions",
+      // 					"conversions",
+      // 					"comments",
+      // 				],
+      // 				source: [
+      // 					"edd",
+      // 					"freemius",
+      // 					"woocommerce",
+      // 					"wp_comments",
+      // 				],
+      // 			},
+      // 		},
+      // 		{
+      // 			value: "tag_sometime",
+      // 			label: "Some time ago",
+      // 			condition: {
+      // 				"notification-type": [
+      // 					"conversions",
+      // 					"conversions",
+      // 					"conversions",
+      // 					"comments",
+      // 				],
+      // 				source: [
+      // 					"edd",
+      // 					"freemius",
+      // 					"woocommerce",
+      // 					"wp_comments",
+      // 				],
+      // 			},
+      // 		},
+      // 	],
+      // 	parent: ["notification-type", "source"],
+      // },
+      // {
+      // 	label: "Custom Fourth Parameter",
+      // 	name: "custom_fourth_param",
+      // 	type: "text",
+      // 	priority: 35,
+      // 	default: "Some time ago",
+      // 	parent: "notification-template[fourth_param]",
+      // 	condition: {
+      // 		"notification-template[fourth_param]":
+      // 			"tag_custom",
+      // 	},
+      // },
+      // {
+      // 	label: "Fifth Parameter",
+      // 	name: "fifth_param",
+      // 	type: "select",
+      // 	priority: 40,
+      // 	options: [
+      // 		{
+      // 			value: "tag_custom",
+      // 			label: "Custom",
+      // 		},
+      // 	],
+      // },
+      // {
+      // 	label: "Custom Fifth Parameter",
+      // 	name: "custom_fifth_param",
+      // 	type: "text",
+      // 	priority: 45,
+      // 	parent: "notification-template[fifth_param]",
+      // 	condition: {
+      // 		"notification-template[fifth_param]":
+      // 			"tag_custom",
+      // 	},
+      // },
+      // {
+      // 	label: "Sixth Parameter",
+      // 	name: "sixth_param",
+      // 	type: "select",
+      // 	priority: 50,
+      // 	options: [
+      // 		{
+      // 			value: "tag_custom",
+      // 			label: "Custom",
+      // 		},
+      // 	],
+      // },
+      // {
+      // 	label: "Custom Sixth Parameter",
+      // 	name: "custom_sixth_param",
+      // 	type: "text",
+      // 	priority: 55,
+      // 	parent: "notification-template[sixth_param]",
+      // 	condition: {
+      // 		"notification-template[sixth_param]":
+      // 			"tag_custom",
+      // 	},
+      // },
+      ]
+    }]
+  }]
+}, {
+  label: "Display",
+  id: "tab-display",
+  icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/icons/screen.svg",
+  classes: "tab-display",
+  fields: [{
+    label: "Visibility",
+    name: "visibility",
+    type: "section",
+    fields: [{
+      label: "Show On",
+      name: "show_on",
+      type: "select",
+      value: "",
+      options: [{
+        value: "everywhere",
+        label: "Show Everywhere"
+      }, {
+        value: "on_selected",
+        label: "Show On Selected"
+      }, {
+        value: "hide_on_selected",
+        label: "Hide On Selected"
+      }]
+    }, {
+      label: "Locations",
+      name: "all_locations",
+      type: "select",
+      value: "",
+      parent: "show_on",
+      multiple: true,
+      condition: {
+        show_on: ["on_selected", "hide_on_selected"]
+      },
+      options: [{
+        value: "is_front_page",
+        label: "Front page"
+      }, {
+        value: "is_home",
+        label: "Blog page"
+      }, {
+        value: "is_singular",
+        label: "All posts, pages and custom post types"
+      }, {
+        value: "is_single",
+        label: "All posts"
+      }, {
+        value: "is_page",
+        label: "All pages"
+      }, {
+        value: "is_attachment",
+        label: "All attachments"
+      }, {
+        value: "is_search",
+        label: "Search results"
+      }, {
+        value: "is_404",
+        label: "404 error page"
+      }, {
+        value: "is_archive",
+        label: "All archives"
+      }, {
+        value: "is_category",
+        label: "All category archives"
+      }, {
+        value: "is_tag",
+        label: "All tag archives"
+      }]
+    }, {
+      label: "Display For",
+      name: "show_on_display",
+      type: "select",
+      value: "",
+      options: [{
+        value: "always",
+        label: "Everyone"
+      }, {
+        value: "logged_out_user",
+        label: "Logged Out User"
+      }, {
+        value: "logged_in_user",
+        label: "Logged In User"
+      }],
+      help: '<a target="_blank" rel="nofollow" href="https://notificationx.com/in/pro-display-control">More Control in Pro</a>'
+    }]
+  }, {
+    label: "IMAGE",
+    name: "image",
+    type: "section",
+    fields: [{
+      label: "Show Default Image",
+      name: "show_default_image",
+      type: "checkbox",
+      value: false
+    }, {
+      label: "Choose an Image",
+      name: "default_avatar",
+      type: "radio-card",
+      value: "",
+      description: "If checked, this will show in notifications.",
+      parent: "show_default_image",
+      condition: {
+        show_default_image: true
+      },
+      options: [{
+        value: "verified.svg",
+        label: "Verified",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/public/image/icons/verified.svg"
+      }, {
+        value: "flames.svg",
+        label: "Flames",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/public/image/icons/flames.svg"
+      }, {
+        value: "flames.gif",
+        label: "Flames GIF",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/public/image/icons/flames.gif"
+      }, {
+        value: "pink-face-looped.gif",
+        label: "Pink Face",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/public/image/icons/pink-face-looped.gif"
+      }, {
+        value: "blue-face-non-looped.gif",
+        label: "Blue Face",
+        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/public/image/icons/blue-face-non-looped.gif"
+      }]
+    }, {
+      label: "Upload an Image",
+      name: "image_url",
+      type: "media",
+      value: "",
+      parent: "show_default_image",
+      condition: {
+        show_default_image: true
+      }
+    }, {
+      label: "Image",
+      name: "show_notification_image",
+      type: "select",
+      value: "",
+      parent: "show_default_image",
+      condition: {
+        show_default_image: false
+      },
+      options: [{
+        value: "product_image",
+        label: "Featured Image"
+      }, {
+        value: "gravatar",
+        label: "Gravatar"
+      }, {
+        value: "none",
+        label: "None"
+      }]
+    }]
+  }]
+}, {
+  label: "Customize",
+  id: "tab-customize",
+  icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/icons/cog.svg",
+  classes: "tab-customize",
+  fields: [{
+    label: "Appearance",
+    name: "appearance",
+    type: "section",
+    fields: [{
+      label: "Position",
+      name: "position",
+      type: "select",
+      value: "",
+      priority: 50,
+      parent: "notification-type",
+      options: [{
+        label: "Top",
+        value: "top",
+        condition: {
+          "notification-type": "press_bar"
+        }
+      }, {
+        label: "Bottom",
+        value: "bottom",
+        condition: {
+          "notification-type": "press_bar"
+        }
+      }, {
+        label: "Bottom Left",
+        value: "bottom_left",
+        condition: {
+          "notification-type": "!press_bar"
+        }
+      }, {
+        label: "Bottom Right",
+        value: "bottom_right",
+        condition: {
+          "notification-type": "!press_bar"
+        }
+      }]
+    }, {
+      label: "Notification Size",
+      name: "size",
+      type: "number",
+      default: 500,
+      priority: 51,
+      help: "Set a max width for notification."
+    }, {
+      label: "Sticky Bar?",
+      name: "sticky_bar",
+      type: "checkbox",
+      default: 0,
+      priority: 60,
+      description: "If checked, this will fixed Notification Bar at top or bottom."
+    }, {
+      label: "Display Overlapping",
+      name: "display_overlapping",
+      type: "checkbox",
+      default: 0,
+      priority: 61,
+      description: "Show Notification Bar overlapping content instead of pushing."
+    }, {
+      label: "Display Close Option",
+      name: "close_button",
+      type: "checkbox",
+      default: 1,
+      priority: 70,
+      description: "Display a close button."
+    }, {
+      label: "Mobile Visibility",
+      name: "hide_on_mobile",
+      type: "checkbox",
+      default: 1,
+      priority: 200,
+      description: "Hide NotificationX on mobile."
+    }]
+  }, {
+    label: "Queue Management",
+    name: "queue_management",
+    type: "section",
+    priority: 150,
+    fields: [{
+      label: "Enable Global Queue",
+      name: "global_queue_active",
+      type: "checkbox",
+      value: "",
+      priority: 0,
+      default: 0,
+      is_pro: true
+    }]
+  }, {
+    label: "Timing",
+    name: "timing",
+    type: "section",
+    priority: 200,
+    parent: "global_queue_active",
+    condition: {
+      global_queue_active: false
+    },
+    fields: [{
+      label: "Delay Before First Notification",
+      name: "delay_before",
+      type: "number",
+      value: "",
+      priority: 40,
+      default: 5,
+      help: "Initial Delay",
+      description: "seconds"
+    }, {
+      label: "Auto Hide",
+      name: "auto_hide",
+      type: "checkbox",
+      value: "",
+      priority: 50,
+      default: false,
+      description: "If checked, notification bar will be hidden after the time set below."
+    }, {
+      label: "Hide After",
+      name: "hide_after",
+      type: "number",
+      priority: 55,
+      default: 60,
+      description: "seconds",
+      help: "Hide after 60 seconds",
+      parent: "auto_hide",
+      condition: {
+        auto_hide: true
+      }
+    }, {
+      name: "display_for",
+      type: "number",
+      label: "Display For",
+      description: "seconds",
+      help: "Display each notification for * seconds",
+      priority: 60,
+      default: 5
+    }, {
+      name: "delay_between",
+      type: "number",
+      label: "Delay Between",
+      description: "seconds",
+      help: "Delay between each notification",
+      priority: 70,
+      default: 5
+    }]
+  }, {
+    label: "Behaviour",
+    name: "behaviour",
+    type: "section",
+    priority: 300,
+    collapsable: true,
+    fields: [{
+      name: "display_last",
+      type: "number",
+      label: "Display The Last",
+      description: "conversions",
+      default: 20,
+      priority: 40,
+      max: 20
+    }, {
+      name: "display_from",
+      type: "number",
+      label: "Display From The Last",
+      priority: 45,
+      default: 2,
+      description: "days"
+    }, {
+      name: "loop",
+      type: "checkbox",
+      label: "Loop Notification",
+      priority: 50,
+      default: true
+    }, {
+      name: "link_open",
+      type: "checkbox",
+      label: "Open Link In New Tab",
+      priority: 60,
+      default: false
+    }]
+  }]
+}, {
+  label: "Modules",
+  id: "modules",
+  icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/icons/pencil.svg",
+  classes: "tab-modules",
+  fields: [{
+    label: "Modules",
+    name: "modules",
+    type: "radio-card",
+    value: "conversions",
+    options: [{
+      value: "modules_cf7",
+      label: "Contact Form 7",
+      link: "https://notificationx.com/docs/contact-form-submission-alert/"
+    }, {
+      value: "modules_convertkit",
+      label: "ConvertKit",
+      link: "https://notificationx.com/docs/contact-form-submission-alert/"
+    }, {
+      value: "modules_custom_notification",
+      label: "Custom Notification",
+      link: ""
+    }, {
+      value: "modules_edd",
+      label: "Easy Digital Downloads",
+      link: "https://notificationx.com/docs/notificationx-easy-digital-downloads/"
+    }, {
+      value: "modules_envato",
+      label: "Envato",
+      link: "https://notificationx.com/docs/envato-sales-notification"
+    }, {
+      value: "modules_freemius",
+      label: "Freemius",
+      link: "https://notificationx.com/docs/freemius-sales-notification/"
+    }, {
+      value: "modules_grvf",
+      label: "Gravity Forms",
+      link: "https://notificationx.com/docs/contact-form-submission-alert/"
+    }, {
+      value: "modules_give",
+      label: "Give",
+      link: "https://notificationx.com/docs/givewp-donation-alert/"
+    }, {
+      value: "modules_google_analytics",
+      label: "Google Analytics",
+      link: "https://notificationx.com/docs/google-analytics/"
+    }, {
+      value: "modules_ifttt",
+      label: "IFTTT",
+      link: "https://notificationx.com/docs/ifttt-notification-alert/"
+    }, {
+      value: "modules_learndash",
+      label: "LearnDash",
+      link: "https://notificationx.com/docs/how-to-display-learndash-course-enrollment-alert-using-notificationx/"
+    }, {
+      value: "modules_mailchimp",
+      label: "MailChimp",
+      link: "https://notificationx.com/docs/mailchimp-email-subscription-alert/"
+    }, {
+      value: "modules_njf",
+      label: "Ninja Forms",
+      link: "https://notificationx.com/docs/contact-form-submission-alert/"
+    }, {
+      value: "modules_bar",
+      label: "Notification Bar",
+      link: "https://notificationx.com/docs/notification-bar/"
+    }, {
+      value: "modules_reviewx",
+      label: "ReviewX",
+      link: "https://notificationx.com/docs/reviewx-notification-alerts/"
+    }, {
+      value: "modules_tutor",
+      label: "Tutor",
+      link: "https://notificationx.com/docs/tutor-lms/"
+    }, {
+      value: "modules_wpf",
+      label: "WPForms",
+      link: "https://notificationx.com/docs/contact-form-submission-alert/"
+    }, {
+      value: "modules_woocommerce",
+      label: "WooCommerce",
+      link: "https://notificationx.com/docs/woocommerce-sales-notifications/"
+    }, {
+      value: "modules_wordpress",
+      label: "WordPress",
+      link: "https://notificationx.com/docs-category/configurations/"
+    }, {
+      value: "modules_zapier",
+      label: "Zapier",
+      link: "https://notificationx.com/docs/zapier-notification-alert/"
+    }]
+  }]
+}];
+/* harmony default export */ __webpack_exports__["default"] = (tabs);
 
 /***/ }),
 
@@ -21955,6 +23424,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _alim__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alim */ "./src/wp-react-form/config/alim.js");
+
 var notification_type_source_themes = [{
   label: "Notification Type",
   name: "notification_type",
@@ -22059,19 +23530,58 @@ var notification_type_source_themes = [{
   }
 }];
 var select_fields = [{
-  label: "Notification Type",
+  label: "Notification Type Checkbox",
+  name: "notification_checkbox",
+  type: "checkbox"
+}, {
+  label: "Notification Type Select",
   name: "notification_select",
   type: "select",
-  parent: "notification_type",
+  // parent: "notification_type",
   // value: "comments",
   // search: true,
   // placeholder: "Placeholder Select",
   // multiple: true, // for multi option select
+  // condition: {
+  // 	notification_checkbox: true,
+  // },
+  options: [{
+    label: "Sales Notification",
+    value: "sales"
+  }, {
+    label: "Comments",
+    value: "comments"
+  }, {
+    label: "Reviews",
+    value: "reviews"
+  }, {
+    label: "Download Stats",
+    value: "download-stats"
+  }, {
+    label: "Donations",
+    value: "donations",
+    is_pro: true,
+    condition: {
+      notification_checkbox: true
+    }
+  }]
+}, {
+  label: "Notification Type 2",
+  name: "notification_select_2",
+  type: "select",
+  value: "comments",
+  // parent: "notification_select",
+  // search: true,
+  // placeholder: "Placeholder Select",
+  // multiple: true, // for multi option select
+  condition: {
+    notification_select: ["comments"]
+  },
   options: [{
     label: "Sales Notification",
     value: "sales",
     condition: {
-      notification_type: "sales"
+      notification_select: "sales"
     }
   }, {
     label: "Comments",
@@ -22088,33 +23598,17 @@ var select_fields = [{
     is_pro: true
   }]
 }, {
-  label: "Notification Type",
-  name: "notification_select_2",
-  type: "select",
+  label: "Notification Text",
+  name: "notification_text",
+  type: "text",
   // parent: "notification_select",
   // search: true,
   // placeholder: "Placeholder Select",
   // multiple: true, // for multi option select
   condition: {
-    notification_select: "comments"
-  },
-  options: [{
-    label: "Sales Notification",
-    value: "sales"
-  }, {
-    label: "Comments",
-    value: "comments"
-  }, {
-    label: "Reviews",
-    value: "reviews"
-  }, {
-    label: "Download Stats",
-    value: "download-stats"
-  }, {
-    label: "Donations",
-    value: "donations",
-    is_pro: true
-  }]
+    notification_select: "comments",
+    notification_select_2: "sales"
+  }
 }];
 var commonFields = [{
   type: "text",
@@ -22235,9 +23729,9 @@ var commonFields = [{
 }];
 var tabs = [{
   label: "Tab 1",
-  id: "tab_1",
+  id: "tab-content",
   icon: "",
-  fields: [].concat(notification_type_source_themes)
+  fields: [].concat(select_fields)
 }, {
   label: "Tab 2",
   id: "tab_2",
@@ -22247,7 +23741,7 @@ var tabs = [{
 var builder = {
   tabs: tabs,
   tabConfig: {
-    active: "tab_1",
+    active: "tab-content",
     sidebar: true
   },
   is_pro_active: true,
@@ -22447,8 +23941,7 @@ var withCommon = function withCommon(WrappedComponent) {
       });
 
       _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3___default()(_this), "onBlur", function (event) {
-        console.log("on blur field validation: event", event);
-
+        // console.log("on blur field validation: event", event);
         if (_this.props.validation_rules) {
           var validationSchema = yup__WEBPACK_IMPORTED_MODULE_12__["object"]().shape(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, _this.makeValidationRules(_this.props.validation_rules)));
           validationSchema.validate(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()({}, _this.props.name, _this.props.value)).catch(function (err) {
@@ -22540,21 +24033,29 @@ var withCommon = function withCommon(WrappedComponent) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _core_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../core/functions */ "./src/wp-react-form/src/core/functions.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _core_functions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../core/functions */ "./src/wp-react-form/src/core/functions.js");
 
 
 
 
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -22565,24 +24066,28 @@ var withConditionedFields = function withConditionedFields(WrappedComponent) {
         onChange = props.onChange,
         value = props.value,
         parentValue = props.parentValue;
-    var isParentValueExists = Object(react__WEBPACK_IMPORTED_MODULE_5__["useMemo"])(function () {
-      return Object(_core_functions__WEBPACK_IMPORTED_MODULE_6__["ObjectFilter"])(parentValue, function (item) {
-        return parentValue[item] != undefined;
-      }, true).length > 0;
-    }, [parentValue]);
 
-    var _useState = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(isParentValueExists ? [] : options),
-        _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_3___default()(_useState, 2),
+    var _useState = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(options),
+        _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4___default()(_useState, 2),
         fields = _useState2[0],
         setFields = _useState2[1];
 
-    var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_5__["useState"])(value),
-        _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_3___default()(_useState3, 2),
+    var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(value),
+        _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4___default()(_useState3, 2),
         savedValue = _useState4[0],
         setSavedValue = _useState4[1];
 
-    Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(function () {
-      if (isParentValueExists) {
+    var selectedOption = fields.filter(function (field) {
+      return field.value === value;
+    });
+
+    var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption[0]),
+        _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4___default()(_useState5, 2),
+        option = _useState6[0],
+        setOption = _useState6[1];
+
+    Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
+      if ((options === null || options === void 0 ? void 0 : options.length) > 0) {
         var newOptions = options.filter(function (item, i) {
           if (item !== null && item !== void 0 && item.condition) {
             var isVisible = true;
@@ -22590,18 +24095,12 @@ var withConditionedFields = function withConditionedFields(WrappedComponent) {
               var _item$condition;
 
               // cond: notification_type, source
-              var typeValue = _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2___default()(parentValue) === "object" ? parentValue[type] : parentValue;
+              var typeValue = _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_3___default()(parentValue) === "object" ? parentValue[type] : parentValue;
 
               if (item !== null && item !== void 0 && (_item$condition = item.condition) !== null && _item$condition !== void 0 && _item$condition[type]) {
-                var _item$condition2, _item$condition3, _item$condition4;
+                var _item$condition2;
 
-                var condTypeof = _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2___default()(item === null || item === void 0 ? void 0 : (_item$condition2 = item.condition) === null || _item$condition2 === void 0 ? void 0 : _item$condition2[type]);
-
-                if (condTypeof === "object" && !(item !== null && item !== void 0 && (_item$condition3 = item.condition) !== null && _item$condition3 !== void 0 && _item$condition3[type].includes(typeValue))) {
-                  isVisible = false;
-                }
-
-                if (condTypeof === "string" && (item === null || item === void 0 ? void 0 : (_item$condition4 = item.condition) === null || _item$condition4 === void 0 ? void 0 : _item$condition4[type]) !== typeValue) {
+                if (!Object(_core_functions__WEBPACK_IMPORTED_MODULE_7__["isExists"])(item === null || item === void 0 ? void 0 : (_item$condition2 = item.condition) === null || _item$condition2 === void 0 ? void 0 : _item$condition2[type], typeValue)) {
                   isVisible = false;
                 }
               }
@@ -22611,59 +24110,49 @@ var withConditionedFields = function withConditionedFields(WrappedComponent) {
             return item;
           }
         });
-        setFields(newOptions);
+        setFields(newOptions); // if (newOptions?.[0]?.value && !savedValue && !props?.multiple) {
+        // 	setOption(newOptions?.[0]);
+        // }
       } else {
-        var _options$;
-
-        setFields(options);
-
-        if (options !== null && options !== void 0 && (_options$ = options[0]) !== null && _options$ !== void 0 && _options$.value && !savedValue && !(props !== null && props !== void 0 && props.multiple)) {
-          var _options$2;
-
-          onChange(options === null || options === void 0 ? void 0 : (_options$2 = options[0]) === null || _options$2 === void 0 ? void 0 : _options$2.value);
-        }
+        setFields(options); // if (options?.[0]?.value && !savedValue && !props?.multiple) {
+        // 	setOption(options?.[0]);
+        // }
       }
     }, [parentValue]);
-    Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(function () {
-      if (parentValue && _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_2___default()(parentValue) !== "object") {
-        var isExists = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1___default()(fields).filter(function (field) {
+    Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
+      if ((fields === null || fields === void 0 ? void 0 : fields.length) > 0) {
+        var _isExists = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_2___default()(fields).filter(function (field) {
           return field.value === savedValue;
         });
 
-        if (0 === isExists.length) {
-          var _fields$;
+        if (parentValue) {
+          if (0 === _isExists.length) {
+            var _fields$;
 
-          if (fields !== null && fields !== void 0 && (_fields$ = fields[0]) !== null && _fields$ !== void 0 && _fields$.value) {
-            setSavedValue(fields[0].value);
+            if (fields !== null && fields !== void 0 && (_fields$ = fields[0]) !== null && _fields$ !== void 0 && _fields$.value) {
+              setSavedValue(fields[0].value);
 
-            if (props.type !== "select" && !(props !== null && props !== void 0 && props.multiple)) {
-              onChange(fields[0].value);
-            }
-          }
-        }
-      } else if (parentValue) {
-        var _isExists = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_1___default()(fields).filter(function (field) {
-          return field.value === savedValue;
-        });
-
-        if (0 === _isExists.length) {
-          var _fields$2;
-
-          if (fields !== null && fields !== void 0 && (_fields$2 = fields[0]) !== null && _fields$2 !== void 0 && _fields$2.value) {
-            setSavedValue(fields[0].value);
-
-            if (props.type !== "select" && !(props !== null && props !== void 0 && props.multiple)) {
-              onChange(fields[0].value);
+              if (!(props !== null && props !== void 0 && props.multiple)) {
+                setOption(_objectSpread({}, fields[0]));
+              }
             }
           }
         }
       }
     }, [fields]);
-    Object(react__WEBPACK_IMPORTED_MODULE_5__["useEffect"])(function () {
-      setSavedValue(value);
+    Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
+      if (value) {
+        setSavedValue(value);
+      }
     }, [value]);
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__["createElement"])(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
+    Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
+      if (option !== null && option !== void 0 && option.value && !(props !== null && props !== void 0 && props.multiple)) {
+        onChange(option.value);
+      }
+    }, [option]);
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
       options: fields,
+      value: option,
       savedValue: savedValue
     }));
   };
@@ -23159,7 +24648,9 @@ function Index(props) {
         value = _ref.value,
         icon = _ref.icon,
         is_pro = _ref.is_pro;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_core__WEBPACK_IMPORTED_MODULE_6__["Column"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_core__WEBPACK_IMPORTED_MODULE_6__["Column"], {
+      column: "4"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: classnames__WEBPACK_IMPORTED_MODULE_4___default()("wprf-input-radio-option", {
         "wprf-option-selected": value === savedValue
       }),
@@ -23288,15 +24779,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.browser.esm.js");
-/* harmony import */ var _Hooks_withConditionedFields__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../Hooks/withConditionedFields */ "./src/wp-react-form/src/Hooks/withConditionedFields.js");
-/* harmony import */ var _select_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./select.scss */ "./src/wp-react-form/src/components/Fields/Controls/SelectControl/select.scss");
-/* harmony import */ var _select_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_select_scss__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _core_Label__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../core/Label */ "./src/wp-react-form/src/core/Label.js");
-/* harmony import */ var _core_functions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../core/functions */ "./src/wp-react-form/src/core/functions.js");
-
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.browser.esm.js");
+/* harmony import */ var _Hooks_withConditionedFields__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../Hooks/withConditionedFields */ "./src/wp-react-form/src/Hooks/withConditionedFields.js");
+/* harmony import */ var _core_Label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../core/Label */ "./src/wp-react-form/src/core/Label.js");
+/* harmony import */ var _core_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../core/functions */ "./src/wp-react-form/src/core/functions.js");
+/* harmony import */ var _select_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./select.scss */ "./src/wp-react-form/src/components/Fields/Controls/SelectControl/select.scss");
+/* harmony import */ var _select_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_select_scss__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
@@ -23315,8 +24803,7 @@ function Index(props) {
       onChange = props.onChange,
       placeholder = props.placeholder,
       search = props.search,
-      options = props.options,
-      savedValue = props.savedValue;
+      options = props.options;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(value),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
@@ -23324,28 +24811,31 @@ function Index(props) {
       setOption = _useState2[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
-    if (savedValue && options.length > 0) {
-      if (!multiple && typeof savedValue === "string") {
-        var currentOption = options.filter(function (option) {
-          return option.value === savedValue;
-        });
-        setOption(currentOption[0]);
-      } else {
-        if (Object(_core_functions__WEBPACK_IMPORTED_MODULE_8__["isArray"])(savedValue)) {
-          var currentOptions = options.filter(function (option) {
-            return savedValue.includes(option.value);
-          });
-          setOption(currentOptions);
-        }
-      }
-    }
-  }, []);
+    setOption(value);
+  }, [value]); // useEffect(() => {
+  // 	if (savedValue && options.length > 0) {
+  // 		if (!multiple && typeof savedValue === "string") {
+  // 			let currentOption = options.filter(
+  // 				(option) => option.value === savedValue
+  // 			);
+  // 			setOption(currentOption[0]);
+  // 		} else {
+  // 			if (isArray(savedValue)) {
+  // 				let currentOptions = options.filter((option) =>
+  // 					savedValue.includes(option.value)
+  // 				);
+  // 				setOption(currentOptions);
+  // 			}
+  // 		}
+  // 	}
+  // }, []);
+
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     if (option) {
       if (!multiple && option !== null && option !== void 0 && option.value) {
         onChange(option.value);
       } else {
-        if (Object(_core_functions__WEBPACK_IMPORTED_MODULE_8__["isArray"])(option)) {
+        if (Object(_core_functions__WEBPACK_IMPORTED_MODULE_6__["isArray"])(option)) {
           var selectedOptions = option.map(function (opt) {
             return opt.value;
           });
@@ -23356,9 +24846,9 @@ function Index(props) {
   }, [option]);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "wprf-select-wrapper"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_core_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_core_Label__WEBPACK_IMPORTED_MODULE_5__["default"], {
     htmlFor: id
-  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, label), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
     classNamePrefix: "wprf-select",
     isSearchable: search !== null && search !== void 0 ? search : false,
     id: id,
@@ -23373,7 +24863,7 @@ function Index(props) {
   }));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_Hooks_withConditionedFields__WEBPACK_IMPORTED_MODULE_5__["default"])(Index));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_Hooks_withConditionedFields__WEBPACK_IMPORTED_MODULE_4__["default"])(Index));
 
 /***/ }),
 
@@ -24911,6 +26401,8 @@ var Field = function Field(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__["withSelect"])(function (select, ownProps) {
+  var _ownProps$options;
+
   var savedValue = select("wprf-store").getFieldValue(ownProps.name);
   var value;
 
@@ -24930,6 +26422,20 @@ var Field = function Field(props) {
     isTouched: select("wprf-store").isTouched(ownProps.name),
     errorMessage: select("wprf-store").getError(ownProps.name)
   };
+
+  if (ownProps !== null && ownProps !== void 0 && ownProps.options && (ownProps === null || ownProps === void 0 ? void 0 : (_ownProps$options = ownProps.options) === null || _ownProps$options === void 0 ? void 0 : _ownProps$options.length) > 0 && ["radio-card", "select"].includes(ownProps === null || ownProps === void 0 ? void 0 : ownProps.type)) {
+    var listCond = [];
+    ownProps.options.map(function (option) {
+      if (option !== null && option !== void 0 && option.condition) {
+        Object.keys(option === null || option === void 0 ? void 0 : option.condition).map(function (condKey) {
+          if (!listCond.includes(condKey)) {
+            listCond.push(condKey);
+          }
+        });
+      }
+    });
+    ownProps.parent = listCond;
+  }
 
   if (ownProps.parent) {
     var parentsData = undefined;
@@ -25404,7 +26910,7 @@ var Row = function Row(props) {
 /*!*************************************************!*\
   !*** ./src/wp-react-form/src/core/functions.js ***!
   \*************************************************/
-/*! exports provided: SweetAlert, ObjectFilter, isArray */
+/*! exports provided: SweetAlert, ObjectFilter, isArray, isExists */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25412,6 +26918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SweetAlert", function() { return SweetAlert; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ObjectFilter", function() { return ObjectFilter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isExists", function() { return isExists; });
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
@@ -25465,6 +26972,20 @@ var ObjectFilter = function ObjectFilter(thisObj, func) {
 var isArray = function isArray(args) {
   return _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(args) === "object" && Array.isArray(args);
 };
+var isExists = function isExists(args, value) {
+  var typeOfargs = _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(args);
+
+  switch (true) {
+    case typeOfargs === "object" && isArray(args):
+      return args.includes(value);
+
+    case typeOfargs === "object" && !isArray(args):
+      return (args === null || args === void 0 ? void 0 : args[value]) !== undefined;
+
+    default:
+      return args === value;
+  }
+};
 
 /***/ }),
 
@@ -25506,20 +27027,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _core_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/functions */ "./src/wp-react-form/src/core/functions.js");
-
-
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/functions */ "./src/wp-react-form/src/core/functions.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 var DEFAULT_STATE = {
@@ -25536,7 +27051,10 @@ var DEFAULT_STATE = {
   values: {
     content_typography: {
       "font-family": "Arial"
-    }
+    },
+    "notification-type": "conversions",
+    source: "woocommerce" // notification_select: ["sales"],
+
   },
   touched: {},
   errors: {}
@@ -25584,57 +27102,65 @@ var store = {
     switch (action.type) {
       case "FIELD_VALUE":
         {
-          var _updatedState2, _updatedState2$values, _updatedState3, _updatedState3$values;
+          var _updatedState2;
 
           var _updatedState = _objectSpread({}, state);
 
           var payload = action.payload,
-              name = action.name;
+              name = action.name; // console.log("payload", payload);
+          // if (
+          // 	updatedState?.values?.[name] &&
+          // 	typeof updatedState?.values?.[name] === "object"
+          // ) {
+          // 	let newValues;
+          // 	if (
+          // 		isArray(updatedState?.values?.[name]) &&
+          // 		isArray(payload?.[name])
+          // 	) {
+          // 		newValues = [
+          // 			...updatedState?.values?.[name],
+          // 			...payload[name],
+          // 		];
+          // 	} else {
+          // 		newValues = {
+          // 			...updatedState?.values?.[name],
+          // 			...payload,
+          // 		};
+          // 	}
+          // 	updatedState = {
+          // 		...updatedState,
+          // 		values: { ...updatedState.values, [name]: newValues },
+          // 	};
+          // } else {
+          // 	updatedState = {
+          // 		...updatedState,
+          // 		values: { ...updatedState?.values, ...payload },
+          // 	};
+          // }
 
-          if ((_updatedState2 = _updatedState) !== null && _updatedState2 !== void 0 && (_updatedState2$values = _updatedState2.values) !== null && _updatedState2$values !== void 0 && _updatedState2$values[name] && _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_1___default()((_updatedState3 = _updatedState) === null || _updatedState3 === void 0 ? void 0 : (_updatedState3$values = _updatedState3.values) === null || _updatedState3$values === void 0 ? void 0 : _updatedState3$values[name]) === "object") {
-            var _updatedState4, _updatedState4$values;
-
-            var newValues;
-
-            if (Object(_core_functions__WEBPACK_IMPORTED_MODULE_3__["isArray"])((_updatedState4 = _updatedState) === null || _updatedState4 === void 0 ? void 0 : (_updatedState4$values = _updatedState4.values) === null || _updatedState4$values === void 0 ? void 0 : _updatedState4$values[name]) && Object(_core_functions__WEBPACK_IMPORTED_MODULE_3__["isArray"])(payload)) {
-              var _updatedState5, _updatedState5$values;
-
-              newValues = [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()((_updatedState5 = _updatedState) === null || _updatedState5 === void 0 ? void 0 : (_updatedState5$values = _updatedState5.values) === null || _updatedState5$values === void 0 ? void 0 : _updatedState5$values[name]), _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(payload));
-            } else {
-              var _updatedState6, _updatedState6$values;
-
-              newValues = _objectSpread(_objectSpread({}, (_updatedState6 = _updatedState) === null || _updatedState6 === void 0 ? void 0 : (_updatedState6$values = _updatedState6.values) === null || _updatedState6$values === void 0 ? void 0 : _updatedState6$values[name]), payload);
-            }
-
-            _updatedState = _objectSpread(_objectSpread({}, _updatedState), {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()({}, name, newValues));
-          } else {
-            var _updatedState7;
-
-            _updatedState = _objectSpread(_objectSpread({}, _updatedState), {}, {
-              values: _objectSpread(_objectSpread({}, (_updatedState7 = _updatedState) === null || _updatedState7 === void 0 ? void 0 : _updatedState7.values), payload)
-            });
-          }
-
+          _updatedState = _objectSpread(_objectSpread({}, _updatedState), {}, {
+            values: _objectSpread(_objectSpread({}, (_updatedState2 = _updatedState) === null || _updatedState2 === void 0 ? void 0 : _updatedState2.values), payload)
+          });
           return _updatedState;
         }
 
       case "RESET_FIELD_VALUE":
         {
-          var _updatedState8$values;
+          var _updatedState3$values;
 
-          var _updatedState8 = _objectSpread({}, state);
+          var _updatedState3 = _objectSpread({}, state);
 
-          if ((_updatedState8$values = _updatedState8.values) !== null && _updatedState8$values !== void 0 && _updatedState8$values[action.payload]) {
-            var _updatedState8$savedV;
+          if ((_updatedState3$values = _updatedState3.values) !== null && _updatedState3$values !== void 0 && _updatedState3$values[action.payload]) {
+            var _updatedState3$savedV;
 
-            delete _updatedState8.values[action.payload];
+            delete _updatedState3.values[action.payload];
 
-            if ((_updatedState8$savedV = _updatedState8.savedValues) !== null && _updatedState8$savedV !== void 0 && _updatedState8$savedV[action.payload]) {
-              _updatedState8.values[action.payload] = _updatedState8.savedValues[action.payload];
+            if ((_updatedState3$savedV = _updatedState3.savedValues) !== null && _updatedState3$savedV !== void 0 && _updatedState3$savedV[action.payload]) {
+              _updatedState3.values[action.payload] = _updatedState3.savedValues[action.payload];
             }
           }
 
-          return _updatedState8;
+          return _updatedState3;
         }
 
       case "FIELD_ERROR":
@@ -25662,7 +27188,9 @@ var store = {
       return state.values;
     },
     getFieldValue: function getFieldValue(state, name) {
-      return state.values[name];
+      var _state$values;
+
+      return (_state$values = state.values) === null || _state$values === void 0 ? void 0 : _state$values[name];
     },
     isTouched: function isTouched(state, current) {
       var _state$touched;
@@ -25681,14 +27209,14 @@ var store = {
 
       var isTrue = true;
       Object.keys(props.condition).map(function (condition) {
-        if (!Object(_core_functions__WEBPACK_IMPORTED_MODULE_3__["isArray"])(props.condition[condition])) {
-          var _state$values$conditi, _state$values;
+        if (!Object(_core_functions__WEBPACK_IMPORTED_MODULE_1__["isArray"])(props.condition[condition])) {
+          var _state$values$conditi, _state$values2;
 
-          isTrue = !(((_state$values$conditi = (_state$values = state.values) === null || _state$values === void 0 ? void 0 : _state$values[condition]) !== null && _state$values$conditi !== void 0 ? _state$values$conditi : false) !== props.condition[condition]);
+          isTrue = !(((_state$values$conditi = (_state$values2 = state.values) === null || _state$values2 === void 0 ? void 0 : _state$values2[condition]) !== null && _state$values$conditi !== void 0 ? _state$values$conditi : false) !== props.condition[condition]);
         } else {
-          var _state$values2;
+          var _state$values3;
 
-          isTrue = props.condition[condition].includes((_state$values2 = state.values) === null || _state$values2 === void 0 ? void 0 : _state$values2[condition]);
+          isTrue = props.condition[condition].includes((_state$values3 = state.values) === null || _state$values3 === void 0 ? void 0 : _state$values3[condition]);
         }
       });
       return isTrue;

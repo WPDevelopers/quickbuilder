@@ -1,3 +1,5 @@
+import alimTabs from "./alim";
+
 const notification_type_source_themes = [
 	{
 		label: "Notification Type",
@@ -118,20 +120,58 @@ const notification_type_source_themes = [
 
 const select_fields = [
 	{
-		label: "Notification Type",
+		label: "Notification Type Checkbox",
+		name: "notification_checkbox",
+		type: "checkbox",
+	},
+	{
+		label: "Notification Type Select",
 		name: "notification_select",
 		type: "select",
-		parent: "notification_type",
+		// parent: "notification_type",
 		// value: "comments",
 		// search: true,
 		// placeholder: "Placeholder Select",
 		// multiple: true, // for multi option select
+		// condition: {
+		// 	notification_checkbox: true,
+		// },
+		options: [
+			{
+				label: "Sales Notification",
+				value: "sales",
+			},
+			{ label: "Comments", value: "comments" },
+			{ label: "Reviews", value: "reviews" },
+			{ label: "Download Stats", value: "download-stats" },
+			{
+				label: "Donations",
+				value: "donations",
+				is_pro: true,
+				condition: {
+					notification_checkbox: true,
+				},
+			},
+		],
+	},
+	{
+		label: "Notification Type 2",
+		name: "notification_select_2",
+		type: "select",
+		value: "comments",
+		// parent: "notification_select",
+		// search: true,
+		// placeholder: "Placeholder Select",
+		// multiple: true, // for multi option select
+		condition: {
+			notification_select: ["comments"],
+		},
 		options: [
 			{
 				label: "Sales Notification",
 				value: "sales",
 				condition: {
-					notification_type: "sales",
+					notification_select: "sales",
 				},
 			},
 			{ label: "Comments", value: "comments" },
@@ -145,30 +185,17 @@ const select_fields = [
 		],
 	},
 	{
-		label: "Notification Type",
-		name: "notification_select_2",
-		type: "select",
+		label: "Notification Text",
+		name: "notification_text",
+		type: "text",
 		// parent: "notification_select",
 		// search: true,
 		// placeholder: "Placeholder Select",
 		// multiple: true, // for multi option select
 		condition: {
 			notification_select: "comments",
+			notification_select_2: "sales",
 		},
-		options: [
-			{
-				label: "Sales Notification",
-				value: "sales",
-			},
-			{ label: "Comments", value: "comments" },
-			{ label: "Reviews", value: "reviews" },
-			{ label: "Download Stats", value: "download-stats" },
-			{
-				label: "Donations",
-				value: "donations",
-				is_pro: true,
-			},
-		],
 	},
 ];
 
@@ -311,15 +338,15 @@ const commonFields = [
 const tabs = [
 	{
 		label: "Tab 1",
-		id: "tab_1",
+		id: "tab-content",
 		icon: "",
 		fields: [
 			// Text Controls
 			// ...commonFields,
 			// Radio Card
-			...notification_type_source_themes,
+			// ...notification_type_source_themes,
 			// Select
-			// ...select_fields
+			...select_fields,
 		],
 	},
 	{
@@ -340,7 +367,7 @@ const tabs = [
 const builder = {
 	tabs,
 	tabConfig: {
-		active: "tab_1",
+		active: "tab-content",
 		sidebar: true,
 	},
 	is_pro_active: true,

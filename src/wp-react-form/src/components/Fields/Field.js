@@ -91,6 +91,24 @@ export default withSelect((select, ownProps) => {
 		errorMessage: select("wprf-store").getError(ownProps.name),
 	};
 
+	if (
+		ownProps?.options &&
+		ownProps?.options?.length > 0 &&
+		["radio-card", "select"].includes(ownProps?.type)
+	) {
+		let listCond = [];
+		ownProps.options.map((option) => {
+			if (option?.condition) {
+				Object.keys(option?.condition).map((condKey) => {
+					if (!listCond.includes(condKey)) {
+						listCond.push(condKey);
+					}
+				});
+			}
+		});
+		ownProps.parent = listCond;
+	}
+
 	if (ownProps.parent) {
 		let parentsData = undefined;
 		let parentValue = select("wprf-store").getFieldValue(ownProps.parent);

@@ -32,3 +32,15 @@ export const ObjectFilter = (thisObj, func, returnArr = false) => {
 export const isArray = (args) => {
 	return typeof args === "object" && Array.isArray(args);
 };
+
+export const isExists = (args, value) => {
+	let typeOfargs = typeof args;
+	switch (true) {
+		case typeOfargs === "object" && isArray(args):
+			return args.includes(value);
+		case typeOfargs === "object" && !isArray(args):
+			return args?.[value] !== undefined;
+		default:
+			return args === value;
+	}
+};

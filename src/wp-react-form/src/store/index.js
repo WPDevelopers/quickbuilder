@@ -15,8 +15,9 @@ const DEFAULT_STATE = {
 		content_typography: {
 			"font-family": "Arial",
 		},
-		"notification-type": "conversions",
+		"notification-type": "reviews",
 		source: "woocommerce",
+		themes: "reviews_total-rated",
 		// notification_select: ["sales"],
 	},
 	touched: {},

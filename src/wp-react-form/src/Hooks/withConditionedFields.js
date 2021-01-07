@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { isExists, ObjectFilter } from "../core/functions";
 
+import { dispatch } from "@wordpress/data";
+
 const withConditionedFields = (WrappedComponent) => {
 	const WithConditionedFields = (props) => {
 		const { options, onChange, value, parentValue } = props;
@@ -8,6 +10,7 @@ const withConditionedFields = (WrappedComponent) => {
 		const [savedValue, setSavedValue] = useState(value);
 		let selectedOption = fields.filter((field) => field.value === value);
 		const [option, setOption] = useState(selectedOption?.[0]);
+		const [isOpt, setOptin] = useState();
 
 		useEffect(() => {
 			if (options?.length > 0) {
@@ -76,9 +79,31 @@ const withConditionedFields = (WrappedComponent) => {
 
 		useEffect(() => {
 			if (option?.value && !props?.multiple) {
+				setOptin(option);
 				onChange(option.value);
 			}
 		}, [option]);
+
+		useEffect(() => {
+			if (isOpt?.value && !props?.multiple) {
+				onChange(isOpt.value);
+			}
+			if (isOpt?.trigger) {
+				Object.keys(isOpt.trigger).map((key) => {
+					let keyValue = isOpt.trigger?.[key];
+					Object.keys(keyValue).map((control_key) => {
+						dispatch("wprf-store").setFieldValue({
+							name: `${key}[${control_key}]`,
+							value: {
+								[`${key}[${control_key}]`]: keyValue[
+									control_key
+								],
+							},
+						});
+					});
+				});
+			}
+		}, [isOpt]);
 
 		return (
 			<WrappedComponent
@@ -86,6 +111,7 @@ const withConditionedFields = (WrappedComponent) => {
 				options={fields}
 				value={option}
 				savedValue={savedValue}
+				setValue={(res) => setOptin(res)}
 			/>
 		);
 	};

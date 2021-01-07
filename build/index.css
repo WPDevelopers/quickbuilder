@@ -414,6 +414,16 @@
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label.wprf-label-has-image {
   padding: 0;
 }
+.wprf-group-control.wprf-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.wprf-group-control.wprf-inline .wprf-control {
+  flex: 1;
+  margin-bottom: 0px;
+  flex-basis: 160px;
+}
 .wprf-control-section .wprf-section-title {
   display: flex;
   align-items: center;

@@ -21703,48 +21703,8 @@ var tabs = [{
       type: "radio-card",
       value: "conversions",
       options: [{
-        value: "form",
-        label: "Contact Form",
-        is_pro: false
-      }, {
-        value: "email_subscription",
-        label: "Email Subscription",
-        is_pro: false
-      }, {
-        value: "custom",
-        label: "Custom Notification",
-        is_pro: false
-      }, {
-        value: "conversions",
-        label: "Sales Notification",
-        is_pro: false
-      }, {
         value: "reviews",
         label: "Reviews",
-        is_pro: false
-      }, {
-        value: "download_stats",
-        label: "Download Stats",
-        is_pro: false
-      }, {
-        value: "donation",
-        label: "Donations",
-        is_pro: false
-      }, {
-        value: "page_analytics",
-        label: "Page Analytics",
-        is_pro: false
-      }, {
-        value: "elearning",
-        label: "eLearning",
-        is_pro: false
-      }, {
-        value: "press_bar",
-        label: "Notification Bar",
-        is_pro: false
-      }, {
-        value: "comments",
-        label: "Comments",
         is_pro: false
       }],
       validation_rules: {
@@ -21933,499 +21893,119 @@ var tabs = [{
       value: "",
       parent: ["notification-type", "source"],
       options: [{
-        label: "form_theme-one",
-        value: "form_theme-one",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-two.jpg",
-        condition: {
-          "notification-type": ["form", "custom", "form", "form", "form"],
-          source: ["cf7", "custom_notification", "grvf", "njf", "wpf"]
-        }
-      }, {
-        label: "form_theme-two",
-        value: "form_theme-two",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-one.jpg",
-        condition: {
-          "notification-type": ["form", "custom", "form", "form", "form"],
-          source: ["cf7", "custom_notification", "grvf", "njf", "wpf"]
-        }
-      }, {
-        label: "form_theme-three",
-        value: "form_theme-three",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-three.jpg",
-        condition: {
-          "notification-type": ["form", "custom", "form", "form", "form"],
-          source: ["cf7", "custom_notification", "grvf", "njf", "wpf"]
-        }
-      }, {
-        label: "conversions_theme-one",
-        value: "conversions_theme-one",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-2.jpg",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_theme-two",
-        value: "conversions_theme-two",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-1.jpg",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_theme-three",
-        value: "conversions_theme-three",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-3.jpg",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_theme-four",
-        value: "conversions_theme-four",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-four.png",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_theme-five",
-        value: "conversions_theme-five",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-five.png",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_conv-theme-six",
-        value: "conversions_conv-theme-six",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-6.jpg",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_maps_theme",
-        value: "conversions_maps_theme",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/maps-theme.png",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_conv-theme-seven",
-        value: "conversions_conv-theme-seven",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-7.png",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_conv-theme-eight",
-        value: "conversions_conv-theme-eight",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-8.png",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
-        label: "conversions_conv-theme-nine",
-        value: "conversions_conv-theme-nine",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-9.png",
-        condition: {
-          "notification-type": ["custom", "conversions", "conversions", "conversions"],
-          source: ["custom_notification", "edd", "freemius", "woocommerce"]
-        }
-      }, {
         label: "reviews_total-rated",
         value: "reviews_total-rated",
         is_pro: null,
         icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/total-rated.png",
+        trigger: {
+          "notification-template": {
+            first_param: "tag_rated",
+            custom_first_param: "Someone",
+            second_param: "people rated",
+            third_param: "tag_plugin_name",
+            fourth_param: "tag_rating",
+            custom_fourth_param: "Some time ago"
+          }
+        },
         condition: {
-          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
-          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+          "notification-type": ["reviews", "reviews", "reviews", "reviews"],
+          source: ["freemius", "reviewx", "woocommerce", "wp_reviews"]
         }
       }, {
         label: "reviews_reviewed",
         value: "reviews_reviewed",
         is_pro: null,
         icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/reviewed.png",
+        trigger: {
+          "notification-template": {
+            first_param: "tag_username",
+            custom_first_param: "Someone",
+            second_param: "just reviewed",
+            third_param: "tag_plugin_name",
+            fourth_param: "tag_rating",
+            custom_fourth_param: "Some time ago"
+          }
+        },
         condition: {
-          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
-          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+          "notification-type": ["reviews", "reviews", "reviews", "reviews"],
+          source: ["freemius", "reviewx", "woocommerce", "wp_reviews"]
         }
       }, {
         label: "reviews_review_saying",
         value: "reviews_review_saying",
         is_pro: null,
         icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/saying-review.png",
+        trigger: {
+          "notification-template": {
+            first_param: "tag_username",
+            custom_first_param: "Someone",
+            second_param: "saying",
+            third_param: "tag_title",
+            fourth_param: "about",
+            fifth_param: "tag_plugin_name",
+            sixth_param: "tag_plugin_name_text"
+          }
+        },
         condition: {
-          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
-          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+          "notification-type": ["reviews", "reviews", "reviews", "reviews"],
+          source: ["freemius", "reviewx", "woocommerce", "wp_reviews"]
         }
       }, {
         label: "reviews_review-comment",
         value: "reviews_review-comment",
         is_pro: null,
         icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/review-with-comment.jpg",
+        trigger: {
+          "notification-template": {
+            first_param: "tag_username",
+            custom_first_param: "Someone",
+            second_param: "just reviewed",
+            third_param: "tag_plugin_review",
+            fourth_param: "tag_rating",
+            custom_fourth_param: "Some time ago"
+          }
+        },
         condition: {
-          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
-          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+          "notification-type": ["reviews", "reviews", "reviews", "reviews"],
+          source: ["freemius", "reviewx", "woocommerce", "wp_reviews"]
         }
       }, {
         label: "reviews_review-comment-2",
         value: "reviews_review-comment-2",
         is_pro: null,
         icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/review-with-comment-2.jpg",
+        trigger: {
+          "notification-template": {
+            first_param: "tag_username",
+            custom_first_param: "Someone",
+            second_param: "just reviewed",
+            third_param: "tag_plugin_review",
+            fourth_param: "tag_rating",
+            custom_fourth_param: "Some time ago"
+          }
+        },
         condition: {
-          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
-          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
+          "notification-type": ["reviews", "reviews", "reviews", "reviews"],
+          source: ["freemius", "reviewx", "woocommerce", "wp_reviews"]
         }
       }, {
         label: "reviews_review-comment-3",
         value: "reviews_review-comment-3",
         is_pro: null,
         icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/review-with-comment-3.jpg",
+        trigger: {
+          "notification-template": {
+            first_param: "tag_username",
+            custom_first_param: "Someone",
+            second_param: "just reviewed",
+            third_param: "tag_plugin_review",
+            fourth_param: "tag_time",
+            custom_fourth_param: "Some time ago"
+          }
+        },
         condition: {
-          "notification-type": ["custom", "reviews", "reviews", "reviews", "reviews"],
-          source: ["custom_notification", "freemius", "reviewx", "woocommerce", "wp_reviews"]
-        }
-      }, {
-        label: "download_stats_today-download",
-        value: "download_stats_today-download",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/today-download.png",
-        condition: {
-          "notification-type": ["custom", "download_stats", "download_stats"],
-          source: ["custom_notification", "freemius", "wp_stats"]
-        }
-      }, {
-        label: "download_stats_7day-download",
-        value: "download_stats_7day-download",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/7day-download.png",
-        condition: {
-          "notification-type": ["custom", "download_stats", "download_stats"],
-          source: ["custom_notification", "freemius", "wp_stats"]
-        }
-      }, {
-        label: "download_stats_actively_using",
-        value: "download_stats_actively_using",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/actively-using.png",
-        condition: {
-          "notification-type": ["custom", "download_stats", "download_stats"],
-          source: ["custom_notification", "freemius", "wp_stats"]
-        }
-      }, {
-        label: "download_stats_total-download",
-        value: "download_stats_total-download",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/total-download.png",
-        condition: {
-          "notification-type": ["custom", "download_stats", "download_stats"],
-          source: ["custom_notification", "freemius", "wp_stats"]
-        }
-      }, {
-        label: "donation_theme-one",
-        value: "donation_theme-one",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-1.jpg",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_theme-two",
-        value: "donation_theme-two",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-2.jpg",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_theme-three",
-        value: "donation_theme-three",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-3.jpg",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_theme-four",
-        value: "donation_theme-four",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-4.png",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_theme-five",
-        value: "donation_theme-five",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-5.png",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_conv-theme-six",
-        value: "donation_conv-theme-six",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-6.jpg",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_maps_theme",
-        value: "donation_maps_theme",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/maps-theme.png",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_conv-theme-seven",
-        value: "donation_conv-theme-seven",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-7.png",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_conv-theme-eight",
-        value: "donation_conv-theme-eight",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-8.png",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "donation_conv-theme-nine",
-        value: "donation_conv-theme-nine",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-9.png",
-        condition: {
-          "notification-type": ["custom", "donation"],
-          source: ["custom_notification", "give"]
-        }
-      }, {
-        label: "elearning_theme-one",
-        value: "elearning_theme-one",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-1.jpg",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_theme-two",
-        value: "elearning_theme-two",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-2.jpg",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_theme-three",
-        value: "elearning_theme-three",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-3.jpg",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_theme-four",
-        value: "elearning_theme-four",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-4.png",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_theme-five",
-        value: "elearning_theme-five",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-5.png",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_conv-theme-six",
-        value: "elearning_conv-theme-six",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-6.png",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_maps_theme",
-        value: "elearning_maps_theme",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/maps-theme.png",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_conv-theme-seven",
-        value: "elearning_conv-theme-seven",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-7.png",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_conv-theme-eight",
-        value: "elearning_conv-theme-eight",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-8.png",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "elearning_conv-theme-nine",
-        value: "elearning_conv-theme-nine",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-9.png",
-        condition: {
-          "notification-type": ["custom", "elearning", "elearning"],
-          source: ["custom_notification", "learndash", "tutor"]
-        }
-      }, {
-        label: "press_bar_theme-one",
-        value: "press_bar_theme-one",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-one.jpg",
-        condition: {
-          "notification-type": ["custom", "press_bar"],
-          source: ["custom_notification", "press_bar"]
-        }
-      }, {
-        label: "press_bar_theme-two",
-        value: "press_bar_theme-two",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-two.jpg",
-        condition: {
-          "notification-type": ["custom", "press_bar"],
-          source: ["custom_notification", "press_bar"]
-        }
-      }, {
-        label: "press_bar_theme-three",
-        value: "press_bar_theme-three",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-three.jpg",
-        condition: {
-          "notification-type": ["custom", "press_bar"],
-          source: ["custom_notification", "press_bar"]
-        }
-      }, {
-        label: "comments_theme-one",
-        value: "comments_theme-one",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-2.jpg",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_theme-two",
-        value: "comments_theme-two",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-1.jpg",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_theme-three",
-        value: "comments_theme-three",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-3.jpg",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_theme-six-free",
-        value: "comments_theme-six-free",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-4.jpg",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_theme-seven-free",
-        value: "comments_theme-seven-free",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-5.jpg",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_theme-eight-free",
-        value: "comments_theme-eight-free",
-        is_pro: null,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-6.jpg",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_theme-four",
-        value: "comments_theme-four",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-four.png",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_theme-five",
-        value: "comments_theme-five",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-five.png",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
-        }
-      }, {
-        label: "comments_maps_theme",
-        value: "comments_maps_theme",
-        is_pro: true,
-        icon: "https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/maps-theme-comments.png",
-        condition: {
-          "notification-type": ["custom", "comments"],
-          source: ["custom_notification", "wp_comments"]
+          "notification-type": ["reviews", "reviews", "reviews", "reviews"],
+          source: ["freemius", "reviewx", "woocommerce", "wp_reviews"]
         }
       }],
       validation_rules: {
@@ -22448,8 +22028,9 @@ var tabs = [{
       label: "Notification Template",
       name: "notification-template",
       type: "group",
+      display: "inline",
       fields: [{
-        label: "First Parameter",
+        // label: "First Parameter",
         name: "first_param",
         type: "select",
         priority: 1,
@@ -22458,40 +22039,20 @@ var tabs = [{
           value: "tag_custom",
           label: "Custom"
         }, {
-          value: "tag_name",
-          label: "Full Name",
+          value: "tag_username",
+          label: "Username",
           condition: {
-            "notification-type": ["conversions" // "comments",
-            ],
-            source: ["edd", "freemius" // "woocommerce",
-            // "wp_comments",
-            ]
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3", "reviews_review_saying"]
           }
         }, {
-          value: "tag_first_name",
-          label: "First Name",
+          value: "tag_rated",
+          label: "Rated",
           condition: {
-            "notification-type": ["conversions", "conversions", "conversions", "comments"],
-            source: ["edd", "freemius", "woocommerce", "wp_comments"]
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3"]
           }
-        }, {
-          value: "tag_last_name",
-          label: "Last Name",
-          condition: {
-            "notification-type": ["conversions", "conversions", "conversions", "comments"],
-            source: ["edd", "freemius", "woocommerce", "wp_comments"]
-          }
-        }, {
-          value: "tag_display_name",
-          label: "Display Name",
-          condition: {
-            "notification-type": ["conversions", "conversions", "conversions", "comments"],
-            source: ["edd", "freemius", "woocommerce", "wp_comments"]
-          }
-        }] // parent: ["notification-type", "source"],
-
+        }]
       }, {
-        label: "Custom First Parameter",
+        // label: "Custom First Parameter",
         name: "custom_first_param",
         type: "text",
         priority: 5,
@@ -22500,202 +22061,167 @@ var tabs = [{
         condition: {
           "notification-template[first_param]": "tag_custom"
         }
-      } // {
-      // 	label: "Second Param",
-      // 	name: "second_param",
-      // 	type: "text",
-      // 	priority: 10,
-      // 	default: "recently purchased",
-      // },
-      // {
-      // 	label: "Third Parameter",
-      // 	name: "third_param",
-      // 	type: "select",
-      // 	priority: 20,
-      // 	default: "tag_title",
-      // 	options: [
-      // 		{
-      // 			value: "tag_custom",
-      // 			label: "Custom",
-      // 		},
-      // 		{
-      // 			value: "tag_post_title",
-      // 			label: "Post Title",
-      // 			condition: {
-      // 				"notification-type": [
-      // 					"conversions",
-      // 					"conversions",
-      // 					"conversions",
-      // 					"comments",
-      // 				],
-      // 				source: [
-      // 					"edd",
-      // 					"freemius",
-      // 					"woocommerce",
-      // 					"wp_comments",
-      // 				],
-      // 			},
-      // 		},
-      // 		{
-      // 			value: "tag_post_comment",
-      // 			label: "Post Comment",
-      // 			condition: {
-      // 				"notification-type": [
-      // 					"conversions",
-      // 					"conversions",
-      // 					"conversions",
-      // 					"comments",
-      // 				],
-      // 				source: [
-      // 					"edd",
-      // 					"freemius",
-      // 					"woocommerce",
-      // 					"wp_comments",
-      // 				],
-      // 			},
-      // 		},
-      // 		{
-      // 			value: "tag_anonymous_post",
-      // 			label: "Anonymous Post",
-      // 			condition: {
-      // 				"notification-type": [
-      // 					"conversions",
-      // 					"conversions",
-      // 					"conversions",
-      // 					"comments",
-      // 				],
-      // 				source: [
-      // 					"edd",
-      // 					"freemius",
-      // 					"woocommerce",
-      // 					"wp_comments",
-      // 				],
-      // 			},
-      // 		},
-      // 	],
-      // 	parent: ["notification-type", "source"],
-      // },
-      // {
-      // 	label: "Custom Third Param",
-      // 	name: "custom_third_param",
-      // 	type: "text",
-      // 	priority: 25,
-      // 	default: "Some time ago",
-      // 	parent: "notification-template[third_param]",
-      // 	condition: {
-      // 		"notification-template[third_param]":
-      // 			"tag_custom",
-      // 	},
-      // },
-      // {
-      // 	label: "Fourth Parameter",
-      // 	name: "fourth_param",
-      // 	type: "select",
-      // 	priority: 30,
-      // 	default: "tag_time",
-      // 	options: [
-      // 		{
-      // 			value: "tag_custom",
-      // 			label: "Custom",
-      // 		},
-      // 		{
-      // 			value: "tag_time",
-      // 			label: "Definite Time",
-      // 			condition: {
-      // 				"notification-type": [
-      // 					"conversions",
-      // 					"conversions",
-      // 					"conversions",
-      // 					"comments",
-      // 				],
-      // 				source: [
-      // 					"edd",
-      // 					"freemius",
-      // 					"woocommerce",
-      // 					"wp_comments",
-      // 				],
-      // 			},
-      // 		},
-      // 		{
-      // 			value: "tag_sometime",
-      // 			label: "Some time ago",
-      // 			condition: {
-      // 				"notification-type": [
-      // 					"conversions",
-      // 					"conversions",
-      // 					"conversions",
-      // 					"comments",
-      // 				],
-      // 				source: [
-      // 					"edd",
-      // 					"freemius",
-      // 					"woocommerce",
-      // 					"wp_comments",
-      // 				],
-      // 			},
-      // 		},
-      // 	],
-      // 	parent: ["notification-type", "source"],
-      // },
-      // {
-      // 	label: "Custom Fourth Parameter",
-      // 	name: "custom_fourth_param",
-      // 	type: "text",
-      // 	priority: 35,
-      // 	default: "Some time ago",
-      // 	parent: "notification-template[fourth_param]",
-      // 	condition: {
-      // 		"notification-template[fourth_param]":
-      // 			"tag_custom",
-      // 	},
-      // },
-      // {
-      // 	label: "Fifth Parameter",
-      // 	name: "fifth_param",
-      // 	type: "select",
-      // 	priority: 40,
-      // 	options: [
-      // 		{
-      // 			value: "tag_custom",
-      // 			label: "Custom",
-      // 		},
-      // 	],
-      // },
-      // {
-      // 	label: "Custom Fifth Parameter",
-      // 	name: "custom_fifth_param",
-      // 	type: "text",
-      // 	priority: 45,
-      // 	parent: "notification-template[fifth_param]",
-      // 	condition: {
-      // 		"notification-template[fifth_param]":
-      // 			"tag_custom",
-      // 	},
-      // },
-      // {
-      // 	label: "Sixth Parameter",
-      // 	name: "sixth_param",
-      // 	type: "select",
-      // 	priority: 50,
-      // 	options: [
-      // 		{
-      // 			value: "tag_custom",
-      // 			label: "Custom",
-      // 		},
-      // 	],
-      // },
-      // {
-      // 	label: "Custom Sixth Parameter",
-      // 	name: "custom_sixth_param",
-      // 	type: "text",
-      // 	priority: 55,
-      // 	parent: "notification-template[sixth_param]",
-      // 	condition: {
-      // 		"notification-template[sixth_param]":
-      // 			"tag_custom",
-      // 	},
-      // },
-      ]
+      }, {
+        // label: "Second Param",
+        name: "second_param",
+        type: "text",
+        priority: 10,
+        default: "recently purchased"
+      }, {
+        // label: "Third Parameter",
+        name: "third_param",
+        type: "select",
+        priority: 20,
+        default: "tag_title",
+        options: [{
+          value: "tag_custom",
+          label: "Custom"
+        }, {
+          value: "tag_plugin_name",
+          label: "Plugin Name",
+          condition: {
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3"]
+          }
+        }, {
+          value: "tag_plugin_review",
+          label: "Review",
+          condition: {
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3"]
+          }
+        }, {
+          value: "tag_anonymous_title",
+          label: "Anonymous Title",
+          condition: {
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3", "reviews_review_saying"]
+          }
+        }, {
+          value: "tag_title",
+          label: "Review Title",
+          condition: {
+            themes: ["reviews_review_saying"]
+          }
+        }]
+      }, {
+        // label: "Custom Third Param",
+        name: "custom_third_param",
+        type: "text",
+        priority: 25,
+        default: "Some time ago",
+        parent: "notification-template[third_param]",
+        condition: {
+          "notification-template[third_param]": "tag_custom"
+        }
+      }, {
+        // label: "Fourth Parameter",
+        name: "fourth_param",
+        type: "select",
+        priority: 30,
+        default: "tag_time",
+        options: [{
+          value: "tag_custom",
+          label: "Custom"
+        }, {
+          value: "tag_rating",
+          label: "Rating",
+          condition: {
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3"]
+          }
+        }, {
+          value: "tag_time",
+          label: "Definite Time",
+          condition: {
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3"]
+          }
+        }, {
+          value: "tag_sometime",
+          label: "Some time ago",
+          condition: {
+            themes: ["reviews_total-rated", "reviews_reviewed", "reviews_review-comment", "reviews_review-comment-2", "reviews_review-comment-3"]
+          }
+        }, {
+          value: "tag_title",
+          label: "Review Title",
+          condition: {
+            themes: ["reviews_review_saying"]
+          }
+        }, {
+          value: "tag_anonymous_title",
+          label: "Anonymous Title",
+          condition: {
+            themes: ["reviews_review_saying"]
+          }
+        }]
+      }, {
+        // label: "Custom Fourth Parameter",
+        name: "custom_fourth_param",
+        type: "text",
+        priority: 35,
+        default: "Some time ago",
+        parent: "notification-template[fourth_param]",
+        condition: {
+          "notification-template[fourth_param]": "tag_custom"
+        }
+      }, {
+        // label: "Fifth Parameter",
+        name: "fifth_param",
+        type: "select",
+        priority: 40,
+        options: [{
+          value: "tag_custom",
+          label: "Custom"
+        }, {
+          value: "tag_plugin_name",
+          label: "Plugin Name",
+          condition: {
+            themes: ["reviews_review_saying"]
+          }
+        }]
+      }, {
+        // label: "Custom Fifth Parameter",
+        name: "custom_fifth_param",
+        type: "text",
+        priority: 45,
+        parent: "notification-template[fifth_param]",
+        condition: {
+          "notification-template[fifth_param]": "tag_custom"
+        }
+      }, {
+        // label: "Sixth Parameter",
+        name: "sixth_param",
+        type: "select",
+        priority: 50,
+        default: "tag_custom",
+        parent: "themes",
+        options: [{
+          value: "tag_custom",
+          label: "Custom"
+        }, {
+          value: "tag_plugin_name_text",
+          label: "Try it now",
+          condition: {
+            themes: ["reviews_review_saying"]
+          }
+        }]
+      }, {
+        // label: "Custom Sixth Parameter",
+        name: "custom_sixth_param",
+        type: "text",
+        priority: 55,
+        parent: "notification-template[sixth_param]",
+        condition: {
+          "notification-template[sixth_param]": "tag_custom"
+        }
+      }, {
+        // label: "Review Fourth Parameter",
+        name: "review_fourth_param",
+        type: "text",
+        priority: 27,
+        default: "About",
+        parent: "themes",
+        condition: {
+          themes: ["reviews_review_saying"]
+        }
+      }]
     }]
   }]
 }, {
@@ -23739,7 +23265,7 @@ var tabs = [{
   fields: [].concat(commonFields)
 }];
 var builder = {
-  tabs: tabs,
+  tabs: _alim__WEBPACK_IMPORTED_MODULE_0__["default"],
   tabConfig: {
     active: "tab-content",
     sidebar: true
@@ -23995,6 +23521,11 @@ var withCommon = function withCommon(WrappedComponent) {
           return !_this2.unveiledProps.includes(prop);
         }, props);
         var componentClasses = classnames__WEBPACK_IMPORTED_MODULE_11___default()("wprf-control", "wprf-control-".concat(this.props.type), this.props.classes);
+
+        if (!this.props.isVisible) {
+          return "";
+        }
+
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, withParent && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])("div", {
           className: componentClasses
         }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, verifiedProps, {
@@ -24046,6 +23577,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _core_functions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../core/functions */ "./src/wp-react-form/src/core/functions.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
@@ -24056,6 +23589,7 @@ __webpack_require__.r(__webpack_exports__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 
 
@@ -24085,6 +23619,11 @@ var withConditionedFields = function withConditionedFields(WrappedComponent) {
         _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4___default()(_useState5, 2),
         option = _useState6[0],
         setOption = _useState6[1];
+
+    var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_6__["useState"])(),
+        _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_4___default()(_useState7, 2),
+        isOpt = _useState8[0],
+        setOptin = _useState8[1];
 
     Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
       if ((options === null || options === void 0 ? void 0 : options.length) > 0) {
@@ -24147,13 +23686,36 @@ var withConditionedFields = function withConditionedFields(WrappedComponent) {
     }, [value]);
     Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
       if (option !== null && option !== void 0 && option.value && !(props !== null && props !== void 0 && props.multiple)) {
+        setOptin(option);
         onChange(option.value);
       }
     }, [option]);
+    Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
+      if (isOpt !== null && isOpt !== void 0 && isOpt.value && !(props !== null && props !== void 0 && props.multiple)) {
+        onChange(isOpt.value);
+      }
+
+      if (isOpt !== null && isOpt !== void 0 && isOpt.trigger) {
+        Object.keys(isOpt.trigger).map(function (key) {
+          var _isOpt$trigger;
+
+          var keyValue = (_isOpt$trigger = isOpt.trigger) === null || _isOpt$trigger === void 0 ? void 0 : _isOpt$trigger[key];
+          Object.keys(keyValue).map(function (control_key) {
+            Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__["dispatch"])("wprf-store").setFieldValue({
+              name: "".concat(key, "[").concat(control_key, "]"),
+              value: _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()({}, "".concat(key, "[").concat(control_key, "]"), keyValue[control_key])
+            });
+          });
+        });
+      }
+    }, [isOpt]);
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
       options: fields,
       value: option,
-      savedValue: savedValue
+      savedValue: savedValue,
+      setValue: function setValue(res) {
+        return setOptin(res);
+      }
     }));
   };
 
@@ -24350,6 +23912,17 @@ function Index(_ref) {
 
 /***/ }),
 
+/***/ "./src/wp-react-form/src/components/Fields/Controls/GroupControl/group.scss":
+/*!**********************************************************************************!*\
+  !*** ./src/wp-react-form/src/components/Fields/Controls/GroupControl/group.scss ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/wp-react-form/src/components/Fields/Controls/GroupControl/index.js":
 /*!********************************************************************************!*\
   !*** ./src/wp-react-form/src/components/Fields/Controls/GroupControl/index.js ***!
@@ -24367,7 +23940,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Field */ "./src/wp-react-form/src/components/Fields/Field.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Field */ "./src/wp-react-form/src/components/Fields/Field.js");
+/* harmony import */ var _group_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./group.scss */ "./src/wp-react-form/src/components/Fields/Controls/GroupControl/group.scss");
+/* harmony import */ var _group_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_group_scss__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -24379,16 +23956,21 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
+
 function Index(_ref) {
   var name = _ref.name,
       fields = _ref.fields,
       label = _ref.label,
       value = _ref.value,
       _onChange = _ref.onChange,
-      rest = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["name", "fields", "label", "value", "onChange"]);
+      display = _ref.display,
+      rest = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["name", "fields", "label", "value", "onChange", "display"]);
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
-    className: "wprf-group-control"
+    className: classnames__WEBPACK_IMPORTED_MODULE_4___default()("wprf-group-control", {
+      "wprf-inline": display
+    })
   }, label, fields.map(function (item) {
     var modifiedName = "".concat(name, "[").concat(item.name, "]");
     var modifiedID = "".concat(name, "-").concat(item.name);
@@ -24401,7 +23983,7 @@ function Index(_ref) {
       }
     });
 
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_4__["default"], singleProps);
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_Field__WEBPACK_IMPORTED_MODULE_5__["default"], singleProps);
   })));
 }
 
@@ -24635,7 +24217,7 @@ function Index(props) {
   var name = props.name,
       label = props.label,
       options = props.options,
-      _onChange = props.onChange,
+      onChange = props.onChange,
       savedValue = props.savedValue;
   var instanceId = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__["useInstanceId"])(Index);
   var componentClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()(["wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
@@ -24647,7 +24229,8 @@ function Index(props) {
     var label = _ref.label,
         value = _ref.value,
         icon = _ref.icon,
-        is_pro = _ref.is_pro;
+        is_pro = _ref.is_pro,
+        trigger = _ref.trigger;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_core__WEBPACK_IMPORTED_MODULE_6__["Column"], {
       column: "4"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
@@ -24662,10 +24245,10 @@ function Index(props) {
       value: value,
       name: name,
       onChange: function onChange(event) {
-        var _event$target;
-
-        return _onChange(event === null || event === void 0 ? void 0 : (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.value, {
-          is_pro: is_pro
+        return props.setValue({
+          value: event.target.value,
+          is_pro: is_pro,
+          trigger: trigger
         });
       }
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_core__WEBPACK_IMPORTED_MODULE_6__["Label"], {
@@ -27052,8 +26635,9 @@ var DEFAULT_STATE = {
     content_typography: {
       "font-family": "Arial"
     },
-    "notification-type": "conversions",
-    source: "woocommerce" // notification_select: ["sales"],
+    "notification-type": "reviews",
+    source: "woocommerce",
+    themes: "reviews_total-rated" // notification_select: ["sales"],
 
   },
   touched: {},

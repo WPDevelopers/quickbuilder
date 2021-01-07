@@ -1,10 +1,17 @@
 import React from "react";
+import classNames from "classnames";
 import Field from "../../Field";
 
-function Index({ name, fields, label, value, onChange, ...rest }) {
+import "./group.scss";
+
+function Index({ name, fields, label, value, onChange, display, ...rest }) {
 	return (
 		<>
-			<div className="wprf-group-control">
+			<div
+				className={classNames("wprf-group-control", {
+					"wprf-inline": display,
+				})}
+			>
 				{label}
 				{fields.map((item) => {
 					const modifiedName = `${name}[${item.name}]`;

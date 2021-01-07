@@ -127,6 +127,10 @@ const withCommon = (WrappedComponent, withParent = true) => {
 				this.props.classes
 			);
 
+			if (!this.props.isVisible) {
+				return "";
+			}
+
 			return (
 				<>
 					{withParent && (

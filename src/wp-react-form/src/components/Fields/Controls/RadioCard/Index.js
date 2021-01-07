@@ -23,42 +23,47 @@ function Index(props) {
 			<h4 class="wprf-control-label">{label}</h4>
 			<div className={componentClasses}>
 				<Row>
-					{options.map(({ label, value, icon, is_pro }, index) => (
-						<Column column="4">
-							<div
-								className={classNames(
-									"wprf-input-radio-option",
-									{
-										"wprf-option-selected":
-											value === savedValue,
-									}
-								)}
-								key={index}
-							>
-								<Input
-									type="radio"
-									checked={value === savedValue}
-									unique_id={`${instanceId}-${index}`}
-									value={value}
-									name={name}
-									onChange={(event) =>
-										onChange(event?.target?.value, {
-											is_pro,
-										})
-									}
-								/>
-								<Label
-									className={classNames({
-										"wprf-label-has-image": icon ?? false,
-									})}
-									htmlFor={`wprf-input-radio-${instanceId}-${index}`}
-									src={icon}
+					{options.map(
+						({ label, value, icon, is_pro, trigger }, index) => (
+							<Column column="4">
+								<div
+									className={classNames(
+										"wprf-input-radio-option",
+										{
+											"wprf-option-selected":
+												value === savedValue,
+										}
+									)}
+									key={index}
 								>
-									{label}
-								</Label>
-							</div>
-						</Column>
-					))}
+									<Input
+										type="radio"
+										checked={value === savedValue}
+										unique_id={`${instanceId}-${index}`}
+										value={value}
+										name={name}
+										onChange={(event) =>
+											props.setValue({
+												value: event.target.value,
+												is_pro,
+												trigger,
+											})
+										}
+									/>
+									<Label
+										className={classNames({
+											"wprf-label-has-image":
+												icon ?? false,
+										})}
+										htmlFor={`wprf-input-radio-${instanceId}-${index}`}
+										src={icon}
+									>
+										{label}
+									</Label>
+								</div>
+							</Column>
+						)
+					)}
 				</Row>
 			</div>
 		</>

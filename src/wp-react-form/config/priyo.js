@@ -365,7 +365,7 @@ const tabs = [
 ];
 
 const builder = {
-	tabs,
+	tabs: alimTabs,
 	tabConfig: {
 		active: "tab-content",
 		sidebar: true,

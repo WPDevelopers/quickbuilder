@@ -18,8 +18,58 @@ const tabs = [
 						value: "conversions",
 						options: [
 							{
+								value: "form",
+								label: "Contact Form",
+								is_pro: false,
+							},
+							{
+								value: "email_subscription",
+								label: "Email Subscription",
+								is_pro: false,
+							},
+							{
+								value: "custom",
+								label: "Custom Notification",
+								is_pro: false,
+							},
+							{
+								value: "conversions",
+								label: "Sales Notification",
+								is_pro: false,
+							},
+							{
 								value: "reviews",
 								label: "Reviews",
+								is_pro: false,
+							},
+							{
+								value: "download_stats",
+								label: "Download Stats",
+								is_pro: false,
+							},
+							{
+								value: "donation",
+								label: "Donations",
+								is_pro: false,
+							},
+							{
+								value: "page_analytics",
+								label: "Page Analytics",
+								is_pro: false,
+							},
+							{
+								value: "elearning",
+								label: "eLearning",
+								is_pro: false,
+							},
+							{
+								value: "press_bar",
+								label: "Notification Bar",
+								is_pro: false,
+							},
+							{
+								value: "comments",
+								label: "Comments",
 								is_pro: false,
 							},
 						],
@@ -31,7 +81,6 @@ const tabs = [
 					{
 						label: "Source",
 						name: "source",
-						parent: "notification-type",
 						type: "radio-card",
 						options: [
 							{
@@ -258,8 +307,384 @@ const tabs = [
 						name: "themes",
 						type: "radio-card",
 						value: "",
-						parent: ["notification-type", "source"],
 						options: [
+							{
+								label: "form_theme-one",
+								value: "form_theme-one",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-two.jpg",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"form",
+										"custom",
+										"form",
+										"form",
+										"form",
+									],
+									source: [
+										"cf7",
+										"custom_notification",
+										"grvf",
+										"njf",
+										"wpf",
+									],
+								},
+							},
+							{
+								label: "form_theme-two",
+								value: "form_theme-two",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-one.jpg",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"form",
+										"custom",
+										"form",
+										"form",
+										"form",
+									],
+									source: [
+										"cf7",
+										"custom_notification",
+										"grvf",
+										"njf",
+										"wpf",
+									],
+								},
+							},
+							{
+								label: "form_theme-three",
+								value: "form_theme-three",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/form/cf7-theme-three.jpg",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"form",
+										"custom",
+										"form",
+										"form",
+										"form",
+									],
+									source: [
+										"cf7",
+										"custom_notification",
+										"grvf",
+										"njf",
+										"wpf",
+									],
+								},
+							},
+							{
+								label: "conversions_theme-one",
+								value: "conversions_theme-one",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-2.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "just purchased",
+										third_param: "tag_title",
+										custom_third_param: "Anonymous Product",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_theme-two",
+								value: "conversions_theme-two",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-1.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "just purchased",
+										third_param: "tag_title",
+										custom_third_param: "Anonymous Product",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_theme-three",
+								value: "conversions_theme-three",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-conv-theme-3.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "just purchased",
+										third_param: "tag_title",
+										custom_third_param: "Anonymous Product",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_theme-four",
+								value: "conversions_theme-four",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-four.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "just purchased",
+										third_param: "tag_title",
+										custom_third_param: "Anonymous Product",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_theme-five",
+								value: "conversions_theme-five",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-five.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "just purchased",
+										third_param: "tag_title",
+										custom_third_param: "Anonymous Product",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_conv-theme-six",
+								value: "conversions_conv-theme-six",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-6.jpg",
+								trigger: {
+									"notification-template": {
+										third_param: "purchased",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_maps_theme",
+								value: "conversions_maps_theme",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/maps-theme.png",
+								trigger: {
+									"notification-template": {
+										third_param: "purchased",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_conv-theme-seven",
+								value: "conversions_conv-theme-seven",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-7.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_sales_count",
+										custom_first_param: "Someone",
+										second_param: "people purchased",
+										third_param: "tag_title",
+										fourth_param: "tag_7days",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_conv-theme-eight",
+								value: "conversions_conv-theme-eight",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-8.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_sales_count",
+										custom_first_param: "Someone",
+										second_param: "people purchased",
+										third_param: "tag_title",
+										fourth_param: "tag_7days",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
+							{
+								label: "conversions_conv-theme-nine",
+								value: "conversions_conv-theme-nine",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-conv-theme-9.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_sales_count",
+										custom_first_param: "Someone",
+										second_param: "people purchased",
+										third_param: "tag_title",
+										fourth_param: "tag_7days",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"conversions",
+										"conversions",
+										"conversions",
+									],
+									source: [
+										"custom_notification",
+										"edd",
+										"freemius",
+										"woocommerce",
+									],
+								},
+							},
 							{
 								label: "reviews_total-rated",
 								value: "reviews_total-rated",
@@ -278,12 +703,14 @@ const tabs = [
 								},
 								condition: {
 									"notification-type": [
+										"custom",
 										"reviews",
 										"reviews",
 										"reviews",
 										"reviews",
 									],
 									source: [
+										"custom_notification",
 										"freemius",
 										"reviewx",
 										"woocommerce",
@@ -309,12 +736,14 @@ const tabs = [
 								},
 								condition: {
 									"notification-type": [
+										"custom",
 										"reviews",
 										"reviews",
 										"reviews",
 										"reviews",
 									],
 									source: [
+										"custom_notification",
 										"freemius",
 										"reviewx",
 										"woocommerce",
@@ -334,19 +763,21 @@ const tabs = [
 										custom_first_param: "Someone",
 										second_param: "saying",
 										third_param: "tag_title",
-										fourth_param: "about",
+										review_fourth_param: "about",
 										fifth_param: "tag_plugin_name",
 										sixth_param: "tag_plugin_name_text",
 									},
 								},
 								condition: {
 									"notification-type": [
+										"custom",
 										"reviews",
 										"reviews",
 										"reviews",
 										"reviews",
 									],
 									source: [
+										"custom_notification",
 										"freemius",
 										"reviewx",
 										"woocommerce",
@@ -372,12 +803,14 @@ const tabs = [
 								},
 								condition: {
 									"notification-type": [
+										"custom",
 										"reviews",
 										"reviews",
 										"reviews",
 										"reviews",
 									],
 									source: [
+										"custom_notification",
 										"freemius",
 										"reviewx",
 										"woocommerce",
@@ -403,12 +836,14 @@ const tabs = [
 								},
 								condition: {
 									"notification-type": [
+										"custom",
 										"reviews",
 										"reviews",
 										"reviews",
 										"reviews",
 									],
 									source: [
+										"custom_notification",
 										"freemius",
 										"reviewx",
 										"woocommerce",
@@ -434,16 +869,833 @@ const tabs = [
 								},
 								condition: {
 									"notification-type": [
+										"custom",
 										"reviews",
 										"reviews",
 										"reviews",
 										"reviews",
 									],
 									source: [
+										"custom_notification",
 										"freemius",
 										"reviewx",
 										"woocommerce",
 										"wp_reviews",
+									],
+								},
+							},
+							{
+								label: "download_stats_today-download",
+								value: "download_stats_today-download",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/today-download.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "",
+										third_param: "tag_today",
+										custom_third_param: "",
+										fourth_param: "tag_today_text",
+										custom_fourth_param: "",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"download_stats",
+										"download_stats",
+									],
+									source: [
+										"custom_notification",
+										"freemius",
+										"wp_stats",
+									],
+								},
+							},
+							{
+								label: "download_stats_7day-download",
+								value: "download_stats_7day-download",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/7day-download.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "",
+										third_param: "tag_last_week",
+										custom_third_param: "",
+										fourth_param: "tag_last_week_text",
+										custom_fourth_param: "",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"download_stats",
+										"download_stats",
+									],
+									source: [
+										"custom_notification",
+										"freemius",
+										"wp_stats",
+									],
+								},
+							},
+							{
+								label: "download_stats_actively_using",
+								value: "download_stats_actively_using",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/actively-using.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_active_installs",
+										custom_first_param: "",
+										second_param:
+											"people are actively using",
+										third_param: "tag_name",
+										custom_third_param: "",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"download_stats",
+										"download_stats",
+									],
+									source: [
+										"custom_notification",
+										"freemius",
+										"wp_stats",
+									],
+								},
+							},
+							{
+								label: "download_stats_total-download",
+								value: "download_stats_total-download",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/wporg/total-download.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "",
+										third_param: "tag_all_time",
+										custom_third_param: "",
+										fourth_param: "tag_all_time_text",
+										custom_fourth_param: "",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"download_stats",
+										"download_stats",
+									],
+									source: [
+										"custom_notification",
+										"freemius",
+										"wp_stats",
+									],
+								},
+							},
+							{
+								label: "donation_theme-one",
+								value: "donation_theme-one",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-1.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "recently donated for",
+										third_param: "tag_none",
+										fourth_param: "tag_title",
+										fifth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_theme-two",
+								value: "donation_theme-two",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-2.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "recently donated for",
+										third_param: "tag_none",
+										fourth_param: "tag_title",
+										fifth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_theme-three",
+								value: "donation_theme-three",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-3.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "recently donated for",
+										third_param: "tag_none",
+										fourth_param: "tag_title",
+										fifth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_theme-four",
+								value: "donation_theme-four",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-4.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "recently donated for",
+										third_param: "tag_none",
+										fourth_param: "tag_title",
+										fifth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_theme-five",
+								value: "donation_theme-five",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-5.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "recently donated for",
+										third_param: "tag_none",
+										fourth_param: "tag_title",
+										fifth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_conv-theme-six",
+								value: "donation_conv-theme-six",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-6.jpg",
+								trigger: null,
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_maps_theme",
+								value: "donation_maps_theme",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/maps-theme.png",
+								trigger: null,
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_conv-theme-seven",
+								value: "donation_conv-theme-seven",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-7.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_sales_count",
+										second_param: "people donated",
+										third_param: "tag_title",
+										fourth_param: "tag_7days",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_conv-theme-eight",
+								value: "donation_conv-theme-eight",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-8.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_sales_count",
+										second_param: "people donated",
+										third_param: "tag_title",
+										fourth_param: "tag_7days",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "donation_conv-theme-nine",
+								value: "donation_conv-theme-nine",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/donation/donation-theme-9.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_sales_count",
+										second_param: "people donated",
+										third_param: "tag_title",
+										fourth_param: "tag_7days",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "donation"],
+									source: ["custom_notification", "give"],
+								},
+							},
+							{
+								label: "elearning_theme-one",
+								value: "elearning_theme-one",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-1.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "just enrolled",
+										custom_third_param: "Anonymous Course",
+										third_param: "tag_title",
+										custom_fourth_param: "Some time ago",
+										fourth_param: "tag_time",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_theme-two",
+								value: "elearning_theme-two",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-2.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "recently enrolled",
+										third_param: "tag_title",
+										custom_third_param: "Anonymous Course",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_theme-three",
+								value: "elearning_theme-three",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-3.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "recently enrolled",
+										third_param: "tag_title",
+										custom_third_param: "Anonymous Course",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_theme-four",
+								value: "elearning_theme-four",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-4.png",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_theme-five",
+								value: "elearning_theme-five",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-5.png",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_conv-theme-six",
+								value: "elearning_conv-theme-six",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-6.png",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_maps_theme",
+								value: "elearning_maps_theme",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/maps-theme.png",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_conv-theme-seven",
+								value: "elearning_conv-theme-seven",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-7.png",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_conv-theme-eight",
+								value: "elearning_conv-theme-eight",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-8.png",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "elearning_conv-theme-nine",
+								value: "elearning_conv-theme-nine",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/elearning/elearning-theme-9.png",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"elearning",
+										"elearning",
+									],
+									source: [
+										"custom_notification",
+										"learndash",
+										"tutor",
+									],
+								},
+							},
+							{
+								label: "press_bar_theme-one",
+								value: "press_bar_theme-one",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-one.jpg",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"press_bar",
+									],
+									source: [
+										"custom_notification",
+										"press_bar",
+									],
+								},
+							},
+							{
+								label: "press_bar_theme-two",
+								value: "press_bar_theme-two",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-two.jpg",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"press_bar",
+									],
+									source: [
+										"custom_notification",
+										"press_bar",
+									],
+								},
+							},
+							{
+								label: "press_bar_theme-three",
+								value: "press_bar_theme-three",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-bar-theme-three.jpg",
+								trigger: null,
+								condition: {
+									"notification-type": [
+										"custom",
+										"press_bar",
+									],
+									source: [
+										"custom_notification",
+										"press_bar",
+									],
+								},
+							},
+							{
+								label: "comments_theme-one",
+								value: "comments_theme-one",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-2.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_title",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_theme-two",
+								value: "comments_theme-two",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-1.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_title",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_theme-three",
+								value: "comments_theme-three",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-3.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_title",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_theme-six-free",
+								value: "comments_theme-six-free",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-4.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_comment",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_theme-seven-free",
+								value: "comments_theme-seven-free",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-5.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_comment",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_theme-eight-free",
+								value: "comments_theme-eight-free",
+								is_pro: null,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/nx-comment-theme-6.jpg",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_comment",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_theme-four",
+								value: "comments_theme-four",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-four.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_title",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_theme-five",
+								value: "comments_theme-five",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/nx-comment-theme-five.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_title",
+										custom_third_param: "Anonymous Post",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
+									],
+								},
+							},
+							{
+								label: "comments_maps_theme",
+								value: "comments_maps_theme",
+								is_pro: true,
+								icon:
+									"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/extensions/themes/pro/maps-theme-comments.png",
+								trigger: {
+									"notification-template": {
+										first_param: "tag_name",
+										custom_first_param: "Someone",
+										second_param: "commented on",
+										third_param: "tag_post_title",
+										fourth_param: "tag_time",
+										custom_fourth_param: "Some time ago",
+									},
+								},
+								condition: {
+									"notification-type": ["custom", "comments"],
+									source: [
+										"custom_notification",
+										"wp_comments",
 									],
 								},
 							},
@@ -477,10 +1729,10 @@ const tabs = [
 						display: "inline",
 						fields: [
 							{
-								// label: "First Parameter",
+								label: "First Parameter",
 								name: "first_param",
 								type: "select",
-								priority: 1,
+								priority: 3,
 								default: "tag_name",
 								options: [
 									{
@@ -488,16 +1740,157 @@ const tabs = [
 										label: "Custom",
 									},
 									{
+										value: "tag_name",
+										label: "Full Name",
+										condition: {
+											themes: [
+												"comments_theme-one",
+												"comments_theme-two",
+												"comments_theme-three",
+												"comments_theme-six-free",
+												"comments_theme-seven-free",
+												"comments_theme-eight-free",
+												"comments_theme-four",
+												"comments_theme-five",
+												"comments_maps_theme",
+												"elearning_theme-one",
+												"elearning_theme-two",
+												"elearning_theme-three",
+												"elearning_theme-four",
+												"elearning_theme-five",
+												"elearning_conv-theme-six",
+												"elearning_maps_theme",
+												"elearning_conv-theme-seven",
+												"elearning_conv-theme-eight",
+												"elearning_conv-theme-nine",
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+												"conversions_theme-one",
+												"conversions_theme-two",
+												"conversions_theme-three",
+												"conversions_theme-four",
+												"conversions_theme-five",
+												"conversions_conv-theme-six",
+												"conversions_maps_theme",
+												"conversions_conv-theme-seven",
+												"conversions_conv-theme-eight",
+												"conversions_conv-theme-nine",
+											],
+										},
+									},
+									{
+										value: "tag_first_name",
+										label: "First Name",
+										condition: {
+											themes: [
+												"comments_theme-one",
+												"comments_theme-two",
+												"comments_theme-three",
+												"comments_theme-six-free",
+												"comments_theme-seven-free",
+												"comments_theme-eight-free",
+												"comments_theme-four",
+												"comments_theme-five",
+												"comments_maps_theme",
+												"elearning_theme-one",
+												"elearning_theme-two",
+												"elearning_theme-three",
+												"elearning_theme-four",
+												"elearning_theme-five",
+												"elearning_conv-theme-six",
+												"elearning_maps_theme",
+												"elearning_conv-theme-seven",
+												"elearning_conv-theme-eight",
+												"elearning_conv-theme-nine",
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+												"conversions_theme-one",
+												"conversions_theme-two",
+												"conversions_theme-three",
+												"conversions_theme-four",
+												"conversions_theme-five",
+												"conversions_conv-theme-six",
+												"conversions_maps_theme",
+												"conversions_conv-theme-seven",
+												"conversions_conv-theme-eight",
+												"conversions_conv-theme-nine",
+											],
+										},
+									},
+									{
+										value: "tag_last_name",
+										label: "Last Name",
+										condition: {
+											themes: [
+												"comments_theme-one",
+												"comments_theme-two",
+												"comments_theme-three",
+												"comments_theme-six-free",
+												"comments_theme-seven-free",
+												"comments_theme-eight-free",
+												"comments_theme-four",
+												"comments_theme-five",
+												"comments_maps_theme",
+												"elearning_theme-one",
+												"elearning_theme-two",
+												"elearning_theme-three",
+												"elearning_theme-four",
+												"elearning_theme-five",
+												"elearning_conv-theme-six",
+												"elearning_maps_theme",
+												"elearning_conv-theme-seven",
+												"elearning_conv-theme-eight",
+												"elearning_conv-theme-nine",
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+												"conversions_theme-one",
+												"conversions_theme-two",
+												"conversions_theme-three",
+												"conversions_theme-four",
+												"conversions_theme-five",
+												"conversions_conv-theme-six",
+												"conversions_maps_theme",
+												"conversions_conv-theme-seven",
+												"conversions_conv-theme-eight",
+												"conversions_conv-theme-nine",
+											],
+										},
+									},
+									{
 										value: "tag_username",
 										label: "Username",
 										condition: {
 											themes: [
+												"reviews_review_saying",
 												"reviews_total-rated",
 												"reviews_reviewed",
 												"reviews_review-comment",
 												"reviews_review-comment-2",
 												"reviews_review-comment-3",
-												"reviews_review_saying",
 											],
 										},
 									},
@@ -514,29 +1907,92 @@ const tabs = [
 											],
 										},
 									},
+									{
+										value: "tag_plugin_theme_name",
+										label: "Plugin/Theme Name",
+										condition: {
+											themes: [
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
+											],
+										},
+									},
+									{
+										value: "tag_today",
+										label: "Today",
+										condition: {
+											themes: [
+												"download_stats_actively_using",
+											],
+										},
+									},
+									{
+										value: "tag_last_week",
+										label: "In last 7 days",
+										condition: {
+											themes: [
+												"download_stats_actively_using",
+											],
+										},
+									},
+									{
+										value: "tag_all_time",
+										label: "Total",
+										condition: {
+											themes: [
+												"download_stats_actively_using",
+											],
+										},
+									},
+									{
+										value: "tag_active_installs",
+										label: "Total Active Install",
+										condition: {
+											themes: [
+												"download_stats_actively_using",
+											],
+										},
+									},
+									{
+										value: "tag_display_name",
+										label: "Display Name",
+										condition: {
+											themes: [
+												"comments_theme-one",
+												"comments_theme-two",
+												"comments_theme-three",
+												"comments_theme-six-free",
+												"comments_theme-seven-free",
+												"comments_theme-eight-free",
+												"comments_theme-four",
+												"comments_theme-five",
+												"comments_maps_theme",
+											],
+										},
+									},
 								],
 							},
 							{
-								// label: "Custom First Parameter",
+								label: "Custom First Parameter",
 								name: "custom_first_param",
 								type: "text",
 								priority: 5,
 								default: "Someone",
-								parent: "notification-template[first_param]",
 								condition: {
 									"notification-template[first_param]":
 										"tag_custom",
 								},
 							},
 							{
-								// label: "Second Param",
+								label: "Second Param",
 								name: "second_param",
 								type: "text",
 								priority: 10,
 								default: "recently purchased",
 							},
 							{
-								// label: "Third Parameter",
+								label: "Third Parameter",
 								name: "third_param",
 								type: "select",
 								priority: 20,
@@ -545,6 +2001,25 @@ const tabs = [
 									{
 										value: "tag_custom",
 										label: "Custom",
+									},
+									{
+										value: "tag_title",
+										label: "Product Title",
+										condition: {
+											themes: [
+												"reviews_review_saying",
+												"conversions_theme-one",
+												"conversions_theme-two",
+												"conversions_theme-three",
+												"conversions_theme-four",
+												"conversions_theme-five",
+												"conversions_conv-theme-six",
+												"conversions_maps_theme",
+												"conversions_conv-theme-seven",
+												"conversions_conv-theme-eight",
+												"conversions_conv-theme-nine",
+											],
+										},
 									},
 									{
 										value: "tag_plugin_name",
@@ -577,38 +2052,181 @@ const tabs = [
 										label: "Anonymous Title",
 										condition: {
 											themes: [
+												"elearning_theme-one",
+												"elearning_theme-two",
+												"elearning_theme-three",
+												"elearning_theme-four",
+												"elearning_theme-five",
+												"elearning_conv-theme-six",
+												"elearning_maps_theme",
+												"elearning_conv-theme-seven",
+												"elearning_conv-theme-eight",
+												"elearning_conv-theme-nine",
+												"reviews_review_saying",
 												"reviews_total-rated",
 												"reviews_reviewed",
 												"reviews_review-comment",
 												"reviews_review-comment-2",
 												"reviews_review-comment-3",
-												"reviews_review_saying",
 											],
 										},
 									},
 									{
-										value: "tag_title",
-										label: "Review Title",
+										value: "tag_today",
+										label: "Today",
 										condition: {
-											themes: ["reviews_review_saying"],
+											themes: [
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
+											],
+										},
+									},
+									{
+										value: "tag_last_week",
+										label: "In last 7 days",
+										condition: {
+											themes: [
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
+											],
+										},
+									},
+									{
+										value: "tag_all_time",
+										label: "Total",
+										condition: {
+											themes: [
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
+											],
+										},
+									},
+									{
+										value: "tag_active_installs",
+										label: "Total Active Install",
+										condition: {
+											themes: [
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
+											],
+										},
+									},
+									{
+										value: "tag_name",
+										label: "Plugin/Theme Name",
+										condition: {
+											themes: [
+												"download_stats_actively_using",
+											],
+										},
+									},
+									{
+										value: "tag_amount",
+										label: "Donation Amount",
+										condition: {
+											themes: [
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+											],
+										},
+									},
+									{
+										value: "tag_none",
+										label: "None",
+										condition: {
+											themes: [
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+											],
+										},
+									},
+									{
+										value: "course_title",
+										label: "Course Title",
+										condition: {
+											themes: [
+												"elearning_theme-one",
+												"elearning_theme-two",
+												"elearning_theme-three",
+												"elearning_theme-four",
+												"elearning_theme-five",
+												"elearning_conv-theme-six",
+												"elearning_maps_theme",
+												"elearning_conv-theme-seven",
+												"elearning_conv-theme-eight",
+												"elearning_conv-theme-nine",
+											],
+										},
+									},
+									{
+										value: "tag_post_title",
+										label: "Post Title",
+										condition: {
+											themes: [
+												"comments_theme-one",
+												"comments_theme-two",
+												"comments_theme-three",
+												"comments_theme-six-free",
+												"comments_theme-seven-free",
+												"comments_theme-eight-free",
+												"comments_theme-four",
+												"comments_theme-five",
+												"comments_maps_theme",
+											],
+										},
+									},
+									{
+										value: "tag_post_comment",
+										label: "Post Comment",
+										condition: {
+											themes: [
+												"comments_theme-one",
+												"comments_theme-two",
+												"comments_theme-three",
+												"comments_theme-six-free",
+												"comments_theme-seven-free",
+												"comments_theme-eight-free",
+												"comments_theme-four",
+												"comments_theme-five",
+												"comments_maps_theme",
+											],
 										},
 									},
 								],
 							},
 							{
-								// label: "Custom Third Param",
+								label: "Custom Third Param",
 								name: "custom_third_param",
 								type: "text",
 								priority: 25,
 								default: "Some time ago",
-								parent: "notification-template[third_param]",
 								condition: {
 									"notification-template[third_param]":
 										"tag_custom",
 								},
 							},
 							{
-								// label: "Fourth Parameter",
+								label: "Fourth Parameter",
 								name: "fourth_param",
 								type: "select",
 								priority: 30,
@@ -617,6 +2235,48 @@ const tabs = [
 									{
 										value: "tag_custom",
 										label: "Custom",
+									},
+									{
+										value: "tag_time",
+										label: "Definite Time",
+										condition: {
+											themes: [
+												"comments_theme-one",
+												"comments_theme-two",
+												"comments_theme-three",
+												"comments_theme-six-free",
+												"comments_theme-seven-free",
+												"comments_theme-eight-free",
+												"comments_theme-four",
+												"comments_theme-five",
+												"comments_maps_theme",
+												"elearning_theme-one",
+												"elearning_theme-two",
+												"elearning_theme-three",
+												"elearning_theme-four",
+												"elearning_theme-five",
+												"elearning_conv-theme-six",
+												"elearning_maps_theme",
+												"elearning_conv-theme-seven",
+												"elearning_conv-theme-eight",
+												"elearning_conv-theme-nine",
+												"reviews_total-rated",
+												"reviews_reviewed",
+												"reviews_review-comment",
+												"reviews_review-comment-2",
+												"reviews_review-comment-3",
+												"conversions_theme-one",
+												"conversions_theme-two",
+												"conversions_theme-three",
+												"conversions_theme-four",
+												"conversions_theme-five",
+												"conversions_conv-theme-six",
+												"conversions_maps_theme",
+												"conversions_conv-theme-seven",
+												"conversions_conv-theme-eight",
+												"conversions_conv-theme-nine",
+											],
+										},
 									},
 									{
 										value: "tag_rating",
@@ -632,61 +2292,100 @@ const tabs = [
 										},
 									},
 									{
-										value: "tag_time",
-										label: "Definite Time",
+										value: "tag_today_text",
+										label: "today. Try it out",
 										condition: {
 											themes: [
-												"reviews_total-rated",
-												"reviews_reviewed",
-												"reviews_review-comment",
-												"reviews_review-comment-2",
-												"reviews_review-comment-3",
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
 											],
 										},
 									},
 									{
-										value: "tag_sometime",
-										label: "Some time ago",
+										value: "tag_last_week_text",
+										label: "in last 7 days",
 										condition: {
 											themes: [
-												"reviews_total-rated",
-												"reviews_reviewed",
-												"reviews_review-comment",
-												"reviews_review-comment-2",
-												"reviews_review-comment-3",
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
+											],
+										},
+									},
+									{
+										value: "tag_all_time_text",
+										label: "in total",
+										condition: {
+											themes: [
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
+											],
+										},
+									},
+									{
+										value: "tag_active_installs_text",
+										label: "in total active",
+										condition: {
+											themes: [
+												"download_stats_today-download",
+												"download_stats_7day-download",
+												"download_stats_total-download",
 											],
 										},
 									},
 									{
 										value: "tag_title",
-										label: "Review Title",
+										label: "Donation For Title",
 										condition: {
-											themes: ["reviews_review_saying"],
+											themes: [
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+											],
 										},
 									},
 									{
 										value: "tag_anonymous_title",
 										label: "Anonymous Title",
 										condition: {
-											themes: ["reviews_review_saying"],
+											themes: [
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+											],
 										},
 									},
 								],
 							},
 							{
-								// label: "Custom Fourth Parameter",
+								label: "Custom Fourth Parameter",
 								name: "custom_fourth_param",
 								type: "text",
 								priority: 35,
 								default: "Some time ago",
-								parent: "notification-template[fourth_param]",
 								condition: {
 									"notification-template[fourth_param]":
 										"tag_custom",
 								},
 							},
 							{
-								// label: "Fifth Parameter",
+								label: "Fifth Parameter",
 								name: "fifth_param",
 								type: "select",
 								priority: 40,
@@ -702,26 +2401,42 @@ const tabs = [
 											themes: ["reviews_review_saying"],
 										},
 									},
+									{
+										value: "tag_time",
+										label: "Definite Time",
+										condition: {
+											themes: [
+												"donation_theme-one",
+												"donation_theme-two",
+												"donation_theme-three",
+												"donation_theme-four",
+												"donation_theme-five",
+												"donation_conv-theme-six",
+												"donation_maps_theme",
+												"donation_conv-theme-seven",
+												"donation_conv-theme-eight",
+												"donation_conv-theme-nine",
+											],
+										},
+									},
 								],
 							},
 							{
-								// label: "Custom Fifth Parameter",
+								label: "Custom Fifth Parameter",
 								name: "custom_fifth_param",
 								type: "text",
 								priority: 45,
-								parent: "notification-template[fifth_param]",
 								condition: {
 									"notification-template[fifth_param]":
 										"tag_custom",
 								},
 							},
 							{
-								// label: "Sixth Parameter",
+								label: "Sixth Parameter",
 								name: "sixth_param",
 								type: "select",
 								priority: 50,
 								default: "tag_custom",
-								parent: "themes",
 								options: [
 									{
 										value: "tag_custom",
@@ -737,28 +2452,68 @@ const tabs = [
 								],
 							},
 							{
-								// label: "Custom Sixth Parameter",
+								label: "Custom Sixth Parameter",
 								name: "custom_sixth_param",
 								type: "text",
 								priority: 55,
-								parent: "notification-template[sixth_param]",
 								condition: {
 									"notification-template[sixth_param]":
 										"tag_custom",
 								},
 							},
 							{
-								// label: "Review Fourth Parameter",
+								label: "Review Fourth Parameter",
 								name: "review_fourth_param",
 								type: "text",
 								priority: 27,
 								default: "About",
-								parent: "themes",
 								condition: {
 									themes: ["reviews_review_saying"],
 								},
 							},
+							{
+								label: "First Parameter CF7",
+								name: "first_param_cf7",
+								type: "select",
+								ajax: "cf7_form",
+								ajax_action: "nx_cf7_keys",
+								data: {
+									action: "nx_cf7_keys",
+									form_id: "cf7_form",
+								},
+								url:
+									"https://nx.alim.dev/wp-admin/admin-ajax.php?action=nx_cf7_keys",
+								priority: 1,
+								default: "tag_name",
+								options: [
+									{
+										value: "tag_name",
+										label: "Select A Tag",
+									},
+									{
+										value: "tag_custom",
+										label: "Custom",
+									},
+								],
+							},
+							{
+								label: "Custom First Parameter CF7",
+								name: "custom_first_param_cf7",
+								type: "text",
+								priority: 5,
+								default: "Someone",
+								condition: {
+									"notification-template[first_param_cf7]":
+										"tag_custom",
+								},
+							},
 						],
+					},
+					{
+						type: "select",
+						label: "Select a Form",
+						options: [],
+						priority: 89,
 					},
 				],
 			},
@@ -801,7 +2556,6 @@ const tabs = [
 						name: "all_locations",
 						type: "select",
 						value: "",
-						parent: "show_on",
 						multiple: true,
 						condition: {
 							show_on: ["on_selected", "hide_on_selected"],
@@ -895,7 +2649,6 @@ const tabs = [
 						value: "",
 						description:
 							"If checked, this will show in notifications.",
-						parent: "show_default_image",
 						condition: {
 							show_default_image: true,
 						},
@@ -937,7 +2690,6 @@ const tabs = [
 						name: "image_url",
 						type: "media",
 						value: "",
-						parent: "show_default_image",
 						condition: {
 							show_default_image: true,
 						},
@@ -947,7 +2699,6 @@ const tabs = [
 						name: "show_notification_image",
 						type: "select",
 						value: "",
-						parent: "show_default_image",
 						condition: {
 							show_default_image: false,
 						},
@@ -988,7 +2739,6 @@ const tabs = [
 						type: "select",
 						value: "",
 						priority: 50,
-						parent: "notification-type",
 						options: [
 							{
 								label: "Top",
@@ -1086,7 +2836,6 @@ const tabs = [
 				name: "timing",
 				type: "section",
 				priority: 200,
-				parent: "global_queue_active",
 				condition: {
 					global_queue_active: false,
 				},
@@ -1119,7 +2868,6 @@ const tabs = [
 						default: 60,
 						description: "seconds",
 						help: "Hide after 60 seconds",
-						parent: "auto_hide",
 						condition: {
 							auto_hide: true,
 						},

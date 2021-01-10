@@ -125,6 +125,11 @@ const select_fields = [
 		type: "checkbox",
 	},
 	{
+		label: "Notification Type Checkbox 2",
+		name: "notification_checkbox_2",
+		type: "checkbox",
+	},
+	{
 		label: "Notification Type Select",
 		name: "notification_select",
 		type: "select",
@@ -133,9 +138,10 @@ const select_fields = [
 		// search: true,
 		// placeholder: "Placeholder Select",
 		// multiple: true, // for multi option select
-		// condition: {
-		// 	notification_checkbox: true,
-		// },
+		condition: {
+			notification_checkbox: true,
+			notification_checkbox_2: true,
+		},
 		options: [
 			{
 				label: "Sales Notification",
@@ -165,6 +171,15 @@ const select_fields = [
 		// multiple: true, // for multi option select
 		condition: {
 			notification_select: ["comments"],
+		},
+		trigger: {
+			ajax: {
+				data: {
+					action: "nx_form_keys",
+					form_type: "@source",
+				},
+				target: "notification-template[first_param]",
+			},
 		},
 		options: [
 			{
@@ -365,7 +380,7 @@ const tabs = [
 ];
 
 const builder = {
-	tabs: alimTabs,
+	tabs,
 	tabConfig: {
 		active: "tab-content",
 		sidebar: true,

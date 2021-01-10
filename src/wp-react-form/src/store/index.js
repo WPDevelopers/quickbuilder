@@ -155,14 +155,16 @@ const store = {
 
 			Object.keys(props.condition).map((condition) => {
 				if (!isArray(props.condition[condition])) {
-					isTrue = !(
-						(state.values?.[condition] ?? false) !==
-						props.condition[condition]
-					);
+					isTrue =
+						isTrue &&
+						(state.values?.[condition] ?? false) ===
+							props.condition[condition];
 				} else {
-					isTrue = props.condition[condition].includes(
-						state.values?.[condition]
-					);
+					isTrue =
+						isTrue &&
+						props.condition[condition].includes(
+							state.values?.[condition]
+						);
 				}
 			});
 			return isTrue;

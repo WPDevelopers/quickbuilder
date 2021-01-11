@@ -5,6 +5,13 @@ import "./section.scss";
 
 function Index({ fields, label, collapsible, collapsed }) {
 	const [isCollapse, setCollapse] = useState(collapsed ?? false);
+	const myData = [].concat(fields)
+    .sort(function(a, b){
+		if(a.priority == undefined || b.priority == undefined)
+			return 0;
+		return a.priority > b.priority ? 1 : -1;
+	});
+	fields = myData;
 	const allFields = fields.map((item) => {
 		return <Field {...item} />;
 	});

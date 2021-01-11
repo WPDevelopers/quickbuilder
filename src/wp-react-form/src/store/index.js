@@ -60,6 +60,7 @@ const actions = {
 
 const store = {
 	reducer(state = DEFAULT_STATE, action) {
+		window.state = state;
 		switch (action.type) {
 			case "FIELD_VALUE": {
 				let updatedState = { ...state };
@@ -155,10 +156,15 @@ const store = {
 
 			Object.keys(props.condition).map((condition) => {
 				if (!isArray(props.condition[condition])) {
-					isTrue =
-						isTrue &&
-						(state.values?.[condition] ?? false) ===
-							props.condition[condition];
+					let cond = typeof props.condition[condition] == 'string' ? props.condition[condition].replace(/^\!/, '') : props.condition[condition];
+
+					let _isTrue = (state.values?.[condition] ?? false) === cond;
+					if(typeof props.condition[condition] == 'string' && props.condition[condition].indexOf('!') == 0){
+						_isTrue = !_isTrue;
+
+					}
+
+					isTrue = isTrue && _isTrue
 				} else {
 					isTrue =
 						isTrue &&
@@ -171,5 +177,4 @@ const store = {
 		},
 	},
 };
-
 export default store;

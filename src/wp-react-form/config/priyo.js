@@ -382,8 +382,8 @@ const tabs = [
 const builder = {
 	tabs,
 	tabConfig: {
-		active: "tab-content",
-		sidebar: true,
+		active: "source_tab",
+		sidebar: false,
 	},
 	is_pro_active: true,
 	submit: {

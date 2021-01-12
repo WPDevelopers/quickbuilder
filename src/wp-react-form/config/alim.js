@@ -1,10 +1,10 @@
 const tabs = [
 	{
 		label: "Source",
-		id: "tab-source",
+		id: "source_tab",
 		icon:
 			"https://nx.alim.dev/wp-content/plugins/notificationx-new/assets/admin/images/icons/database.svg",
-		classes: "tab-source",
+		classes: "source_tab",
 		fields: [
 			{
 				label: "Select Source",

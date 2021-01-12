@@ -27200,6 +27200,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TabContent = function TabContent(_ref) {
+  var _submit$show;
+
   var tabs = _ref.tabs,
       submit = _ref.submit,
       activeTab = _ref.activeTab;
@@ -27224,7 +27226,7 @@ var TabContent = function TabContent(_ref) {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_3__["default"], {
       fields: tab === null || tab === void 0 ? void 0 : tab.fields
     }));
-  }), submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
     config: submit
   }));
 };

@@ -36,7 +36,7 @@ const TabContent = ({ tabs, submit, activeTab }) => {
 					</div>
 				);
 			})}
-			{submit && <Submit config={submit} />}
+			{(submit?.show ?? true) && <Submit config={submit} />}
 		</div>
 	);
 };

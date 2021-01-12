@@ -7,19 +7,23 @@ const TabBuilder = ({ config }) => {
 	const [activeTab, setActiveTab] = useState(config?.tabConfig?.active);
 	const [tabs, setTab] = useState({});
 
-	useEffect(() => {
-		if (activeTab) {
-			let currentTabs = config?.tabs.filter(
-				(tab) => tab.id === activeTab
-			);
-			setTab(currentTabs?.[0]);
-		}
-	}, [activeTab]);
+	// useEffect(() => {
+	// 	if (activeTab) {
+	// 		let currentTabs = config?.tabs.filter(
+	// 			(tab) => tab.id === activeTab
+	// 		);
+	// 		setTab(currentTabs?.[0]);
+	// 	}
+	// }, [activeTab]);
 
 	return (
 		<>
 			<TabMenu {...{ config, activeTab, setActiveTab }} />
-			<TabContent tabs={tabs} submit={config?.submit} />
+			<TabContent
+				tabs={config.tabs}
+				submit={config?.submit}
+				activeTab={activeTab}
+			/>
 		</>
 	);
 };

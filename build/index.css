@@ -748,7 +748,10 @@
   background: #FFF;
   padding: 30px;
 }
-.wp-react-form.wprf-tabs-wrapper .wprf-tab-content-wrapper .wprf-tab-content.wprf-active-content {
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-content-wrapper .wprf-tab-content {
+  display: none;
+}
+.wp-react-form.wprf-tabs-wrapper .wprf-tab-content-wrapper .wprf-tab-content.wprf-active {
   display: block;
 }
 

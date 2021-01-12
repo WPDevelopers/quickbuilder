@@ -63,8 +63,8 @@
 			background: $tab_content_bg_color;
 			padding: 30px;
 			.wprf-tab-content {
-				// display: none;
-				&.wprf-active-content {
+				display: none;
+				&.wprf-active {
 					display: block;
 				}
 			}

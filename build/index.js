@@ -27201,29 +27201,30 @@ __webpack_require__.r(__webpack_exports__);
 
 var TabContent = function TabContent(_ref) {
   var tabs = _ref.tabs,
-      submit = _ref.submit;
-
-  if (tabs === undefined || Object.keys(tabs).length === 0) {
-    return "";
-  }
-
-  if (!(tabs !== null && tabs !== void 0 && tabs.id)) {
-    throw Error("Each Tab Must Have an Unique ID. i.e: id: tab_one");
-  }
-
-  if (!(tabs !== null && tabs !== void 0 && tabs.fields)) {
-    throw Error("Each tab must have some fields.");
-  }
-
+      submit = _ref.submit,
+      activeTab = _ref.activeTab;
+  // if (tabs === undefined || Object.keys(tabs).length === 0) {
+  // 	return "";
+  // }
+  // if (!tabs?.id) {
+  // 	throw Error("Each Tab Must Have an Unique ID. i.e: id: tab_one");
+  // }
+  // if (!tabs?.fields) {
+  // 	throw Error("Each tab must have some fields.");
+  // }
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "wprf-tab-content-wrapper"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    id: tabs === null || tabs === void 0 ? void 0 : tabs.id,
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wprf-tab-content", "wprf-tab-".concat(tabs === null || tabs === void 0 ? void 0 : tabs.id)),
-    key: tabs === null || tabs === void 0 ? void 0 : tabs.id
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    fields: tabs === null || tabs === void 0 ? void 0 : tabs.fields
-  })), submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, tabs === null || tabs === void 0 ? void 0 : tabs.map(function (tab) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      id: tab === null || tab === void 0 ? void 0 : tab.id,
+      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
+        "wprf-active": activeTab === tab.id
+      }),
+      key: tab === null || tab === void 0 ? void 0 : tab.id
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Fields__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      fields: tab === null || tab === void 0 ? void 0 : tab.fields
+    }));
+  }), submit && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Submit__WEBPACK_IMPORTED_MODULE_4__["default"], {
     config: submit
   }));
 };
@@ -27328,23 +27329,24 @@ var TabBuilder = function TabBuilder(_ref) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
       _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
       tabs = _useState4[0],
-      setTab = _useState4[1];
+      setTab = _useState4[1]; // useEffect(() => {
+  // 	if (activeTab) {
+  // 		let currentTabs = config?.tabs.filter(
+  // 			(tab) => tab.id === activeTab
+  // 		);
+  // 		setTab(currentTabs?.[0]);
+  // 	}
+  // }, [activeTab]);
 
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
-    if (activeTab) {
-      var currentTabs = config === null || config === void 0 ? void 0 : config.tabs.filter(function (tab) {
-        return tab.id === activeTab;
-      });
-      setTab(currentTabs === null || currentTabs === void 0 ? void 0 : currentTabs[0]);
-    }
-  }, [activeTab]);
+
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_TabMenu__WEBPACK_IMPORTED_MODULE_3__["default"], {
     config: config,
     activeTab: activeTab,
     setActiveTab: setActiveTab
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_TabContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    tabs: tabs,
-    submit: config === null || config === void 0 ? void 0 : config.submit
+    tabs: config.tabs,
+    submit: config === null || config === void 0 ? void 0 : config.submit,
+    activeTab: activeTab
   }));
 };
 

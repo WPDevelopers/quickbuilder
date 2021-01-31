@@ -6,27 +6,29 @@ import WPReactForm from "./wp-react-form";
 import { priyo as builder } from "./wp-react-form/config";
 
 (function () {
-	const App = () => {
-		// const [tabs, setTabs] = useState([]);
-		// useEffect(() => {
-		// 	fetch(
-		// 		"https://cors-anywhere.herokuapp.com/https://nx.alim.dev/wp-admin/admin-ajax.php?action=nx",
-		// 		{
-		// 			headers: {
-		// 				"no-cors": true,
-		// 			},
-		// 		}
-		// 	)
-		// 		.then((res) => res.json())
-		// 		.then((res) => {
-		// 			console.log(res);
-		// 			setTabs(res);
-		// 		});
-		// }, []);
+    const App = () => {
+        // const [tabs, setTabs] = useState([]);
+        // useEffect(() => {
+        // 	fetch(
+        // 		"https://cors-anywhere.herokuapp.com/https://nx.alim.dev/wp-admin/admin-ajax.php?action=nx",
+        // 		{
+        // 			headers: {
+        // 				"no-cors": true,
+        // 			},
+        // 		}
+        // 	)
+        // 		.then((res) => res.json())
+        // 		.then((res) => {
+        // 			console.log(res);
+        // 			setTabs(res);
+        // 		});
+        // }, []);
 
-		// builder.tabs = tabs;
+        // builder.tabs = tabs;
 
-		return <WPReactForm config={builder} />;
-	};
-	ReactDOM.render(<App />, document.getElementById("root"));
+        console.log("notificationxTabs", notificationxTabs);
+
+        return <WPReactForm config={notificationxTabs} />;
+    };
+    ReactDOM.render(<App />, document.getElementById("root"));
 })();

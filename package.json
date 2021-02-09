@@ -19,6 +19,7 @@
     "grunt-wp-readme-to-markdown": "~1.0.0"
   },
   "dependencies": {
+    "@wordpress/api-fetch": "^3.21.5",
     "@wordpress/scripts": "^12.5.0",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",

@@ -62,6 +62,27 @@ const fields = [
 		// 	"min:3": "Has to be min 3 char long.",
 		// },
 	},
+	{
+		label: "Toggle List",
+		type: "toggle",
+		multiple: true, // default false
+		classes: "", // default empty, you can provide your class name if needed
+		name: "toggle-list",
+		style: {
+			type: "card", // default empty
+			column: 3, // default 4,
+			label: {
+				position: "right", // default
+			},
+		},
+		// if multiple is true, you should provide valid options like below
+		options: [
+			{
+				label: "test",
+				value: "test",
+			},
+		],
+	},
 ];
 
 export { fields };

@@ -18,6 +18,7 @@ function Index(props) {
 		placeholder,
 		search,
 		options,
+		isAjax,
 	} = props;
 	const [option, setOption] = useState(value);
 
@@ -42,6 +43,12 @@ function Index(props) {
 	// 		}
 	// 	}
 	// }, []);
+
+	useEffect(() => {
+		// TODO
+		if (isAjax != undefined) {
+		}
+	}, [isAjax]);
 
 	useEffect(() => {
 		if (option) {

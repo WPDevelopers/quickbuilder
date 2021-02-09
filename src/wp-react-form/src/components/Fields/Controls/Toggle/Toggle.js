@@ -4,14 +4,19 @@ import { Label } from "../../../../core";
 import Input from "../Input/Input";
 
 const Toggle = ({ label, name, value: checked, styles, ...rest }) => {
+	const componentClasses = classNames(
+		"wprf-toggle-wrap",
+		`wprf-${styles.type}`,
+		{
+			"wprf-checked": checked,
+			[`wprf-label-position-${styles?.label?.position}`]: styles?.label
+				?.position,
+		},
+		rest?.classes
+	);
+
 	return (
-		<div
-			className={classNames("wprf-toggle-wrap", {
-				"wprf-checked": checked,
-				[`wprf-label-position-${styles?.label?.position}`]: styles
-					?.label?.position,
-			})}
-		>
+		<div className={componentClasses}>
 			{styles?.label?.position === "left" && <span>{label}</span>}
 			<Input
 				{...{

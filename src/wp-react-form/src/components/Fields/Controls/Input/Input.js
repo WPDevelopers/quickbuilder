@@ -27,7 +27,7 @@ const Input = (props) => {
 		props?.className,
 	]);
 
-	if (props.type == "textarea") {
+	if (props.type === "textarea") {
 		return <textarea {...props} id={id} className={componentClasses} />;
 	}
 

@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 import "./textarea.scss";
 
-function Index({ id, name, label, onChange, ...rest }) {
+function Index({ name, label, onChange, ...rest }) {
 	return (
 		<>
 			<Label htmlFor={name}>{label}</Label>
@@ -19,7 +19,7 @@ function Index({ id, name, label, onChange, ...rest }) {
 					className: classNames(rest?.className, {
 						"resize-none": rest?.resize === false,
 					}),
-					onChange: (evt) => onChange(evt.target.value),
+					onChange: (event) => onChange(event.target.value),
 					...rest,
 				}}
 			/>

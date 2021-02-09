@@ -357,24 +357,34 @@ const tabs = [
 		icon: "",
 		fields: [
 			// Text Controls
-			// ...commonFields,
-			// Radio Card
-			// ...notification_type_source_themes,
-			// Select
-			...select_fields,
-		],
-	},
-	{
-		label: "Tab 2",
-		id: "tab_2",
-		icon: "",
-		fields: [
-			// Text Controls
-			...commonFields,
-			// Radio Card
-			// ...notification_type_source_themes,
-			// Select
-			// ...select_fields
+			{
+				label: "Checkbox",
+				type: "checkbox",
+				name: "checkbox",
+			},
+			{
+				label: "Async Select",
+				type: "select",
+				name: "select",
+				value: "test",
+				options: [
+					{
+						label: "Custom",
+						value: "custom",
+					},
+					{
+						label: "Test",
+						value: "test",
+					},
+					{
+						label: "Test 2",
+						value: "test2",
+						condition: {
+							checkbox: true,
+						},
+					},
+				],
+			},
 		],
 	},
 ];
@@ -382,7 +392,7 @@ const tabs = [
 const builder = {
 	tabs,
 	tabConfig: {
-		active: "source_tab",
+		active: "tab-content",
 		sidebar: false,
 	},
 	is_pro_active: true,

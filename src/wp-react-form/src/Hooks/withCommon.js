@@ -56,7 +56,6 @@ const withCommon = (WrappedComponent, withParent = true) => {
 					tempYup = tempYup[functionName]();
 				}
 			});
-
 			return tempYup;
 		};
 

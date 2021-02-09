@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import apiFetch from "@wordpress/api-fetch";
 
 export const SweetAlert = (args = {}) => {
 	return Swal.fire({

@@ -361,12 +361,19 @@ const tabs = [
 				label: "Checkbox",
 				type: "checkbox",
 				name: "checkbox",
+				value: true,
+				rules: [
+					"or",
+					["includes", "select", "test"],
+					["includes", "select", "custom"],
+				],
 			},
 			{
 				label: "Async Select",
 				type: "select",
 				name: "select",
-				value: "test",
+				// value: "test", // if multiple is true, you need to pass value as array!
+				multiple: true,
 				options: [
 					{
 						label: "Custom",
@@ -379,9 +386,7 @@ const tabs = [
 					{
 						label: "Test 2",
 						value: "test2",
-						condition: {
-							checkbox: true,
-						},
+						rules: ["is", "checkbox", true],
 					},
 				],
 			},

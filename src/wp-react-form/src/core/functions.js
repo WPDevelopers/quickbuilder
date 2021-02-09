@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
 import apiFetch from "@wordpress/api-fetch";
+import when from "./when";
+import { select } from "@wordpress/data";
 
 export const SweetAlert = (args = {}) => {
 	return Swal.fire({
@@ -30,6 +32,15 @@ export const ObjectFilter = (thisObj, func, returnArr = false) => {
 	return newObj;
 };
 
+export const isEmptyObj = (obj) => {
+	for (let k in obj) {
+		if (obj.hasOwnProperty(k)) {
+			return false;
+		}
+	}
+	return true;
+};
+
 export const isArray = (args) => {
 	return typeof args === "object" && Array.isArray(args);
 };
@@ -44,4 +55,38 @@ export const isExists = (args, value) => {
 		default:
 			return args === value;
 	}
+};
+
+export const eligibleOptions = (options, parentValue = {}) => {
+	let newOptions = [];
+	parentValue = isEmptyObj(parentValue)
+		? select("wprf-store").getValues()
+		: parentValue;
+	if (options?.length) {
+		newOptions = options.filter((item, i) => {
+			if (item?.rules) {
+				return when(item.rules, parentValue);
+			} else {
+				return item;
+			}
+		});
+	}
+
+	return newOptions;
+};
+
+export const eligibleOption = (options, value, multiple = false) => {
+	let newOptions = [];
+	if (options.length) {
+		if (!multiple) {
+			newOptions = options.filter((option) => option.value === value);
+			return newOptions?.[0] ?? [];
+		} else {
+			newOptions = options.filter((option) =>
+				value.includes(option.value)
+			);
+			return newOptions;
+		}
+	}
+	return false;
 };

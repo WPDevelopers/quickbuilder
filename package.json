@@ -19,10 +19,12 @@
     "grunt-wp-readme-to-markdown": "~1.0.0"
   },
   "dependencies": {
+    "@flipbyte/when-condition": "^0.6.0",
     "@wordpress/api-fetch": "^3.21.5",
     "@wordpress/scripts": "^12.5.0",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
+    "conditional-field": "^1.0.2",
     "react-select": "^3.1.1",
     "sweetalert2": "^10.12.6",
     "yup": "^0.32.8"

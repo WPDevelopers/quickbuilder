@@ -1,4 +1,4 @@
-import { isArray } from "../core/functions";
+import when from "../core/when";
 
 const DEFAULT_STATE = {
     savedValues: {},
@@ -19,6 +19,12 @@ const actions = {
             type: "FIELD_VALUE",
             name,
             payload: value,
+        };
+    },
+    removeFieldValue(payload) {
+        return {
+            type: "REMOVE_FIELD_VALUE",
+            payload,
         };
     },
     resetFieldValue(payload) {
@@ -97,6 +103,15 @@ const store = {
 
                 return updatedState;
             }
+            case "REMOVE_FIELD_VALUE": {
+                let updatedState = { ...state };
+                const { payload } = action;
+
+                if (updatedState.values?.[payload]) {
+                    delete updatedState.values[payload];
+                }
+                return updatedState;
+            }
             case "RESET_FIELD_VALUE": {
                 let updatedState = { ...state };
                 if (updatedState.values?.[action.payload]) {
@@ -142,37 +157,12 @@ const store = {
         getError(state, current) {
             return state.errors?.[current];
         },
-        isVisible(state, props, parentValue) {
-            if (!props.condition) {
+        isVisible(state, props) {
+            if (!props.rules) {
                 return true;
             }
-            let isTrue = true;
-
-            Object.keys(props.condition).map((condition) => {
-                if (!isArray(props.condition[condition])) {
-                    let cond =
-                        typeof props.condition[condition] == "string"
-                            ? props.condition[condition].replace(/^\!/, "")
-                            : props.condition[condition];
-
-                    let _isTrue = (state.values?.[condition] ?? false) === cond;
-                    if (
-                        typeof props.condition[condition] == "string" &&
-                        props.condition[condition].indexOf("!") == 0
-                    ) {
-                        _isTrue = !_isTrue;
-                    }
-
-                    isTrue = isTrue && _isTrue;
-                } else {
-                    isTrue =
-                        isTrue &&
-                        props.condition[condition].includes(
-                            state.values?.[condition]
-                        );
-                }
-            });
-            return isTrue;
+            let whenVar = when(props.rules, state.values);
+            return Boolean(whenVar);
         },
     },
 };

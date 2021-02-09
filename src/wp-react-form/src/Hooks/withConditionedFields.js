@@ -12,6 +12,10 @@ const withConditionedFields = (WrappedComponent) => {
 		const [isOpt, setOptin] = useState();
 
 		useEffect(() => {
+			setFields(options);
+		}, [options]);
+
+		useEffect(() => {
 			if (fields) {
 				let selectedOption = fields.filter(
 					(field) => field.value === value

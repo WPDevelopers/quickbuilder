@@ -16,7 +16,7 @@ import {
 	Number,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
-import { isArray } from "../../core/functions";
+import { eligibleOptions, isArray } from "../../core/functions";
 
 const Field = (props) => {
 	if (!props.isVisible) {
@@ -26,14 +26,6 @@ const Field = (props) => {
 	let controlProps = {
 		...props,
 	};
-
-	// console.log("controlProps", controlProps);
-
-	// console.log(
-	// 	"from Field Comp controlProps",
-	// 	controlProps.name,
-	// 	controlProps
-	// );
 
 	switch (props.type) {
 		case "section":
@@ -56,8 +48,8 @@ const Field = (props) => {
 			return <Typography {...controlProps} />;
 		case "slider":
 			return <Slider {...controlProps} />;
-		case "button":
-		case "date":
+		// case "button":
+		// case "date":
 		case "group":
 			return <GroupControl {...controlProps} />;
 		case "select":
@@ -65,15 +57,13 @@ const Field = (props) => {
 		case "number":
 			return <Number {...controlProps} />;
 		default:
-			return <div></div>;
+			return "";
 	}
 };
 
 export default withSelect((select, ownProps) => {
 	let savedValue = select("wprf-store").getFieldValue(ownProps.name);
-
 	let value;
-
 	if (typeof ownProps.value === "object" && savedValue != undefined) {
 		if (isArray(ownProps.value)) {
 			value = [...ownProps.value, ...savedValue];
@@ -90,24 +80,6 @@ export default withSelect((select, ownProps) => {
 		isTouched: select("wprf-store").isTouched(ownProps.name),
 		errorMessage: select("wprf-store").getError(ownProps.name),
 	};
-
-	if (
-		ownProps?.options &&
-		ownProps?.options?.length > 0 &&
-		["radio-card", "select"].includes(ownProps?.type)
-	) {
-		let listCond = [];
-		ownProps.options.map((option) => {
-			if (option?.condition) {
-				Object.keys(option?.condition).map((condKey) => {
-					if (!listCond.includes(condKey)) {
-						listCond.push(condKey);
-					}
-				});
-			}
-		});
-		ownProps.parent = listCond;
-	}
 
 	if (ownProps.parent) {
 		let parentsData = undefined;
@@ -128,9 +100,9 @@ export default withSelect((select, ownProps) => {
 		};
 	}
 
-	mapsToProps = {
-		...mapsToProps,
-	};
+	if (ownProps?.options) {
+		mapsToProps.options = eligibleOptions(ownProps.options);
+	}
 
 	return mapsToProps;
 })(withCommon(Field));

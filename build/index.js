@@ -3292,6 +3292,76 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
+/***/ "./node_modules/intersect/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/intersect/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = intersect;
+
+function many (sets) {
+  var o = {};
+  var l = sets.length - 1;
+  var first = sets[0];
+  var last = sets[l];
+  
+  for(var i in first) o[first[i]] = 0;
+  
+  for(var i = 1; i <= l; i++) {
+    var row = sets[i];
+    for(var j in row) {
+      var key = row[j];
+      if(o[key] === i - 1) o[key] = i;
+    }
+  }
+  
+  var a = [];
+  for(var i in last) {
+    var key = last[i];
+    if(o[key] === l) a.push(key);
+  }
+  
+  return a;
+}
+
+function intersect (a, b) {
+  if (!b) return many(a);
+
+  var res = [];
+  for (var i = 0; i < a.length; i++) {
+    if (indexOf(b, a[i]) > -1) res.push(a[i]);
+  }
+  return res;
+}
+
+intersect.big = function(a, b) {
+  if (!b) return many(a);
+  
+  var ret = [];
+  var temp = {};
+  
+  for (var i = 0; i < b.length; i++) {
+    temp[b[i]] = true;
+  }
+  for (var i = 0; i < a.length; i++) {
+    if (temp[a[i]]) ret.push(a[i]);
+  }
+  
+  return ret;
+}
+
+function indexOf(arr, el) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === el) return i;
+  }
+  return -1;
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_DataView.js":
 /*!******************************************!*\
   !*** ./node_modules/lodash/_DataView.js ***!
@@ -24293,12 +24363,19 @@ var tabs = [{
     label: "Checkbox",
     type: "checkbox",
     name: "checkbox",
-    value: true,
-    rules: ["or", ["includes", "select", "test"], ["includes", "select", "custom"]]
+    value: true // rules: ["includes", "select", "test"],
+    // rules: ["includes", "select", ["test", "custom"]],
+    // rules: [
+    // 	"or",
+    // 	["includes", "select", "test"],
+    // 	["includes", "select", "custom"],
+    // ],
+
   }, {
     label: "Async Select",
     type: "select",
     name: "select",
+    rules: ["!is", "checkbox", true],
     // value: "test", // if multiple is true, you need to pass value as array!
     multiple: true,
     options: [{
@@ -27846,8 +27923,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
 /* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./functions */ "./src/wp-react-form/src/core/functions.js");
+/* harmony import */ var intersect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! intersect */ "./node_modules/intersect/index.js");
+/* harmony import */ var intersect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(intersect__WEBPACK_IMPORTED_MODULE_2__);
 
 var _arguments = arguments;
+
 
 
 var _typeof = function _typeof(obj) {
@@ -27869,17 +27949,28 @@ var rules = {
   is: function is(key, value, data) {
     return get(data, key) === value;
   },
+  "!is": function is(key, value, data) {
+    return !rules.is(key, value, data);
+  },
   includes: function includes(key, value, data) {
     if (!Object(_functions__WEBPACK_IMPORTED_MODULE_1__["isEmptyObj"])(data)) {
-      if (Array.isArray(get(data, key))) {
-        return get(data, key).includes(value);
+      var newData = get(data, key);
+
+      if (Object(_functions__WEBPACK_IMPORTED_MODULE_1__["isArray"])(newData)) {
+        if (Object(_functions__WEBPACK_IMPORTED_MODULE_1__["isArray"])(value)) {
+          var _intersect;
+
+          return (_intersect = intersect__WEBPACK_IMPORTED_MODULE_2___default()(newData, value)) === null || _intersect === void 0 ? void 0 : _intersect.length;
+        }
+
+        return newData.includes(value);
       }
     }
 
     return false;
   },
-  "!is": function is(key, value, data) {
-    return get(data, key) !== value;
+  "!includes": function includes(key, value, data) {
+    return !rules.includes(key, value, data);
   },
   isOfType: function isOfType(key, value, data) {
     return _typeof(get(data, key)) === value;

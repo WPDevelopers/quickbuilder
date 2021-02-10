@@ -1,4 +1,5 @@
-import { isEmptyObj } from "./functions";
+import { isArray, isEmptyObj } from "./functions";
+import intersect from "intersect";
 
 const _typeof = (obj) => {
 	if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -30,16 +31,23 @@ const rules = {
 	is: (key, value, data) => {
 		return get(data, key) === value;
 	},
+	"!is": (key, value, data) => {
+		return !rules.is(key, value, data);
+	},
 	includes: (key, value, data) => {
 		if (!isEmptyObj(data)) {
-			if (Array.isArray(get(data, key))) {
-				return get(data, key).includes(value);
+			let newData = get(data, key);
+			if (isArray(newData)) {
+				if (isArray(value)) {
+					return intersect(newData, value)?.length;
+				}
+				return newData.includes(value);
 			}
 		}
 		return false;
 	},
-	"!is": (key, value, data) => {
-		return get(data, key) !== value;
+	"!includes": (key, value, data) => {
+		return !rules.includes(key, value, data);
 	},
 	isOfType: (key, value, data) => {
 		return _typeof(get(data, key)) === value;

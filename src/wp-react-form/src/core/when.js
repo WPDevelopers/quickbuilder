@@ -34,14 +34,23 @@ const rules = {
 	"!is": (key, value, data) => {
 		return !rules.is(key, value, data);
 	},
-	includes: (key, value, data) => {
-		if (!isEmptyObj(data)) {
-			let newData = get(data, key);
-			if (isArray(newData)) {
-				if (isArray(value)) {
-					return intersect(newData, value)?.length;
+	includes: (key, checkAgainst, selectedData) => {
+		if (!isEmptyObj(selectedData)) {
+			let newData = get(selectedData, key);
+			if (_typeof(newData) != "function") {
+				if (isArray(checkAgainst) && isArray(newData)) {
+					return intersect(newData, checkAgainst)?.length;
+				} else if (
+					isArray(checkAgainst) &&
+					_typeof(newData) == "string"
+				) {
+					return checkAgainst.includes(newData);
+				} else if (
+					isArray(newData) &&
+					_typeof(checkAgainst) == "string"
+				) {
+					return newData.includes(checkAgainst);
 				}
-				return newData.includes(value);
 			}
 		}
 		return false;

@@ -4,6 +4,7 @@ import { __ } from "@wordpress/i18n";
 import WPReactForm from "./wp-react-form";
 // import axios from "axios";
 import { priyo as builder } from "./wp-react-form/config";
+import { apiFetch } from "./wp-react-form/src/core/functions";
 
 (function () {
 	const App = () => {

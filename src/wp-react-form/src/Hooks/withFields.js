@@ -1,17 +1,48 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { eligibleOption, eligibleOptions, isArray } from "../core/functions";
+import { isArray, apiFetch, processAjaxData } from "../core/functions";
 
 import { dispatch } from "@wordpress/data";
 
 const withFields = (WrappedComponent) => {
 	const WithFields = (props) => {
-		const { options, onChange, value, parentValue } = props;
+		const { options, onChange, value, parentValue, ajax } = props;
 		const [fields, setFields] = useState(options);
+		const [isMenuOpen, setMenuOpen] = useState(false);
 		const [option, setOption] = useState(null);
+		const [isAjaxOptionLoaded, setAjaxOptionLoaded] = useState(false);
 
 		useEffect(() => {
 			setFields(options);
 		}, [options]);
+
+		useEffect(() => {
+			if (
+				ajax &&
+				ajax?.on === "click" &&
+				isMenuOpen &&
+				!isAjaxOptionLoaded &&
+				ajax?.api
+			) {
+				apiFetch({
+					path: ajax.api,
+					data: processAjaxData(ajax.data),
+				})
+					.then((response) => {
+						if (isArray(response)) {
+							setTimeout(() => {
+								setAjaxOptionLoaded(true);
+								setFields((oldFields) => [
+									...oldFields,
+									...response,
+								]);
+							}, 1000);
+						}
+					})
+					.catch((err) => {
+						setAjaxOptionLoaded(false);
+					});
+			}
+		}, [isMenuOpen]);
 
 		// useEffect(() => {
 		// 	let newOptions = eligibleOptions(options, parentValue);
@@ -54,6 +85,7 @@ const withFields = (WrappedComponent) => {
 				{...props}
 				options={fields}
 				option={option}
+				menuOpen={(res) => setMenuOpen(res)}
 				setOption={(res) => setOption(res)}
 			/>
 		);

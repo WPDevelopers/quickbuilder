@@ -1,6 +1,7 @@
 import React from "react";
 import { useInstanceId } from "@wordpress/compose";
 import withConditionedFields from "../../../../Hooks/withConditionedFields";
+import withFields from "../../../../Hooks/withFields";
 import classNames from "classnames";
 
 import Input from "../Input/Input";

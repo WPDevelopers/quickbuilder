@@ -358,25 +358,44 @@ const tabs = [
 		fields: [
 			// Text Controls
 			{
-				label: "Checkbox",
+				label: "Type",
 				type: "checkbox",
-				name: "checkbox",
+				name: "type",
 				value: true,
-				// rules: ["includes", "select", "test"],
-				// rules: ["includes", "select", ["test", "custom"]],
-				// rules: [
-				// 	"or",
-				// 	["includes", "select", "test"],
-				// 	["includes", "select", "custom"],
-				// ],
 			},
 			{
-				label: "Async Select",
-				type: "select",
-				name: "select",
-				rules: ["!is", "checkbox", true],
+				label: "Source",
+				type: "radio-card",
+				name: "source",
+				options: [
+					{
+						label: "Custom",
+						value: "cf7",
+					},
+					{
+						label: "Test",
+						value: "mkl",
+					},
+					{
+						label: "Test 2",
+						value: "mkl2",
+					},
+				],
+			},
+			{
+				label: "Themes",
+				type: "radio-card",
+				name: "themes",
+				// ajax: {
+				// 	on: "click",
+				// 	api: "/notificationx/v1/get-data",
+				// 	data: {
+				// 		form_type: "@source",
+				// 	},
+				// },
+				// rules: ["!is", "checkbox", true],
 				// value: "test", // if multiple is true, you need to pass value as array!
-				multiple: true,
+				// multiple: true,
 				options: [
 					{
 						label: "Custom",
@@ -389,7 +408,7 @@ const tabs = [
 					{
 						label: "Test 2",
 						value: "test2",
-						rules: ["is", "checkbox", true],
+						rules: ["includes", "source", ["cf7", "mkl"]],
 					},
 				],
 			},

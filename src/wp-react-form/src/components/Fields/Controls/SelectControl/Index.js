@@ -31,6 +31,8 @@ function Index(props) {
 				placeholder={placeholder}
 				options={options}
 				value={option}
+				onMenuOpen={() => props.menuOpen(true)}
+				onMenuClose={() => props.menuOpen(false)}
 				onChange={(option) => props.setOption(option)} // option or options
 			/>
 		</div>

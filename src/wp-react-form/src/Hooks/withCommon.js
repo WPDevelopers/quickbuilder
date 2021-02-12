@@ -2,27 +2,32 @@ import React, { Component } from "react";
 import { useInstanceId } from "@wordpress/compose";
 import classNames from "classnames";
 import * as Yup from "yup";
-import { dispatch } from "@wordpress/data";
-import { SweetAlert } from "../core/functions";
+
+import { SweetAlert, triggerDefaults, setStoreData } from "../core/functions";
 
 const withCommon = (WrappedComponent, withParent = true) => {
     class WithCommon extends Component {
         componentDidMount() {
             if (this.props.value && this.props.isVisible) {
-                dispatch("wprf-store").setFieldValue({
+                setStoreData().setFieldValue({
                     name: this.props.name,
                     value: { [this.props.name]: this.props.value },
                 });
+                triggerDefaults(
+                    this.props.trigger?.defaults,
+                    this.props.name,
+                    this.props.value
+                );
             }
         }
         componentDidUpdate(prevProps) {
             if (prevProps.isVisible !== this.props.isVisible) {
-                dispatch("wprf-store").setFieldValue({
+                setStoreData().setFieldValue({
                     name: this.props.name,
                     value: { [this.props.name]: this.props.value },
                 });
                 if (!this.props.isVisible) {
-                    dispatch("wprf-store").removeFieldValue(this.props.name);
+                    setStoreData().removeFieldValue(this.props.name);
                 }
             }
         }
@@ -39,16 +44,21 @@ const withCommon = (WrappedComponent, withParent = true) => {
                 });
             }
             if (this.props?.errorMessage) {
-                dispatch("wprf-store").removeError(this.props.name);
+                setStoreData().removeError(this.props.name);
             }
-            dispatch("wprf-store").setFieldValue({
+            setStoreData().setFieldValue({
                 name: this.props.name,
                 value: { [this.props.name]: value },
             });
+            triggerDefaults(
+                this.props.trigger?.defaults,
+                this.props.name,
+                value
+            );
         };
 
         onReset = (name) => {
-            dispatch("wprf-store").resetFieldValue(name);
+            setStoreData().resetFieldValue(name);
         };
 
         makeValidationRules = (rules) => {
@@ -83,13 +93,13 @@ const withCommon = (WrappedComponent, withParent = true) => {
                         [this.props.name]: this.props.value,
                     })
                     .catch((err) => {
-                        dispatch("wprf-store").setError({
+                        setStoreData().setError({
                             [this.props.name]: err.message,
                         });
                     });
             }
 
-            dispatch("wprf-store").setFieldTouched({
+            setStoreData().setFieldTouched({
                 [this.props.name]: true,
             });
         };

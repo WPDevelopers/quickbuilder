@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import * as wpFetch from "@wordpress/api-fetch";
-import { select } from "@wordpress/data";
+import { dispatch, select } from "@wordpress/data";
 
 // const { api_nonce } = NotificationXGlobal;
 // wpFetch.use(wpFetch.createNonceMiddleware(notificationxTabs.rest.nonce));
@@ -101,11 +101,41 @@ export const eligibleOption = (options, value, multiple = false) => {
     return false;
 };
 
+export const triggerDefaults = (defaults, checkType, value = null) => {
+    if (!isEmptyObj(defaults) && typeof defaults === "object") {
+        for (let obj in defaults) {
+            if (obj === value) {
+                let at = defaults[obj].indexOf("@"),
+                    colon = defaults[obj].indexOf(":");
+                if (at === 0 && colon > 0) {
+                    let eligibleKey = defaults[obj].substr(1, colon - 1);
+                    let eligibleDataToSet = defaults[obj].substr(colon + 1);
+                    let eligibleDefaultData = getStoreData().getSavedFieldValue(
+                        eligibleKey,
+                        checkType
+                    );
+                    if (eligibleKey != "" && eligibleDataToSet != "") {
+                        setStoreData().setFieldValue({
+                            name: eligibleKey,
+                            value: {
+                                [eligibleKey]: eligibleDefaultData
+                                    ? eligibleDefaultData
+                                    : eligibleDataToSet,
+                            },
+                        });
+                    }
+                }
+            }
+        }
+    }
+};
+
 /**
  * API Fetch for WP
  * @param {object} args
  */
 export const getStoreData = () => select("wprf-store");
+export const setStoreData = () => dispatch("wprf-store");
 
 export const apiFetch = (params) => {
     let args = { ...params, method: "POST" };
@@ -118,7 +148,12 @@ export const processAjaxData = (data) => {
         if (data[item].indexOf("@") === 0) {
             let eligibleKey = data[item].substr(1);
             if (eligibleKey != "") {
-                newData[item] = getStoreData().getFieldValue(eligibleKey);
+                let eligibleData = getStoreData().getFieldValue(eligibleKey);
+                if (eligibleData) {
+                    newData[item] = eligibleData;
+                } else {
+                    newData[item] = "undefined";
+                }
             }
         } else {
             newData[item] = data[item];

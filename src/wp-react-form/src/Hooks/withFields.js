@@ -1,11 +1,18 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { isArray, apiFetch, processAjaxData } from "../core/functions";
+import {
+	isArray,
+	apiFetch,
+	processAjaxData,
+	eligibleOption,
+	isEmptyObj,
+} from "../core/functions";
 
 import { dispatch } from "@wordpress/data";
+import intersect from "intersect";
 
 const withFields = (WrappedComponent) => {
 	const WithFields = (props) => {
-		const { options, onChange, value, parentValue, ajax } = props;
+		const { options, onChange, value, onReset, ajax } = props;
 		const [fields, setFields] = useState(options);
 		const [isMenuOpen, setMenuOpen] = useState(false);
 		const [option, setOption] = useState(null);
@@ -44,25 +51,38 @@ const withFields = (WrappedComponent) => {
 			}
 		}, [isMenuOpen]);
 
-		// useEffect(() => {
-		// 	let newOptions = eligibleOptions(options, parentValue);
-		// 	setFields(newOptions);
-		// 	if (value) {
-		// 		let newOption = eligibleOption(
-		// 			newOptions,
-		// 			value,
-		// 			props?.multiple
-		// 		);
-		// 		if (newOption != false) {
-		// 			setOption(newOption);
-		// 		}
-		// 	}
-		// }, []);
+		useEffect(() => {
+			if (value) {
+				let newOption = eligibleOption(options, value, props?.multiple);
+				if (newOption != false) {
+					setOption(newOption);
+				}
+			}
+		}, []);
 
-		// useEffect(() => {
-		// 	let newOptions = eligibleOptions(options, parentValue);
-		// 	setFields(newOptions);
-		// }, [parentValue]);
+		useEffect(() => {
+			if (isArray(value)) {
+				let nValue = intersect(
+					fields.map((item) => item.value),
+					value
+				);
+				if (nValue.length !== value.length) {
+					let newOption = eligibleOption(
+						fields,
+						nValue,
+						props?.multiple
+					);
+					setOption(newOption);
+				}
+			} else {
+				let newOption = eligibleOption(fields, value, false);
+				if (isEmptyObj(newOption)) {
+					onReset(props.name);
+				} else {
+					setOption(newOption);
+				}
+			}
+		}, [fields]);
 
 		useEffect(() => {
 			if (option !== null) {

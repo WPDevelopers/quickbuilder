@@ -357,42 +357,112 @@ const tabs = [
 		icon: "",
 		fields: [
 			// Text Controls
+			// {
+			// 	label: "Type",
+			// 	type: "checkbox",
+			// 	name: "type",
+			// 	value: true,
+			// },
 			{
 				label: "Type",
-				type: "checkbox",
+				type: "radio-card",
 				name: "type",
-				value: true,
+				value: "conversions",
+				trigger: {
+					defaults: {
+						conversions: "@source:woocommerce",
+						press_bar: "@source:bar",
+						form: "@source:cf7",
+					},
+				},
+				options: [
+					{
+						label: "Conversions",
+						value: "conversions",
+					},
+					{
+						label: "Press Bar",
+						value: "press_bar",
+					},
+					{
+						label: "Contact Form",
+						value: "form",
+					},
+				],
 			},
 			{
 				label: "Source",
 				type: "radio-card",
 				name: "source",
+				// value: "conversions",
 				options: [
 					{
-						label: "Custom",
+						label: "WooCommerce",
+						value: "woocommerce",
+						rules: ["is", "type", "conversions"],
+					},
+					{
+						label: "EDD",
+						value: "edd",
+						rules: ["is", "type", "conversions"],
+					},
+					{
+						label: "Bar",
+						value: "bar",
+						rules: ["is", "type", "press_bar"],
+					},
+					{
+						label: "Contact Form 7",
 						value: "cf7",
+						rules: ["is", "type", "form"],
 					},
 					{
-						label: "Test",
-						value: "mkl",
+						label: "WPForm",
+						value: "wp_form",
+						rules: ["is", "type", "form"],
+					},
+				],
+			},
+			{
+				label: "Checkbox",
+				name: "checkbox",
+				type: "checkbox",
+			},
+			{
+				label: "Select a Form",
+				type: "select",
+				name: "form_list",
+				value: "item_1",
+				multiple: true,
+				options: [
+					{
+						label: "Item One",
+						value: "item_1",
 					},
 					{
-						label: "Test 2",
-						value: "mkl2",
+						label: "Item 2",
+						value: "item_2",
+						rules: ["is", "checkbox", true],
+					},
+					{
+						label: "Item 3",
+						value: "item_3",
 					},
 				],
 			},
 			{
 				label: "Themes",
-				type: "radio-card",
+				type: "select",
 				name: "themes",
-				// ajax: {
-				// 	on: "click",
-				// 	api: "/notificationx/v1/get-data",
-				// 	data: {
-				// 		form_type: "@source",
-				// 	},
-				// },
+				ajax: {
+					on: "click",
+					api: "/notificationx/v1/get-data",
+					data: {
+						type: "ContactForm",
+						source: "@source",
+						form_list: "@form_list",
+					},
+				},
 				// rules: ["!is", "checkbox", true],
 				// value: "test", // if multiple is true, you need to pass value as array!
 				// multiple: true,

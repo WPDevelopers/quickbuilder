@@ -5,6 +5,7 @@ import {
 	processAjaxData,
 	eligibleOption,
 	isEmptyObj,
+	setStoreData,
 } from "../core/functions";
 
 import { dispatch } from "@wordpress/data";
@@ -36,13 +37,18 @@ const withFields = (WrappedComponent) => {
 				})
 					.then((response) => {
 						if (isArray(response)) {
-							setTimeout(() => {
-								setAjaxOptionLoaded(true);
-								setFields((oldFields) => [
-									...oldFields,
-									...response,
-								]);
-							}, 1000);
+							setAjaxOptionLoaded(true);
+							setFields((oldFields) => [
+								...oldFields,
+								...response,
+							]);
+							console.log("test");
+							// if (ajax?.target) {
+							// 	setStoreData().setFieldValue({
+							// 		name: ajax.target,
+							// 		value: { [ajax.target]: response },
+							// 	});
+							// }
 						}
 					})
 					.catch((err) => {

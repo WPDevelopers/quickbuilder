@@ -13,6 +13,8 @@ import SelectControl from "./SelectControl";
 import Typography from "./Typography";
 import Slider from "./Slider";
 import Number from "./Number";
+import DateTime from "./DateTime";
+import Repeater from "./Repeater";
 
 export {
 	Input,
@@ -29,4 +31,6 @@ export {
 	Typography,
 	Slider,
 	Number,
+	DateTime,
+	Repeater,
 };

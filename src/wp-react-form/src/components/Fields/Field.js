@@ -14,6 +14,8 @@ import {
 	Typography,
 	Slider,
 	Number,
+	DateTime,
+	Repeater,
 } from "./Controls";
 import withCommon from "../../Hooks/withCommon";
 import { eligibleOptions, isArray, getStoreData } from "../../core/functions";
@@ -53,7 +55,10 @@ const Field = (props) => {
 		case "slider":
 			return <Slider {...controlProps} />;
 		// case "button":
-		// case "date":
+		case "repeater":
+			return <Repeater {...controlProps} />;
+		case "datetime":
+			return <DateTime {...controlProps} />;
 		case "group":
 			return <GroupControl {...controlProps} />;
 		case "select":

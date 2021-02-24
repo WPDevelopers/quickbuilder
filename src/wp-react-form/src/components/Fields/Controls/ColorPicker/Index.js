@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ColorPicker } from "@wordpress/components";
 import "./colorpicker.scss";
-import "./wp.scss";
 
 function Index({ id, name, label, onChange, value }) {
 	const [showPicker, setShowPicker] = useState(false);

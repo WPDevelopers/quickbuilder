@@ -429,59 +429,84 @@ const tabs = [
 				type: "checkbox",
 			},
 			{
-				label: "Select a Form",
-				type: "select",
-				name: "form_list",
-				value: "item_1",
-				multiple: true,
-				options: [
+				label: "Repeater",
+				name: "repeater",
+				type: "repeater",
+				fields: [
 					{
-						label: "Item One",
-						value: "item_1",
+						label: "R Text",
+						name: "n_text",
+						type: "text",
+						validation_rules: {
+							required: "test",
+						},
 					},
 					{
-						label: "Item 2",
-						value: "item_2",
-						rules: ["is", "checkbox", true],
-					},
-					{
-						label: "Item 3",
-						value: "item_3",
+						label: "R Toggle",
+						name: "toggle",
+						type: "toggle",
 					},
 				],
 			},
-			{
-				label: "Themes",
-				type: "select",
-				name: "themes",
-				ajax: {
-					on: "click",
-					api: "/notificationx/v1/get-data",
-					data: {
-						type: "ContactForm",
-						source: "@source",
-						form_list: "@form_list",
-					},
-				},
-				// rules: ["!is", "checkbox", true],
-				// value: "test", // if multiple is true, you need to pass value as array!
-				// multiple: true,
-				options: [
-					{
-						label: "Custom",
-						value: "custom",
-					},
-					{
-						label: "Test",
-						value: "test",
-					},
-					{
-						label: "Test 2",
-						value: "test2",
-						rules: ["includes", "source", ["cf7", "mkl"]],
-					},
-				],
-			},
+			// {
+			// 	label: "DateTime",
+			// 	name: "datetime",
+			// 	type: "datetime",
+			// },
+			// {
+			// 	label: "Select a Form",
+			// 	type: "select",
+			// 	name: "form_list",
+			// 	value: "item_1",
+			// 	multiple: true,
+			// 	options: [
+			// 		{
+			// 			label: "Item One",
+			// 			value: "item_1",
+			// 		},
+			// 		{
+			// 			label: "Item 2",
+			// 			value: "item_2",
+			// 			rules: ["is", "checkbox", true],
+			// 		},
+			// 		{
+			// 			label: "Item 3",
+			// 			value: "item_3",
+			// 		},
+			// 	],
+			// },
+			// {
+			// 	label: "Themes",
+			// 	type: "select",
+			// 	name: "themes",
+			// 	ajax: {
+			// 		on: "click",
+			// 		api: "/notificationx/v1/get-data",
+			// 		data: {
+			// 			type: "ContactForm",
+			// 			source: "@source",
+			// 			form_list: "@form_list",
+			// 		},
+			// 	},
+			// 	// rules: ["!is", "checkbox", true],
+			// 	// value: "test", // if multiple is true, you need to pass value as array!
+			// 	// multiple: true,
+			// 	options: [
+			// 		{
+			// 			label: "Custom",
+			// 			value: "custom",
+			// 		},
+			// 		{
+			// 			label: "Test",
+			// 			value: "test",
+			// 		},
+			// 		{
+			// 			label: "Test 2",
+			// 			value: "test2",
+			// 			rules: ["includes", "source", ["cf7", "mkl"]],
+			// 		},
+			// 	],
+			// },
 		],
 	},
 ];

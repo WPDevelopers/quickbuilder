@@ -2,8 +2,6 @@ import React from "react";
 import Field from "../core/Field";
 import withChange from "../core/hooks/withChange";
 
-import '../scss/text.scss';
-
 function Checkbox(props) {
     const { name, label, value, ...rest } = props;
 

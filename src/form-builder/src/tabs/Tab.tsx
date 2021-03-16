@@ -4,7 +4,7 @@ import Content from './Content'
 import { TabConfig } from './types';
 import { BuilderProvider } from '../core/hooks/useBuilderContext';
 
-import '../scss/tabs.scss';
+import '../scss/index.scss';
 
 import useBuilder from '../core/hooks/useBuilder';
 

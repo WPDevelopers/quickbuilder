@@ -186,11 +186,12 @@ const useBuilder = (props) => {
         return options;
     }, [state.errors, state.touched, state.values]);
 
-    // const getFieldHelpers = React.useCallback((name, props) => {
-    //     return {
-    //         s
-    //     };
-    // }, [state.errors, state.touched, state.values]);
+    const getFieldHelpers = React.useCallback((props) => {
+        return {
+            setValue: (name, value) => setFieldValue(name, value)
+        };
+    }, [state.errors, state.touched, state.values]);
+
     let context = {
         values: state.values,
         errors: {},
@@ -202,6 +203,7 @@ const useBuilder = (props) => {
         handleChange: handleChange,
         getFieldProps: getFieldProps,
         getFieldMeta: getFieldMeta,
+        getFieldHelpers: getFieldHelpers,
         eligibleOptions: eligibleOptions,
         eligibleOption: eligibleOption,
     };

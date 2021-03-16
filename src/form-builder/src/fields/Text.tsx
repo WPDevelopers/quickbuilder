@@ -3,8 +3,6 @@ import Field from "../core/Field";
 import withChange from "../core/hooks/withChange";
 import withLabel from "../core/hooks/withLabel";
 
-import '../scss/text.scss';
-
 function Text(props) {
     const { name, label, value, ...rest } = props;
 

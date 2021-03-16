@@ -1,0 +1,19 @@
+.wprf-control-section {
+    .wprf-section-title{
+        display: flex;
+        align-items: center;
+        & > h4 {
+            flex: 1
+        }
+    }
+    & .wprf-section-fields {
+        height: auto;
+        transition: all 0.3s ease 0s;
+    }
+    &.wprf-section-collapsed {
+        & .wprf-section-fields {
+            height: 0;
+            overflow: hidden;
+        }
+    }
+}

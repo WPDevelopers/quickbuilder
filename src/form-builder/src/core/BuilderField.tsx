@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Radio } from '../fields';
+import { Group, Radio, Section, Date } from '../fields';
 import { useBuilderContext } from './hooks';
 import Field from './Field';
 import { objectWithoutPropertiesLoose } from './utils';
@@ -17,8 +17,13 @@ const BuilderField = (props) => {
     const { validation_rules, default: defolt, rules } = props;
 
     const meta = { ...builderContext.getFieldMeta(field.name, props), ...props.meta, validation_rules, default: defolt, rules };
+    const helpers = builderContext.getFieldHelpers(props);
 
-    const inputFieldsAttributes = { ...field, meta }
+    const inputFieldsAttributes = { ...field, meta, helpers }
+
+    if (props.name == 'date') {
+        console.log("BuilderField", inputFieldsAttributes);
+    }
 
     if (!meta.visible) {
         return <></>;
@@ -32,7 +37,7 @@ const BuilderField = (props) => {
         case "email":
         case "range":
         case "number":
-            // console.log(inputFieldsAttributes);
+            // case "date":
             return <Field {...inputFieldsAttributes} />;
         case "group":
             let groupAttr = {
@@ -42,6 +47,12 @@ const BuilderField = (props) => {
             return <Group {...groupAttr} />;
         case "radio-card":
             return <Radio {...inputFieldsAttributes} />;
+        case "section":
+            return <Section {...inputFieldsAttributes} />;
+        case "date":
+            return <Date {...inputFieldsAttributes} />;
+        default:
+            return <></>;
     }
 }
 

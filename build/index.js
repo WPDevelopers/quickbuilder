@@ -348,47 +348,100 @@ var builder = {
                     },
                 },
                 {
-                    type: "group",
-                    name: "group_control",
-                    label: "Group Control",
-                    default: {
-                        name: 'Mukul',
-                        email: 'mukul@ar.com.bd'
-                    },
+                    type: 'date',
+                    name: 'date',
+                },
+                {
+                    type: 'section',
+                    label: 'Section Test',
+                    name: 'section',
                     fields: [
                         {
-                            type: "text",
-                            name: "name",
-                            label: "Username",
-                            placeholder: "Text Control Placeholder",
-                            value: "Test Control Saved Value",
-                            default: "Test Control Default Value",
-                            validation_rules: {
-                                required: "This Fields is Required",
-                                "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                            type: "group",
+                            name: "group_control",
+                            label: "Group Control",
+                            default: {
+                                name: 'Mukul',
+                                email: 'mukul@ar.com.bd'
                             },
-                        },
-                        {
-                            type: "email",
-                            name: "email",
-                            label: "Email",
-                            placeholder: "Text Control Placeholder",
-                            value: "Test Control Saved Value",
-                            default: "Test Control Default Value",
-                            validation_rules: {
-                                required: "This Fields is Required",
-                                "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                            },
-                        },
-                    ],
-                    // placeholder: "Text Control Placeholder",
-                    // value: "Test Control Saved Value", // String
-                    // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                    // validation_rules: {
-                    // 	required: "This Fields is Required", // Message
-                    // 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    // },
+                            fields: [
+                                {
+                                    type: "text",
+                                    name: "name",
+                                    label: "Username",
+                                    placeholder: "Text Control Placeholder",
+                                    value: "Test Control Saved Value",
+                                    default: "Test Control Default Value",
+                                    validation_rules: {
+                                        required: "This Fields is Required",
+                                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                                    },
+                                },
+                                {
+                                    type: "email",
+                                    name: "email",
+                                    label: "Email",
+                                    placeholder: "Text Control Placeholder",
+                                    value: "Test Control Saved Value",
+                                    default: "Test Control Default Value",
+                                    validation_rules: {
+                                        required: "This Fields is Required",
+                                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                                    },
+                                },
+                            ],
+                            // placeholder: "Text Control Placeholder",
+                            // value: "Test Control Saved Value", // String
+                            // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                            // validation_rules: {
+                            // 	required: "This Fields is Required", // Message
+                            // 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+                            // },
+                        }
+                    ]
                 },
+                // {
+                // 	type: "group", // Required
+                // 	name: "group_control", // Required
+                // 	label: "Group Control",
+                // 	default: {
+                // 		name: 'Mukul',
+                // 		email: 'mukul@ar.com.bd'
+                // 	},
+                // 	fields: [
+                // 		{
+                // 			type: "text", // Required
+                // 			name: "name", // Required
+                // 			label: "Username",
+                // 			placeholder: "Text Control Placeholder",
+                // 			value: "Test Control Saved Value", // String
+                // 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                // 			validation_rules: {
+                // 				required: "This Fields is Required", // Message
+                // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+                // 			},
+                // 		},
+                // 		{
+                // 			type: "email", // Required
+                // 			name: "email", // Required
+                // 			label: "Email",
+                // 			placeholder: "Text Control Placeholder",
+                // 			value: "Test Control Saved Value", // String
+                // 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                // 			validation_rules: {
+                // 				required: "This Fields is Required", // Message
+                // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+                // 			},
+                // 		},
+                // 	],
+                // 	// placeholder: "Text Control Placeholder",
+                // 	// value: "Test Control Saved Value", // String
+                // 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                // 	// validation_rules: {
+                // 	// 	required: "This Fields is Required", // Message
+                // 	// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+                // 	// },
+                // },
             ]
         },
     ]
@@ -503,7 +556,11 @@ var BuilderField = function (props) {
     var field = utils_1.objectWithoutPropertiesLoose(props, ['validation_rules', 'default', 'rules', 'meta']);
     var validation_rules = props.validation_rules, defolt = props.default, rules = props.rules;
     var meta = __assign(__assign(__assign({}, builderContext.getFieldMeta(field.name, props)), props.meta), { validation_rules: validation_rules, default: defolt, rules: rules });
-    var inputFieldsAttributes = __assign(__assign({}, field), { meta: meta });
+    var helpers = builderContext.getFieldHelpers(props);
+    var inputFieldsAttributes = __assign(__assign({}, field), { meta: meta, helpers: helpers });
+    if (props.name == 'date') {
+        console.log("BuilderField", inputFieldsAttributes);
+    }
     if (!meta.visible) {
         return react_1.default.createElement(react_1.default.Fragment, null);
     }
@@ -515,13 +572,19 @@ var BuilderField = function (props) {
         case "email":
         case "range":
         case "number":
-            // console.log(inputFieldsAttributes);
+            // case "date":
             return react_1.default.createElement(Field_1.default, __assign({}, inputFieldsAttributes));
         case "group":
             var groupAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: props.name, parentDefault: props.default }) });
             return react_1.default.createElement(fields_1.Group, __assign({}, groupAttr));
         case "radio-card":
             return react_1.default.createElement(fields_1.Radio, __assign({}, inputFieldsAttributes));
+        case "section":
+            return react_1.default.createElement(fields_1.Section, __assign({}, inputFieldsAttributes));
+        case "date":
+            return react_1.default.createElement(fields_1.Date, __assign({}, inputFieldsAttributes));
+        default:
+            return react_1.default.createElement(react_1.default.Fragment, null);
     }
 };
 exports.default = BuilderField;
@@ -1269,11 +1332,11 @@ var useBuilder = function (props) {
         }
         return options;
     }, [state.errors, state.touched, state.values]);
-    // const getFieldHelpers = React.useCallback((name, props) => {
-    //     return {
-    //         s
-    //     };
-    // }, [state.errors, state.touched, state.values]);
+    var getFieldHelpers = react_1.default.useCallback(function (props) {
+        return {
+            setValue: function (name, value) { return setFieldValue(name, value); }
+        };
+    }, [state.errors, state.touched, state.values]);
     var context = {
         values: state.values,
         errors: {},
@@ -1285,6 +1348,7 @@ var useBuilder = function (props) {
         handleChange: handleChange,
         getFieldProps: getFieldProps,
         getFieldMeta: getFieldMeta,
+        getFieldHelpers: getFieldHelpers,
         eligibleOptions: eligibleOptions,
         eligibleOption: eligibleOption,
     };
@@ -1710,6 +1774,42 @@ exports.default = when;
 
 /***/ }),
 
+/***/ "./src/form-builder/src/fields/Date.tsx":
+/*!**********************************************!*\
+  !*** ./src/form-builder/src/fields/Date.tsx ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+var date_1 = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
+var DateControl = function (props, ref) {
+    var settings = date_1.__experimentalGetSettings();
+    // const divRef = useRef(null);
+    var is12HourTime = /a(?!\\)/i.test(settings.formats.time
+        .toLowerCase() // Test only the lower case a
+        .replace(/\\\\/g, "") // Replace "//" with empty strings
+        .split("")
+        .reverse()
+        .join("") // Reverse the string and test for "a" not followed by a slash
+    );
+    // console.log("ref", ref, props);
+    // console.log(divRef)
+    return (react_1.default.createElement("div", { className: "wprf-control-datetime" },
+        react_1.default.createElement(components_1.DateTimePicker, { onChange: function (date) { return props.helpers.setValue(props.name, date); }, is12Hour: is12HourTime })));
+};
+exports.default = DateControl;
+
+
+/***/ }),
+
 /***/ "./src/form-builder/src/fields/Group.tsx":
 /*!***********************************************!*\
   !*** ./src/form-builder/src/fields/Group.tsx ***!
@@ -1876,6 +1976,71 @@ exports.default = RadioCard;
 
 /***/ }),
 
+/***/ "./src/form-builder/src/fields/Section.tsx":
+/*!*************************************************!*\
+  !*** ./src/form-builder/src/fields/Section.tsx ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var BuilderField_1 = __importDefault(__webpack_require__(/*! ../core/BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
+var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
+// import "../section.scss";
+var Section = function (props) {
+    var _a;
+    var _b = react_1.useState((_a = props.collapsed) !== null && _a !== void 0 ? _a : false), isCollapse = _b[0], setCollapse = _b[1];
+    var newFields = utils_1.sortingFields(props.fields);
+    var allFields = newFields.map(function (item, index) {
+        return react_1.default.createElement(BuilderField_1.default, __assign({ key: item.name }, item, { meta: props.meta }));
+    });
+    return (react_1.default.createElement("div", { className: "wprf-control-section " + (props.collapsible ? (isCollapse ? "wprf-section-collapsed" : "") : "") },
+        react_1.default.createElement("div", { className: "wprf-section-title" },
+            react_1.default.createElement("h4", null, props.label),
+            props.collapsible && (react_1.default.createElement("button", { onClick: function () { return setCollapse(!isCollapse); } }, "Icon"))),
+        react_1.default.createElement("div", { className: "wprf-section-fields" }, allFields)));
+};
+exports.default = Section;
+
+
+/***/ }),
+
 /***/ "./src/form-builder/src/fields/index.ts":
 /*!**********************************************!*\
   !*** ./src/form-builder/src/fields/index.ts ***!
@@ -1889,19 +2054,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Radio = exports.Group = void 0;
+exports.Date = exports.Section = exports.Radio = exports.Group = void 0;
 var Group_1 = __webpack_require__(/*! ./Group */ "./src/form-builder/src/fields/Group.tsx");
 Object.defineProperty(exports, "Group", { enumerable: true, get: function () { return __importDefault(Group_1).default; } });
 var RadioCard_1 = __webpack_require__(/*! ./RadioCard */ "./src/form-builder/src/fields/RadioCard.tsx");
 Object.defineProperty(exports, "Radio", { enumerable: true, get: function () { return __importDefault(RadioCard_1).default; } });
+var Section_1 = __webpack_require__(/*! ./Section */ "./src/form-builder/src/fields/Section.tsx");
+Object.defineProperty(exports, "Section", { enumerable: true, get: function () { return __importDefault(Section_1).default; } });
+var Date_1 = __webpack_require__(/*! ./Date */ "./src/form-builder/src/fields/Date.tsx");
+Object.defineProperty(exports, "Date", { enumerable: true, get: function () { return __importDefault(Date_1).default; } });
 
 
 /***/ }),
 
-/***/ "./src/form-builder/src/scss/radio-card.scss":
-/*!***************************************************!*\
-  !*** ./src/form-builder/src/scss/radio-card.scss ***!
-  \***************************************************/
+/***/ "./src/form-builder/src/scss/index.scss":
+/*!**********************************************!*\
+  !*** ./src/form-builder/src/scss/index.scss ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1909,10 +2078,10 @@ Object.defineProperty(exports, "Radio", { enumerable: true, get: function () { r
 
 /***/ }),
 
-/***/ "./src/form-builder/src/scss/tabs.scss":
-/*!*********************************************!*\
-  !*** ./src/form-builder/src/scss/tabs.scss ***!
-  \*********************************************/
+/***/ "./src/form-builder/src/scss/radio-card.scss":
+/*!***************************************************!*\
+  !*** ./src/form-builder/src/scss/radio-card.scss ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2225,7 +2394,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var Menu_1 = __importDefault(__webpack_require__(/*! ./Menu */ "./src/form-builder/src/tabs/Menu.tsx"));
 var Content_1 = __importDefault(__webpack_require__(/*! ./Content */ "./src/form-builder/src/tabs/Content.tsx"));
 var useBuilderContext_1 = __webpack_require__(/*! ../core/hooks/useBuilderContext */ "./src/form-builder/src/core/hooks/useBuilderContext.ts");
-__webpack_require__(/*! ../scss/tabs.scss */ "./src/form-builder/src/scss/tabs.scss");
+__webpack_require__(/*! ../scss/index.scss */ "./src/form-builder/src/scss/index.scss");
 var useBuilder_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useBuilder */ "./src/form-builder/src/core/hooks/useBuilder.tsx"));
 var Tab = function (props) {
     var builderContextState = useBuilder_1.default(props);
@@ -2289,6 +2458,17 @@ var default_1 = __importDefault(__webpack_require__(/*! ./form-builder/config/de
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["components"]; }());
+
+/***/ }),
+
 /***/ "@wordpress/compose":
 /*!*********************************!*\
   !*** external ["wp","compose"] ***!
@@ -2308,6 +2488,17 @@ var default_1 = __importDefault(__webpack_require__(/*! ./form-builder/config/de
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["data"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/date":
+/*!******************************!*\
+  !*** external ["wp","date"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["date"]; }());
 
 /***/ }),
 

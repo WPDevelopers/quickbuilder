@@ -83,49 +83,101 @@ const builder = {
 						"min:20": "Your Input is too short. Make it 20Character Bigger.",
 					},
 				},
-
 				{
-					type: "group", // Required
-					name: "group_control", // Required
-					label: "Group Control",
-					default: {
-						name: 'Mukul',
-						email: 'mukul@ar.com.bd'
-					},
+					type: 'date',
+					name: 'date',
+				},
+				{
+					type: 'section',
+					label: 'Section Test',
+					name: 'section',
 					fields: [
 						{
-							type: "text", // Required
-							name: "name", // Required
-							label: "Username",
-							placeholder: "Text Control Placeholder",
-							value: "Test Control Saved Value", // String
-							default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-							validation_rules: {
-								required: "This Fields is Required", // Message
-								"min:20": "Your Input is too short. Make it 20Character Bigger.",
+							type: "group", // Required
+							name: "group_control", // Required
+							label: "Group Control",
+							default: {
+								name: 'Mukul',
+								email: 'mukul@ar.com.bd'
 							},
-						},
-						{
-							type: "email", // Required
-							name: "email", // Required
-							label: "Email",
-							placeholder: "Text Control Placeholder",
-							value: "Test Control Saved Value", // String
-							default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-							validation_rules: {
-								required: "This Fields is Required", // Message
-								"min:20": "Your Input is too short. Make it 20Character Bigger.",
-							},
-						},
-					],
-					// placeholder: "Text Control Placeholder",
-					// value: "Test Control Saved Value", // String
-					// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-					// validation_rules: {
-					// 	required: "This Fields is Required", // Message
-					// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
-					// },
+							fields: [
+								{
+									type: "text", // Required
+									name: "name", // Required
+									label: "Username",
+									placeholder: "Text Control Placeholder",
+									value: "Test Control Saved Value", // String
+									default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+									validation_rules: {
+										required: "This Fields is Required", // Message
+										"min:20": "Your Input is too short. Make it 20Character Bigger.",
+									},
+								},
+								{
+									type: "email", // Required
+									name: "email", // Required
+									label: "Email",
+									placeholder: "Text Control Placeholder",
+									value: "Test Control Saved Value", // String
+									default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+									validation_rules: {
+										required: "This Fields is Required", // Message
+										"min:20": "Your Input is too short. Make it 20Character Bigger.",
+									},
+								},
+							],
+							// placeholder: "Text Control Placeholder",
+							// value: "Test Control Saved Value", // String
+							// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+							// validation_rules: {
+							// 	required: "This Fields is Required", // Message
+							// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+							// },
+						}
+					]
 				},
+				// {
+				// 	type: "group", // Required
+				// 	name: "group_control", // Required
+				// 	label: "Group Control",
+				// 	default: {
+				// 		name: 'Mukul',
+				// 		email: 'mukul@ar.com.bd'
+				// 	},
+				// 	fields: [
+				// 		{
+				// 			type: "text", // Required
+				// 			name: "name", // Required
+				// 			label: "Username",
+				// 			placeholder: "Text Control Placeholder",
+				// 			value: "Test Control Saved Value", // String
+				// 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+				// 			validation_rules: {
+				// 				required: "This Fields is Required", // Message
+				// 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+				// 			},
+				// 		},
+				// 		{
+				// 			type: "email", // Required
+				// 			name: "email", // Required
+				// 			label: "Email",
+				// 			placeholder: "Text Control Placeholder",
+				// 			value: "Test Control Saved Value", // String
+				// 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+				// 			validation_rules: {
+				// 				required: "This Fields is Required", // Message
+				// 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+				// 			},
+				// 		},
+				// 	],
+				// 	// placeholder: "Text Control Placeholder",
+				// 	// value: "Test Control Saved Value", // String
+				// 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+				// 	// validation_rules: {
+				// 	// 	required: "This Fields is Required", // Message
+				// 	// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+				// 	// },
+				// },
 			]
 		},
 	]

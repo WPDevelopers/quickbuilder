@@ -34,6 +34,10 @@ const Group = (props) => {
         if (!isEqual(localState, builderContext.values[props.name])) {
             builderContext.setFieldValue(props.name, localState);
         }
+
+        if (props?.handleChange) {
+            props.handleChange(localState);
+        }
     }, [localState])
 
     const newFields = sortingFields(props.fields);

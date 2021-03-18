@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { TabProps } from "./types";
 import { sortingFields, isArray } from "../core/utils";
 import InnerContent from "../core/InnerContent";
+import { Popover } from "@wordpress/components";
 
 
 const Content: React.FC<TabProps> = ({ tabs, active }) => {
@@ -38,6 +39,7 @@ const Content: React.FC<TabProps> = ({ tabs, active }) => {
                 return (
                     <div id={tab?.id} className={componentClasses} key={tab?.id} >
                         <InnerContent fields={tab?.fields} />
+                        <Popover.Slot />
                     </div>
                 );
             })}

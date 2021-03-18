@@ -386,6 +386,17 @@
 .wprf-control-datetime {
   position: relative;
 }
+.wprf-control-datetime .components-button.is-tertiary {
+  background-color: #f2f2f2;
+  border: none;
+  color: #6648fe;
+  padding: 10px;
+  cursor: pointer;
+}
+.wprf-control-datetime .components-button.is-tertiary:focus {
+  outline: none;
+  border: none;
+}
 .wprf-control-datetime .components-datetime {
   /*rtl:end:ignore*/
 }
@@ -785,10 +796,6 @@
 }
 .wprf-control-datetime .components-datetime .CalendarMonthGrid__animating {
   z-index: 1;
-}
-.wprf-control-datetime .components-datetime .CalendarMonthGrid__horizontal {
-  position: absolute;
-  left: 9px;
 }
 .wprf-control-datetime .components-datetime .CalendarMonthGrid__vertical {
   margin: 0 auto;
@@ -1277,7 +1284,7 @@
   outline: 2px solid transparent;
 }
 .wprf-control-datetime .components-datetime .components-datetime__date .CalendarDay__selected {
-  background: var(--wp-admin-theme-color);
+  background: #6648fe;
   border: 2px solid transparent;
 }
 .wprf-control-datetime .components-datetime .components-datetime__date .CalendarDay__selected:hover {
@@ -1387,8 +1394,16 @@
 .wprf-control-datetime .components-datetime .components-datetime__time-field-month-select {
   max-width: 145px;
 }
-.wprf-control-datetime .components-datetime .components-popover .components-datetime__date {
+.wprf-control-datetime .components-popover .components-datetime__date {
   padding-left: 4px;
+}
+.wprf-control-datetime .components-popover .components-popover__content {
+  position: absolute;
+  background: #ffff;
+  padding: 15px;
+  box-shadow: 0 0 40px -30px rgba(0, 0, 0, 0.9);
+  border: 1px solid #f2f2f2;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=index.css.map*/

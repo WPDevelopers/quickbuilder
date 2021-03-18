@@ -1,33 +1,40 @@
-import React, { useRef } from "react";
-import { DateTimePicker, DatePicker, TimePicker, Button, ButtonGroup } from "@wordpress/components";
-import { __experimentalGetSettings } from "@wordpress/date";
+import React, { useEffect, useRef } from "react";
+import { DateTimePicker, DatePicker, TimePicker, Dropdown, Button } from "@wordpress/components";
+import { __experimentalGetSettings, date } from "@wordpress/date";
 
-const DateControl = (props, ref) => {
+const DateControl = (props) => {
     const settings = __experimentalGetSettings();
-
-    // const divRef = useRef(null);
-
-
     const is12HourTime = /a(?!\\)/i.test(
-        settings.formats.time
-            .toLowerCase() // Test only the lower case a
-            .replace(/\\\\/g, "") // Replace "//" with empty strings
+        settings.formats.datetime
+            .toLowerCase()
+            .replace(/\\\\/g, "")
             .split("")
             .reverse()
-            .join("") // Reverse the string and test for "a" not followed by a slash
+            .join("")
     );
 
-    // console.log("ref", ref, props);
-    // console.log(divRef)
+    useEffect(() => {
+        if (props.meta.value == undefined) {
+            props.helpers.setValue(props.name, date('c', props.meta.value))
+        }
+    }, [])
 
     return (
-        <div className="wprf-control-datetime">
-            {/* <button onClick={() => divRef.current.classList.add()}>Tarikh</button> */}
-            <DateTimePicker
-                onChange={(date) => props.helpers.setValue(props.name, date)}
-                is12Hour={is12HourTime}
-            />
-        </div>
+        <Dropdown
+            className="wprf-control-datetime"
+            renderToggle={({ isOpen, onToggle }) => (<Button isTertiary onClick={onToggle}>
+                {date(settings.formats.datetime, props.meta.value, settings.timezone.string)}
+            </Button>)}
+            renderContent={() => {
+                return (
+                    <DateTimePicker
+                        currentDate={date(settings.formats.datetime, props.meta.value) || date(settings.formats.datetime, Date.now())}
+                        onChange={(date) => props.helpers.setValue(props.name, date ?? (props.meta.default || new Date()))}
+                        is12Hour={is12HourTime}
+                    />
+                )
+            }}>
+        </Dropdown>
     );
 };
 

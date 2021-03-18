@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Radio, Section, Date } from '../fields';
+import { Group, Radio, Section, Date, Test, Repeater } from '../fields';
 import { useBuilderContext } from './hooks';
 import Field from './Field';
 import { objectWithoutPropertiesLoose } from './utils';
@@ -51,6 +51,13 @@ const BuilderField = (props) => {
             return <Section {...inputFieldsAttributes} />;
         case "date":
             return <Date {...inputFieldsAttributes} />;
+        case "repeater":
+            let repeaterAttr = {
+                ...inputFieldsAttributes,
+                meta: { ...inputFieldsAttributes.meta, withState: false, parent: props.name, parentDefault: props.default }
+            };
+            return <Repeater {...repeaterAttr} />;
+        // return <Test {...inputFieldsAttributes} />;
         default:
             return <></>;
     }

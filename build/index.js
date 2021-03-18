@@ -307,6 +307,16 @@ var builder = {
                     },
                 },
                 {
+                    type: "colorpicker",
+                    name: "color",
+                    label: "Color Control",
+                    default: '#FF0000',
+                    validation_rules: {
+                        required: "This Fields is Required",
+                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                    },
+                },
+                {
                     type: "text",
                     name: "text_control_3",
                     label: "Text Control",
@@ -621,6 +631,8 @@ var BuilderField = function (props) {
             return react_1.default.createElement(fields_1.Date, __assign({}, inputFieldsAttributes));
         case "toggle":
             return react_1.default.createElement(fields_1.Toggle, __assign({}, inputFieldsAttributes));
+        case "colorpicker":
+            return react_1.default.createElement(fields_1.ColorPicker, __assign({}, inputFieldsAttributes));
         case "repeater":
             var repeaterAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: {
                         type: props.type,
@@ -1810,6 +1822,87 @@ exports.default = when;
 
 /***/ }),
 
+/***/ "./src/form-builder/src/fields/ColorPicker.tsx":
+/*!*****************************************************!*\
+  !*** ./src/form-builder/src/fields/ColorPicker.tsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+var ColorPicker = function (_a) {
+    var field = _a.field, meta = _a.meta, helpers = _a.helpers, props = __rest(_a, ["field", "meta", "helpers"]);
+    var value = field.value, name = field.name, id = field.id;
+    var _b = react_1.useState(false), showPicker = _b[0], setShowPicker = _b[1];
+    var closeRef = react_1.useRef(null);
+    var handleCloseRef = function (ref) {
+        react_1.useEffect(function () {
+            var handleClickOutside = function (ev) {
+                if (ref.current && !ref.current.contains(ev.target)) {
+                    setShowPicker(false);
+                }
+            };
+            document.addEventListener("mousedown", handleClickOutside);
+            return function () {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    };
+    react_1.useEffect(function () {
+        helpers.setValue(name, value || meta.value || meta.default);
+    }, [value, meta.value, meta.default]);
+    handleCloseRef(closeRef);
+    return (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement("div", { className: "wprf-colorpicker-wrap", ref: closeRef },
+            react_1.default.createElement("input", { type: "hidden", value: value, name: name, id: id }),
+            react_1.default.createElement("span", { className: "wprf-picker-display", style: { backgroundColor: value, borderColor: value }, onClick: function () { return setShowPicker(!showPicker); } }),
+            showPicker && (react_1.default.createElement(react_1.default.Fragment, null,
+                react_1.default.createElement("button", { className: "wprf-colorpicker-reset", onClick: function (e) {
+                        e.preventDefault();
+                        setShowPicker(false);
+                        meta.default && helpers.setValue(name, meta.default);
+                    } }, "Reset"),
+                react_1.default.createElement(components_1.ColorPicker, { color: value, onChangeComplete: function (event) { return helpers.setValue(name, event.hex); } }))))));
+};
+exports.default = ColorPicker;
+
+
+/***/ }),
+
 /***/ "./src/form-builder/src/fields/Date.tsx":
 /*!**********************************************!*\
   !*** ./src/form-builder/src/fields/Date.tsx ***!
@@ -2450,7 +2543,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Test = exports.Repeater = exports.Section = exports.Radio = exports.Toggle = exports.Group = exports.Date = void 0;
+exports.Test = exports.ColorPicker = exports.Repeater = exports.Section = exports.Radio = exports.Toggle = exports.Group = exports.Date = void 0;
 var Date_1 = __webpack_require__(/*! ./Date */ "./src/form-builder/src/fields/Date.tsx");
 Object.defineProperty(exports, "Date", { enumerable: true, get: function () { return __importDefault(Date_1).default; } });
 var Group_1 = __webpack_require__(/*! ./Group */ "./src/form-builder/src/fields/Group.tsx");
@@ -2463,6 +2556,8 @@ var Section_1 = __webpack_require__(/*! ./Section */ "./src/form-builder/src/fie
 Object.defineProperty(exports, "Section", { enumerable: true, get: function () { return __importDefault(Section_1).default; } });
 var Repeater_1 = __webpack_require__(/*! ./Repeater */ "./src/form-builder/src/fields/Repeater.tsx");
 Object.defineProperty(exports, "Repeater", { enumerable: true, get: function () { return __importDefault(Repeater_1).default; } });
+var ColorPicker_1 = __webpack_require__(/*! ./ColorPicker */ "./src/form-builder/src/fields/ColorPicker.tsx");
+Object.defineProperty(exports, "ColorPicker", { enumerable: true, get: function () { return __importDefault(ColorPicker_1).default; } });
 var Test_1 = __webpack_require__(/*! ./Test */ "./src/form-builder/src/fields/Test.tsx");
 Object.defineProperty(exports, "Test", { enumerable: true, get: function () { return __importDefault(Test_1).default; } });
 

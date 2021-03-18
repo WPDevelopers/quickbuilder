@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Radio, Section, Date, Test, Repeater, Toggle } from '../fields';
+import { Group, Radio, Section, Date, Test, Repeater, Toggle, ColorPicker } from '../fields';
 import { useBuilderContext } from './hooks';
 import Field from './Field';
 import { objectWithoutPropertiesLoose } from './utils';
@@ -71,6 +71,8 @@ const BuilderField = (props) => {
             return <Date {...inputFieldsAttributes} />;
         case "toggle":
             return <Toggle {...inputFieldsAttributes} />;
+        case "colorpicker":
+            return <ColorPicker {...inputFieldsAttributes} />;
         case "repeater":
             let repeaterAttr = {
                 ...inputFieldsAttributes,

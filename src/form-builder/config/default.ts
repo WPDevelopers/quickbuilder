@@ -43,6 +43,16 @@ const builder = {
 					},
 				},
 				{
+					type: "colorpicker", // Required
+					name: "color", // Required
+					label: "Color Control",
+					default: '#FF0000',
+					validation_rules: {
+						required: "This Fields is Required", // Message
+						"min:20": "Your Input is too short. Make it 20Character Bigger.",
+					},
+				},
+				{
 					type: "text", // Required
 					name: "text_control_3", // Required
 					label: "Text Control",

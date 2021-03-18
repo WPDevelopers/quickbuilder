@@ -106,6 +106,7 @@ const useBuilder = (props) => {
         }
 
         let field: any = {
+            ...args,
             type: args.type,
             name: name,
             value: valueState || '',

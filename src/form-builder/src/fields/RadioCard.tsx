@@ -15,9 +15,9 @@ const RadioCard = (props) => {
         throw new Error('#options is a required arguments for RadioCard field.');
     }
 
-    useEffect(() => {
-        console.log(props, option);
-    }, [option])
+    // useEffect(() => {
+    //     console.log(props, option);
+    // }, [option])
 
     const instanceId = useInstanceId(RadioCard);
 

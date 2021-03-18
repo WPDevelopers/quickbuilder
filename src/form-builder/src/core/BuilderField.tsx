@@ -21,9 +21,15 @@ const BuilderField = (props) => {
 
     const inputFieldsAttributes = { ...field, meta, helpers }
 
-    if (props.name == 'date') {
-        console.log("BuilderField", inputFieldsAttributes);
-    }
+    // if (props.name === 'repeater_text_one') {
+
+    //     console.log(props, field, meta)
+    // }
+
+
+    // if (props.name == 'date') {
+    //     console.log("BuilderField", inputFieldsAttributes);
+    // }
 
     if (!meta.visible) {
         return <></>;
@@ -42,7 +48,16 @@ const BuilderField = (props) => {
         case "group":
             let groupAttr = {
                 ...inputFieldsAttributes,
-                meta: { ...inputFieldsAttributes.meta, withState: false, parent: props.name, parentDefault: props.default }
+                meta: {
+                    ...inputFieldsAttributes.meta,
+                    withState: false,
+                    parent: {
+                        type: props.type,
+                        name: props.name,
+                        default: props.default,
+                        ...inputFieldsAttributes?.meta?.parent
+                    }
+                }
             };
             return <Group {...groupAttr} />;
         case "radio-card":
@@ -54,7 +69,15 @@ const BuilderField = (props) => {
         case "repeater":
             let repeaterAttr = {
                 ...inputFieldsAttributes,
-                meta: { ...inputFieldsAttributes.meta, withState: false, parent: props.name, parentDefault: props.default }
+                meta: {
+                    ...inputFieldsAttributes.meta,
+                    withState: false,
+                    parent: {
+                        type: props.type,
+                        name: props.name,
+                        default: props.default
+                    }
+                }
             };
             return <Repeater {...repeaterAttr} />;
         // return <Test {...inputFieldsAttributes} />;

@@ -20,7 +20,7 @@ const Group = (props) => {
         return localS;
     }, [])
 
-    const [localState, setLocalState] = useState(localMemoizedState || props.meta.default || {});
+    const [localState, setLocalState] = useState((props?.handleChange ? {} : (localMemoizedState || props.meta.default)) || {});
 
     const handleChange = useCallback((event) => {
         if (event.persist) {
@@ -31,7 +31,7 @@ const Group = (props) => {
     }, [])
 
     useEffect(() => {
-        if (!isEqual(localState, builderContext.values[props.name])) {
+        if (!isEqual(localState, builderContext.values[props.name]) && !props?.handleChange) {
             builderContext.setFieldValue(props.name, localState);
         }
 
@@ -42,7 +42,7 @@ const Group = (props) => {
 
     const newFields = sortingFields(props.fields);
     const allFields = newFields.map((item, index) => {
-        return <BuilderField key={item.name} {...item} meta={props.meta} onChange={handleChange} />;
+        return <BuilderField key={item.name} index={props.index} {...item} meta={props.meta} onChange={handleChange} />;
     });
 
     return (

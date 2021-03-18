@@ -59,11 +59,20 @@ const Field: React.FC<FieldAttributes<any>> = (props) => {
     let field = builderContext.getFieldProps({ name, ...props });
 
     if (!withState) {
-        const parent = props?.meta?.parent;
+        const parent = props?.meta?.parent.name;
         delete field.onChange;
         delete field.onBlur;
         meta = builderContext.getFieldMeta(parent, props)
-        field.value = meta.value && meta.value[field.name] || '';
+
+        if (meta.parent) {
+            if (meta.parent.type === 'group') {
+                field.value = meta.value && meta.value[field.name] || '';
+            }
+            if (meta.parent.type === 'repeater') {
+                field.value = meta.value && meta.value?.[field.index]?.[field.name] || '';
+            }
+        }
+
         field.onChange = props.onChange;
         field.onBlur = props.onBlur;
     }

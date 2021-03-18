@@ -2,11 +2,14 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useBuilderContext } from '../core/hooks';
 
 import BuilderField from '../core/BuilderField'
-import { executeChange } from '../core/utils';
+import { RepeaterField } from './helpers';
+import { isEqual } from 'lodash';
+
 
 const Repeater = (props) => {
     const builderContext = useBuilderContext();
-    const localMemoizedState = useMemo(() => {
+
+    const localMemoizedValue = useMemo(() => {
         let localS = builderContext.values?.[props.name];
         if (localS && props.meta.default) {
             localS = [...props.meta.default, ...localS];
@@ -14,37 +17,35 @@ const Repeater = (props) => {
         return localS;
     }, [])
 
-    const [localState, setLocalState] = useState(localMemoizedState || []);
+    const [localFields, setLocalFields] = useState([{}]);
+    const [localValue, setLocalValue] = useState(localMemoizedValue || {});
+
+    const handleChange = useCallback((value, index) => {
+        setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
+    }, [])
 
     useEffect(() => {
-        if (props?.name == 'repeater') {
-            console.log("localState", localState)
-        }
-    })
-
-    const handleChange = useCallback((event) => {
-        if (event.persist) {
-            event.persist();
-        }
-        const { field, val: value } = executeChange(event);
-
-        console.log(value, field)
-
-        // setLocalState((prevState) => ([...prevState, value]));
-    }, [])
+        props.helpers.setValue(props.name, localValue);
+    }, [localValue])
 
     return (
         <div className="wprf-repeater-control">
             <div className="wprf-repeater-label">
                 <h4>{props.label}</h4>
-                <button className="wprf-repeater-button" onClick={() => setLocalState(prevLocalState => ([...prevLocalState, {}]))}>
+                <button className="wprf-repeater-button" onClick={() => setLocalFields(prevLocalState => ([...prevLocalState, {}]))}>
                     {props.button.label}
                 </button>
             </div>
             <div className="wprf-repeater-content">
                 {
-                    localState.map((field, index) => {
-                        return <BuilderField key={index} name={`${props.name}_${index}`} handleChange={handleChange} type="group" fields={props.fields} />
+                    localFields.map((field, index) => {
+                        return <RepeaterField
+                            key={index}
+                            name={`${props.name}`}
+                            index={index}
+                            handleChange={handleChange}
+                            fields={props.fields}
+                        />
                     })
                 }
 

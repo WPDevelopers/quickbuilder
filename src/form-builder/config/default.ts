@@ -88,25 +88,30 @@ const builder = {
 					name: 'date',
 				},
 				{
-					type: 'repeater',
-					name: 'repeater',
-					label: 'Repeater',
-					button: {
-						label: 'Add New',
-					},
-					fields: [
-						{
-							type: 'text',
-							placeholder: 'Repeater Text',
-							name: 'repeater_text',
-						},
-						{
-							type: 'text',
-							placeholder: 'Repeater Text',
-							name: 'repeater_text_one',
-						},
-					]
+					type: 'toggle',
+					name: 'toggle',
+					label: 'Toggle'
 				},
+				// {
+				// 	type: 'repeater',
+				// 	name: 'repeater',
+				// 	label: 'Repeater',
+				// 	button: {
+				// 		label: 'Add New',
+				// 	},
+				// 	fields: [
+				// 		{
+				// 			type: 'text',
+				// 			placeholder: 'Repeater Text',
+				// 			name: 'repeater_text',
+				// 		},
+				// 		{
+				// 			type: 'text',
+				// 			placeholder: 'Repeater Text',
+				// 			name: 'repeater_text_one',
+				// 		},
+				// 	]
+				// },
 				{
 					type: 'section',
 					label: 'Section Test',

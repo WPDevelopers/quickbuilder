@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Radio, Section, Date, Test, Repeater } from '../fields';
+import { Group, Radio, Section, Date, Test, Repeater, Toggle } from '../fields';
 import { useBuilderContext } from './hooks';
 import Field from './Field';
 import { objectWithoutPropertiesLoose } from './utils';
@@ -22,13 +22,7 @@ const BuilderField = (props) => {
     const inputFieldsAttributes = { ...field, meta, helpers }
 
     // if (props.name === 'repeater_text_one') {
-
     //     console.log(props, field, meta)
-    // }
-
-
-    // if (props.name == 'date') {
-    //     console.log("BuilderField", inputFieldsAttributes);
     // }
 
     if (!meta.visible) {
@@ -66,6 +60,8 @@ const BuilderField = (props) => {
             return <Section {...inputFieldsAttributes} />;
         case "date":
             return <Date {...inputFieldsAttributes} />;
+        case "toggle":
+            return <Toggle {...inputFieldsAttributes} />;
         case "repeater":
             let repeaterAttr = {
                 ...inputFieldsAttributes,

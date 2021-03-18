@@ -52,6 +52,7 @@ export declare type FieldAttributes<T> = GenericFieldHTMLAttributes & FieldConfi
 
 const Field: React.FC<FieldAttributes<any>> = (props) => {
     const { name, children, as: is, component } = props;
+
     const builderContext = useBuilderContext();
 
     const withState = !!(props?.meta?.withState ?? true);
@@ -88,7 +89,6 @@ const Field: React.FC<FieldAttributes<any>> = (props) => {
         }
     }, [])
 
-
     if (isFunction(children)) {
         return children({ ...legacyField, meta });
     }
@@ -111,4 +111,4 @@ const Field: React.FC<FieldAttributes<any>> = (props) => {
     return React.createElement(asElement, { ...field }, children);
 }
 
-export default Field;
+export default React.memo(Field);

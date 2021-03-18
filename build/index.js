@@ -352,25 +352,30 @@ var builder = {
                     name: 'date',
                 },
                 {
-                    type: 'repeater',
-                    name: 'repeater',
-                    label: 'Repeater',
-                    button: {
-                        label: 'Add New',
-                    },
-                    fields: [
-                        {
-                            type: 'text',
-                            placeholder: 'Repeater Text',
-                            name: 'repeater_text',
-                        },
-                        {
-                            type: 'text',
-                            placeholder: 'Repeater Text',
-                            name: 'repeater_text_one',
-                        },
-                    ]
+                    type: 'toggle',
+                    name: 'toggle',
+                    label: 'Toggle'
                 },
+                // {
+                // 	type: 'repeater',
+                // 	name: 'repeater',
+                // 	label: 'Repeater',
+                // 	button: {
+                // 		label: 'Add New',
+                // 	},
+                // 	fields: [
+                // 		{
+                // 			type: 'text',
+                // 			placeholder: 'Repeater Text',
+                // 			name: 'repeater_text',
+                // 		},
+                // 		{
+                // 			type: 'text',
+                // 			placeholder: 'Repeater Text',
+                // 			name: 'repeater_text_one',
+                // 		},
+                // 	]
+                // },
                 {
                     type: 'section',
                     label: 'Section Test',
@@ -582,9 +587,6 @@ var BuilderField = function (props) {
     // if (props.name === 'repeater_text_one') {
     //     console.log(props, field, meta)
     // }
-    // if (props.name == 'date') {
-    //     console.log("BuilderField", inputFieldsAttributes);
-    // }
     if (!meta.visible) {
         return react_1.default.createElement(react_1.default.Fragment, null);
     }
@@ -607,6 +609,8 @@ var BuilderField = function (props) {
             return react_1.default.createElement(fields_1.Section, __assign({}, inputFieldsAttributes));
         case "date":
             return react_1.default.createElement(fields_1.Date, __assign({}, inputFieldsAttributes));
+        case "toggle":
+            return react_1.default.createElement(fields_1.Toggle, __assign({}, inputFieldsAttributes));
         case "repeater":
             var repeaterAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: {
                         type: props.type,
@@ -808,7 +812,7 @@ var Field = function (props) {
     }
     return react_1.default.createElement(asElement, __assign({}, field), children);
 };
-exports.default = Field;
+exports.default = react_1.default.memo(Field);
 
 
 /***/ }),
@@ -1302,8 +1306,9 @@ var useBuilder = function (props) {
         var valueState = utils_1.getIn(state.values, name);
         if (isAnObject) {
             delete args.meta;
+            delete args.helpers;
         }
-        var field = __assign(__assign({}, args), { type: args.type, name: name, value: valueState || '', onChange: handleChange, onBlur: handleBlur });
+        var field = __assign(__assign({}, args), { type: args.type, name: name, value: valueState || '', onChange: handleChange, onBlur: handleBlur, id: name });
         if (args === null || args === void 0 ? void 0 : args.id) {
             field.id = args.id;
         }
@@ -1327,6 +1332,9 @@ var useBuilder = function (props) {
                 field.multiple = true;
             }
         }
+        // if (name === 'toggle') {
+        //     console.log(field)
+        // }
         return field;
     }, [handleBlur, handleChange, state.values]);
     var getFieldMeta = react_1.default.useCallback(function (name, props) {
@@ -2218,6 +2226,71 @@ exports.default = MyPopover;
 
 /***/ }),
 
+/***/ "./src/form-builder/src/fields/Toggle.tsx":
+/*!************************************************!*\
+  !*** ./src/form-builder/src/fields/Toggle.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Toggle = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+var Field_1 = __importDefault(__webpack_require__(/*! ../core/Field */ "./src/form-builder/src/core/Field.tsx"));
+var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-builder/src/core/components/index.ts");
+var Toggle = function (_a) {
+    var _b;
+    var _c, _d, _e, _f;
+    var label = _a.label, prevStyles = _a.styles, props = __rest(_a, ["label", "styles"]);
+    var styles = __assign({ type: "card", label: {
+            position: "right",
+        } }, prevStyles);
+    var componentClasses = classnames_1.default("wprf-toggle-wrap", "wprf-" + (styles === null || styles === void 0 ? void 0 : styles.type), (_b = {
+            "wprf-checked": Boolean(props.value)
+        },
+        _b["wprf-label-position-" + ((_c = styles === null || styles === void 0 ? void 0 : styles.label) === null || _c === void 0 ? void 0 : _c.position)] = (_d = styles === null || styles === void 0 ? void 0 : styles.label) === null || _d === void 0 ? void 0 : _d.position,
+        _b), props === null || props === void 0 ? void 0 : props.classes);
+    // console.log("props", props)
+    return (react_1.default.createElement("div", { className: componentClasses },
+        ((_e = styles === null || styles === void 0 ? void 0 : styles.label) === null || _e === void 0 ? void 0 : _e.position) === "left" && react_1.default.createElement("span", null, label),
+        react_1.default.createElement(Field_1.default, __assign({}, props, { type: "checkbox" })),
+        react_1.default.createElement(components_1.Label, { htmlFor: props.id }),
+        ((_f = styles === null || styles === void 0 ? void 0 : styles.label) === null || _f === void 0 ? void 0 : _f.position) === "right" && react_1.default.createElement("span", null, label)));
+};
+exports.Toggle = Toggle;
+exports.default = exports.Toggle;
+
+
+/***/ }),
+
 /***/ "./src/form-builder/src/fields/helpers/Popover.tsx":
 /*!*********************************************************!*\
   !*** ./src/form-builder/src/fields/helpers/Popover.tsx ***!
@@ -2376,11 +2449,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Test = exports.Repeater = exports.Section = exports.Radio = exports.Group = exports.Date = void 0;
+exports.Test = exports.Repeater = exports.Section = exports.Radio = exports.Toggle = exports.Group = exports.Date = void 0;
 var Date_1 = __webpack_require__(/*! ./Date */ "./src/form-builder/src/fields/Date.tsx");
 Object.defineProperty(exports, "Date", { enumerable: true, get: function () { return __importDefault(Date_1).default; } });
 var Group_1 = __webpack_require__(/*! ./Group */ "./src/form-builder/src/fields/Group.tsx");
 Object.defineProperty(exports, "Group", { enumerable: true, get: function () { return __importDefault(Group_1).default; } });
+var Toggle_1 = __webpack_require__(/*! ./Toggle */ "./src/form-builder/src/fields/Toggle.tsx");
+Object.defineProperty(exports, "Toggle", { enumerable: true, get: function () { return __importDefault(Toggle_1).default; } });
 var RadioCard_1 = __webpack_require__(/*! ./RadioCard */ "./src/form-builder/src/fields/RadioCard.tsx");
 Object.defineProperty(exports, "Radio", { enumerable: true, get: function () { return __importDefault(RadioCard_1).default; } });
 var Section_1 = __webpack_require__(/*! ./Section */ "./src/form-builder/src/fields/Section.tsx");

@@ -39,7 +39,6 @@ const Content: React.FC<TabProps> = ({ tabs, active }) => {
                 return (
                     <div id={tab?.id} className={componentClasses} key={tab?.id} >
                         <InnerContent fields={tab?.fields} />
-                        <Popover.Slot />
                     </div>
                 );
             })}

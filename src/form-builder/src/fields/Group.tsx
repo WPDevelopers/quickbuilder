@@ -6,14 +6,17 @@ import { executeChange, isArray, sortingFields } from '../core/utils';
 import BuilderField from '../core/BuilderField';
 
 const Group = (props) => {
-    if (!props.fields || !isArray(props.fields) || props.fields.length === 0) {
+    const { name: fieldName, fields } = props.field;
+
+    if (!fields || !isArray(fields) || fields.length === 0) {
         throw new Error('You should give a #fields arguments to a group field.')
     }
+
 
     const builderContext = useBuilderContext();
 
     const localMemoizedState = useMemo(() => {
-        let localS = builderContext.values?.[props.name];
+        let localS = builderContext.values?.[fieldName];
         if (localS && props.meta.default) {
             localS = { ...props.meta.default, ...localS };
         }
@@ -27,24 +30,23 @@ const Group = (props) => {
             event.persist();
         }
         const { field, val: value } = executeChange(event);
-
         setLocalState((prevState) => ({ ...prevState, [field]: value }));
     }, [])
 
     useEffect(() => {
-        if (!isEqual(localState, builderContext.values[props.name]) && !props?.handleChange) {
-            builderContext.setFieldValue(props.name, localState);
+        if (!isEqual(localState, builderContext.values[fieldName]) && !props?.handleChange) {
+            builderContext.setFieldValue(fieldName, localState);
         }
 
         if (props?.handleChange) {
-            let newLocal = builderContext.values[props.name]?.[props.index] ? { ...builderContext.values[props.name][props.index], ...localState } : localState;
+            let newLocal = builderContext.values[fieldName]?.[props.index] ? { ...builderContext.values[fieldName][props.index], ...localState } : localState;
             props.handleChange(newLocal);
         }
     }, [localState])
 
-    const newFields = sortingFields(props.fields);
+    const newFields = sortingFields(fields);
     const allFields = newFields.map((item, index) => {
-        return <BuilderField key={item.name} index={props.index} {...item} meta={props.meta} onChange={handleChange} />;
+        return <BuilderField key={item.name} index={props.index} onChange={handleChange} field={{ ...item }} meta={props.meta} helpers={props.helpers} />;
     });
 
     return (

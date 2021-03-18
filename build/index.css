@@ -1230,10 +1230,6 @@
   display: flex;
   justify-content: space-between;
 }
-.wprf-control-datetime .components-datetime .components-datetime .components-datetime__date-help-toggle {
-  display: block;
-  margin-left: auto;
-}
 .wprf-control-datetime .components-datetime .components-datetime fieldset {
   border: 0;
   padding: 0;
@@ -1398,12 +1394,17 @@
   padding-left: 4px;
 }
 .wprf-control-datetime .components-popover .components-popover__content {
+  z-index: 9999999;
   position: absolute;
   background: #ffff;
   padding: 15px;
   box-shadow: 0 0 40px -30px rgba(0, 0, 0, 0.9);
   border: 1px solid #f2f2f2;
   border-radius: 5px;
+}
+.wprf-control-datetime .components-popover .components-datetime__date-help-toggle {
+  display: none;
+  margin-left: auto;
 }
 
 .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field {

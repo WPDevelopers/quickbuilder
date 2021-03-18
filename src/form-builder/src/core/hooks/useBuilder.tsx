@@ -104,6 +104,7 @@ const useBuilder = (props) => {
         if (isAnObject) {
             delete args.meta;
             delete args.helpers;
+            delete args.options;
         }
 
         let field: any = {
@@ -141,10 +142,6 @@ const useBuilder = (props) => {
                 field.multiple = true;
             }
         }
-
-        // if (name === 'toggle') {
-        //     console.log(field)
-        // }
 
         return field;
     }, [handleBlur, handleChange, state.values]);

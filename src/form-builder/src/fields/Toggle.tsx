@@ -3,7 +3,10 @@ import classNames from "classnames";
 import Field from '../core/Field';
 import { Label } from '../core/components';
 
-export const Toggle = ({ label, styles: prevStyles, ...props }) => {
+export const Toggle = (props) => {
+
+    const { styles: prevStyles, field, meta, helpers } = props;
+    const { label, value } = field;
 
     let styles = {
         type: "card",
@@ -17,20 +20,18 @@ export const Toggle = ({ label, styles: prevStyles, ...props }) => {
         "wprf-toggle-wrap",
         `wprf-${styles?.type}`,
         {
-            "wprf-checked": Boolean(props.value),
+            "wprf-checked": Boolean(value),
             [`wprf-label-position-${styles?.label?.position}`]: styles?.label
                 ?.position,
         },
         props?.classes
     );
 
-    // console.log("props", props)
-
     return (
         <div className={componentClasses}>
             {styles?.label?.position === "left" && <span>{label}</span>}
-            <Field {...props} type="checkbox" />
-            <Label htmlFor={props.id} />
+            <Field meta={meta} helpers={helpers} field={{ ...field, type: 'checkbox' }} />
+            <Label htmlFor={field.id} />
             {styles?.label?.position === "right" && <span>{label}</span>}
         </div>
     );

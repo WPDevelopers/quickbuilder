@@ -22,11 +22,13 @@ const RepeaterField = (props) => {
                                 type: 'repeater'
                             }
                         }}
+                        field={{
+                            type: 'group',
+                            name: props.name,
+                            fields: props.field.fields
+                        }}
                         index={props.index}
-                        name={`${props.name}`}
                         handleChange={(value) => props.handleChange(value || value, props.index)}
-                        type="group"
-                        fields={props.fields}
                     />
                 </div>
             }

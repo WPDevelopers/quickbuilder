@@ -3,33 +3,42 @@ import { Group, Radio, Section, Date, Test, Repeater, Toggle } from '../fields';
 import { useBuilderContext } from './hooks';
 import Field from './Field';
 import { objectWithoutPropertiesLoose } from './utils';
+import { isFunction } from 'lodash';
 
 const BuilderField = (props) => {
-
-    if (!props.type || props.type.length === 0) {
+    if (!props.field || props.field.length === 0) {
+        throw new Error('Field must have a #field. see documentation.');
+    }
+    if (!props.field.type || props.field.type.length === 0) {
         throw new Error('Field must have a #type. see documentation.');
     }
 
     const builderContext = useBuilderContext();
 
-    const field: any = objectWithoutPropertiesLoose(props, ['validation_rules', 'default', 'rules', 'meta']);
+    const { onChange, onBlur } = props;
+    let field: any = objectWithoutPropertiesLoose(props.field, ['validation_rules', 'default', 'rules', 'meta']);
+    field = builderContext.getFieldProps(field);
 
-    const { validation_rules, default: defolt, rules } = props;
+    const { validation_rules, default: defolt, rules, options } = props.field;
+
+    if (isFunction(onChange)) {
+        field.onChange = props.onChange;
+    }
+    if (isFunction(onBlur)) {
+        field.onBlur = props.onBlur;
+    }
 
     const meta = { ...builderContext.getFieldMeta(field.name, props), ...props.meta, validation_rules, default: defolt, rules };
     const helpers = builderContext.getFieldHelpers(props);
 
-    const inputFieldsAttributes = { ...field, meta, helpers }
-
-    // if (props.name === 'repeater_text_one') {
-    //     console.log(props, field, meta)
-    // }
+    const inputFieldsAttributes = { field, meta, helpers }
+    // console.log("inputFieldsAttributes", inputFieldsAttributes)
 
     if (!meta.visible) {
         return <></>;
     }
 
-    switch (props.type) {
+    switch (field.type) {
         case "text":
         case "checkbox":
         case "radio":
@@ -46,16 +55,16 @@ const BuilderField = (props) => {
                     ...inputFieldsAttributes.meta,
                     withState: false,
                     parent: {
-                        type: props.type,
-                        name: props.name,
-                        default: props.default,
+                        type: field.type,
+                        name: field.name,
+                        default: meta.default,
                         ...inputFieldsAttributes?.meta?.parent
                     }
                 }
             };
             return <Group {...groupAttr} />;
         case "radio-card":
-            return <Radio {...inputFieldsAttributes} />;
+            return <Radio {...inputFieldsAttributes} options={options} />;
         case "section":
             return <Section {...inputFieldsAttributes} />;
         case "date":

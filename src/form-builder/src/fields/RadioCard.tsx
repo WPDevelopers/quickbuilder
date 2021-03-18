@@ -8,7 +8,8 @@ import useOptions from "../core/hooks/useOptions";
 
 
 const RadioCard = (props) => {
-    const { name, label, meta } = props;
+    const { meta, field } = props;
+    const { name, label } = field;
     const { options, option } = useOptions(props, 'options');
 
     if (!options) {
@@ -53,11 +54,13 @@ const RadioCard = (props) => {
                                     src={icon}
                                 >
                                     <Field
-                                        type="radio"
-                                        checked={value === option}
-                                        id={`wprf-input-radio-${instanceId}-${index}`}
-                                        value={value}
-                                        name={name}
+                                        field={{
+                                            ...field,
+                                            value: value,
+                                            type: 'radio',
+                                            checked: value === option,
+                                            id: `wprf-input-radio-${instanceId}-${index}`,
+                                        }}
                                         meta={meta}
                                     />
                                     {label}

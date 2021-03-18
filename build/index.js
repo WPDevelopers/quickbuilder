@@ -573,24 +573,34 @@ var fields_1 = __webpack_require__(/*! ../fields */ "./src/form-builder/src/fiel
 var hooks_1 = __webpack_require__(/*! ./hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var Field_1 = __importDefault(__webpack_require__(/*! ./Field */ "./src/form-builder/src/core/Field.tsx"));
 var utils_1 = __webpack_require__(/*! ./utils */ "./src/form-builder/src/core/utils.ts");
+var lodash_1 = __webpack_require__(/*! lodash */ "lodash-es");
 var BuilderField = function (props) {
     var _a;
-    if (!props.type || props.type.length === 0) {
+    if (!props.field || props.field.length === 0) {
+        throw new Error('Field must have a #field. see documentation.');
+    }
+    if (!props.field.type || props.field.type.length === 0) {
         throw new Error('Field must have a #type. see documentation.');
     }
     var builderContext = hooks_1.useBuilderContext();
-    var field = utils_1.objectWithoutPropertiesLoose(props, ['validation_rules', 'default', 'rules', 'meta']);
-    var validation_rules = props.validation_rules, defolt = props.default, rules = props.rules;
+    var onChange = props.onChange, onBlur = props.onBlur;
+    var field = utils_1.objectWithoutPropertiesLoose(props.field, ['validation_rules', 'default', 'rules', 'meta']);
+    field = builderContext.getFieldProps(field);
+    var _b = props.field, validation_rules = _b.validation_rules, defolt = _b.default, rules = _b.rules, options = _b.options;
+    if (lodash_1.isFunction(onChange)) {
+        field.onChange = props.onChange;
+    }
+    if (lodash_1.isFunction(onBlur)) {
+        field.onBlur = props.onBlur;
+    }
     var meta = __assign(__assign(__assign({}, builderContext.getFieldMeta(field.name, props)), props.meta), { validation_rules: validation_rules, default: defolt, rules: rules });
     var helpers = builderContext.getFieldHelpers(props);
-    var inputFieldsAttributes = __assign(__assign({}, field), { meta: meta, helpers: helpers });
-    // if (props.name === 'repeater_text_one') {
-    //     console.log(props, field, meta)
-    // }
+    var inputFieldsAttributes = { field: field, meta: meta, helpers: helpers };
+    // console.log("inputFieldsAttributes", inputFieldsAttributes)
     if (!meta.visible) {
         return react_1.default.createElement(react_1.default.Fragment, null);
     }
-    switch (props.type) {
+    switch (field.type) {
         case "text":
         case "checkbox":
         case "radio":
@@ -601,10 +611,10 @@ var BuilderField = function (props) {
             // case "date":
             return react_1.default.createElement(Field_1.default, __assign({}, inputFieldsAttributes));
         case "group":
-            var groupAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: __assign({ type: props.type, name: props.name, default: props.default }, (_a = inputFieldsAttributes === null || inputFieldsAttributes === void 0 ? void 0 : inputFieldsAttributes.meta) === null || _a === void 0 ? void 0 : _a.parent) }) });
+            var groupAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: __assign({ type: field.type, name: field.name, default: meta.default }, (_a = inputFieldsAttributes === null || inputFieldsAttributes === void 0 ? void 0 : inputFieldsAttributes.meta) === null || _a === void 0 ? void 0 : _a.parent) }) });
             return react_1.default.createElement(fields_1.Group, __assign({}, groupAttr));
         case "radio-card":
-            return react_1.default.createElement(fields_1.Radio, __assign({}, inputFieldsAttributes));
+            return react_1.default.createElement(fields_1.Radio, __assign({}, inputFieldsAttributes, { options: options }));
         case "section":
             return react_1.default.createElement(fields_1.Section, __assign({}, inputFieldsAttributes));
         case "date":
@@ -766,27 +776,24 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var hooks_1 = __webpack_require__(/*! ./hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var utils_1 = __webpack_require__(/*! ./utils */ "./src/form-builder/src/core/utils.ts");
 var Field = function (props) {
-    var _a, _b, _c, _d, _e;
-    var name = props.name, children = props.children, is = props.as, component = props.component;
+    var _a, _b, _c;
+    var children = props.children, is = props.as, component = props.component, originalField = props.field, originalMeta = props.meta, helpers = props.helpers;
+    var name = originalField.name;
     var builderContext = hooks_1.useBuilderContext();
-    var withState = !!((_b = (_a = props === null || props === void 0 ? void 0 : props.meta) === null || _a === void 0 ? void 0 : _a.withState) !== null && _b !== void 0 ? _b : true);
+    var withState = !!((_a = originalMeta === null || originalMeta === void 0 ? void 0 : originalMeta.withState) !== null && _a !== void 0 ? _a : true);
     var meta = builderContext.getFieldMeta(name, props);
-    var field = builderContext.getFieldProps(__assign({ name: name }, props));
+    var field = __assign({}, originalField);
     if (!withState) {
-        var parent_1 = (_c = props === null || props === void 0 ? void 0 : props.meta) === null || _c === void 0 ? void 0 : _c.parent.name;
-        delete field.onChange;
-        delete field.onBlur;
+        var parent_1 = meta === null || meta === void 0 ? void 0 : meta.parent.name;
         meta = builderContext.getFieldMeta(parent_1, props);
         if (meta.parent) {
             if (meta.parent.type === 'group') {
                 field.value = meta.value && meta.value[field.name] || '';
             }
             if (meta.parent.type === 'repeater') {
-                field.value = meta.value && ((_e = (_d = meta.value) === null || _d === void 0 ? void 0 : _d[field.index]) === null || _e === void 0 ? void 0 : _e[field.name]) || '';
+                field.value = meta.value && ((_c = (_b = meta.value) === null || _b === void 0 ? void 0 : _b[field.index]) === null || _c === void 0 ? void 0 : _c[field.name]) || '';
             }
         }
-        field.onChange = props.onChange;
-        field.onBlur = props.onBlur;
     }
     var legacyField = {
         field: field,
@@ -826,17 +833,6 @@ exports.default = react_1.default.memo(Field);
 
 "use strict";
 
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -849,7 +845,7 @@ var InnerContent = function (_a) {
     // Fields Sorting
     var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item) {
-        return react_1.default.createElement(BuilderField_1.default, __assign({ key: item.name }, item));
+        return react_1.default.createElement(BuilderField_1.default, { key: item.name, field: item });
     });
     return react_1.default.createElement(react_1.default.Fragment, null, allFields);
 };
@@ -1307,6 +1303,7 @@ var useBuilder = function (props) {
         if (isAnObject) {
             delete args.meta;
             delete args.helpers;
+            delete args.options;
         }
         var field = __assign(__assign({}, args), { type: args.type, name: name, value: valueState || '', onChange: handleChange, onBlur: handleBlur, id: name });
         if (args === null || args === void 0 ? void 0 : args.id) {
@@ -1332,9 +1329,6 @@ var useBuilder = function (props) {
                 field.multiple = true;
             }
         }
-        // if (name === 'toggle') {
-        //     console.log(field)
-        // }
         return field;
     }, [handleBlur, handleChange, state.values]);
     var getFieldMeta = react_1.default.useCallback(function (name, props) {
@@ -1479,15 +1473,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __webpack_require__(/*! react */ "react");
 var index_1 = __webpack_require__(/*! ./index */ "./src/form-builder/src/core/hooks/index.ts");
 var useOptions = function (props, propertyName) {
+    var _a, _b;
     if (propertyName === void 0) { propertyName = 'fields'; }
     if (!(props === null || props === void 0 ? void 0 : props[propertyName])) {
         throw new Error('#options param need to set in order to use useOptions hook.');
     }
     var builderContext = index_1.useBuilderContext();
     var options = builderContext.eligibleOptions(props[propertyName]);
-    var opt = builderContext.eligibleOption(options, props.meta.value, props === null || props === void 0 ? void 0 : props.multiple);
+    var opt = builderContext.eligibleOption(options, props.meta.value, (_a = props.field) === null || _a === void 0 ? void 0 : _a.multiple);
     var option;
-    if (!(props === null || props === void 0 ? void 0 : props.multiple)) {
+    if (!((_b = props.field) === null || _b === void 0 ? void 0 : _b.multiple)) {
         option = opt.value || props.meta.default;
     }
     else {
@@ -1495,7 +1490,7 @@ var useOptions = function (props, propertyName) {
     }
     react_1.useEffect(function () {
         if (option) {
-            builderContext.setFieldValue(props.name, option);
+            builderContext.setFieldValue(props.field.name, option);
         }
     }, [option]);
     return { options: options, option: option };
@@ -1843,11 +1838,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 var date_1 = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
-var DateControl = function (props) {
+var DateControl = function (_a) {
+    var field = _a.field, meta = _a.meta, helpers = _a.helpers, rest = __rest(_a, ["field", "meta", "helpers"]);
     var settings = date_1.__experimentalGetSettings();
     var is12HourTime = /a(?!\\)/i.test(settings.formats.datetime
         .toLowerCase()
@@ -1856,15 +1863,15 @@ var DateControl = function (props) {
         .reverse()
         .join(""));
     react_1.useEffect(function () {
-        if (props.meta.value == undefined) {
-            props.helpers.setValue(props.name, date_1.date('c', props.meta.value));
+        if (meta.value == undefined) {
+            helpers.setValue(field.name, date_1.date('c', meta.value));
         }
     }, []);
     return (react_1.default.createElement(components_1.Dropdown, { className: "wprf-control-datetime", renderToggle: function (_a) {
             var isOpen = _a.isOpen, onToggle = _a.onToggle;
-            return (react_1.default.createElement(components_1.Button, { isTertiary: true, onClick: onToggle }, date_1.date(settings.formats.datetime, props.meta.value, settings.timezone.string)));
+            return (react_1.default.createElement(components_1.Button, { isTertiary: true, onClick: onToggle }, date_1.date(settings.formats.datetime, meta.value, settings.timezone.string)));
         }, renderContent: function () {
-            return (react_1.default.createElement(components_1.DateTimePicker, { currentDate: date_1.date(settings.formats.datetime, props.meta.value) || date_1.date(settings.formats.datetime, Date.now()), onChange: function (date) { return props.helpers.setValue(props.name, date !== null && date !== void 0 ? date : (props.meta.default || new Date())); }, is12Hour: is12HourTime }));
+            return (react_1.default.createElement(components_1.DateTimePicker, { currentDate: date_1.date(settings.formats.datetime, meta.value) || date_1.date(settings.formats.datetime, Date.now()), onChange: function (date) { return helpers.setValue(field.name, date !== null && date !== void 0 ? date : (meta.default || new Date())); }, is12Hour: is12HourTime }));
         } }));
 };
 exports.default = DateControl;
@@ -1921,19 +1928,20 @@ var lodash_1 = __webpack_require__(/*! lodash */ "lodash-es");
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var BuilderField_1 = __importDefault(__webpack_require__(/*! ../core/BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
 var Group = function (props) {
-    if (!props.fields || !utils_1.isArray(props.fields) || props.fields.length === 0) {
+    var _a = props.field, fieldName = _a.name, fields = _a.fields;
+    if (!fields || !utils_1.isArray(fields) || fields.length === 0) {
         throw new Error('You should give a #fields arguments to a group field.');
     }
     var builderContext = hooks_1.useBuilderContext();
     var localMemoizedState = react_1.useMemo(function () {
         var _a;
-        var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[props.name];
+        var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName];
         if (localS && props.meta.default) {
             localS = __assign(__assign({}, props.meta.default), localS);
         }
         return localS;
     }, []);
-    var _a = react_1.useState(((props === null || props === void 0 ? void 0 : props.handleChange) ? {} : (localMemoizedState || props.meta.default)) || {}), localState = _a[0], setLocalState = _a[1];
+    var _b = react_1.useState(((props === null || props === void 0 ? void 0 : props.handleChange) ? {} : (localMemoizedState || props.meta.default)) || {}), localState = _b[0], setLocalState = _b[1];
     var handleChange = react_1.useCallback(function (event) {
         if (event.persist) {
             event.persist();
@@ -1946,17 +1954,17 @@ var Group = function (props) {
     }, []);
     react_1.useEffect(function () {
         var _a;
-        if (!lodash_1.isEqual(localState, builderContext.values[props.name]) && !(props === null || props === void 0 ? void 0 : props.handleChange)) {
-            builderContext.setFieldValue(props.name, localState);
+        if (!lodash_1.isEqual(localState, builderContext.values[fieldName]) && !(props === null || props === void 0 ? void 0 : props.handleChange)) {
+            builderContext.setFieldValue(fieldName, localState);
         }
         if (props === null || props === void 0 ? void 0 : props.handleChange) {
-            var newLocal = ((_a = builderContext.values[props.name]) === null || _a === void 0 ? void 0 : _a[props.index]) ? __assign(__assign({}, builderContext.values[props.name][props.index]), localState) : localState;
+            var newLocal = ((_a = builderContext.values[fieldName]) === null || _a === void 0 ? void 0 : _a[props.index]) ? __assign(__assign({}, builderContext.values[fieldName][props.index]), localState) : localState;
             props.handleChange(newLocal);
         }
     }, [localState]);
-    var newFields = utils_1.sortingFields(props.fields);
+    var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item, index) {
-        return react_1.default.createElement(BuilderField_1.default, __assign({ key: item.name, index: props.index }, item, { meta: props.meta, onChange: handleChange }));
+        return react_1.default.createElement(BuilderField_1.default, { key: item.name, index: props.index, onChange: handleChange, field: __assign({}, item), meta: props.meta, helpers: props.helpers });
     });
     return (react_1.default.createElement("div", { className: "wprf-group-control" },
         props.label,
@@ -1976,6 +1984,17 @@ exports.default = Group;
 
 "use strict";
 
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -1987,7 +2006,8 @@ var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-bui
 __webpack_require__(/*! ../scss/radio-card.scss */ "./src/form-builder/src/scss/radio-card.scss");
 var useOptions_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useOptions */ "./src/form-builder/src/core/hooks/useOptions.ts"));
 var RadioCard = function (props) {
-    var name = props.name, label = props.label, meta = props.meta;
+    var meta = props.meta, field = props.field;
+    var name = field.name, label = field.label;
     var _a = useOptions_1.default(props, 'options'), options = _a.options, option = _a.option;
     if (!options) {
         throw new Error('#options is a required arguments for RadioCard field.');
@@ -2013,7 +2033,7 @@ var RadioCard = function (props) {
                     react_1.default.createElement(components_1.Label, { className: classnames_1.default({
                             "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false,
                         }), htmlFor: "wprf-input-radio-" + instanceId + "-" + index, src: icon },
-                        react_1.default.createElement(components_1.Field, { type: "radio", checked: value === option, id: "wprf-input-radio-" + instanceId + "-" + index, value: value, name: name, meta: meta }),
+                        react_1.default.createElement(components_1.Field, { field: __assign(__assign({}, field), { value: value, type: 'radio', checked: value === option, id: "wprf-input-radio-" + instanceId + "-" + index }), meta: meta }),
                         label))));
         }))));
 };
@@ -2138,17 +2158,6 @@ exports.default = Repeater;
 
 "use strict";
 
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -2175,13 +2184,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var BuilderField_1 = __importDefault(__webpack_require__(/*! ../core/BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
-// import "../section.scss";
 var Section = function (props) {
     var _a;
     var _b = react_1.useState((_a = props.collapsed) !== null && _a !== void 0 ? _a : false), isCollapse = _b[0], setCollapse = _b[1];
-    var newFields = utils_1.sortingFields(props.fields);
+    var newFields = utils_1.sortingFields(props.field.fields);
     var allFields = newFields.map(function (item, index) {
-        return react_1.default.createElement(BuilderField_1.default, __assign({ key: item.name }, item, { meta: props.meta }));
+        return react_1.default.createElement(BuilderField_1.default, { key: item.name, field: item });
     });
     return (react_1.default.createElement("div", { className: "wprf-control-section " + (props.collapsible ? (isCollapse ? "wprf-section-collapsed" : "") : "") },
         react_1.default.createElement("div", { className: "wprf-section-title" },
@@ -2246,17 +2254,6 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -2266,24 +2263,24 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
 var Field_1 = __importDefault(__webpack_require__(/*! ../core/Field */ "./src/form-builder/src/core/Field.tsx"));
 var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-builder/src/core/components/index.ts");
-var Toggle = function (_a) {
-    var _b;
-    var _c, _d, _e, _f;
-    var label = _a.label, prevStyles = _a.styles, props = __rest(_a, ["label", "styles"]);
+var Toggle = function (props) {
+    var _a;
+    var _b, _c, _d, _e;
+    var prevStyles = props.styles, field = props.field, meta = props.meta, helpers = props.helpers;
+    var label = field.label, value = field.value;
     var styles = __assign({ type: "card", label: {
             position: "right",
         } }, prevStyles);
-    var componentClasses = classnames_1.default("wprf-toggle-wrap", "wprf-" + (styles === null || styles === void 0 ? void 0 : styles.type), (_b = {
-            "wprf-checked": Boolean(props.value)
+    var componentClasses = classnames_1.default("wprf-toggle-wrap", "wprf-" + (styles === null || styles === void 0 ? void 0 : styles.type), (_a = {
+            "wprf-checked": Boolean(value)
         },
-        _b["wprf-label-position-" + ((_c = styles === null || styles === void 0 ? void 0 : styles.label) === null || _c === void 0 ? void 0 : _c.position)] = (_d = styles === null || styles === void 0 ? void 0 : styles.label) === null || _d === void 0 ? void 0 : _d.position,
-        _b), props === null || props === void 0 ? void 0 : props.classes);
-    // console.log("props", props)
+        _a["wprf-label-position-" + ((_b = styles === null || styles === void 0 ? void 0 : styles.label) === null || _b === void 0 ? void 0 : _b.position)] = (_c = styles === null || styles === void 0 ? void 0 : styles.label) === null || _c === void 0 ? void 0 : _c.position,
+        _a), props === null || props === void 0 ? void 0 : props.classes);
     return (react_1.default.createElement("div", { className: componentClasses },
-        ((_e = styles === null || styles === void 0 ? void 0 : styles.label) === null || _e === void 0 ? void 0 : _e.position) === "left" && react_1.default.createElement("span", null, label),
-        react_1.default.createElement(Field_1.default, __assign({}, props, { type: "checkbox" })),
-        react_1.default.createElement(components_1.Label, { htmlFor: props.id }),
-        ((_f = styles === null || styles === void 0 ? void 0 : styles.label) === null || _f === void 0 ? void 0 : _f.position) === "right" && react_1.default.createElement("span", null, label)));
+        ((_d = styles === null || styles === void 0 ? void 0 : styles.label) === null || _d === void 0 ? void 0 : _d.position) === "left" && react_1.default.createElement("span", null, label),
+        react_1.default.createElement(Field_1.default, { meta: meta, helpers: helpers, field: __assign(__assign({}, field), { type: 'checkbox' }) }),
+        react_1.default.createElement(components_1.Label, { htmlFor: field.id }),
+        ((_e = styles === null || styles === void 0 ? void 0 : styles.label) === null || _e === void 0 ? void 0 : _e.position) === "right" && react_1.default.createElement("span", null, label)));
 };
 exports.Toggle = Toggle;
 exports.default = exports.Toggle;
@@ -2407,7 +2404,11 @@ var RepeaterField = function (props) {
                         parent: {
                             type: 'repeater'
                         }
-                    }, index: props.index, name: "" + props.name, handleChange: function (value) { return props.handleChange(value || value, props.index); }, type: "group", fields: props.fields }))));
+                    }, field: {
+                        type: 'group',
+                        name: props.name,
+                        fields: props.field.fields
+                    }, index: props.index, handleChange: function (value) { return props.handleChange(value || value, props.index); } }))));
 };
 exports.default = RepeaterField;
 
@@ -2676,7 +2677,6 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var InnerContent_1 = __importDefault(__webpack_require__(/*! ../core/InnerContent */ "./src/form-builder/src/core/InnerContent.tsx"));
-var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 var Content = function (_a) {
     var tabs = _a.tabs, active = _a.active;
     if (tabs === undefined) {
@@ -2698,8 +2698,7 @@ var Content = function (_a) {
             "wprf-active": active === tab.id,
         });
         return (react_1.default.createElement("div", { id: tab === null || tab === void 0 ? void 0 : tab.id, className: componentClasses, key: tab === null || tab === void 0 ? void 0 : tab.id },
-            react_1.default.createElement(InnerContent_1.default, { fields: tab === null || tab === void 0 ? void 0 : tab.fields }),
-            react_1.default.createElement(components_1.Popover.Slot, null)));
+            react_1.default.createElement(InnerContent_1.default, { fields: tab === null || tab === void 0 ? void 0 : tab.fields })));
     })));
 };
 exports.default = Content;

@@ -862,11 +862,6 @@
 				justify-content: space-between;
 			}
 
-			.components-datetime__date-help-toggle {
-				display: block;
-				margin-left: auto;
-			}
-
 			fieldset {
 				border: 0;
 				padding: 0;
@@ -1069,12 +1064,18 @@
 			padding-left: $grid-unit-05;
 		}
 		.components-popover__content {
+			z-index: 9999999;
 			position: absolute;
 			background: #ffff;
 			padding: 15px;
 			box-shadow: 0 0 40px -30px rgb(0 0 0 / 90%);
 			border: 1px solid #f2f2f2;
 			border-radius: 5px;
+		}
+
+		.components-datetime__date-help-toggle {
+			display: none;
+			margin-left: auto;
 		}
 	}
 }

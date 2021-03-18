@@ -15,7 +15,6 @@ const Menu: React.FC<TabProps> = (props) => {
         { "wprf-tab-menu-sidebar": config?.sidebar }
     );
 
-
     return (
         <div className={componentClasses}>
             <ul className="wprf-tab-nav">

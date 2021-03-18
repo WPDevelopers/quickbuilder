@@ -51,20 +51,18 @@ export declare type FieldAttributes<T> = GenericFieldHTMLAttributes & FieldConfi
 
 
 const Field: React.FC<FieldAttributes<any>> = (props) => {
-    const { name, children, as: is, component } = props;
-
+    const { children, as: is, component, field: originalField, meta: originalMeta, helpers } = props;
+    const { name } = originalField;
     const builderContext = useBuilderContext();
 
-    const withState = !!(props?.meta?.withState ?? true);
+
+    const withState = !!(originalMeta?.withState ?? true);
     let meta = builderContext.getFieldMeta(name, props);
-    let field = builderContext.getFieldProps({ name, ...props });
+    let field = { ...originalField };
 
     if (!withState) {
-        const parent = props?.meta?.parent.name;
-        delete field.onChange;
-        delete field.onBlur;
+        const parent = meta?.parent.name;
         meta = builderContext.getFieldMeta(parent, props)
-
         if (meta.parent) {
             if (meta.parent.type === 'group') {
                 field.value = meta.value && meta.value[field.name] || '';
@@ -73,9 +71,6 @@ const Field: React.FC<FieldAttributes<any>> = (props) => {
                 field.value = meta.value && meta.value?.[field.index]?.[field.name] || '';
             }
         }
-
-        field.onChange = props.onChange;
-        field.onBlur = props.onBlur;
     }
 
     var legacyField = {

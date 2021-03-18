@@ -1,0 +1,41 @@
+.wprf-repeater-control {
+    .wprf-repeater-label {
+
+    }
+    .wprf-repeater-content {
+        .wprf-repeater-field {
+            margin-top: 20px;
+            .wprf-repeater-field-title {
+                padding: 15px;
+                cursor: pointer;
+                font-size: 12px;
+                background-color: #f8fafb;
+                display: flex;
+                align-items: center;
+                h4 {
+                    margin: 0;
+                    flex-basis: 100%;
+                }
+                .wprf-repeater-field-controls {
+                    align-self: flex-end;
+                    display: flex;
+                    span {
+                        margin-left: 10px;
+                    }
+                    .dashicon.dashicons-admin-page {
+                        color: #5f7eff;
+                    }
+                    .dashicon.dashicons-trash {
+                        color: #dc4f4b;
+                    }
+                }
+            }
+            .wprf-repeater-inner-field {
+                // display: none;
+                padding: 20px;
+                background-color: #fff;
+                border: 1px solid #f2f2f2;
+            }
+        }
+    }
+}

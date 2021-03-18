@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useBuilderContext } from '../core/hooks';
-
-import BuilderField from '../core/BuilderField'
 import { RepeaterField } from './helpers';
-import { isEqual } from 'lodash';
+import { isEmptyObj } from '../core/utils';
+
+import { useInstanceId } from "@wordpress/compose";
 
 
 const Repeater = (props) => {
     const builderContext = useBuilderContext();
+    const instanceId = useInstanceId(Repeater);
 
     const localMemoizedValue = useMemo(() => {
         let localS = builderContext.values?.[props.name];
@@ -15,14 +16,41 @@ const Repeater = (props) => {
             localS = [...props.meta.default, ...localS];
         }
         return localS;
-    }, [])
+    }, [builderContext.values?.[props.name]])
+
+    // useEffect(() => {
+    //     console.log("localMemoizedValue", localMemoizedValue, builderContext.values?.[props.name])
+    // }, [])
 
     const [localFields, setLocalFields] = useState([{}]);
-    const [localValue, setLocalValue] = useState(localMemoizedValue || {});
+    const [localValue, setLocalValue] = useState(localMemoizedValue);
 
     const handleChange = useCallback((value, index) => {
-        setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
+        if (!isEmptyObj(value)) {
+            setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
+            // setLocalValue(prevLocalValue => ([...prevLocalValue, value]));
+        }
     }, [])
+
+    const handleRemove = useCallback((index) => {
+        console.log("index", index)
+
+        let newValue = { ...localValue };
+        delete newValue[index];
+
+        props.helpers.setValue(props.name, newValue);
+
+        let newFields = [...localFields];
+        newFields.splice(index, 1)
+        setLocalFields(newFields);
+
+    }, [localFields, localValue])
+
+    const handleClone = useCallback((index) => {
+        const indexedCopy = localValue?.[index] || {};
+        setLocalFields(prevLocalState => ([...prevLocalState, indexedCopy]));
+        handleChange(indexedCopy, ++index);
+    }, [localValue, localFields])
 
     useEffect(() => {
         props.helpers.setValue(props.name, localValue);
@@ -40,15 +68,18 @@ const Repeater = (props) => {
                 {
                     localFields.map((field, index) => {
                         return <RepeaterField
+                            remove={handleRemove}
+                            clone={handleClone}
+                            isOpen={true}
                             key={index}
                             name={`${props.name}`}
                             index={index}
                             handleChange={handleChange}
                             fields={props.fields}
+                            parentProps={props}
                         />
                     })
                 }
-
             </div>
         </div>
     )

@@ -1406,4 +1406,38 @@
   border-radius: 5px;
 }
 
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field {
+  margin-top: 20px;
+}
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title {
+  padding: 15px;
+  cursor: pointer;
+  font-size: 12px;
+  background-color: #f8fafb;
+  display: flex;
+  align-items: center;
+}
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title h4 {
+  margin: 0;
+  flex-basis: 100%;
+}
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title .wprf-repeater-field-controls {
+  align-self: flex-end;
+  display: flex;
+}
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title .wprf-repeater-field-controls span {
+  margin-left: 10px;
+}
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title .wprf-repeater-field-controls .dashicon.dashicons-admin-page {
+  color: #5f7eff;
+}
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title .wprf-repeater-field-controls .dashicon.dashicons-trash {
+  color: #dc4f4b;
+}
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-inner-field {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #f2f2f2;
+}
+
 /*# sourceMappingURL=index.css.map*/

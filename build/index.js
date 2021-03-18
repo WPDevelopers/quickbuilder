@@ -1949,9 +1949,7 @@ var Group = function (props) {
         return react_1.default.createElement(BuilderField_1.default, __assign({ key: item.name, index: props.index }, item, { meta: props.meta, onChange: handleChange }));
     });
     return (react_1.default.createElement("div", { className: "wprf-group-control" },
-        react_1.default.createElement("br", null),
         props.label,
-        react_1.default.createElement("br", null),
         allFields));
 };
 exports.default = Group;
@@ -2062,8 +2060,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var helpers_1 = __webpack_require__(/*! ./helpers */ "./src/form-builder/src/fields/helpers/index.ts");
+var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
+var compose_1 = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 var Repeater = function (props) {
+    var _a;
     var builderContext = hooks_1.useBuilderContext();
+    var instanceId = compose_1.useInstanceId(Repeater);
     var localMemoizedValue = react_1.useMemo(function () {
         var _a;
         var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[props.name];
@@ -2071,15 +2073,35 @@ var Repeater = function (props) {
             localS = __spreadArray(__spreadArray([], props.meta.default), localS);
         }
         return localS;
-    }, []);
-    var _a = react_1.useState([{}]), localFields = _a[0], setLocalFields = _a[1];
-    var _b = react_1.useState(localMemoizedValue || {}), localValue = _b[0], setLocalValue = _b[1];
+    }, [(_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[props.name]]);
+    // useEffect(() => {
+    //     console.log("localMemoizedValue", localMemoizedValue, builderContext.values?.[props.name])
+    // }, [])
+    var _b = react_1.useState([{}]), localFields = _b[0], setLocalFields = _b[1];
+    var _c = react_1.useState(localMemoizedValue), localValue = _c[0], setLocalValue = _c[1];
     var handleChange = react_1.useCallback(function (value, index) {
-        setLocalValue(function (prevLocalValue) {
-            var _a;
-            return (__assign(__assign({}, prevLocalValue), (_a = {}, _a[index] = value, _a)));
-        });
+        if (!utils_1.isEmptyObj(value)) {
+            setLocalValue(function (prevLocalValue) {
+                var _a;
+                return (__assign(__assign({}, prevLocalValue), (_a = {}, _a[index] = value, _a)));
+            });
+            // setLocalValue(prevLocalValue => ([...prevLocalValue, value]));
+        }
     }, []);
+    var handleRemove = react_1.useCallback(function (index) {
+        console.log("index", index);
+        var newValue = __assign({}, localValue);
+        delete newValue[index];
+        props.helpers.setValue(props.name, newValue);
+        var newFields = __spreadArray([], localFields);
+        newFields.splice(index, 1);
+        setLocalFields(newFields);
+    }, [localFields, localValue]);
+    var handleClone = react_1.useCallback(function (index) {
+        var indexedCopy = (localValue === null || localValue === void 0 ? void 0 : localValue[index]) || {};
+        setLocalFields(function (prevLocalState) { return (__spreadArray(__spreadArray([], prevLocalState), [indexedCopy])); });
+        handleChange(indexedCopy, ++index);
+    }, [localValue, localFields]);
     react_1.useEffect(function () {
         props.helpers.setValue(props.name, localValue);
     }, [localValue]);
@@ -2088,7 +2110,7 @@ var Repeater = function (props) {
             react_1.default.createElement("h4", null, props.label),
             react_1.default.createElement("button", { className: "wprf-repeater-button", onClick: function () { return setLocalFields(function (prevLocalState) { return (__spreadArray(__spreadArray([], prevLocalState), [{}])); }); } }, props.button.label)),
         react_1.default.createElement("div", { className: "wprf-repeater-content" }, localFields.map(function (field, index) {
-            return react_1.default.createElement(helpers_1.RepeaterField, { key: index, name: "" + props.name, index: index, handleChange: handleChange, fields: props.fields });
+            return react_1.default.createElement(helpers_1.RepeaterField, { remove: handleRemove, clone: handleClone, isOpen: true, key: index, name: "" + props.name, index: index, handleChange: handleChange, fields: props.fields, parentProps: props });
         }))));
 };
 exports.default = Repeater;
@@ -2264,19 +2286,52 @@ exports.default = Popover;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 var BuilderField_1 = __importDefault(__webpack_require__(/*! ../../core/BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
 var RepeaterField = function (props) {
-    return (react_1.default.createElement("div", { className: "wprf-repeater-field", key: props.index },
-        react_1.default.createElement(BuilderField_1.default, { meta: {
-                parent: {
-                    type: 'repeater'
-                }
-            }, index: props.index, name: "" + props.name, handleChange: function (value) { return props.handleChange(value || value, props.index); }, type: "group", fields: props.fields })));
+    var _a = react_1.useState(props.isOpen), isCollapse = _a[0], setIsCollapse = _a[1];
+    // onClick={() => setIsCollapse(!isCollapse)}
+    return (react_1.default.createElement("div", { className: "wprf-repeater-field" },
+        react_1.default.createElement("div", { className: "wprf-repeater-field-title" },
+            react_1.default.createElement("h4", null,
+                "#ID: ",
+                props.index,
+                " - ",
+                props.parentProps.label),
+            react_1.default.createElement("div", { className: "wprf-repeater-field-controls" },
+                react_1.default.createElement(components_1.Icon, { onClick: function () { return props.clone(props.index); }, icon: "admin-page" }),
+                react_1.default.createElement(components_1.Icon, { onClick: function () { return props.remove(props.index); }, icon: "trash" }))),
+        isCollapse &&
+            react_1.default.createElement("div", { className: "wprf-repeater-inner-field" },
+                react_1.default.createElement(BuilderField_1.default, { meta: {
+                        parent: {
+                            type: 'repeater'
+                        }
+                    }, index: props.index, name: "" + props.name, handleChange: function (value) { return props.handleChange(value || value, props.index); }, type: "group", fields: props.fields }))));
 };
 exports.default = RepeaterField;
 

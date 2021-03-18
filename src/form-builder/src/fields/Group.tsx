@@ -47,9 +47,7 @@ const Group = (props) => {
 
     return (
         <div className="wprf-group-control">
-            <br />
             {props.label}
-            <br />
             {allFields}
         </div>
     )

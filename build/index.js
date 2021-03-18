@@ -1937,11 +1937,13 @@ var Group = function (props) {
         });
     }, []);
     react_1.useEffect(function () {
+        var _a;
         if (!lodash_1.isEqual(localState, builderContext.values[props.name]) && !(props === null || props === void 0 ? void 0 : props.handleChange)) {
             builderContext.setFieldValue(props.name, localState);
         }
         if (props === null || props === void 0 ? void 0 : props.handleChange) {
-            props.handleChange(localState);
+            var newLocal = ((_a = builderContext.values[props.name]) === null || _a === void 0 ? void 0 : _a[props.index]) ? __assign(__assign({}, builderContext.values[props.name][props.index]), localState) : localState;
+            props.handleChange(newLocal);
         }
     }, [localState]);
     var newFields = utils_1.sortingFields(props.fields);
@@ -2085,11 +2087,9 @@ var Repeater = function (props) {
                 var _a;
                 return (__assign(__assign({}, prevLocalValue), (_a = {}, _a[index] = value, _a)));
             });
-            // setLocalValue(prevLocalValue => ([...prevLocalValue, value]));
         }
     }, []);
     var handleRemove = react_1.useCallback(function (index) {
-        console.log("index", index);
         var newValue = __assign({}, localValue);
         delete newValue[index];
         props.helpers.setValue(props.name, newValue);
@@ -2105,6 +2105,9 @@ var Repeater = function (props) {
     react_1.useEffect(function () {
         props.helpers.setValue(props.name, localValue);
     }, [localValue]);
+    react_1.useEffect(function () {
+        console.log(localFields);
+    });
     return (react_1.default.createElement("div", { className: "wprf-repeater-control" },
         react_1.default.createElement("div", { className: "wprf-repeater-label" },
             react_1.default.createElement("h4", null, props.label),

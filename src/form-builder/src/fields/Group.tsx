@@ -27,6 +27,7 @@ const Group = (props) => {
             event.persist();
         }
         const { field, val: value } = executeChange(event);
+
         setLocalState((prevState) => ({ ...prevState, [field]: value }));
     }, [])
 
@@ -36,7 +37,8 @@ const Group = (props) => {
         }
 
         if (props?.handleChange) {
-            props.handleChange(localState);
+            let newLocal = builderContext.values[props.name]?.[props.index] ? { ...builderContext.values[props.name][props.index], ...localState } : localState;
+            props.handleChange(newLocal);
         }
     }, [localState])
 

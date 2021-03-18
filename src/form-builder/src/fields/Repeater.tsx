@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useBuilderContext } from '../core/hooks';
 import { RepeaterField } from './helpers';
 import { isEmptyObj } from '../core/utils';
@@ -28,13 +28,10 @@ const Repeater = (props) => {
     const handleChange = useCallback((value, index) => {
         if (!isEmptyObj(value)) {
             setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
-            // setLocalValue(prevLocalValue => ([...prevLocalValue, value]));
         }
     }, [])
 
     const handleRemove = useCallback((index) => {
-        console.log("index", index)
-
         let newValue = { ...localValue };
         delete newValue[index];
 
@@ -56,11 +53,16 @@ const Repeater = (props) => {
         props.helpers.setValue(props.name, localValue);
     }, [localValue])
 
+    useEffect(() => {
+        console.log(localFields)
+    })
+
     return (
         <div className="wprf-repeater-control">
             <div className="wprf-repeater-label">
                 <h4>{props.label}</h4>
-                <button className="wprf-repeater-button" onClick={() => setLocalFields(prevLocalState => ([...prevLocalState, {}]))}>
+                <button className="wprf-repeater-button"
+                    onClick={() => setLocalFields(prevLocalState => ([...prevLocalState, {}]))}>
                     {props.button.label}
                 </button>
             </div>

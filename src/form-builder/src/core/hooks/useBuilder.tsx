@@ -207,11 +207,19 @@ const useBuilder = (props) => {
         };
     }, [state.errors, state.touched, state.values]);
 
+    const setSubmitting = useEventCallback((submit) => {
+        dispatch({
+            type: 'SET_ISSUBMITTING',
+            payload: submit
+        });
+    });
+
     let context = {
         values: state.values,
         errors: {},
         touched: {},
         isSubmitting: false,
+        setSubmitting: setSubmitting,
         setValues: setValues,
         setFieldValue: setFieldValue,
         handleBlur: handleBlur,

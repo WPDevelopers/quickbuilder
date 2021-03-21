@@ -28,10 +28,7 @@ export const builderReducer = (state: any, action: any) => {
             });
 
         case 'SET_ISSUBMITTING':
-            return _extends({}, state, {
-                isSubmitting: action.payload
-            });
-
+            return { ...state, isSubmitting: action.payload };
         case 'SET_ISVALIDATING':
             return _extends({}, state, {
                 isValidating: action.payload

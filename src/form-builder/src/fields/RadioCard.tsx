@@ -8,7 +8,7 @@ import useOptions from "../core/hooks/useOptions";
 
 
 const RadioCard = (props) => {
-    const { meta, field } = props;
+    const { meta, field, helpers } = props;
     const { name, label } = field;
     const { options, option } = useOptions(props, 'options');
 
@@ -16,9 +16,9 @@ const RadioCard = (props) => {
         throw new Error('#options is a required arguments for RadioCard field.');
     }
 
-    // useEffect(() => {
-    //     console.log(props, option);
-    // }, [option])
+    useEffect(() => {
+        helpers.setValue(name, option)
+    }, [option])
 
     const instanceId = useInstanceId(RadioCard);
 
@@ -53,18 +53,18 @@ const RadioCard = (props) => {
                                     htmlFor={`wprf-input-radio-${instanceId}-${index}`}
                                     src={icon}
                                 >
-                                    <Field
-                                        field={{
-                                            ...field,
-                                            value: value,
-                                            type: 'radio',
-                                            checked: value === option,
-                                            id: `wprf-input-radio-${instanceId}-${index}`,
-                                        }}
-                                        meta={meta}
-                                    />
                                     {label}
                                 </Label>
+                                <Field
+                                    field={{
+                                        ...field,
+                                        value: value,
+                                        type: 'radio',
+                                        checked: value === option,
+                                        id: `wprf-input-radio-${instanceId}-${index}`,
+                                    }}
+                                    meta={meta}
+                                />
                             </div>
                         </Column>
                     )

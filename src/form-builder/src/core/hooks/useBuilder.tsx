@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { builderReducer } from '../BuilderReducers'
-import { getIn, isObject, executeChange as eChange, isVisible, withState } from "../utils";
+import { getIn, isObject, executeChange as eChange, isVisible, withState, isArray } from "../utils";
 import when from "../when";
 
 const useBuilder = (props) => {
@@ -12,6 +12,7 @@ const useBuilder = (props) => {
     }, [])
 
     const [state, dispatch] = useReducer(builderReducer, {
+        savedValues: props.savedValues || {},
         values: props.initialValues || {},
         errors: props.initialErrors || {},
         touched: props.initialTouched || {},
@@ -177,14 +178,14 @@ const useBuilder = (props) => {
     const eligibleOption = React.useCallback((options, value, multiple = false) => {
         if (options.length) {
             let newOptions = [];
-            if (multiple) {
+            if (multiple && isArray(value)) {
                 newOptions = options.filter((option) =>
                     value.includes(option.value)
                 );
                 return newOptions;
             } else {
                 newOptions = options.filter((option) => option.value === value);
-                return newOptions?.[0] ?? '';
+                return newOptions.length > 0 ? newOptions[0] : '';
             }
         }
         return options;
@@ -192,7 +193,17 @@ const useBuilder = (props) => {
 
     const getFieldHelpers = React.useCallback((props) => {
         return {
-            setValue: (name, value) => setFieldValue(name, value)
+            setValue: (name, value) => setFieldValue(name, value),
+            getValue: (name) => getIn(state.values, name),
+            getValueForDefault: (name, comparisonKey = null) => {
+                if (comparisonKey === null) {
+                    return getIn(state.savedValues, name);
+                }
+
+                let savedValue = getIn(state.savedValues, comparisonKey),
+                    currentValue = getIn(state.values, comparisonKey);
+                return savedValue === currentValue ? getIn(state.savedValues, name) : false;
+            },
         };
     }, [state.errors, state.touched, state.values]);
 

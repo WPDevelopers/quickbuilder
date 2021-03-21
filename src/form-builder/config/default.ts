@@ -53,6 +53,33 @@ const builder = {
 					},
 				},
 				{
+					type: "slider", // Required
+					name: "slider", // Required
+					label: "Slider Control",
+					default: '10',
+					// unit: 'px',
+					units: [ 'px', 'em' ],
+					validation_rules: {
+						required: "This Fields is Required", // Message
+						"min:20": "Your Input is too short. Make it 20Character Bigger.",
+					},
+				},
+				{
+					type: "select", // Required
+					name: "select", // Required
+					label: "Color Control",
+					multiple: true,
+					options: [
+						{ label: 'MKL', value: 'mkl' },
+						{ label: 'PRIYO', value: 'priyo' },
+					]
+					// default: '#FF0000',
+					// validation_rules: {
+					// 	required: "This Fields is Required", // Message
+					// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+					// },
+				},
+				{
 					type: "text", // Required
 					name: "text_control_3", // Required
 					label: "Text Control",
@@ -100,7 +127,26 @@ const builder = {
 				{
 					type: 'toggle',
 					name: 'toggle',
-					label: 'Toggle'
+					label: 'Toggle',
+					multiple: true,
+					default: {
+						one: true,
+						three: true,
+					},
+					options: [
+						{
+							label: 'One',
+							value: 'one'
+						},
+						{
+							label: 'Two',
+							value: 'two'
+						},
+						{
+							label: 'Three',
+							value: 'three'
+						}
+					]
 				},
 				// {
 				// 	type: 'repeater',

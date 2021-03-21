@@ -1,9 +1,8 @@
-import { isEqual } from 'lodash';
 import React, { useEffect, useState } from 'react'
 import { useBuilderContext } from './hooks';
 import { _extends } from './functions';
 import { FieldInputProps, FieldMetaProps } from './types';
-import { isFunction, withState } from './utils';
+import { isFunction } from './utils';
 
 export declare type FieldValidator = (value: any) => string | void | Promise<string | void>;
 

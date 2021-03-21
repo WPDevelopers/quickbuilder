@@ -1,9 +1,10 @@
-import React from 'react'
-import { Group, Radio, Section, Date, Test, Repeater, Toggle, ColorPicker } from '../fields';
-import { useBuilderContext } from './hooks';
+import React, { useEffect } from 'react'
+import { Group, Radio, Section, Date, Test, Repeater, Toggle, ColorPicker, Select, Slider } from '../fields';
+import { useBuilderContext, useDefaults } from './hooks';
 import Field from './Field';
-import { objectWithoutPropertiesLoose } from './utils';
-import { isFunction } from 'lodash';
+import { isEmptyObj, objectWithoutPropertiesLoose } from './utils';
+import { isFunction, isObject } from 'lodash';
+import withLabel from './hooks/withLabel';
 
 const BuilderField = (props) => {
     if (!props.field || props.field.length === 0) {
@@ -16,10 +17,13 @@ const BuilderField = (props) => {
     const builderContext = useBuilderContext();
 
     const { onChange, onBlur } = props;
-    let field: any = objectWithoutPropertiesLoose(props.field, ['validation_rules', 'default', 'rules', 'meta']);
+    let field: any = objectWithoutPropertiesLoose(
+        props.field,
+        ['validation_rules', 'default', 'rules', 'meta', 'options', 'trigger', 'is_pro', 'switch']
+    );
     field = builderContext.getFieldProps(field);
 
-    const { validation_rules, default: defolt, rules, options } = props.field;
+    const { validation_rules, default: defolt, rules, options, trigger } = props.field;
 
     if (isFunction(onChange)) {
         field.onChange = props.onChange;
@@ -32,7 +36,16 @@ const BuilderField = (props) => {
     const helpers = builderContext.getFieldHelpers(props);
 
     const inputFieldsAttributes = { field, meta, helpers }
-    // console.log("inputFieldsAttributes", inputFieldsAttributes)
+
+    // if (field.name == 'design') {
+    //     console.log(field.name, meta.visible)
+    // }
+
+    useEffect(() => {
+        if (isObject(trigger) && !isEmptyObj(trigger)) {
+            useDefaults(field.name, helpers, meta, trigger);
+        }
+    }, [meta.value])
 
     if (!meta.visible) {
         return <></>;
@@ -42,12 +55,14 @@ const BuilderField = (props) => {
         case "text":
         case "checkbox":
         case "radio":
-        case "select":
         case "email":
         case "range":
         case "number":
-            // case "date":
             return <Field {...inputFieldsAttributes} />;
+        case "select":
+            return <Select {...inputFieldsAttributes} options={options} />;
+        case "slider":
+            return <Slider {...inputFieldsAttributes} />;
         case "group":
             let groupAttr = {
                 ...inputFieldsAttributes,
@@ -70,7 +85,7 @@ const BuilderField = (props) => {
         case "date":
             return <Date {...inputFieldsAttributes} />;
         case "toggle":
-            return <Toggle {...inputFieldsAttributes} />;
+            return <Toggle {...inputFieldsAttributes} options={options} />;
         case "colorpicker":
             return <ColorPicker {...inputFieldsAttributes} />;
         case "repeater":

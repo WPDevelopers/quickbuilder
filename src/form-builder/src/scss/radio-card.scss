@@ -1,4 +1,7 @@
 .wprf-input-radio-set-wrap.wprf-radio-card {
+	input {
+		display: none;
+	}
 	.wprf-input-radio-option {
 		min-height: 80px;
 		position: relative;

@@ -7,6 +7,7 @@ import { useInstanceId } from "@wordpress/compose";
 
 
 const Repeater = (props) => {
+    return <></>;
     const builderContext = useBuilderContext();
     const instanceId = useInstanceId(Repeater);
 
@@ -63,7 +64,7 @@ const Repeater = (props) => {
                 <h4>{props.label}</h4>
                 <button className="wprf-repeater-button"
                     onClick={() => setLocalFields(prevLocalState => ([...prevLocalState, {}]))}>
-                    {props.button.label}
+                    {props?.button?.label}
                 </button>
             </div>
             <div className="wprf-repeater-content">

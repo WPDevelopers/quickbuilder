@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { isArray } from "../utils";
 import { useBuilderContext } from "./index";
 
 const useOptions = ( props: any, propertyName: string = 'fields' ) => {
@@ -6,24 +7,25 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
         throw new Error('#options param need to set in order to use useOptions hook.');
     }
 
+    const { field, meta }  = props;
     const builderContext = useBuilderContext();
     const options = builderContext.eligibleOptions(props[propertyName]);
-    const opt = builderContext.eligibleOption(options, props.meta.value, props.field?.multiple );
+    const selectedOption = builderContext.eligibleOption(options, meta.value, field.multiple ?? false );
 
     let option : string | Array<string>;
-    if( ! props.field?.multiple ) {
-        option = opt.value || props.meta.default;
+    if( ! field.multiple ) {
+        option = selectedOption.value || meta.default;
     } else {
-        option = opt.map( (o: any) => o.value ) || props.meta.default;
+        option = (isArray(selectedOption) && selectedOption.map( (o: any) => o.value )) || meta.default;
     }
 
-    useEffect(() => {
-        if( option ) {
-            builderContext.setFieldValue(props.field.name, option);
-        }
-    }, [option])
+    // useEffect(() => {
+    //     if( option ) {
+    //         builderContext.setFieldValue(field.name, option);
+    //     }
+    // }, [option])
 
-    return { options, option }
+    return { options, option, selectedOption }
 }
 
 export default useOptions;

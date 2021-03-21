@@ -5,6 +5,10 @@ export const isString = (args) => {
     return args !== null && typeof args === "string";
 };
 
+export const isNumber = (args) => {
+    return args !== null && typeof args === "number";
+};
+
 var isInteger = function isInteger(obj) {
     return String(Math.floor(Number(obj))) === obj;
 };
@@ -22,10 +26,10 @@ export const isObject = (obj) => {
 }
 
 export const isVisible = (values, props) => {
-    if (!props.rules || props.name == undefined) {
+    if (!props.field.rules || props.field.name == undefined) {
         return true;
     }
-    let whenVar = when(props.rules, values);
+    let whenVar = when(props.field.rules, values);
     return Boolean(whenVar);
 }
 

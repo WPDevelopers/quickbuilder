@@ -3,10 +3,10 @@ import classNames from "classnames";
 import { TabProps } from "./types";
 import { sortingFields, isArray } from "../core/utils";
 import InnerContent from "../core/InnerContent";
-import { Popover } from "@wordpress/components";
+import Submit from "./Submit";
 
 
-const Content: React.FC<TabProps> = ({ tabs, active }) => {
+const Content: React.FC<TabProps> = ({ tabs, active, submit }) => {
     if (tabs === undefined) {
         throw new Error("There are no #tabs args defined in props.");
     }
@@ -42,7 +42,7 @@ const Content: React.FC<TabProps> = ({ tabs, active }) => {
                     </div>
                 );
             })}
-            {/* {(submit?.show ?? true) && <Submit config={submit} />} */}
+            {(submit?.show ?? true) && <Submit {...submit} />}
         </div>
     );
 };

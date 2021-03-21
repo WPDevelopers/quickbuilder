@@ -1,6 +1,7 @@
 export interface TabConfig {
     tabs: any,
-    config?: { [key: string] : any }
+    config?: { [key: string] : any },
+    submit?: any
 }
 
 interface TabMenuConfig extends TabConfig {

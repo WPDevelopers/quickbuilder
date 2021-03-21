@@ -7,10 +7,18 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
         throw new Error('#options param need to set in order to use useOptions hook.');
     }
 
-    const { field, meta }  = props;
+    const { field, meta, helpers }  = props;
     const builderContext = useBuilderContext();
+
+    let value = meta.value;
+    if( meta.parent && meta.parent.type === 'group' ) {
+        if( meta.value ) {
+            value = meta.value[field.name];
+        }
+    }
+
     const options = builderContext.eligibleOptions(props[propertyName]);
-    const selectedOption = builderContext.eligibleOption(options, meta.value, field.multiple ?? false );
+    const selectedOption = builderContext.eligibleOption(options, value, field.multiple ?? false );
 
     let option : string | Array<string>;
     if( ! field.multiple ) {
@@ -24,6 +32,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     //         builderContext.setFieldValue(field.name, option);
     //     }
     // }, [option])
+
 
     return { options, option, selectedOption }
 }

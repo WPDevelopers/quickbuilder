@@ -37,8 +37,8 @@ const BuilderField = (props) => {
 
     const inputFieldsAttributes = { field, meta, helpers }
 
-    // if (field.name == 'design') {
-    //     console.log(field.name, meta.visible)
+    // if (field.name == 'custom_first_param') {
+    //     console.log(field.name, meta)
     // }
 
     useEffect(() => {

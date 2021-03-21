@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import classNames from 'classnames';
+
 import { useBuilderContext } from '../core/hooks';
 import { isEqual } from 'lodash';
 import { executeChange, isArray, sortingFields } from '../core/utils';
-
 import BuilderField from '../core/BuilderField';
+
 
 const Group = (props) => {
     const { name: fieldName, fields } = props.field;
@@ -33,6 +35,10 @@ const Group = (props) => {
         setLocalState((prevState) => ({ ...prevState, [field]: value }));
     }, [])
 
+    const handleChangeForSelect = useCallback((event) => {
+        setLocalState((prevState) => ({ ...prevState, [event.field]: event.value }));
+    }, [])
+
     useEffect(() => {
         if (!isEqual(localState, builderContext.values[fieldName]) && !props?.handleChange) {
             builderContext.setFieldValue(fieldName, localState);
@@ -46,13 +52,27 @@ const Group = (props) => {
 
     const newFields = sortingFields(fields);
     const allFields = newFields.map((item, index) => {
-        return <BuilderField key={item.name} index={props.index} onChange={handleChange} field={{ ...item }} meta={props.meta} helpers={props.helpers} />;
+        let meta = { ...props.meta, ...builderContext.getFieldMeta(item.name, { field: item }) };
+        return <BuilderField
+            key={item.name}
+            index={props.index}
+            onChange={item.type != 'select' ? handleChange : handleChangeForSelect}
+            field={{ ...item }}
+            meta={meta}
+            helpers={props.helpers}
+        />;
+    });
+
+    const innerClasses = classNames('wprf-group-control-inner', {
+        'wprf-display-inline': props.field.display === 'inline'
     });
 
     return (
         <div className="wprf-group-control">
-            {props.label}
-            {allFields}
+            { props.field.label && <h4>{props.field.label}</h4>}
+            <div className={innerClasses}>
+                {allFields}
+            </div>
         </div>
     )
 }

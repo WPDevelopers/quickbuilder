@@ -1,3 +1,6 @@
+.wprf-input-radio-set-wrap.wprf-radio-card input {
+  display: none;
+}
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option {
   min-height: 80px;
   position: relative;
@@ -217,11 +220,21 @@
 .wprf-control .wprf-error-message {
   color: red;
 }
+.wprf-control.wprf-submit {
+  margin-top: 30px;
+}
+.wprf-control.wprf-submit button.wprf-submit-button {
+  padding: 10px 20px;
+  border: none;
+}
 
 .wprf-control .wprf-input-field.wprf-input-text {
   padding: 10px;
 }
 
+.wprf-input-radio-set-wrap.wprf-radio-card input {
+  display: none;
+}
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option {
   min-height: 80px;
   position: relative;
@@ -1751,6 +1764,15 @@
 }
 .wprf-colorpicker-wrap .components-color-picker__inputs-wrapper .components-color-picker__inputs-fields .components-text-control__input[type=number] {
   width: 54px;
+}
+
+.wprf-group-control .wprf-group-control-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.wprf-group-control .wprf-group-control-inner > * {
+  flex-basis: 30%;
 }
 
 /*# sourceMappingURL=index.css.map*/

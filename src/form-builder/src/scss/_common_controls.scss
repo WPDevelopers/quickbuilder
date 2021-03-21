@@ -94,4 +94,11 @@ $white: '#FFF';
 	.wprf-error-message {
 		color: red
 	}
+	&.wprf-submit {
+		margin-top: 30px;
+		button.wprf-submit-button {
+			padding: 10px 20px;
+			border: none;
+		}
+	}
 }

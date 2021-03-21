@@ -24,6 +24,7 @@ const Tab: React.FC<TabConfig> = (props) => {
                 <Content
                     tabs={props.tabs}
                     active={activeTab}
+                    submit={props?.submit}
                 />
             </BuilderProvider>
         </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Label } from '../core/components';
 import ReactSelect from "react-select";
 import useOptions from '../core/hooks/useOptions';
-import { isArray, isObject } from '../core/utils';
+import { isArray, isFunction, isObject } from '../core/utils';
 
 const Select = (props: any) => {
     const { meta, helpers, field } = props;
@@ -12,10 +12,24 @@ const Select = (props: any) => {
 
     useEffect(() => {
         if (!isArray(sOption) && isObject(sOption)) {
-            helpers.setValue(name, sOption.value)
+            if (!meta.parent) {
+                helpers.setValue(name, sOption.value)
+            } else {
+                field.onChange({
+                    field: name,
+                    value: sOption.value
+                })
+            }
         }
         if (isArray(sOption)) {
-            helpers.setValue(name, sOption.map(item => item.value))
+            if (!meta.parent) {
+                helpers.setValue(name, sOption.map(item => item.value))
+            } else {
+                field.onChange({
+                    field: name,
+                    value: sOption.map(item => item.value)
+                })
+            }
         }
     }, [sOption])
 

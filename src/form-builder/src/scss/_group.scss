@@ -1,0 +1,10 @@
+.wprf-group-control {
+    .wprf-group-control-inner {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        & > * {
+            flex-basis: 30%;
+        }
+    }
+}

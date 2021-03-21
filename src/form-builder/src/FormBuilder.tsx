@@ -12,8 +12,6 @@ import { BuilderProps } from "./types/Builder";
 import Tab from "./tabs/Tab";
 
 const FormBuilder: React.FC<BuilderProps> = (props) => {
-	console.log("FormBuilder props", props);
-
 	const componentClasses = classNames(
 		"wp-react-form wprf-tabs-wrapper",
 		props?.className,

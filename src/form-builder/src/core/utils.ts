@@ -29,6 +29,7 @@ export const isVisible = (values, props) => {
     if (!props.field.rules || props.field.name == undefined) {
         return true;
     }
+
     let whenVar = when(props.field.rules, values);
     return Boolean(whenVar);
 }

@@ -12,6 +12,11 @@ const RadioCard = (props) => {
     const { name, label } = field;
     const { options, option } = useOptions(props, 'options');
 
+    // if (name === 'themes') {
+    //     console.log('RadioCard', options);
+    // }
+
+
     if (!options) {
         throw new Error('#options is a required arguments for RadioCard field.');
     }

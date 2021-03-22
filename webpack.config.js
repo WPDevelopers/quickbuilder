@@ -14,6 +14,10 @@ module.exports = {
 				use: "ts-loader",
 				exclude: /node_modules/,
 			},
+			{
+				test: /\.(jpg|png|gif|svg)$/,
+				use: "url-loader",
+			},
 			...defaultConfig.module.rules,
 		],
 	},

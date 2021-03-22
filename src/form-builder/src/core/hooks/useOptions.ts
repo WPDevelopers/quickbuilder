@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { isArray } from "../utils";
+import useDefaults from "./useDefaults";
+import { isArray, isEmptyObj, isObject } from "../utils";
 import { useBuilderContext } from "./index";
 
 const useOptions = ( props: any, propertyName: string = 'fields' ) => {
@@ -12,7 +13,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
 
     let value = meta.value;
     if( meta.parent && meta.parent.type === 'group' ) {
-        if( meta.value ) {
+        if( ! isEmptyObj(meta.value) ) {
             value = meta.value[field.name];
         }
     }
@@ -22,11 +23,10 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
 
     let option : string | Array<string>;
     if( ! field.multiple ) {
-        option = selectedOption.value || meta.default;
+        option = selectedOption.value || meta.value || meta.default;
     } else {
-        option = (isArray(selectedOption) && selectedOption.map( (o: any) => o.value )) || meta.default;
+        option = (isArray(selectedOption) && selectedOption.map( (o: any) => o.value )) || meta.value || meta.default;
     }
-
     // useEffect(() => {
     //     if( option ) {
     //         builderContext.setFieldValue(field.name, option);

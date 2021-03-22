@@ -12,7 +12,10 @@ const useBuilder = (props) => {
     }, [])
 
     const [state, dispatch] = useReducer(builderReducer, {
-        savedValues: props.savedValues || {},
+        savedValues: props.savedValues || {
+            type: 'conversions',
+            source: 'freemius_conversions'
+        },
         values: props.initialValues || {},
         errors: props.initialErrors || {},
         touched: props.initialTouched || {},
@@ -100,7 +103,7 @@ const useBuilder = (props) => {
     const getFieldProps = React.useCallback((args) => {
         const isAnObject = isObject(args);
         const name = isAnObject ? args.name : args;
-        const valueState = getIn(state.values, name);
+        const valueState = getIn(state.values, name) || args?.meta?.default;
 
         if (isAnObject) {
             delete args.meta;
@@ -150,7 +153,7 @@ const useBuilder = (props) => {
     const getFieldMeta = React.useCallback((name, props) => {
         return {
             ...props.meta,
-            value: getIn(state.values, name),
+            value: getIn(state.values, name) || props.meta?.default,
             error: getIn(state.errors, name),
             touched: !!getIn(state.touched, name),
             visible: isVisible(state.values, props),

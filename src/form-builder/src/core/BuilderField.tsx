@@ -32,7 +32,7 @@ const BuilderField = (props) => {
         field.onBlur = props.onBlur;
     }
 
-    const meta = { ...builderContext.getFieldMeta(field.name, props), ...props.meta, validation_rules, default: defolt, rules };
+    const meta = { ...builderContext.getFieldMeta(field.name, props), ...props.meta, validation_rules, default: defolt, rules, options, trigger };
     const helpers = builderContext.getFieldHelpers(props);
 
     const inputFieldsAttributes = { field, meta, helpers }
@@ -43,7 +43,7 @@ const BuilderField = (props) => {
 
     useEffect(() => {
         if (isObject(trigger) && !isEmptyObj(trigger)) {
-            useDefaults(field.name, helpers, meta, trigger);
+            useDefaults(field.name, helpers, meta.value, trigger);
         }
     }, [meta.value])
 

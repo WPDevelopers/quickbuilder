@@ -12,10 +12,7 @@ const useBuilder = (props) => {
     }, [])
 
     const [state, dispatch] = useReducer(builderReducer, {
-        savedValues: props.savedValues || {
-            type: 'conversions',
-            source: 'freemius_conversions'
-        },
+        savedValues: props.savedValues || {},
         values: props.initialValues || {},
         errors: props.initialErrors || {},
         touched: props.initialTouched || {},
@@ -25,6 +22,16 @@ const useBuilder = (props) => {
         var resolvedValues = typeof values === 'function' ? values(state.values) : values;
         dispatch({
             type: 'SET_VALUES',
+            payload: resolvedValues
+        });
+        var willValidate = shouldValidate === undefined ? false : shouldValidate;
+        return willValidate ? resolvedValues : Promise.resolve();
+    });
+
+    const setSavedValues = useEventCallback((values, shouldValidate) => {
+        var resolvedValues = typeof values === 'function' ? values(state.values) : values;
+        dispatch({
+            type: 'SET_SAVED_VALUES',
             payload: resolvedValues
         });
         var willValidate = shouldValidate === undefined ? false : shouldValidate;
@@ -218,12 +225,15 @@ const useBuilder = (props) => {
     });
 
     let context = {
+        ...props,
         values: state.values,
+        savedValues: state.savedValues,
         errors: {},
         touched: {},
         isSubmitting: false,
         setSubmitting: setSubmitting,
         setValues: setValues,
+        setSavedValues: setSavedValues,
         setFieldValue: setFieldValue,
         handleBlur: handleBlur,
         handleChange: handleChange,

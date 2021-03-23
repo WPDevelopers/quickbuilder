@@ -7,6 +7,10 @@ export const builderReducer = (state: any, action: any) => {
             return _extends({}, state, {
                 values: { ... state.values, ...action.payload }
             });
+        case 'SET_SAVED_VALUES':
+            return _extends({}, state, {
+                savedValues: { ...state.savedValues, ...action.payload }
+            });
 
         case 'SET_TOUCHED':
             return _extends({}, state, {

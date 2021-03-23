@@ -13,10 +13,19 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
 
     let value = meta.value;
     if( meta.parent && meta.parent.type === 'group' ) {
-        if( ! isEmptyObj(meta.value) ) {
-            value = meta.value[field.name];
+        let helpers = builderContext.getFieldHelpers(props);
+        let parentValue = helpers.getValue( meta.parent.name);
+        if( parentValue ) {
+            value = parentValue[field.name];
         }
+        // if( ! isEmptyObj(meta.value) ) {
+        //     value = meta.value[field.name];
+        // }
     }
+
+    // if( field.name === 'source' ) {
+    //     console.log( "value", props );
+    // }
 
     const options = builderContext.eligibleOptions(props[propertyName]);
     const selectedOption = builderContext.eligibleOption(options, value, field.multiple ?? false );
@@ -27,6 +36,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     } else {
         option = (isArray(selectedOption) && selectedOption.map( (o: any) => o.value )) || meta.value || meta.default;
     }
+
     // useEffect(() => {
     //     if( option ) {
     //         builderContext.setFieldValue(field.name, option);

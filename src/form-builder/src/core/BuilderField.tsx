@@ -4,10 +4,10 @@ import { useBuilderContext, useDefaults } from './hooks';
 import Field from './Field';
 import { isEmptyObj, objectWithoutPropertiesLoose } from './utils';
 import { isFunction, isObject } from 'lodash';
-import withLabel from './hooks/withLabel';
 
 const BuilderField = (props) => {
     if (!props.field || props.field.length === 0) {
+        console.log(props)
         throw new Error('Field must have a #field. see documentation.');
     }
     if (!props.field.type || props.field.type.length === 0) {
@@ -23,7 +23,7 @@ const BuilderField = (props) => {
     );
     field = builderContext.getFieldProps(field);
 
-    const { validation_rules, default: defolt, rules, options, trigger } = props.field;
+    const { validation_rules, default: defolt, rules, options, trigger, styles, fields } = props.field;
 
     if (isFunction(onChange)) {
         field.onChange = props.onChange;
@@ -32,7 +32,7 @@ const BuilderField = (props) => {
         field.onBlur = props.onBlur;
     }
 
-    const meta = { ...builderContext.getFieldMeta(field.name, props), ...props.meta, validation_rules, default: defolt, rules, options, trigger };
+    const meta = { ...builderContext.getFieldMeta(field.name, props), ...props.meta, validation_rules, default: defolt, rules, options, trigger, styles };
     const helpers = builderContext.getFieldHelpers(props);
 
     const inputFieldsAttributes = { field, meta, helpers }
@@ -101,11 +101,12 @@ const BuilderField = (props) => {
                     }
                 }
             };
-            return <Repeater {...repeaterAttr} />;
+            return <Repeater {...repeaterAttr} fields={fields} />;
         // return <Test {...inputFieldsAttributes} />;
         default:
             return <></>;
     }
 }
 
+// export default withLabel(BuilderField);
 export default BuilderField;

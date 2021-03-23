@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import classNames from "classnames";
 import Field from '../core/Field';
 import { Column, Label, Row } from '../core/components';
+import { withLabel } from '../core/hooks';
 
 export const Toggle = (props) => {
-    const { styles: prevStyles, field, meta, helpers, options } = props;
+    const { field, meta, helpers, options } = props;
     const { label, value } = field;
+    const { styles: prevStyles } = meta;
 
     let styles = {
-        type: "card",
+        type: "", // card
         label: {
             position: "right",
         },
@@ -76,4 +78,4 @@ export const Toggle = (props) => {
     );
 }
 
-export default Toggle;
+export default withLabel(Toggle);

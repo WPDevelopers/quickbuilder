@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useBuilderContext } from './hooks';
+import { useBuilderContext, withLabel } from './hooks';
 import { _extends } from './functions';
 import { FieldInputProps, FieldMetaProps } from './types';
 import { isFunction } from './utils';

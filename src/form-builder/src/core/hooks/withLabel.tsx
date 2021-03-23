@@ -5,13 +5,23 @@ import Image from "../Image";
 const withLabel = (WrappedComponent) => {
     const WithLabel = (props) => {
         const componentClasses = classNames("wprf-label");
-        const { label, id } = props.field;
+        let { label, id, name, type } = props.field;
+
+        if (id == undefined) {
+            id = name;
+        }
 
         return (
-            <label htmlFor={id} className={componentClasses}>
-                {label}
-                <WrappedComponent {...props} />
-            </label>
+            <div>
+                <div>
+                    <label htmlFor={id} className={componentClasses}>
+                        {label}
+                    </label>
+                </div>
+                <div>
+                    <WrappedComponent {...props} id={id} />
+                </div>
+            </div>
         );
     }
 

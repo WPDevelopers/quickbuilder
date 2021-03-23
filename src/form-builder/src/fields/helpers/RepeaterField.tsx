@@ -25,7 +25,7 @@ const RepeaterField = (props) => {
                         field={{
                             type: 'group',
                             name: props.name,
-                            fields: props.field.fields
+                            fields: props.fields
                         }}
                         index={props.index}
                         handleChange={(value) => props.handleChange(value || value, props.index)}

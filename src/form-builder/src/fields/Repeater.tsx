@@ -7,17 +7,20 @@ import { useInstanceId } from "@wordpress/compose";
 
 
 const Repeater = (props) => {
-    return <></>;
+    console.log("re", props);
+
+    const { field, meta, helpers } = props;
+    const { name, label, button, fields } = field;
     const builderContext = useBuilderContext();
     const instanceId = useInstanceId(Repeater);
 
     const localMemoizedValue = useMemo(() => {
-        let localS = builderContext.values?.[props.name];
-        if (localS && props.meta.default) {
-            localS = [...props.meta.default, ...localS];
+        let localS = builderContext.values?.[name];
+        if (localS && meta.default) {
+            localS = [...meta.default, ...localS];
         }
         return localS;
-    }, [builderContext.values?.[props.name]])
+    }, [builderContext.values?.[name]])
 
     // useEffect(() => {
     //     console.log("localMemoizedValue", localMemoizedValue, builderContext.values?.[props.name])
@@ -36,7 +39,7 @@ const Repeater = (props) => {
         let newValue = { ...localValue };
         delete newValue[index];
 
-        props.helpers.setValue(props.name, newValue);
+        helpers.setValue(name, newValue);
 
         let newFields = [...localFields];
         newFields.splice(index, 1)
@@ -51,20 +54,16 @@ const Repeater = (props) => {
     }, [localValue, localFields])
 
     useEffect(() => {
-        props.helpers.setValue(props.name, localValue);
+        helpers.setValue(name, localValue);
     }, [localValue])
-
-    useEffect(() => {
-        console.log(localFields)
-    })
 
     return (
         <div className="wprf-repeater-control">
             <div className="wprf-repeater-label">
-                <h4>{props.label}</h4>
+                <h4>{label}</h4>
                 <button className="wprf-repeater-button"
                     onClick={() => setLocalFields(prevLocalState => ([...prevLocalState, {}]))}>
-                    {props?.button?.label}
+                    {button?.label}
                 </button>
             </div>
             <div className="wprf-repeater-content">
@@ -75,10 +74,10 @@ const Repeater = (props) => {
                             clone={handleClone}
                             isOpen={true}
                             key={index}
-                            name={`${props.name}`}
+                            name={name}
                             index={index}
                             handleChange={handleChange}
-                            fields={props.fields}
+                            fields={fields}
                             parentProps={props}
                         />
                     })

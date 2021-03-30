@@ -1,51 +1,25 @@
 import React, { useEffect } from 'react'
-import { Group, Radio, Section, Date, Test, Repeater, Toggle, ColorPicker, Select, Slider } from '../fields';
-import { useBuilderContext, useDefaults, withChange } from './hooks';
-import Field from './Field';
-import { isEmptyObj, objectWithoutPropertiesLoose } from './utils';
-import { isFunction, isObject } from 'lodash';
+import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date } from '.';
+import { useBuilderContext, useDefaults, withChange, withProps } from '../core/hooks';
+import { isEmptyObj, isObject } from '../core/utils';
 
-const BuilderField = (props) => {
-    if (!props.field || props.field.length === 0) {
-        console.log(props)
+const Field = ({ meta, field, helpers }) => {
+    if (!field || field.length === 0) {
         throw new Error('Field must have a #field. see documentation.');
     }
-    if (!props.field.type || props.field.type.length === 0) {
+    if (!field.type || field.type.length === 0) {
         throw new Error('Field must have a #type. see documentation.');
     }
 
-    const builderContext = useBuilderContext();
-
-    const { onChange, onBlur } = props;
-    let field: any = objectWithoutPropertiesLoose(
-        props.field,
-        ['validation_rules', 'default', 'rules', 'meta', 'options', 'trigger', 'is_pro', 'switch']
-    );
-    field = builderContext.getFieldProps(field);
-
-    const { validation_rules, default: defolt, rules, options, trigger, styles, fields } = props.field;
-
-    if (isFunction(onChange)) {
-        field.onChange = props.onChange;
-    }
-    if (isFunction(onBlur)) {
-        field.onBlur = props.onBlur;
-    }
-
-    const meta = { ...builderContext.getFieldMeta(field.name, props), ...props.meta, validation_rules, default: defolt, rules, options, trigger, styles };
-    const helpers = builderContext.getFieldHelpers(props);
-
-    const inputFieldsAttributes = { field, meta, helpers }
-
-    // if (field.name == 'custom_first_param') {
-    //     console.log(field.name, meta)
-    // }
+    const inputFieldsAttributes = { meta, field, helpers };
+    const { options, fields, trigger } = meta;
 
     useEffect(() => {
         if (isObject(trigger) && !isEmptyObj(trigger)) {
             useDefaults(field.name, helpers, meta.value, trigger);
         }
     }, [meta.value])
+
 
     if (!meta.visible) {
         return <></>;
@@ -58,7 +32,7 @@ const BuilderField = (props) => {
         case "email":
         case "range":
         case "number":
-            return <Field {...inputFieldsAttributes} />;
+            return <Input {...field} />;
         case "select":
             return <Select {...inputFieldsAttributes} options={options} />;
         case "slider":
@@ -95,9 +69,9 @@ const BuilderField = (props) => {
                     ...inputFieldsAttributes.meta,
                     withState: false,
                     parent: {
-                        type: props.type,
-                        name: props.name,
-                        default: props.default,
+                        type: field.type,
+                        name: field.name,
+                        default: field.default,
                         ...inputFieldsAttributes?.meta?.parent
                     }
                 }
@@ -107,7 +81,7 @@ const BuilderField = (props) => {
         default:
             return <></>;
     }
-}
+};
 
-export const BuilderFieldWithOutChange = BuilderField;
-export default withChange(BuilderField);
+export const GenericField = withProps(Field);
+export default withProps(withChange(Field));

@@ -69,7 +69,7 @@
 .wp-react-form.wprf-tabs-wrapper {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 20px 20px;
 }
 .wp-react-form.wprf-tabs-wrapper .wprf-tab-menu-wrapper {
   margin-bottom: 5px;

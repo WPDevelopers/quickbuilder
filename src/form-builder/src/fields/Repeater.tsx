@@ -29,11 +29,12 @@ const Repeater = (props) => {
     const [localFields, setLocalFields] = useState([{}]);
     const [localValue, setLocalValue] = useState(localMemoizedValue);
 
-    const handleChange = useCallback((value, index) => {
-        if (!isEmptyObj(value)) {
-            setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
-        }
-    }, [])
+    const handleChange = (value, index) => {
+        console.log('ddd');
+        // if (!isEmptyObj(value)) {
+        //     setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
+        // }
+    }
 
     const handleRemove = useCallback((index) => {
         let newValue = { ...localValue };
@@ -44,7 +45,6 @@ const Repeater = (props) => {
         let newFields = [...localFields];
         newFields.splice(index, 1)
         setLocalFields(newFields);
-
     }, [localFields, localValue])
 
     const handleClone = useCallback((index) => {
@@ -54,6 +54,8 @@ const Repeater = (props) => {
     }, [localValue, localFields])
 
     useEffect(() => {
+        console.log("localValue", localValue);
+
         helpers.setValue(name, localValue);
     }, [localValue])
 

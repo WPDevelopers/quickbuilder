@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import BuilderField from '../core/BuilderField';
+import { Field } from '../fields';
 import { sortingFields } from '../core/utils';
 
 const Section = (props) => {
@@ -7,7 +7,7 @@ const Section = (props) => {
     const newFields = sortingFields(props.field.fields);
 
     const allFields = newFields.map((item, index) => {
-        return <BuilderField key={item.name} field={item} />;
+        return <Field key={item.name} field={item} />;
     });
 
     return (

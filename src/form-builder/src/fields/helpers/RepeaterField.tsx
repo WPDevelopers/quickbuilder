@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Icon } from '@wordpress/components';
-import BuilderField from '../../core/BuilderField';
+import { GenericField } from '../Field';
 
 const RepeaterField = (props) => {
     const [isCollapse, setIsCollapse] = useState(props.isOpen);
@@ -16,7 +16,7 @@ const RepeaterField = (props) => {
             </div>
             { isCollapse &&
                 <div className="wprf-repeater-inner-field">
-                    <BuilderField
+                    <GenericField
                         meta={{
                             parent: {
                                 type: 'repeater'

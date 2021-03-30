@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { TabProps } from "./types";
 import { sortingFields, isArray } from "../core/utils";
-import InnerContent from "../core/InnerContent";
+import InnerContent from "./InnerContent";
 import Submit from "./Submit";
 
 

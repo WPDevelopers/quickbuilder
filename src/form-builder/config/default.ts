@@ -11,31 +11,66 @@ const builder = {
 			icon: "",
 			fields: [
 				{
-					type: "repeater", // Required
-					name: "repeater_control", // Required
-					label: "Repeater Control",
-					button: {
-						label: 'Add New'
+					type: "text", // Required
+					name: "text_control", // Required
+					label: "Text Control",
+					default: 'Hello World',
+					placeholder: "Text Control Placeholder",
+					// value: "Test Control Saved Value", // String
+					// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+					validation_rules: {
+						required: "This Fields is Required", // Message
+						"min:20": "Your Input is too short. Make it 20Character Bigger.",
 					},
-					fields: [
+				},
+				{
+					"label": "Notification Template",
+					"name": "notification-template",
+					"type": "group",
+					"display": "inline",
+					"priority": 90,
+					"fields": [
 						{
-							type: 'text',
-						},
-						{
-							type: 'select',
-							options: [
-								{
-									label: 'One',
-									value: 'one'
-								},
-								{
-									label: 'Two',
-									value: 'two'
-								},
-							]
+							type: "text", // Required
+							name: "text_control", // Required
+							label: "Text Control",
+							default: 'Hello World',
+							placeholder: "Text Control Placeholder",
+							// value: "Test Control Saved Value", // String
+							// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+							validation_rules: {
+								required: "This Fields is Required", // Message
+								"min:20": "Your Input is too short. Make it 20Character Bigger.",
+							},
 						},
 					]
-				},
+				}
+				// {
+				// 	type: "repeater", // Required
+				// 	name: "repeater_control", // Required
+				// 	label: "Repeater Control",
+				// 	button: {
+				// 		label: 'Add New'
+				// 	},
+				// 	fields: [
+				// 		{
+				// 			type: 'text',
+				// 		},
+				// 		{
+				// 			type: 'select',
+				// 			options: [
+				// 				{
+				// 					label: 'One',
+				// 					value: 'one'
+				// 				},
+				// 				{
+				// 					label: 'Two',
+				// 					value: 'two'
+				// 				},
+				// 			]
+				// 		},
+				// 	]
+				// },
 			]
 		},
 		// {

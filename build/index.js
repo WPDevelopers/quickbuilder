@@ -9259,18 +9259,136 @@ exports.storeName = void 0;
 var builder = {
     storeName: "formbuilder",
     config: {
-        active: 'tab_2',
+        active: 'tab_1',
         sidebar: false,
     },
     tabs: [
+        {
+            label: "Tab 1",
+            id: "tab_1",
+            icon: "",
+            fields: [
+                {
+                    type: "text",
+                    name: "text_control",
+                    label: "Text Control",
+                    default: 'Hello World',
+                    placeholder: "Text Control Placeholder",
+                    // value: "Test Control Saved Value", // String
+                    // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                    validation_rules: {
+                        required: "This Fields is Required",
+                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                    },
+                },
+                {
+                    "label": "Notification Template",
+                    "name": "notification-template",
+                    "type": "group",
+                    "display": "inline",
+                    "priority": 90,
+                    "fields": [
+                        {
+                            type: "text",
+                            name: "text_control",
+                            label: "Text Control",
+                            default: 'Hello World',
+                            placeholder: "Text Control Placeholder",
+                            // value: "Test Control Saved Value", // String
+                            // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                            validation_rules: {
+                                required: "This Fields is Required",
+                                "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                            },
+                        },
+                    ]
+                }
+                // {
+                // 	type: "repeater", // Required
+                // 	name: "repeater_control", // Required
+                // 	label: "Repeater Control",
+                // 	button: {
+                // 		label: 'Add New'
+                // 	},
+                // 	fields: [
+                // 		{
+                // 			type: 'text',
+                // 		},
+                // 		{
+                // 			type: 'select',
+                // 			options: [
+                // 				{
+                // 					label: 'One',
+                // 					value: 'one'
+                // 				},
+                // 				{
+                // 					label: 'Two',
+                // 					value: 'two'
+                // 				},
+                // 			]
+                // 		},
+                // 	]
+                // },
+            ]
+        },
         // {
-        // 	label: "Tab 1",
-        // 	id: "tab_1",
+        // 	label: "Tab 2",
+        // 	id: "tab_2",
         // 	icon: "",
         // 	fields: [
         // 		{
+        // 			type: "checkbox", // Required
+        // 			name: "checkbox_control", // Required
+        // 			label: "Text Control",
+        // 			default: true,
+        // 			// placeholder: "Text Control Placeholder",
+        // 			// value: "Test Control Saved Value", // String
+        // 			// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 			validation_rules: {
+        // 				required: "This Fields is Required", // Message
+        // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 			},
+        // 		},
+        // 		{
+        // 			type: "colorpicker", // Required
+        // 			name: "color", // Required
+        // 			label: "Color Control",
+        // 			default: '#FF0000',
+        // 			validation_rules: {
+        // 				required: "This Fields is Required", // Message
+        // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 			},
+        // 		},
+        // 		{
+        // 			type: "slider", // Required
+        // 			name: "slider", // Required
+        // 			label: "Slider Control",
+        // 			default: '10',
+        // 			// unit: 'px',
+        // 			units: [ 'px', 'em' ],
+        // 			validation_rules: {
+        // 				required: "This Fields is Required", // Message
+        // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 			},
+        // 		},
+        // 		{
+        // 			type: "select", // Required
+        // 			name: "select", // Required
+        // 			label: "Color Control",
+        // 			multiple: true,
+        // 			options: [
+        // 				{ label: 'MKL', value: 'mkl' },
+        // 				{ label: 'PRIYO', value: 'priyo' },
+        // 			]
+        // 			// default: '#FF0000',
+        // 			// validation_rules: {
+        // 			// 	required: "This Fields is Required", // Message
+        // 			// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 			// },
+        // 		},
+        // 		{
         // 			type: "text", // Required
-        // 			name: "text_control", // Required
+        // 			name: "text_control_3", // Required
         // 			label: "Text Control",
         // 			placeholder: "Text Control Placeholder",
         // 			value: "Test Control Saved Value", // String
@@ -9279,246 +9397,177 @@ var builder = {
         // 				required: "This Fields is Required", // Message
         // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
         // 			},
+        // 			// rules: [ 'is', 'checkbox_control', true ]
         // 		},
+        // 		{
+        // 			type: "radio-card", // Required
+        // 			name: "radio_control_3", // Required
+        // 			label: "Text Control",
+        // 			default: 'option_one',
+        // 			options: [
+        // 				{
+        // 					label: "Option One",
+        // 					value: 'option_one'
+        // 				},
+        // 				{
+        // 					label: "Option Two",
+        // 					value: 'option_two'
+        // 				},
+        // 				{
+        // 					label: "Option Two",
+        // 					value: 'option_three',
+        // 					rules: ['is', 'checkbox_control', false ]
+        // 				},
+        // 			],
+        // 			// placeholder: "Text Control Placeholder",
+        // 			// value: "Test Control Saved Value", // String
+        // 			// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 			validation_rules: {
+        // 				required: "This Fields is Required", // Message
+        // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 			},
+        // 		},
+        // 		{
+        // 			type: 'date',
+        // 			name: 'date',
+        // 		},
+        // 		{
+        // 			type: 'toggle',
+        // 			name: 'toggle',
+        // 			label: 'Toggle',
+        // 			multiple: true,
+        // 			default: {
+        // 				one: true,
+        // 				three: true,
+        // 			},
+        // 			options: [
+        // 				{
+        // 					label: 'One',
+        // 					value: 'one'
+        // 				},
+        // 				{
+        // 					label: 'Two',
+        // 					value: 'two'
+        // 				},
+        // 				{
+        // 					label: 'Three',
+        // 					value: 'three'
+        // 				}
+        // 			]
+        // 		},
+        // 		// {
+        // 		// 	type: 'repeater',
+        // 		// 	name: 'repeater',
+        // 		// 	label: 'Repeater',
+        // 		// 	button: {
+        // 		// 		label: 'Add New',
+        // 		// 	},
+        // 		// 	fields: [
+        // 		// 		{
+        // 		// 			type: 'text',
+        // 		// 			placeholder: 'Repeater Text',
+        // 		// 			name: 'repeater_text',
+        // 		// 		},
+        // 		// 		{
+        // 		// 			type: 'text',
+        // 		// 			placeholder: 'Repeater Text',
+        // 		// 			name: 'repeater_text_one',
+        // 		// 		},
+        // 		// 	]
+        // 		// },
+        // 		{
+        // 			type: 'section',
+        // 			label: 'Section Test',
+        // 			name: 'section',
+        // 			fields: [
+        // 				{
+        // 					type: "group", // Required
+        // 					name: "group_control", // Required
+        // 					label: "Group Control",
+        // 					default: {
+        // 						name: 'Mukul',
+        // 						email: 'mukul@ar.com.bd'
+        // 					},
+        // 					fields: [
+        // 						{
+        // 							type: "text", // Required
+        // 							name: "name", // Required
+        // 							label: "Username",
+        // 							placeholder: "Text Control Placeholder",
+        // 							value: "Test Control Saved Value", // String
+        // 							default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 							validation_rules: {
+        // 								required: "This Fields is Required", // Message
+        // 								"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 							},
+        // 						},
+        // 						{
+        // 							type: "email", // Required
+        // 							name: "email", // Required
+        // 							label: "Email",
+        // 							placeholder: "Text Control Placeholder",
+        // 							value: "Test Control Saved Value", // String
+        // 							default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 							validation_rules: {
+        // 								required: "This Fields is Required", // Message
+        // 								"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 							},
+        // 						},
+        // 					],
+        // 					// placeholder: "Text Control Placeholder",
+        // 					// value: "Test Control Saved Value", // String
+        // 					// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 					// validation_rules: {
+        // 					// 	required: "This Fields is Required", // Message
+        // 					// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 					// },
+        // 				}
+        // 			]
+        // 		},
+        // 		// {
+        // 		// 	type: "group", // Required
+        // 		// 	name: "group_control", // Required
+        // 		// 	label: "Group Control",
+        // 		// 	default: {
+        // 		// 		name: 'Mukul',
+        // 		// 		email: 'mukul@ar.com.bd'
+        // 		// 	},
+        // 		// 	fields: [
+        // 		// 		{
+        // 		// 			type: "text", // Required
+        // 		// 			name: "name", // Required
+        // 		// 			label: "Username",
+        // 		// 			placeholder: "Text Control Placeholder",
+        // 		// 			value: "Test Control Saved Value", // String
+        // 		// 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 		// 			validation_rules: {
+        // 		// 				required: "This Fields is Required", // Message
+        // 		// 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 		// 			},
+        // 		// 		},
+        // 		// 		{
+        // 		// 			type: "email", // Required
+        // 		// 			name: "email", // Required
+        // 		// 			label: "Email",
+        // 		// 			placeholder: "Text Control Placeholder",
+        // 		// 			value: "Test Control Saved Value", // String
+        // 		// 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 		// 			validation_rules: {
+        // 		// 				required: "This Fields is Required", // Message
+        // 		// 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 		// 			},
+        // 		// 		},
+        // 		// 	],
+        // 		// 	// placeholder: "Text Control Placeholder",
+        // 		// 	// value: "Test Control Saved Value", // String
+        // 		// 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+        // 		// 	// validation_rules: {
+        // 		// 	// 	required: "This Fields is Required", // Message
+        // 		// 	// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+        // 		// 	// },
+        // 		// },
         // 	]
         // },
-        {
-            label: "Tab 2",
-            id: "tab_2",
-            icon: "",
-            fields: [
-                {
-                    type: "checkbox",
-                    name: "checkbox_control",
-                    label: "Text Control",
-                    default: true,
-                    // placeholder: "Text Control Placeholder",
-                    // value: "Test Control Saved Value", // String
-                    // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                    validation_rules: {
-                        required: "This Fields is Required",
-                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    },
-                },
-                {
-                    type: "colorpicker",
-                    name: "color",
-                    label: "Color Control",
-                    default: '#FF0000',
-                    validation_rules: {
-                        required: "This Fields is Required",
-                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    },
-                },
-                {
-                    type: "slider",
-                    name: "slider",
-                    label: "Slider Control",
-                    default: '10',
-                    // unit: 'px',
-                    units: ['px', 'em'],
-                    validation_rules: {
-                        required: "This Fields is Required",
-                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    },
-                },
-                {
-                    type: "select",
-                    name: "select",
-                    label: "Color Control",
-                    multiple: true,
-                    options: [
-                        { label: 'MKL', value: 'mkl' },
-                        { label: 'PRIYO', value: 'priyo' },
-                    ]
-                    // default: '#FF0000',
-                    // validation_rules: {
-                    // 	required: "This Fields is Required", // Message
-                    // 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    // },
-                },
-                {
-                    type: "text",
-                    name: "text_control_3",
-                    label: "Text Control",
-                    placeholder: "Text Control Placeholder",
-                    value: "Test Control Saved Value",
-                    default: "Test Control Default Value",
-                    validation_rules: {
-                        required: "This Fields is Required",
-                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    },
-                    // rules: [ 'is', 'checkbox_control', true ]
-                },
-                {
-                    type: "radio-card",
-                    name: "radio_control_3",
-                    label: "Text Control",
-                    default: 'option_one',
-                    options: [
-                        {
-                            label: "Option One",
-                            value: 'option_one'
-                        },
-                        {
-                            label: "Option Two",
-                            value: 'option_two'
-                        },
-                        {
-                            label: "Option Two",
-                            value: 'option_three',
-                            rules: ['is', 'checkbox_control', false]
-                        },
-                    ],
-                    // placeholder: "Text Control Placeholder",
-                    // value: "Test Control Saved Value", // String
-                    // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                    validation_rules: {
-                        required: "This Fields is Required",
-                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    },
-                },
-                {
-                    type: 'date',
-                    name: 'date',
-                },
-                {
-                    type: 'toggle',
-                    name: 'toggle',
-                    label: 'Toggle',
-                    multiple: true,
-                    default: {
-                        one: true,
-                        three: true,
-                    },
-                    options: [
-                        {
-                            label: 'One',
-                            value: 'one'
-                        },
-                        {
-                            label: 'Two',
-                            value: 'two'
-                        },
-                        {
-                            label: 'Three',
-                            value: 'three'
-                        }
-                    ]
-                },
-                // {
-                // 	type: 'repeater',
-                // 	name: 'repeater',
-                // 	label: 'Repeater',
-                // 	button: {
-                // 		label: 'Add New',
-                // 	},
-                // 	fields: [
-                // 		{
-                // 			type: 'text',
-                // 			placeholder: 'Repeater Text',
-                // 			name: 'repeater_text',
-                // 		},
-                // 		{
-                // 			type: 'text',
-                // 			placeholder: 'Repeater Text',
-                // 			name: 'repeater_text_one',
-                // 		},
-                // 	]
-                // },
-                {
-                    type: 'section',
-                    label: 'Section Test',
-                    name: 'section',
-                    fields: [
-                        {
-                            type: "group",
-                            name: "group_control",
-                            label: "Group Control",
-                            default: {
-                                name: 'Mukul',
-                                email: 'mukul@ar.com.bd'
-                            },
-                            fields: [
-                                {
-                                    type: "text",
-                                    name: "name",
-                                    label: "Username",
-                                    placeholder: "Text Control Placeholder",
-                                    value: "Test Control Saved Value",
-                                    default: "Test Control Default Value",
-                                    validation_rules: {
-                                        required: "This Fields is Required",
-                                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                                    },
-                                },
-                                {
-                                    type: "email",
-                                    name: "email",
-                                    label: "Email",
-                                    placeholder: "Text Control Placeholder",
-                                    value: "Test Control Saved Value",
-                                    default: "Test Control Default Value",
-                                    validation_rules: {
-                                        required: "This Fields is Required",
-                                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                                    },
-                                },
-                            ],
-                            // placeholder: "Text Control Placeholder",
-                            // value: "Test Control Saved Value", // String
-                            // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                            // validation_rules: {
-                            // 	required: "This Fields is Required", // Message
-                            // 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
-                            // },
-                        }
-                    ]
-                },
-                // {
-                // 	type: "group", // Required
-                // 	name: "group_control", // Required
-                // 	label: "Group Control",
-                // 	default: {
-                // 		name: 'Mukul',
-                // 		email: 'mukul@ar.com.bd'
-                // 	},
-                // 	fields: [
-                // 		{
-                // 			type: "text", // Required
-                // 			name: "name", // Required
-                // 			label: "Username",
-                // 			placeholder: "Text Control Placeholder",
-                // 			value: "Test Control Saved Value", // String
-                // 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                // 			validation_rules: {
-                // 				required: "This Fields is Required", // Message
-                // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
-                // 			},
-                // 		},
-                // 		{
-                // 			type: "email", // Required
-                // 			name: "email", // Required
-                // 			label: "Email",
-                // 			placeholder: "Text Control Placeholder",
-                // 			value: "Test Control Saved Value", // String
-                // 			default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                // 			validation_rules: {
-                // 				required: "This Fields is Required", // Message
-                // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
-                // 			},
-                // 		},
-                // 	],
-                // 	// placeholder: "Text Control Placeholder",
-                // 	// value: "Test Control Saved Value", // String
-                // 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                // 	// validation_rules: {
-                // 	// 	required: "This Fields is Required", // Message
-                // 	// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
-                // 	// },
-                // },
-            ]
-        },
     ]
 };
 var storeName = builder.storeName;
@@ -9593,130 +9642,6 @@ exports.default = FormBuilder;
 
 /***/ }),
 
-/***/ "./src/form-builder/src/core/BuilderField.tsx":
-/*!****************************************************!*\
-  !*** ./src/form-builder/src/core/BuilderField.tsx ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
-var fields_1 = __webpack_require__(/*! ../fields */ "./src/form-builder/src/fields/index.ts");
-var hooks_1 = __webpack_require__(/*! ./hooks */ "./src/form-builder/src/core/hooks/index.ts");
-var Field_1 = __importDefault(__webpack_require__(/*! ./Field */ "./src/form-builder/src/core/Field.tsx"));
-var utils_1 = __webpack_require__(/*! ./utils */ "./src/form-builder/src/core/utils.ts");
-var lodash_1 = __webpack_require__(/*! lodash */ "lodash-es");
-var BuilderField = function (props) {
-    var _a;
-    if (!props.field || props.field.length === 0) {
-        throw new Error('Field must have a #field. see documentation.');
-    }
-    if (!props.field.type || props.field.type.length === 0) {
-        throw new Error('Field must have a #type. see documentation.');
-    }
-    var builderContext = hooks_1.useBuilderContext();
-    var onChange = props.onChange, onBlur = props.onBlur;
-    var field = utils_1.objectWithoutPropertiesLoose(props.field, ['validation_rules', 'default', 'rules', 'meta', 'options', 'trigger', 'is_pro', 'switch']);
-    field = builderContext.getFieldProps(field);
-    var _b = props.field, validation_rules = _b.validation_rules, defolt = _b.default, rules = _b.rules, options = _b.options, trigger = _b.trigger;
-    if (lodash_1.isFunction(onChange)) {
-        field.onChange = props.onChange;
-    }
-    if (lodash_1.isFunction(onBlur)) {
-        field.onBlur = props.onBlur;
-    }
-    var meta = __assign(__assign(__assign({}, builderContext.getFieldMeta(field.name, props)), props.meta), { validation_rules: validation_rules, default: defolt, rules: rules });
-    var helpers = builderContext.getFieldHelpers(props);
-    var inputFieldsAttributes = { field: field, meta: meta, helpers: helpers };
-    // if (field.name == 'custom_first_param') {
-    //     console.log(field.name, meta)
-    // }
-    react_1.useEffect(function () {
-        if (lodash_1.isObject(trigger) && !utils_1.isEmptyObj(trigger)) {
-            hooks_1.useDefaults(field.name, helpers, meta, trigger);
-        }
-    }, [meta.value]);
-    if (!meta.visible) {
-        return react_1.default.createElement(react_1.default.Fragment, null);
-    }
-    switch (field.type) {
-        case "text":
-        case "checkbox":
-        case "radio":
-        case "email":
-        case "range":
-        case "number":
-            return react_1.default.createElement(Field_1.default, __assign({}, inputFieldsAttributes));
-        case "select":
-            return react_1.default.createElement(fields_1.Select, __assign({}, inputFieldsAttributes, { options: options }));
-        case "slider":
-            return react_1.default.createElement(fields_1.Slider, __assign({}, inputFieldsAttributes));
-        case "group":
-            var groupAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: __assign({ type: field.type, name: field.name, default: meta.default }, (_a = inputFieldsAttributes === null || inputFieldsAttributes === void 0 ? void 0 : inputFieldsAttributes.meta) === null || _a === void 0 ? void 0 : _a.parent) }) });
-            return react_1.default.createElement(fields_1.Group, __assign({}, groupAttr));
-        case "radio-card":
-            return react_1.default.createElement(fields_1.Radio, __assign({}, inputFieldsAttributes, { options: options }));
-        case "section":
-            return react_1.default.createElement(fields_1.Section, __assign({}, inputFieldsAttributes));
-        case "date":
-            return react_1.default.createElement(fields_1.Date, __assign({}, inputFieldsAttributes));
-        case "toggle":
-            return react_1.default.createElement(fields_1.Toggle, __assign({}, inputFieldsAttributes, { options: options }));
-        case "colorpicker":
-            return react_1.default.createElement(fields_1.ColorPicker, __assign({}, inputFieldsAttributes));
-        case "repeater":
-            var repeaterAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: {
-                        type: props.type,
-                        name: props.name,
-                        default: props.default
-                    } }) });
-            return react_1.default.createElement(fields_1.Repeater, __assign({}, repeaterAttr));
-        // return <Test {...inputFieldsAttributes} />;
-        default:
-            return react_1.default.createElement(react_1.default.Fragment, null);
-    }
-};
-exports.default = BuilderField;
-
-
-/***/ }),
-
 /***/ "./src/form-builder/src/core/BuilderReducers.ts":
 /*!******************************************************!*\
   !*** ./src/form-builder/src/core/BuilderReducers.ts ***!
@@ -9748,6 +9673,10 @@ var builderReducer = function (state, action) {
             return functions_1._extends({}, state, {
                 values: __assign(__assign({}, state.values), action.payload)
             });
+        case 'SET_SAVED_VALUES':
+            return functions_1._extends({}, state, {
+                savedValues: __assign(__assign({}, state.savedValues), action.payload)
+            });
         case 'SET_TOUCHED':
             return functions_1._extends({}, state, {
                 touched: action.payload
@@ -9764,9 +9693,7 @@ var builderReducer = function (state, action) {
                 status: action.payload
             });
         case 'SET_ISSUBMITTING':
-            return functions_1._extends({}, state, {
-                isSubmitting: action.payload
-            });
+            return __assign(__assign({}, state), { isSubmitting: action.payload });
         case 'SET_ISVALIDATING':
             return functions_1._extends({}, state, {
                 isValidating: action.payload
@@ -9899,36 +9826,6 @@ var Field = function (props) {
     return react_1.default.createElement(asElement, __assign({}, field), children);
 };
 exports.default = react_1.default.memo(Field);
-
-
-/***/ }),
-
-/***/ "./src/form-builder/src/core/InnerContent.tsx":
-/*!****************************************************!*\
-  !*** ./src/form-builder/src/core/InnerContent.tsx ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
-var utils_1 = __webpack_require__(/*! ./utils */ "./src/form-builder/src/core/utils.ts");
-var BuilderField_1 = __importDefault(__webpack_require__(/*! ./BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
-var InnerContent = function (_a) {
-    var fields = _a.fields;
-    // Fields Sorting
-    var newFields = utils_1.sortingFields(fields);
-    var allFields = newFields.map(function (item) {
-        return react_1.default.createElement(BuilderField_1.default, { key: item.name, field: item });
-    });
-    return react_1.default.createElement(react_1.default.Fragment, null, allFields);
-};
-exports.default = InnerContent;
 
 
 /***/ }),
@@ -10238,13 +10135,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useDefaults = exports.BuilderConsumer = exports.BuilderProvider = exports.useBuilderContext = void 0;
+exports.withChange = exports.withProps = exports.withLabel = exports.useBuilder = exports.useDefaults = exports.BuilderConsumer = exports.BuilderProvider = exports.useBuilderContext = void 0;
 var useBuilderContext_1 = __webpack_require__(/*! ./useBuilderContext */ "./src/form-builder/src/core/hooks/useBuilderContext.ts");
 Object.defineProperty(exports, "useBuilderContext", { enumerable: true, get: function () { return __importDefault(useBuilderContext_1).default; } });
 Object.defineProperty(exports, "BuilderProvider", { enumerable: true, get: function () { return useBuilderContext_1.BuilderProvider; } });
 Object.defineProperty(exports, "BuilderConsumer", { enumerable: true, get: function () { return useBuilderContext_1.BuilderConsumer; } });
 var useDefaults_1 = __webpack_require__(/*! ./useDefaults */ "./src/form-builder/src/core/hooks/useDefaults.ts");
 Object.defineProperty(exports, "useDefaults", { enumerable: true, get: function () { return __importDefault(useDefaults_1).default; } });
+var useBuilder_1 = __webpack_require__(/*! ./useBuilder */ "./src/form-builder/src/core/hooks/useBuilder.tsx");
+Object.defineProperty(exports, "useBuilder", { enumerable: true, get: function () { return __importDefault(useBuilder_1).default; } });
+var withLabel_1 = __webpack_require__(/*! ./withLabel */ "./src/form-builder/src/core/hooks/withLabel.tsx");
+Object.defineProperty(exports, "withLabel", { enumerable: true, get: function () { return __importDefault(withLabel_1).default; } });
+var withProps_1 = __webpack_require__(/*! ./withProps */ "./src/form-builder/src/core/hooks/withProps.tsx");
+Object.defineProperty(exports, "withProps", { enumerable: true, get: function () { return __importDefault(withProps_1).default; } });
+var withChange_1 = __webpack_require__(/*! ./withChange */ "./src/form-builder/src/core/hooks/withChange.tsx");
+Object.defineProperty(exports, "withChange", { enumerable: true, get: function () { return __importDefault(withChange_1).default; } });
 
 
 /***/ }),
@@ -10318,6 +10223,15 @@ var useBuilder = function (props) {
         var willValidate = shouldValidate === undefined ? false : shouldValidate;
         return willValidate ? resolvedValues : Promise.resolve();
     });
+    var setSavedValues = useEventCallback(function (values, shouldValidate) {
+        var resolvedValues = typeof values === 'function' ? values(state.values) : values;
+        dispatch({
+            type: 'SET_SAVED_VALUES',
+            payload: resolvedValues
+        });
+        var willValidate = shouldValidate === undefined ? false : shouldValidate;
+        return willValidate ? resolvedValues : Promise.resolve();
+    });
     var setFieldValue = useEventCallback(function (field, value, shouldValidate) {
         dispatch({
             type: 'SET_FIELD_VALUE',
@@ -10379,9 +10293,10 @@ var useBuilder = function (props) {
         }
     });
     var getFieldProps = react_1.default.useCallback(function (args) {
+        var _a;
         var isAnObject = utils_1.isObject(args);
         var name = isAnObject ? args.name : args;
-        var valueState = utils_1.getIn(state.values, name);
+        var valueState = utils_1.getIn(state.values, name) || ((_a = args === null || args === void 0 ? void 0 : args.meta) === null || _a === void 0 ? void 0 : _a.default);
         if (isAnObject) {
             delete args.meta;
             delete args.helpers;
@@ -10414,7 +10329,8 @@ var useBuilder = function (props) {
         return field;
     }, [handleBlur, handleChange, state.values]);
     var getFieldMeta = react_1.default.useCallback(function (name, props) {
-        return __assign(__assign({}, props.meta), { value: utils_1.getIn(state.values, name), error: utils_1.getIn(state.errors, name), touched: !!utils_1.getIn(state.touched, name), visible: utils_1.isVisible(state.values, props), initialValue: '', initialTouched: "", initialError: "" });
+        var _a;
+        return __assign(__assign({}, props.meta), { value: utils_1.getIn(state.values, name) || ((_a = props.meta) === null || _a === void 0 ? void 0 : _a.default), error: utils_1.getIn(state.errors, name), touched: !!utils_1.getIn(state.touched, name), visible: utils_1.isVisible(state.values, props), initialValue: '', initialTouched: "", initialError: "" });
     }, [state.errors, state.touched, state.values]);
     var eligibleOptions = react_1.default.useCallback(function (options) {
         if (options.length > 0) {
@@ -10462,21 +10378,13 @@ var useBuilder = function (props) {
             },
         };
     }, [state.errors, state.touched, state.values]);
-    var context = {
-        values: state.values,
-        errors: {},
-        touched: {},
-        isSubmitting: false,
-        setValues: setValues,
-        setFieldValue: setFieldValue,
-        handleBlur: handleBlur,
-        handleChange: handleChange,
-        getFieldProps: getFieldProps,
-        getFieldMeta: getFieldMeta,
-        getFieldHelpers: getFieldHelpers,
-        eligibleOptions: eligibleOptions,
-        eligibleOption: eligibleOption,
-    };
+    var setSubmitting = useEventCallback(function (submit) {
+        dispatch({
+            type: 'SET_ISSUBMITTING',
+            payload: submit
+        });
+    });
+    var context = __assign(__assign({}, props), { values: state.values, savedValues: state.savedValues, errors: {}, touched: {}, isSubmitting: false, setSubmitting: setSubmitting, setValues: setValues, setSavedValues: setSavedValues, setFieldValue: setFieldValue, handleBlur: handleBlur, handleChange: handleChange, getFieldProps: getFieldProps, getFieldMeta: getFieldMeta, getFieldHelpers: getFieldHelpers, eligibleOptions: eligibleOptions, eligibleOption: eligibleOption });
     return context;
 };
 var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? react_1.default.useLayoutEffect : react_1.default.useEffect;
@@ -10561,23 +10469,24 @@ exports.default = useBuilderContext;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(/*! ../utils */ "./src/form-builder/src/core/utils.ts");
-var useDefaults = function (parentName, helpers, meta, trigger) {
+var useDefaults = function (parentName, helpers, value, trigger) {
     if (trigger != undefined && (trigger === null || trigger === void 0 ? void 0 : trigger.defaults) != undefined && !utils_1.isEmptyObj(trigger.defaults)) {
         var defaults = trigger.defaults;
         if (defaults != undefined && !utils_1.isEmptyObj(defaults)) {
-            for (var obj in defaults) {
-                if (obj === (meta.value || meta.default)) {
-                    var at = defaults[obj].indexOf("@"), colon = defaults[obj].indexOf(":");
-                    if (at === 0 && colon > 0) {
-                        var eligibleKey = defaults[obj].substr(1, colon - 1);
-                        var eligibleDataToSet = defaults[obj].substr(colon + 1);
-                        var eligibleDefaultData = helpers.getValueForDefault(eligibleKey, parentName);
-                        if (eligibleKey != "" && eligibleDataToSet != "") {
-                            helpers.setValue(eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet);
-                        }
+            var defaultsData = {};
+            if (defaults === null || defaults === void 0 ? void 0 : defaults[value]) {
+                var at = defaults[value].indexOf("@"), colon = defaults[value].indexOf(":");
+                if (at === 0 && colon > 0) {
+                    var eligibleKey = defaults[value].substr(1, colon - 1);
+                    var eligibleDataToSet = defaults[value].substr(colon + 1);
+                    var eligibleDefaultData = helpers.getValueForDefault(eligibleKey, parentName);
+                    if (eligibleKey != "" && eligibleDataToSet != "") {
+                        defaultsData[eligibleKey] = eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet;
+                        helpers.setValue(eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet);
                     }
                 }
             }
+            return { defaultsData: defaultsData };
         }
     }
 };
@@ -10608,18 +10517,26 @@ var useOptions = function (props, propertyName) {
     var builderContext = index_1.useBuilderContext();
     var value = meta.value;
     if (meta.parent && meta.parent.type === 'group') {
-        if (meta.value) {
-            value = meta.value[field.name];
+        var helpers_1 = builderContext.getFieldHelpers(props);
+        var parentValue = helpers_1.getValue(meta.parent.name);
+        if (parentValue) {
+            value = parentValue[field.name];
         }
+        // if( ! isEmptyObj(meta.value) ) {
+        //     value = meta.value[field.name];
+        // }
     }
+    // if( field.name === 'source' ) {
+    //     console.log( "value", props );
+    // }
     var options = builderContext.eligibleOptions(props[propertyName]);
     var selectedOption = builderContext.eligibleOption(options, value, (_a = field.multiple) !== null && _a !== void 0 ? _a : false);
     var option;
     if (!field.multiple) {
-        option = selectedOption.value || meta.default;
+        option = selectedOption.value || meta.value || meta.default;
     }
     else {
-        option = (utils_1.isArray(selectedOption) && selectedOption.map(function (o) { return o.value; })) || meta.default;
+        option = (utils_1.isArray(selectedOption) && selectedOption.map(function (o) { return o.value; })) || meta.value || meta.default;
     }
     // useEffect(() => {
     //     if( option ) {
@@ -10629,6 +10546,144 @@ var useOptions = function (props, propertyName) {
     return { options: options, option: option, selectedOption: selectedOption };
 };
 exports.default = useOptions;
+
+
+/***/ }),
+
+/***/ "./src/form-builder/src/core/hooks/withChange.tsx":
+/*!********************************************************!*\
+  !*** ./src/form-builder/src/core/hooks/withChange.tsx ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var withChange = function (WrappedComponent) {
+    var WithChange = function (props) {
+        return react_1.default.createElement(WrappedComponent, __assign({ onChange: props.onChange }, props));
+    };
+    return WithChange;
+};
+exports.default = withChange;
+
+
+/***/ }),
+
+/***/ "./src/form-builder/src/core/hooks/withLabel.tsx":
+/*!*******************************************************!*\
+  !*** ./src/form-builder/src/core/hooks/withLabel.tsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+var withLabel = function (WrappedComponent) {
+    var WithLabel = function (props) {
+        var componentClasses = classnames_1.default("wprf-label");
+        var _a = props.field, label = _a.label, id = _a.id, name = _a.name, type = _a.type;
+        if (id == undefined) {
+            id = name;
+        }
+        return (react_1.default.createElement("div", { className: "wprf-control-wrapper" },
+            react_1.default.createElement("div", { className: "wprf-control-label" },
+                react_1.default.createElement("label", { htmlFor: id }, label)),
+            react_1.default.createElement("div", { className: "wprf-control-field" },
+                react_1.default.createElement(WrappedComponent, __assign({}, props, { id: id })))));
+    };
+    return WithLabel;
+};
+exports.default = withLabel;
+
+
+/***/ }),
+
+/***/ "./src/form-builder/src/core/hooks/withProps.tsx":
+/*!*******************************************************!*\
+  !*** ./src/form-builder/src/core/hooks/withProps.tsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var utils_1 = __webpack_require__(/*! ../utils */ "./src/form-builder/src/core/utils.ts");
+var index_1 = __webpack_require__(/*! ./index */ "./src/form-builder/src/core/hooks/index.ts");
+var withProps = function (WrappedComponent) {
+    var WithProps = function (props) {
+        // console.log("WithProps props", props)
+        var builderContext = index_1.useBuilderContext();
+        var field = utils_1.objectWithoutPropertiesLoose(props.field, ['validation_rules', 'default', 'rules', 'meta', 'options', 'trigger', 'is_pro', 'switch']);
+        field = builderContext.getFieldProps(field);
+        var _a = props.field, validation_rules = _a.validation_rules, defolt = _a.default, rules = _a.rules, options = _a.options, trigger = _a.trigger, styles = _a.styles, fields = _a.fields;
+        var meta = __assign(__assign(__assign({}, builderContext.getFieldMeta(field.name, props)), props.meta), { validation_rules: validation_rules, default: defolt, rules: rules,
+            options: options,
+            trigger: trigger,
+            styles: styles,
+            fields: fields });
+        if (utils_1.isFunction(props.handleChange)) {
+            field.onChange = props.handleChange;
+        }
+        if (utils_1.isFunction(props.handleBlur)) {
+            field.onBlur = props.handleBlur;
+        }
+        var helpers = builderContext.getFieldHelpers(props);
+        var inputFieldsAttributes = { field: field, meta: meta, helpers: helpers };
+        return react_1.default.createElement(WrappedComponent, __assign({}, inputFieldsAttributes));
+    };
+    return WithProps;
+};
+exports.default = withProps;
 
 
 /***/ }),
@@ -11097,6 +11152,109 @@ exports.default = DateControl;
 
 /***/ }),
 
+/***/ "./src/form-builder/src/fields/Field.tsx":
+/*!***********************************************!*\
+  !*** ./src/form-builder/src/fields/Field.tsx ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GenericField = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
+var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
+var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
+var Field = function (_a) {
+    var _b, _c;
+    var meta = _a.meta, field = _a.field, helpers = _a.helpers;
+    if (!field || field.length === 0) {
+        throw new Error('Field must have a #field. see documentation.');
+    }
+    if (!field.type || field.type.length === 0) {
+        throw new Error('Field must have a #type. see documentation.');
+    }
+    var inputFieldsAttributes = { meta: meta, field: field, helpers: helpers };
+    var options = meta.options, fields = meta.fields, trigger = meta.trigger;
+    react_1.useEffect(function () {
+        if (utils_1.isObject(trigger) && !utils_1.isEmptyObj(trigger)) {
+            hooks_1.useDefaults(field.name, helpers, meta.value, trigger);
+        }
+    }, [meta.value]);
+    if (!meta.visible) {
+        return react_1.default.createElement(react_1.default.Fragment, null);
+    }
+    switch (field.type) {
+        case "text":
+        case "checkbox":
+        case "radio":
+        case "email":
+        case "range":
+        case "number":
+            return react_1.default.createElement(_1.Input, __assign({}, field));
+        case "select":
+            return react_1.default.createElement(_1.Select, __assign({}, inputFieldsAttributes, { options: options }));
+        case "slider":
+            return react_1.default.createElement(_1.Slider, __assign({}, inputFieldsAttributes));
+        case "group":
+            var groupAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: __assign({ type: field.type, name: field.name, default: meta.default }, (_b = inputFieldsAttributes === null || inputFieldsAttributes === void 0 ? void 0 : inputFieldsAttributes.meta) === null || _b === void 0 ? void 0 : _b.parent) }) });
+            return react_1.default.createElement(_1.Group, __assign({}, groupAttr));
+        case "radio-card":
+            return react_1.default.createElement(_1.Radio, __assign({}, inputFieldsAttributes, { options: options }));
+        case "section":
+            return react_1.default.createElement(_1.Section, __assign({}, inputFieldsAttributes));
+        case "date":
+            return react_1.default.createElement(_1.Date, __assign({}, inputFieldsAttributes));
+        case "toggle":
+            return react_1.default.createElement(_1.Toggle, __assign({}, inputFieldsAttributes, { options: options }));
+        case "colorpicker":
+            return react_1.default.createElement(_1.ColorPicker, __assign({}, inputFieldsAttributes));
+        case "repeater":
+            var repeaterAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: __assign({ type: field.type, name: field.name, default: field.default }, (_c = inputFieldsAttributes === null || inputFieldsAttributes === void 0 ? void 0 : inputFieldsAttributes.meta) === null || _c === void 0 ? void 0 : _c.parent) }) });
+            return react_1.default.createElement(_1.Repeater, __assign({}, repeaterAttr, { fields: fields }));
+        // return <Test {...inputFieldsAttributes} />;
+        default:
+            return react_1.default.createElement(react_1.default.Fragment, null);
+    }
+};
+exports.GenericField = hooks_1.withProps(Field);
+exports.default = hooks_1.withProps(hooks_1.withChange(Field));
+
+
+/***/ }),
+
 /***/ "./src/form-builder/src/fields/Group.tsx":
 /*!***********************************************!*\
   !*** ./src/form-builder/src/fields/Group.tsx ***!
@@ -11145,9 +11303,10 @@ var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var lodash_1 = __webpack_require__(/*! lodash */ "lodash-es");
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
-var BuilderField_1 = __importDefault(__webpack_require__(/*! ../core/BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
+var Field_1 = __webpack_require__(/*! ./Field */ "./src/form-builder/src/fields/Field.tsx");
 var Group = function (props) {
-    var _a = props.field, fieldName = _a.name, fields = _a.fields;
+    var _a;
+    var _b = props.field, fieldName = _b.name, fields = _b.fields;
     if (!fields || !utils_1.isArray(fields) || fields.length === 0) {
         throw new Error('You should give a #fields arguments to a group field.');
     }
@@ -11159,8 +11318,8 @@ var Group = function (props) {
             localS = __assign(__assign({}, props.meta.default), localS);
         }
         return localS;
-    }, []);
-    var _b = react_1.useState(((props === null || props === void 0 ? void 0 : props.handleChange) ? {} : (localMemoizedState || props.meta.default)) || {}), localState = _b[0], setLocalState = _b[1];
+    }, [(_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName]]);
+    var _c = react_1.useState(((props === null || props === void 0 ? void 0 : props.handleChange) ? localMemoizedState : (localMemoizedState || props.meta.default)) || {}), localState = _c[0], setLocalState = _c[1];
     var handleChange = react_1.useCallback(function (event) {
         if (event.persist) {
             event.persist();
@@ -11176,7 +11335,7 @@ var Group = function (props) {
             var _a;
             return (__assign(__assign({}, prevState), (_a = {}, _a[event.field] = event.value, _a)));
         });
-    }, []);
+    }, [props.meta.value, props.meta.default]);
     react_1.useEffect(function () {
         var _a;
         if (!lodash_1.isEqual(localState, builderContext.values[fieldName]) && !(props === null || props === void 0 ? void 0 : props.handleChange)) {
@@ -11189,8 +11348,8 @@ var Group = function (props) {
     }, [localState]);
     var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item, index) {
-        var meta = __assign(__assign({}, props.meta), builderContext.getFieldMeta(item.name, { field: item }));
-        return react_1.default.createElement(BuilderField_1.default, { key: item.name, index: props.index, onChange: item.type != 'select' ? handleChange : handleChangeForSelect, field: __assign({}, item), meta: meta, helpers: props.helpers });
+        var meta = __assign(__assign(__assign({}, props.meta), builderContext.getFieldMeta(item.name, { field: item })), { value: localState[item.name] });
+        return react_1.default.createElement(Field_1.GenericField, { key: item.name, index: props.index, handleChange: item.type != 'select' ? handleChange : handleChangeForSelect, field: __assign({}, item), meta: meta, helpers: props.helpers });
     });
     var innerClasses = classnames_1.default('wprf-group-control-inner', {
         'wprf-display-inline': props.field.display === 'inline'
@@ -11200,6 +11359,43 @@ var Group = function (props) {
         react_1.default.createElement("div", { className: innerClasses }, allFields)));
 };
 exports.default = Group;
+
+
+/***/ }),
+
+/***/ "./src/form-builder/src/fields/Input.tsx":
+/*!***********************************************!*\
+  !*** ./src/form-builder/src/fields/Input.tsx ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var Input = function (props) {
+    // console.log("Input Props: ", props);
+    return react_1.default.createElement('input', __assign({}, props));
+};
+Input.defaultProps = {
+    type: 'text'
+};
+exports.default = Input;
 
 
 /***/ }),
@@ -11253,10 +11449,14 @@ var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node
 var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-builder/src/core/components/index.ts");
 __webpack_require__(/*! ../scss/radio-card.scss */ "./src/form-builder/src/scss/radio-card.scss");
 var useOptions_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useOptions */ "./src/form-builder/src/core/hooks/useOptions.ts"));
+var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
 var RadioCard = function (props) {
     var meta = props.meta, field = props.field, helpers = props.helpers;
     var name = field.name, label = field.label;
     var _a = useOptions_1.default(props, 'options'), options = _a.options, option = _a.option;
+    // if (name === 'themes') {
+    //     console.log('RadioCard', options);
+    // }
     if (!options) {
         throw new Error('#options is a required arguments for RadioCard field.');
     }
@@ -11281,7 +11481,7 @@ var RadioCard = function (props) {
                     react_1.default.createElement(components_1.Label, { className: classnames_1.default({
                             "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false,
                         }), htmlFor: "wprf-input-radio-" + instanceId + "-" + index, src: icon }, label),
-                    react_1.default.createElement(components_1.Field, { field: __assign(__assign({}, field), { value: value, type: 'radio', checked: value === option, id: "wprf-input-radio-" + instanceId + "-" + index }), meta: meta }))));
+                    react_1.default.createElement(_1.Input, __assign({}, field, { type: "radio", value: value, checked: value === option, id: "wprf-input-radio-" + instanceId + "-" + index })))));
         }))));
 };
 exports.default = RadioCard;
@@ -11337,38 +11537,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var helpers_1 = __webpack_require__(/*! ./helpers */ "./src/form-builder/src/fields/helpers/index.ts");
-var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var compose_1 = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 var Repeater = function (props) {
-    var _a, _b;
-    return react_1.default.createElement(react_1.default.Fragment, null);
+    var _a;
+    console.log("re", props);
+    var field = props.field, meta = props.meta, helpers = props.helpers;
+    var name = field.name, label = field.label, button = field.button, fields = field.fields;
     var builderContext = hooks_1.useBuilderContext();
     var instanceId = compose_1.useInstanceId(Repeater);
     var localMemoizedValue = react_1.useMemo(function () {
         var _a;
-        var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[props.name];
-        if (localS && props.meta.default) {
-            localS = __spreadArray(__spreadArray([], props.meta.default), localS);
+        var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[name];
+        if (localS && meta.default) {
+            localS = __spreadArray(__spreadArray([], meta.default), localS);
         }
         return localS;
-    }, [(_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[props.name]]);
+    }, [(_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[name]]);
     // useEffect(() => {
     //     console.log("localMemoizedValue", localMemoizedValue, builderContext.values?.[props.name])
     // }, [])
-    var _c = react_1.useState([{}]), localFields = _c[0], setLocalFields = _c[1];
-    var _d = react_1.useState(localMemoizedValue), localValue = _d[0], setLocalValue = _d[1];
-    var handleChange = react_1.useCallback(function (value, index) {
-        if (!utils_1.isEmptyObj(value)) {
-            setLocalValue(function (prevLocalValue) {
-                var _a;
-                return (__assign(__assign({}, prevLocalValue), (_a = {}, _a[index] = value, _a)));
-            });
-        }
-    }, []);
+    var _b = react_1.useState([{}]), localFields = _b[0], setLocalFields = _b[1];
+    var _c = react_1.useState(localMemoizedValue), localValue = _c[0], setLocalValue = _c[1];
+    var handleChange = function (value, index) {
+        console.log('ddd');
+        // if (!isEmptyObj(value)) {
+        //     setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
+        // }
+    };
     var handleRemove = react_1.useCallback(function (index) {
         var newValue = __assign({}, localValue);
         delete newValue[index];
-        props.helpers.setValue(props.name, newValue);
+        helpers.setValue(name, newValue);
         var newFields = __spreadArray([], localFields);
         newFields.splice(index, 1);
         setLocalFields(newFields);
@@ -11379,17 +11578,15 @@ var Repeater = function (props) {
         handleChange(indexedCopy, ++index);
     }, [localValue, localFields]);
     react_1.useEffect(function () {
-        props.helpers.setValue(props.name, localValue);
+        console.log("localValue", localValue);
+        helpers.setValue(name, localValue);
     }, [localValue]);
-    react_1.useEffect(function () {
-        console.log(localFields);
-    });
     return (react_1.default.createElement("div", { className: "wprf-repeater-control" },
         react_1.default.createElement("div", { className: "wprf-repeater-label" },
-            react_1.default.createElement("h4", null, props.label),
-            react_1.default.createElement("button", { className: "wprf-repeater-button", onClick: function () { return setLocalFields(function (prevLocalState) { return (__spreadArray(__spreadArray([], prevLocalState), [{}])); }); } }, (_b = props === null || props === void 0 ? void 0 : props.button) === null || _b === void 0 ? void 0 : _b.label)),
+            react_1.default.createElement("h4", null, label),
+            react_1.default.createElement("button", { className: "wprf-repeater-button", onClick: function () { return setLocalFields(function (prevLocalState) { return (__spreadArray(__spreadArray([], prevLocalState), [{}])); }); } }, button === null || button === void 0 ? void 0 : button.label)),
         react_1.default.createElement("div", { className: "wprf-repeater-content" }, localFields.map(function (field, index) {
-            return react_1.default.createElement(helpers_1.RepeaterField, { remove: handleRemove, clone: handleClone, isOpen: true, key: index, name: "" + props.name, index: index, handleChange: handleChange, fields: props.fields, parentProps: props });
+            return react_1.default.createElement(helpers_1.RepeaterField, { remove: handleRemove, clone: handleClone, isOpen: true, key: index, name: name, index: index, handleChange: handleChange, fields: fields, parentProps: props });
         }))));
 };
 exports.default = Repeater;
@@ -11425,24 +11622,22 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
-var BuilderField_1 = __importDefault(__webpack_require__(/*! ../core/BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
+var fields_1 = __webpack_require__(/*! ../fields */ "./src/form-builder/src/fields/index.ts");
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var Section = function (props) {
     var _a;
     var _b = react_1.useState((_a = props.collapsed) !== null && _a !== void 0 ? _a : false), isCollapse = _b[0], setCollapse = _b[1];
     var newFields = utils_1.sortingFields(props.field.fields);
     var allFields = newFields.map(function (item, index) {
-        return react_1.default.createElement(BuilderField_1.default, { key: item.name, field: item });
+        return react_1.default.createElement(fields_1.Field, { key: item.name, field: item });
     });
     return (react_1.default.createElement("div", { className: "wprf-control-section " + (props.collapsible ? (isCollapse ? "wprf-section-collapsed" : "") : "") },
-        react_1.default.createElement("div", { className: "wprf-section-title" },
-            react_1.default.createElement("h4", null, props.label),
-            props.collapsible && (react_1.default.createElement("button", { onClick: function () { return setCollapse(!isCollapse); } }, "Icon"))),
+        props.label &&
+            react_1.default.createElement("div", { className: "wprf-section-title" },
+                react_1.default.createElement("h4", null, props.label),
+                props.collapsible && (react_1.default.createElement("button", { onClick: function () { return setCollapse(!isCollapse); } }, "Icon"))),
         react_1.default.createElement("div", { className: "wprf-section-fields" }, allFields)));
 };
 exports.default = Section;
@@ -11691,12 +11886,14 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
 var Field_1 = __importDefault(__webpack_require__(/*! ../core/Field */ "./src/form-builder/src/core/Field.tsx"));
 var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-builder/src/core/components/index.ts");
+var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var Toggle = function (props) {
     var _a;
     var _b, _c;
-    var prevStyles = props.styles, field = props.field, meta = props.meta, helpers = props.helpers, options = props.options;
+    var field = props.field, meta = props.meta, helpers = props.helpers, options = props.options;
     var label = field.label, value = field.value;
-    var styles = __assign({ type: "card", label: {
+    var prevStyles = meta.styles;
+    var styles = __assign({ type: "", label: {
             position: "right",
         }, column: 4 }, prevStyles);
     var componentClasses = classnames_1.default("wprf-toggle-wrap", "wprf-" + (styles === null || styles === void 0 ? void 0 : styles.type), (_a = {
@@ -11732,7 +11929,7 @@ var Toggle = function (props) {
         react_1.default.createElement(components_1.Label, { htmlFor: field.id })));
 };
 exports.Toggle = Toggle;
-exports.default = exports.Toggle;
+exports.default = hooks_1.withLabel(exports.Toggle);
 
 
 /***/ }),
@@ -11827,13 +12024,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-var BuilderField_1 = __importDefault(__webpack_require__(/*! ../../core/BuilderField */ "./src/form-builder/src/core/BuilderField.tsx"));
+var Field_1 = __webpack_require__(/*! ../Field */ "./src/form-builder/src/fields/Field.tsx");
 var RepeaterField = function (props) {
     var _a = react_1.useState(props.isOpen), isCollapse = _a[0], setIsCollapse = _a[1];
     // onClick={() => setIsCollapse(!isCollapse)}
@@ -11849,14 +12043,14 @@ var RepeaterField = function (props) {
                 react_1.default.createElement(components_1.Icon, { onClick: function () { return props.remove(props.index); }, icon: "trash" }))),
         isCollapse &&
             react_1.default.createElement("div", { className: "wprf-repeater-inner-field" },
-                react_1.default.createElement(BuilderField_1.default, { meta: {
+                react_1.default.createElement(Field_1.GenericField, { meta: {
                         parent: {
                             type: 'repeater'
                         }
                     }, field: {
                         type: 'group',
                         name: props.name,
-                        fields: props.field.fields
+                        fields: props.fields
                     }, index: props.index, handleChange: function (value) { return props.handleChange(value || value, props.index); } }))));
 };
 exports.default = RepeaterField;
@@ -11899,9 +12093,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Test = exports.ColorPicker = exports.Slider = exports.Repeater = exports.Section = exports.Radio = exports.Toggle = exports.Select = exports.Group = exports.Date = void 0;
+exports.Test = exports.ColorPicker = exports.Slider = exports.Repeater = exports.Section = exports.Radio = exports.Toggle = exports.Select = exports.Group = exports.Input = exports.Date = exports.GenericField = exports.Field = void 0;
+var Field_1 = __webpack_require__(/*! ./Field */ "./src/form-builder/src/fields/Field.tsx");
+Object.defineProperty(exports, "Field", { enumerable: true, get: function () { return __importDefault(Field_1).default; } });
+Object.defineProperty(exports, "GenericField", { enumerable: true, get: function () { return Field_1.GenericField; } });
 var Date_1 = __webpack_require__(/*! ./Date */ "./src/form-builder/src/fields/Date.tsx");
 Object.defineProperty(exports, "Date", { enumerable: true, get: function () { return __importDefault(Date_1).default; } });
+var Input_1 = __webpack_require__(/*! ./Input */ "./src/form-builder/src/fields/Input.tsx");
+Object.defineProperty(exports, "Input", { enumerable: true, get: function () { return __importDefault(Input_1).default; } });
 var Group_1 = __webpack_require__(/*! ./Group */ "./src/form-builder/src/fields/Group.tsx");
 Object.defineProperty(exports, "Group", { enumerable: true, get: function () { return __importDefault(Group_1).default; } });
 var Select_1 = __webpack_require__(/*! ./Select */ "./src/form-builder/src/fields/Select.tsx");
@@ -12142,7 +12341,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
-var InnerContent_1 = __importDefault(__webpack_require__(/*! ../core/InnerContent */ "./src/form-builder/src/core/InnerContent.tsx"));
+var InnerContent_1 = __importDefault(__webpack_require__(/*! ./InnerContent */ "./src/form-builder/src/tabs/InnerContent.tsx"));
 var Submit_1 = __importDefault(__webpack_require__(/*! ./Submit */ "./src/form-builder/src/tabs/Submit.tsx"));
 var Content = function (_a) {
     var _b;
@@ -12172,6 +12371,36 @@ var Content = function (_a) {
         ((_b = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _b !== void 0 ? _b : true) && react_1.default.createElement(Submit_1.default, __assign({}, submit))));
 };
 exports.default = Content;
+
+
+/***/ }),
+
+/***/ "./src/form-builder/src/tabs/InnerContent.tsx":
+/*!****************************************************!*\
+  !*** ./src/form-builder/src/tabs/InnerContent.tsx ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
+var fields_1 = __webpack_require__(/*! ../fields */ "./src/form-builder/src/fields/index.ts");
+var InnerContent = function (_a) {
+    var fields = _a.fields;
+    // Fields Sorting
+    var newFields = utils_1.sortingFields(fields);
+    var allFields = newFields.map(function (item) {
+        return react_1.default.createElement(fields_1.Field, { key: item.name, field: item });
+    });
+    return react_1.default.createElement(react_1.default.Fragment, null, allFields);
+};
+exports.default = InnerContent;
 
 
 /***/ }),
@@ -12272,15 +12501,17 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var Submit = function (_a) {
     var _b = _a.label, label = _b === void 0 ? 'Save Changes' : _b, props = __rest(_a, ["label"]);
+    var context = hooks_1.useBuilderContext();
     var handleSubmit = react_1.useCallback(function (event) {
         if (props === null || props === void 0 ? void 0 : props.onSubmit) {
-            props.onSubmit(event);
+            props.onSubmit(event, context);
             return;
         }
         console.log('on submit wprf.');
-    }, []);
+    }, [context]);
     return (react_1.default.createElement("div", { className: "wprf-submit wprf-control" },
         react_1.default.createElement(components_1.Button, { className: "wprf-submit-button", onClick: handleSubmit }, label)));
 };
@@ -12325,8 +12556,8 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var Menu_1 = __importDefault(__webpack_require__(/*! ./Menu */ "./src/form-builder/src/tabs/Menu.tsx"));
 var Content_1 = __importDefault(__webpack_require__(/*! ./Content */ "./src/form-builder/src/tabs/Content.tsx"));
 var useBuilderContext_1 = __webpack_require__(/*! ../core/hooks/useBuilderContext */ "./src/form-builder/src/core/hooks/useBuilderContext.ts");
-__webpack_require__(/*! ../scss/index.scss */ "./src/form-builder/src/scss/index.scss");
 var useBuilder_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useBuilder */ "./src/form-builder/src/core/hooks/useBuilder.tsx"));
+__webpack_require__(/*! ../scss/index.scss */ "./src/form-builder/src/scss/index.scss");
 var Tab = function (props) {
     var builderContextState = useBuilder_1.default(props);
     var _a = react_1.useState(props.config.active), activeTab = _a[0], setActiveTab = _a[1];
@@ -12368,6 +12599,7 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "react-dom"));
 var form_builder_1 = __importDefault(__webpack_require__(/*! ./form-builder */ "./src/form-builder/index.tsx"));
 var default_1 = __importDefault(__webpack_require__(/*! ./form-builder/config/default */ "./src/form-builder/config/default.ts"));
+// import builder from "./form-builder/config/nx";
 (function () {
     var App = function () {
         return react_1.default.createElement(form_builder_1.default, __assign({}, default_1.default));

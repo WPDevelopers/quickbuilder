@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { __ } from "@wordpress/i18n";
 import FormBuilder from "./form-builder";
 import builder from "./form-builder/config/default";
+// import builder from "./form-builder/config/nx";
 
 (function () {
     const App = () => {

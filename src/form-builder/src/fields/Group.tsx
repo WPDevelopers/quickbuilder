@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useBuilderContext } from '../core/hooks';
 import { isEqual } from 'lodash';
 import { executeChange, isArray, sortingFields } from '../core/utils';
-import BuilderField from '../core/BuilderField';
+import { GenericField } from './Field';
 
 
 const Group = (props) => {
@@ -23,9 +23,9 @@ const Group = (props) => {
             localS = { ...props.meta.default, ...localS };
         }
         return localS;
-    }, [])
+    }, [builderContext.values?.[fieldName]])
 
-    const [localState, setLocalState] = useState((props?.handleChange ? {} : (localMemoizedState || props.meta.default)) || {});
+    const [localState, setLocalState] = useState((props?.handleChange ? localMemoizedState : (localMemoizedState || props.meta.default)) || {});
 
     const handleChange = useCallback((event) => {
         if (event.persist) {
@@ -37,7 +37,7 @@ const Group = (props) => {
 
     const handleChangeForSelect = useCallback((event) => {
         setLocalState((prevState) => ({ ...prevState, [event.field]: event.value }));
-    }, [])
+    }, [props.meta.value, props.meta.default])
 
     useEffect(() => {
         if (!isEqual(localState, builderContext.values[fieldName]) && !props?.handleChange) {
@@ -52,11 +52,12 @@ const Group = (props) => {
 
     const newFields = sortingFields(fields);
     const allFields = newFields.map((item, index) => {
-        let meta = { ...props.meta, ...builderContext.getFieldMeta(item.name, { field: item }) };
-        return <BuilderField
+        let meta = { ...props.meta, ...builderContext.getFieldMeta(item.name, { field: item }), value: localState[item.name] };
+
+        return <GenericField
             key={item.name}
             index={props.index}
-            onChange={item.type != 'select' ? handleChange : handleChangeForSelect}
+            handleChange={item.type != 'select' ? handleChange : handleChangeForSelect}
             field={{ ...item }}
             meta={meta}
             helpers={props.helpers}

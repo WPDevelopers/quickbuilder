@@ -5,6 +5,7 @@ import { Row, Column, Label, Field } from '../core/components';
 
 import "../scss/radio-card.scss";
 import useOptions from "../core/hooks/useOptions";
+import { Input } from ".";
 
 
 const RadioCard = (props) => {
@@ -60,15 +61,12 @@ const RadioCard = (props) => {
                                 >
                                     {label}
                                 </Label>
-                                <Field
-                                    field={{
-                                        ...field,
-                                        value: value,
-                                        type: 'radio',
-                                        checked: value === option,
-                                        id: `wprf-input-radio-${instanceId}-${index}`,
-                                    }}
-                                    meta={meta}
+                                <Input
+                                    {...field}
+                                    type="radio"
+                                    value={value}
+                                    checked={value === option}
+                                    id={`wprf-input-radio-${instanceId}-${index}`}
                                 />
                             </div>
                         </Column>

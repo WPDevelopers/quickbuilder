@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { isEmptyObj } from '../utils';
 
 const useDefaults = ( parentName, helpers, value, trigger : any ) => {

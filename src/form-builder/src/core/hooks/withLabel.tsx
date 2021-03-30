@@ -12,13 +12,11 @@ const withLabel = (WrappedComponent) => {
         }
 
         return (
-            <div>
-                <div>
-                    <label htmlFor={id} className={componentClasses}>
-                        {label}
-                    </label>
+            <div className="wprf-control-wrapper">
+                <div className="wprf-control-label">
+                    <label htmlFor={id}>{label}</label>
                 </div>
-                <div>
+                <div className="wprf-control-field">
                     <WrappedComponent {...props} id={id} />
                 </div>
             </div>

@@ -9269,11 +9269,46 @@ var builder = {
             icon: "",
             fields: [
                 {
+                    type: 'checkbox',
+                    name: 'checkbox_control',
+                    label: 'Checkbox',
+                    default: false,
+                },
+                {
                     type: "text",
                     name: "text_control",
                     label: "Text Control",
                     default: 'Hello World',
                     placeholder: "Text Control Placeholder",
+                    // value: "Test Control Saved Value", // String
+                    // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                    rules: ['is', 'checkbox_control', true],
+                    validation_rules: {
+                        required: "This Fields is Required",
+                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                    },
+                },
+                {
+                    type: "select",
+                    name: "select_control",
+                    label: "Text Control",
+                    default: 'one',
+                    multiple: true,
+                    options: [
+                        {
+                            label: 'One',
+                            value: 'one',
+                        },
+                        {
+                            label: 'Two',
+                            value: 'two',
+                        },
+                        {
+                            label: 'Three',
+                            value: 'three',
+                        },
+                    ],
+                    // placeholder: "Text Control Placeholder",
                     // value: "Test Control Saved Value", // String
                     // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
                     validation_rules: {
@@ -9282,53 +9317,80 @@ var builder = {
                     },
                 },
                 {
-                    "label": "Notification Template",
-                    "name": "notification-template",
-                    "type": "group",
-                    "display": "inline",
-                    "priority": 90,
-                    "fields": [
+                    type: 'group',
+                    name: 'group_control',
+                    fields: [
                         {
                             type: "text",
-                            name: "text_control",
-                            label: "Text Control",
-                            default: 'Hello World',
-                            placeholder: "Text Control Placeholder",
-                            // value: "Test Control Saved Value", // String
-                            // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                            validation_rules: {
-                                required: "This Fields is Required",
-                                "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                            },
+                            name: 'group_text',
+                            label: 'Text',
+                            default: "Hello World Group Text"
                         },
+                        {
+                            type: "select",
+                            name: 'group_select',
+                            label: 'Group Select',
+                            options: [
+                                {
+                                    label: 'G One',
+                                    value: 'one'
+                                },
+                                {
+                                    label: 'G Two',
+                                    value: 'two'
+                                },
+                            ]
+                        }
                     ]
-                }
+                },
                 // {
-                // 	type: "repeater", // Required
-                // 	name: "repeater_control", // Required
-                // 	label: "Repeater Control",
-                // 	button: {
-                // 		label: 'Add New'
-                // 	},
-                // 	fields: [
+                // 	"label": "Notification Template",
+                // 	"name": "notification-template",
+                // 	"type": "group",
+                // 	"display": "inline",
+                // 	"priority": 90,
+                // 	"fields": [
                 // 		{
-                // 			type: 'text',
-                // 		},
-                // 		{
-                // 			type: 'select',
-                // 			options: [
-                // 				{
-                // 					label: 'One',
-                // 					value: 'one'
-                // 				},
-                // 				{
-                // 					label: 'Two',
-                // 					value: 'two'
-                // 				},
-                // 			]
+                // 			type: "text", // Required
+                // 			name: "text_control", // Required
+                // 			label: "Text Control",
+                // 			default: 'Hello World',
+                // 			placeholder: "Text Control Placeholder",
+                // 			// value: "Test Control Saved Value", // String
+                // 			// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                // 			validation_rules: {
+                // 				required: "This Fields is Required", // Message
+                // 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+                // 			},
                 // 		},
                 // 	]
-                // },
+                // }
+                {
+                    type: "repeater",
+                    name: "repeater_control",
+                    label: "Repeater Control",
+                    button: {
+                        label: 'Add New'
+                    },
+                    fields: [
+                        {
+                            type: 'text',
+                        },
+                        {
+                            type: 'select',
+                            options: [
+                                {
+                                    label: 'One',
+                                    value: 'one'
+                                },
+                                {
+                                    label: 'Two',
+                                    value: 'two'
+                                },
+                            ]
+                        },
+                    ]
+                },
             ]
         },
         // {
@@ -9665,9 +9727,8 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.builderReducer = void 0;
 var functions_1 = __webpack_require__(/*! ./functions */ "./src/form-builder/src/core/functions.ts");
-var utils_1 = __webpack_require__(/*! ./utils */ "./src/form-builder/src/core/utils.ts");
 var builderReducer = function (state, action) {
-    var _a;
+    var _a, _b;
     switch (action.type) {
         case 'SET_VALUES':
             return functions_1._extends({}, state, {
@@ -9703,10 +9764,10 @@ var builderReducer = function (state, action) {
                 values: __assign(__assign({}, state.values), (_a = {}, _a[action.payload.field] = action.payload.value, _a))
             });
         case 'SET_FIELD_TOUCHED':
-            // return { ...state, touched: { ...state.touched, [action.payload.field]: action.payload.value }}
-            return functions_1._extends({}, state, {
-                touched: utils_1.setIn(state.touched, action.payload.field, action.payload.value)
-            });
+            return __assign(__assign({}, state), { touched: __assign(__assign({}, state.touched), (_b = {}, _b[action.payload.field] = action.payload.value, _b)) });
+        // return _extends({}, state, {
+        //     touched: setIn(state.touched, action.payload.field, action.payload.value)
+        // });
         case 'SET_FIELD_ERROR':
         // return _extends({}, state, {
         //     errors: setIn(state.errors, action.payload.field, action.payload.value)
@@ -10283,54 +10344,50 @@ var useBuilder = function (props) {
         }
     }, [setFieldValue, state.values]);
     var handleChange = useEventCallback(function (eventOrString) {
+        console.log(eventOrString, typeof eventOrString);
         if (typeof eventOrString === 'string') {
-            return function (event) {
-                return executeChange(event, eventOrString);
-            };
+            return function (event) { return executeChange(eventOrString, event); };
         }
         else {
             executeChange(eventOrString);
         }
     });
     var getFieldProps = react_1.default.useCallback(function (args) {
-        var _a;
-        var isAnObject = utils_1.isObject(args);
-        var name = isAnObject ? args.name : args;
-        var valueState = utils_1.getIn(state.values, name) || ((_a = args === null || args === void 0 ? void 0 : args.meta) === null || _a === void 0 ? void 0 : _a.default);
-        if (isAnObject) {
-            delete args.meta;
-            delete args.helpers;
-            delete args.options;
+        var defaultProps = __assign({}, args);
+        var validProps = utils_1.validFieldProps(defaultProps);
+        var name = validProps.name;
+        var type = validProps.type;
+        var valueState = utils_1.getIn(state.values, name) || (defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.default);
+        if (['group', 'repeater'].includes(type)) {
         }
-        var field = __assign(__assign({}, args), { type: args.type, name: name, value: valueState || '', onChange: handleChange, onBlur: handleBlur, id: name });
-        if (args === null || args === void 0 ? void 0 : args.id) {
-            field.id = args.id;
+        validProps.onChange = handleChange;
+        validProps.onBlur = handleBlur;
+        var valueProp = validProps.value;
+        if (type === 'checkbox') {
+            validProps.checked = !!valueState;
+            validProps.value = !!valueState;
         }
-        if (isAnObject) {
-            var type = args.type, valueProp = args.value, is = args.as, multiple = args.multiple;
-            if (type === 'checkbox') {
-                if (valueProp === undefined) {
-                    field.checked = !!valueState;
-                }
-                else {
-                    field.checked = !!(Array.isArray(valueState) && ~valueState.indexOf(valueProp));
-                    field.value = valueProp;
-                }
-            }
-            else if (type === 'radio') {
-                field.checked = valueState === valueProp;
-                field.value = valueProp;
-            }
-            else if (is === 'select' && multiple) {
-                field.value = field.value || [];
-                field.multiple = true;
-            }
+        else if (type === 'radio') {
+            validProps.checked = valueState === valueProp;
+            validProps.value = valueProp;
         }
-        return field;
+        else {
+            validProps.value = valueState;
+        }
+        return validProps;
     }, [handleBlur, handleChange, state.values]);
-    var getFieldMeta = react_1.default.useCallback(function (name, props) {
+    var getFieldMeta = react_1.default.useCallback(function (name, props, parent) {
         var _a;
-        return __assign(__assign({}, props.meta), { value: utils_1.getIn(state.values, name) || ((_a = props.meta) === null || _a === void 0 ? void 0 : _a.default), error: utils_1.getIn(state.errors, name), touched: !!utils_1.getIn(state.touched, name), visible: utils_1.isVisible(state.values, props), initialValue: '', initialTouched: "", initialError: "" });
+        if (parent === void 0) { parent = null; }
+        var parentValue, value;
+        if (parent !== null) {
+            parentValue = utils_1.getIn(state.values, parent);
+            value = parentValue === null || parentValue === void 0 ? void 0 : parentValue[name];
+        }
+        else {
+            value = utils_1.getIn(state.values, name) || ((_a = props.meta) === null || _a === void 0 ? void 0 : _a.default);
+        }
+        return __assign(__assign({}, props.meta), { value: value, error: utils_1.getIn(state.errors, name), touched: !!utils_1.getIn(state.touched, name), visible: utils_1.isVisible(state.values, props), initialValue: '', initialTouched: "", initialError: "" });
     }, [state.errors, state.touched, state.values]);
     var eligibleOptions = react_1.default.useCallback(function (options) {
         if (options.length > 0) {
@@ -10364,7 +10421,7 @@ var useBuilder = function (props) {
         }
         return options;
     }, [state.errors, state.touched, state.values]);
-    var getFieldHelpers = react_1.default.useCallback(function (props) {
+    var getFieldHelpers = react_1.default.useCallback(function () {
         return {
             setValue: function (name, value) { return setFieldValue(name, value); },
             getValue: function (name) { return utils_1.getIn(state.values, name); },
@@ -10508,35 +10565,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(/*! ../utils */ "./src/form-builder/src/core/utils.ts");
 var index_1 = __webpack_require__(/*! ./index */ "./src/form-builder/src/core/hooks/index.ts");
 var useOptions = function (props, propertyName) {
-    var _a;
     if (propertyName === void 0) { propertyName = 'fields'; }
     if (!(props === null || props === void 0 ? void 0 : props[propertyName])) {
         throw new Error('#options param need to set in order to use useOptions hook.');
     }
-    var field = props.field, meta = props.meta, helpers = props.helpers;
+    var savedValue = props.value, multiple = props.multiple;
     var builderContext = index_1.useBuilderContext();
-    var value = meta.value;
-    if (meta.parent && meta.parent.type === 'group') {
-        var helpers_1 = builderContext.getFieldHelpers(props);
-        var parentValue = helpers_1.getValue(meta.parent.name);
-        if (parentValue) {
-            value = parentValue[field.name];
-        }
-        // if( ! isEmptyObj(meta.value) ) {
-        //     value = meta.value[field.name];
-        // }
-    }
+    var value = savedValue;
+    // if( meta.parent && meta.parent.type === 'group' ) {
+    //     let helpers = builderContext.getFieldHelpers(props);
+    //     let parentValue = helpers.getValue( meta.parent.name);
+    //     if( parentValue ) {
+    //         value = parentValue[field.name];
+    //     }
+    //     // if( ! isEmptyObj(meta.value) ) {
+    //     //     value = meta.value[field.name];
+    //     // }
+    // }
     // if( field.name === 'source' ) {
     //     console.log( "value", props );
     // }
     var options = builderContext.eligibleOptions(props[propertyName]);
-    var selectedOption = builderContext.eligibleOption(options, value, (_a = field.multiple) !== null && _a !== void 0 ? _a : false);
+    var selectedOption = builderContext.eligibleOption(options, value, multiple !== null && multiple !== void 0 ? multiple : false);
     var option;
-    if (!field.multiple) {
-        option = selectedOption.value || meta.value || meta.default;
+    if (!multiple) {
+        option = selectedOption.value || value;
     }
     else {
-        option = (utils_1.isArray(selectedOption) && selectedOption.map(function (o) { return o.value; })) || meta.value || meta.default;
+        option = (utils_1.isArray(selectedOption) && selectedOption.map(function (o) { return o.value; })) || value;
     }
     // useEffect(() => {
     //     if( option ) {
@@ -10577,7 +10633,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var withChange = function (WrappedComponent) {
     var WithChange = function (props) {
-        return react_1.default.createElement(WrappedComponent, __assign({ onChange: props.onChange }, props));
+        var handleChange = function (value) {
+            console.log(value);
+        };
+        return react_1.default.createElement(WrappedComponent, __assign({}, props));
     };
     return WithChange;
 };
@@ -10652,34 +10711,67 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var utils_1 = __webpack_require__(/*! ../utils */ "./src/form-builder/src/core/utils.ts");
 var index_1 = __webpack_require__(/*! ./index */ "./src/form-builder/src/core/hooks/index.ts");
 var withProps = function (WrappedComponent) {
     var WithProps = function (props) {
-        // console.log("WithProps props", props)
         var builderContext = index_1.useBuilderContext();
-        var field = utils_1.objectWithoutPropertiesLoose(props.field, ['validation_rules', 'default', 'rules', 'meta', 'options', 'trigger', 'is_pro', 'switch']);
-        field = builderContext.getFieldProps(field);
-        var _a = props.field, validation_rules = _a.validation_rules, defolt = _a.default, rules = _a.rules, options = _a.options, trigger = _a.trigger, styles = _a.styles, fields = _a.fields;
-        var meta = __assign(__assign(__assign({}, builderContext.getFieldMeta(field.name, props)), props.meta), { validation_rules: validation_rules, default: defolt, rules: rules,
-            options: options,
-            trigger: trigger,
-            styles: styles,
-            fields: fields });
-        if (utils_1.isFunction(props.handleChange)) {
-            field.onChange = props.handleChange;
+        var field = builderContext.getFieldProps(props);
+        var validation_rules = props.validation_rules, defolt = props.default, rules = props.rules, label = props.label, options = props.options, trigger = props.trigger, styles = props.styles, fields = props.fields;
+        // const meta = {
+        //     ...builderContext.getFieldMeta(field.name, props),
+        //     ...props.meta,
+        //     validation_rules,
+        //     default: defolt,
+        //     label,
+        //     rules,
+        //     options,
+        //     trigger,
+        //     styles,
+        //     fields
+        // };
+        var meta = builderContext.getFieldMeta(field.name, props);
+        // if (isFunction(props.handleChange)) {
+        //     field.onChange = props.handleChange;
+        // }
+        // if (isFunction(props.handleBlur)) {
+        //     field.onBlur = props.handleBlur;
+        // }
+        var helpers = builderContext.getFieldHelpers();
+        react_1.useEffect(function () {
+            // Not needed / Confused
+            helpers.setValue(field.name, field.value);
+        }, []);
+        react_1.useEffect(function () {
+            if (utils_1.isObject(trigger) && !utils_1.isEmptyObj(trigger)) {
+                index_1.useDefaults(field.name, helpers, field.value, trigger);
+            }
+        }, [field.value]);
+        if (!meta.visible) {
+            return react_1.default.createElement(react_1.default.Fragment, null);
         }
-        if (utils_1.isFunction(props.handleBlur)) {
-            field.onBlur = props.handleBlur;
-        }
-        var helpers = builderContext.getFieldHelpers(props);
-        var inputFieldsAttributes = { field: field, meta: meta, helpers: helpers };
-        return react_1.default.createElement(WrappedComponent, __assign({}, inputFieldsAttributes));
+        return react_1.default.createElement(WrappedComponent, __assign({}, field));
     };
     return WithProps;
 };
@@ -10701,7 +10793,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setIn = exports.objectWithoutPropertiesLoose = exports.executeChange = exports.getSelectedValues = exports.sortingFields = exports.getIn = exports.isEmptyObj = exports.withState = exports.isVisible = exports.isObject = exports.isArray = exports.isFunction = exports.isNumber = exports.isString = void 0;
+exports.validFieldProps = exports.setIn = exports.objectWithoutPropertiesLoose = exports.executeChange = exports.getSelectedValues = exports.sortingFields = exports.getIn = exports.isEmptyObj = exports.withState = exports.isVisible = exports.isObject = exports.isArray = exports.isFunction = exports.isNumber = exports.isString = void 0;
 var lodash_es_1 = __webpack_require__(/*! lodash-es */ "lodash-es");
 var when_1 = __importDefault(__webpack_require__(/*! ./when */ "./src/form-builder/src/core/when.ts"));
 var isString = function (args) {
@@ -10728,10 +10820,10 @@ var isObject = function (obj) {
 };
 exports.isObject = isObject;
 var isVisible = function (values, props) {
-    if (!props.field.rules || props.field.name == undefined) {
+    if (!(props === null || props === void 0 ? void 0 : props.rules) || props.name == undefined) {
         return true;
     }
-    var whenVar = when_1.default(props.field.rules, values);
+    var whenVar = when_1.default(props.rules, values);
     return Boolean(whenVar);
 };
 exports.isVisible = isVisible;
@@ -10782,10 +10874,10 @@ var executeChange = function (eventOrTextValue, maybePath) {
             eventOrTextValue.persist();
         }
         var target = eventOrTextValue.target ? eventOrTextValue.target : eventOrTextValue.currentTarget;
-        var type = target.type, name_1 = target.name, id = target.id, value = target.value, checked = target.checked, outerHTML = target.outerHTML, options = target.options, multiple = target.multiple;
-        field = maybePath ? maybePath : name_1 ? name_1 : id;
+        var type = target.type, name_1 = target.name, value = target.value, checked = target.checked, options = target.options, multiple = target.multiple;
+        field = maybePath ? maybePath : name_1;
         val = /number|range/.test(type) ? (parsed = parseFloat(value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type) // checkboxes
-            ? checked : !!multiple ? exports.getSelectedValues(options) : value;
+            ? checked : !!multiple ? value : value;
     }
     return { field: field, val: val };
 };
@@ -10837,6 +10929,22 @@ var setIn = function (obj, path, value) {
     return res;
 };
 exports.setIn = setIn;
+var validFieldProps = function (defaultProps) {
+    var type = defaultProps.type;
+    var filterOutArray = ['validation_rules', 'withChange', 'default', 'rules', 'label', 'meta', 'trigger', 'is_pro', 'switch'];
+    if (type !== 'select') {
+        filterOutArray.push('options');
+    }
+    if (type !== 'group' && type !== 'repeater') {
+        filterOutArray.push('fields');
+    }
+    var validProps = exports.objectWithoutPropertiesLoose(defaultProps, filterOutArray);
+    if ((defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.label) && !(defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.placeholder)) {
+        validProps.placeholder = defaultProps.label;
+    }
+    return validProps;
+};
+exports.validFieldProps = validFieldProps;
 
 
 /***/ }),
@@ -11172,78 +11280,78 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenericField = void 0;
-var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
-var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
-var Field = function (_a) {
-    var _b, _c;
-    var meta = _a.meta, field = _a.field, helpers = _a.helpers;
-    if (!field || field.length === 0) {
-        throw new Error('Field must have a #field. see documentation.');
-    }
-    if (!field.type || field.type.length === 0) {
+var Field = function (props) {
+    if (!props.type || props.type.length === 0) {
         throw new Error('Field must have a #type. see documentation.');
     }
-    var inputFieldsAttributes = { meta: meta, field: field, helpers: helpers };
-    var options = meta.options, fields = meta.fields, trigger = meta.trigger;
-    react_1.useEffect(function () {
-        if (utils_1.isObject(trigger) && !utils_1.isEmptyObj(trigger)) {
-            hooks_1.useDefaults(field.name, helpers, meta.value, trigger);
-        }
-    }, [meta.value]);
-    if (!meta.visible) {
-        return react_1.default.createElement(react_1.default.Fragment, null);
-    }
-    switch (field.type) {
+    // const inputFieldsAttributes = { meta, field, helpers };
+    // const { options, fields, trigger } = meta;
+    // useEffect(() => {
+    //     if (isObject(trigger) && !isEmptyObj(trigger)) {
+    //         useDefaults(field.name, helpers, meta.value, trigger);
+    //     }
+    // }, [meta.value])
+    switch (props.type) {
         case "text":
         case "checkbox":
         case "radio":
         case "email":
         case "range":
         case "number":
-            return react_1.default.createElement(_1.Input, __assign({}, field));
+            return react_1.default.createElement(_1.Input, __assign({}, props));
         case "select":
-            return react_1.default.createElement(_1.Select, __assign({}, inputFieldsAttributes, { options: options }));
+            return react_1.default.createElement(_1.Select, __assign({}, props));
         case "slider":
-            return react_1.default.createElement(_1.Slider, __assign({}, inputFieldsAttributes));
+            return react_1.default.createElement(_1.Slider, __assign({}, props));
         case "group":
-            var groupAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: __assign({ type: field.type, name: field.name, default: meta.default }, (_b = inputFieldsAttributes === null || inputFieldsAttributes === void 0 ? void 0 : inputFieldsAttributes.meta) === null || _b === void 0 ? void 0 : _b.parent) }) });
-            return react_1.default.createElement(_1.Group, __assign({}, groupAttr));
+            // let groupAttr = {
+            //     ...props,
+            //     meta: {
+            //         ...inputFieldsAttributes.meta,
+            //         withState: false,
+            //         parent: {
+            //             type: field.type,
+            //             name: field.name,
+            //             default: meta.default,
+            //             ...inputFieldsAttributes?.meta?.parent
+            //         }
+            //     }
+            // };
+            return '';
+        // return <Group {...props} />;
         case "radio-card":
-            return react_1.default.createElement(_1.Radio, __assign({}, inputFieldsAttributes, { options: options }));
+            return react_1.default.createElement(_1.Radio, __assign({}, props));
         case "section":
-            return react_1.default.createElement(_1.Section, __assign({}, inputFieldsAttributes));
+            return react_1.default.createElement(_1.Section, __assign({}, props));
         case "date":
-            return react_1.default.createElement(_1.Date, __assign({}, inputFieldsAttributes));
+            return react_1.default.createElement(_1.Date, __assign({}, props));
         case "toggle":
-            return react_1.default.createElement(_1.Toggle, __assign({}, inputFieldsAttributes, { options: options }));
+            return react_1.default.createElement(_1.Toggle, __assign({}, props));
         case "colorpicker":
-            return react_1.default.createElement(_1.ColorPicker, __assign({}, inputFieldsAttributes));
+            return react_1.default.createElement(_1.ColorPicker, __assign({}, props));
         case "repeater":
-            var repeaterAttr = __assign(__assign({}, inputFieldsAttributes), { meta: __assign(__assign({}, inputFieldsAttributes.meta), { withState: false, parent: __assign({ type: field.type, name: field.name, default: field.default }, (_c = inputFieldsAttributes === null || inputFieldsAttributes === void 0 ? void 0 : inputFieldsAttributes.meta) === null || _c === void 0 ? void 0 : _c.parent) }) });
-            return react_1.default.createElement(_1.Repeater, __assign({}, repeaterAttr, { fields: fields }));
+        // let repeaterAttr = {
+        //     ...inputFieldsAttributes,
+        //     meta: {
+        //         ...inputFieldsAttributes.meta,
+        //         withState: false,
+        //         parent: {
+        //             type: field.type,
+        //             name: field.name,
+        //             default: field.default,
+        //             ...inputFieldsAttributes?.meta?.parent
+        //         }
+        //     }
+        // };
+        // return <Repeater {...props} />;
         // return <Test {...inputFieldsAttributes} />;
         default:
             return react_1.default.createElement(react_1.default.Fragment, null);
@@ -11346,9 +11454,10 @@ var Group = function (props) {
             props.handleChange(newLocal);
         }
     }, [localState]);
+    // console.log('Group Meta', props);
     var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item, index) {
-        var meta = __assign(__assign(__assign({}, props.meta), builderContext.getFieldMeta(item.name, { field: item })), { value: localState[item.name] });
+        var meta = __assign(__assign(__assign({}, props.meta), builderContext.getFieldMeta(item.name, { field: item }, fieldName)), { value: localState[item.name] });
         return react_1.default.createElement(Field_1.GenericField, { key: item.name, index: props.index, handleChange: item.type != 'select' ? handleChange : handleChangeForSelect, field: __assign({}, item), meta: meta, helpers: props.helpers });
     });
     var innerClasses = classnames_1.default('wprf-group-control-inner', {
@@ -11389,7 +11498,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var Input = function (props) {
-    // console.log("Input Props: ", props);
     return react_1.default.createElement('input', __assign({}, props));
 };
 Input.defaultProps = {
@@ -11678,44 +11786,38 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
-var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-builder/src/core/components/index.ts");
 var react_select_1 = __importDefault(__webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js"));
 var useOptions_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useOptions */ "./src/form-builder/src/core/hooks/useOptions.ts"));
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var Select = function (props) {
-    var meta = props.meta, helpers = props.helpers, field = props.field;
-    var label = field.label, id = field.id, name = field.name, multiple = field.multiple, placeholder = field.placeholder, _a = field.search, search = _a === void 0 ? false : _a;
-    var _b = useOptions_1.default(props, 'options'), options = _b.options, option = _b.option, selectedOption = _b.selectedOption;
+    var id = props.id, name = props.name, multiple = props.multiple, placeholder = props.placeholder, _a = props.search, search = _a === void 0 ? false : _a, onChange = props.onChange;
+    var _b = useOptions_1.default(props, 'options'), options = _b.options, selectedOption = _b.selectedOption;
     var _c = react_1.useState(null), sOption = _c[0], setSOption = _c[1];
     react_1.useEffect(function () {
         if (!utils_1.isArray(sOption) && utils_1.isObject(sOption)) {
-            if (!meta.parent) {
-                helpers.setValue(name, sOption.value);
-            }
-            else {
-                field.onChange({
-                    field: name,
-                    value: sOption.value
-                });
-            }
+            onChange({
+                target: {
+                    type: 'select',
+                    name: name,
+                    value: sOption.value,
+                    options: options,
+                    multiple: multiple
+                },
+            });
         }
         if (utils_1.isArray(sOption)) {
-            if (!meta.parent) {
-                helpers.setValue(name, sOption.map(function (item) { return item.value; }));
-            }
-            else {
-                field.onChange({
-                    field: name,
-                    value: sOption.map(function (item) { return item.value; })
-                });
-            }
+            onChange({
+                target: {
+                    type: 'select',
+                    name: name,
+                    value: sOption.map(function (item) { return item.value; }),
+                    options: options,
+                    multiple: multiple
+                },
+            });
         }
     }, [sOption]);
-    if (placeholder == undefined) {
-        placeholder = label;
-    }
     return (react_1.default.createElement("div", { className: "wprf-select-wrapper" },
-        react_1.default.createElement(components_1.Label, { htmlFor: id }, label),
         react_1.default.createElement(react_select_1.default, { classNamePrefix: "wprf-select", isSearchable: search !== null && search !== void 0 ? search : false, id: id, name: name, isMulti: multiple !== null && multiple !== void 0 ? multiple : false, placeholder: placeholder, options: options, value: selectedOption, 
             // onMenuOpen={() => console.log(true)}
             // onMenuClose={() => console.log(false)}
@@ -12384,6 +12486,17 @@ exports.default = Content;
 
 "use strict";
 
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -12396,7 +12509,13 @@ var InnerContent = function (_a) {
     // Fields Sorting
     var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item) {
-        return react_1.default.createElement(fields_1.Field, { key: item.name, field: item });
+        //TODO: visibility needs to be done here somehow.
+        if (item.type === 'section') {
+            return react_1.default.createElement(fields_1.GenericField, __assign({ key: item.name }, item));
+        }
+        else {
+            return react_1.default.createElement(fields_1.Field, __assign({ key: item.name }, item));
+        }
     });
     return react_1.default.createElement(react_1.default.Fragment, null, allFields);
 };

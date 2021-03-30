@@ -1,44 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { isFunction, objectWithoutPropertiesLoose } from "../utils";
-import { useBuilderContext } from "./index";
+import { isEmptyObj, isFunction, isObject, objectWithoutPropertiesLoose } from "../utils";
+import { useBuilderContext, useDefaults } from "./index";
 
 const withProps = (WrappedComponent) => {
     const WithProps = (props) => {
-        // console.log("WithProps props", props)
         const builderContext = useBuilderContext();
+        let field: any = builderContext.getFieldProps(props);
 
-        let field: any = objectWithoutPropertiesLoose(
-            props.field,
-            ['validation_rules', 'default', 'rules', 'meta', 'options', 'trigger', 'is_pro', 'switch']
-        );
-        field = builderContext.getFieldProps(field);
+        const { validation_rules, default: defolt, rules, label, options, trigger, styles, fields } = props;
 
-        const { validation_rules, default: defolt, rules, options, trigger, styles, fields } = props.field;
+        // const meta = {
+        //     ...builderContext.getFieldMeta(field.name, props),
+        //     ...props.meta,
+        //     validation_rules,
+        //     default: defolt,
+        //     label,
+        //     rules,
+        //     options,
+        //     trigger,
+        //     styles,
+        //     fields
+        // };
 
-        const meta = {
-            ...builderContext.getFieldMeta(field.name, props),
-            ...props.meta,
-            validation_rules,
-            default: defolt,
-            rules,
-            options,
-            trigger,
-            styles,
-            fields
-        };
+        const meta = builderContext.getFieldMeta(field.name, props);
 
-        if (isFunction(props.handleChange)) {
-            field.onChange = props.handleChange;
+        // if (isFunction(props.handleChange)) {
+        //     field.onChange = props.handleChange;
+        // }
+        // if (isFunction(props.handleBlur)) {
+        //     field.onBlur = props.handleBlur;
+        // }
+
+        const helpers = builderContext.getFieldHelpers();
+
+        useEffect(() => {
+            // Not needed / Confused
+            helpers.setValue(field.name, field.value)
+        }, [])
+
+        useEffect(() => {
+            if (isObject(trigger) && !isEmptyObj(trigger)) {
+                useDefaults(field.name, helpers, field.value, trigger);
+            }
+        }, [field.value])
+
+        if (!meta.visible) {
+            return <></>;
         }
-        if (isFunction(props.handleBlur)) {
-            field.onBlur = props.handleBlur;
-        }
-
-
-        const helpers = builderContext.getFieldHelpers(props);
-        const inputFieldsAttributes = { field, meta, helpers }
-
-        return <WrappedComponent {...inputFieldsAttributes} />;
+        return <WrappedComponent {...field} />;
     }
     return WithProps;
 };

@@ -44,11 +44,11 @@ export const builderReducer = (state: any, action: any) => {
             });
 
         case 'SET_FIELD_TOUCHED':
-            // return { ...state, touched: { ...state.touched, [action.payload.field]: action.payload.value }}
+            return { ...state, touched: { ...state.touched, [action.payload.field]: action.payload.value }}
 
-            return _extends({}, state, {
-                touched: setIn(state.touched, action.payload.field, action.payload.value)
-            });
+            // return _extends({}, state, {
+            //     touched: setIn(state.touched, action.payload.field, action.payload.value)
+            // });
 
         case 'SET_FIELD_ERROR':
             // return _extends({}, state, {

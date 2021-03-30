@@ -26,11 +26,11 @@ export const isObject = (obj) => {
 }
 
 export const isVisible = (values, props) => {
-    if (!props.field.rules || props.field.name == undefined) {
+    if (!props?.rules || props.name == undefined) {
         return true;
     }
 
-    let whenVar = when(props.field.rules, values);
+    let whenVar = when(props.rules, values);
     return Boolean(whenVar);
 }
 
@@ -82,19 +82,19 @@ export const executeChange = (eventOrTextValue, maybePath?) =>  {
             }
 
             const target = eventOrTextValue.target ? eventOrTextValue.target : eventOrTextValue.currentTarget;
+
             const type = target.type,
                 name = target.name,
-                id = target.id,
                 value = target.value,
                 checked = target.checked,
-                outerHTML = target.outerHTML,
                 options = target.options,
                 multiple = target.multiple;
 
-            field = maybePath ? maybePath : name ? name : id;
+
+            field = maybePath ? maybePath : name;
 
             val = /number|range/.test(type) ? (parsed = parseFloat(value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type) // checkboxes
-                ? checked : !!multiple ? getSelectedValues(options) : value;
+                ? checked : !!multiple ? value : value;
         }
 
     return { field, val };
@@ -150,4 +150,21 @@ export const  setIn = (obj, path, value) => {
     }
 
     return res;
+}
+
+export const validFieldProps = ( defaultProps ) => {
+    const type = defaultProps.type;
+    let filterOutArray = [ 'validation_rules', 'withChange', 'default', 'rules', 'label', 'meta', 'trigger', 'is_pro', 'switch' ];
+    if( type !== 'select' ) {
+        filterOutArray.push( 'options' );
+    }
+    if( type !== 'group' && type !== 'repeater' ) {
+        filterOutArray.push( 'fields' );
+    }
+
+    let validProps: any = objectWithoutPropertiesLoose( defaultProps, filterOutArray );
+    if( defaultProps?.label && ! defaultProps?.placeholder ) {
+        validProps.placeholder = defaultProps.label;
+    }
+    return validProps;
 }

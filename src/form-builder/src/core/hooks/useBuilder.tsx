@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { builderReducer } from '../BuilderReducers'
-import { getIn, isObject, executeChange as eChange, isVisible, withState, isArray } from "../utils";
+import { getIn, isObject, executeChange as eChange, isVisible, withState, isArray, objectWithoutPropertiesLoose, validFieldProps } from "../utils";
 import when from "../when";
 
 const useBuilder = (props) => {
@@ -80,7 +80,6 @@ const useBuilder = (props) => {
     }, [setFieldTouched]);
 
     const handleBlur = useEventCallback((eventOrString) => {
-
         if (typeof eventOrString === 'string') {
             return function (event) {
                 return executeBlur(event, eventOrString);
@@ -98,69 +97,56 @@ const useBuilder = (props) => {
     }, [setFieldValue, state.values]);
 
     const handleChange = useEventCallback((eventOrString) => {
+        console.log(eventOrString, typeof eventOrString);
+
         if (typeof eventOrString === 'string') {
-            return function (event) {
-                return executeChange(event, eventOrString);
-            };
+            return (event) => executeChange(eventOrString, event);
         } else {
             executeChange(eventOrString);
         }
     });
 
     const getFieldProps = React.useCallback((args) => {
-        const isAnObject = isObject(args);
-        const name = isAnObject ? args.name : args;
-        const valueState = getIn(state.values, name) || args?.meta?.default;
+        let defaultProps = { ...args };
+        let validProps: any = validFieldProps(defaultProps);
+        const name = validProps.name;
+        const type = validProps.type;
+        const valueState = getIn(state.values, name) || defaultProps?.default;
 
-        if (isAnObject) {
-            delete args.meta;
-            delete args.helpers;
-            delete args.options;
+        if (['group', 'repeater'].includes(type)) {
+
         }
 
-        let field: any = {
-            ...args,
-            type: args.type,
-            name: name,
-            value: valueState || '',
-            onChange: handleChange,
-            onBlur: handleBlur,
-            id: name,
-        };
+        validProps.onChange = handleChange;
+        validProps.onBlur = handleBlur;
 
-        if (args?.id) {
-            field.id = args.id;
+        let valueProp = validProps.value;
+        if (type === 'checkbox') {
+            validProps.checked = !!valueState;
+            validProps.value = !!valueState;
+        } else if (type === 'radio') {
+            validProps.checked = valueState === valueProp;
+            validProps.value = valueProp;
+        } else {
+            validProps.value = valueState;
         }
-
-        if (isAnObject) {
-            var type = args.type,
-                valueProp = args.value,
-                is = args.as,
-                multiple = args.multiple;
-
-            if (type === 'checkbox') {
-                if (valueProp === undefined) {
-                    field.checked = !!valueState;
-                } else {
-                    field.checked = !!(Array.isArray(valueState) && ~valueState.indexOf(valueProp));
-                    field.value = valueProp;
-                }
-            } else if (type === 'radio') {
-                field.checked = valueState === valueProp;
-                field.value = valueProp;
-            } else if (is === 'select' && multiple) {
-                field.value = field.value || [];
-                field.multiple = true;
-            }
-        }
-
-        return field;
+        return validProps;
     }, [handleBlur, handleChange, state.values]);
 
-    const getFieldMeta = React.useCallback((name, props) => {
+    const getFieldMeta = React.useCallback((name, props, parent = null) => {
+        var parentValue,
+            value;
+
+        if (parent !== null) {
+            parentValue = getIn(state.values, parent);
+            value = parentValue?.[name];
+        } else {
+            value = getIn(state.values, name) || props.meta?.default;
+        }
+
         return {
             ...props.meta,
-            value: getIn(state.values, name) || props.meta?.default,
+            value: value,
             error: getIn(state.errors, name),
             touched: !!getIn(state.touched, name),
             visible: isVisible(state.values, props),
@@ -201,7 +187,7 @@ const useBuilder = (props) => {
         return options;
     }, [state.errors, state.touched, state.values]);
 
-    const getFieldHelpers = React.useCallback((props) => {
+    const getFieldHelpers = React.useCallback(() => {
         return {
             setValue: (name, value) => setFieldValue(name, value),
             getValue: (name) => getIn(state.values, name),

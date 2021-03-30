@@ -11,11 +11,46 @@ const builder = {
 			icon: "",
 			fields: [
 				{
+					type: 'checkbox',
+					name: 'checkbox_control',
+					label: 'Checkbox',
+					default: false,
+				},
+				{
 					type: "text", // Required
 					name: "text_control", // Required
 					label: "Text Control",
 					default: 'Hello World',
 					placeholder: "Text Control Placeholder",
+					// value: "Test Control Saved Value", // String
+					// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+					rules: [ 'is', 'checkbox_control', true ],
+					validation_rules: {
+						required: "This Fields is Required", // Message
+						"min:20": "Your Input is too short. Make it 20Character Bigger.",
+					},
+				},
+				{
+					type: "select", // Required
+					name: "select_control", // Required
+					label: "Text Control",
+					default: 'one',
+					multiple: true,
+					options: [
+						{
+							label: 'One',
+							value: 'one',
+						},
+						{
+							label: 'Two',
+							value: 'two',
+						},
+						{
+							label: 'Three',
+							value: 'three',
+						},
+					],
+					// placeholder: "Text Control Placeholder",
 					// value: "Test Control Saved Value", // String
 					// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
 					validation_rules: {
@@ -24,53 +59,80 @@ const builder = {
 					},
 				},
 				{
-					"label": "Notification Template",
-					"name": "notification-template",
-					"type": "group",
-					"display": "inline",
-					"priority": 90,
-					"fields": [
+					type: 'group',
+					name: 'group_control',
+					fields: [
 						{
-							type: "text", // Required
-							name: "text_control", // Required
-							label: "Text Control",
-							default: 'Hello World',
-							placeholder: "Text Control Placeholder",
-							// value: "Test Control Saved Value", // String
-							// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-							validation_rules: {
-								required: "This Fields is Required", // Message
-								"min:20": "Your Input is too short. Make it 20Character Bigger.",
-							},
+							type: "text",
+							name: 'group_text',
+							label: 'Text',
+							default: "Hello World Group Text"
 						},
+						{
+							type: "select",
+							name: 'group_select',
+							label: 'Group Select',
+							options: [
+								{
+									label: 'G One',
+									value: 'one'
+								},
+								{
+									label: 'G Two',
+									value: 'two'
+								},
+							]
+						}
 					]
-				}
+				},
 				// {
-				// 	type: "repeater", // Required
-				// 	name: "repeater_control", // Required
-				// 	label: "Repeater Control",
-				// 	button: {
-				// 		label: 'Add New'
-				// 	},
-				// 	fields: [
+				// 	"label": "Notification Template",
+				// 	"name": "notification-template",
+				// 	"type": "group",
+				// 	"display": "inline",
+				// 	"priority": 90,
+				// 	"fields": [
 				// 		{
-				// 			type: 'text',
-				// 		},
-				// 		{
-				// 			type: 'select',
-				// 			options: [
-				// 				{
-				// 					label: 'One',
-				// 					value: 'one'
-				// 				},
-				// 				{
-				// 					label: 'Two',
-				// 					value: 'two'
-				// 				},
-				// 			]
+				// 			type: "text", // Required
+				// 			name: "text_control", // Required
+				// 			label: "Text Control",
+				// 			default: 'Hello World',
+				// 			placeholder: "Text Control Placeholder",
+				// 			// value: "Test Control Saved Value", // String
+				// 			// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+				// 			validation_rules: {
+				// 				required: "This Fields is Required", // Message
+				// 				"min:20": "Your Input is too short. Make it 20Character Bigger.",
+				// 			},
 				// 		},
 				// 	]
-				// },
+				// }
+				{
+					type: "repeater", // Required
+					name: "repeater_control", // Required
+					label: "Repeater Control",
+					button: {
+						label: 'Add New'
+					},
+					fields: [
+						{
+							type: 'text',
+						},
+						{
+							type: 'select',
+							options: [
+								{
+									label: 'One',
+									value: 'one'
+								},
+								{
+									label: 'Two',
+									value: 'two'
+								},
+							]
+						},
+					]
+				},
 			]
 		},
 		// {

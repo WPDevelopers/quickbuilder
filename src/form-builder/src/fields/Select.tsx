@@ -5,41 +5,37 @@ import useOptions from '../core/hooks/useOptions';
 import { isArray, isFunction, isObject } from '../core/utils';
 
 const Select = (props: any) => {
-    const { meta, helpers, field } = props;
-    let { label, id, name, multiple, placeholder, search = false } = field;
-    const { options, option, selectedOption } = useOptions(props, 'options');
+    let { id, name, multiple, placeholder, search = false, onChange } = props;
+    const { options, selectedOption } = useOptions(props, 'options');
     const [sOption, setSOption] = useState<any>(null);
 
     useEffect(() => {
         if (!isArray(sOption) && isObject(sOption)) {
-            if (!meta.parent) {
-                helpers.setValue(name, sOption.value)
-            } else {
-                field.onChange({
-                    field: name,
-                    value: sOption.value
-                })
-            }
+            onChange({
+                target: {
+                    type: 'select',
+                    name,
+                    value: sOption.value,
+                    options,
+                    multiple
+                },
+            });
         }
         if (isArray(sOption)) {
-            if (!meta.parent) {
-                helpers.setValue(name, sOption.map(item => item.value))
-            } else {
-                field.onChange({
-                    field: name,
-                    value: sOption.map(item => item.value)
-                })
-            }
+            onChange({
+                target: {
+                    type: 'select',
+                    name,
+                    value: sOption.map(item => item.value),
+                    options,
+                    multiple
+                },
+            });
         }
     }, [sOption])
 
-    if (placeholder == undefined) {
-        placeholder = label;
-    }
-
     return (
         <div className="wprf-select-wrapper">
-            <Label htmlFor={id}>{label}</Label>
             <ReactSelect
                 classNamePrefix="wprf-select"
                 isSearchable={search ?? false}

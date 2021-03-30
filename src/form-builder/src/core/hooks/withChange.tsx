@@ -3,7 +3,11 @@ import { useBuilderContext } from "./index";
 
 const withChange = (WrappedComponent) => {
     const WithChange = (props) => {
-        return <WrappedComponent onChange={props.onChange} {...props} />
+        const handleChange = (value) => {
+            console.log(value)
+        }
+
+        return <WrappedComponent {...props} />
     }
     return WithChange;
 };

@@ -1,8 +1,7 @@
 import React from 'react'
+import { executeChange } from '../core/utils';
 
 const Input = (props) => {
-    // console.log("Input Props: ", props);
-
     return React.createElement('input', { ...props })
 }
 

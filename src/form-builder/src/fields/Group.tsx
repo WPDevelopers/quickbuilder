@@ -50,9 +50,11 @@ const Group = (props) => {
         }
     }, [localState])
 
+    // console.log('Group Meta', props);
+
     const newFields = sortingFields(fields);
     const allFields = newFields.map((item, index) => {
-        let meta = { ...props.meta, ...builderContext.getFieldMeta(item.name, { field: item }), value: localState[item.name] };
+        let meta = { ...props.meta, ...builderContext.getFieldMeta(item.name, { field: item }, fieldName), value: localState[item.name] };
 
         return <GenericField
             key={item.name}

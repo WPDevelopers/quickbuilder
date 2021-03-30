@@ -3,80 +3,73 @@ import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, To
 import { useBuilderContext, useDefaults, withChange, withProps } from '../core/hooks';
 import { isEmptyObj, isObject } from '../core/utils';
 
-const Field = ({ meta, field, helpers }) => {
-    if (!field || field.length === 0) {
-        throw new Error('Field must have a #field. see documentation.');
-    }
-    if (!field.type || field.type.length === 0) {
+const Field = (props) => {
+    if (!props.type || props.type.length === 0) {
         throw new Error('Field must have a #type. see documentation.');
     }
 
-    const inputFieldsAttributes = { meta, field, helpers };
-    const { options, fields, trigger } = meta;
+    // const inputFieldsAttributes = { meta, field, helpers };
+    // const { options, fields, trigger } = meta;
 
-    useEffect(() => {
-        if (isObject(trigger) && !isEmptyObj(trigger)) {
-            useDefaults(field.name, helpers, meta.value, trigger);
-        }
-    }, [meta.value])
+    // useEffect(() => {
+    //     if (isObject(trigger) && !isEmptyObj(trigger)) {
+    //         useDefaults(field.name, helpers, meta.value, trigger);
+    //     }
+    // }, [meta.value])
 
-
-    if (!meta.visible) {
-        return <></>;
-    }
-
-    switch (field.type) {
+    switch (props.type) {
         case "text":
         case "checkbox":
         case "radio":
         case "email":
         case "range":
         case "number":
-            return <Input {...field} />;
+            return <Input {...props} />;
         case "select":
-            return <Select {...inputFieldsAttributes} options={options} />;
+            return <Select {...props} />;
         case "slider":
-            return <Slider {...inputFieldsAttributes} />;
+            return <Slider {...props} />;
         case "group":
-            let groupAttr = {
-                ...inputFieldsAttributes,
-                meta: {
-                    ...inputFieldsAttributes.meta,
-                    withState: false,
-                    parent: {
-                        type: field.type,
-                        name: field.name,
-                        default: meta.default,
-                        ...inputFieldsAttributes?.meta?.parent
-                    }
-                }
-            };
-            return <Group {...groupAttr} />;
+            // let groupAttr = {
+            //     ...props,
+            //     meta: {
+            //         ...inputFieldsAttributes.meta,
+            //         withState: false,
+            //         parent: {
+            //             type: field.type,
+            //             name: field.name,
+            //             default: meta.default,
+            //             ...inputFieldsAttributes?.meta?.parent
+            //         }
+            //     }
+            // };
+            return '';
+        // return <Group {...props} />;
         case "radio-card":
-            return <Radio {...inputFieldsAttributes} options={options} />;
+            return <Radio {...props} />;
         case "section":
-            return <Section {...inputFieldsAttributes} />;
+            return <Section {...props} />;
         case "date":
-            return <Date {...inputFieldsAttributes} />;
+            return <Date {...props} />;
         case "toggle":
-            return <Toggle {...inputFieldsAttributes} options={options} />;
+            return <Toggle {...props} />;
         case "colorpicker":
-            return <ColorPicker {...inputFieldsAttributes} />;
+            return <ColorPicker {...props} />;
         case "repeater":
-            let repeaterAttr = {
-                ...inputFieldsAttributes,
-                meta: {
-                    ...inputFieldsAttributes.meta,
-                    withState: false,
-                    parent: {
-                        type: field.type,
-                        name: field.name,
-                        default: field.default,
-                        ...inputFieldsAttributes?.meta?.parent
-                    }
-                }
-            };
-            return <Repeater {...repeaterAttr} fields={fields} />;
+        // let repeaterAttr = {
+        //     ...inputFieldsAttributes,
+        //     meta: {
+        //         ...inputFieldsAttributes.meta,
+        //         withState: false,
+        //         parent: {
+        //             type: field.type,
+        //             name: field.name,
+        //             default: field.default,
+        //             ...inputFieldsAttributes?.meta?.parent
+        //         }
+        //     }
+        // };
+        // return <Repeater {...props} />;
         // return <Test {...inputFieldsAttributes} />;
         default:
             return <></>;

@@ -5,6 +5,8 @@ import { isEmptyObj, isObject } from '../core/utils';
 
 const Field = (props) => {
     if (!props.type || props.type.length === 0) {
+        console.error("props", props);
+
         throw new Error('Field must have a #type. see documentation.');
     }
 
@@ -30,21 +32,7 @@ const Field = (props) => {
         case "slider":
             return <Slider {...props} />;
         case "group":
-            // let groupAttr = {
-            //     ...props,
-            //     meta: {
-            //         ...inputFieldsAttributes.meta,
-            //         withState: false,
-            //         parent: {
-            //             type: field.type,
-            //             name: field.name,
-            //             default: meta.default,
-            //             ...inputFieldsAttributes?.meta?.parent
-            //         }
-            //     }
-            // };
-            return '';
-        // return <Group {...props} />;
+            return <Group {...props} />;
         case "radio-card":
             return <Radio {...props} />;
         case "section":
@@ -56,25 +44,12 @@ const Field = (props) => {
         case "colorpicker":
             return <ColorPicker {...props} />;
         case "repeater":
-        // let repeaterAttr = {
-        //     ...inputFieldsAttributes,
-        //     meta: {
-        //         ...inputFieldsAttributes.meta,
-        //         withState: false,
-        //         parent: {
-        //             type: field.type,
-        //             name: field.name,
-        //             default: field.default,
-        //             ...inputFieldsAttributes?.meta?.parent
-        //         }
-        //     }
-        // };
-        // return <Repeater {...props} />;
+            return <Repeater {...props} />;
         // return <Test {...inputFieldsAttributes} />;
         default:
             return <></>;
     }
 };
 
-export const GenericField = withProps(Field);
+export const GenericField = withProps(Field, true);
 export default withProps(withChange(Field));

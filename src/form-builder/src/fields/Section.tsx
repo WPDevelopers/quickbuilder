@@ -4,10 +4,10 @@ import { sortingFields } from '../core/utils';
 
 const Section = (props) => {
     const [isCollapse, setCollapse] = useState(props.collapsed ?? false);
-    const newFields = sortingFields(props.field.fields);
+    const newFields = sortingFields(props.fields);
 
     const allFields = newFields.map((item, index) => {
-        return <Field key={item.name} field={item} />;
+        return <Field key={item.name} {...item} />;
     });
 
     return (

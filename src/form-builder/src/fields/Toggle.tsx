@@ -3,11 +3,10 @@ import classNames from "classnames";
 import Field from '../core/Field';
 import { Column, Label, Row } from '../core/components';
 import { withLabel } from '../core/hooks';
+import { Input } from '.';
 
 export const Toggle = (props) => {
-    const { field, meta, helpers, options } = props;
-    const { label, value } = field;
-    const { styles: prevStyles } = meta;
+    const { options, value, multiple } = props;
 
     let styles = {
         type: "", // card
@@ -15,7 +14,7 @@ export const Toggle = (props) => {
             position: "right",
         },
         column: 4,
-        ...prevStyles,
+        // ...prevStyles,
     };
 
     const componentClasses = classNames(
@@ -29,7 +28,7 @@ export const Toggle = (props) => {
         props?.classes
     );
 
-    if (field.multiple) {
+    if (multiple) {
         const [localState, setLocalState] = useState({});
         const handleChange = (event) => {
             const target = event.target ? event.target : event.currentTarget;
@@ -37,11 +36,11 @@ export const Toggle = (props) => {
         }
 
         useEffect(() => {
-            helpers.setValue(field.name, localState);
+            // helpers.setValue(name, localState);
         }, [localState])
 
         useEffect(() => {
-            setLocalState(meta.value || meta.default);
+            setLocalState(value);
         }, [])
 
         return <div className="wprf-toggle-wrapper wprf-control">
@@ -50,10 +49,8 @@ export const Toggle = (props) => {
                     return (
                         <Column key={item.value} column={styles.column}>
                             <div className={componentClasses}>
-                                <Field
-                                    meta={meta}
-                                    helpers={helpers}
-                                    field={{
+                                <Input
+                                    {...{
                                         ...item,
                                         id: item.value,
                                         checked: !!localState?.[item.value],
@@ -72,8 +69,8 @@ export const Toggle = (props) => {
 
     return (
         <div className={componentClasses}>
-            <Field meta={meta} helpers={helpers} field={{ ...field, type: 'checkbox' }} />
-            <Label htmlFor={field.id} />
+            <Input {...{ ...props, type: 'checkbox' }} />
+            <Label htmlFor={props.id} />
         </div>
     );
 }

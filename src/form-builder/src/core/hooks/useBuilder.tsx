@@ -97,8 +97,6 @@ const useBuilder = (props) => {
     }, [setFieldValue, state.values]);
 
     const handleChange = useEventCallback((eventOrString) => {
-        console.log(eventOrString, typeof eventOrString);
-
         if (typeof eventOrString === 'string') {
             return (event) => executeChange(eventOrString, event);
         } else {
@@ -111,7 +109,18 @@ const useBuilder = (props) => {
         let validProps: any = validFieldProps(defaultProps);
         const name = validProps.name;
         const type = validProps.type;
-        const valueState = getIn(state.values, name) || defaultProps?.default;
+        const parent = validProps.parent;
+        const parentType = validProps.parenttype;
+        let valueState: any;
+        if (parent && parentType === 'group') {
+            let parentValue = getIn(state.values, parent) || {};
+            valueState = parentValue?.[name] || defaultProps?.default
+        } else if (parent && parentType === 'repeater') {
+            let parentValue = getIn(state.values, parent) || [];
+            valueState = parentValue?.[validProps.index]?.[name] || defaultProps?.default || ''
+        } else {
+            valueState = getIn(state.values, name) || defaultProps?.default
+        }
 
         if (['group', 'repeater'].includes(type)) {
 

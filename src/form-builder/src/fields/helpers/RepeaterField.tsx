@@ -3,12 +3,13 @@ import { Icon } from '@wordpress/components';
 import { GenericField } from '../Field';
 
 const RepeaterField = (props) => {
+    const { fields, onChange, index, parent } = props;
     const [isCollapse, setIsCollapse] = useState(props.isOpen);
     // onClick={() => setIsCollapse(!isCollapse)}
     return (
         <div className="wprf-repeater-field">
             <div className="wprf-repeater-field-title" >
-                <h4>#ID: {props.index} - {props.parentProps.label}</h4>
+                <h4>#ID: {props.index}</h4>
                 <div className="wprf-repeater-field-controls">
                     <Icon onClick={() => props.clone(props.index)} icon="admin-page" />
                     <Icon onClick={() => props.remove(props.index)} icon="trash" />
@@ -16,20 +17,16 @@ const RepeaterField = (props) => {
             </div>
             { isCollapse &&
                 <div className="wprf-repeater-inner-field">
-                    <GenericField
-                        meta={{
-                            parent: {
-                                type: 'repeater'
-                            }
-                        }}
-                        field={{
-                            type: 'group',
-                            name: props.name,
-                            fields: props.fields
-                        }}
-                        index={props.index}
-                        handleChange={(value) => props.handleChange(value || value, props.index)}
-                    />
+                    {fields.map((field, fieldIndex) => {
+                        return <GenericField
+                            key={`field-${index}-${fieldIndex}`}
+                            {...field}
+                            index={index}
+                            parenttype='repeater'
+                            parent={parent}
+                            onChange={(event) => onChange(event, index)}
+                        />
+                    })}
                 </div>
             }
         </div>

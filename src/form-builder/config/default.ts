@@ -72,6 +72,7 @@ const builder = {
 							type: "select",
 							name: 'group_select',
 							label: 'Group Select',
+							default: 'one',
 							options: [
 								{
 									label: 'G One',
@@ -117,9 +118,11 @@ const builder = {
 					fields: [
 						{
 							type: 'text',
+							name: 'r_text',
 						},
 						{
 							type: 'select',
+							name: 'r_select',
 							options: [
 								{
 									label: 'One',

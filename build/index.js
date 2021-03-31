@@ -9330,6 +9330,7 @@ var builder = {
                             type: "select",
                             name: 'group_select',
                             label: 'Group Select',
+                            default: 'one',
                             options: [
                                 {
                                     label: 'G One',
@@ -9375,9 +9376,11 @@ var builder = {
                     fields: [
                         {
                             type: 'text',
+                            name: 'r_text',
                         },
                         {
                             type: 'select',
+                            name: 'r_select',
                             options: [
                                 {
                                     label: 'One',
@@ -10344,7 +10347,6 @@ var useBuilder = function (props) {
         }
     }, [setFieldValue, state.values]);
     var handleChange = useEventCallback(function (eventOrString) {
-        console.log(eventOrString, typeof eventOrString);
         if (typeof eventOrString === 'string') {
             return function (event) { return executeChange(eventOrString, event); };
         }
@@ -10353,11 +10355,25 @@ var useBuilder = function (props) {
         }
     });
     var getFieldProps = react_1.default.useCallback(function (args) {
+        var _a;
         var defaultProps = __assign({}, args);
         var validProps = utils_1.validFieldProps(defaultProps);
         var name = validProps.name;
         var type = validProps.type;
-        var valueState = utils_1.getIn(state.values, name) || (defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.default);
+        var parent = validProps.parent;
+        var parentType = validProps.parenttype;
+        var valueState;
+        if (parent && parentType === 'group') {
+            var parentValue = utils_1.getIn(state.values, parent) || {};
+            valueState = (parentValue === null || parentValue === void 0 ? void 0 : parentValue[name]) || (defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.default);
+        }
+        else if (parent && parentType === 'repeater') {
+            var parentValue = utils_1.getIn(state.values, parent) || [];
+            valueState = ((_a = parentValue === null || parentValue === void 0 ? void 0 : parentValue[validProps.index]) === null || _a === void 0 ? void 0 : _a[name]) || (defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.default) || '';
+        }
+        else {
+            valueState = utils_1.getIn(state.values, name) || (defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.default);
+        }
         if (['group', 'repeater'].includes(type)) {
         }
         validProps.onChange = handleChange;
@@ -10674,7 +10690,7 @@ var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node
 var withLabel = function (WrappedComponent) {
     var WithLabel = function (props) {
         var componentClasses = classnames_1.default("wprf-label");
-        var _a = props.field, label = _a.label, id = _a.id, name = _a.name, type = _a.type;
+        var label = props.label, id = props.id, name = props.name, type = props.type;
         if (id == undefined) {
             id = name;
         }
@@ -10734,7 +10750,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var utils_1 = __webpack_require__(/*! ../utils */ "./src/form-builder/src/core/utils.ts");
 var index_1 = __webpack_require__(/*! ./index */ "./src/form-builder/src/core/hooks/index.ts");
-var withProps = function (WrappedComponent) {
+var withProps = function (WrappedComponent, isGeneric) {
+    if (isGeneric === void 0) { isGeneric = false; }
     var WithProps = function (props) {
         var builderContext = index_1.useBuilderContext();
         var field = builderContext.getFieldProps(props);
@@ -10752,16 +10769,45 @@ var withProps = function (WrappedComponent) {
         //     fields
         // };
         var meta = builderContext.getFieldMeta(field.name, props);
-        // if (isFunction(props.handleChange)) {
-        //     field.onChange = props.handleChange;
-        // }
-        // if (isFunction(props.handleBlur)) {
-        //     field.onBlur = props.handleBlur;
-        // }
+        if (utils_1.isFunction(props.onChange)) {
+            field.onChange = props.onChange;
+        }
+        if (utils_1.isFunction(props.onBlur)) {
+            field.onBlur = props.onBlur;
+        }
         var helpers = builderContext.getFieldHelpers();
         react_1.useEffect(function () {
+            var _a;
             // Not needed / Confused
-            helpers.setValue(field.name, field.value);
+            if (!isGeneric) {
+                helpers.setValue(field.name, field.value);
+            }
+            else {
+                var parent_1 = props === null || props === void 0 ? void 0 : props.parent;
+                var parenttype = props === null || props === void 0 ? void 0 : props.parenttype;
+                if (parent_1 && parenttype === 'group') {
+                    var parentValues = helpers.getValue(parent_1) || {};
+                    if (utils_1.isEmptyObj(parentValues)) {
+                        parentValues[field.name] = field.value;
+                        helpers.setValue(parent_1, parentValues);
+                    }
+                    else {
+                        parentValues = __assign(__assign({}, parentValues), (_a = {}, _a[field.name] = field.value, _a));
+                        helpers.setValue(parent_1, parentValues);
+                    }
+                }
+                if (parent_1 && parenttype === 'repeater') {
+                    // let parentValues = helpers.getValue(parent) || [];
+                    // if (isArray(parentValues) && parentValues.length > 0) {
+                    //     parentValues[props.index][field.name] = field.value;
+                    //     helpers.setValue(parent, parentValues)
+                    // } else {
+                    //     parentValues = [...parentValues, ];
+                    //     parentValues = { ...parentValues, [field.name]: field.value };
+                    //     helpers.setValue(parent, parentValues)
+                    // }
+                }
+            }
         }, []);
         react_1.useEffect(function () {
             if (utils_1.isObject(trigger) && !utils_1.isEmptyObj(trigger)) {
@@ -10789,6 +10835,11 @@ exports.default = withProps;
 
 "use strict";
 
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -10929,13 +10980,14 @@ var setIn = function (obj, path, value) {
     return res;
 };
 exports.setIn = setIn;
-var validFieldProps = function (defaultProps) {
+var validFieldProps = function (defaultProps, exclude) {
+    if (exclude === void 0) { exclude = []; }
     var type = defaultProps.type;
-    var filterOutArray = ['validation_rules', 'withChange', 'default', 'rules', 'label', 'meta', 'trigger', 'is_pro', 'switch'];
-    if (type !== 'select') {
+    var filterOutArray = __spreadArray(['validation_rules', 'default', 'rules', 'label', 'meta', 'trigger', 'is_pro', 'switch'], exclude);
+    if (type !== 'select' && type !== 'radio-card') {
         filterOutArray.push('options');
     }
-    if (type !== 'group' && type !== 'repeater') {
+    if (type !== 'group' && type !== 'repeater' && type !== 'section') {
         filterOutArray.push('fields');
     }
     var validProps = exports.objectWithoutPropertiesLoose(defaultProps, filterOutArray);
@@ -11138,25 +11190,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-var ColorPicker = function (_a) {
-    var field = _a.field, meta = _a.meta, helpers = _a.helpers, props = __rest(_a, ["field", "meta", "helpers"]);
-    var value = field.value, name = field.name, id = field.id;
-    var _b = react_1.useState(false), showPicker = _b[0], setShowPicker = _b[1];
+var i18n_1 = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var ColorPicker = function (props) {
+    var value = props.value, name = props.name, id = props.id, onChange = props.onChange;
+    var _a = react_1.useState(false), showPicker = _a[0], setShowPicker = _a[1];
+    var _b = react_1.useState(value || null), color = _b[0], setColor = _b[1];
+    var _c = react_1.useState(null), defaultColor = _c[0], setDefaultColor = _c[1];
     var closeRef = react_1.useRef(null);
+    react_1.useEffect(function () {
+        setDefaultColor(value);
+    }, []);
     var handleCloseRef = function (ref) {
         react_1.useEffect(function () {
             var handleClickOutside = function (ev) {
@@ -11171,8 +11217,14 @@ var ColorPicker = function (_a) {
         }, [ref]);
     };
     react_1.useEffect(function () {
-        helpers.setValue(name, value || meta.value || meta.default);
-    }, [value, meta.value, meta.default]);
+        onChange({
+            target: {
+                type: 'colorpicker',
+                name: name,
+                value: color,
+            },
+        });
+    }, [color]);
     handleCloseRef(closeRef);
     return (react_1.default.createElement(react_1.default.Fragment, null,
         react_1.default.createElement("div", { className: "wprf-colorpicker-wrap", ref: closeRef },
@@ -11181,10 +11233,10 @@ var ColorPicker = function (_a) {
             showPicker && (react_1.default.createElement(react_1.default.Fragment, null,
                 react_1.default.createElement("button", { className: "wprf-colorpicker-reset", onClick: function (e) {
                         e.preventDefault();
+                        setColor(defaultColor);
                         setShowPicker(false);
-                        meta.default && helpers.setValue(name, meta.default);
-                    } }, "Reset"),
-                react_1.default.createElement(components_1.ColorPicker, { color: value, onChangeComplete: function (event) { return helpers.setValue(name, event.hex); } }))))));
+                    } }, i18n_1.__('Reset', 'wprf')),
+                react_1.default.createElement(components_1.ColorPicker, { color: value, onChangeComplete: function (event) { return setColor(event.hex); } }))))));
 };
 exports.default = ColorPicker;
 
@@ -11219,23 +11271,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 var date_1 = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
-var DateControl = function (_a) {
-    var field = _a.field, meta = _a.meta, helpers = _a.helpers, rest = __rest(_a, ["field", "meta", "helpers"]);
+var DateControl = function (props) {
+    var name = props.name, value = props.value, onChange = props.onChange;
     var settings = date_1.__experimentalGetSettings();
     var is12HourTime = /a(?!\\)/i.test(settings.formats.datetime
         .toLowerCase()
@@ -11244,15 +11285,23 @@ var DateControl = function (_a) {
         .reverse()
         .join(""));
     react_1.useEffect(function () {
-        if (meta.value == undefined) {
-            helpers.setValue(field.name, date_1.date('c', meta.value));
+        if (value == undefined) {
+            // helpers.setValue(name, date('c', value))
         }
     }, []);
     return (react_1.default.createElement(components_1.Dropdown, { className: "wprf-control-datetime", renderToggle: function (_a) {
             var isOpen = _a.isOpen, onToggle = _a.onToggle;
-            return (react_1.default.createElement(components_1.Button, { isTertiary: true, onClick: onToggle }, date_1.date(settings.formats.datetime, meta.value, settings.timezone.string)));
+            return (react_1.default.createElement(components_1.Button, { isTertiary: true, onClick: onToggle }, date_1.date(settings.formats.datetime, value, settings.timezone.string)));
         }, renderContent: function () {
-            return (react_1.default.createElement(components_1.DateTimePicker, { currentDate: date_1.date(settings.formats.datetime, meta.value) || date_1.date(settings.formats.datetime, Date.now()), onChange: function (date) { return helpers.setValue(field.name, date !== null && date !== void 0 ? date : (meta.default || new Date())); }, is12Hour: is12HourTime }));
+            return (react_1.default.createElement(components_1.DateTimePicker, { currentDate: date_1.date(settings.formats.datetime, value) || date_1.date(settings.formats.datetime, Date.now()), onChange: function (date) {
+                    onChange({
+                        target: {
+                            type: 'date',
+                            name: name,
+                            value: date !== null && date !== void 0 ? date : (value || new Date()),
+                        },
+                    });
+                }, is12Hour: is12HourTime }));
         } }));
 };
 exports.default = DateControl;
@@ -11290,6 +11339,7 @@ var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var Field = function (props) {
     if (!props.type || props.type.length === 0) {
+        console.error("props", props);
         throw new Error('Field must have a #type. see documentation.');
     }
     // const inputFieldsAttributes = { meta, field, helpers };
@@ -11312,21 +11362,7 @@ var Field = function (props) {
         case "slider":
             return react_1.default.createElement(_1.Slider, __assign({}, props));
         case "group":
-            // let groupAttr = {
-            //     ...props,
-            //     meta: {
-            //         ...inputFieldsAttributes.meta,
-            //         withState: false,
-            //         parent: {
-            //             type: field.type,
-            //             name: field.name,
-            //             default: meta.default,
-            //             ...inputFieldsAttributes?.meta?.parent
-            //         }
-            //     }
-            // };
-            return '';
-        // return <Group {...props} />;
+            return react_1.default.createElement(_1.Group, __assign({}, props));
         case "radio-card":
             return react_1.default.createElement(_1.Radio, __assign({}, props));
         case "section":
@@ -11338,26 +11374,13 @@ var Field = function (props) {
         case "colorpicker":
             return react_1.default.createElement(_1.ColorPicker, __assign({}, props));
         case "repeater":
-        // let repeaterAttr = {
-        //     ...inputFieldsAttributes,
-        //     meta: {
-        //         ...inputFieldsAttributes.meta,
-        //         withState: false,
-        //         parent: {
-        //             type: field.type,
-        //             name: field.name,
-        //             default: field.default,
-        //             ...inputFieldsAttributes?.meta?.parent
-        //         }
-        //     }
-        // };
-        // return <Repeater {...props} />;
+            return react_1.default.createElement(_1.Repeater, __assign({}, props));
         // return <Test {...inputFieldsAttributes} />;
         default:
             return react_1.default.createElement(react_1.default.Fragment, null);
     }
 };
-exports.GenericField = hooks_1.withProps(Field);
+exports.GenericField = hooks_1.withProps(Field, true);
 exports.default = hooks_1.withProps(hooks_1.withChange(Field));
 
 
@@ -11409,12 +11432,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
-var lodash_1 = __webpack_require__(/*! lodash */ "lodash-es");
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var Field_1 = __webpack_require__(/*! ./Field */ "./src/form-builder/src/fields/Field.tsx");
 var Group = function (props) {
-    var _a;
-    var _b = props.field, fieldName = _b.name, fields = _b.fields;
+    var fieldName = props.name, fields = props.fields, value = props.value;
     if (!fields || !utils_1.isArray(fields) || fields.length === 0) {
         throw new Error('You should give a #fields arguments to a group field.');
     }
@@ -11422,12 +11443,12 @@ var Group = function (props) {
     var localMemoizedState = react_1.useMemo(function () {
         var _a;
         var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName];
-        if (localS && props.meta.default) {
-            localS = __assign(__assign({}, props.meta.default), localS);
-        }
+        // if (localS && props.meta.default) {
+        //     localS = { ...props.meta.default, ...localS };
+        // }
         return localS;
-    }, [(_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName]]);
-    var _c = react_1.useState(((props === null || props === void 0 ? void 0 : props.handleChange) ? localMemoizedState : (localMemoizedState || props.meta.default)) || {}), localState = _c[0], setLocalState = _c[1];
+    }, [value]);
+    var _a = react_1.useState(localMemoizedState), localState = _a[0], setLocalState = _a[1];
     var handleChange = react_1.useCallback(function (event) {
         if (event.persist) {
             event.persist();
@@ -11437,34 +11458,31 @@ var Group = function (props) {
             var _a;
             return (__assign(__assign({}, prevState), (_a = {}, _a[field] = value, _a)));
         });
-    }, []);
-    var handleChangeForSelect = react_1.useCallback(function (event) {
-        setLocalState(function (prevState) {
-            var _a;
-            return (__assign(__assign({}, prevState), (_a = {}, _a[event.field] = event.value, _a)));
-        });
-    }, [props.meta.value, props.meta.default]);
+    }, [props.value]);
     react_1.useEffect(function () {
-        var _a;
-        if (!lodash_1.isEqual(localState, builderContext.values[fieldName]) && !(props === null || props === void 0 ? void 0 : props.handleChange)) {
-            builderContext.setFieldValue(fieldName, localState);
-        }
-        if (props === null || props === void 0 ? void 0 : props.handleChange) {
-            var newLocal = ((_a = builderContext.values[fieldName]) === null || _a === void 0 ? void 0 : _a[props.index]) ? __assign(__assign({}, builderContext.values[fieldName][props.index]), localState) : localState;
-            props.handleChange(newLocal);
-        }
+        builderContext.handleChange({
+            target: {
+                type: 'group',
+                name: fieldName,
+                value: localState
+            },
+        });
+        // if (!isEqual(localState, builderContext.values[fieldName]) && !props?.handleChange) {
+        //     builderContext.handleChange(fieldName, localState);
+        // }
+        // if (props?.handleChange) {
+        //     let newLocal = builderContext.values[fieldName]?.[props.index] ? { ...builderContext.values[fieldName][props.index], ...localState } : localState;
+        //     props.handleChange(newLocal);
+        // }
     }, [localState]);
-    // console.log('Group Meta', props);
     var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item, index) {
-        var meta = __assign(__assign(__assign({}, props.meta), builderContext.getFieldMeta(item.name, { field: item }, fieldName)), { value: localState[item.name] });
-        return react_1.default.createElement(Field_1.GenericField, { key: item.name, index: props.index, handleChange: item.type != 'select' ? handleChange : handleChangeForSelect, field: __assign({}, item), meta: meta, helpers: props.helpers });
+        return react_1.default.createElement(Field_1.GenericField, __assign({ key: item.name, index: props.index, onChange: handleChange }, item, { parenttype: 'group', parent: fieldName }));
     });
     var innerClasses = classnames_1.default('wprf-group-control-inner', {
-        'wprf-display-inline': props.field.display === 'inline'
+        'wprf-display-inline': (props === null || props === void 0 ? void 0 : props.display) === 'inline'
     });
     return (react_1.default.createElement("div", { className: "wprf-group-control" },
-        props.field.label && react_1.default.createElement("h4", null, props.field.label),
         react_1.default.createElement("div", { className: innerClasses }, allFields)));
 };
 exports.default = Group;
@@ -11498,6 +11516,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var Input = function (props) {
+    // useEffect(() => {
+    //     console.log("props.value", props.value, props);
+    //     props.onChange({
+    //         target: {
+    //             type: props.type,
+    //             name: props.name,
+    //             value: props.value
+    //         },
+    //     })
+    // }, [])
     return react_1.default.createElement('input', __assign({}, props));
 };
 Input.defaultProps = {
@@ -11528,39 +11556,19 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 var compose_1 = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
 var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-builder/src/core/components/index.ts");
 __webpack_require__(/*! ../scss/radio-card.scss */ "./src/form-builder/src/scss/radio-card.scss");
 var useOptions_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useOptions */ "./src/form-builder/src/core/hooks/useOptions.ts"));
 var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
+var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var RadioCard = function (props) {
-    var meta = props.meta, field = props.field, helpers = props.helpers;
-    var name = field.name, label = field.label;
     var _a = useOptions_1.default(props, 'options'), options = _a.options, option = _a.option;
     // if (name === 'themes') {
     //     console.log('RadioCard', options);
@@ -11568,9 +11576,10 @@ var RadioCard = function (props) {
     if (!options) {
         throw new Error('#options is a required arguments for RadioCard field.');
     }
-    react_1.useEffect(function () {
-        helpers.setValue(name, option);
-    }, [option]);
+    // useEffect(() => {
+    //     console.log("option", option);
+    //     // helpers.setValue(name, option)
+    // }, [option])
     var instanceId = compose_1.useInstanceId(RadioCard);
     var componentClasses = classnames_1.default([
         "wprf-control",
@@ -11578,8 +11587,8 @@ var RadioCard = function (props) {
         "wprf-input-radio-set-wrap",
         props === null || props === void 0 ? void 0 : props.className,
     ]);
+    var validProps = utils_1.validFieldProps(props, ['options']);
     return (react_1.default.createElement("div", { className: componentClasses },
-        react_1.default.createElement("h4", { className: "wprf-control-label" }, label),
         react_1.default.createElement(components_1.Row, null, options.map(function (_a, index) {
             var label = _a.label, value = _a.value, icon = _a.icon;
             return (react_1.default.createElement(components_1.Column, { column: "4", key: index },
@@ -11589,7 +11598,7 @@ var RadioCard = function (props) {
                     react_1.default.createElement(components_1.Label, { className: classnames_1.default({
                             "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false,
                         }), htmlFor: "wprf-input-radio-" + instanceId + "-" + index, src: icon }, label),
-                    react_1.default.createElement(_1.Input, __assign({}, field, { type: "radio", value: value, checked: value === option, id: "wprf-input-radio-" + instanceId + "-" + index })))));
+                    react_1.default.createElement(_1.Input, __assign({}, validProps, { type: "radio", value: value, checked: value === option, id: "wprf-input-radio-" + instanceId + "-" + index })))));
         }))));
 };
 exports.default = RadioCard;
@@ -11645,56 +11654,69 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var helpers_1 = __webpack_require__(/*! ./helpers */ "./src/form-builder/src/fields/helpers/index.ts");
+var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var compose_1 = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 var Repeater = function (props) {
     var _a;
-    console.log("re", props);
-    var field = props.field, meta = props.meta, helpers = props.helpers;
-    var name = field.name, label = field.label, button = field.button, fields = field.fields;
+    var fieldName = props.name, fieldValue = props.value, button = props.button, fields = props.fields;
     var builderContext = hooks_1.useBuilderContext();
     var instanceId = compose_1.useInstanceId(Repeater);
     var localMemoizedValue = react_1.useMemo(function () {
         var _a;
-        var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[name];
-        if (localS && meta.default) {
-            localS = __spreadArray(__spreadArray([], meta.default), localS);
-        }
+        var localS = ((_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName]) || [{}];
+        // if (localS && meta.default) {
+        //     localS = [...meta.default, ...localS];
+        // }
         return localS;
-    }, [(_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[name]]);
+    }, [(_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName]]);
     // useEffect(() => {
     //     console.log("localMemoizedValue", localMemoizedValue, builderContext.values?.[props.name])
     // }, [])
-    var _b = react_1.useState([{}]), localFields = _b[0], setLocalFields = _b[1];
-    var _c = react_1.useState(localMemoizedValue), localValue = _c[0], setLocalValue = _c[1];
-    var handleChange = function (value, index) {
-        console.log('ddd');
-        // if (!isEmptyObj(value)) {
-        //     setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
-        // }
+    var _b = react_1.useState(localMemoizedValue), localValue = _b[0], setLocalValue = _b[1];
+    var handleChange = function (event, index) {
+        var _a;
+        if (event.persist) {
+            event.persist();
+        }
+        var _b = utils_1.executeChange(event), field = _b.field, value = _b.val;
+        var lValue = __spreadArray([], localValue);
+        if (lValue.indexOf(index) !== -1) {
+            lValue[index][field] = value;
+        }
+        else {
+            lValue[index] = __assign(__assign({}, lValue[index]), (_a = {}, _a[field] = value, _a));
+        }
+        if (!utils_1.isEmptyObj(value)) {
+            setLocalValue(lValue);
+        }
     };
     var handleRemove = react_1.useCallback(function (index) {
-        var newValue = __assign({}, localValue);
-        delete newValue[index];
-        helpers.setValue(name, newValue);
-        var newFields = __spreadArray([], localFields);
-        newFields.splice(index, 1);
-        setLocalFields(newFields);
-    }, [localFields, localValue]);
+        var lValue = __spreadArray([], localValue);
+        lValue.splice(index, 1);
+        setLocalValue(lValue);
+    }, [localValue]);
     var handleClone = react_1.useCallback(function (index) {
-        var indexedCopy = (localValue === null || localValue === void 0 ? void 0 : localValue[index]) || {};
-        setLocalFields(function (prevLocalState) { return (__spreadArray(__spreadArray([], prevLocalState), [indexedCopy])); });
-        handleChange(indexedCopy, ++index);
-    }, [localValue, localFields]);
+        var lValue = __spreadArray([], localValue);
+        if (lValue.length > 0 && lValue.findIndex(function (arr, idx) { return index === idx; }) > -1) {
+            var indexedCopy = lValue === null || lValue === void 0 ? void 0 : lValue[index];
+            lValue.splice(index + 1, 0, indexedCopy);
+            setLocalValue(lValue);
+        }
+    }, [localValue]);
     react_1.useEffect(function () {
-        console.log("localValue", localValue);
-        helpers.setValue(name, localValue);
+        builderContext.handleChange({
+            target: {
+                type: 'repeater',
+                name: fieldName,
+                value: localValue
+            },
+        });
     }, [localValue]);
     return (react_1.default.createElement("div", { className: "wprf-repeater-control" },
         react_1.default.createElement("div", { className: "wprf-repeater-label" },
-            react_1.default.createElement("h4", null, label),
-            react_1.default.createElement("button", { className: "wprf-repeater-button", onClick: function () { return setLocalFields(function (prevLocalState) { return (__spreadArray(__spreadArray([], prevLocalState), [{}])); }); } }, button === null || button === void 0 ? void 0 : button.label)),
-        react_1.default.createElement("div", { className: "wprf-repeater-content" }, localFields.map(function (field, index) {
-            return react_1.default.createElement(helpers_1.RepeaterField, { remove: handleRemove, clone: handleClone, isOpen: true, key: index, name: name, index: index, handleChange: handleChange, fields: fields, parentProps: props });
+            react_1.default.createElement("button", { className: "wprf-repeater-button", onClick: function () { return setLocalValue(function (prevLocalValue) { return (__spreadArray(__spreadArray([], prevLocalValue), [{}])); }); } }, button === null || button === void 0 ? void 0 : button.label)),
+        react_1.default.createElement("div", { className: "wprf-repeater-content" }, localValue.map(function (value, index) {
+            return react_1.default.createElement(helpers_1.RepeaterField, { isOpen: true, key: index, fields: fields, index: index, parent: fieldName, clone: handleClone, remove: handleRemove, onChange: function (event) { return handleChange(event, index); } });
         }))));
 };
 exports.default = Repeater;
@@ -11711,6 +11733,17 @@ exports.default = Repeater;
 
 "use strict";
 
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -11737,9 +11770,9 @@ var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/c
 var Section = function (props) {
     var _a;
     var _b = react_1.useState((_a = props.collapsed) !== null && _a !== void 0 ? _a : false), isCollapse = _b[0], setCollapse = _b[1];
-    var newFields = utils_1.sortingFields(props.field.fields);
+    var newFields = utils_1.sortingFields(props.fields);
     var allFields = newFields.map(function (item, index) {
-        return react_1.default.createElement(fields_1.Field, { key: item.name, field: item });
+        return react_1.default.createElement(fields_1.Field, __assign({ key: item.name }, item));
     });
     return (react_1.default.createElement("div", { className: "wprf-control-section " + (props.collapsible ? (isCollapse ? "wprf-section-collapsed" : "") : "") },
         props.label &&
@@ -11790,9 +11823,20 @@ var react_select_1 = __importDefault(__webpack_require__(/*! react-select */ "./
 var useOptions_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useOptions */ "./src/form-builder/src/core/hooks/useOptions.ts"));
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var Select = function (props) {
-    var id = props.id, name = props.name, multiple = props.multiple, placeholder = props.placeholder, _a = props.search, search = _a === void 0 ? false : _a, onChange = props.onChange;
+    var id = props.id, name = props.name, multiple = props.multiple, placeholder = props.placeholder, _a = props.search, search = _a === void 0 ? false : _a, onChange = props.onChange, value = props.value;
     var _b = useOptions_1.default(props, 'options'), options = _b.options, selectedOption = _b.selectedOption;
     var _c = react_1.useState(null), sOption = _c[0], setSOption = _c[1];
+    // useEffect(() => {
+    // onChange({
+    //     target: {
+    //         type: 'select',
+    //         name,
+    //         value: value,
+    //         options,
+    //         multiple
+    //     },
+    // });
+    // }, [])
     react_1.useEffect(function () {
         if (!utils_1.isArray(sOption) && utils_1.isObject(sOption)) {
             onChange({
@@ -11986,24 +12030,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Toggle = void 0;
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
-var Field_1 = __importDefault(__webpack_require__(/*! ../core/Field */ "./src/form-builder/src/core/Field.tsx"));
 var components_1 = __webpack_require__(/*! ../core/components */ "./src/form-builder/src/core/components/index.ts");
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
+var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
 var Toggle = function (props) {
     var _a;
     var _b, _c;
-    var field = props.field, meta = props.meta, helpers = props.helpers, options = props.options;
-    var label = field.label, value = field.value;
-    var prevStyles = meta.styles;
-    var styles = __assign({ type: "", label: {
+    var options = props.options, value = props.value, multiple = props.multiple;
+    var styles = {
+        type: "",
+        label: {
             position: "right",
-        }, column: 4 }, prevStyles);
+        },
+        column: 4,
+        // ...prevStyles,
+    };
     var componentClasses = classnames_1.default("wprf-toggle-wrap", "wprf-" + (styles === null || styles === void 0 ? void 0 : styles.type), (_a = {
             "wprf-checked": Boolean(value)
         },
         _a["wprf-label-position-" + ((_b = styles === null || styles === void 0 ? void 0 : styles.label) === null || _b === void 0 ? void 0 : _b.position)] = (_c = styles === null || styles === void 0 ? void 0 : styles.label) === null || _c === void 0 ? void 0 : _c.position,
         _a), props === null || props === void 0 ? void 0 : props.classes);
-    if (field.multiple) {
+    if (multiple) {
         var _d = react_1.useState({}), localState_1 = _d[0], setLocalState_1 = _d[1];
         var handleChange_1 = function (event) {
             var target = event.target ? event.target : event.currentTarget;
@@ -12013,22 +12060,22 @@ var Toggle = function (props) {
             });
         };
         react_1.useEffect(function () {
-            helpers.setValue(field.name, localState_1);
+            // helpers.setValue(name, localState);
         }, [localState_1]);
         react_1.useEffect(function () {
-            setLocalState_1(meta.value || meta.default);
+            setLocalState_1(value);
         }, []);
         return react_1.default.createElement("div", { className: "wprf-toggle-wrapper wprf-control" },
             react_1.default.createElement(components_1.Row, null, options.map(function (item) {
                 return (react_1.default.createElement(components_1.Column, { key: item.value, column: styles.column },
                     react_1.default.createElement("div", { className: componentClasses },
-                        react_1.default.createElement(Field_1.default, { meta: meta, helpers: helpers, field: __assign(__assign({}, item), { id: item.value, checked: !!(localState_1 === null || localState_1 === void 0 ? void 0 : localState_1[item.value]), type: 'checkbox', onChange: handleChange_1 }) }),
+                        react_1.default.createElement(_1.Input, __assign({}, __assign(__assign({}, item), { id: item.value, checked: !!(localState_1 === null || localState_1 === void 0 ? void 0 : localState_1[item.value]), type: 'checkbox', onChange: handleChange_1 }))),
                         react_1.default.createElement(components_1.Label, { htmlFor: item.value }))));
             })));
     }
     return (react_1.default.createElement("div", { className: componentClasses },
-        react_1.default.createElement(Field_1.default, { meta: meta, helpers: helpers, field: __assign(__assign({}, field), { type: 'checkbox' }) }),
-        react_1.default.createElement(components_1.Label, { htmlFor: field.id })));
+        react_1.default.createElement(_1.Input, __assign({}, __assign(__assign({}, props), { type: 'checkbox' }))),
+        react_1.default.createElement(components_1.Label, { htmlFor: props.id })));
 };
 exports.Toggle = Toggle;
 exports.default = hooks_1.withLabel(exports.Toggle);
@@ -12107,6 +12154,17 @@ exports.default = Popover;
 
 "use strict";
 
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -12131,29 +12189,21 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 var Field_1 = __webpack_require__(/*! ../Field */ "./src/form-builder/src/fields/Field.tsx");
 var RepeaterField = function (props) {
+    var fields = props.fields, onChange = props.onChange, index = props.index, parent = props.parent;
     var _a = react_1.useState(props.isOpen), isCollapse = _a[0], setIsCollapse = _a[1];
     // onClick={() => setIsCollapse(!isCollapse)}
     return (react_1.default.createElement("div", { className: "wprf-repeater-field" },
         react_1.default.createElement("div", { className: "wprf-repeater-field-title" },
             react_1.default.createElement("h4", null,
                 "#ID: ",
-                props.index,
-                " - ",
-                props.parentProps.label),
+                props.index),
             react_1.default.createElement("div", { className: "wprf-repeater-field-controls" },
                 react_1.default.createElement(components_1.Icon, { onClick: function () { return props.clone(props.index); }, icon: "admin-page" }),
                 react_1.default.createElement(components_1.Icon, { onClick: function () { return props.remove(props.index); }, icon: "trash" }))),
         isCollapse &&
-            react_1.default.createElement("div", { className: "wprf-repeater-inner-field" },
-                react_1.default.createElement(Field_1.GenericField, { meta: {
-                        parent: {
-                            type: 'repeater'
-                        }
-                    }, field: {
-                        type: 'group',
-                        name: props.name,
-                        fields: props.fields
-                    }, index: props.index, handleChange: function (value) { return props.handleChange(value || value, props.index); } }))));
+            react_1.default.createElement("div", { className: "wprf-repeater-inner-field" }, fields.map(function (field, fieldIndex) {
+                return react_1.default.createElement(Field_1.GenericField, __assign({ key: "field-" + index + "-" + fieldIndex }, field, { index: index, parenttype: 'repeater', parent: parent, onChange: function (event) { return onChange(event, index); } }));
+            }))));
 };
 exports.default = RepeaterField;
 
@@ -12674,16 +12724,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var Menu_1 = __importDefault(__webpack_require__(/*! ./Menu */ "./src/form-builder/src/tabs/Menu.tsx"));
 var Content_1 = __importDefault(__webpack_require__(/*! ./Content */ "./src/form-builder/src/tabs/Content.tsx"));
-var useBuilderContext_1 = __webpack_require__(/*! ../core/hooks/useBuilderContext */ "./src/form-builder/src/core/hooks/useBuilderContext.ts");
-var useBuilder_1 = __importDefault(__webpack_require__(/*! ../core/hooks/useBuilder */ "./src/form-builder/src/core/hooks/useBuilder.tsx"));
+// import { BuilderProvider } from '../core/hooks/useBuilderContext';
+// import useBuilder from '../core/hooks/useBuilder';
 __webpack_require__(/*! ../scss/index.scss */ "./src/form-builder/src/scss/index.scss");
 var Tab = function (props) {
-    var builderContextState = useBuilder_1.default(props);
+    // const builderContextState = useBuilder(props);
     var _a = react_1.useState(props.config.active), activeTab = _a[0], setActiveTab = _a[1];
     return (react_1.default.createElement("div", null,
-        react_1.default.createElement(useBuilderContext_1.BuilderProvider, { value: builderContextState },
-            react_1.default.createElement(Menu_1.default, { active: activeTab, setActive: function (tabId) { return setActiveTab(tabId); }, tabs: props.tabs, config: props.config }),
-            react_1.default.createElement(Content_1.default, { tabs: props.tabs, active: activeTab, submit: props === null || props === void 0 ? void 0 : props.submit }))));
+        react_1.default.createElement(Menu_1.default, { active: activeTab, setActive: function (tabId) { return setActiveTab(tabId); }, tabs: props.tabs, config: props.config }),
+        react_1.default.createElement(Content_1.default, { tabs: props.tabs, active: activeTab, submit: props === null || props === void 0 ? void 0 : props.submit })));
 };
 exports.default = Tab;
 
@@ -12781,6 +12830,17 @@ var default_1 = __importDefault(__webpack_require__(/*! ./form-builder/config/de
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["date"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["i18n"]; }());
 
 /***/ }),
 

@@ -1,11 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ColorPicker as WPColorPicker } from "@wordpress/components";
+import { __ } from '@wordpress/i18n';
 
 
-const ColorPicker = ({ field, meta, helpers, ...props }) => {
-    const { value, name, id } = field;
+const ColorPicker = (props) => {
+    const { value, name, id, onChange } = props;
     const [showPicker, setShowPicker] = useState(false);
+    const [color, setColor] = useState(value || null)
+    const [defaultColor, setDefaultColor] = useState(null)
     const closeRef = useRef(null);
+
+    useEffect(() => {
+        setDefaultColor(value);
+    }, [])
 
     const handleCloseRef = (ref) => {
         useEffect(() => {
@@ -22,8 +29,14 @@ const ColorPicker = ({ field, meta, helpers, ...props }) => {
     };
 
     useEffect(() => {
-        helpers.setValue(name, value || meta.value || meta.default)
-    }, [value, meta.value, meta.default]);
+        onChange({
+            target: {
+                type: 'colorpicker',
+                name,
+                value: color,
+            },
+        });
+    }, [color]);
 
     handleCloseRef(closeRef);
 
@@ -42,15 +55,15 @@ const ColorPicker = ({ field, meta, helpers, ...props }) => {
                             className="wprf-colorpicker-reset"
                             onClick={(e) => {
                                 e.preventDefault();
+                                setColor(defaultColor);
                                 setShowPicker(false);
-                                meta.default && helpers.setValue(name, meta.default)
                             }}
                         >
-                            Reset
-						</button>
+                            {__('Reset', 'wprf')}
+                        </button>
                         <WPColorPicker
                             color={value}
-                            onChangeComplete={(event) => helpers.setValue(name, event.hex)}
+                            onChangeComplete={(event) => setColor(event.hex)}
                         />
                     </>
                 )}

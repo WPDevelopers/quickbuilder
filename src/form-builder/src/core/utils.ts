@@ -152,13 +152,13 @@ export const  setIn = (obj, path, value) => {
     return res;
 }
 
-export const validFieldProps = ( defaultProps ) => {
+export const validFieldProps = ( defaultProps, exclude = [] ) => {
     const type = defaultProps.type;
-    let filterOutArray = [ 'validation_rules', 'withChange', 'default', 'rules', 'label', 'meta', 'trigger', 'is_pro', 'switch' ];
-    if( type !== 'select' ) {
+    let filterOutArray = [ 'validation_rules', 'default', 'rules', 'label', 'meta', 'trigger', 'is_pro', 'switch', ...exclude ];
+    if( type !== 'select' && type !== 'radio-card' ) {
         filterOutArray.push( 'options' );
     }
-    if( type !== 'group' && type !== 'repeater' ) {
+    if( type !== 'group' && type !== 'repeater' && type !== 'section' ) {
         filterOutArray.push( 'fields' );
     }
 

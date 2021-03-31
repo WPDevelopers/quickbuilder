@@ -1,86 +1,93 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useBuilderContext } from '../core/hooks';
 import { RepeaterField } from './helpers';
-import { isEmptyObj } from '../core/utils';
+import { executeChange, isEmptyObj } from '../core/utils';
 
 import { useInstanceId } from "@wordpress/compose";
+import { GenericField } from './Field';
 
 
 const Repeater = (props) => {
-    console.log("re", props);
-
-    const { field, meta, helpers } = props;
-    const { name, label, button, fields } = field;
+    const { name: fieldName, value: fieldValue, button, fields } = props;
     const builderContext = useBuilderContext();
     const instanceId = useInstanceId(Repeater);
 
     const localMemoizedValue = useMemo(() => {
-        let localS = builderContext.values?.[name];
-        if (localS && meta.default) {
-            localS = [...meta.default, ...localS];
-        }
+        let localS = builderContext.values?.[fieldName] || [{}];
+        // if (localS && meta.default) {
+        //     localS = [...meta.default, ...localS];
+        // }
         return localS;
-    }, [builderContext.values?.[name]])
+    }, [builderContext.values?.[fieldName]])
 
     // useEffect(() => {
     //     console.log("localMemoizedValue", localMemoizedValue, builderContext.values?.[props.name])
     // }, [])
 
-    const [localFields, setLocalFields] = useState([{}]);
     const [localValue, setLocalValue] = useState(localMemoizedValue);
 
-    const handleChange = (value, index) => {
-        console.log('ddd');
-        // if (!isEmptyObj(value)) {
-        //     setLocalValue(prevLocalValue => ({ ...prevLocalValue, [index]: value }));
-        // }
+    const handleChange = (event, index) => {
+        if (event.persist) {
+            event.persist();
+        }
+        const { field, val: value } = executeChange(event);
+
+        let lValue = [...localValue];
+        if (lValue.indexOf(index) !== -1) {
+            lValue[index][field] = value;
+        } else {
+            lValue[index] = { ...lValue[index], [field]: value };
+        }
+        if (!isEmptyObj(value)) {
+            setLocalValue(lValue);
+        }
     }
 
     const handleRemove = useCallback((index) => {
-        let newValue = { ...localValue };
-        delete newValue[index];
-
-        helpers.setValue(name, newValue);
-
-        let newFields = [...localFields];
-        newFields.splice(index, 1)
-        setLocalFields(newFields);
-    }, [localFields, localValue])
+        let lValue = [...localValue];
+        lValue.splice(index, 1)
+        setLocalValue(lValue);
+    }, [localValue])
 
     const handleClone = useCallback((index) => {
-        const indexedCopy = localValue?.[index] || {};
-        setLocalFields(prevLocalState => ([...prevLocalState, indexedCopy]));
-        handleChange(indexedCopy, ++index);
-    }, [localValue, localFields])
+        let lValue = [...localValue];
+        if (lValue.length > 0 && lValue.findIndex((arr, idx) => index === idx) > -1) {
+            const indexedCopy = lValue?.[index];
+            lValue.splice(index + 1, 0, indexedCopy);
+            setLocalValue(lValue);
+        }
+    }, [localValue])
 
     useEffect(() => {
-        console.log("localValue", localValue);
-
-        helpers.setValue(name, localValue);
+        builderContext.handleChange({
+            target: {
+                type: 'repeater',
+                name: fieldName,
+                value: localValue
+            },
+        });
     }, [localValue])
 
     return (
         <div className="wprf-repeater-control">
             <div className="wprf-repeater-label">
-                <h4>{label}</h4>
                 <button className="wprf-repeater-button"
-                    onClick={() => setLocalFields(prevLocalState => ([...prevLocalState, {}]))}>
+                    onClick={() => setLocalValue(prevLocalValue => ([...prevLocalValue, {}]))}>
                     {button?.label}
                 </button>
             </div>
             <div className="wprf-repeater-content">
                 {
-                    localFields.map((field, index) => {
+                    localValue.map((value, index) => {
                         return <RepeaterField
-                            remove={handleRemove}
-                            clone={handleClone}
                             isOpen={true}
                             key={index}
-                            name={name}
-                            index={index}
-                            handleChange={handleChange}
                             fields={fields}
-                            parentProps={props}
+                            index={index}
+                            parent={fieldName}
+                            clone={handleClone}
+                            remove={handleRemove}
+                            onChange={(event: any) => handleChange(event, index)}
                         />
                     })
                 }

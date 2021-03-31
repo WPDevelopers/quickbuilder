@@ -5,9 +5,21 @@ import useOptions from '../core/hooks/useOptions';
 import { isArray, isFunction, isObject } from '../core/utils';
 
 const Select = (props: any) => {
-    let { id, name, multiple, placeholder, search = false, onChange } = props;
+    let { id, name, multiple, placeholder, search = false, onChange, value } = props;
     const { options, selectedOption } = useOptions(props, 'options');
     const [sOption, setSOption] = useState<any>(null);
+
+    // useEffect(() => {
+    // onChange({
+    //     target: {
+    //         type: 'select',
+    //         name,
+    //         value: value,
+    //         options,
+    //         multiple
+    //     },
+    // });
+    // }, [])
 
     useEffect(() => {
         if (!isArray(sOption) && isObject(sOption)) {

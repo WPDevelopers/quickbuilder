@@ -6,25 +6,25 @@ import { Row, Column, Label, Field } from '../core/components';
 import "../scss/radio-card.scss";
 import useOptions from "../core/hooks/useOptions";
 import { Input } from ".";
+import { validFieldProps } from "../core/utils";
 
 
 const RadioCard = (props) => {
-    const { meta, field, helpers } = props;
-    const { name, label } = field;
     const { options, option } = useOptions(props, 'options');
 
     // if (name === 'themes') {
     //     console.log('RadioCard', options);
     // }
 
-
     if (!options) {
         throw new Error('#options is a required arguments for RadioCard field.');
     }
 
-    useEffect(() => {
-        helpers.setValue(name, option)
-    }, [option])
+    // useEffect(() => {
+    //     console.log("option", option);
+
+    //     // helpers.setValue(name, option)
+    // }, [option])
 
     const instanceId = useInstanceId(RadioCard);
 
@@ -35,9 +35,10 @@ const RadioCard = (props) => {
         props?.className,
     ]);
 
+    const validProps = validFieldProps(props, ['options']);
+
     return (
         <div className={componentClasses}>
-            <h4 className="wprf-control-label">{label}</h4>
             <Row>
                 {options.map(
                     ({ label, value, icon }, index) => (
@@ -62,7 +63,7 @@ const RadioCard = (props) => {
                                     {label}
                                 </Label>
                                 <Input
-                                    {...field}
+                                    {...validProps}
                                     type="radio"
                                     value={value}
                                     checked={value === option}

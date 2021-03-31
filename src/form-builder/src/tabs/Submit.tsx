@@ -4,13 +4,13 @@ import { useBuilderContext } from '../core/hooks';
 
 const Submit = ({ label = 'Save Changes', ...props }) => {
     const context = useBuilderContext();
+
     const handleSubmit = useCallback(
         (event) => {
-            if (props?.onSubmit) {
-                props.onSubmit(event, context);
+            if (context.submit?.onSubmit) {
+                context.submit.onSubmit(event, context);
                 return;
             }
-
             console.log('on submit wprf.');
         },
         [context],

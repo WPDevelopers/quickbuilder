@@ -154,8 +154,8 @@ export const  setIn = (obj, path, value) => {
 
 export const validFieldProps = ( defaultProps, exclude = [] ) => {
     const type = defaultProps.type;
-    let filterOutArray = [ 'validation_rules', 'default', 'rules', 'label', 'meta', 'trigger', 'is_pro', 'switch', ...exclude ];
-    if( type !== 'select' && type !== 'radio-card' ) {
+    let filterOutArray = [ 'validation_rules', 'default', 'rules', 'label', 'meta', 'trigger', 'switch', ...exclude ];
+    if( type !== 'select' && type !== 'radio-card' && ( type !== 'toggle' && defaultProps.multiple ) ) {
         filterOutArray.push( 'options' );
     }
     if( type !== 'group' && type !== 'repeater' && type !== 'section' ) {

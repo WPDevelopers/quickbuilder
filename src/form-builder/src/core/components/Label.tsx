@@ -7,6 +7,15 @@ const Label = (props) => {
 
     return (
         <label htmlFor={props?.htmlFor} className={componentClasses}>
+            {
+                props?.badge?.value &&
+                <div className="wprf-badge">
+                    <sup className={classNames("wprf-badge-item", {
+                        'wprf-badge-active': props?.badge?.active
+                    })}>{props?.badge?.label}</sup>
+                </div>
+            }
+
             {!props?.src && props?.children}
             {props?.src && (
                 <Image

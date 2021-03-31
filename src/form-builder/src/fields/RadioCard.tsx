@@ -7,24 +7,16 @@ import "../scss/radio-card.scss";
 import useOptions from "../core/hooks/useOptions";
 import { Input } from ".";
 import { validFieldProps } from "../core/utils";
+import { useBuilderContext } from "../core/hooks";
 
 
 const RadioCard = (props) => {
+    const builderContext = useBuilderContext();
     const { options, option } = useOptions(props, 'options');
-
-    // if (name === 'themes') {
-    //     console.log('RadioCard', options);
-    // }
 
     if (!options) {
         throw new Error('#options is a required arguments for RadioCard field.');
     }
-
-    // useEffect(() => {
-    //     console.log("option", option);
-
-    //     // helpers.setValue(name, option)
-    // }, [option])
 
     const instanceId = useInstanceId(RadioCard);
 
@@ -41,7 +33,7 @@ const RadioCard = (props) => {
         <div className={componentClasses}>
             <Row>
                 {options.map(
-                    ({ label, value, icon }, index) => (
+                    ({ label, value, icon, is_pro }, index) => (
                         <Column column="4" key={index}>
                             <div
                                 className={classNames(
@@ -59,11 +51,17 @@ const RadioCard = (props) => {
                                     })}
                                     htmlFor={`wprf-input-radio-${instanceId}-${index}`}
                                     src={icon}
+                                    badge={{
+                                        label: is_pro ? 'Pro' : 'Free',
+                                        value: is_pro,
+                                        active: Boolean(builderContext.is_pro_active),
+                                    }}
                                 >
                                     {label}
                                 </Label>
                                 <Input
                                     {...validProps}
+                                    is_pro={is_pro}
                                     type="radio"
                                     value={value}
                                     checked={value === option}

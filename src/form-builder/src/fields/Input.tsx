@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { executeChange } from '../core/utils';
+import React, { useCallback, useEffect } from 'react'
+import { executeChange, validFieldProps } from '../core/utils';
 
 const Input = (props) => {
 
@@ -14,7 +14,13 @@ const Input = (props) => {
     //     })
     // }, [])
 
-    return React.createElement('input', { ...props })
+    if (props.name === 'global_queue') {
+        console.log('Input Props', props);
+    }
+
+    const validProps = validFieldProps(props, ['is_pro']);
+    const handleChange = useCallback((event) => validProps.onChange(event, { isPro: props.is_pro }), []);
+    return React.createElement('input', { ...validProps, onChange: handleChange })
 }
 
 Input.defaultProps = {

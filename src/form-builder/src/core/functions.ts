@@ -13,19 +13,17 @@ import when from "./when";
 import { isArray, isEmptyObj } from "./utils";
 // import store from "../store";
 
-export const SweetAlert = (args = {}) => {
-	console.log('Alert', args );
-
-	// return SweatAlert.fire({
-	// 	target: args?.target ?? "#root .wp-react-form",
-	// 	type: args?.type ?? "success",
-	// 	html: args?.html,
-	// 	title: args?.title ?? "Title Goes Here: title",
-	// 	text: args?.text ?? "Test Goes Here: text",
-	// 	icon: args?.icon ?? "success",
-	// 	timer: args?.timer ?? null,
-	// 	...args,
-	// });
+export const SweetAlert = ( args: any = {} ) => {
+	return Swal.fire({
+		target: args?.target ?? "#notificationx",
+		type: args?.type ?? "success",
+		html: args?.html,
+		title: args?.title ?? "Title Goes Here: title",
+		text: args?.text ?? "Test Goes Here: text",
+		icon: args?.icon ?? (args?.type || "success"),
+		timer: args?.timer ?? null,
+		...args,
+	});
 };
 
 export const ObjectFilter = (thisObj, func, returnArr = false) => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { builderReducer } from '../BuilderReducers'
+import { SweetAlert } from "../functions";
 import { getIn, isObject, executeChange as eChange, isVisible, withState, isArray, objectWithoutPropertiesLoose, validFieldProps } from "../utils";
 import when from "../when";
 
@@ -12,6 +13,7 @@ const useBuilder = (props) => {
     }, [])
 
     const [state, dispatch] = useReducer(builderReducer, {
+        ...props,
         savedValues: props.savedValues || {},
         values: props.initialValues || {},
         errors: props.initialErrors || {},
@@ -96,7 +98,18 @@ const useBuilder = (props) => {
         }
     }, [setFieldValue, state.values]);
 
-    const handleChange = useEventCallback((eventOrString) => {
+    const handleChange = useEventCallback((eventOrString, validProps) => {
+        if (validProps?.isPro && Boolean(state.is_pro_active) === false) {
+            SweetAlert({
+                showConfirmButton: false,
+                type: 'error',
+                timer: 1500,
+                title: 'Opps...',
+                text: '',
+                html: "You need to upgrade to the <strong><a href='https://notificationx.com'>Premium Version</a></strong> Version to use this feature"
+            });
+            return;
+        }
         if (typeof eventOrString === 'string') {
             return (event) => executeChange(eventOrString, event);
         } else {
@@ -112,6 +125,10 @@ const useBuilder = (props) => {
         const parent = validProps.parent;
         const parentType = validProps.parenttype;
         let valueState: any;
+        if (defaultProps?.is_pro) {
+            validProps.is_pro = !(defaultProps?.is_pro && Boolean(state.is_pro_active) === true);
+        }
+
         if (parent && parentType === 'group') {
             let parentValue = getIn(state.values, parent) || {};
             valueState = parentValue?.[name] || defaultProps?.default

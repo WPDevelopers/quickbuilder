@@ -40,6 +40,52 @@ $white: '#FFF';
 		.wprf-label-image {
 			max-width: 100%;
 		}
+		.wprf-badge {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			overflow: hidden;
+			.wprf-badge-item {
+				font-size: 14px;
+				color: #ffffff;
+				text-transform: uppercase;
+				text-align: center;
+				-webkit-transform: rotate(-45deg);
+				-moz-transform: rotate(-45deg);
+				-ms-transform: rotate(-45deg);
+				-o-transform: rotate(-45deg);
+				transform: rotate(-45deg);
+				position: absolute;
+				top: 8px;
+				left: -20px;
+				width: 80px;
+				background-image: -moz-linear-gradient(-122deg,
+						rgb(146, 113, 255) 0%,
+						rgb(87, 37, 255) 100%);
+				background-image: -webkit-linear-gradient(-122deg,
+						rgb(146, 113, 255) 0%,
+						rgb(87, 37, 255) 100%);
+				background-image: -ms-linear-gradient(-122deg,
+						rgb(146, 113, 255) 0%,
+						rgb(87, 37, 255) 100%);
+				background-image: linear-gradient(-122deg,
+						rgb(146, 113, 255) 0%,
+						rgb(87, 37, 255) 100%);
+				box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
+				color: #fff;
+				height: 30px;
+				line-height: 30px;
+				left: -29px;
+				width: 100px;
+				z-index: 9;
+				&.wprf-badge-active {
+					background-color: #0ccf9f;
+					background-image: none;
+				}
+			}
+		}
 	}
 	.wprf-row {
 		margin-left: -10px;

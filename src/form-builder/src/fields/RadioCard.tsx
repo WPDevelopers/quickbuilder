@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useInstanceId } from "@wordpress/compose";
 import classNames from "classnames";
-import { Row, Column, Label, Field } from '../core/components';
+import { Row, Column, Label } from '../core/components';
 
 import "../scss/radio-card.scss";
 import useOptions from "../core/hooks/useOptions";

@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import Image from "../Image";
 
 const withLabel = (WrappedComponent) => {
     const WithLabel = (props) => {

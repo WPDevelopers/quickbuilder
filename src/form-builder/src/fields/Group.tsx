@@ -2,9 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames';
 
 import { useBuilderContext } from '../core/hooks';
-import { isEqual } from 'lodash';
 import { executeChange, isArray, sortingFields } from '../core/utils';
-import { GenericField } from './Field';
+import { GenericField } from '.';
 
 
 const Group = (props) => {

@@ -1,5 +1,4 @@
 import { _extends } from "./functions";
-import { setIn } from "./utils";
 
 export const builderReducer = (state: any, action: any) => {
     switch (action.type) {
@@ -82,3 +81,5 @@ export const builderReducer = (state: any, action: any) => {
             return state;
     }
 }
+
+export default builderReducer;

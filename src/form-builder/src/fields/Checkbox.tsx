@@ -1,12 +1,11 @@
 import React from "react";
-import Field from "../core/Field";
-import withChange from "../core/hooks/withChange";
+import { Input } from ".";
 
 function Checkbox(props) {
     const { name, label, value, ...rest } = props;
 
     return (
-        <Field
+        <Input
             type="checkbox"
             id={name}
             name={name}
@@ -17,7 +16,4 @@ function Checkbox(props) {
     );
 }
 
-export { Checkbox }
-
 export default Checkbox;
-// export default withChange(Checkbox);

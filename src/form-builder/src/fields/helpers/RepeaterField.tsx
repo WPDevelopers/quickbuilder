@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Icon } from '@wordpress/components';
-import { GenericField } from '../Field';
+import { GenericField } from '../index';
 
 const RepeaterField = (props) => {
     const { fields, onChange, index, parent } = props;

@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import Image from "./Image";
+import { Image } from ".";
 
 const Label = (props) => {
     const componentClasses = classNames("wprf-input-label", props?.className);

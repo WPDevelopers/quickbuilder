@@ -3,26 +3,26 @@ import { Button, RangeControl } from '@wordpress/components';
 import { Label } from '../core/components';
 import { isArray, isNumber, isString } from '../core/utils';
 
-const Slider = ({ field, meta, helpers, ...props }) => {
-    const { name, id, label, units, value, min, max, unit, tooltip, reset } = field;
+const Slider = (props) => {
+    const { name, id, label, units, value, min, max, unit, tooltip, reset } = props;
 
-    const [isValue, setValue] = useState(value || meta.default);
+    const [isValue, setValue] = useState(value);
     const [sunit, setSunit] = useState(unit || "px");
 
     useEffect(() => {
-        if (isValue) {
-            let finalValue: number | string;
-            if (isNumber(isValue)) {
-                finalValue = `${isValue}${sunit}`;
-            } else if (isString(isValue)) {
-                if (!(isValue.indexOf('px') > -1)) {
-                    finalValue = `${isValue}${sunit}`;
-                } else {
-                    finalValue = `${isValue}`;
-                }
-            }
-            helpers.setValue(name, finalValue);
-        }
+        // if (isValue) {
+        //     let finalValue: number | string;
+        //     if (isNumber(isValue)) {
+        //         finalValue = `${isValue}${sunit}`;
+        //     } else if (isString(isValue)) {
+        //         if (!(isValue.indexOf('px') > -1)) {
+        //             finalValue = `${isValue}${sunit}`;
+        //         } else {
+        //             finalValue = `${isValue}`;
+        //         }
+        //     }
+        //     helpers.setValue(name, finalValue);
+        // }
     }, [isValue, sunit])
 
     return (

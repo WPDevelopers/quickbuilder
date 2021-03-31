@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import classNames from "classnames";
-import Field from '../core/Field';
 import { Column, Label, Row } from '../core/components';
 import { withLabel } from '../core/hooks';
 import { Input } from '.';

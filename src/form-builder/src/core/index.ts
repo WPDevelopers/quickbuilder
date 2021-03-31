@@ -1,1 +1,2 @@
-export { default as BuilderField, BuilderFieldWithOutChange } from './BuilderField';
+export { default as when } from './when';
+export { default as builderReducer } from './builderReducer';

@@ -1,8 +1,7 @@
 import React, { useEffect, useReducer, useRef } from "react";
-import { builderReducer } from '../BuilderReducers'
+import { builderReducer, when } from '../index'
 import { SweetAlert } from "../functions";
-import { getIn, isObject, executeChange as eChange, isVisible, withState, isArray, objectWithoutPropertiesLoose, validFieldProps } from "../utils";
-import when from "../when";
+import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps } from "../utils";
 
 const useBuilder = (props) => {
     // Set is Mounted or NOT
@@ -236,7 +235,11 @@ const useBuilder = (props) => {
         });
     });
 
-    let context = {
+    interface BuilderContext {
+        [field: string]: any
+    }
+
+    let context: BuilderContext = {
         ...props,
         values: state.values,
         savedValues: state.savedValues,

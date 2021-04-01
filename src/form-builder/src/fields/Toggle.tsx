@@ -68,7 +68,7 @@ export const Toggle = (props) => {
 
     return (
         <div className={componentClasses}>
-            <Input {...{ ...props, type: 'checkbox' }} />
+            <Input {...{ ...props, type: 'checkbox', placeholder: undefined }} />
             <Label htmlFor={props.id} />
         </div>
     );

@@ -129,13 +129,13 @@ const useBuilder = (props) => {
         }
 
         if (parent && parentType === 'group') {
-            let parentValue = getIn(state.values, parent) || {};
-            valueState = parentValue?.[name] || defaultProps?.default
+            let parentValue = getIn(state.values, parent) ?? {};
+            valueState = parentValue?.[name] ?? defaultProps?.default
         } else if (parent && parentType === 'repeater') {
-            let parentValue = getIn(state.values, parent) || [];
-            valueState = parentValue?.[validProps.index]?.[name] || defaultProps?.default || ''
+            let parentValue = getIn(state.values, parent) ?? [];
+            valueState = parentValue?.[validProps.index]?.[name] ?? defaultProps?.default
         } else {
-            valueState = getIn(state.values, name) || defaultProps?.default
+            valueState = getIn(state.values, name) ?? defaultProps?.default
         }
 
         if (['group', 'repeater'].includes(type)) {

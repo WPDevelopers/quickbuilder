@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames';
 
-import { useBuilderContext } from '../core/hooks';
+import { useBuilderContext, withLabel } from '../core/hooks';
 import { executeChange, isArray, sortingFields } from '../core/utils';
 import { GenericField } from '.';
 
@@ -77,4 +77,4 @@ const Group = (props) => {
     )
 }
 
-export default Group
+export default withLabel(Group)

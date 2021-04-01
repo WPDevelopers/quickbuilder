@@ -14,9 +14,9 @@ const Section = (props) => {
         <div
             className={`wprf-control-section ${props.collapsible ? (isCollapse ? "wprf-section-collapsed" : "") : ""}`}
         >
-            { props.label &&
+            { props.placeholder &&
                 <div className="wprf-section-title">
-                    <h4>{props.label}</h4>
+                    <h4>{props.placeholder}</h4>
                     {props.collapsible && (
                         <button onClick={() => setCollapse(!isCollapse)}>
                             {/* <Icon

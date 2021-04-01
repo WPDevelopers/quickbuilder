@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Label } from '../core/components';
 import ReactSelect from "react-select";
-import useOptions from '../core/hooks/useOptions';
-import { isArray, isFunction, isObject } from '../core/utils';
+import { isArray, isObject } from '../core/utils';
+import { withLabel, useOptions } from '../core/hooks';
 
 const Select = (props: any) => {
     let { id, name, multiple, placeholder, search = false, onChange, value } = props;
@@ -65,4 +64,4 @@ const Select = (props: any) => {
     )
 }
 
-export default Select;
+export default withLabel(Select);

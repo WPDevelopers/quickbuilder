@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date } from '.';
-import { useBuilderContext, useDefaults, withChange, withProps } from '../core/hooks';
-import { isEmptyObj, isObject } from '../core/utils';
+import { withChange, withLabel, withProps } from '../core/hooks';
 
 const Field = (props) => {
     if (!props.type || props.type.length === 0) {
-        console.error("props", props);
-
         throw new Error('Field must have a #type. see documentation.');
     }
 
@@ -52,4 +49,4 @@ const Field = (props) => {
 };
 
 export const GenericField = withProps(Field, true);
-export default withProps(withChange(Field));
+export default withProps(Field);

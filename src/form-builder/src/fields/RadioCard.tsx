@@ -7,7 +7,7 @@ import "../scss/radio-card.scss";
 import useOptions from "../core/hooks/useOptions";
 import { Input } from ".";
 import { validFieldProps } from "../core/utils";
-import { useBuilderContext } from "../core/hooks";
+import { useBuilderContext, withLabel } from "../core/hooks";
 
 
 const RadioCard = (props) => {
@@ -27,7 +27,7 @@ const RadioCard = (props) => {
         props?.className,
     ]);
 
-    const validProps = validFieldProps(props, ['options']);
+    const validProps = validFieldProps(props, ['options', 'placeholder']);
 
     return (
         <div className={componentClasses}>
@@ -76,4 +76,4 @@ const RadioCard = (props) => {
     );
 }
 
-export default RadioCard;
+export default withLabel(RadioCard);

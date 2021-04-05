@@ -7,6 +7,7 @@ const DateControl = (props) => {
     const { name, value, onChange } = props;
 
     const settings = __experimentalGetSettings();
+    const format = props?.format ?? settings.formats.datetime;
     const is12HourTime = /a(?!\\)/i.test(
         settings.formats.datetime
             .toLowerCase()
@@ -26,12 +27,12 @@ const DateControl = (props) => {
         <Dropdown
             className="wprf-control-datetime"
             renderToggle={({ isOpen, onToggle }) => (<Button isTertiary onClick={onToggle}>
-                {date(settings.formats.datetime, value, settings.timezone.string)}
+                {date(format, value, settings.timezone.string)}
             </Button>)}
             renderContent={() => {
                 return (
                     <DateTimePicker
-                        currentDate={date(settings.formats.datetime, value) || date(settings.formats.datetime, Date.now())}
+                        currentDate={date(format, value) || date(format, Date.now())}
                         onChange={(date) => {
                             onChange({
                                 target: {

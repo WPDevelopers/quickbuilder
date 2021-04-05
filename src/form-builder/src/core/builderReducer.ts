@@ -2,6 +2,10 @@ import { _extends } from "./functions";
 
 export const builderReducer = (state: any, action: any) => {
     switch (action.type) {
+        case 'SET_ACTIVE_TAB':
+            return { ...state, config: { ...state.config, active: action.payload } }
+        case 'SET_REDIRECT':
+            return { ...state, redirect: { ...state.redirect, ...action.payload } }
         case 'SET_VALUES':
             return _extends({}, state, {
                 values: { ... state.values, ...action.payload }

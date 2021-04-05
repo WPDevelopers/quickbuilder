@@ -6,11 +6,21 @@ import { TabConfig } from './types';
 // import useBuilder from '../core/hooks/useBuilder';
 
 import '../scss/index.scss';
+import { useBuilderContext } from '../core/hooks';
 
 
 const Tab: React.FC<TabConfig> = (props) => {
     // const builderContextState = useBuilder(props);
+    const builderContext = useBuilderContext();
     const [activeTab, setActiveTab] = useState(props.config.active);
+
+    useEffect(() => {
+        setActiveTab(builderContext.config.active);
+    }, [builderContext.config.active])
+
+    useEffect(() => {
+        builderContext.setActiveTab(activeTab);
+    }, [activeTab])
 
     return (
         <div>
@@ -25,6 +35,7 @@ const Tab: React.FC<TabConfig> = (props) => {
                 tabs={props.tabs}
                 active={activeTab}
                 submit={props?.submit}
+                config={props.config}
             />
             {/* </BuilderProvider> */}
         </div>

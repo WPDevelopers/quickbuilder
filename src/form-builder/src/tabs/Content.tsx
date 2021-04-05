@@ -4,9 +4,10 @@ import { TabProps } from "./types";
 import { sortingFields, isArray } from "../core/utils";
 import InnerContent from "./InnerContent";
 import Submit from "./Submit";
+import SteppedButton from "./SteppedButton";
 
 
-const Content: React.FC<TabProps> = ({ tabs, active, submit }) => {
+const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
     if (tabs === undefined) {
         throw new Error("There are no #tabs args defined in props.");
     }
@@ -42,6 +43,10 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit }) => {
                     </div>
                 );
             })}
+            {
+                config?.step?.show &&
+                <SteppedButton tabs={newTabs} config={config.step ?? {}} />
+            }
             {(submit?.show ?? true) && <Submit {...submit} />}
         </div>
     );

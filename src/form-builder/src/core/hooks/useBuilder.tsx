@@ -235,17 +235,34 @@ const useBuilder = (props) => {
         });
     });
 
+    const setActiveTab = useEventCallback((tab) => {
+        dispatch({
+            type: 'SET_ACTIVE_TAB',
+            payload: tab
+        });
+    });
+
+    const setRedirect = useEventCallback((redirectData) => {
+        dispatch({
+            type: 'SET_REDIRECT',
+            payload: redirectData
+        });
+    });
+
     interface BuilderContext {
         [field: string]: any
     }
 
     let context: BuilderContext = {
         ...props,
+        ...state,
         values: state.values,
         savedValues: state.savedValues,
-        errors: {},
-        touched: {},
+        errors: state.errors,
+        touched: state.touched,
         isSubmitting: false,
+        setActiveTab: setActiveTab,
+        setRedirect: setRedirect,
         setSubmitting: setSubmitting,
         setValues: setValues,
         setSavedValues: setSavedValues,

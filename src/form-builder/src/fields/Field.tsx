@@ -1,20 +1,11 @@
 import React from 'react'
 import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date } from '.';
-import { withChange, withLabel, withProps } from '../core/hooks';
+import { withChange, withProps } from '../core/hooks';
 
 const Field = (props) => {
     if (!props.type || props.type.length === 0) {
         throw new Error('Field must have a #type. see documentation.');
     }
-
-    // const inputFieldsAttributes = { meta, field, helpers };
-    // const { options, fields, trigger } = meta;
-
-    // useEffect(() => {
-    //     if (isObject(trigger) && !isEmptyObj(trigger)) {
-    //         useDefaults(field.name, helpers, meta.value, trigger);
-    //     }
-    // }, [meta.value])
 
     switch (props.type) {
         case "text":

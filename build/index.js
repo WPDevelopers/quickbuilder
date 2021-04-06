@@ -12919,26 +12919,26 @@ var builder = {
             id: "tab_1",
             icon: "",
             fields: [
-                {
-                    type: 'checkbox',
-                    name: 'checkbox_control',
-                    label: 'Checkbox',
-                    default: true,
-                },
-                {
-                    type: "text",
-                    name: "text_control",
-                    label: "Text Control",
-                    default: 'Hello World',
-                    placeholder: "Text Control Placeholder",
-                    // value: "Test Control Saved Value", // String
-                    // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                    rules: ['is', 'checkbox_control', true],
-                    validation_rules: {
-                        required: "This Fields is Required",
-                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
-                    },
-                },
+                // {
+                // 	type: 'checkbox',
+                // 	name: 'checkbox_control',
+                // 	label: 'Checkbox',
+                // 	default: true,
+                // },
+                // {
+                // 	type: "text", // Required
+                // 	name: "text_control", // Required
+                // 	label: "Text Control",
+                // 	default: 'Hello World',
+                // 	placeholder: "Text Control Placeholder",
+                // 	// value: "Test Control Saved Value", // String
+                // 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                // 	rules: [ 'is', 'checkbox_control', true ],
+                // 	validation_rules: {
+                // 		required: "This Fields is Required", // Message
+                // 		"min:20": "Your Input is too short. Make it 20Character Bigger.",
+                // 	},
+                // },
                 // {
                 // 	type: "select", // Required
                 // 	name: "select_control", // Required
@@ -12967,34 +12967,34 @@ var builder = {
                 // 		"min:20": "Your Input is too short. Make it 20Character Bigger.",
                 // 	},
                 // },
-                // {
-                // 	type: 'group',
-                // 	name: 'group_control',
-                // 	fields: [
-                // 		{
-                // 			type: "text",
-                // 			name: 'group_text',
-                // 			label: 'Text',
-                // 			default: "Hello World Group Text"
-                // 		},
-                // 		{
-                // 			type: "select",
-                // 			name: 'group_select',
-                // 			label: 'Group Select',
-                // 			default: 'one',
-                // 			options: [
-                // 				{
-                // 					label: 'G One',
-                // 					value: 'one'
-                // 				},
-                // 				{
-                // 					label: 'G Two',
-                // 					value: 'two'
-                // 				},
-                // 			]
-                // 		}
-                // 	]
-                // },
+                {
+                    type: 'group',
+                    name: 'group_control',
+                    fields: [
+                        {
+                            type: "text",
+                            name: 'group_text',
+                            label: 'Text',
+                            default: "Hello World Group Text"
+                        },
+                        {
+                            type: "select",
+                            name: 'group_select',
+                            label: 'Group Select',
+                            default: 'one',
+                            options: [
+                                {
+                                    label: 'G One',
+                                    value: 'one'
+                                },
+                                {
+                                    label: 'G Two',
+                                    value: 'two'
+                                },
+                            ]
+                        }
+                    ]
+                },
                 // {
                 // 	"label": "Notification Template",
                 // 	"name": "notification-template",
@@ -13399,16 +13399,25 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.builderReducer = void 0;
 var functions_1 = __webpack_require__(/*! ./functions */ "./src/form-builder/src/core/functions.ts");
+var utils_1 = __webpack_require__(/*! ./utils */ "./src/form-builder/src/core/utils.ts");
 var builderReducer = function (state, action) {
-    var _a, _b;
+    var _a;
     switch (action.type) {
+        case 'SET_ACTIVE_TAB':
+            return __assign(__assign({}, state), { config: __assign(__assign({}, state.config), { active: action.payload }) });
+        case 'SET_REDIRECT':
+            return __assign(__assign({}, state), { redirect: __assign(__assign({}, state.redirect), action.payload) });
         case 'SET_VALUES':
             return functions_1._extends({}, state, {
-                values: __assign(__assign({}, state.values), action.payload)
+                values: action.payload
             });
         case 'SET_SAVED_VALUES':
             return functions_1._extends({}, state, {
                 savedValues: __assign(__assign({}, state.savedValues), action.payload)
+            });
+        case 'SET_FIELD_VALUE':
+            return functions_1._extends({}, state, {
+                values: utils_1.setIn(state.values, action.payload.field, action.payload.value)
             });
         case 'SET_TOUCHED':
             return functions_1._extends({}, state, {
@@ -13431,12 +13440,8 @@ var builderReducer = function (state, action) {
             return functions_1._extends({}, state, {
                 isValidating: action.payload
             });
-        case 'SET_FIELD_VALUE':
-            return functions_1._extends({}, state, {
-                values: __assign(__assign({}, state.values), (_a = {}, _a[action.payload.field] = action.payload.value, _a))
-            });
         case 'SET_FIELD_TOUCHED':
-            return __assign(__assign({}, state), { touched: __assign(__assign({}, state.touched), (_b = {}, _b[action.payload.field] = action.payload.value, _b)) });
+            return __assign(__assign({}, state), { touched: __assign(__assign({}, state.touched), (_a = {}, _a[action.payload.field] = action.payload.value, _a)) });
         // return _extends({}, state, {
         //     touched: setIn(state.touched, action.payload.field, action.payload.value)
         // });
@@ -13872,9 +13877,10 @@ var useBuilder = function (props) {
                 value: value
             }
         });
-        // var willValidate = shouldValidate === undefined ? true : shouldValidate;
-        // return willValidate ? value : Promise.resolve();
     });
+    var getFieldValue = react_1.default.useCallback(function (name) {
+        return utils_1.getIn(state.values, name);
+    }, [state]);
     var setFieldTouched = useEventCallback(function (field, touched, shouldValidate) {
         if (!touched) {
             touched = true;
@@ -13956,8 +13962,6 @@ var useBuilder = function (props) {
         else {
             valueState = (_f = utils_1.getIn(state.values, name)) !== null && _f !== void 0 ? _f : defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps.default;
         }
-        if (['group', 'repeater'].includes(type)) {
-        }
         validProps.onChange = handleChange;
         validProps.onBlur = handleBlur;
         var valueProp = validProps.value;
@@ -13972,6 +13976,7 @@ var useBuilder = function (props) {
         else {
             validProps.value = valueState;
         }
+        validProps.visible = utils_1.isVisible(state.values, args);
         return validProps;
     }, [handleBlur, handleChange, state.values]);
     var getFieldMeta = react_1.default.useCallback(function (name, props, parent) {
@@ -14039,7 +14044,19 @@ var useBuilder = function (props) {
             payload: submit
         });
     });
-    var context = __assign(__assign({}, props), { values: state.values, savedValues: state.savedValues, errors: {}, touched: {}, isSubmitting: false, setSubmitting: setSubmitting, setValues: setValues, setSavedValues: setSavedValues, setFieldValue: setFieldValue, handleBlur: handleBlur, handleChange: handleChange, getFieldProps: getFieldProps, getFieldMeta: getFieldMeta, getFieldHelpers: getFieldHelpers, eligibleOptions: eligibleOptions, eligibleOption: eligibleOption });
+    var setActiveTab = useEventCallback(function (tab) {
+        dispatch({
+            type: 'SET_ACTIVE_TAB',
+            payload: tab
+        });
+    });
+    var setRedirect = useEventCallback(function (redirectData) {
+        dispatch({
+            type: 'SET_REDIRECT',
+            payload: redirectData
+        });
+    });
+    var context = __assign(__assign(__assign({}, props), state), { values: state.values, savedValues: state.savedValues, errors: state.errors, touched: state.touched, isSubmitting: false, setActiveTab: setActiveTab, setRedirect: setRedirect, setSubmitting: setSubmitting, setValues: setValues, setSavedValues: setSavedValues, setFieldValue: setFieldValue, getFieldValue: getFieldValue, handleBlur: handleBlur, handleChange: handleChange, getFieldProps: getFieldProps, getFieldMeta: getFieldMeta, getFieldHelpers: getFieldHelpers, eligibleOptions: eligibleOptions, eligibleOption: eligibleOption });
     return context;
 };
 var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? react_1.default.useLayoutEffect : react_1.default.useEffect;
@@ -14141,6 +14158,21 @@ var useDefaults = function (parentName, helpers, value, trigger) {
                     }
                 }
             }
+            // else if( defaults?.[ value ] && isArray(defaults?.[ value ]) ) {
+            //     for( let eachKey of defaults?.[ value ] ) {
+            //         let at = eachKey.indexOf("@"),
+            //             colon = eachKey.indexOf(":");
+            //         if (at === 0 && colon > 0) {
+            //             let eligibleKey = eachKey.substr(1, colon - 1);
+            //             let eligibleDataToSet = eachKey.substr(colon + 1);
+            //             let eligibleDefaultData = helpers.getValueForDefault( eligibleKey, parentName );
+            //             if (eligibleKey != "" && eligibleDataToSet != "") {
+            //                 defaultsData[eligibleKey] = eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet;
+            //                 helpers.setValue( eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet);
+            //             }
+            //         }
+            //     }
+            // }
             return { defaultsData: defaultsData };
         }
     }
@@ -14273,22 +14305,23 @@ var utils_1 = __webpack_require__(/*! ../utils */ "./src/form-builder/src/core/u
 var compose_1 = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 var withLabel = function (WrappedComponent) {
     var WithLabel = function (props) {
-        var componentClasses = classnames_1.default("wprf-label");
         var label = props.label, id = props.id, name = props.name, type = props.type, placeholder = props.placeholder;
         var instanceId = compose_1.useInstanceId(withLabel);
         if (id == undefined) {
             id = name;
         }
-        if (placeholder === undefined) {
+        if (label === undefined || label === '' || label.length <= 0) {
             return react_1.default.createElement(WrappedComponent, __assign({}, props, { id: id }));
         }
-        var validProps = utils_1.validFieldProps(props, ['description', 'placeholder']);
-        return (react_1.default.createElement("div", { className: "wprf-control-wrapper" },
+        var validProps = utils_1.validFieldProps(props, ['description', 'label', 'help']);
+        var componentClasses = classnames_1.default("wprf-control-wrapper", "wprf-type-" + type);
+        return (react_1.default.createElement("div", { className: componentClasses },
             react_1.default.createElement("div", { className: "wprf-control-label" },
-                react_1.default.createElement("label", { htmlFor: id }, props.placeholder)),
+                react_1.default.createElement("label", { htmlFor: id }, label)),
             react_1.default.createElement("div", { className: "wprf-control-field" },
                 react_1.default.createElement(WrappedComponent, __assign({}, validProps, { id: id })),
-                (props === null || props === void 0 ? void 0 : props.description) && react_1.default.createElement("div", { className: "wprf-description" }, props.description))));
+                (props === null || props === void 0 ? void 0 : props.description) && react_1.default.createElement("p", { className: "wprf-description", dangerouslySetInnerHTML: { __html: props.description } }),
+                (props === null || props === void 0 ? void 0 : props.help) && react_1.default.createElement("p", { className: "wprf-help", dangerouslySetInnerHTML: { __html: props.help } }))));
     };
     return WithLabel;
 };
@@ -14344,58 +14377,40 @@ var withProps = function (WrappedComponent, isGeneric) {
     if (isGeneric === void 0) { isGeneric = false; }
     var WithProps = function (props) {
         var builderContext = index_1.useBuilderContext();
+        var trigger = props.trigger;
         var field = builderContext.getFieldProps(props);
-        var validation_rules = props.validation_rules, defolt = props.default, rules = props.rules, label = props.label, options = props.options, trigger = props.trigger, styles = props.styles, fields = props.fields;
-        // const meta = {
-        //     ...builderContext.getFieldMeta(field.name, props),
-        //     ...props.meta,
-        //     validation_rules,
-        //     default: defolt,
-        //     label,
-        //     rules,
-        //     options,
-        //     trigger,
-        //     styles,
-        //     fields
-        // };
         var meta = builderContext.getFieldMeta(field.name, props);
+        var helpers = builderContext.getFieldHelpers();
         if (utils_1.isFunction(props.onChange)) {
             field.onChange = props.onChange;
         }
         if (utils_1.isFunction(props.onBlur)) {
             field.onBlur = props.onBlur;
         }
-        var helpers = builderContext.getFieldHelpers();
         react_1.useEffect(function () {
-            var _a;
-            // Not needed / Confused
-            if (!isGeneric) {
-                helpers.setValue(field.name, field.value);
-            }
-            else {
-                var parent_1 = props === null || props === void 0 ? void 0 : props.parent;
-                var parenttype = props === null || props === void 0 ? void 0 : props.parenttype;
-                if (parent_1 && parenttype === 'group') {
-                    var parentValues = helpers.getValue(parent_1) || {};
-                    if (utils_1.isEmptyObj(parentValues)) {
-                        parentValues[field.name] = field.value;
-                        helpers.setValue(parent_1, parentValues);
-                    }
-                    else {
-                        parentValues = __assign(__assign({}, parentValues), (_a = {}, _a[field.name] = field.value, _a));
-                        helpers.setValue(parent_1, parentValues);
-                    }
+            // console.log(field.name, field);
+            if (meta.visible) {
+                // Not needed / Confused
+                if (!isGeneric && field.type !== 'group') {
+                    helpers.setValue(field.name, field.value);
                 }
-                if (parent_1 && parenttype === 'repeater') {
-                    // let parentValues = helpers.getValue(parent) || [];
-                    // if (isArray(parentValues) && parentValues.length > 0) {
-                    //     parentValues[props.index][field.name] = field.value;
-                    //     helpers.setValue(parent, parentValues)
-                    // } else {
-                    //     parentValues = [...parentValues, ];
-                    //     parentValues = { ...parentValues, [field.name]: field.value };
-                    //     helpers.setValue(parent, parentValues)
-                    // }
+                else {
+                    var parent_1 = props === null || props === void 0 ? void 0 : props.parent;
+                    var parenttype = props === null || props === void 0 ? void 0 : props.parenttype;
+                    if (parent_1 && parenttype === 'group') {
+                        helpers.setValue([parent_1, field.name], field.value);
+                    }
+                    if (parent_1 && parenttype === 'repeater') {
+                        // let parentValues = helpers.getValue(parent) || [];
+                        // if (isArray(parentValues) && parentValues.length > 0) {
+                        //     parentValues[props.index][field.name] = field.value;
+                        //     helpers.setValue(parent, parentValues)
+                        // } else {
+                        //     parentValues = [...parentValues, ];
+                        //     parentValues = { ...parentValues, [field.name]: field.value };
+                        //     helpers.setValue(parent, parentValues)
+                        // }
+                    }
                 }
             }
         }, []);
@@ -14595,7 +14610,7 @@ exports.setIn = setIn;
 var validFieldProps = function (defaultProps, exclude) {
     if (exclude === void 0) { exclude = []; }
     var type = defaultProps.type;
-    var filterOutArray = __spreadArray(['validation_rules', 'default', 'rules', 'label', 'meta', 'trigger', 'switch'], exclude);
+    var filterOutArray = __spreadArray(['validation_rules', 'default', 'rules', 'meta', 'trigger', 'switch'], exclude);
     if (type !== 'select' && type !== 'radio-card' && (type !== 'toggle' && defaultProps.multiple)) {
         filterOutArray.push('options');
     }
@@ -14888,8 +14903,10 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 var date_1 = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
 var DateControl = function (props) {
+    var _a;
     var name = props.name, value = props.value, onChange = props.onChange;
     var settings = date_1.__experimentalGetSettings();
+    var format = (_a = props === null || props === void 0 ? void 0 : props.format) !== null && _a !== void 0 ? _a : settings.formats.datetime;
     var is12HourTime = /a(?!\\)/i.test(settings.formats.datetime
         .toLowerCase()
         .replace(/\\\\/g, "")
@@ -14903,9 +14920,9 @@ var DateControl = function (props) {
     }, []);
     return (react_1.default.createElement(components_1.Dropdown, { className: "wprf-control-datetime", renderToggle: function (_a) {
             var isOpen = _a.isOpen, onToggle = _a.onToggle;
-            return (react_1.default.createElement(components_1.Button, { isTertiary: true, onClick: onToggle }, date_1.date(settings.formats.datetime, value, settings.timezone.string)));
+            return (react_1.default.createElement(components_1.Button, { isTertiary: true, onClick: onToggle }, date_1.date(format, value, settings.timezone.string)));
         }, renderContent: function () {
-            return (react_1.default.createElement(components_1.DateTimePicker, { currentDate: date_1.date(settings.formats.datetime, value) || date_1.date(settings.formats.datetime, Date.now()), onChange: function (date) {
+            return (react_1.default.createElement(components_1.DateTimePicker, { currentDate: date_1.date(format, value) || date_1.date(format, Date.now()), onChange: function (date) {
                     onChange({
                         target: {
                             type: 'date',
@@ -14953,13 +14970,6 @@ var Field = function (props) {
     if (!props.type || props.type.length === 0) {
         throw new Error('Field must have a #type. see documentation.');
     }
-    // const inputFieldsAttributes = { meta, field, helpers };
-    // const { options, fields, trigger } = meta;
-    // useEffect(() => {
-    //     if (isObject(trigger) && !isEmptyObj(trigger)) {
-    //         useDefaults(field.name, helpers, meta.value, trigger);
-    //     }
-    // }, [meta.value])
     switch (props.type) {
         case "text":
         case "checkbox":
@@ -15054,9 +15064,9 @@ var Group = function (props) {
     var localMemoizedState = react_1.useMemo(function () {
         var _a;
         var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName];
-        // if (localS && props.meta.default) {
-        //     localS = { ...props.meta.default, ...localS };
-        // }
+        if (localS === undefined && (value != undefined && !utils_1.isEmptyObj(value))) {
+            localS = __assign({}, value);
+        }
         return localS;
     }, [value]);
     var _a = react_1.useState(localMemoizedState), localState = _a[0], setLocalState = _a[1];
@@ -15065,26 +15075,19 @@ var Group = function (props) {
             event.persist();
         }
         var _a = utils_1.executeChange(event), field = _a.field, value = _a.val;
-        setLocalState(function (prevState) {
-            var _a;
-            return (__assign(__assign({}, prevState), (_a = {}, _a[field] = value, _a)));
-        });
+        builderContext.setFieldValue([fieldName, field], value);
+        // setLocalState((prevState) => ({ ...prevState, [field]: value }));
     }, [props.value]);
     react_1.useEffect(function () {
-        builderContext.handleChange({
-            target: {
-                type: 'group',
-                name: fieldName,
-                value: localState
-            },
-        });
-        // if (!isEqual(localState, builderContext.values[fieldName]) && !props?.handleChange) {
-        //     builderContext.handleChange(fieldName, localState);
-        // }
-        // if (props?.handleChange) {
-        //     let newLocal = builderContext.values[fieldName]?.[props.index] ? { ...builderContext.values[fieldName][props.index], ...localState } : localState;
-        //     props.handleChange(newLocal);
-        // }
+        if (localState !== undefined) {
+            builderContext.handleChange({
+                target: {
+                    type: 'group',
+                    name: fieldName,
+                    value: localState
+                },
+            });
+        }
     }, [localState]);
     var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item, index) {
@@ -15096,7 +15099,7 @@ var Group = function (props) {
     return (react_1.default.createElement("div", { className: "wprf-group-control" },
         react_1.default.createElement("div", { className: innerClasses }, allFields)));
 };
-exports.default = Group;
+exports.default = hooks_1.withLabel(Group);
 
 
 /***/ }),
@@ -15145,17 +15148,7 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var Input = function (props) {
-    // useEffect(() => {
-    //     console.log("props.value", props.value, props);
-    //     props.onChange({
-    //         target: {
-    //             type: props.type,
-    //             name: props.name,
-    //             value: props.value
-    //         },
-    //     })
-    // }, [])
-    var validProps = utils_1.validFieldProps(props, ['is_pro']);
+    var validProps = utils_1.validFieldProps(props, ['is_pro', 'visible']);
     var handleChange = react_1.useCallback(function (event) { return validProps.onChange(event, { isPro: !!props.is_pro }); }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
     return react_1.default.createElement('input', __assign(__assign({}, validProps), { onChange: handleChange }));
 };
@@ -15231,7 +15224,7 @@ var RadioCard = function (props) {
                     react_1.default.createElement(_1.Input, __assign({}, validProps, { is_pro: is_pro, type: "radio", value: value, checked: value === option, id: "wprf-input-radio-" + instanceId + "-" + index })))));
         }))));
 };
-exports.default = RadioCard;
+exports.default = hooks_1.withLabel(RadioCard);
 
 
 /***/ }),
@@ -15405,9 +15398,9 @@ var Section = function (props) {
         return react_1.default.createElement(fields_1.Field, __assign({ key: item.name }, item));
     });
     return (react_1.default.createElement("div", { className: "wprf-control-section " + (props.collapsible ? (isCollapse ? "wprf-section-collapsed" : "") : "") },
-        props.label &&
+        props.placeholder &&
             react_1.default.createElement("div", { className: "wprf-section-title" },
-                react_1.default.createElement("h4", null, props.label),
+                react_1.default.createElement("h4", null, props.placeholder),
                 props.collapsible && (react_1.default.createElement("button", { onClick: function () { return setCollapse(!isCollapse); } }, "Icon"))),
         react_1.default.createElement("div", { className: "wprf-section-fields" }, allFields)));
 };
@@ -15457,16 +15450,17 @@ var Select = function (props) {
     var _b = hooks_1.useOptions(props, 'options'), options = _b.options, selectedOption = _b.selectedOption;
     var _c = react_1.useState(null), sOption = _c[0], setSOption = _c[1];
     // useEffect(() => {
-    // onChange({
-    //     target: {
-    //         type: 'select',
-    //         name,
-    //         value: value,
-    //         options,
-    //         multiple
-    //     },
-    // });
-    // }, [])
+    //     console.log("selectedOption", name, selectedOption || 'nai', props);
+    //     // onChange({
+    //     //     target: {
+    //     //         type: 'select',
+    //     //         name,
+    //     //         value: value,
+    //     //         options,
+    //     //         multiple
+    //     //     },
+    //     // });
+    // }, [selectedOption])
     react_1.useEffect(function () {
         if (!utils_1.isArray(sOption) && utils_1.isObject(sOption)) {
             onChange({
@@ -16111,9 +16105,10 @@ var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var InnerContent_1 = __importDefault(__webpack_require__(/*! ./InnerContent */ "./src/form-builder/src/tabs/InnerContent.tsx"));
 var Submit_1 = __importDefault(__webpack_require__(/*! ./Submit */ "./src/form-builder/src/tabs/Submit.tsx"));
+var SteppedButton_1 = __importDefault(__webpack_require__(/*! ./SteppedButton */ "./src/form-builder/src/tabs/SteppedButton.tsx"));
 var Content = function (_a) {
-    var _b;
-    var tabs = _a.tabs, active = _a.active, submit = _a.submit;
+    var _b, _c, _d;
+    var tabs = _a.tabs, active = _a.active, submit = _a.submit, config = _a.config;
     if (tabs === undefined) {
         throw new Error("There are no #tabs args defined in props.");
     }
@@ -16136,7 +16131,9 @@ var Content = function (_a) {
             return (react_1.default.createElement("div", { id: tab === null || tab === void 0 ? void 0 : tab.id, className: componentClasses, key: tab === null || tab === void 0 ? void 0 : tab.id },
                 react_1.default.createElement(InnerContent_1.default, { fields: tab === null || tab === void 0 ? void 0 : tab.fields })));
         }),
-        ((_b = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _b !== void 0 ? _b : true) && react_1.default.createElement(Submit_1.default, __assign({}, submit))));
+        ((_b = config === null || config === void 0 ? void 0 : config.step) === null || _b === void 0 ? void 0 : _b.show) &&
+            react_1.default.createElement(SteppedButton_1.default, { tabs: newTabs, config: (_c = config.step) !== null && _c !== void 0 ? _c : {} }),
+        ((_d = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _d !== void 0 ? _d : true) && react_1.default.createElement(Submit_1.default, __assign({}, submit))));
 };
 exports.default = Content;
 
@@ -16244,6 +16241,60 @@ exports.default = Menu;
 
 /***/ }),
 
+/***/ "./src/form-builder/src/tabs/SteppedButton.tsx":
+/*!*****************************************************!*\
+  !*** ./src/form-builder/src/tabs/SteppedButton.tsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
+var components_1 = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
+var SteppedButton = function (props) {
+    var _a = react_1.useState(''), nextTab = _a[0], setNextTab = _a[1];
+    var _b = react_1.useState(''), prevTab = _b[0], setPrevTab = _b[1];
+    var builderContext = hooks_1.useBuilderContext();
+    react_1.useEffect(function () {
+        var tabIds = props.tabs.map(function (tab) { return tab.id; });
+        var currentTabIndex = props.tabs.findIndex(function (tab) { return tab.id === builderContext.config.active; });
+        if (currentTabIndex != -1) {
+            setNextTab(tabIds[currentTabIndex + 1]);
+            setPrevTab(tabIds[currentTabIndex - 1]);
+        }
+    }, [builderContext.config.active]);
+    return (react_1.default.createElement("div", { className: "wprf-stepped-button" }, Object.keys(props.config.buttons).map(function (button, index) {
+        return react_1.default.createElement(react_1.default.Fragment, { key: "button_" + button + "_" + index }, ((button === 'next' && nextTab != undefined) || (button === 'prev' && prevTab !== undefined)) &&
+            react_1.default.createElement(components_1.Button, { className: "wprf-step-btn-" + button, onClick: function () { return builderContext.setActiveTab(button === 'next' ? nextTab : prevTab); } }, props.config.buttons[button]));
+    })));
+};
+exports.default = react_1.default.memo(SteppedButton);
+
+
+/***/ }),
+
 /***/ "./src/form-builder/src/tabs/Submit.tsx":
 /*!**********************************************!*\
   !*** ./src/form-builder/src/tabs/Submit.tsx ***!
@@ -16344,12 +16395,20 @@ var Content_1 = __importDefault(__webpack_require__(/*! ./Content */ "./src/form
 // import { BuilderProvider } from '../core/hooks/useBuilderContext';
 // import useBuilder from '../core/hooks/useBuilder';
 __webpack_require__(/*! ../scss/index.scss */ "./src/form-builder/src/scss/index.scss");
+var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var Tab = function (props) {
     // const builderContextState = useBuilder(props);
+    var builderContext = hooks_1.useBuilderContext();
     var _a = react_1.useState(props.config.active), activeTab = _a[0], setActiveTab = _a[1];
+    react_1.useEffect(function () {
+        setActiveTab(builderContext.config.active);
+    }, [builderContext.config.active]);
+    react_1.useEffect(function () {
+        builderContext.setActiveTab(activeTab);
+    }, [activeTab]);
     return (react_1.default.createElement("div", null,
         react_1.default.createElement(Menu_1.default, { active: activeTab, setActive: function (tabId) { return setActiveTab(tabId); }, tabs: props.tabs, config: props.config }),
-        react_1.default.createElement(Content_1.default, { tabs: props.tabs, active: activeTab, submit: props === null || props === void 0 ? void 0 : props.submit })));
+        react_1.default.createElement(Content_1.default, { tabs: props.tabs, active: activeTab, submit: props === null || props === void 0 ? void 0 : props.submit, config: props.config })));
 };
 exports.default = Tab;
 

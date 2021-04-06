@@ -14,17 +14,17 @@ const withLabel = (WrappedComponent) => {
             id = name;
         }
 
-        if (placeholder === undefined) {
+        if (label === undefined || label === '' || label.length <= 0) {
             return <WrappedComponent {...props} id={id} />;
         }
 
-        const validProps = validFieldProps(props, ['description', 'placeholder', 'help'])
+        const validProps = validFieldProps(props, ['description', 'label', 'help'])
         const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`);
 
         return (
             <div className={componentClasses}>
                 <div className="wprf-control-label">
-                    <label htmlFor={id}>{props.placeholder}</label>
+                    <label htmlFor={id}>{label}</label>
                 </div>
                 <div className="wprf-control-field">
                     <WrappedComponent {...validProps} id={id} />

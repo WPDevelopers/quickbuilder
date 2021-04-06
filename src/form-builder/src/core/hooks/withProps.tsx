@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { isArray, isEmptyObj, isFunction, isObject } from "../utils";
 import { useBuilderContext, useDefaults } from "./index";
 
 const withProps = (WrappedComponent, isGeneric = false) => {
     const WithProps = (props) => {
         const builderContext = useBuilderContext();
+        const { trigger } = props;
+
         let field: any = builderContext.getFieldProps(props);
-
-        const { validation_rules, default: defolt, rules, label, options, trigger, styles, fields } = props;
-
-        // const meta = {
-        //     ...builderContext.getFieldMeta(field.name, props),
-        //     ...props.meta,
-        //     validation_rules,
-        //     default: defolt,
-        //     label,
-        //     rules,
-        //     options,
-        //     trigger,
-        //     styles,
-        //     fields
-        // };
-
         const meta = builderContext.getFieldMeta(field.name, props);
+        const helpers = builderContext.getFieldHelpers();
 
         if (isFunction(props.onChange)) {
             field.onChange = props.onChange;
@@ -31,35 +18,30 @@ const withProps = (WrappedComponent, isGeneric = false) => {
             field.onBlur = props.onBlur;
         }
 
-        const helpers = builderContext.getFieldHelpers();
 
         useEffect(() => {
-            // Not needed / Confused
-            if (!isGeneric) {
-                helpers.setValue(field.name, field.value)
-            } else {
-                let parent = props?.parent;
-                let parenttype = props?.parenttype;
-                if (parent && parenttype === 'group') {
-                    let parentValues = helpers.getValue(parent) || {};
-                    if (isEmptyObj(parentValues)) {
-                        parentValues[field.name] = field.value;
-                        helpers.setValue(parent, parentValues)
-                    } else {
-                        parentValues = { ...parentValues, [field.name]: field.value };
-                        helpers.setValue(parent, parentValues)
+            // console.log(field.name, field);
+            if (meta.visible) {
+                // Not needed / Confused
+                if (!isGeneric && field.type !== 'group') {
+                    helpers.setValue(field.name, field.value)
+                } else {
+                    let parent = props?.parent;
+                    let parenttype = props?.parenttype;
+                    if (parent && parenttype === 'group') {
+                        helpers.setValue([parent, field.name], field.value)
                     }
-                }
-                if (parent && parenttype === 'repeater') {
-                    // let parentValues = helpers.getValue(parent) || [];
-                    // if (isArray(parentValues) && parentValues.length > 0) {
-                    //     parentValues[props.index][field.name] = field.value;
-                    //     helpers.setValue(parent, parentValues)
-                    // } else {
-                    //     parentValues = [...parentValues, ];
-                    //     parentValues = { ...parentValues, [field.name]: field.value };
-                    //     helpers.setValue(parent, parentValues)
-                    // }
+                    if (parent && parenttype === 'repeater') {
+                        // let parentValues = helpers.getValue(parent) || [];
+                        // if (isArray(parentValues) && parentValues.length > 0) {
+                        //     parentValues[props.index][field.name] = field.value;
+                        //     helpers.setValue(parent, parentValues)
+                        // } else {
+                        //     parentValues = [...parentValues, ];
+                        //     parentValues = { ...parentValues, [field.name]: field.value };
+                        //     helpers.setValue(parent, parentValues)
+                        // }
+                    }
                 }
             }
         }, [])

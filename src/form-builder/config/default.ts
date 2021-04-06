@@ -10,26 +10,26 @@ const builder = {
 			id: "tab_1",
 			icon: "",
 			fields: [
-				{
-					type: 'checkbox',
-					name: 'checkbox_control',
-					label: 'Checkbox',
-					default: true,
-				},
-				{
-					type: "text", // Required
-					name: "text_control", // Required
-					label: "Text Control",
-					default: 'Hello World',
-					placeholder: "Text Control Placeholder",
-					// value: "Test Control Saved Value", // String
-					// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-					rules: [ 'is', 'checkbox_control', true ],
-					validation_rules: {
-						required: "This Fields is Required", // Message
-						"min:20": "Your Input is too short. Make it 20Character Bigger.",
-					},
-				},
+				// {
+				// 	type: 'checkbox',
+				// 	name: 'checkbox_control',
+				// 	label: 'Checkbox',
+				// 	default: true,
+				// },
+				// {
+				// 	type: "text", // Required
+				// 	name: "text_control", // Required
+				// 	label: "Text Control",
+				// 	default: 'Hello World',
+				// 	placeholder: "Text Control Placeholder",
+				// 	// value: "Test Control Saved Value", // String
+				// 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+				// 	rules: [ 'is', 'checkbox_control', true ],
+				// 	validation_rules: {
+				// 		required: "This Fields is Required", // Message
+				// 		"min:20": "Your Input is too short. Make it 20Character Bigger.",
+				// 	},
+				// },
 				// {
 				// 	type: "select", // Required
 				// 	name: "select_control", // Required
@@ -58,34 +58,34 @@ const builder = {
 				// 		"min:20": "Your Input is too short. Make it 20Character Bigger.",
 				// 	},
 				// },
-				// {
-				// 	type: 'group',
-				// 	name: 'group_control',
-				// 	fields: [
-				// 		{
-				// 			type: "text",
-				// 			name: 'group_text',
-				// 			label: 'Text',
-				// 			default: "Hello World Group Text"
-				// 		},
-				// 		{
-				// 			type: "select",
-				// 			name: 'group_select',
-				// 			label: 'Group Select',
-				// 			default: 'one',
-				// 			options: [
-				// 				{
-				// 					label: 'G One',
-				// 					value: 'one'
-				// 				},
-				// 				{
-				// 					label: 'G Two',
-				// 					value: 'two'
-				// 				},
-				// 			]
-				// 		}
-				// 	]
-				// },
+				{
+					type: 'group',
+					name: 'group_control',
+					fields: [
+						{
+							type: "text",
+							name: 'group_text',
+							label: 'Text',
+							default: "Hello World Group Text"
+						},
+						{
+							type: "select",
+							name: 'group_select',
+							label: 'Group Select',
+							default: 'one',
+							options: [
+								{
+									label: 'G One',
+									value: 'one'
+								},
+								{
+									label: 'G Two',
+									value: 'two'
+								},
+							]
+						}
+					]
+				},
 				// {
 				// 	"label": "Notification Template",
 				// 	"name": "notification-template",

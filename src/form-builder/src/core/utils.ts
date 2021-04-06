@@ -113,7 +113,7 @@ export const objectWithoutPropertiesLoose = (source, excluded) => {
     return target;
 }
 
-export const  setIn = (obj, path, value) => {
+export const setIn = (obj, path, value) => {
     var res = clone(obj); // this keeps inheritance when obj is a class
 
     var resVal = res;
@@ -154,7 +154,7 @@ export const  setIn = (obj, path, value) => {
 
 export const validFieldProps = ( defaultProps, exclude = [] ) => {
     const type = defaultProps.type;
-    let filterOutArray = [ 'validation_rules', 'default', 'rules', 'label', 'meta', 'trigger', 'switch', ...exclude ];
+    let filterOutArray = [ 'validation_rules', 'default', 'rules', 'meta', 'trigger', 'switch', ...exclude ];
     if( type !== 'select' && type !== 'radio-card' && ( type !== 'toggle' && defaultProps.multiple ) ) {
         filterOutArray.push( 'options' );
     }

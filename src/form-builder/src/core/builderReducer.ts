@@ -1,4 +1,5 @@
 import { _extends } from "./functions";
+import { setIn } from "./utils";
 
 export const builderReducer = (state: any, action: any) => {
     switch (action.type) {
@@ -8,13 +9,16 @@ export const builderReducer = (state: any, action: any) => {
             return { ...state, redirect: { ...state.redirect, ...action.payload } }
         case 'SET_VALUES':
             return _extends({}, state, {
-                values: { ... state.values, ...action.payload }
+                values: action.payload
             });
         case 'SET_SAVED_VALUES':
             return _extends({}, state, {
                 savedValues: { ...state.savedValues, ...action.payload }
             });
-
+        case 'SET_FIELD_VALUE':
+            return _extends({}, state, {
+                values: setIn(state.values, action.payload.field, action.payload.value)
+            });
         case 'SET_TOUCHED':
             return _extends({}, state, {
                 touched: action.payload
@@ -39,11 +43,6 @@ export const builderReducer = (state: any, action: any) => {
         case 'SET_ISVALIDATING':
             return _extends({}, state, {
                 isValidating: action.payload
-            });
-
-        case 'SET_FIELD_VALUE':
-            return _extends({}, state, {
-                values: { ...state.values,[ action.payload.field ]: action.payload.value }
             });
 
         case 'SET_FIELD_TOUCHED':

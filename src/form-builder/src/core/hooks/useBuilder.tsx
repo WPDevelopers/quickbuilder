@@ -47,9 +47,11 @@ const useBuilder = (props) => {
                 value: value
             }
         });
-        // var willValidate = shouldValidate === undefined ? true : shouldValidate;
-        // return willValidate ? value : Promise.resolve();
     });
+
+    const getFieldValue = React.useCallback((name) => {
+        return getIn(state.values, name);
+    }, [state]);
 
     const setFieldTouched = useEventCallback((field, touched, shouldValidate) => {
         if (!touched) {
@@ -138,10 +140,6 @@ const useBuilder = (props) => {
             valueState = getIn(state.values, name) ?? defaultProps?.default
         }
 
-        if (['group', 'repeater'].includes(type)) {
-
-        }
-
         validProps.onChange = handleChange;
         validProps.onBlur = handleBlur;
 
@@ -155,6 +153,9 @@ const useBuilder = (props) => {
         } else {
             validProps.value = valueState;
         }
+
+        validProps.visible = isVisible(state.values, args);
+
         return validProps;
     }, [handleBlur, handleChange, state.values]);
 
@@ -267,6 +268,7 @@ const useBuilder = (props) => {
         setValues: setValues,
         setSavedValues: setSavedValues,
         setFieldValue: setFieldValue,
+        getFieldValue: getFieldValue,
         handleBlur: handleBlur,
         handleChange: handleChange,
         getFieldProps: getFieldProps,

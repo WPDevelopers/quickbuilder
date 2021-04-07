@@ -14,7 +14,7 @@ const useBuilder = (props) => {
     const [state, dispatch] = useReducer(builderReducer, {
         ...props,
         savedValues: props.savedValues || {},
-        values: props.initialValues || {},
+        values: props.values || {},
         errors: props.initialErrors || {},
         touched: props.initialTouched || {},
     });

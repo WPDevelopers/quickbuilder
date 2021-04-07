@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import classNames from "classnames";
 import { Column, Label, Row } from '../core/components';
 import { withLabel } from '../core/hooks';
-import { Input } from '.';
+import { Input, GenericInput } from '.';
 
 export const Toggle = (props) => {
-    const { options, value, multiple } = props;
+    const { options, value, multiple, style: prevStyles } = props;
 
     let styles = {
         type: "", // card
@@ -13,7 +13,7 @@ export const Toggle = (props) => {
             position: "right",
         },
         column: 4,
-        // ...prevStyles,
+        ...prevStyles,
     };
 
     const componentClasses = classNames(
@@ -35,7 +35,13 @@ export const Toggle = (props) => {
         }
 
         useEffect(() => {
-            // helpers.setValue(name, localState);
+            props.onChange({
+                target: {
+                    type: 'toggle',
+                    name: props.name,
+                    value: localState,
+                }
+            });
         }, [localState])
 
         useEffect(() => {
@@ -48,7 +54,7 @@ export const Toggle = (props) => {
                     return (
                         <Column key={item.value} column={styles.column}>
                             <div className={componentClasses}>
-                                <Input
+                                <GenericInput
                                     {...{
                                         ...item,
                                         id: item.value,

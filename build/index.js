@@ -12925,20 +12925,20 @@ var builder = {
                 // 	label: 'Checkbox',
                 // 	default: true,
                 // },
-                // {
-                // 	type: "text", // Required
-                // 	name: "text_control", // Required
-                // 	label: "Text Control",
-                // 	default: 'Hello World',
-                // 	placeholder: "Text Control Placeholder",
-                // 	// value: "Test Control Saved Value", // String
-                // 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-                // 	rules: [ 'is', 'checkbox_control', true ],
-                // 	validation_rules: {
-                // 		required: "This Fields is Required", // Message
-                // 		"min:20": "Your Input is too short. Make it 20Character Bigger.",
-                // 	},
-                // },
+                {
+                    type: "text",
+                    name: "text_control",
+                    label: "Text Control",
+                    default: 'Hello World',
+                    placeholder: "Text Control Placeholder",
+                    // value: "Test Control Saved Value", // String
+                    // default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
+                    rules: ['is', 'checkbox_control', true],
+                    validation_rules: {
+                        required: "This Fields is Required",
+                        "min:20": "Your Input is too short. Make it 20Character Bigger.",
+                    },
+                },
                 // {
                 // 	type: "select", // Required
                 // 	name: "select_control", // Required
@@ -13850,7 +13850,7 @@ var useBuilder = function (props) {
         isMounted.current = true;
         return function () { isMounted.current = false; };
     }, []);
-    var _a = react_1.useReducer(index_1.builderReducer, __assign(__assign({}, props), { savedValues: props.savedValues || {}, values: props.initialValues || {}, errors: props.initialErrors || {}, touched: props.initialTouched || {} })), state = _a[0], dispatch = _a[1];
+    var _a = react_1.useReducer(index_1.builderReducer, __assign(__assign({}, props), { savedValues: props.savedValues || {}, values: props.values || {}, errors: props.initialErrors || {}, touched: props.initialTouched || {} })), state = _a[0], dispatch = _a[1];
     var setValues = useEventCallback(function (values, shouldValidate) {
         var resolvedValues = typeof values === 'function' ? values(state.values) : values;
         dispatch({
@@ -14789,6 +14789,31 @@ exports.default = when;
 
 /***/ }),
 
+/***/ "./src/form-builder/src/fields/Action.tsx":
+/*!************************************************!*\
+  !*** ./src/form-builder/src/fields/Action.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Action = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
+var hooks_1 = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+var Action = function (props) {
+    return (react_1.default.createElement(react_1.default.Fragment, null, hooks_1.applyFilters(props.action)));
+};
+exports.Action = Action;
+exports.default = exports.Action;
+
+
+/***/ }),
+
 /***/ "./src/form-builder/src/fields/ColorPicker.tsx":
 /*!*****************************************************!*\
   !*** ./src/form-builder/src/fields/ColorPicker.tsx ***!
@@ -14996,6 +15021,8 @@ var Field = function (props) {
             return react_1.default.createElement(_1.ColorPicker, __assign({}, props));
         case "repeater":
             return react_1.default.createElement(_1.Repeater, __assign({}, props));
+        case "action":
+            return react_1.default.createElement(_1.Action, __assign({}, props));
         // return <Test {...inputFieldsAttributes} />;
         default:
             return react_1.default.createElement(react_1.default.Fragment, null);
@@ -15056,39 +15083,18 @@ var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/c
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
 var Group = function (props) {
-    var fieldName = props.name, fields = props.fields, value = props.value;
+    var fieldName = props.name, fields = props.fields;
     if (!fields || !utils_1.isArray(fields) || fields.length === 0) {
         throw new Error('You should give a #fields arguments to a group field.');
     }
     var builderContext = hooks_1.useBuilderContext();
-    var localMemoizedState = react_1.useMemo(function () {
-        var _a;
-        var localS = (_a = builderContext.values) === null || _a === void 0 ? void 0 : _a[fieldName];
-        if (localS === undefined && (value != undefined && !utils_1.isEmptyObj(value))) {
-            localS = __assign({}, value);
-        }
-        return localS;
-    }, [value]);
-    var _a = react_1.useState(localMemoizedState), localState = _a[0], setLocalState = _a[1];
     var handleChange = react_1.useCallback(function (event) {
         if (event.persist) {
             event.persist();
         }
         var _a = utils_1.executeChange(event), field = _a.field, value = _a.val;
         builderContext.setFieldValue([fieldName, field], value);
-        // setLocalState((prevState) => ({ ...prevState, [field]: value }));
     }, [props.value]);
-    react_1.useEffect(function () {
-        if (localState !== undefined) {
-            builderContext.handleChange({
-                target: {
-                    type: 'group',
-                    name: fieldName,
-                    value: localState
-                },
-            });
-        }
-    }, [localState]);
     var newFields = utils_1.sortingFields(fields);
     var allFields = newFields.map(function (item, index) {
         return react_1.default.createElement(_1.GenericField, __assign({ key: item.name, index: props.index, onChange: handleChange }, item, { parenttype: 'group', parent: fieldName }));
@@ -15144,17 +15150,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GenericInput = void 0;
 var react_1 = __importStar(__webpack_require__(/*! react */ "react"));
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var Input = function (props) {
-    var validProps = utils_1.validFieldProps(props, ['is_pro', 'visible']);
+    var validProps = utils_1.validFieldProps(props, ['is_pro', 'visible', 'disable']);
     var handleChange = react_1.useCallback(function (event) { return validProps.onChange(event, { isPro: !!props.is_pro }); }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
     return react_1.default.createElement('input', __assign(__assign({}, validProps), { onChange: handleChange }));
 };
 Input.defaultProps = {
     type: 'text'
 };
+exports.GenericInput = react_1.default.memo(Input);
 exports.default = hooks_1.withLabel(react_1.default.memo(Input));
 
 
@@ -15309,9 +15317,9 @@ var Repeater = function (props) {
         else {
             lValue[index] = __assign(__assign({}, lValue[index]), (_a = {}, _a[field] = value, _a));
         }
-        if (!utils_1.isEmptyObj(value)) {
-            setLocalValue(lValue);
-        }
+        setLocalValue(lValue);
+        // if (!isEmptyObj(value)) {
+        // }
     };
     var handleRemove = react_1.useCallback(function (index) {
         var lValue = __spreadArray([], localValue);
@@ -15446,21 +15454,9 @@ var react_select_1 = __importDefault(__webpack_require__(/*! react-select */ "./
 var utils_1 = __webpack_require__(/*! ../core/utils */ "./src/form-builder/src/core/utils.ts");
 var hooks_1 = __webpack_require__(/*! ../core/hooks */ "./src/form-builder/src/core/hooks/index.ts");
 var Select = function (props) {
-    var id = props.id, name = props.name, multiple = props.multiple, placeholder = props.placeholder, _a = props.search, search = _a === void 0 ? false : _a, onChange = props.onChange, value = props.value;
+    var id = props.id, name = props.name, multiple = props.multiple, placeholder = props.placeholder, _a = props.search, search = _a === void 0 ? false : _a, onChange = props.onChange;
     var _b = hooks_1.useOptions(props, 'options'), options = _b.options, selectedOption = _b.selectedOption;
     var _c = react_1.useState(null), sOption = _c[0], setSOption = _c[1];
-    // useEffect(() => {
-    //     console.log("selectedOption", name, selectedOption || 'nai', props);
-    //     // onChange({
-    //     //     target: {
-    //     //         type: 'select',
-    //     //         name,
-    //     //         value: value,
-    //     //         options,
-    //     //         multiple
-    //     //     },
-    //     // });
-    // }, [selectedOption])
     react_1.useEffect(function () {
         if (!utils_1.isArray(sOption) && utils_1.isObject(sOption)) {
             onChange({
@@ -15646,15 +15642,10 @@ var _1 = __webpack_require__(/*! . */ "./src/form-builder/src/fields/index.ts");
 var Toggle = function (props) {
     var _a;
     var _b, _c;
-    var options = props.options, value = props.value, multiple = props.multiple;
-    var styles = {
-        type: "",
-        label: {
+    var options = props.options, value = props.value, multiple = props.multiple, prevStyles = props.style;
+    var styles = __assign({ type: "", label: {
             position: "right",
-        },
-        column: 4,
-        // ...prevStyles,
-    };
+        }, column: 4 }, prevStyles);
     var componentClasses = classnames_1.default("wprf-toggle-wrap", "wprf-" + (styles === null || styles === void 0 ? void 0 : styles.type), (_a = {
             "wprf-checked": Boolean(value)
         },
@@ -15670,7 +15661,13 @@ var Toggle = function (props) {
             });
         };
         react_1.useEffect(function () {
-            // helpers.setValue(name, localState);
+            props.onChange({
+                target: {
+                    type: 'toggle',
+                    name: props.name,
+                    value: localState_1,
+                }
+            });
         }, [localState_1]);
         react_1.useEffect(function () {
             setLocalState_1(value);
@@ -15679,7 +15676,7 @@ var Toggle = function (props) {
             react_1.default.createElement(components_1.Row, null, options.map(function (item) {
                 return (react_1.default.createElement(components_1.Column, { key: item.value, column: styles.column },
                     react_1.default.createElement("div", { className: componentClasses },
-                        react_1.default.createElement(_1.Input, __assign({}, __assign(__assign({}, item), { id: item.value, checked: !!(localState_1 === null || localState_1 === void 0 ? void 0 : localState_1[item.value]), type: 'checkbox', onChange: handleChange_1 }))),
+                        react_1.default.createElement(_1.GenericInput, __assign({}, __assign(__assign({}, item), { id: item.value, checked: !!(localState_1 === null || localState_1 === void 0 ? void 0 : localState_1[item.value]), type: 'checkbox', onChange: handleChange_1 }))),
                         react_1.default.createElement(components_1.Label, { htmlFor: item.value }))));
             })));
     }
@@ -15855,7 +15852,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Test = exports.ColorPicker = exports.Slider = exports.Repeater = exports.Section = exports.Radio = exports.Toggle = exports.Select = exports.Group = exports.Input = exports.Date = exports.GenericField = exports.Field = void 0;
+exports.Test = exports.Action = exports.ColorPicker = exports.Slider = exports.Repeater = exports.Section = exports.Radio = exports.Toggle = exports.Select = exports.Group = exports.GenericInput = exports.Input = exports.Date = exports.GenericField = exports.Field = void 0;
 var Field_1 = __webpack_require__(/*! ./Field */ "./src/form-builder/src/fields/Field.tsx");
 Object.defineProperty(exports, "Field", { enumerable: true, get: function () { return __importDefault(Field_1).default; } });
 Object.defineProperty(exports, "GenericField", { enumerable: true, get: function () { return Field_1.GenericField; } });
@@ -15863,6 +15860,7 @@ var Date_1 = __webpack_require__(/*! ./Date */ "./src/form-builder/src/fields/Da
 Object.defineProperty(exports, "Date", { enumerable: true, get: function () { return __importDefault(Date_1).default; } });
 var Input_1 = __webpack_require__(/*! ./Input */ "./src/form-builder/src/fields/Input.tsx");
 Object.defineProperty(exports, "Input", { enumerable: true, get: function () { return __importDefault(Input_1).default; } });
+Object.defineProperty(exports, "GenericInput", { enumerable: true, get: function () { return Input_1.GenericInput; } });
 var Group_1 = __webpack_require__(/*! ./Group */ "./src/form-builder/src/fields/Group.tsx");
 Object.defineProperty(exports, "Group", { enumerable: true, get: function () { return __importDefault(Group_1).default; } });
 var Select_1 = __webpack_require__(/*! ./Select */ "./src/form-builder/src/fields/Select.tsx");
@@ -15879,6 +15877,8 @@ var Slider_1 = __webpack_require__(/*! ./Slider */ "./src/form-builder/src/field
 Object.defineProperty(exports, "Slider", { enumerable: true, get: function () { return __importDefault(Slider_1).default; } });
 var ColorPicker_1 = __webpack_require__(/*! ./ColorPicker */ "./src/form-builder/src/fields/ColorPicker.tsx");
 Object.defineProperty(exports, "ColorPicker", { enumerable: true, get: function () { return __importDefault(ColorPicker_1).default; } });
+var Action_1 = __webpack_require__(/*! ./Action */ "./src/form-builder/src/fields/Action.tsx");
+Object.defineProperty(exports, "Action", { enumerable: true, get: function () { return __importDefault(Action_1).default; } });
 var Test_1 = __webpack_require__(/*! ./Test */ "./src/form-builder/src/fields/Test.tsx");
 Object.defineProperty(exports, "Test", { enumerable: true, get: function () { return __importDefault(Test_1).default; } });
 
@@ -16506,6 +16506,17 @@ var default_1 = __importDefault(__webpack_require__(/*! ./form-builder/config/de
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["date"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/hooks":
+/*!*******************************!*\
+  !*** external ["wp","hooks"] ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["hooks"]; }());
 
 /***/ }),
 

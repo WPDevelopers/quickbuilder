@@ -4,6 +4,9 @@ const builder = {
 		active: 'tab_1',
 		sidebar: false,
 	},
+	submit: {
+
+	},
 	tabs: [
 		{
 			label: "Tab 1",
@@ -24,11 +27,11 @@ const builder = {
 				// 	placeholder: "Text Control Placeholder",
 				// 	// value: "Test Control Saved Value", // String
 				// 	// default: "Test Control Default Value", // not implemented [ i will do it, lots of things need to changes ]
-				// 	rules: [ 'is', 'checkbox_control', true ],
-				// 	validation_rules: {
-				// 		required: "This Fields is Required", // Message
-				// 		"min:20": "Your Input is too short. Make it 20Character Bigger.",
-				// 	},
+				// 	// rules: [ 'is', 'checkbox_control', true ],
+				// 	// validation_rules: {
+				// 	// 	required: "This Fields is Required", // Message
+				// 	// 	"min:20": "Your Input is too short. Make it 20Character Bigger.",
+				// 	// },
 				// },
 				// {
 				// 	type: "select", // Required
@@ -58,34 +61,34 @@ const builder = {
 				// 		"min:20": "Your Input is too short. Make it 20Character Bigger.",
 				// 	},
 				// },
-				{
-					type: 'group',
-					name: 'group_control',
-					fields: [
-						{
-							type: "text",
-							name: 'group_text',
-							label: 'Text',
-							default: "Hello World Group Text"
-						},
-						{
-							type: "select",
-							name: 'group_select',
-							label: 'Group Select',
-							default: 'one',
-							options: [
-								{
-									label: 'G One',
-									value: 'one'
-								},
-								{
-									label: 'G Two',
-									value: 'two'
-								},
-							]
-						}
-					]
-				},
+				// {
+				// 	type: 'group',
+				// 	name: 'group_control',
+				// 	fields: [
+				// 		{
+				// 			type: "text",
+				// 			name: 'group_text',
+				// 			label: 'Text',
+				// 			default: "Hello World Group Text"
+				// 		},
+				// 		{
+				// 			type: "select",
+				// 			name: 'group_select',
+				// 			label: 'Group Select',
+				// 			default: 'one',
+				// 			options: [
+				// 				{
+				// 					label: 'G One',
+				// 					value: 'one'
+				// 				},
+				// 				{
+				// 					label: 'G Two',
+				// 					value: 'two'
+				// 				},
+				// 			]
+				// 		}
+				// 	]
+				// },
 				// {
 				// 	"label": "Notification Template",
 				// 	"name": "notification-template",
@@ -108,34 +111,36 @@ const builder = {
 				// 		},
 				// 	]
 				// }
-				// {
-				// 	type: "repeater", // Required
-				// 	name: "repeater_control", // Required
-				// 	label: "Repeater Control",
-				// 	button: {
-				// 		label: 'Add New'
-				// 	},
-				// 	fields: [
-				// 		{
-				// 			type: 'text',
-				// 			name: 'r_text',
-				// 		},
-				// 		{
-				// 			type: 'select',
-				// 			name: 'r_select',
-				// 			options: [
-				// 				{
-				// 					label: 'One',
-				// 					value: 'one'
-				// 				},
-				// 				{
-				// 					label: 'Two',
-				// 					value: 'two'
-				// 				},
-				// 			]
-				// 		},
-				// 	]
-				// },
+				{
+					type: "repeater", // Required
+					name: "repeater_control", // Required
+					label: "Repeater Control",
+					button: {
+						label: 'Add New'
+					},
+					fields: [
+						{
+							label: 'First Name',
+							type: 'text',
+							name: 'r_text',
+						},
+						{
+							label: 'R Select',
+							type: 'select',
+							name: 'r_select',
+							options: [
+								{
+									label: 'One',
+									value: 'one'
+								},
+								{
+									label: 'Two',
+									value: 'two'
+								},
+							]
+						},
+					]
+				},
 			]
 		},
 		// {

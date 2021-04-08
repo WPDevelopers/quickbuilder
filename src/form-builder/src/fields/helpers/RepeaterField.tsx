@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Icon } from '@wordpress/components';
 import { GenericField } from '../index';
+import { useInstanceId } from "@wordpress/compose";
 
 const RepeaterField = (props) => {
     const { fields, onChange, index, parent } = props;
     const [isCollapse, setIsCollapse] = useState(props.isOpen);
+    const instanceId = useInstanceId(RepeaterField);
     // onClick={() => setIsCollapse(!isCollapse)}
     return (
         <div className="wprf-repeater-field">
@@ -21,6 +23,7 @@ const RepeaterField = (props) => {
                         return <GenericField
                             key={`field-${index}-${fieldIndex}`}
                             {...field}
+                            id={`field-${instanceId}-${index}-${fieldIndex}`}
                             index={index}
                             parenttype='repeater'
                             parent={parent}

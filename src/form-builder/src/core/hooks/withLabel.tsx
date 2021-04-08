@@ -19,7 +19,9 @@ const withLabel = (WrappedComponent) => {
         }
 
         const validProps = validFieldProps(props, ['description', 'label', 'help'])
-        const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`);
+        const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`, {
+            [`wprf-${props?.style?.label?.position || 'inline'}-label`]: props?.style?.label?.position ?? true
+        });
 
         return (
             <div className={componentClasses}>

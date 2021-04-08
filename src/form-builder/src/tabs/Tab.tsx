@@ -23,7 +23,7 @@ const Tab: React.FC<TabConfig> = (props) => {
     }, [activeTab])
 
     return (
-        <div>
+        <>
             {/* <BuilderProvider value={builderContextState}> */}
             <Menu
                 active={activeTab}
@@ -38,7 +38,7 @@ const Tab: React.FC<TabConfig> = (props) => {
                 config={props.config}
             />
             {/* </BuilderProvider> */}
-        </div>
+        </>
     )
 }
 

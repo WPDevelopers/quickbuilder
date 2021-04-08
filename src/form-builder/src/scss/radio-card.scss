@@ -61,6 +61,14 @@
 			margin-bottom: 0;
 			&.wprf-label-has-image {
 				padding: 0;
+				&.wprf-size-medium {
+					padding: 10px;
+					box-sizing: border-box;
+					& > img {
+						width: 50px;
+						height: 50px;
+					}
+				}
 			}
 			box-sizing: border-box;
 		}

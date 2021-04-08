@@ -27,7 +27,8 @@ const RadioCard = (props) => {
         props?.className,
     ]);
 
-    const validProps = validFieldProps(props, ['options', 'placeholder']);
+    const styles = { ...props?.style };
+    const validProps = validFieldProps(props, ['options', 'placeholder', 'style']);
 
     return (
         <div className={componentClasses}>
@@ -46,8 +47,8 @@ const RadioCard = (props) => {
                             >
                                 <Label
                                     className={classNames({
-                                        "wprf-label-has-image":
-                                            icon ?? false,
+                                        "wprf-label-has-image": icon ?? false,
+                                        [`wprf-size-${styles.size}`]: (icon && styles?.size) ?? false
                                     })}
                                     htmlFor={`wprf-input-radio-${instanceId}-${index}`}
                                     src={icon}

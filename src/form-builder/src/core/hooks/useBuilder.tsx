@@ -154,6 +154,13 @@ const useBuilder = (props) => {
             validProps.value = valueState;
         }
 
+        // var parsed, val;
+
+        // val = /number|range|slider/.test(type) ? (parsed = parseFloat(validProps.value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type)
+        //     ? validProps.value : !!validProps.multiple ? validProps.value : validProps.value;
+
+        // validProps.value = val;
+
         validProps.visible = isVisible(state.values, args);
 
         return validProps;

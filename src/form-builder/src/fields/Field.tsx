@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date, Action } from '.';
+import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date, Action, Test, Media } from '.';
 import { withChange, withProps } from '../core/hooks';
 
 const Field = (props) => {
@@ -33,9 +33,12 @@ const Field = (props) => {
             return <ColorPicker {...props} />;
         case "repeater":
             return <Repeater {...props} />;
+        case "media":
+            return <Media {...props} />;
         case "action":
             return <Action {...props} />;
-        // return <Test {...inputFieldsAttributes} />;
+        // case "test":
+        //     return <Test {...props} />;
         default:
             return <></>;
     }

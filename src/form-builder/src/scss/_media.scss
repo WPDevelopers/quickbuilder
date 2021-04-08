@@ -1,0 +1,25 @@
+.wprf-media {
+    display: flex;
+    align-items: center;
+    .wprf-image-preview {
+        width: 100px;
+        height: auto;
+        max-height: 100px;
+        margin-right: 20px;
+        overflow: hidden;
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
+    }
+    .wprf-image-uploader {
+        button {
+            margin-right: 10px;
+            &.wprf-image-remove-btn {
+                background-color: #f26f5a;
+                color: #fff;
+            }
+        }
+    }
+}

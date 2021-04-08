@@ -13,6 +13,9 @@ const builder = {
 			id: "tab_1",
 			icon: "",
 			fields: [
+				{
+					type: 'test'
+				},
 				// {
 				// 	type: 'checkbox',
 				// 	name: 'checkbox_control',
@@ -111,36 +114,36 @@ const builder = {
 				// 		},
 				// 	]
 				// }
-				{
-					type: "repeater", // Required
-					name: "repeater_control", // Required
-					label: "Repeater Control",
-					button: {
-						label: 'Add New'
-					},
-					fields: [
-						{
-							label: 'First Name',
-							type: 'text',
-							name: 'r_text',
-						},
-						{
-							label: 'R Select',
-							type: 'select',
-							name: 'r_select',
-							options: [
-								{
-									label: 'One',
-									value: 'one'
-								},
-								{
-									label: 'Two',
-									value: 'two'
-								},
-							]
-						},
-					]
-				},
+				// {
+				// 	type: "repeater", // Required
+				// 	name: "repeater_control", // Required
+				// 	label: "Repeater Control",
+				// 	button: {
+				// 		label: 'Add New'
+				// 	},
+				// 	fields: [
+				// 		{
+				// 			label: 'First Name',
+				// 			type: 'text',
+				// 			name: 'r_text',
+				// 		},
+				// 		{
+				// 			label: 'R Select',
+				// 			type: 'select',
+				// 			name: 'r_select',
+				// 			options: [
+				// 				{
+				// 					label: 'One',
+				// 					value: 'one'
+				// 				},
+				// 				{
+				// 					label: 'Two',
+				// 					value: 'two'
+				// 				},
+				// 			]
+				// 		},
+				// 	]
+				// },
 			]
 		},
 		// {

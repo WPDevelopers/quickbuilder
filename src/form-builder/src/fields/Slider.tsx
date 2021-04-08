@@ -6,7 +6,7 @@ import { isArray, isNumber, isString } from '../core/utils';
 const Slider = (props) => {
     const { name, id, label, units, value, min, max, unit, tooltip, reset } = props;
 
-    const [isValue, setValue] = useState(value);
+    const [isValue, setValue] = useState(value || 0);
     const [sunit, setSunit] = useState(unit || "px");
 
     useEffect(() => {

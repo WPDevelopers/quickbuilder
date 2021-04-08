@@ -31,7 +31,7 @@ const Repeater = (props) => {
         let lValue = [...localMemoizedValue];
         if (lValue.length > 0) {
             const indexedCopy = lValue?.[index] || {};
-            builderContext.setFieldValue([fieldName, index + 1], indexedCopy);
+            builderContext.setFieldValue([fieldName, localMemoizedValue.length], indexedCopy);
         }
     }, [localMemoizedValue])
 

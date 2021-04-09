@@ -32,7 +32,7 @@ const DateControl = (props) => {
             renderContent={() => {
                 return (
                     <DateTimePicker
-                        currentDate={date(format, value) || date(format, Date.now())}
+                        currentDate={date(format, value, settings.timezone.string) || date(format, Date.now(), settings.timezone.string)}
                         onChange={(date) => {
                             onChange({
                                 target: {

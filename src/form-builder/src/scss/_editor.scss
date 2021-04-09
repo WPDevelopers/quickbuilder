@@ -1,0 +1,13 @@
+.wprf-editor {
+    height: 250px;
+    .wprf-editor-toolbar {
+        margin-bottom: 0px;
+    }
+    .wprf-editor-main {
+        height: calc(100% - 46px);
+        padding: 0px 15px;
+        box-sizing: border-box;
+        border: 1px solid #F1F1F1;
+        border-top: 0px;
+    }
+}

@@ -11,4 +11,5 @@ export { default as Slider } from './Slider';
 export { default as ColorPicker } from './ColorPicker';
 export { default as Action } from './Action';
 export { default as Media } from './Media';
+export { default as Editor } from "./Editor";
 export { default as Test } from './Test';

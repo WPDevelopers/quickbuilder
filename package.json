@@ -19,6 +19,7 @@
     "@types/react": "^17.0.3",
     "@types/react-select": "^4.0.13",
     "@types/wordpress__components": "^9.8.6",
+    "@types/wordpress__media-utils": "^0.2.4",
     "@wordpress/api-fetch": "^3.22.0",
     "@wordpress/components": "^12.0.8",
     "@wordpress/data": "^4.27.0",

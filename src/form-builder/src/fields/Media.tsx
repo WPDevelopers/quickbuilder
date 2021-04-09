@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { MediaUpload } from '@wordpress/media-utils';
 import { withLabel } from '../..';
 
-const ALLOWED_MEDIA_TYPES = ['image'];
-
 const Media = (props) => {
     const [imageData, setImageData] = useState(props.value || null)
 
@@ -35,7 +33,7 @@ const Media = (props) => {
                         });
                     }}
                     multiple={false}
-                    allowedTypes={ALLOWED_MEDIA_TYPES}
+                    allowedTypes={['image']}
                     value={imageData}
                     render={({ open }) => {
                         return <>

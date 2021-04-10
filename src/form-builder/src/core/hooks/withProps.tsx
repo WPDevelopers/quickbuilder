@@ -20,7 +20,6 @@ const withProps = (WrappedComponent, isGeneric = false) => {
 
 
         useEffect(() => {
-            // console.log(field.name, field);
             if (meta.visible) {
                 // Not needed / Confused
                 if (!isGeneric && field.type !== 'group') {
@@ -44,7 +43,7 @@ const withProps = (WrappedComponent, isGeneric = false) => {
                     }
                 }
             }
-        }, [])
+        }, [meta.visible])
 
         useEffect(() => {
             if (isObject(trigger) && !isEmptyObj(trigger)) {

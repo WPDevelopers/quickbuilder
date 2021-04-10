@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ColorPicker as WPColorPicker } from "@wordpress/components";
 import { __ } from '@wordpress/i18n';
+import { withLabel } from '../core/hooks';
 
 
 const ColorPicker = (props) => {
@@ -72,4 +73,4 @@ const ColorPicker = (props) => {
     )
 }
 
-export default ColorPicker;
+export default withLabel(ColorPicker);

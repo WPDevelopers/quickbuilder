@@ -24,7 +24,7 @@ const SteppedButton = (props) => {
                         {
                             ((button === 'next' && nextTab != undefined) || (button === 'prev' && prevTab !== undefined)) &&
                             <Button
-                                className={`wprf-step-btn-${button}`}
+                                className={`wprf-btn wprf-step-btn-${button}`}
                                 onClick={() => builderContext.setActiveTab(button === 'next' ? nextTab : prevTab)}
                             >
                                 {props.config.buttons[button]}

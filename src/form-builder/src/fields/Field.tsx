@@ -4,6 +4,8 @@ import { withChange, withProps } from '../core/hooks';
 
 const Field = (props) => {
     if (!props.type || props.type.length === 0) {
+        console.error(props);
+
         throw new Error('Field must have a #type. see documentation.');
     }
 

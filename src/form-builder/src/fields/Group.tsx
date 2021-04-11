@@ -7,7 +7,7 @@ import { GenericField } from '.';
 
 
 const Group = (props) => {
-    const { name: fieldName, fields } = props;
+    const { name: fieldName, fields, ...rest } = props;
 
     if (!fields || !isArray(fields) || fields.length === 0) {
         throw new Error('You should give a #fields arguments to a group field.')
@@ -25,6 +25,7 @@ const Group = (props) => {
     const newFields = sortingFields(fields);
     const allFields = newFields.map((item, index) => {
         return <GenericField
+            {...rest}
             key={item.name}
             index={props.index}
             onChange={handleChange}

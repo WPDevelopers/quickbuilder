@@ -6,7 +6,7 @@ const DateControl = (props) => {
 
     const { name, value, onChange } = props;
 
-    const settings = __experimentalGetSettings();
+    const settings: any = __experimentalGetSettings();
     const format = props?.format ?? settings.formats.datetime;
     const is12HourTime = /a(?!\\)/i.test(
         settings.formats.datetime
@@ -32,7 +32,7 @@ const DateControl = (props) => {
             renderContent={() => {
                 return (
                     <DateTimePicker
-                        currentDate={date(format, value, settings.timezone.string) || date(format, Date.now(), settings.timezone.string)}
+                        currentDate={date(format, value, settings.timezone.string) || date(format, new Date(), settings.timezone.string)}
                         onChange={(date) => {
                             onChange({
                                 target: {

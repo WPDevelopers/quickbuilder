@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import classNames from "classnames";
-import { Column, Label, Row } from '../core/components';
-import { withLabel } from '../core/hooks';
-import { Input, GenericInput } from '.';
+import { Column, Row } from '../..';
+import { GenericToggle } from './helpers'
 
 export const Toggle = (props) => {
     const { options, value, multiple, style: prevStyles } = props;
-
     let styles = {
         type: "", // card
         label: {
@@ -15,17 +12,6 @@ export const Toggle = (props) => {
         column: 4,
         ...prevStyles,
     };
-
-    const componentClasses = classNames(
-        "wprf-toggle-wrap",
-        `wprf-${styles?.type}`,
-        {
-            "wprf-checked": Boolean(value),
-            [`wprf-label-position-${styles?.label?.position}`]: styles?.label
-                ?.position,
-        },
-        props?.classes
-    );
 
     if (multiple) {
         const [localState, setLocalState] = useState({});
@@ -53,18 +39,15 @@ export const Toggle = (props) => {
                 {options.map(item => {
                     return (
                         <Column key={item.value} column={styles.column}>
-                            <div className={componentClasses}>
-                                <GenericInput
-                                    {...{
-                                        ...item,
-                                        id: item.value,
-                                        checked: !!localState?.[item.value],
-                                        type: 'checkbox',
-                                        onChange: handleChange
-                                    }}
-                                />
-                                <Label htmlFor={item.value} />
-                            </div>
+                            <GenericToggle
+                                {...{
+                                    ...item,
+                                    id: item.value,
+                                    checked: !!localState?.[item.value],
+                                    type: 'checkbox',
+                                    onChange: handleChange
+                                }}
+                            />
                         </Column>
                     )
                 })}
@@ -72,12 +55,7 @@ export const Toggle = (props) => {
         </div>
     }
 
-    return (
-        <div className={componentClasses}>
-            <Input {...{ ...props, type: 'checkbox', placeholder: undefined }} />
-            <Label htmlFor={props.id} />
-        </div>
-    );
+    return <GenericToggle {...props} />
 }
 
-export default withLabel(Toggle);
+export default Toggle;

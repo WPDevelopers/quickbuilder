@@ -49,6 +49,16 @@ const useBuilder = (props) => {
         });
     });
 
+    const setFormField = useEventCallback((field, value) => {
+        dispatch({
+            type: 'SET_FORM_FIELD',
+            payload: {
+                field: field,
+                value: value
+            }
+        });
+    });
+
     const getFieldValue = React.useCallback((name) => {
         return getIn(state.values, name);
     }, [state]);
@@ -283,6 +293,8 @@ const useBuilder = (props) => {
         getFieldHelpers: getFieldHelpers,
         eligibleOptions: eligibleOptions,
         eligibleOption: eligibleOption,
+
+        setFormField: setFormField
     };
 
     return context;

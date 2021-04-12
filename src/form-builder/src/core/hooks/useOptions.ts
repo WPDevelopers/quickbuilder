@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import useDefaults from "./useDefaults";
-import { isArray, isEmptyObj, isObject } from "../utils";
+import { useEffect, useState } from "react";
+import { isArray } from "../utils";
 import { useBuilderContext } from "./index";
 
 const useOptions = ( props: any, propertyName: string = 'fields' ) => {
@@ -10,41 +9,49 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
 
     const { value: savedValue, multiple }  = props;
     const builderContext = useBuilderContext();
+    const [fieldOptions, setFieldOptions] = useState(props[propertyName]);
+    const [options, setOptions] = useState([])
+    const [isData, setData] = useState({ options: null, parentIndex: null })
+    const [selectedOption, setSelectedOption] = useState(null)
+    const [option, setOption] = useState(null)
 
-    let value = savedValue;
-    // if( meta.parent && meta.parent.type === 'group' ) {
-    //     let helpers = builderContext.getFieldHelpers(props);
-    //     let parentValue = helpers.getValue( meta.parent.name);
-    //     if( parentValue ) {
-    //         value = parentValue[field.name];
-    //     }
-    //     // if( ! isEmptyObj(meta.value) ) {
-    //     //     value = meta.value[field.name];
-    //     // }
-    // }
+    useEffect(() => {
+        setOptions(builderContext.eligibleOptions(fieldOptions));
+        setSelectedOption(builderContext.eligibleOption(fieldOptions, savedValue, multiple ?? false ))
+    }, [savedValue])
 
-    // if( field.name === 'source' ) {
-    //     console.log( "value", props );
-    // }
+    useEffect(() => {
+        setFieldOptions(props[propertyName]);
+        setOptions(builderContext.eligibleOptions(props[propertyName]));
+    }, [props])
 
-    const options = builderContext.eligibleOptions(props[propertyName]);
-    const selectedOption = builderContext.eligibleOption(options, value, multiple ?? false );
+    useEffect(() => {
+        setOptions(builderContext.eligibleOptions(fieldOptions));
+    }, [ fieldOptions ])
 
-    let option : string | Array<string>;
-    if( ! multiple ) {
-        option = selectedOption.value || value;
-    } else {
-        option = (isArray(selectedOption) && selectedOption.map( (o: any) => o.value )) || value;
-    }
-
-    // useEffect(() => {
-    //     if( option ) {
-    //         builderContext.setFieldValue(field.name, option);
-    //     }
-    // }, [option])
+    useEffect(() => {
+        if( isData.options != null ) {
+            // console.log( 'tttttt', [...props[propertyName], ...isData.options] );
+            // builderContext.setFormField(isData.parentIndex, [...props[propertyName], ...isData.options])
+            // setOptions(builderContext.eligibleOptions(isData.options));
+            setFieldOptions(isData.options);
+        }
+    }, [isData])
 
 
-    return { options, option, selectedOption }
+    useEffect(() => {
+        if( selectedOption != null ) {
+            let opt : string | Array<string>;
+            if( ! multiple ) {
+                opt = selectedOption.value || savedValue;
+            } else {
+                opt = (isArray(selectedOption) && selectedOption.map( (o: any) => o.value )) || savedValue;
+            }
+            setOption(opt);
+        }
+    }, [selectedOption])
+
+    return { options, option, selectedOption, setOptions, setData }
 }
 
 export default useOptions;

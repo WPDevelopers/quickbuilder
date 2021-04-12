@@ -1,12 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import ReactSelect from "react-select";
 import { isArray, isObject } from '../core/utils';
-import { withLabel, useOptions } from '../core/hooks';
+import { withLabel, useOptions, useBuilderContext } from '../core/hooks';
+import { wpFetch } from '../core/functions';
+import { when } from '../core';
 
 const Select = (props: any) => {
-    let { id, name, multiple, placeholder, search = false, onChange } = props;
-    const { options, selectedOption } = useOptions(props, 'options');
+    const builderContext = useBuilderContext();
+    let { id, name, multiple, placeholder, search = false, onChange, parentIndex } = props;
+    const { options, selectedOption, setOptions, setData } = useOptions(props, 'options');
     const [sOption, setSOption] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(false)
+    const [isAjaxComplete, setIsAjaxComplete] = useState(false)
+
+    const handleMenuOpen = () => {
+        // AJAX
+        if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
+            setIsLoading(true);
+            let data = {};
+            Object.keys(props?.ajax.data).map(singleData => {
+                if (props?.ajax.data[singleData].indexOf('@') > -1) {
+                    let eligibleKey = props?.ajax.data[singleData].substr(1);
+                    data[singleData] = builderContext.values?.[eligibleKey]
+                } else {
+                    data[singleData] = props?.ajax.data[singleData]
+                }
+            })
+            if (!isAjaxComplete) {
+                wpFetch({
+                    path: props?.ajax.api,
+                    data: data
+                }).then((response: any) => {
+                    setIsLoading(false);
+                    builderContext.setFormField([...parentIndex, 'options'], [...props.options, ...response])
+                    setData({
+                        options: [...props.options, ...response],
+                        parentIndex: [...parentIndex, 'options']
+                    });
+                    // setIsAjaxComplete(true);
+                })
+            }
+        }
+    }
+    const handleMenuClose = () => {
+        console.log('menuClose', options);
+        setIsLoading(false);
+    }
 
     useEffect(() => {
         if (!isArray(sOption) && isObject(sOption)) {
@@ -42,10 +81,11 @@ const Select = (props: any) => {
                 name={name}
                 isMulti={multiple ?? false}
                 placeholder={placeholder}
+                isLoading={isLoading}
                 options={options}
                 value={selectedOption}
-                // onMenuOpen={() => console.log(true)}
-                // onMenuClose={() => console.log(false)}
+                onMenuOpen={handleMenuOpen}
+                onMenuClose={handleMenuClose}
                 onChange={(option) => setSOption(option)} // option or options
             />
         </div>

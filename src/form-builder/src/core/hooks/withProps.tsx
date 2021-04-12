@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { isArray, isEmptyObj, isFunction, isObject } from "../utils";
+import { isEmptyObj, isFunction, isObject } from "../utils";
 import { useBuilderContext, useDefaults } from "./index";
 
 const withProps = (WrappedComponent, isGeneric = false) => {
@@ -11,6 +11,9 @@ const withProps = (WrappedComponent, isGeneric = false) => {
         const meta = builderContext.getFieldMeta(field.name, props);
         const helpers = builderContext.getFieldHelpers();
 
+        let pIndex = props?.parentIndex ? [...props.parentIndex] : []
+        field.parentIndex = pIndex;
+
         if (isFunction(props.onChange)) {
             field.onChange = props.onChange;
         }
@@ -18,6 +21,9 @@ const withProps = (WrappedComponent, isGeneric = false) => {
             field.onBlur = props.onBlur;
         }
 
+        // if (props?.parent === 'notification-template' && props?.ajax) {
+        //     console.log(props.name, props);
+        // }
 
         useEffect(() => {
             if (meta.visible) {

@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field } from '../fields';
 import { sortingFields } from '../core/utils';
+import { useBuilderContext } from '../core/hooks';
 
 const Section = (props) => {
+    const builderContext = useBuilderContext();
     const [isCollapse, setCollapse] = useState(props.collapsed ?? false);
-    const newFields = sortingFields(props.fields);
+    const [fields, setFields] = useState([]);
 
-    const allFields = newFields.map((item, index) => {
-        return <Field key={item.name} {...item} />;
-    });
+    useEffect(() => {
+        const newFields = sortingFields(props.fields);
+        builderContext.setFormField([...props.parentIndex, 'fields'], newFields);
+        // builderContext.setFormField([...props.parentIndex, 'sorted'], true);
+        let allFields = newFields.map((item, index) => {
+            let parentIndex = [...props.parentIndex, 'fields', index];
+            return <Field key={item.name} {...item} parentIndex={parentIndex} />;
+        });
+        setFields(allFields);
+    }, [])
 
     return (
         <div
@@ -27,9 +36,9 @@ const Section = (props) => {
                     )}
                 </div>
             }
-            <div className="wprf-section-fields">{allFields}</div>
+            <div className="wprf-section-fields">{fields}</div>
         </div>
     )
 }
 
-export default Section;
+export default React.memo(Section);

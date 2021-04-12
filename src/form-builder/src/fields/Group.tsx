@@ -23,7 +23,14 @@ const Group = (props) => {
     }, [props.value])
 
     const newFields = sortingFields(fields);
+
+    useEffect(() => {
+        builderContext.setFormField([...props.parentIndex, 'fields'], newFields)
+    }, [])
+
+
     const allFields = newFields.map((item, index) => {
+        let parentIndex = [...props.parentIndex, 'fields', index]
         return <GenericField
             {...rest}
             key={item.name}
@@ -32,6 +39,7 @@ const Group = (props) => {
             {...item}
             parenttype='group'
             parent={fieldName}
+            parentIndex={parentIndex}
         />;
     });
 

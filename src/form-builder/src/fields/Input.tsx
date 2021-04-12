@@ -5,7 +5,7 @@ import { validFieldProps } from '../core/utils';
 const Input = (props) => {
     // console.log("Input", props);
 
-    const validProps = validFieldProps(props, ['is_pro', 'visible', 'disable']);
+    const validProps = validFieldProps(props, ['is_pro', 'visible', 'disable', 'parentIndex']);
     const handleChange = useCallback((event) => validProps.onChange(event, { isPro: !!props.is_pro }), [validProps?.value]);
     return React.createElement('input', { ...validProps, onChange: handleChange })
 }

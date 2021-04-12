@@ -13,6 +13,7 @@ const withProps = (WrappedComponent, isGeneric = false) => {
 
         let pIndex = props?.parentIndex ? [...props.parentIndex] : []
         field.parentIndex = pIndex;
+        field.context = builderContext;
 
         if (isFunction(props.onChange)) {
             field.onChange = props.onChange;

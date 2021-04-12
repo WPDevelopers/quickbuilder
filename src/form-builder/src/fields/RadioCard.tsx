@@ -40,8 +40,8 @@ const RadioCard = (props) => {
                                 className={classNames(
                                     "wprf-input-radio-option",
                                     {
-                                        "wprf-option-selected":
-                                            value == option,
+                                        "wprf-option-has-image": icon ?? false,
+                                        "wprf-option-selected": value == option,
                                     }
                                 )}
                             >

@@ -14,87 +14,109 @@ const builder = {
 			icon: "",
 			fields: [
 				{
-					type: 'select',
-					name: 'type',
-					default: 'sales',
-					options: [
-						{
-							label: 'Form',
-							value: 'form',
+					type: 'button',
+					text: {
+						normal: 'Connect',
+						saved: 'Refresh',
+						loading: 'Refreshing...'
+					},
+					// href:'hello.com',
+					// text: 'Connect',
+					name: 'connect',
+					label: 'Connect Button',
+					default: false,
+					ajax: {
+						on: 'click',
+						api: '/notificationx/v1/get-data',
+						data: {
+							type: 'ContactForm',
+							nx_type: '@type',
 						},
-						{
-							label: 'Sales',
-							value: 'sales',
-						},
-					],
+						// trigger: '@connect:Refresh'
+					}
 				},
-				{
-					type: 'select',
-					name: 'source',
-					default: 'woo',
-					options: [
-						{
-							label: 'Woo',
-							value: 'woo',
-						},
-						{
-							label: 'CF7',
-							value: 'cf7',
-						},
-					],
-				},
-				{
-					type: 'select',
-					name: 'form_list',
-					default: '12',
-					options: [
-						{
-							label: '11',
-							value: 11,
-						},
-						{
-							label: '12',
-							value: '12',
-						},
-					],
-				},
-				{
-					type: 'section',
-					name: 'tm_section',
-					fields: [
-						{
-							type: 'group',
-							name: 'notification-template',
-							fields: [
-								{
-									type: 'select',
-									name: "first_param",
-									options: [
-										{
-											label: 'One',
-											value: 'one',
-										},
-										{
-											label: 'Two',
-											value: 'two',
-										},
-									],
-									ajax: {
-										on: 'click',
-										api: "/notificationx/v1/get-data",
-										data: {
-											type: 'ContactForm',
-											form_type: '@source',
-											form_id: '@form_list'
-										},
-										target: "first_param",
-										rules: [ 'is', 'type', 'form' ]
-									}
-								},
-							]
-						}
-					]
-				}
+				// {
+				// 	type: 'select',
+				// 	name: 'type',
+				// 	default: 'sales',
+				// 	options: [
+				// 		{
+				// 			label: 'Form',
+				// 			value: 'form',
+				// 		},
+				// 		{
+				// 			label: 'Sales',
+				// 			value: 'sales',
+				// 		},
+				// 	],
+				// },
+				// {
+				// 	type: 'select',
+				// 	name: 'source',
+				// 	default: 'woo',
+				// 	options: [
+				// 		{
+				// 			label: 'Woo',
+				// 			value: 'woo',
+				// 		},
+				// 		{
+				// 			label: 'CF7',
+				// 			value: 'cf7',
+				// 		},
+				// 	],
+				// },
+				// {
+				// 	type: 'select',
+				// 	name: 'form_list',
+				// 	default: '12',
+				// 	options: [
+				// 		{
+				// 			label: '11',
+				// 			value: 11,
+				// 		},
+				// 		{
+				// 			label: '12',
+				// 			value: '12',
+				// 		},
+				// 	],
+				// },
+				// {
+				// 	type: 'section',
+				// 	name: 'tm_section',
+				// 	fields: [
+				// 		{
+				// 			type: 'group',
+				// 			name: 'notification-template',
+				// 			fields: [
+				// 				{
+				// 					type: 'select',
+				// 					name: "first_param",
+				// 					options: [
+				// 						{
+				// 							label: 'One',
+				// 							value: 'one',
+				// 						},
+				// 						{
+				// 							label: 'Two',
+				// 							value: 'two',
+				// 						},
+				// 					],
+				// 					ajax: {
+				// 						on: 'click',
+				// 						api: "/notificationx/v1/get-data",
+				// 						data: {
+				// 							type: 'ContactForm',
+				// 							form_type: '@source',
+				// 							form_id: '@form_list'
+				// 						},
+				// 						target: "first_param",
+				// 						rules: [ 'is', 'type', 'form' ]
+				// 					}
+				// 				},
+				// 			]
+				// 		}
+				// 	]
+				// }
 				// {
 				// 	type: 'checkbox',
 				// 	name: 'checkbox_control',

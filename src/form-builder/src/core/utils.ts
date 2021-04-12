@@ -1,4 +1,5 @@
 import { clone, toPath } from "lodash-es";
+import { wpFetch } from "./functions";
 import when from "./when";
 
 export const isString = (args) => {
@@ -167,4 +168,40 @@ export const validFieldProps = ( defaultProps, exclude = [] ) => {
         validProps.placeholder = defaultProps.label;
     }
     return validProps;
+}
+
+export const hitAAJX = ( ajax, context = null ) => {
+    if( context !== null && ajax ) {
+        let isEligible = true;
+        if( ajax?.rules ) {
+            isEligible = when(ajax?.rules, context.values);
+        }
+        if( isEligible ) {
+            let data = {}
+            Object.keys(ajax.data).map(singleData => {
+                if (ajax.data[singleData].indexOf('@') > -1) {
+                    let eligibleKey = ajax.data[singleData].substr(1);
+                    data[singleData] = context.values?.[eligibleKey]
+                } else {
+                    data[singleData] = ajax.data[singleData]
+                }
+            })
+            return wpFetch({
+                path: ajax.api,
+                data
+            }).then( response => {
+                if( ajax?.trigger && isString(ajax?.trigger) ) {
+                    let at = ajax.trigger.indexOf('@');
+                    let colon = ajax.trigger.indexOf(":");
+                    if (at === 0 && colon > 0) {
+                        let eligibleKey = ajax.trigger.substr(1, colon - 1);
+                        let eligibleDataToSet = ajax.trigger.substr(colon + 1);
+                        context.setFieldValue(eligibleKey, eligibleDataToSet);
+                    }
+                }
+                return response;
+            })
+        }
+    }
+    return Promise.reject( false );
 }

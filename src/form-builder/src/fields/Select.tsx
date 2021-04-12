@@ -5,11 +5,11 @@ import { withLabel, useOptions, useBuilderContext } from '../core/hooks';
 import { wpFetch } from '../core/functions';
 import { when } from '../core';
 
-const Select = (props: any) => {
+const Select = (props) => {
     const builderContext = useBuilderContext();
     let { id, name, multiple, placeholder, search = false, onChange, parentIndex } = props;
     const { options, selectedOption, setOptions, setData } = useOptions(props, 'options');
-    const [sOption, setSOption] = useState<any>(null);
+    const [sOption, setSOption] = useState(null);
     const [isLoading, setIsLoading] = useState(false)
     const [isAjaxComplete, setIsAjaxComplete] = useState(false)
 

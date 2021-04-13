@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Field } from '../fields';
 import { sortingFields } from '../core/utils';
 import { useBuilderContext } from '../core/hooks';
+import classNames from 'classnames';
 
 const Section = (props) => {
     const builderContext = useBuilderContext();
@@ -19,10 +20,13 @@ const Section = (props) => {
         setFields(allFields);
     }, [])
 
+    const componentClasses = classNames('wprf-control-section', props?.classes, {
+        'wprf-section-collapsed': props?.collapsible && isCollapse,
+    })
+
     return (
         <div
-            className={`wprf-control-section ${props.collapsible ? (isCollapse ? "wprf-section-collapsed" : "") : ""}`}
-        >
+            className={componentClasses}>
             { props.placeholder &&
                 <div className="wprf-section-title">
                     <h4>{props.placeholder}</h4>

@@ -39,6 +39,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
 
                 return (
                     <div id={tab?.id} className={componentClasses} key={tab?.id} >
+                        { tab?.label && <h4>{tab.label}</h4>}
                         <InnerContent fields={tab?.fields} parentIndex={index} />
                     </div>
                 );

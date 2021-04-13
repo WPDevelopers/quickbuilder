@@ -28,7 +28,8 @@ const Menu: React.FC<TabProps> = (props) => {
                         key={tab.id}
                         onClick={() => setActive(tab.id)}
                     >
-                        {tab.label}
+                        { tab?.icon && <img src={tab.icon} alt={tab?.label} />}
+                        <span>{tab.label}</span>
                     </li>
                 ))}
             </ul>

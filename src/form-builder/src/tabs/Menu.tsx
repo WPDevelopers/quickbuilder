@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { TabProps } from "./types";
 
@@ -15,18 +15,21 @@ const Menu: React.FC<TabProps> = (props) => {
         { "wprf-tab-menu-sidebar": config?.sidebar }
     );
 
+    const currentTabIndex = tabs.findIndex((tab: any) => tab.id === active);
+
     return (
         <div className={componentClasses}>
             <ul className="wprf-tab-nav">
-                {tabs.map((tab) => (
+                {tabs.map((tab, index) => (
                     <li
                         className={classNames("wprf-tab-nav-item", {
                             [`${tab.classes}`]: tab.classes,
                             "wprf-active-nav": active === tab.id,
+                            "wprf-tab-complete": config?.completionTrack ? (index <= currentTabIndex) : false
                         })}
                         data-key={tab.id}
                         key={tab.id}
-                        onClick={() => setActive(tab.id)}
+                        onClick={() => (config?.clickable ?? true) && setActive(tab.id)}
                     >
                         { tab?.icon && <img src={tab.icon} alt={tab?.label} />}
                         <span>{tab.label}</span>

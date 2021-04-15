@@ -17,6 +17,7 @@ const useBuilder = (props) => {
         values: props.values || {},
         errors: props.initialErrors || {},
         touched: props.initialTouched || {},
+        icons: props.initialIcons || {},
     });
 
     const setValues = useEventCallback((values, shouldValidate) => {
@@ -267,6 +268,16 @@ const useBuilder = (props) => {
         });
     });
 
+    const registerIcons = useEventCallback((name, iconLists) => {
+        dispatch({
+            type: 'SET_ICONS',
+            payload: {
+                name,
+                icons: iconLists
+            }
+        });
+    });
+
     interface BuilderContext {
         [field: string]: any
     }
@@ -294,7 +305,9 @@ const useBuilder = (props) => {
         eligibleOptions: eligibleOptions,
         eligibleOption: eligibleOption,
 
-        setFormField: setFormField
+        setFormField: setFormField,
+
+        registerIcons: registerIcons
     };
 
     return context;

@@ -7,7 +7,8 @@ export interface TabConfig {
 interface TabMenuConfig extends TabConfig {
     active: string,
     setActive?: (tabId: string) => void,
-    config?: TabConfig['config']
+    config?: TabConfig['config'],
+    context?: any
 }
 
 // export type TabContentProps = TabConfig &&

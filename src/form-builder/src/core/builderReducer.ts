@@ -84,6 +84,10 @@ export const builderReducer = (state: any, action: any) => {
             return _extends({}, state, {
                 tabs: setIn(state.tabs, action.payload.field, action.payload.value)
             });
+        case 'SET_ICONS':
+            return _extends({}, state, {
+                icons: setIn(state.icons, action.payload.name, action.payload.icons)
+            });
         default:
             return state;
     }

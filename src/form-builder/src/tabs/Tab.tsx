@@ -30,6 +30,7 @@ const Tab: React.FC<TabConfig> = (props) => {
                 setActive={(tabId) => setActiveTab(tabId)}
                 tabs={props.tabs}
                 config={props.config}
+                context={builderContext}
             />
             <Content
                 tabs={props.tabs}

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { DateTimePicker, DatePicker, TimePicker, Dropdown, Button } from "@wordpress/components";
 import { __experimentalGetSettings, date } from "@wordpress/date";
+import { withLabel } from "../core/hooks";
 
 const DateControl = (props) => {
 
@@ -50,4 +51,4 @@ const DateControl = (props) => {
     );
 };
 
-export default DateControl;
+export default withLabel(DateControl);

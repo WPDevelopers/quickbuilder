@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { Column, Row } from '../..';
-import { withStyles } from '../core/hooks';
 import { GenericToggle } from './helpers'
 
 export const Toggle = (props) => {

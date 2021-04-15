@@ -3,7 +3,6 @@ import classNames from "classnames";
 import { validFieldProps } from "../utils";
 
 import { useInstanceId } from "@wordpress/compose";
-import { withStyles } from ".";
 
 const withLabel = (WrappedComponent) => {
     const WithLabel = (props) => {

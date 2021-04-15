@@ -3,10 +3,11 @@ import classNames from "classnames";
 import { validFieldProps } from "../utils";
 
 import { useInstanceId } from "@wordpress/compose";
+import { withStyles } from ".";
 
 const withLabel = (WrappedComponent) => {
     const WithLabel = (props) => {
-        let { label, id, name, type, placeholder } = props;
+        let { label, id, name, type, placeholder, style } = props;
 
         const instanceId = useInstanceId(withLabel);
 
@@ -14,14 +15,20 @@ const withLabel = (WrappedComponent) => {
             id = name;
         }
 
+
+        const styleClasses = classNames({
+            [`wprf-style-${style?.type}`]: (style?.type || false)
+        });
+
+
         if (label === undefined || label === '' || label.length <= 0) {
             return <WrappedComponent {...props} id={id} />;
         }
 
-        const validProps = validFieldProps(props, ['description', 'label', 'help'])
+        const validProps = validFieldProps(props, ['description', 'label', 'help', 'style'])
         const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`, {
-            [`wprf-${props?.style?.label?.position || 'inline'}-label`]: props?.style?.label?.position ?? true
-        });
+            [`wprf-${props?.style?.label?.position || 'inline'}-label`]: style?.label?.position ?? true
+        }, styleClasses);
 
         return (
             <div className={componentClasses}>

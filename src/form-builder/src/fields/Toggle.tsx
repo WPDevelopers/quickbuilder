@@ -1,17 +1,16 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { Column, Row } from '../..';
+import { withStyles } from '../core/hooks';
 import { GenericToggle } from './helpers'
 
 export const Toggle = (props) => {
     const { options, value, multiple, style: prevStyles } = props;
     let styles = {
-        type: "", // card
-        label: {
-            position: "right",
-        },
         column: 4,
         ...prevStyles,
     };
+
 
     if (multiple) {
         const [localState, setLocalState] = useState({});
@@ -45,7 +44,8 @@ export const Toggle = (props) => {
                                     id: item.value,
                                     checked: !!localState?.[item.value],
                                     type: 'checkbox',
-                                    onChange: handleChange
+                                    onChange: handleChange,
+                                    style: styles
                                 }}
                             />
                         </Column>

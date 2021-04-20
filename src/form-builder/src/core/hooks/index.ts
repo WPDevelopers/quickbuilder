@@ -6,3 +6,4 @@ export { default as useBuilder } from './useBuilder';
 export { default as withLabel } from './withLabel';
 export { default as withProps } from './withProps';
 export { default as withChange } from './withChange';
+export { default as withStyles } from './withStyles';

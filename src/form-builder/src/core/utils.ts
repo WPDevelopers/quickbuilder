@@ -190,13 +190,27 @@ export const hitAAJX = ( ajax, context = null ) => {
                 path: ajax.api,
                 data
             }).then( response => {
+                if (response?.status == "success" && response?.redirect) {
+                    window.location = response?.redirect;
+                }
+
                 if( ajax?.trigger && isString(ajax?.trigger) ) {
                     let at = ajax.trigger.indexOf('@');
                     let colon = ajax.trigger.indexOf(":");
                     if (at === 0 && colon > 0) {
                         let eligibleKey = ajax.trigger.substr(1, colon - 1);
                         let eligibleDataToSet = ajax.trigger.substr(colon + 1);
-                        context.setFieldValue(eligibleKey, eligibleDataToSet);
+                        if (eligibleDataToSet == 'true'){
+                            eligibleDataToSet = true;
+                        }
+                        else if (eligibleDataToSet == 'false'){
+                            eligibleDataToSet = false;
+                        }
+
+                        context.setFieldValue(
+                                eligibleKey,
+                                eligibleDataToSet
+                            );
                     }
                 }
                 return response;

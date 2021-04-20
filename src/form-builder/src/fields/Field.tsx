@@ -16,6 +16,7 @@ const Field = (props) => {
         case "email":
         case "range":
         case "number":
+        case "hidden":
             return <Input {...props} />;
         case "select":
             return <Select {...props} />;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date, Action, Test, Media, Editor, Button } from '.';
+import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date, Action, Test, Media, Editor, Button, Message } from '.';
 import { withChange, withProps } from '../core/hooks';
 
 const Field = (props) => {
@@ -18,6 +18,8 @@ const Field = (props) => {
         case "number":
         case "hidden":
             return <Input {...props} />;
+        case "message":
+            return <Message {...props} />;
         case "select":
             return <Select {...props} />;
         case "slider":

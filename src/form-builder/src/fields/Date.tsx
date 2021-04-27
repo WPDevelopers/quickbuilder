@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { DateTimePicker, DatePicker, TimePicker, Dropdown, Button } from "@wordpress/components";
+// @ts-ignore
 import { __experimentalGetSettings, date } from "@wordpress/date";
 import { withLabel } from "../core/hooks";
 

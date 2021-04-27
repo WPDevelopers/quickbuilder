@@ -25,68 +25,71 @@ const get = (obj, path, ...restParams) => {
 };
 
 const rules = {
-	is: (key, value, data) => {
-		return get(data, key) === value;
-	},
-	"!is": (key, value, data) => {
-		return !rules.is(key, value, data);
-	},
-	includes: (key, checkAgainst, selectedData) => {
-		if (!isEmptyObj(selectedData)) {
-			let newData = get(selectedData, key);
-			if (_typeof(newData) != "function") {
-				if (isArray(checkAgainst) && isArray(newData)) {
-					return intersect(newData, checkAgainst)?.length;
-				} else if (
-					isArray(checkAgainst) &&
-					_typeof(newData) == "string"
-				) {
-					return checkAgainst.includes(newData);
-				} else if (
-					isArray(newData) &&
-					_typeof(checkAgainst) == "string"
-				) {
-					return newData.includes(checkAgainst);
-				}
-			}
-		}
-		return false;
-	},
-	"!includes": (key, value, data) => {
-		return !rules.includes(key, value, data);
-	},
-	isOfType: (key, value, data) => {
-		return _typeof(get(data, key)) === value;
-	},
-	allOf: (key, values, data) => {
-		if (!Array.isArray(values)) {
-			throw Error('"allOf" condition requires an array as #3 argument');
-		}
+    is: (key, value, data) => {
+        return get(data, key) == value;
+    },
+    "!is": (key, value, data) => {
+        return !rules.is(key, value, data);
+    },
+    includes: (key, checkAgainst, selectedData) => {
+        if (!isEmptyObj(selectedData)) {
+            let newData = get(selectedData, key);
+            if (_typeof(newData) != "function") {
+                if (isArray(checkAgainst) && isArray(newData)) {
+                    return intersect(newData, checkAgainst)?.length;
+                } else if (
+                    isArray(checkAgainst) &&
+                    _typeof(newData) == "string"
+                ) {
+                    return checkAgainst.includes(newData);
+                } else if (
+                    isArray(newData) &&
+                    _typeof(checkAgainst) == "string"
+                ) {
+                    return newData.includes(checkAgainst);
+                }
+            }
+        }
+        return false;
+    },
+    "!includes": (key, value, data) => {
+        return !rules.includes(key, value, data);
+    },
+    isOfType: (key, value, data) => {
+        return _typeof(get(data, key)) === value;
+    },
+    "!isOfType": (key, value, data) => {
+        return !rules.isOfType(key, value, data);
+    },
+    allOf: (key, values, data) => {
+        if (!Array.isArray(values)) {
+            throw Error('"allOf" condition requires an array as #3 argument');
+        }
 
-		let dataValues = get(data, key);
-		return values.every(function (currentValue) {
-			return dataValues.includes(currentValue);
-		});
-	},
-	anyOf: (key, values, data) => {
-		if (!Array.isArray(values)) {
-			throw Error('"anyOf" condition requires an array as #3 argument');
-		}
-		var dataValue = get(data, key);
-		return values.includes(dataValue);
-	},
-	gt: (key, value, data) => {
-		return get(data, key) > value;
-	},
-	gte: (key, value, data) => {
-		return get(data, key) >= value;
-	},
-	lt: (key, value, data) => {
-		return get(data, key) < value;
-	},
-	lte: (key, value, data) => {
-		return get(data, key) <= value;
-	},
+        let dataValues = get(data, key);
+        return values.every(function (currentValue) {
+            return dataValues.includes(currentValue);
+        });
+    },
+    anyOf: (key, values, data) => {
+        if (!Array.isArray(values)) {
+            throw Error('"anyOf" condition requires an array as #3 argument');
+        }
+        var dataValue = get(data, key);
+        return values.includes(dataValue);
+    },
+    gt: (key, value, data) => {
+        return get(data, key) > value;
+    },
+    gte: (key, value, data) => {
+        return get(data, key) >= value;
+    },
+    lt: (key, value, data) => {
+        return get(data, key) < value;
+    },
+    lte: (key, value, data) => {
+        return get(data, key) <= value;
+    },
 };
 const logicalRules = {
 	and: (data) => {

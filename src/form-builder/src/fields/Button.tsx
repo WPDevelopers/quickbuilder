@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
 import classNames from 'classnames';
 import { withLabel } from '../core/hooks';
-import { hitAAJX, isObject } from '../core/utils';
+import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 
 const Button = (props) => {
     if (!props?.text) {
         throw new Error('Button has a required params #text.')
     }
+    const validProps = validFieldProps(props, [
+        "is_pro",
+        "visible",
+        "disable",
+        "parentIndex",
+        "context",
+        "onBlur",
+        "value",
+    ]);
+
 
     const [isLoading, setIsLoading] = useState(false)
     const handleClick = (event) => {
@@ -49,6 +59,7 @@ const Button = (props) => {
 
     return (
         <button
+            {...validProps}
             name={props.name}
             onClick={handleClick}
             className={classNames('wprf-control wprf-button wprf-btn', props?.classes)}>

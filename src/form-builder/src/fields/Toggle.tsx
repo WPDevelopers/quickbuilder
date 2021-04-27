@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { Column, Row } from '../..';
+import { isObject } from '../core/utils';
 import { GenericToggle } from './helpers'
 
 export const Toggle = (props) => {
@@ -29,7 +30,15 @@ export const Toggle = (props) => {
         }, [localState])
 
         useEffect(() => {
-            setLocalState(value);
+            if (!isObject(value)) {
+                let lState = {};
+                for (let option of options) {
+                    lState[option.value] = value;
+                }
+                setLocalState(lState);
+            } else {
+                setLocalState(value);
+            }
         }, [])
 
         return <div className="wprf-toggle-wrapper wprf-control">
@@ -41,7 +50,7 @@ export const Toggle = (props) => {
                                 {...{
                                     ...item,
                                     id: item.value,
-                                    checked: !!localState?.[item.value],
+                                    checked: localState?.[item.value] ? value : !!localState?.[item.value],
                                     type: 'checkbox',
                                     onChange: handleChange,
                                     style: styles

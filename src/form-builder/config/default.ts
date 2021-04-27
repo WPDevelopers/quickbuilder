@@ -20,8 +20,6 @@ const builder = {
 						saved: 'Refresh',
 						loading: 'Refreshing...'
 					},
-					// href:'hello.com',
-					// text: 'Connect',
 					name: 'connect',
 					label: 'Connect Button',
 					default: false,
@@ -32,7 +30,6 @@ const builder = {
 							type: 'ContactForm',
 							nx_type: '@type',
 						},
-						// trigger: '@connect:Refresh'
 					}
 				},
 				// {

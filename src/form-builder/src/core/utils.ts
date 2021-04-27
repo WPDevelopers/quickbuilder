@@ -189,7 +189,7 @@ export const hitAAJX = ( ajax, context = null ) => {
             return wpFetch({
                 path: ajax.api,
                 data
-            }).then( response => {
+            }).then( (response: any) => {
                 if (response?.status == "success" && response?.redirect) {
                     window.location = response?.redirect;
                 }

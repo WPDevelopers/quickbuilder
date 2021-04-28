@@ -75,6 +75,7 @@ const Select = (props) => {
     return (
         <div className="wprf-select-wrapper">
             <ReactSelect
+                isDisabled={props?.disable}
                 classNamePrefix="wprf-select"
                 isSearchable={search ?? false}
                 id={id}

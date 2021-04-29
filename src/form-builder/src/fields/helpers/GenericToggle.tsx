@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from "classnames";
 import { Label } from '../../core/components';
 import { withLabel } from '../../core/hooks';
-import { Input, GenericInput } from '../.';
+import { GenericInput } from '../.';
 
 const GenericToggle = (props) => {
     const { value, style: prevStyles } = props;
@@ -29,7 +29,7 @@ const GenericToggle = (props) => {
 
     return (
         <div className={componentClasses}>
-            <Input {...{ ...props, type: 'checkbox', placeholder: undefined }} />
+            <GenericInput {...{ ...props, type: 'checkbox', placeholder: undefined }} />
             <Label htmlFor={props.id} />
         </div>
     );

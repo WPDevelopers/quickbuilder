@@ -5,7 +5,7 @@ import { Row, Column, Label } from '../core/components';
 
 import "../scss/radio-card.scss";
 import useOptions from "../core/hooks/useOptions";
-import { Input } from ".";
+import { GenericInput } from ".";
 import { validFieldProps } from "../core/utils";
 import { useBuilderContext, withLabel } from "../core/hooks";
 
@@ -60,7 +60,7 @@ const RadioCard = (props) => {
                                 >
                                     {label}
                                 </Label>
-                                <Input
+                                <GenericInput
                                     {...validProps}
                                     is_pro={is_pro}
                                     type="radio"

@@ -1,6 +1,18 @@
 import React from 'react'
-import { ColorPicker, Group, Input, Radio, Repeater, Section, Select, Slider, Toggle, Date, Action, Test, Media, Editor, Button, Message } from '.';
-import { withChange, withProps } from '../core/hooks';
+import {
+    ColorPicker,
+    Group,
+    Input,
+    Radio,
+    Repeater,
+    Section,
+    Select,
+    Slider,
+    Toggle,
+    Date, Action, Test, Media, Editor, Button, Message, Modal
+} from '.';
+
+import { withProps } from '../core/hooks';
 
 const Field = (props) => {
     if (!props.type || props.type.length === 0) {
@@ -46,6 +58,8 @@ const Field = (props) => {
             return <Action {...props} />;
         case "button":
             return <Button {...props} />;
+        case "modal":
+            return <Modal {...props} />;
         // case "test":
         //     return <Test {...props} />;
         default:

@@ -6,7 +6,7 @@ import { useInstanceId } from "@wordpress/compose";
 
 const withLabel = (WrappedComponent) => {
     const WithLabel = (props) => {
-        let { label, id, name, type, placeholder, style } = props;
+        let { label, id, name, type, style: prevStyle } = props;
 
         const instanceId = useInstanceId(withLabel);
 
@@ -14,29 +14,43 @@ const withLabel = (WrappedComponent) => {
             id = name;
         }
 
+        const styles = {
+            description: {
+                position: 'right',
+            },
+            ...prevStyle
+        }
 
         const styleClasses = classNames({
-            [`wprf-style-${style?.type}`]: (style?.type || false)
+            [`wprf-style-${styles?.type}`]: (styles?.type || false),
+            [`wprf-${styles?.label?.position || 'inline'}-label`]: styles?.label?.position ?? true
         });
 
 
-        if (label === undefined || label === '' || label.length <= 0) {
-            return <WrappedComponent {...props} id={id} />;
-        }
+        // if (label === undefined || label === '' || label.length <= 0) {
+        //     return <WrappedComponent {...props} id={id} />;
+        // }
 
         const validProps = validFieldProps(props, ['description', 'label', 'help', 'style'])
-        const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`, {
-            [`wprf-${props?.style?.label?.position || 'inline'}-label`]: style?.label?.position ?? true
-        }, styleClasses);
+        const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`, styleClasses);
 
         return (
             <div className={componentClasses}>
-                <div className="wprf-control-label">
-                    <label htmlFor={id}>{label}</label>
-                </div>
+                { label && label.length > 0 &&
+                    <div className="wprf-control-label">
+                        <label htmlFor={id}>{label}</label>
+                    </div>
+                }
                 <div className="wprf-control-field">
+                    {
+                        styles?.description?.position === 'left' && props?.description &&
+                        <p className="wprf-description" dangerouslySetInnerHTML={{ __html: props.description }}></p>
+                    }
                     <WrappedComponent {...validProps} id={id} />
-                    {props?.description && <p className="wprf-description" dangerouslySetInnerHTML={{ __html: props.description }}></p>}
+                    {
+                        styles?.description?.position === 'right' && props?.description &&
+                        <p className="wprf-description" dangerouslySetInnerHTML={{ __html: props.description }}></p>
+                    }
                     {props?.help && <p className="wprf-help" dangerouslySetInnerHTML={{ __html: props.help }}></p>}
                 </div>
             </div>

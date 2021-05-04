@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import classNames from 'classnames';
-import { withLabel } from '../core/hooks';
+import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
+import { Field } from '.';
 
 const Button = (props) => {
-    if (!props?.text) {
+    if (!props?.text && props?.group !== true) {
         throw new Error('Button has a required params #text.')
     }
     const validProps = validFieldProps(props, [
@@ -19,7 +20,8 @@ const Button = (props) => {
     ]);
 
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleClick = (event) => {
         if (props?.ajax) {
             setIsLoading(true);
@@ -45,7 +47,9 @@ const Button = (props) => {
                 console.log(err);
             });
         }
+        useTrigger(props);
     }
+
 
     if (props?.href) {
         return (
@@ -56,6 +60,17 @@ const Button = (props) => {
                 {props?.text}
             </a>
         )
+    }
+
+    if (props?.group) {
+        let allFields = props.fields.map((item, index) => {
+            let parentIndex = [...props.parentIndex, 'fields', index];
+            return <Field key={item.name} {...item} parentIndex={parentIndex} />;
+        });
+
+        return <div className="wprf-control wprf-button-group wprf-flex">
+            {allFields}
+        </div>
     }
 
     return (

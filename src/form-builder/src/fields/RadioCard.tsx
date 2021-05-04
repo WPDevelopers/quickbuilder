@@ -28,14 +28,14 @@ const RadioCard = (props) => {
     ]);
 
     const styles = { ...props?.style };
-    const validProps = validFieldProps(props, ['options', 'placeholder', 'style']);
+    const validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
 
     return (
         <div className={componentClasses}>
             <Row>
                 {options.map(
-                    ({ label, value, icon, is_pro }, index) => (
-                        <Column column="4" key={index}>
+                    ({ label, value, icon, is_pro, ...rest }, index) => (
+                        <Column column={+rest?.column || 4} key={index}>
                             <div
                                 className={classNames(
                                     "wprf-input-radio-option",

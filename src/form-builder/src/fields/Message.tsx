@@ -11,7 +11,10 @@ const eligibleMessage = (props) => {
             }
         }
     }
-    return ''
+    return {
+        message: props?.message,
+        type: 'normal'
+    };
 }
 
 const Message = (props) => {

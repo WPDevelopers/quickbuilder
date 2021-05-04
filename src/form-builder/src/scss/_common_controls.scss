@@ -44,6 +44,11 @@ $white: '#FFF';
 			font-size: 12px;
 		}
 	}
+	&.wprf-label-none {
+		.wprf-control-field {
+			flex-basis: 100%;
+		}
+	}
 	&.wprf-top-label {
 		display: block;
 		div.wprf-control-field {

@@ -23,13 +23,14 @@ const withLabel = (WrappedComponent) => {
 
         const styleClasses = classNames({
             [`wprf-style-${styles?.type}`]: (styles?.type || false),
-            [`wprf-${styles?.label?.position || 'inline'}-label`]: styles?.label?.position ?? true
+            'wprf-label-none': label === undefined || label === '' || label.length === 0,
+            [`wprf-${styles?.label?.position || 'inline'}-label`]: (styles?.label?.position ?? true) && label != undefined
         });
 
 
-        // if (label === undefined || label === '' || label.length <= 0) {
-        //     return <WrappedComponent {...props} id={id} />;
-        // }
+        if (type === 'hidden') {
+            return <WrappedComponent {...props} id={id} />;
+        }
 
         const validProps = validFieldProps(props, ['description', 'label', 'help', 'style'])
         const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`, styleClasses);

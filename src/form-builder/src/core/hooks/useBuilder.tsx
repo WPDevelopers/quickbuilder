@@ -20,6 +20,16 @@ const useBuilder = (props) => {
         icons: props.initialIcons || {},
     });
 
+    const setContext = useEventCallback((field, value, shouldValidate) => {
+        dispatch({
+            type: 'SET_CONTEXT',
+            payload: {
+                field: field,
+                value: value
+            }
+        });
+    });
+
     const setValues = useEventCallback((values, shouldValidate) => {
         var resolvedValues = typeof values === 'function' ? values(state.values) : values;
         dispatch({
@@ -285,6 +295,7 @@ const useBuilder = (props) => {
     let context: BuilderContext = {
         ...props,
         ...state,
+        setContext: setContext,
         values: state.values,
         savedValues: state.savedValues,
         errors: state.errors,

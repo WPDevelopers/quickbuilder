@@ -155,11 +155,11 @@ export const setIn = (obj, path, value) => {
 
 export const validFieldProps = ( defaultProps, exclude = [] ) => {
     const type = defaultProps.type;
-    let filterOutArray = [ 'validation_rules', 'default', 'rules', 'meta', 'trigger', 'switch', ...exclude ];
+    let filterOutArray = [ 'validation_rules', 'default', 'rules', 'meta', 'switch', ...exclude ];
     if( type !== 'select' && type !== 'radio-card' && ( type !== 'toggle' && defaultProps.multiple ) ) {
         filterOutArray.push( 'options' );
     }
-    if( type !== 'group' && type !== 'repeater' && type !== 'section' ) {
+    if( type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button' ) {
         filterOutArray.push( 'fields' );
     }
 
@@ -208,9 +208,9 @@ export const hitAAJX = ( ajax, context = null ) => {
                         }
 
                         context.setFieldValue(
-                                eligibleKey,
-                                eligibleDataToSet
-                            );
+                            eligibleKey,
+                            eligibleDataToSet
+                        );
                     }
                 }
                 return response;

@@ -3,6 +3,8 @@ import { setIn } from "./utils";
 
 export const builderReducer = (state: any, action: any) => {
     switch (action.type) {
+        case 'SET_CONTEXT':
+            return _extends({}, state, setIn(state, action.payload.field, action.payload.value));
         case 'SET_ACTIVE_TAB':
             return { ...state, config: { ...state.config, active: action.payload } }
         case 'SET_REDIRECT':

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { isEmptyObj, isFunction, isObject } from "../utils";
 import { useBuilderContext, useDefaults } from "./index";
 
@@ -11,6 +11,10 @@ const withProps = (WrappedComponent, isGeneric = false) => {
         const meta = builderContext.getFieldMeta(field.name, props);
         const helpers = builderContext.getFieldHelpers();
 
+        if (props.name === 'import_elementor_theme_next') {
+            console.log("import_elementor_theme_next", props);
+        }
+
         let pIndex = props?.parentIndex ? [...props.parentIndex] : []
         field.parentIndex = pIndex;
         field.context = builderContext;
@@ -22,12 +26,21 @@ const withProps = (WrappedComponent, isGeneric = false) => {
             field.onBlur = props.onBlur;
         }
 
+        const isFieldMounted = useRef({});
+
+        useEffect(() => {
+            isFieldMounted.current[props.name] = true;
+            return () => {
+                isFieldMounted.current[props.name] = false;
+            }
+        }, [])
+
         // if (props?.parent === 'notification-template' && props?.ajax) {
         //     console.log(props.name, props);
         // }
 
         useEffect(() => {
-            if (meta.visible) {
+            if (meta.visible && isFieldMounted.current[props.name]) {
                 // Not needed / Confused
                 if (!isGeneric && field.type !== 'group') {
                     helpers.setValue(field.name, field.value)
@@ -53,8 +66,10 @@ const withProps = (WrappedComponent, isGeneric = false) => {
         }, [meta.visible])
 
         useEffect(() => {
-            if (isObject(trigger) && !isEmptyObj(trigger)) {
-                useDefaults(field.name, helpers, field.value, trigger);
+            if (isFieldMounted.current[props.name]) {
+                if (isObject(trigger) && !isEmptyObj(trigger)) {
+                    useDefaults(field.name, helpers, field.value, trigger);
+                }
             }
         }, [field.value])
 

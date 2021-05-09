@@ -132,3 +132,17 @@ export function _extends(...rest) {
 
 	return _extends.apply(this, rest);
 }
+
+// export const timezoneString = ($offset) => {
+//     let $hours     = Math.trunc($offset);
+//     let $minutes   = ( $offset - $hours );
+//     let $sign      = ( $offset < 0 ) ? '-' : '+';
+//     let $abs_hour  = Math.abs( $hours );
+//     let $abs_mins  = Math.abs( $minutes * 60 );
+//     let $tz_offset = $sign + pad2($abs_hour) + ':' + pad2($abs_mins) );
+//     return $tz_offset;
+// }
+
+// export function pad2(number) {
+//     return (number < 10 ? '0' : '') + number
+// }

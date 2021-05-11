@@ -3,6 +3,7 @@ import { DateTimePicker, DatePicker, TimePicker, Dropdown, Button } from "@wordp
 // @ts-ignore
 import { __experimentalGetSettings, date } from "@wordpress/date";
 import { withLabel } from "../core/hooks";
+import moment from "moment";
 
 const DateControl = (props) => {
 
@@ -10,6 +11,8 @@ const DateControl = (props) => {
 
     const settings: any = __experimentalGetSettings();
     const format = props?.format ?? settings.formats.datetime;
+    const _value = moment.utc(value).utcOffset(+settings?.timezone?.offset); //
+
     const is12HourTime = /a(?!\\)/i.test(
         settings.formats.datetime
             .toLowerCase()
@@ -29,18 +32,18 @@ const DateControl = (props) => {
         <Dropdown
             className="wprf-control-datetime"
             renderToggle={({ isOpen, onToggle }) => (<Button isTertiary onClick={onToggle}>
-                {date(format, value, settings.timezone.string)}
+                {date(format, _value)}
             </Button>)}
             renderContent={() => {
                 return (
                     <DateTimePicker
-                        currentDate={date(format, value, settings.timezone.string) || date(format, new Date(), settings.timezone.string)}
+                        currentDate={date(format, _value)}
                         onChange={(date) => {
                             onChange({
                                 target: {
                                     type: 'date',
                                     name,
-                                    value: date ?? (value || new Date()),
+                                    value: date ?? value,
                                 },
                             });
                         }}
@@ -51,5 +54,6 @@ const DateControl = (props) => {
         </Dropdown>
     );
 };
+
 
 export default withLabel(DateControl);

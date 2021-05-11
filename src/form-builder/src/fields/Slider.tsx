@@ -7,22 +7,33 @@ const Slider = (props) => {
     const { name, id, label, units, value, min, max, unit, tooltip, reset } = props;
 
     const [isValue, setValue] = useState(value || 0);
-    const [sunit, setSunit] = useState(unit || "px");
+    const [sunit, setSunit] = useState(unit);
 
     useEffect(() => {
-        // if (isValue) {
-        //     let finalValue: number | string;
-        //     if (isNumber(isValue)) {
-        //         finalValue = `${isValue}${sunit}`;
-        //     } else if (isString(isValue)) {
-        //         if (!(isValue.indexOf('px') > -1)) {
-        //             finalValue = `${isValue}${sunit}`;
-        //         } else {
-        //             finalValue = `${isValue}`;
-        //         }
-        //     }
-        //     helpers.setValue(name, finalValue);
-        // }
+        if (isValue) {
+            let finalValue: number | string;
+
+            if (isNumber(isValue)) {
+                if (sunit) {
+                    finalValue = `${isValue}${sunit}`;
+                } else {
+                    finalValue = `${isValue}`;
+                }
+            } else if (isString(isValue)) {
+                if (!(isValue.indexOf(sunit) > -1)) {
+                    finalValue = `${isValue}${sunit}`;
+                } else {
+                    finalValue = `${isValue}`;
+                }
+            }
+            props.onChange({
+                target: {
+                    type: 'slider',
+                    name: name,
+                    value: finalValue,
+                }
+            });
+        }
     }, [isValue, sunit])
 
     return (

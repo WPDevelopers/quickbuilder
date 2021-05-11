@@ -18,8 +18,8 @@ const GenericToggle = (props) => {
 
     const componentClasses = classNames(
         "wprf-toggle-wrap",
-        `wprf-${styles?.type}`,
         {
+            [`wprf-${styles?.type}`]: styles?.type.length > 0,
             "wprf-checked": Boolean(value),
             [`wprf-label-position-${styles?.label?.position}`]: styles?.label
                 ?.position,

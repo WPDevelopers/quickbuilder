@@ -194,6 +194,12 @@ export const hitAAJX = ( ajax, context = null ) => {
                     window.location = response?.redirect;
                 }
 
+                if (response?.data?.context && isObject(response?.data?.context)) {
+                    Object.keys(response?.data?.context).map((eligibleKey) => {
+                        context.setFieldValue(eligibleKey, response?.data?.context[eligibleKey]);
+                    });
+                }
+
                 if( ajax?.trigger && isString(ajax?.trigger) ) {
                     let at = ajax.trigger.indexOf('@');
                     let colon = ajax.trigger.indexOf(":");

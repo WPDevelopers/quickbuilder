@@ -54,7 +54,7 @@ const Button = (props) => {
     if (props?.href) {
         return (
             <a
-                href={props?.href}
+                href={props?.href === -1 ? props?.value : props?.href}
                 target={props?.target}
                 className={classNames('wprf-control wprf-button wprf-href-btn', props?.classes)}>
                 {props?.text}

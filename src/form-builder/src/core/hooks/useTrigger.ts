@@ -14,9 +14,10 @@ const useTrigger = ( props ) => {
                         eligibleKey = eligibleKey.split('.')
                     }
                     let eligibleData = trigger?.action[ key ];
-                    let eligibleDefaultData = builderContext.getFieldHelpers().getValueForDefault( eligibleKey, props.name );
-                    if (eligibleKey != "" && eligibleData != "") {
-                        builderContext[triggerType](eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleData)
+                    // let eligibleDefaultData = builderContext.getFieldHelpers().getValueForDefault( eligibleKey, props.name );
+                    // data should be nullable.
+                    if (eligibleKey != "") { // && eligibleData !== ""
+                        builderContext[triggerType](eligibleKey, eligibleData) //eligibleDefaultData ? eligibleDefaultData :
                     }
                 }
             }

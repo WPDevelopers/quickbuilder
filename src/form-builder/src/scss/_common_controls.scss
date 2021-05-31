@@ -13,6 +13,9 @@ $white: '#FFF';
 	&:not(:last-child) {
 		margin-bottom: 20px;
 	}
+	&.hidden{
+		display: none;
+	}
 	.wprf-control-label {
 		flex-basis: 20%;
 		font-weight: 700;

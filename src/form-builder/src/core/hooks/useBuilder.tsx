@@ -5,6 +5,8 @@ import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps } 
 
 const useBuilder = (props) => {
     // Set is Mounted or NOT
+    console.log(props);
+
     const isMounted = useRef(null);
     useEffect(() => {
         isMounted.current = true;

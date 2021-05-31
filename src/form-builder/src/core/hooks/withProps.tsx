@@ -15,6 +15,13 @@ const withProps = (WrappedComponent, isGeneric = false) => {
             console.log("import_elementor_theme_next", props);
         }
 
+        if (builderContext?.quickBuilder && builderContext?.show) {
+            if(!builderContext.show.includes(props.name)){
+                // console.log('WithProps', props, builderContext);
+                field.classes = field?.classes ? field.classes + ' hidden' : ' hidden';
+            }
+        }
+
         let pIndex = props?.parentIndex ? [...props.parentIndex] : []
         field.parentIndex = pIndex;
         field.context = builderContext;

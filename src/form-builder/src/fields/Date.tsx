@@ -32,12 +32,12 @@ const DateControl = (props) => {
         <Dropdown
             className="wprf-control-datetime"
             renderToggle={({ isOpen, onToggle }) => (<Button isTertiary onClick={onToggle}>
-                {date(format, _value)}
+                {date(format, _value, undefined)}
             </Button>)}
             renderContent={() => {
                 return (
                     <DateTimePicker
-                        currentDate={date(format, _value)}
+                        currentDate={date(format, _value, undefined)}
                         onChange={(date) => {
                             onChange({
                                 target: {

@@ -4,7 +4,7 @@ import { applyFilters } from '@wordpress/hooks'
 const Action = (props) => {
     return (
         <>
-            {applyFilters(props.action)}
+            {applyFilters(props.action, props)}
         </>
     )
 }

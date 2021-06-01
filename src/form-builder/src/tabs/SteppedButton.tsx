@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@wordpress/components'
 import { useBuilderContext } from '../core/hooks';
+import { Field } from '../fields';
 
 const SteppedButton = (props) => {
     const [nextTab, setNextTab] = useState(undefined);
@@ -31,6 +32,9 @@ const SteppedButton = (props) => {
                             >
                                 {props.config.buttons[button]}
                             </Button>
+                        }
+                        {
+                            nextTab == undefined && props.config.buttons?.[button]?.type && <Field {...props.config.buttons?.[button]} />
                         }
                     </React.Fragment>;
                 })

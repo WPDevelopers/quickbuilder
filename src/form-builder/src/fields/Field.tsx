@@ -9,7 +9,7 @@ import {
     Select,
     Slider,
     Toggle,
-    Date, Action, Test, Media, Editor, Button, Message, Modal
+    Date, Action, Test, Media, Editor, Button, Message, Modal, AdvancedTemplate
 } from '.';
 
 import { withProps } from '../core/hooks';
@@ -54,6 +54,8 @@ const Field = (props) => {
             return <Media {...props} />;
         case "editor":
             return <Editor {...props} />;
+        case "advanced-template":
+            return <AdvancedTemplate {...props} />;
         case "action":
             return <Action {...props} />;
         case "button":

@@ -3,6 +3,7 @@ import { Editor as Wysiwyg } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, convertFromRaw, ContentState, RawDraftContentState, Modifier, Editor } from "draft-js";
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import { applyFilters } from '@wordpress/hooks'
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { toolbarOptions } from './helpers';
@@ -107,6 +108,14 @@ const AdvancedTemplate = (props) => {
         }, 300);
     }
 
+    useEffect(() => {
+        const tmpl: any = applyFilters('nx_adv_template_default', builderContext.values);
+        const { contentBlocks, entityMap } = htmlToDraft(tmpl.map(val => `<p>${val}</p>`).join("\r\n"));
+        const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+        const editorState = EditorState.createWithContent(contentState);
+        setEditorState(editorState);
+    }, [builderContext.values.themes, builderContext.values['notification-template']])
+
     return (
         <>
         <Wysiwyg
@@ -125,7 +134,7 @@ const AdvancedTemplate = (props) => {
             Variables:
             {builderContext.eligibleOptions(templateOptions).map(val => {
                 if(val.value != 'tag_custom'){
-                    return <><span data-value={val.label} onClick={() => clicked(val.value)}>{`{{${val.value}}}`}</span>{" "}</>;
+                    return <><span className="button button-secondary" data-value={val.label} onClick={() => clicked(val.value)}>{`{{${val.value}}}`}</span>{" "}</>;
                 }
             })}
         </div>

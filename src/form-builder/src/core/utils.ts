@@ -195,8 +195,8 @@ export const hitAAJX = ( ajax, context = null ) => {
                 }
 
                 if (response?.data?.context && isObject(response?.data?.context)) {
-                    Object.keys(response?.data?.context).map((eligibleKey) => {
-                        context.setFieldValue(eligibleKey, response?.data?.context[eligibleKey]);
+                    Object.keys(response.data.context).map((eligibleKey) => {
+                        context.setFieldValue(eligibleKey, response.data.context[eligibleKey]);
                     });
                 }
 

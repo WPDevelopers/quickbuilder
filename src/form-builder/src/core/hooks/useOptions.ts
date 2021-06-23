@@ -18,7 +18,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     useEffect(() => {
         setOptions(builderContext.eligibleOptions(fieldOptions));
         setSelectedOption(builderContext.eligibleOption(fieldOptions, savedValue, multiple ?? false ))
-    }, [savedValue])
+    }, [savedValue, fieldOptions])
 
     useEffect(() => {
         setFieldOptions(props[propertyName]);

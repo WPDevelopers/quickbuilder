@@ -50,6 +50,7 @@ const Button = (props) => {
         useTrigger(props);
     }
 
+    console.log(props?.name, props?.value);
 
     if (props?.href) {
         return (

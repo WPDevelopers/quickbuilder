@@ -78,7 +78,7 @@ const withProps = (WrappedComponent, isGeneric = false) => {
                     useDefaults(field.name, helpers, field.value, trigger);
                 }
             }
-        }, [field.value])
+        }, [field.value, meta.visible])
 
 
         if (!meta.visible) {

@@ -27,7 +27,7 @@ const Select = (props) => {
                 }
             })
             if (!isAjaxComplete) {
-                wpFetch({
+                return wpFetch({
                     path: props?.ajax.api,
                     data: data
                 }).then((response: any) => {
@@ -38,6 +38,7 @@ const Select = (props) => {
                         parentIndex: [...parentIndex, 'options']
                     });
                     // setIsAjaxComplete(true);
+                    return response;
                 })
             }
         }
@@ -71,6 +72,10 @@ const Select = (props) => {
             });
         }
     }, [sOption])
+
+    useEffect(() => {
+        handleMenuOpen();
+    }, [])
 
     return (
         <div className="wprf-select-wrapper">

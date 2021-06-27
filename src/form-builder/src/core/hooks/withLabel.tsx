@@ -35,7 +35,7 @@ const withLabel = (WrappedComponent) => {
         }
 
         const validProps = validFieldProps(props, ['description', 'label', 'help', 'style'])
-        const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`, styleClasses, props?.classes);
+        const componentClasses = classNames("wprf-control-wrapper", `wprf-type-${type}`, `wprf-name-${name}`, styleClasses, props?.classes);
 
         return (
             <div className={componentClasses}>

@@ -32,18 +32,20 @@ const DateControl = (props) => {
         <Dropdown
             className="wprf-control-datetime"
             renderToggle={({ isOpen, onToggle }) => (<Button isTertiary onClick={onToggle}>
+                {/* @ts-ignore */}
                 {date(format, _value, undefined)}
             </Button>)}
             renderContent={() => {
                 return (
                     <DateTimePicker
+                    // @ts-ignore
                         currentDate={date(format, _value, undefined)}
                         onChange={(date) => {
                             onChange({
                                 target: {
                                     type: 'date',
                                     name,
-                                    value: date ?? value,
+                                    value: moment.utc(date).utcOffset(+settings?.timezone?.offset, true),
                                 },
                             });
                         }}

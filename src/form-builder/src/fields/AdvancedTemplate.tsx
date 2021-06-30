@@ -109,11 +109,13 @@ const AdvancedTemplate = (props) => {
     }
 
     useEffect(() => {
-        const tmpl: any = applyFilters('nx_adv_template_default', builderContext.values);
-        const { contentBlocks, entityMap } = htmlToDraft(tmpl.map(val => `<p>${val}</p>`).join("\r\n"));
-        const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
-        const editorState = EditorState.createWithContent(contentState);
-        setEditorState(editorState);
+        if(!builderContext.savedValues?.['advanced_template']){
+            const tmpl: any = applyFilters('nx_adv_template_default', builderContext.values);
+            const { contentBlocks, entityMap } = htmlToDraft(tmpl.map(val => `<p>${val}</p>`).join("\r\n"));
+            const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+            const editorState = EditorState.createWithContent(contentState);
+            setEditorState(editorState);
+        }
     }, [builderContext.values.themes, builderContext.values['notification-template']])
 
     return (

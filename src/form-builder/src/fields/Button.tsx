@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 import { Field } from '.';
+import Swal from 'sweetalert2';
 
 const Button = (props) => {
     if (!props?.text && props?.group !== true) {
@@ -33,7 +34,14 @@ const Button = (props) => {
                         name: props.name,
                         value: true
                     }
-                })
+                });
+
+                Swal.fire({
+                    text: 'Complete',
+                    title: 'Complete',
+                    icon: 'success',
+                    timer: 1500,
+                });
             }).catch(err => {
                 setIsLoading(false);
                 //TODO: need to be fixed.
@@ -43,8 +51,13 @@ const Button = (props) => {
                         name: props.name,
                         value: false
                     }
-                })
-                console.log(err);
+                });
+                Swal.fire({
+                    text: 'Something went wrong.',
+                    title: '!!!',
+                    icon: 'error',
+                    timer: 1500,
+                });
             });
         }
         useTrigger(props);

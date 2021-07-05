@@ -9,7 +9,7 @@ import {
     Select,
     Slider,
     Toggle,
-    Date, Action, Test, Media, Editor, Button, Message, Modal, AdvancedTemplate
+    Date, Action, Test, Media, Editor, Button, Message, Modal, AdvancedTemplate, Textarea
 } from '.';
 
 import { withProps } from '../core/hooks';
@@ -30,6 +30,8 @@ const Field = (props) => {
         case "number":
         case "hidden":
             return <Input {...props} />;
+        case "textarea":
+            return <Textarea {...props} />;
         case "message":
             return <Message {...props} />;
         case "select":

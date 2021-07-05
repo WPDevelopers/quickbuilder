@@ -124,12 +124,12 @@ const useBuilder = (props) => {
     const handleChange = useEventCallback((eventOrString, validProps) => {
         if (validProps?.isPro && Boolean(state.is_pro_active) === false) {
             SweetAlert({
-                showConfirmButton: false,
+                showConfirmButton: true,
                 type: 'error',
-                timer: 1500,
+                // timer: 1500,
                 title: 'Opps...',
                 text: '',
-                html: "You need to upgrade to the <strong><a href='https://notificationx.com'>Premium Version</a></strong> Version to use this feature"
+                html: "You need to upgrade to the <strong><a href='https://notificationx.com' target='_blank'>Premium Version</a></strong> Version to use this feature"
             });
             return;
         }

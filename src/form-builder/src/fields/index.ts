@@ -1,6 +1,7 @@
 export { default as Field, GenericField } from './Field';
 export { default as Date } from './Date';
 export { default as Input, GenericInput } from './Input';
+export { default as Textarea } from './Textarea';
 export { default as Group } from './Group';
 export { default as Select } from './Select';
 export { default as Toggle } from './Toggle';

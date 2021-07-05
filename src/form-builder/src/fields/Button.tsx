@@ -26,7 +26,7 @@ const Button = (props) => {
     const handleClick = (event) => {
         if (props?.ajax) {
             setIsLoading(true);
-            hitAAJX(props?.ajax, props.context).then(res => {
+            hitAAJX(props.ajax, props.context).then(res => {
                 setIsLoading(false);
                 props.onChange({
                     target: {
@@ -36,12 +36,13 @@ const Button = (props) => {
                     }
                 });
 
-                Swal.fire({
-                    text: 'Complete',
-                    title: 'Complete',
-                    icon: 'success',
-                    timer: 1500,
-                });
+                if(!props.ajax?.hideSwal)
+                    Swal.fire({
+                        text: 'Complete',
+                        title: 'Complete',
+                        icon: 'success',
+                        timer: 1500,
+                    });
             }).catch(err => {
                 setIsLoading(false);
                 //TODO: need to be fixed.
@@ -52,18 +53,18 @@ const Button = (props) => {
                         value: false
                     }
                 });
-                Swal.fire({
-                    text: 'Something went wrong.',
-                    title: '!!!',
-                    icon: 'error',
-                    timer: 1500,
-                });
+                if(!props.ajax?.hideSwal)
+                    Swal.fire({
+                        text: 'Something went wrong.',
+                        title: '!!!',
+                        icon: 'error',
+                        timer: 1500,
+                    });
             });
         }
         useTrigger(props);
     }
 
-    console.log(props?.name, props?.value);
 
     if (props?.href) {
         return (

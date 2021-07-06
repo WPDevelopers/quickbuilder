@@ -5,7 +5,7 @@ import { withLabel } from '../../core/hooks';
 import { GenericInput } from '../.';
 
 const GenericToggle = (props) => {
-    const { value, style: prevStyles } = props;
+    const { style: prevStyles } = props;
 
     let styles = {
         type: "", // card
@@ -16,11 +16,12 @@ const GenericToggle = (props) => {
         ...prevStyles,
     };
 
+
     const componentClasses = classNames(
         "wprf-toggle-wrap",
         {
             [`wprf-${styles?.type}`]: styles?.type.length > 0,
-            "wprf-checked": Boolean(value),
+            "wprf-checked": Boolean(props.checked),
             [`wprf-label-position-${styles?.label?.position}`]: styles?.label
                 ?.position,
         },

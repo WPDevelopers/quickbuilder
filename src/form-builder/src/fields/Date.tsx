@@ -24,6 +24,13 @@ const DateControl = (props) => {
 
     useEffect(() => {
         if (value == undefined) {
+            onChange({
+                target: {
+                    type: 'date',
+                    name,
+                    value: _value,
+                },
+            });
             // helpers.setValue(name, date('c', value))
         }
     }, [])
@@ -38,7 +45,7 @@ const DateControl = (props) => {
             renderContent={() => {
                 return (
                     <DateTimePicker
-                    // @ts-ignore
+                        // @ts-ignore
                         currentDate={date(format, _value, undefined)}
                         onChange={(date) => {
                             onChange({

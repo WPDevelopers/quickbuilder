@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import { useBuilderContext } from '../core/hooks';
 import { RepeaterField } from './helpers';
 import { executeChange } from '../core/utils';
@@ -7,11 +7,19 @@ import { executeChange } from '../core/utils';
 const Repeater = (props) => {
     const { name: fieldName, value: fieldValue, button, fields } = props;
     const builderContext = useBuilderContext();
+    const [localMemoizedValue, setLocalMemoizedValue] = useState(null)
 
-    const localMemoizedValue = useMemo(() => {
-        let localS = builderContext.values?.[fieldName] || [{}];
-        return localS;
+    // const localMemoizedValue = useMemo(() => {
+    //     let localS = builderContext.values?.[fieldName];
+    //     return localS;
+    // }, [builderContext.values?.[fieldName], refresh])
+
+    useEffect(() => {
+        if (builderContext.values?.[fieldName] != undefined) {
+            setLocalMemoizedValue(builderContext.values?.[fieldName]);
+        }
     }, [builderContext.values?.[fieldName]])
+
 
     const handleChange = (event, index) => {
         if (event.persist) {
@@ -35,6 +43,12 @@ const Repeater = (props) => {
         }
     }, [localMemoizedValue])
 
+    useEffect(() => {
+        if (localMemoizedValue == null) {
+            setLocalMemoizedValue([{}]);
+        }
+    }, [])
+
     return (
         <div className="wprf-repeater-control">
             <div className="wprf-repeater-label">
@@ -45,7 +59,7 @@ const Repeater = (props) => {
             </div>
             <div className="wprf-repeater-content">
                 {
-                    localMemoizedValue.map((value, index) => {
+                    localMemoizedValue && localMemoizedValue?.length > 0 && localMemoizedValue.map((value, index) => {
                         return <RepeaterField
                             isOpen={true}
                             key={index}

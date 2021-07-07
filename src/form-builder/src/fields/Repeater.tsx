@@ -7,7 +7,7 @@ import { executeChange } from '../core/utils';
 const Repeater = (props) => {
     const { name: fieldName, value: fieldValue, button, fields } = props;
     const builderContext = useBuilderContext();
-    const [localMemoizedValue, setLocalMemoizedValue] = useState(null)
+    const [localMemoizedValue, setLocalMemoizedValue] = useState(builderContext.values?.[fieldName])
 
     // const localMemoizedValue = useMemo(() => {
     //     let localS = builderContext.values?.[fieldName];
@@ -44,7 +44,7 @@ const Repeater = (props) => {
     }, [localMemoizedValue])
 
     useEffect(() => {
-        if (localMemoizedValue == null) {
+        if (localMemoizedValue == undefined) {
             setLocalMemoizedValue([{}]);
         }
     }, [])

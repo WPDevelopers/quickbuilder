@@ -16,7 +16,7 @@ const withProps = (WrappedComponent, isGeneric = false) => {
         }
 
         if (builderContext?.quickBuilder && builderContext?.show) {
-            if(!builderContext.show.includes(props.name)){
+            if (!builderContext.show.includes(props.name)) {
                 // console.log('WithProps', props, builderContext);
                 field.classes = field?.classes ? field.classes + ' hidden' : ' hidden';
             }
@@ -52,22 +52,22 @@ const withProps = (WrappedComponent, isGeneric = false) => {
                 if (!isGeneric && field.type !== 'group') {
                     helpers.setValue(field.name, field.value)
                 } else {
-                    let parent = props?.parent;
-                    let parenttype = props?.parenttype;
-                    if (parent && parenttype === 'group') {
-                        helpers.setValue([parent, field.name], field.value)
-                    }
-                    if (parent && parenttype === 'repeater') {
-                        // let parentValues = helpers.getValue(parent) || [];
-                        // if (isArray(parentValues) && parentValues.length > 0) {
-                        //     parentValues[props.index][field.name] = field.value;
-                        //     helpers.setValue(parent, parentValues)
-                        // } else {
-                        //     parentValues = [...parentValues, ];
-                        //     parentValues = { ...parentValues, [field.name]: field.value };
-                        //     helpers.setValue(parent, parentValues)
-                        // }
-                    }
+                    // let parent = props?.parent;
+                    // let parenttype = props?.parenttype;
+                    // if (parent && parenttype === 'group') {
+                    //     helpers.setValue([parent, field.name], field.value)
+                    // }
+                    // if (parent && parenttype === 'repeater') {
+                    //     // let parentValues = helpers.getValue(parent) || [];
+                    //     // if (isArray(parentValues) && parentValues.length > 0) {
+                    //     //     parentValues[props.index][field.name] = field.value;
+                    //     //     helpers.setValue(parent, parentValues)
+                    //     // } else {
+                    //     //     parentValues = [...parentValues,];
+                    //     //     parentValues = { ...parentValues, [field.name]: field.value };
+                    //     //     helpers.setValue(parent, parentValues)
+                    //     // }
+                    // }
                 }
             }
         }, [meta.visible])

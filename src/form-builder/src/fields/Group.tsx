@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames';
 
-import { BuilderConsumer, useBuilderContext, withLabel } from '../core/hooks';
-import { executeChange, isArray, isEmptyObj, sortingFields } from '../core/utils';
+import { useBuilderContext, withLabel } from '../core/hooks';
+import { executeChange, isArray, sortingFields } from '../core/utils';
 import { GenericField } from '.';
 
 

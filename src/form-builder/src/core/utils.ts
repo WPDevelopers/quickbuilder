@@ -94,33 +94,8 @@ export const executeChange = (eventOrTextValue, maybePath?) =>  {
 
             field = maybePath ? maybePath : name;
 
-            switch( type ) {
-                case 'number':
-                case 'range':
-                    parsed = parseFloat(value), isNaN(parsed) ? '' : parsed;
-                    val = parsed;
-                    break;
-                case 'checkbox':
-                case 'toggle':
-                    val = !!multiple ? value : checked;
-                    break;
-            }
-
-            // console.log(field, val);
-
-
-            // if( /number|range/.test(type) ) {
-            //     parsed = parseFloat(value), isNaN(parsed) ? '' : parsed;
-            //     val = parsed;
-            // } else if(/checkbox/.test(type)){
-            //     val = (checked || value);
-            // } else {
-            //     if( !!multiple ) {
-            //         val
-            //     }
-            // }
-
-            // val = /number|range/.test(type) ? (parsed = parseFloat(value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type) ? (checked || value) : !!multiple ? value : value;
+            val = /number|range/.test(type) ? (parsed = parseFloat(value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type) // checkboxes
+                ? checked : !!multiple ? value : value;
         }
 
     return { field, val };

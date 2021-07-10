@@ -52,11 +52,11 @@ const withProps = (WrappedComponent, isGeneric = false) => {
                 if (!isGeneric && field.type !== 'group') {
                     helpers.setValue(field.name, field.value)
                 } else {
-                    let parent = props?.parent;
-                    let parenttype = props?.parenttype;
-                    if (parent && parenttype === 'group' && field.value) {
-                        helpers.setValue([parent, field.name], field.value)
-                    }
+                    // let parent = props?.parent;
+                    // let parenttype = props?.parenttype;
+                    // if (parent && parenttype === 'group') {
+                    //     helpers.setValue([parent, field.name], field.value)
+                    // }
                     // if (parent && parenttype === 'repeater') {
                     //     // let parentValues = helpers.getValue(parent) || [];
                     //     // if (isArray(parentValues) && parentValues.length > 0) {

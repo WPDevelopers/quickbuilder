@@ -116,11 +116,10 @@ const useBuilder = (props) => {
 
     const executeChange = React.useCallback((eventOrTextValue, maybePath?) => {
         const { field, val: value } = eChange(eventOrTextValue, maybePath);
-
         if (field) {
             setFieldValue(field, value);
         }
-    }, [setFieldValue, state.values, state]);
+    }, [setFieldValue, state.values]);
 
     const handleChange = useEventCallback((eventOrString, validProps) => {
         if (validProps?.isPro && Boolean(state.is_pro_active) === false) {
@@ -134,7 +133,6 @@ const useBuilder = (props) => {
             });
             return;
         }
-
         if (typeof eventOrString === 'string') {
             return (event) => executeChange(eventOrString, event);
         } else {
@@ -178,21 +176,14 @@ const useBuilder = (props) => {
             validProps.value = valueState;
         }
 
-        validProps.visible = isVisible(state.values, args);
+        // var parsed, val;
 
-        // if (validProps?.parenttype === 'group') {
-        //     let parentIndex = validProps?.parentIndex;
-        //     if (isArray(parentIndex)) {
-        //         let lastIndex = parentIndex.pop();
-        //         parentIndex.push(lastIndex - 1);
-        //     }
-        //     console.log(validProps.name, parentIndex);
-        //     const parentField = getIn(state.tabs, parentIndex);
-        //     console.log("parentField", parentField);
-        //     const parentVisibility = isVisible(state.values, parentField);
-        //     console.log("parentVisibility", parentVisibility);
-        //     validProps.visible = validProps.visible && parentVisibility;
-        // }
+        // val = /number|range|slider/.test(type) ? (parsed = parseFloat(validProps.value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type)
+        //     ? validProps.value : !!validProps.multiple ? validProps.value : validProps.value;
+
+        // validProps.value = val;
+
+        validProps.visible = isVisible(state.values, args);
 
         return validProps;
     }, [handleBlur, handleChange, state.values]);

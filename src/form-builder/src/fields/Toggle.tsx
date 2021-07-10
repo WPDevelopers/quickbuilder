@@ -13,8 +13,6 @@ export const Toggle = (props) => {
 
 
     if (multiple) {
-        console.log("props toggles", props);
-
         const [localState, setLocalState] = useState({});
         const handleChange = (event) => {
             const target = event.target ? event.target : event.currentTarget;
@@ -27,7 +25,6 @@ export const Toggle = (props) => {
                     type: 'toggle',
                     name: props.name,
                     value: localState,
-                    multiple: true,
                 }
             });
         }, [localState])

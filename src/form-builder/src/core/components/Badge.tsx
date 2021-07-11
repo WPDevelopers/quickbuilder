@@ -6,11 +6,12 @@ const Badge = (props) => {
     const builderContext = useBuilderContext();
 
     const { label, active } = props;
-    const componentClasses = classNames('wprf-badge', {
+    const componentClasses = classNames('wprf-badge-item', {
         'wprf-badge-active': active
     });
 
     let componentProps = {};
+
     if (!builderContext.is_pro_active) {
         componentProps = {
             onClick: (e) => {

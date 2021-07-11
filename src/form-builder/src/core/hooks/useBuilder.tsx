@@ -129,7 +129,7 @@ const useBuilder = (props) => {
                 // timer: 1500,
                 title: 'Opps...',
                 text: '',
-                html: "You need to upgrade to the <strong><a href='https://notificationx.com' target='_blank'>Premium Version</a></strong> Version to use this feature"
+                html: "You need to upgrade to the <strong><a href='https://notificationx.com/#pricing' target='_blank'>Premium Version</a></strong> Version to use this feature"
             });
             return;
         }

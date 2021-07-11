@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { builderReducer, when } from '../index'
 import { SweetAlert } from "../functions";
-import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps } from "../utils";
+import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString } from "../utils";
 
 const useBuilder = (props) => {
     // Set is Mounted or NOT
@@ -165,6 +165,13 @@ const useBuilder = (props) => {
         if (type === 'checkbox') {
             validProps.checked = !!valueState;
             validProps.value = !!valueState;
+            if (isString(valueState) && valueState === "0") {
+                validProps.checked = false;
+                validProps.value = false;
+            } else {
+                validProps.checked = Boolean(valueState);
+                validProps.value = Boolean(valueState);
+            }
         } else if (type === 'radio') {
             validProps.checked = valueState === valueProp;
             validProps.value = valueProp;

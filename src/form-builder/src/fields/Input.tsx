@@ -1,13 +1,15 @@
 import React, { useCallback } from 'react'
 import { withLabel } from '../core/hooks';
-import { validFieldProps } from '../core/utils';
+import { isString, validFieldProps } from '../core/utils';
 
 const Input = (props) => {
     const validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge']);
     const handleChange = useCallback((event) => validProps.onChange(event, { isPro: !!props.is_pro }), [validProps?.value]);
 
     if (validProps.type === 'checkbox') {
-        validProps.checked = validProps.value;
+        if (validProps?.name) {
+            validProps.checked = validProps?.checked || validProps?.value;
+        }
     }
 
     return React.createElement('input', {

@@ -44,7 +44,6 @@ const Select = (props) => {
         }
     }
     const handleMenuClose = () => {
-        console.log('menuClose', options);
         setIsLoading(false);
     }
 

@@ -90,6 +90,14 @@ export const builderReducer = (state: any, action: any) => {
             return _extends({}, state, {
                 icons: setIn(state.icons, action.payload.name, action.payload.icons)
             });
+        case 'SET_ALERTS':
+            return _extends({}, state, {
+                alerts: setIn(state.common, action.payload.name, action.payload.value)
+            });
+        case 'SET_COMMONS':
+            return _extends({}, state, {
+                common: setIn(state.common, action.payload.name, action.payload.value)
+            });
         default:
             return state;
     }

@@ -19,6 +19,8 @@ const useBuilder = (props) => {
         errors: props.initialErrors || {},
         touched: props.initialTouched || {},
         icons: props.initialIcons || {},
+        common: {},
+        alerts: {},
     });
 
     const setContext = useEventCallback((field, value, shouldValidate) => {
@@ -123,16 +125,10 @@ const useBuilder = (props) => {
 
     const handleChange = useEventCallback((eventOrString, validProps) => {
         if (validProps?.isPro && Boolean(state.is_pro_active) === false) {
-            SweetAlert({
-                showConfirmButton: true,
-                type: 'error',
-                // timer: 1500,
-                title: 'Opps...',
-                text: '',
-                html: "You need to upgrade to the <strong><a href='https://notificationx.com/#pricing' target='_blank'>Premium Version</a></strong> Version to use this feature"
-            });
-            return;
+            state.alerts?.pro_alert?.fire();
+            return false;
         }
+
         if (typeof eventOrString === 'string') {
             return (event) => executeChange(eventOrString, event);
         } else {
@@ -175,13 +171,6 @@ const useBuilder = (props) => {
         } else {
             validProps.value = valueState;
         }
-
-        // var parsed, val;
-
-        // val = /number|range|slider/.test(type) ? (parsed = parseFloat(validProps.value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type)
-        //     ? validProps.value : !!validProps.multiple ? validProps.value : validProps.value;
-
-        // validProps.value = val;
 
         validProps.visible = isVisible(state.values, args);
 
@@ -289,6 +278,25 @@ const useBuilder = (props) => {
         });
     });
 
+    const registerCommon = useEventCallback((name, value) => {
+        dispatch({
+            type: 'SET_COMMONS',
+            payload: {
+                name,
+                value
+            }
+        });
+    });
+    const registerAlert = useEventCallback((name, value) => {
+        dispatch({
+            type: 'SET_ALERTS',
+            payload: {
+                name,
+                value
+            }
+        });
+    });
+
     interface BuilderContext {
         [field: string]: any
     }
@@ -319,7 +327,9 @@ const useBuilder = (props) => {
 
         setFormField: setFormField,
 
-        registerIcons: registerIcons
+        registerIcons: registerIcons,
+        registerCommon: registerCommon,
+        registerAlert: registerAlert,
     };
 
     return context;

@@ -4,8 +4,11 @@ import { useBuilderContext } from '../hooks';
 
 const Badge = (props) => {
     const builderContext = useBuilderContext();
+    let { label, active } = props;
+    if (label === undefined) {
+        label = 'Pro';
+    }
 
-    const { label, active } = props;
     const componentClasses = classNames('wprf-badge-item', {
         'wprf-badge-active': active
     });
@@ -22,10 +25,12 @@ const Badge = (props) => {
     }
 
     return (
-        <div {...componentProps}>
-            <div className="wprf-badge">
-                <sup className={componentClasses}>{label}</sup>
-            </div>
+        <div className="wprf-badge-wrapper" {...componentProps}>
+            {label.length > 0 &&
+                <div className="wprf-badge">
+                    <sup className={componentClasses}>{label}</sup>
+                </div>
+            }
             {props.children}
         </div>
     )

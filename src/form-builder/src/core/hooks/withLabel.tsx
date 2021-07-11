@@ -8,9 +8,7 @@ import { useInstanceId } from "@wordpress/compose";
 const withLabel = (WrappedComponent) => {
     const WithLabel = (props) => {
         let { label, id, name, type, style: prevStyle, is_pro, badge } = props;
-
         const instanceId = useInstanceId(withLabel);
-        // console.log('WithLabel', props);
 
 
         if (id == undefined) {
@@ -40,7 +38,7 @@ const withLabel = (WrappedComponent) => {
 
         return (
             <div className={componentClasses}>
-                {is_pro && badge && <Badge label="Pro">
+                {is_pro == true && <Badge {...badge}>
                     {label && label.length > 0 &&
                         <div className="wprf-control-label">
                             <label htmlFor={id}>{label}</label>
@@ -60,7 +58,7 @@ const withLabel = (WrappedComponent) => {
                     </div>
                 </Badge>}
                 {
-                    !badge && <>
+                    (is_pro == false || is_pro == undefined) && <>
                         {label && label.length > 0 &&
                             <div className="wprf-control-label">
                                 <label htmlFor={id}>{label}</label>

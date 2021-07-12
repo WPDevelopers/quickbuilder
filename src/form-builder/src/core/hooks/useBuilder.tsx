@@ -180,6 +180,18 @@ const useBuilder = (props) => {
         }
 
         validProps.visible = isVisible(state.values, args);
+        //=== "notification-template"
+        // if (validProps?.parenttype === 'group') {
+        //     // if ("custom_fifth_param" === name) {
+        //     let currentIndex = validProps.parentIndex;
+        //     let parentIndex = validProps.parentIndex;
+        //     const lastIndex = parentIndex.pop() - 1;
+        //     parentIndex = [...parentIndex, lastIndex];
+        //     const parentField = getIn(state.tabs, parentIndex);
+        //     const parentVisibility = isVisible(state.values, getFieldProps(parentField));
+        //     console.log("validProps", validProps.name, parentVisibility);
+        //     // }
+        // }
 
         return validProps;
     }, [handleBlur, handleChange, state.values]);

@@ -1,4 +1,4 @@
-import { isArray, isEmptyObj, isString } from '../utils';
+import { isArray, isEmptyObj, isObject, isString } from '../utils';
 
 const useDefaults = ( parentName, helpers, value, trigger : any ) => {
     if( trigger != undefined && trigger?.defaults != undefined && ! isEmptyObj( trigger.defaults ) ) {
@@ -18,12 +18,12 @@ const useDefaults = ( parentName, helpers, value, trigger : any ) => {
                     }
                 }
             }
-            else if( defaults?.[ value ] && isArray(defaults?.[ value ]) ) {
-                for( let eachKey of defaults?.[ value ] ) {
+            else if( defaults?.[ value ] && (isArray(defaults?.[ value ]) || isObject(defaults?.[ value ])) ) {
+                for( let eachKey of Object.values<string>(defaults?.[ value ]) ) {
                     let at = eachKey.indexOf("@"),
                         colon = eachKey.indexOf(":");
                     if (at === 0 && colon > 0) {
-                        let eligibleKey = eachKey.substr(1, colon - 1);
+                        let eligibleKey:any = eachKey.substr(1, colon - 1);
                         let eligibleDataToSet = eachKey.substr(colon + 1);
                         if( eachKey.indexOf(".") > -1 ) {
                             eligibleKey = eligibleKey.split('.')

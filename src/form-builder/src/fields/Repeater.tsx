@@ -51,12 +51,6 @@ const Repeater = (props) => {
 
     return (
         <div className="wprf-repeater-control">
-            <div className="wprf-repeater-label">
-                <button className="wprf-repeater-button"
-                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {}])}>
-                    {button?.label}
-                </button>
-            </div>
             <div className="wprf-repeater-content">
                 {
                     localMemoizedValue && localMemoizedValue?.length > 0 && localMemoizedValue.map((value, index) => {
@@ -72,6 +66,12 @@ const Repeater = (props) => {
                         />
                     })
                 }
+            </div>
+            <div className="wprf-repeater-label">
+                <button className="wprf-repeater-button"
+                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {}])}>
+                    {button?.label}
+                </button>
             </div>
         </div>
     )

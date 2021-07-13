@@ -16,9 +16,16 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     const [option, setOption] = useState(null)
 
     useEffect(() => {
-        setOptions(builderContext.eligibleOptions(fieldOptions));
-        setSelectedOption(builderContext.eligibleOption(fieldOptions, savedValue, multiple ?? false ))
-    }, [savedValue])
+        let newFieldsOptions = builderContext.getTabFields( props?.parentIndex )[propertyName] || fieldOptions;
+        // console.log(props.name, newFieldsOptions);
+        // console.log(props.name, 'old', fieldOptions);
+        /**
+         * old Options is => fieldOptions, L28, 29, 30 ( remove )
+         * if there is any issue with other fields, then it should be for AJAX on Select only.
+         */
+        setOptions(builderContext.eligibleOptions(newFieldsOptions));
+        setSelectedOption(builderContext.eligibleOption(newFieldsOptions, savedValue, multiple ?? false ))
+    }, [savedValue, fieldOptions])
 
     useEffect(() => {
         setFieldOptions(props[propertyName]);

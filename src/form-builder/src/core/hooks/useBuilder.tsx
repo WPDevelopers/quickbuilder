@@ -266,6 +266,10 @@ const useBuilder = (props) => {
         };
     }, [state.errors, state.touched, state.values]);
 
+    const getTabFields = React.useCallback((parentIndex) => {
+        return getIn(state.tabs, parentIndex);
+    }, [state]);
+
     const setSubmitting = useEventCallback((submit) => {
         dispatch({
             type: 'SET_ISSUBMITTING',
@@ -343,6 +347,7 @@ const useBuilder = (props) => {
         getFieldHelpers: getFieldHelpers,
         eligibleOptions: eligibleOptions,
         eligibleOption: eligibleOption,
+        getTabFields: getTabFields,
 
         setFormField: setFormField,
 

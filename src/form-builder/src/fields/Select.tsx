@@ -91,6 +91,7 @@ const Select = (props) => {
                 value={selectedOption}
                 onMenuOpen={handleMenuOpen}
                 onMenuClose={handleMenuClose}
+                isOptionDisabled={(option) => option?.disabled}
                 onChange={(option) => setSOption(option)} // option or options
             />
         </div>

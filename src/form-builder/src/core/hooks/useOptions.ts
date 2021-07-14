@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { isArray } from "../utils";
+import { isArray, sortingFields } from "../utils";
 import { useBuilderContext } from "./index";
 
 const useOptions = ( props: any, propertyName: string = 'fields' ) => {
@@ -10,7 +10,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     const { value: savedValue, multiple }  = props;
     const builderContext = useBuilderContext();
     const [fieldOptions, setFieldOptions] = useState(props[propertyName]);
-    const [options, setOptions] = useState([])
+    const [lOptions, setOptions] = useState([])
     const [isData, setData] = useState({ options: null, parentIndex: null })
     const [selectedOption, setSelectedOption] = useState(null)
     const [option, setOption] = useState(null)
@@ -58,6 +58,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
         }
     }, [selectedOption])
 
+    let options = sortingFields(lOptions);
     return { options, option, selectedOption, setOptions, setData }
 }
 

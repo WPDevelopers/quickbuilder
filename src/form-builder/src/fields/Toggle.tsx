@@ -1,11 +1,16 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
 import { Column, Row } from '../..';
-import { isObject } from '../core/utils';
+import { isObject, sortingFields } from '../core/utils';
 import { GenericToggle } from './helpers'
 
 export const Toggle = (props) => {
-    const { options, value, multiple, style: prevStyles } = props;
+    const { options: passedOptions, value, multiple, style: prevStyles } = props;
+    const options = sortingFields(passedOptions);
+
+    // console.log("options", options);
+
+
     let styles = {
         column: 4,
         ...prevStyles,

@@ -11,7 +11,7 @@ const DateControl = (props) => {
 
     const settings: any = __experimentalGetSettings();
     const format = props?.format ?? settings.formats.datetime;
-    const _value = moment.utc(value).utcOffset(+settings?.timezone?.offset); //
+    const _value = moment.utc(value ? value : undefined).utcOffset(+settings?.timezone?.offset); //
 
     const is12HourTime = /a(?!\\)/i.test(
         settings.formats.datetime
@@ -23,7 +23,7 @@ const DateControl = (props) => {
     );
 
     useEffect(() => {
-        if (value == undefined) {
+        if (!value) {
             onChange({
                 target: {
                     type: 'date',
@@ -32,7 +32,9 @@ const DateControl = (props) => {
                 },
             });
             // helpers.setValue(name, date('c', value))
+            console.log(props, value, _value);
         }
+
     }, [])
 
     return (

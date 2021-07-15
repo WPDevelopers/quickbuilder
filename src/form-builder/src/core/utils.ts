@@ -1,6 +1,7 @@
 import { clone, toPath } from "lodash-es";
 import { wpFetch } from "./functions";
 import when from "./when";
+// @ts-ignore
 import { __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
 

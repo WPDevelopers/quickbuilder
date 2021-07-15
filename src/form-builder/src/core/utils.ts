@@ -1,6 +1,8 @@
 import { clone, toPath } from "lodash-es";
 import { wpFetch } from "./functions";
 import when from "./when";
+import { __experimentalGetSettings } from "@wordpress/date";
+import moment from "moment";
 
 export const isString = (args) => {
     return args !== null && typeof args === "string";
@@ -224,4 +226,10 @@ export const hitAAJX = ( ajax, context = null ) => {
         }
     }
     return Promise.reject( false );
+}
+
+export const getTime = ( value?, keepLocalTime: boolean = false ) => {
+    const settings: any = __experimentalGetSettings();
+    const _value = moment.utc(value ? value : undefined).utcOffset(+settings?.timezone?.offset, keepLocalTime);
+    return _value;
 }

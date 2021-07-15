@@ -1,17 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { DateTimePicker, DatePicker, TimePicker, Dropdown, Button } from "@wordpress/components";
 // @ts-ignore
 import { __experimentalGetSettings, date } from "@wordpress/date";
 import { withLabel } from "../core/hooks";
-import moment from "moment";
+import { getTime } from "../core/utils";
 
 const DateControl = (props) => {
-
     const { name, value, onChange } = props;
 
     const settings: any = __experimentalGetSettings();
     const format = props?.format ?? settings.formats.datetime;
-    const _value = moment.utc(value ? value : undefined).utcOffset(+settings?.timezone?.offset); //
+    const _value = getTime(value);
 
     const is12HourTime = /a(?!\\)/i.test(
         settings.formats.datetime
@@ -28,13 +27,11 @@ const DateControl = (props) => {
                 target: {
                     type: 'date',
                     name,
-                    value: _value,
+                    value: _value
                 },
             });
-            // helpers.setValue(name, date('c', value))
-            console.log(props, value, _value);
+            //     // helpers.setValue(name, date('c', value))
         }
-
     }, [])
 
     return (
@@ -54,7 +51,7 @@ const DateControl = (props) => {
                                 target: {
                                     type: 'date',
                                     name,
-                                    value: moment.utc(date).utcOffset(+settings?.timezone?.offset, true),
+                                    value: getTime(date, true),
                                 },
                             });
                         }}

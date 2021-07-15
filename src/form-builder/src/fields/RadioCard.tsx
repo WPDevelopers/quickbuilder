@@ -30,6 +30,16 @@ const RadioCard = (props) => {
     const styles = { ...props?.style };
     const validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
 
+    useEffect(() => {
+        props.onChange({
+            target: {
+                type: 'radio-card',
+                name: props.name,
+                value: option
+            }
+        })
+    }, [option])
+
     return (
         <div className={componentClasses}>
             <Row>

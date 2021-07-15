@@ -58,6 +58,13 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
         }
     }, [selectedOption])
 
+    useEffect(() => {
+        if( lOptions.filter(opt => opt.value === option).length === 0 ){
+            let options = sortingFields(lOptions);
+            setOption(options?.[0]?.value || savedValue );
+        }
+    }, [option, lOptions])
+
     let options = sortingFields(lOptions);
     return { options, option, selectedOption, setOptions, setData }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { builderReducer, when } from '../index'
 import { SweetAlert } from "../functions";
-import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString } from "../utils";
+import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, getTime } from "../utils";
 
 const useBuilder = (props) => {
     // Set is Mounted or NOT
@@ -175,6 +175,8 @@ const useBuilder = (props) => {
         } else if (type === 'radio') {
             validProps.checked = valueState === valueProp;
             validProps.value = valueProp;
+        } else if (type === 'date') {
+            validProps.value = valueState == undefined ? getTime() : valueState;
         } else {
             validProps.value = valueState;
         }

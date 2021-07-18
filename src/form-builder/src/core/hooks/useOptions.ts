@@ -16,7 +16,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     const [option, setOption] = useState(null)
 
     useEffect(() => {
-        let newFieldsOptions = builderContext.getTabFields( props?.parentIndex )[propertyName] || fieldOptions;
+        let newFieldsOptions = builderContext.getTabFields( props?.parentIndex )?.[propertyName] || fieldOptions;
         // console.log(props.name, newFieldsOptions);
         // console.log(props.name, 'old', fieldOptions);
         /**

@@ -31,13 +31,15 @@ const RadioCard = (props) => {
     const validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
 
     useEffect(() => {
-        props.onChange({
-            target: {
-                type: 'radio-card',
-                name: props.name,
-                value: option
-            }
-        })
+        if (option) {
+            props.onChange({
+                target: {
+                    type: 'radio-card',
+                    name: props.name,
+                    value: option
+                }
+            })
+        }
     }, [option])
 
     return (

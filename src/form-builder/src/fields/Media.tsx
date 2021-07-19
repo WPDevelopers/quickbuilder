@@ -3,7 +3,7 @@ import { MediaUpload } from '@wordpress/media-utils';
 import { withLabel } from '../..';
 
 const Media = (props) => {
-    const [imageData, setImageData] = useState(props.value || null)
+    const [imageData, setImageData] = useState(props.value?.url ? props.value : null)
 
     useEffect(() => {
         props.onChange({

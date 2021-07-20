@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import classNames from "classnames";
 import { useBuilderContext } from '../hooks';
 
+
+const BadgeComp = ({ componentClasses, label }) => {
+    return <div className="wprf-badge">
+        <sup className={componentClasses}>{label}</sup>
+    </div>
+}
+
 const Badge = (props) => {
     const builderContext = useBuilderContext();
-    let { label, active } = props;
+    let { label, active, position = 'right', renderLabel, renderComponent } = props;
     if (label === undefined) {
         label = 'Pro';
     }
@@ -26,12 +33,24 @@ const Badge = (props) => {
 
     return (
         <div className="wprf-badge-wrapper" {...componentProps}>
-            {label.length > 0 &&
-                <div className="wprf-badge">
-                    <sup className={componentClasses}>{label}</sup>
-                </div>
+            {
+                position === 'left' &&
+                label.length > 0 &&
+                <>
+                    {renderLabel(<BadgeComp componentClasses={componentClasses} label={label} />, 'left')}
+                </>
             }
-            {props.children}
+            {
+                position === 'right' &&
+                label.length > 0 &&
+                <>
+                    {renderLabel(<BadgeComp componentClasses={componentClasses} label={label} />, 'right')}
+                    {/* <div className="wprf-badge">
+                        <sup className={componentClasses}>{label}</sup>
+                    </div> */}
+                </>
+            }
+            {renderComponent()}
         </div>
     )
 }

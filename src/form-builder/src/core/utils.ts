@@ -234,3 +234,9 @@ export const getTime = ( value?, keepLocalTime: boolean = false ) => {
     const _value = moment.utc(value ? value : undefined).utcOffset(+settings?.timezone?.offset, keepLocalTime);
     return _value;
 }
+
+export const merge = (arr1: Array<object>, arr2: Array<object>, key: string) => {
+    const data = [...arr1];
+    const newArr2 = arr2.filter((element: any) => data.findIndex((_element: any) => _element[key] === element[key]) <= -1);
+    return [...data, ...newArr2];
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactSelect from "react-select";
-import { isArray, isObject } from '../core/utils';
+import { isArray, isObject, merge } from '../core/utils';
 import { withLabel, useOptions, useBuilderContext } from '../core/hooks';
 import { wpFetch } from '../core/functions';
 import { when } from '../core';
@@ -32,9 +32,10 @@ const Select = (props) => {
                     data: data
                 }).then((response: any) => {
                     setIsLoading(false);
-                    builderContext.setFormField([...parentIndex, 'options'], [...props.options, ...response])
+                    const arrayMerge = merge(props.options, response, 'value');
+                    builderContext.setFormField([...parentIndex, 'options'], arrayMerge)
                     setData({
-                        options: [...props.options, ...response],
+                        options: arrayMerge,
                         parentIndex: [...parentIndex, 'options']
                     });
                     // setIsAjaxComplete(true);

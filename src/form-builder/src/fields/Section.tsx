@@ -11,7 +11,7 @@ const Section = (props) => {
 
     useEffect(() => {
         const newFields = sortingFields(props.fields);
-        builderContext.setFormField([...props.parentIndex, 'fields'], newFields);
+        // builderContext.setFormField([...props.parentIndex, 'fields'], newFields); //FIXME: Commented for Issue#11, Cycle 7
         // builderContext.setFormField([...props.parentIndex, 'sorted'], true);
         let allFields = newFields.map((item, index) => {
             let parentIndex = [...props.parentIndex, 'fields', index];
@@ -27,7 +27,7 @@ const Section = (props) => {
     return (
         <div
             className={componentClasses}>
-            { props.placeholder &&
+            {props.placeholder &&
                 <div className="wprf-section-title">
                     <h4>{props.placeholder}</h4>
                     {props.collapsible && (
@@ -35,7 +35,7 @@ const Section = (props) => {
                             {/* <Icon
                             icon={`arrow-${isCollapse ? "down" : "up"}-alt2`}
                         /> */}
-                        Icon
+                            Icon
                         </button>
                     )}
                 </div>

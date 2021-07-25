@@ -20,7 +20,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
     }
 
     return (
-        <div className="wprf-tab-content-wrapper">
+        <div className={classNames("wprf-tab-content-wrapper", builderContext?.values?.source)} >
             {tabs.map((tab, index) => {
                 const componentClasses = classNames(
                     "wprf-tab-content",

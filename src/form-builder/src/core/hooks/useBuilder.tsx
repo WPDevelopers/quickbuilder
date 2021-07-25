@@ -267,7 +267,7 @@ const useBuilder = (props) => {
                 return savedValue === currentValue ? getIn(state.savedValues, name) : false;
             },
         };
-    }, [state.errors, state.touched, state.values]);
+    }, [state.errors, state.touched, state.values, state.savedValues]);
 
     const getTabFields = React.useCallback((parentIndex) => {
         return getIn(state.tabs, parentIndex);

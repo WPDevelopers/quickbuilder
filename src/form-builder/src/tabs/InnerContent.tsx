@@ -1,21 +1,33 @@
-import React from 'react'
-import { sortingFields } from '../core/utils';
+import React, { useEffect, useState } from 'react'
+import { isArray, sortingFields } from '../core/utils';
 import { Field, GenericField } from '../fields';
 
-const InnerContent = ({ fields, parentIndex }) => {
+const InnerContent = ({ fields, parentIndex, context }) => {
+    const [_fields, setFields] = useState([])
+    const [fieldViews, setFieldViews] = useState([])
     // Fields Sorting
-    const newFields = sortingFields(fields);
+    useEffect(() => {
+        const newFields = sortingFields(fields);
+        context.setFormField([parentIndex, 'fields'], newFields);
+        setFields(newFields);
+    }, [])
 
-    const allFields = newFields.map((item, index) => {
-        //TODO: visibility needs to be done here somehow.
-        let pIndex = [parentIndex, 'fields', index]
-        if (item.type === 'section') {
-            return <GenericField key={`input-${item.name}-${index}`} {...item} parentIndex={pIndex} />;
-        } else {
-            return <Field key={`input-${item.name}-${index}`} {...item} parentIndex={pIndex} />;
+    useEffect(() => {
+        if (isArray(_fields) && _fields.length > 0) {
+            const allFields = _fields.map((item, index) => {
+                let pIndex = [parentIndex, 'fields', index];
+                if (item.type === 'section') {
+                    return <GenericField key={`input-${item.name}-${index}`} {...item} parentIndex={pIndex} />;
+                } else {
+                    return <Field key={`input-${item.name}-${index}`} {...item} parentIndex={pIndex} />;
+                }
+            });
+            setFieldViews(allFields);
         }
-    });
-    return <>{allFields}</>;
+    }, [_fields])
+
+
+    return <>{fieldViews}</>;
 };
 
 export default InnerContent;

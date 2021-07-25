@@ -13,22 +13,15 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
         throw new Error("There are no #tabs args defined in props.");
     }
 
-    const [fields, setFields] = useState([]);
     const builderContext = useBuilderContext();
 
-    useEffect(() => {
-        const newFields = sortingFields(tabs);
-        builderContext.setFormField(null, newFields);
-        setFields(newFields);
-    }, [])
-
-    if (!isArray(fields)) {
+    if (!isArray(tabs)) {
         throw new Error('Not an array.')
     }
 
     return (
         <div className="wprf-tab-content-wrapper">
-            {fields.map((tab, index) => {
+            {tabs.map((tab, index) => {
                 const componentClasses = classNames(
                     "wprf-tab-content",
                     `wprf-tab-${tab?.id}`,
@@ -40,13 +33,13 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
                 return (
                     <div id={tab?.id} className={componentClasses} key={tab?.id} >
                         {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
-                        <InnerContent fields={tab?.fields} parentIndex={index} />
+                        <InnerContent context={builderContext} fields={tab?.fields} parentIndex={index} />
                     </div>
                 );
             })}
             {
                 config?.step?.show &&
-                <SteppedButton tabs={fields} config={config.step ?? {}} />
+                <SteppedButton tabs={tabs} config={config.step ?? {}} />
             }
             {(submit?.show ?? true) && <Submit {...submit} />}
         </div>

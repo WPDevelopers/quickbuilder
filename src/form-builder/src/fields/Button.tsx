@@ -38,9 +38,9 @@ const Button = (props) => {
 
                 if(!props.ajax?.hideSwal)
                     Swal.fire({
-                        text: 'Complete',
-                        title: 'Complete',
-                        icon: 'success',
+                        text: props.ajax?.swal.text || 'Complete',
+                        title: props.ajax?.swal.title || 'Complete',
+                        icon: props.ajax?.swal?.icon || 'success',
                         timer: 1500,
                     });
             }).catch(err => {

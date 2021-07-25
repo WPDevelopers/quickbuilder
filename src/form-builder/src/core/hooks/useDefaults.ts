@@ -25,7 +25,7 @@ const useDefaults = ( parentName, helpers, value, trigger : any ) => {
                         colon = eachKey.indexOf(":");
                     if (at === 0 && colon > 0) {
                         let eligibleKey:any = eachKey.substr(1, colon - 1);
-                        let eligibleDataToSet = eachKey.substr(colon + 1);
+                        let eligibleDataToSet:any = eachKey.substr(colon + 1);
                         if( eachKey.indexOf(".") > -1 ) {
                             eligibleKey = eligibleKey.split('.')
                         }

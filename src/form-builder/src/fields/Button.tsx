@@ -38,12 +38,14 @@ const Button = (props) => {
 
                 if(!props.ajax?.hideSwal)
                     Swal.fire({
-                        text: props.ajax?.swal.text || 'Complete',
-                        title: props.ajax?.swal.title || 'Complete',
+                        text: props.ajax?.swal?.text || 'Complete',
+                        title: props.ajax?.swal?.title || 'Complete',
                         icon: props.ajax?.swal?.icon || 'success',
                         timer: 1500,
                     });
             }).catch(err => {
+                console.log(err);
+
                 setIsLoading(false);
                 //TODO: need to be fixed.
                 props.onChange({

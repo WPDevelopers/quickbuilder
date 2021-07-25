@@ -10,13 +10,9 @@ export const builderReducer = (state: any, action: any) => {
         case 'SET_REDIRECT':
             return { ...state, redirect: { ...state.redirect, ...action.payload } }
         case 'SET_VALUES':
-            return _extends({}, state, {
-                values: action.payload
-            });
+            return _extends({}, state, setIn(state, 'values', action.payload));
         case 'SET_SAVED_VALUES':
-            return _extends({}, state, {
-                savedValues: { ...state.savedValues, ...action.payload }
-            });
+            return _extends({}, state, setIn(state, 'savedValues', action.payload));
         case 'SET_FIELD_VALUE':
             return _extends({}, state, {
                 values: setIn(state.values, action.payload.field, action.payload.value)
@@ -62,9 +58,6 @@ export const builderReducer = (state: any, action: any) => {
         case 'RESET_FORM':
             return _extends({}, state, action.payload);
 
-        case 'SET_FORMIK_STATE':
-            return action.payload(state);
-
         case 'SUBMIT_ATTEMPT':
             return _extends({}, state, {
                 // touched: setNestedObjectValues(state.values, true),
@@ -83,6 +76,9 @@ export const builderReducer = (state: any, action: any) => {
             });
         // Tabs Fields SET
         case 'SET_FORM_FIELD':
+            if( action.payload.field === null ) {
+                return _extends({}, state, setIn(state, 'tabs', action.payload.value));
+            }
             return _extends({}, state, {
                 tabs: setIn(state.tabs, action.payload.field, action.payload.value)
             });

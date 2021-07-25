@@ -1,11 +1,10 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { builderReducer, when } from '../index'
 import { SweetAlert } from "../functions";
-import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, getTime } from "../utils";
+import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, getTime, sortingFields } from "../utils";
 
 const useBuilder = (props) => {
     // Set is Mounted or NOT
-
     const isMounted = useRef(null);
     useEffect(() => {
         isMounted.current = true;
@@ -21,6 +20,7 @@ const useBuilder = (props) => {
         icons: props.initialIcons || {},
         common: {},
         alerts: {},
+        tabs: sortingFields(props.tabs)
     });
 
     const setContext = useEventCallback((field, value, shouldValidate) => {
@@ -267,7 +267,7 @@ const useBuilder = (props) => {
                 return savedValue === currentValue ? getIn(state.savedValues, name) : false;
             },
         };
-    }, [state.errors, state.touched, state.values]);
+    }, [state.errors, state.touched, state.values, state.savedValues]);
 
     const getTabFields = React.useCallback((parentIndex) => {
         return getIn(state.tabs, parentIndex);

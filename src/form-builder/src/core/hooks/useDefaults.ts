@@ -13,6 +13,7 @@ const useDefaults = ( parentName, helpers, value, trigger : any ) => {
                     let eligibleDataToSet = defaults[value].substr(colon + 1);
                     let eligibleDefaultData = helpers.getValueForDefault( eligibleKey, parentName );
                     if (eligibleKey != "" && eligibleDataToSet != "") {
+                        eligibleDataToSet = eligibleDataToSet === 'false' ? false : eligibleDataToSet;
                         defaultsData[eligibleKey] = eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet;
                         helpers.setValue( eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet);
                     }
@@ -30,6 +31,7 @@ const useDefaults = ( parentName, helpers, value, trigger : any ) => {
                         }
                         let eligibleDefaultData = helpers.getValueForDefault( eligibleKey, parentName );
                         if (eligibleKey != "" && eligibleDataToSet != "") {
+                            eligibleDataToSet = eligibleDataToSet === 'false' ? false : eligibleDataToSet;
                             defaultsData[eligibleKey] = eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet;
                             helpers.setValue( eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet);
                         }

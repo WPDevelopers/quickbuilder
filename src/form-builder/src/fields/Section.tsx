@@ -20,7 +20,7 @@ const Section = (props) => {
         setFields(allFields);
     }, [])
 
-    const componentClasses = classNames('wprf-control-section', props?.classes, {
+    const componentClasses = classNames('wprf-control-section', props?.classes, props?.name, {
         'wprf-section-collapsed': props?.collapsible && isCollapse,
     })
 

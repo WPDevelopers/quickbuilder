@@ -18,7 +18,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
 
     useEffect(() => {
         const newFields = sortingFields(tabs);
-        builderContext.setFormField(['tabs'], newFields);
+        builderContext.setFormField(null, newFields);
         setFields(newFields);
     }, [])
 
@@ -39,7 +39,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
 
                 return (
                     <div id={tab?.id} className={componentClasses} key={tab?.id} >
-                        { tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
+                        {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
                         <InnerContent fields={tab?.fields} parentIndex={index} />
                     </div>
                 );

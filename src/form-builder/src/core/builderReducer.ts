@@ -76,6 +76,9 @@ export const builderReducer = (state: any, action: any) => {
             });
         // Tabs Fields SET
         case 'SET_FORM_FIELD':
+            if( action.payload.field === null ) {
+                return _extends({}, state, setIn(state, 'tabs', action.payload.value));
+            }
             return _extends({}, state, {
                 tabs: setIn(state.tabs, action.payload.field, action.payload.value)
             });

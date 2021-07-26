@@ -235,8 +235,11 @@ export const getTime = ( value?, keepLocalTime: boolean = false ) => {
     return _value;
 }
 
-export const merge = (arr1: Array<object>, arr2: Array<object>, key: string) => {
-    const data = [...arr1];
-    const newArr2 = arr2.filter((element: any) => data.findIndex((_element: any) => _element[key] === element[key]) <= -1);
-    return [...data, ...newArr2];
+export const merge = (array_one: Array<object>, array_two: Array<object>, key: string) => {
+    // if( ! isArray(array_one) && ! isArray( array_two ) && isObject( array_one ) && isObject( array_two ) ) {
+    //     return { ...array_one, ...array_two }
+    // }
+    const data = [...array_one];
+    const _array_two = array_two.filter((element: any) => data.findIndex((_element: any) => _element[key] === element[key]) <= -1);
+    return [...data, ..._array_two];
 }

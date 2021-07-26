@@ -31,9 +31,9 @@ const Editor = (props) => {
         })
     }, [editorState]);
 
-
     return (
         <Wysiwyg
+            placeholder={props?.placeholder}
             toolbar={toolbarOptions}
             editorState={editorState}
             toolbarClassName="wprf-editor-toolbar"

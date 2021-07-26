@@ -48,7 +48,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
                 config?.step?.show &&
                 <SteppedButton tabs={tabs} config={config.step ?? {}} />
             }
-            {(submit?.show ?? true) && when(submit.rules, { config }) && <Submit {...submit} />}
+            {(submit?.show ?? true) && (submit?.rules ? when(submit?.rules, { config }) : true) && <Submit {...submit} />}
         </div>
     );
 };

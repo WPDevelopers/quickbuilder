@@ -3,12 +3,12 @@ import classNames from "classnames";
 import { validFieldProps } from "../utils";
 import { Badge, ControlField, ControlLabel } from "../components";
 
-import { useInstanceId } from "@wordpress/compose";
+// import { useInstanceId } from "@wordpress/compose";
 
 const withLabel = (WrappedComponent) => {
     const WithLabel = (props) => {
-        let { label, id, name, type, style: prevStyle, is_pro, badge } = props;
-        const instanceId = useInstanceId(withLabel);
+        let { label, id, name, type, style: prevStyle, is_pro, badge, ...rest } = props;
+        // const instanceId = useInstanceId(withLabel);
 
 
         if (id == undefined) {
@@ -42,7 +42,14 @@ const withLabel = (WrappedComponent) => {
                     is_pro == true &&
                     <Badge
                         {...badge}
-                        renderLabel={(badge, position) => <ControlLabel badge={badge} badgePosition={position} label={label} id={id} />}
+                        renderLabel={(badge, position) => <ControlLabel
+                            {...validProps}
+                            context={rest?.context}
+                            id={id}
+                            label={label}
+                            badge={badge}
+                            badgePosition={position}
+                        />}
                         renderComponent={() => <ControlField
                             help={props?.help}
                             description={props?.description}
@@ -54,22 +61,19 @@ const withLabel = (WrappedComponent) => {
                 {
                     (is_pro == false || is_pro == undefined) && <>
                         {label && label.length > 0 &&
-                            <div className="wprf-control-label">
-                                <label htmlFor={id}>{label}</label>
-                            </div>
+                            <ControlLabel
+                                {...validProps}
+                                context={rest?.context}
+                                label={label}
+                                id={id}
+                            />
                         }
-                        <div className="wprf-control-field">
-                            {
-                                styles?.description?.position === 'left' && props?.description &&
-                                <p className="wprf-description" dangerouslySetInnerHTML={{ __html: props.description }}></p>
-                            }
-                            <WrappedComponent {...validProps} id={id} />
-                            {
-                                styles?.description?.position === 'right' && props?.description &&
-                                <p className="wprf-description" dangerouslySetInnerHTML={{ __html: props.description }}></p>
-                            }
-                            {props?.help && <p className="wprf-help" dangerouslySetInnerHTML={{ __html: props.help }}></p>}
-                        </div>
+                        <ControlField
+                            help={props?.help}
+                            description={props?.description}
+                            position={styles?.description?.position}
+                            renderComponent={() => <WrappedComponent {...validProps} id={id} />}
+                        />
                     </>
                 }
             </div >

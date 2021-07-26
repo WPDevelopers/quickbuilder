@@ -54,6 +54,7 @@ export const Toggle = (props) => {
                             <GenericToggle
                                 {...{
                                     ...item,
+                                    context: props?.context,
                                     id: item.value,
                                     checked: localState?.[item.value] ? value : !!localState?.[item.value],
                                     type: 'checkbox',

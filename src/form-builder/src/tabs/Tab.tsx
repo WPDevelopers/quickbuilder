@@ -33,6 +33,7 @@ const Tab: React.FC<TabConfig> = (props) => {
                 context={builderContext}
             />
             <Content
+                {...props}
                 tabs={props.tabs}
                 active={activeTab}
                 submit={props?.submit}

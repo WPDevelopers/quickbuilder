@@ -9,7 +9,7 @@ import SteppedButton from "./SteppedButton";
 import { useBuilderContext } from "../core/hooks";
 
 
-const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
+const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) => {
     if (tabs === undefined) {
         throw new Error("There are no #tabs args defined in props.");
     }
@@ -41,7 +41,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
                         );
                     })}
                 </div>
-                {applyFilters('wprf_tab_content')}
+                {applyFilters('wprf_tab_content', rest)}
             </div>
             {
                 config?.step?.show &&

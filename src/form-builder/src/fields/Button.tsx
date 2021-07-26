@@ -41,7 +41,7 @@ const Button = (props) => {
                         text: props.ajax?.swal?.text || 'Complete',
                         title: props.ajax?.swal?.title || 'Complete',
                         icon: props.ajax?.swal?.icon || 'success',
-                        timer: 1500,
+                        timer: 2000,
                     });
             }).catch(err => {
                 console.log(err);
@@ -60,7 +60,7 @@ const Button = (props) => {
                         text: 'Something went wrong.',
                         title: '!!!',
                         icon: 'error',
-                        timer: 1500,
+                        timer: 2000,
                     });
             });
         }

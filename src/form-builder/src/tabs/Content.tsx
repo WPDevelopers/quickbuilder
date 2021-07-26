@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { applyFilters } from '@wordpress/hooks'
 import classNames from "classnames";
 import { TabProps } from "./types";
-import { sortingFields, isArray } from "../core/utils";
+import { isArray } from "../core/utils";
 import InnerContent from "./InnerContent";
 import Submit from "./Submit";
 import SteppedButton from "./SteppedButton";
@@ -20,23 +21,28 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config }) => {
     }
 
     return (
-        <div className={classNames("wprf-tab-content-wrapper", builderContext?.values?.source)} >
-            {tabs.map((tab, index) => {
-                const componentClasses = classNames(
-                    "wprf-tab-content",
-                    `wprf-tab-${tab?.id}`,
-                    {
-                        "wprf-active": active === tab.id,
-                    }
-                );
+        <div className={classNames("wprf-tab-content-wrapper", builderContext?.values?.source)}>
+            <div className="wprf-tab-flex">
+                <div className="wprf-tab-contents">
+                    {tabs.map((tab, index) => {
+                        const componentClasses = classNames(
+                            "wprf-tab-content",
+                            `wprf-tab-${tab?.id}`,
+                            {
+                                "wprf-active": active === tab.id,
+                            }
+                        );
 
-                return (
-                    <div id={tab?.id} className={componentClasses} key={tab?.id} >
-                        {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
-                        <InnerContent context={builderContext} fields={tab?.fields} parentIndex={index} />
-                    </div>
-                );
-            })}
+                        return (
+                            <div id={tab?.id} className={componentClasses} key={tab?.id} >
+                                {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
+                                <InnerContent context={builderContext} fields={tab?.fields} parentIndex={index} />
+                            </div>
+                        );
+                    })}
+                </div>
+                {applyFilters('wprf_tab_content')}
+            </div>
             {
                 config?.step?.show &&
                 <SteppedButton tabs={tabs} config={config.step ?? {}} />

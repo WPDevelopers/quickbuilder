@@ -7,6 +7,7 @@ import InnerContent from "./InnerContent";
 import Submit from "./Submit";
 import SteppedButton from "./SteppedButton";
 import { useBuilderContext } from "../core/hooks";
+import when from "../core/when";
 
 
 const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) => {
@@ -47,7 +48,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
                 config?.step?.show &&
                 <SteppedButton tabs={tabs} config={config.step ?? {}} />
             }
-            {(submit?.show ?? true) && <Submit {...submit} />}
+            {(submit?.show ?? true) && when(submit.rules, { config }) && <Submit {...submit} />}
         </div>
     );
 };

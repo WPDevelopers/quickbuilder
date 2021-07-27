@@ -36,7 +36,7 @@ const Button = (props) => {
                     }
                 });
 
-                if(!props.ajax?.hideSwal)
+                if (!props.ajax?.hideSwal)
                     Swal.fire({
                         text: props.ajax?.swal?.text || 'Complete',
                         title: props.ajax?.swal?.title || 'Complete',
@@ -44,8 +44,7 @@ const Button = (props) => {
                         timer: 2000,
                     });
             }).catch(err => {
-                console.log(err);
-
+                console.error('Error In Button Called', props.name, err);
                 setIsLoading(false);
                 //TODO: need to be fixed.
                 props.onChange({
@@ -55,13 +54,15 @@ const Button = (props) => {
                         value: false
                     }
                 });
-                if(!props.ajax?.hideSwal)
+                if (!props.ajax?.hideSwal) {
                     Swal.fire({
                         text: 'Something went wrong.',
                         title: '!!!',
                         icon: 'error',
                         timer: 2000,
                     });
+                }
+
             });
         }
         useTrigger(props);

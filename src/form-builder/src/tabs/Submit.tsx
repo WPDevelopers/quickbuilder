@@ -11,7 +11,7 @@ const Submit = ({ label = 'Save Changes', ...props }) => {
                 context.submit.onSubmit(event, context);
                 return;
             }
-            console.log('on submit wprf.');
+            // console.log('on submit wprf.');
         },
         [context],
     )

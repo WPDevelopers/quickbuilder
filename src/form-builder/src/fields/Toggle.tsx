@@ -8,9 +8,6 @@ export const Toggle = (props) => {
     const { options: passedOptions, value, multiple, style: prevStyles } = props;
     const options = sortingFields(passedOptions);
 
-    // console.log("options", options);
-
-
     let styles = {
         column: 4,
         ...prevStyles,

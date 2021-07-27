@@ -14,16 +14,11 @@ export const useAJAX = ( props ) => {
         Object.keys(props?.ajax.data).map( singleData => {
             if( props?.ajax.data[singleData].indexOf('@') > -1 ) {
                 let eligibleKey = props?.ajax.data[singleData].substr(1);
-                console.log("eligibleKey", builderContext.values?.[eligibleKey]);
                 data[singleData] = builderContext.values?.[eligibleKey]
             } else {
                 data[singleData] = props?.ajax.data[singleData]
             }
         })
-
-        // console.log(data);
-        // useEffect(() => {
-        // }, [])
 
         wpFetch({
             path: props?.ajax.api,

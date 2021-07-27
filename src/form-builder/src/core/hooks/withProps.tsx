@@ -11,13 +11,8 @@ const withProps = (WrappedComponent, isGeneric = false) => {
         const meta = builderContext.getFieldMeta(field.name, props);
         const helpers = builderContext.getFieldHelpers();
 
-        if (props.name === 'import_elementor_theme_next') {
-            console.log("import_elementor_theme_next", props);
-        }
-
         if (builderContext?.quickBuilder && builderContext?.show) {
             if (!builderContext.show.includes(props.name)) {
-                // console.log('WithProps', props, builderContext);
                 field.classes = field?.classes ? field.classes + ' hidden' : ' hidden';
             }
         }
@@ -41,10 +36,6 @@ const withProps = (WrappedComponent, isGeneric = false) => {
                 isFieldMounted.current[props.name] = false;
             }
         }, [])
-
-        // if (props?.parent === 'notification-template' && props?.ajax) {
-        //     console.log(props.name, props);
-        // }
 
         useEffect(() => {
             if (meta.visible && isFieldMounted.current[props.name]) {

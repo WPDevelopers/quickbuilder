@@ -38,7 +38,6 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
 
     useEffect(() => {
         if( isData.options != null ) {
-            // console.log( 'tttttt', [...props[propertyName], ...isData.options] );
             // builderContext.setFormField(isData.parentIndex, [...props[propertyName], ...isData.options])
             // setOptions(builderContext.eligibleOptions(isData.options));
             setFieldOptions(isData.options);

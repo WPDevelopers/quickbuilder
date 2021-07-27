@@ -9,7 +9,6 @@ export {
     BuilderProvider,
     BuilderConsumer,
     useDefaults,
-    withChange,
     withProps,
     withLabel
 } from './src/core/hooks';

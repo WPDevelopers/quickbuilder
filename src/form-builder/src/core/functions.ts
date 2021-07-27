@@ -7,7 +7,6 @@ import { dispatch, select } from "@wordpress/data";
 // wpFetch.use(
 //     wpFetch.createRootURLMiddleware("http://my-wordpress-site/wp-json/")
 // );
-// console.log(notificationxTabs);
 
 import when from "./when";
 import { isArray, isEmptyObj } from "./utils";

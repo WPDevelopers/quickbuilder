@@ -126,7 +126,8 @@ const AdvancedTemplate = (props) => {
                 Variables:
                 {builderContext.eligibleOptions(templateOptions).map((val, i) => {
                     if (val.value != 'tag_custom' && val.value != 'select_a_tag') {
-                        return <React.Fragment key={i}><span className="button button-secondary" data-value={val.label} onClick={() => clicked(val.value)}>{`{{${val.value}}}`}</span>{" "}</React.Fragment>;
+                        const tag = val.value.replace('tag_', '');
+                        return <React.Fragment key={i}><span className="button button-secondary" data-value={val.label} onClick={() => clicked(tag)}>{`{{${tag}}}`}</span>{" "}</React.Fragment>;
                     }
                 })}
             </div>

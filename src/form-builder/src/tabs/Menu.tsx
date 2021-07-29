@@ -13,7 +13,8 @@ const Menu: React.FC<TabProps> = (props) => {
     const componentClasses = classNames(
         "wprf-tab-menu-wrapper",
         props?.className,
-        { "wprf-tab-menu-sidebar": config?.sidebar }
+        { "wprf-tab-menu-sidebar": config?.sidebar },
+        context?.values?.source
     );
 
     const currentTabIndex = tabs.findIndex((tab: any) => tab.id === active);

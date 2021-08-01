@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { applyFilters } from '@wordpress/hooks'
 import classNames from "classnames";
 import { TabProps } from "./types";
-import { isArray } from "../core/utils";
+import { isArray, isVisible } from "../core/utils";
 import InnerContent from "./InnerContent";
 import Submit from "./Submit";
 import SteppedButton from "./SteppedButton";
@@ -21,11 +21,23 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
         throw new Error('Not an array.')
     }
 
+    const [tabsFields, setTabsFields] = useState([]);
+
+    useEffect(() => {
+
+        const filteredTabs = tabs.filter(tab => isVisible(builderContext?.values, tab));
+        setTabsFields(filteredTabs);
+
+    }, [tabs, builderContext?.values?.source])
+
     return (
         <div className={classNames("wprf-tab-content-wrapper", builderContext?.values?.source, builderContext?.values?.themes)}>
             <div className="wprf-tab-flex">
                 <div className="wprf-tab-contents">
                     {tabs.map((tab, index) => {
+                        if (!isVisible(builderContext?.values, tab)) {
+                            return '';
+                        }
                         const componentClasses = classNames(
                             "wprf-tab-content",
                             `wprf-tab-${tab?.id}`,
@@ -46,7 +58,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
             </div>
             {
                 config?.step?.show &&
-                <SteppedButton tabs={tabs} config={config.step ?? {}} />
+                <SteppedButton tabs={tabsFields} config={config.step ?? {}} />
             }
             {(submit?.show ?? true) && (submit?.rules ? when(submit?.rules, { config }) : true) && <Submit {...submit} />}
         </div>

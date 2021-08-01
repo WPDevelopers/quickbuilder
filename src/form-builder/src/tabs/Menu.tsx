@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { TabProps } from "./types";
-import { isString, isObject } from "../core/utils";
+import { isString, isObject, isVisible } from "../core/utils";
 
 const Menu: React.FC<TabProps> = (props) => {
     if (props.tabs === undefined) {
@@ -10,6 +10,15 @@ const Menu: React.FC<TabProps> = (props) => {
 
     const { active, setActive, tabs, config, context } = props;
 
+    const [tabsFields, setTabsFields] = useState([]);
+
+    useEffect(() => {
+
+        const filteredTabs = tabs.filter(tab => isVisible(context?.values, tab));
+        setTabsFields(filteredTabs);
+
+    }, [tabs, context?.values?.source])
+
     const componentClasses = classNames(
         "wprf-tab-menu-wrapper",
         props?.className,
@@ -17,13 +26,13 @@ const Menu: React.FC<TabProps> = (props) => {
         context?.values?.source
     );
 
-    const currentTabIndex = tabs.findIndex((tab: any) => tab.id === active);
+    const currentTabIndex = tabsFields.findIndex((tab: any) => tab.id === active);
 
     return (
         <div className={componentClasses}>
             <ul className="wprf-tab-nav">
                 {
-                    tabs.map((tab, index) => (
+                    tabsFields.map((tab, index) => (
                         <li
                             className={classNames("wprf-tab-nav-item", {
                                 [`${tab.classes}`]: tab.classes,
@@ -44,7 +53,7 @@ const Menu: React.FC<TabProps> = (props) => {
                     ))
                 }
             </ul>
-        </div>
+        </div >
     );
 };
 

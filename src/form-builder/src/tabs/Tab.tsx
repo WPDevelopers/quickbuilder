@@ -28,13 +28,13 @@ const Tab: React.FC<TabConfig> = (props) => {
             <Menu
                 active={activeTab}
                 setActive={(tabId) => setActiveTab(tabId)}
-                tabs={props.tabs}
+                tabs={builderContext.tabs}
                 config={props.config}
                 context={builderContext}
             />
             <Content
                 {...props}
-                tabs={props.tabs}
+                tabs={builderContext.tabs}
                 active={activeTab}
                 submit={props?.submit}
                 config={props.config}

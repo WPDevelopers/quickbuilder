@@ -246,7 +246,7 @@ const useBuilder = (props) => {
                 );
                 return newOptions;
             } else {
-                newOptions = options.filter((option) => option.value === value);
+                newOptions = options.filter((option) => option.value == value);
                 return newOptions.length > 0 ? newOptions[0] : '';
             }
         }

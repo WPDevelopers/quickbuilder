@@ -22,8 +22,10 @@ const Modal = (props) => {
                 <SweetAlert
                     customClass="wprf-modal-inner"
                     style={{
-                        width: '900px',
-                        overflowY: 'scroll'
+                        maxWidth: '900px',
+                        width: '100%',
+                        overflowY: 'scroll',
+                        margin: '50px auto',
                     }}
                     closeBtnStyle={{
                         top: '5px',

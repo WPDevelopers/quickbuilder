@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import { GenericField } from '.';
 import { ModalContent, ModalHeader } from './helpers';
 import SweetAlert from 'react-bootstrap-sweetalert';
-import { hitAAJX } from '../core/utils';
 
 const Modal = (props) => {
     if (props?.body == undefined || props?.button == undefined) {
@@ -19,10 +18,25 @@ const Modal = (props) => {
     return (
         <div className="wprf-control wprf-modal" id={`wprf-modal-${props.name}`}>
             <GenericField type="button" {...props?.button} onClick={openModal} />
-            { isOpen &&
+            {isOpen &&
                 <SweetAlert
+                    customClass="wprf-modal-inner"
                     style={{
-                        width: '900px'
+                        width: '900px',
+                        overflowY: 'scroll'
+                    }}
+                    closeBtnStyle={{
+                        top: '5px',
+                        right: '5px',
+                        color: '#f78c8c',
+                        fontSize: '18px',
+                        border: '1px solid #f78c8c',
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                     }}
                     title={<ModalHeader content={props?.body?.header} />}
                     onConfirm={onConfirm}
@@ -47,7 +61,7 @@ const Modal = (props) => {
                     />
                 </SweetAlert>
             }
-        </div>
+        </div >
     )
 }
 

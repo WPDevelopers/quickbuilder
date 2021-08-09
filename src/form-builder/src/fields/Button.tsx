@@ -17,7 +17,8 @@ const Button = (props) => {
         "context",
         "onBlur",
         "value",
-        'ajax'
+        'ajax',
+        'text'
     ]);
 
 
@@ -95,6 +96,7 @@ const Button = (props) => {
         <button
             {...validProps}
             name={props.name}
+            disabled={isLoading}
             onClick={props?.onClick ?? handleClick}
             className={classNames('wprf-control wprf-button wprf-btn', props?.classes)}>
             {

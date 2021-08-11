@@ -145,9 +145,9 @@ const useBuilder = (props) => {
         const parentType = validProps.parenttype;
         let valueState: any;
         // For Badge Is Commented.
-        // if (defaultProps?.is_pro) {
-        //     validProps.is_pro = !(defaultProps?.is_pro && Boolean(state.is_pro_active) === true);
-        // }
+        if (defaultProps?.is_pro) {
+            validProps.is_pro = !(defaultProps?.is_pro && Boolean(state.is_pro_active) === true);
+        }
 
         if (parent && parentType === 'group') {
             let parentValue = getIn(state.values, parent) ?? {};

@@ -77,6 +77,12 @@ const Select = (props) => {
         handleMenuOpen();
     }, [])
 
+    useEffect(() => {
+        if (props?.menuOpen) {
+            handleMenuOpen();
+        }
+    }, [props?.menuOpen])
+
     return (
         <div className="wprf-select-wrapper">
             <ReactSelect

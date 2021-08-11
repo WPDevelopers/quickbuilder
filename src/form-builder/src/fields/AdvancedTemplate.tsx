@@ -14,6 +14,15 @@ const AdvancedTemplate = (props) => {
     const editor = useRef<{ editor: Editor }>();
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
     const [templateOptions, setTemplateOptions] = useState([]);
+    const getField = (arr, name) => {
+        if (arr.length) {
+            return arr.find(field => field.name == name)?.fields;
+        }
+        return [];
+    }
+    let field = getField(builderContext.tabs, 'content_tab');
+    field = getField(field, 'content');
+    field = getField(field, 'notification-template');
 
     useEffect(() => {
         if (props.value) {
@@ -27,9 +36,21 @@ const AdvancedTemplate = (props) => {
         let field = getField(builderContext.tabs, 'content_tab')
         field = getField(field, 'content')
         field = getField(field, 'notification-template')
+        let templateIndex = props.parentIndex;
+        templateIndex = [...templateIndex, templateIndex.pop() - 1];
+        field[0].menuOpen = true;
+        builderContext.setFormField(templateIndex, field);
+
         let options = field.filter(f => f?.options).map(f => f?.options).flat();
         setTemplateOptions(options);
     }, []);
+
+    useEffect(() => {
+        if (field?.[0]?.options?.length > 0) {
+            let options = field.filter(f => f?.options).map(f => f?.options).flat();
+            setTemplateOptions(options);
+        }
+    }, [field?.[0]?.options])
 
     useEffect(() => {
         let tempValue = draftToHtml(convertToRaw(editorState.getCurrentContent()));
@@ -70,12 +91,6 @@ const AdvancedTemplate = (props) => {
         if (editorLine + clipboardLine > 3) {
             return true;
         }
-    }
-    const getField = (arr, name) => {
-        if (arr.length) {
-            return arr.find(field => field.name == name)?.fields;
-        }
-        return [];
     }
 
     const clicked = (value) => {

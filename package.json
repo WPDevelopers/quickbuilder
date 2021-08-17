@@ -1,7 +1,7 @@
 {
-  "name": "wp-react-form",
-  "version": "0.1.0",
-  "main": "Gruntfile.js",
+  "name": "@priyomukul/wp-react-form",
+  "version": "1.0.0",
+  "main": "index.tsx",
   "author": "priyomukul",
   "scripts": {
     "start": "set NODE_ENV=development && wp-scripts start",

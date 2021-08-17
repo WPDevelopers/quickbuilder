@@ -11,7 +11,8 @@
     "start": "set NODE_ENV=development && wp-scripts start",
     "build": "set NODE_ENV=production && wp-scripts build",
     "readme": "grunt readme",
-    "i18n": "grunt i18n"
+    "i18n": "grunt i18n",
+    "pkg": "tsc -p ."
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -38,6 +39,7 @@
     "grunt": "^1.4.0",
     "grunt-wp-i18n": "^1.0.3",
     "grunt-wp-readme-to-markdown": "~1.0.0",
+    "jest": "^27.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "ts-loader": "^8.2.0",

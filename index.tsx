@@ -1,7 +1,7 @@
 
-import FormBuilder from './form-builder/src/FormBuilder';
+import FormBuilder from './src/FormBuilder';
 
-export { when, builderReducer } from './form-builder/src/core';
+export { when, builderReducer } from './src/core';
 
 export {
     useBuilder,
@@ -11,8 +11,8 @@ export {
     useDefaults,
     withProps,
     withLabel
-} from './form-builder/src/core/hooks';
+} from './src/core/hooks';
 
-export { Row, Column, Label, Image } from './form-builder/src/core/components';
+export { Row, Column, Label, Image } from './src/core/components';
 
 export default FormBuilder

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "./build/",
+        "outDir": "./lib",
         "target": "es5",
         // "lib": [
         //     "dom",
@@ -9,14 +9,14 @@
         //     "es2015", "es2016"
         // ],
         "jsx": "react",
-        "module": "commonjs", // "esnext",
+        "module": "umd", // "esnext",
         "esModuleInterop": true,
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "noImplicitAny": false,
         "moduleResolution": "node",
         "noUnusedLocals": false,
-        "sourceMap": true,
+        "sourceMap": false,
         "types": ["node"],
     },
     "include": [

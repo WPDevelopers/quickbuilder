@@ -3,8 +3,9 @@ const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 
 module.exports = {
 	...defaultConfig,
+	mode: "development",
 	entry: {
-		index: path.resolve(__dirname, "src/index.tsx"),
+		index: path.resolve(__dirname, "index.tsx"),
 	},
 	module: {
 		...defaultConfig.module,
@@ -29,5 +30,7 @@ module.exports = {
 		...defaultConfig.output,
 		filename: "index.js",
 		path: path.resolve(__dirname, "build"),
+		library: ["wp", "formbuilder"],
+		libraryTarget: "window",
 	},
 };

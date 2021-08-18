@@ -1,7 +1,10 @@
 
-import FormBuilder from './src/FormBuilder';
+export { default as FormBuilder } from './src/FormBuilder';
 
 export { when, builderReducer } from './src/core';
+export * from './src/core/utils';
+export * from './src/fields';
+export * from './src/core/functions';
 
 export {
     useBuilder,
@@ -14,5 +17,3 @@ export {
 } from './src/core/hooks';
 
 export { Row, Column, Label, Image } from './src/core/components';
-
-export default FormBuilder

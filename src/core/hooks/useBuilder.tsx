@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer, useRef, useCallback, useLayoutEffect } from "react";
 import { builderReducer, when } from '../index'
 import { SweetAlert } from "../functions";
 import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, getTime, sortingFields } from "../utils";
@@ -73,7 +73,7 @@ const useBuilder = (props) => {
         });
     });
 
-    const getFieldValue = React.useCallback((name) => {
+    const getFieldValue = useCallback((name) => {
         return getIn(state.values, name);
     }, [state]);
 
@@ -93,7 +93,7 @@ const useBuilder = (props) => {
         // return willValidate ? validateFormWithHighPriority(state.values) : Promise.resolve();
     });
 
-    const executeBlur = React.useCallback((event, path = false) => {
+    const executeBlur = useCallback((event, path = false) => {
         if (event.persist) {
             event.persist();
         }
@@ -116,7 +116,7 @@ const useBuilder = (props) => {
         }
     });
 
-    const executeChange = React.useCallback((eventOrTextValue, maybePath?) => {
+    const executeChange = useCallback((eventOrTextValue, maybePath?) => {
         const { field, val: value } = eChange(eventOrTextValue, maybePath);
         if (field) {
             setFieldValue(field, value);
@@ -136,7 +136,7 @@ const useBuilder = (props) => {
         }
     });
 
-    const getFieldProps = React.useCallback((args) => {
+    const getFieldProps = useCallback((args) => {
         let defaultProps = { ...args };
         let validProps: any = validFieldProps(defaultProps);
         const name = validProps.name;
@@ -199,7 +199,7 @@ const useBuilder = (props) => {
         return validProps;
     }, [handleBlur, handleChange, state.values]);
 
-    const getFieldMeta = React.useCallback((name, props, parent = null) => {
+    const getFieldMeta = useCallback((name, props, parent = null) => {
         var parentValue,
             value;
 
@@ -222,7 +222,7 @@ const useBuilder = (props) => {
         };
     }, [state.errors, state.touched, state.values]);
 
-    const eligibleOptions = React.useCallback((options) => {
+    const eligibleOptions = useCallback((options) => {
         if (options.length > 0) {
             let newOptions = [];
             newOptions = options.filter((item) => {
@@ -237,7 +237,7 @@ const useBuilder = (props) => {
         return options;
     }, [state.errors, state.touched, state.values]);
 
-    const eligibleOption = React.useCallback((options, value, multiple = false) => {
+    const eligibleOption = useCallback((options, value, multiple = false) => {
         if (options.length) {
             let newOptions = [];
             if (multiple && isArray(value)) {
@@ -253,7 +253,7 @@ const useBuilder = (props) => {
         return options;
     }, [state.errors, state.touched, state.values]);
 
-    const getFieldHelpers = React.useCallback(() => {
+    const getFieldHelpers = useCallback(() => {
         return {
             setValue: (name, value) => setFieldValue(name, value),
             getValue: (name) => getIn(state.values, name),
@@ -269,7 +269,7 @@ const useBuilder = (props) => {
         };
     }, [state.errors, state.touched, state.values, state.savedValues]);
 
-    const getTabFields = React.useCallback((parentIndex) => {
+    const getTabFields = useCallback((parentIndex) => {
         return getIn(state.tabs, parentIndex);
     }, [state]);
 
@@ -362,14 +362,14 @@ const useBuilder = (props) => {
     return context;
 }
 
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? useLayoutEffect : useEffect;
 
 const useEventCallback = (fn) => {
-    var ref = React.useRef(fn);
+    var ref = useRef(fn);
     useIsomorphicLayoutEffect(function () {
         ref.current = fn;
     });
-    return React.useCallback(function (...args) {
+    return useCallback(function (...args) {
         for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
         }

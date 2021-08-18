@@ -1,4 +1,3 @@
-import React from 'react'
 import { useBuilderContext } from './index';
 
 const useField = (props) => {

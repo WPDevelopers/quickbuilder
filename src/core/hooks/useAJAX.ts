@@ -1,5 +1,3 @@
-
-import React, {useEffect} from 'react'
 import { wpFetch } from '../functions';
 import when from '../when';
 import useBuilderContext from './useBuilderContext';

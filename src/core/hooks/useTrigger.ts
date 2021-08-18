@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
 import { isArray, isObject } from '../utils';
-import useBuilderContext from './useBuilderContext';
 
 const useTrigger = ( props ) => {
     const builderContext = props.context;

@@ -3,7 +3,6 @@ import { useInstanceId } from "@wordpress/compose";
 import classNames from "classnames";
 import { Row, Column, Label } from '../core/components';
 
-import "../scss/radio-card.scss";
 import useOptions from "../core/hooks/useOptions";
 import { GenericInput } from ".";
 import { validFieldProps } from "../core/utils";

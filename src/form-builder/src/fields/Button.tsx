@@ -3,7 +3,9 @@ import classNames from 'classnames';
 import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 import { Field } from '.';
-import Swal from 'sweetalert2';
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Button = (props) => {
     if (!props?.text && props?.group !== true) {
@@ -38,12 +40,18 @@ const Button = (props) => {
                 });
 
                 if (!props.ajax?.hideSwal)
-                    Swal.fire({
-                        text: props.ajax?.swal?.text || 'Complete',
-                        title: props.ajax?.swal?.title || 'Complete',
-                        icon: props.ajax?.swal?.icon || 'success',
-                        timer: 2000,
-                    });
+                    toast.info(
+                        "Complete Successfully",
+                        {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        }
+                    )
             }).catch(err => {
                 console.error('Error In Button Called', props.name, err);
                 setIsLoading(false);
@@ -56,11 +64,14 @@ const Button = (props) => {
                     }
                 });
                 if (!props.ajax?.hideSwal) {
-                    Swal.fire({
-                        text: 'Something went wrong.',
-                        title: '!!!',
-                        icon: 'error',
-                        timer: 2000,
+                    toast.error("Oops, Something went wrong. Please try again.", {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
                     });
                 }
 
@@ -93,18 +104,21 @@ const Button = (props) => {
     }
 
     return (
-        <button
-            {...validProps}
-            name={props.name}
-            disabled={isLoading}
-            onClick={props?.onClick ?? handleClick}
-            className={classNames('wprf-control wprf-button wprf-btn', props?.classes)}>
-            {
-                isObject(props?.text) && props?.ajax ?
-                    (isLoading ? props?.text?.loading : (props.value ? props?.text?.saved : (props?.text?.normal)))
-                    : props?.text
-            }
-        </button>
+        <>
+            <button
+                {...validProps}
+                name={props.name}
+                disabled={isLoading}
+                onClick={props?.onClick ?? handleClick}
+                className={classNames('wprf-control wprf-button wprf-btn', props?.classes)}>
+                {
+                    isObject(props?.text) && props?.ajax ?
+                        (isLoading ? props?.text?.loading : (props.value ? props?.text?.saved : (props?.text?.normal)))
+                        : props?.text
+                }
+            </button>
+            <ToastContainer />
+        </>
     )
 }
 

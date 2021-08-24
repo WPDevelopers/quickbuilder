@@ -4,8 +4,6 @@ import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 import { Field } from '.';
 import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Button = (props) => {
     if (!props?.text && props?.group !== true) {
@@ -117,7 +115,6 @@ const Button = (props) => {
                         : props?.text
                 }
             </button>
-            <ToastContainer />
         </>
     )
 }

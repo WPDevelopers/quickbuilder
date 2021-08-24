@@ -1,5 +1,7 @@
 import React from "react";
 import classNames from "classnames";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 /**
  * Registering a store.
  */
@@ -23,6 +25,7 @@ const FormBuilder: React.FC<BuilderProps> = (props) => {
 	return (
 		<div className={componentClasses}>
 			<Tab {...props} />
+            <ToastContainer />
 		</div>
 	);
 };

@@ -39,7 +39,7 @@ const Button = (props) => {
 
                 if (!props.ajax?.hideSwal)
                     toast.info(
-                        "Complete Successfully",
+                        "Connected Successfully.",
                         {
                             position: "bottom-right",
                             autoClose: 5000,

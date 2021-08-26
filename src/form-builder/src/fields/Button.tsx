@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 import { Field } from '.';
-import { toast } from "react-toastify";
 
 const Button = (props) => {
     if (!props?.text && props?.group !== true) {
@@ -37,19 +36,9 @@ const Button = (props) => {
                     }
                 });
 
-                if (!props.ajax?.hideSwal)
-                    toast.info(
-                        "Connected Successfully.",
-                        {
-                            position: "bottom-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        }
-                    )
+                if (!props.ajax?.hideSwal) {
+                    props.context.alerts.toast('success');
+                }
             }).catch(err => {
                 console.error('Error In Button Called', props.name, err);
                 setIsLoading(false);
@@ -62,15 +51,7 @@ const Button = (props) => {
                     }
                 });
                 if (!props.ajax?.hideSwal) {
-                    toast.error("Oops, Something went wrong. Please try again.", {
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    props.context.alerts.toast('error');
                 }
 
             });

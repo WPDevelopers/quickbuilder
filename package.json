@@ -1,15 +1,15 @@
 {
   "name": "quickbuilder",
   "version": "1.0.0",
-  "main": "dist/formbuilder.esm.js",
-  "module": "dist/formbuilder.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "author": "priyomukul",
   "repository": {
     "type": "git",
     "url": "https://github.com/priyomukul/wp-react-form.git"
   },
   "files": [
-    "dist/",
+    "dist/**",
     "package.json"
   ],
   "scripts": {
@@ -17,7 +17,9 @@
     "prebuild": "rimraf build",
     "build": "set NODE_ENV=production && wp-scripts build",
     "watch": "rollup -c --environment NODE_ENV:development -w",
-    "prepkg": "rimraf dist",
+    "predev": "rimraf dist/dev",
+    "dev": "rollup -c --environment NODE_ENV:development",
+    "prepkg": "rimraf dist/src",
     "pkg": "rollup -c --environment NODE_ENV:production"
   },
   "devDependencies": {
@@ -46,6 +48,7 @@
     "@wordpress/media-utils": "^3.0.0",
     "@wordpress/scripts": "^17.1.0",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

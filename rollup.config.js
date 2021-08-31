@@ -12,7 +12,7 @@ const postcssPlugins = require("@wordpress/postcss-plugins-preset");
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 const isProduction = process.env.NODE_ENV === "production";
-const distFolder = "dist/";
+const distFolder = isProduction ? "dist/src/" : "dist/dev/";
 
 const globalKeys = {
 	react: "React",
@@ -26,20 +26,22 @@ const globalKeys = {
 	"draft-js?commonjs-proxy": "draftJs",
 };
 
+const isMin = isProduction ? ".min" : "";
+
 export default {
 	input: "index.tsx",
 	output: [
 		{
-			file: `${distFolder}formbuilder.cjs.js`,
+			file: `${distFolder}quickbuilder.cjs${isMin}.js`,
 			format: "cjs",
 		},
 		{
-			file: `${distFolder}formbuilder.esm.js`,
+			file: `${distFolder}quickbuilder.esm${isMin}.js`,
 			format: "esm",
 		},
 		{
-			name: "FormBuilder",
-			file: `${distFolder}formbuilder.umd.js`,
+			name: "quickbuilder",
+			file: `${distFolder}quickbuilder.umd${isMin}.js`,
 			format: "umd",
 			globals: globalKeys,
 		},
@@ -55,7 +57,7 @@ export default {
 			exclude: ["node_modules/draft-js/**"],
 		}),
 		scss({
-			output: `${distFolder}formbuilder.css`,
+			output: `${distFolder}quickbuilder.css`,
 			sourceMap: !isProduction,
 			include: ["**/*.scss", "*.css", "node_modules/**/*.css"],
 			failOnError: true,

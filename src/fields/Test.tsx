@@ -1,23 +1,12 @@
-import React from 'react';
-import { Button, Popover } from '@wordpress/components';
-import { withState } from '@wordpress/compose';
+import React from 'react'
 
-const MyPopover = withState({
-    isVisible: false,
-})(({ isVisible, setState }) => {
-    const toggleVisible = () => {
-        setState((state) => ({ isVisible: !state.isVisible }));
-    };
+export const Test = () => {
     return (
-        <Button isSecondary onClick={toggleVisible}>
-            Toggle Popover!
-            { isVisible && (
-                <Popover>
-                    Popover is toggled!
-                </Popover>
-            )}
-        </Button>
-    );
-});
+        <div>
+            <h1>Test</h1>
+        </div>
+    )
+}
 
-export default MyPopover;
+
+export default Test;

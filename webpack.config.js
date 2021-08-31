@@ -30,7 +30,7 @@ module.exports = {
 		...defaultConfig.output,
 		filename: "index.js",
 		path: path.resolve(__dirname, "build"),
-		library: ["wp", "formbuilder"],
-		libraryTarget: "window",
+		// library: ["wp", "formbuilder"],
+		// libraryTarget: "window",
 	},
 };

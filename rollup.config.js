@@ -1,17 +1,65 @@
+import builtins from "rollup-plugin-node-builtins";
 import { uglify } from "rollup-plugin-uglify";
 import ignoreImport from "rollup-plugin-ignore-import";
-import { babel } from "@rollup/plugin-babel";
+import babel from "@rollup/plugin-babel";
 import json from "@rollup/plugin-json";
-import resolve from "rollup-plugin-node-resolve";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import scss from "rollup-plugin-scss";
+
+function NxPlugin() {
+	return {
+		name: "nx-plugin", // this name will show up in warnings and errors
+		resolveId(source) {
+			// if (
+			// 	source == "draft-js?commonjs-proxy" ||
+			// 	source == "draft-js?commonjs-proxy"
+			// ) {
+			// 	return "draft-js";
+			// }
+			if (source.includes("draft-js")) {
+				console.log("source", source);
+			}
+			// if (source === "draft-js") {
+			// 	return source; // this signals that rollup should not ask other plugins or check the file system to find this id
+			// }
+			return null; // other ids should be handled as usually
+		},
+		load(id) {
+			const isExternal = (id) =>
+				!id.startsWith("\0") &&
+				!id.startsWith(".") &&
+				!id.startsWith("/");
+
+			// if (id.includes("draft")) {
+			// 	console.log("id", id);
+			// }
+
+			// if (id === "draft-js") {
+			// 	return 'export default "This is virtual!"'; // the source code for "virtual-module"
+			// }
+			return null; // other ids should be handled as usually
+		},
+	};
+}
 
 const postcssPlugins = require("@wordpress/postcss-plugins-preset");
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
-const distFolder = "dist/";
 
 const isProduction = process.env.NODE_ENV === "production";
+const distFolder = isProduction ? "quickbuilder/" : "dist/";
+const globalKeys = {
+	react: "React",
+	"react-dom": "ReactDOM",
+	lodash: "lodash",
+	"lodash-es": "lodashEs",
+	moment: "momentLib",
+	"@wordpress/components": "wpComponents",
+	"react-draft-wysiwyg": "reactDraftWysiwyg",
+	"draft-js": "draftJs",
+	"draft-js?commonjs-proxy": "draftJs",
+};
 
 export default {
 	input: "index.tsx",
@@ -28,29 +76,18 @@ export default {
 			name: "FormBuilder",
 			file: `${distFolder}formbuilder.umd.js`,
 			format: "umd",
-			globals: {
-				react: "React",
-				"react-dom": "ReactDOM",
-				lodash: "lodash",
-				"lodash-es": "lodashEs",
-				moment: "momentLib",
-				"@wordpress/components": "wpComponents",
-			},
+			globals: globalKeys,
 		},
 	],
-	external: [
-		/@babel\/runtime/,
-		/react/,
-		/react-dom/,
-		/moment/,
-		/@wordpress\/components/,
-		/lodash/,
-		/lodash-es/,
-	],
+	external: Object.keys(globalKeys),
 	plugins: [
-		resolve({
-			mainFields: ["module", "main", "jsnext:main", "browser"],
+		builtins(),
+		nodeResolve({
+			mainFields: ["browser", "module", "main"],
 			extensions,
+		}),
+		commonjs({
+			exclude: ["node_modules/draft-js/**"],
 		}),
 		scss({
 			output: `${distFolder}formbuilder.css`,
@@ -64,19 +101,14 @@ export default {
 		ignoreImport({
 			extensions: [".scss", ".css"],
 		}),
-		commonjs(),
 		json({
 			include: ["node_modules/**/*.json"],
 		}),
 		babel({
-			exclude: "./node_modules/**",
+			exclude: "node_modules/**",
 			extensions,
 			babelHelpers: "runtime",
-			plugins: [
-				"@babel/plugin-transform-runtime",
-				"@babel/plugin-proposal-class-properties",
-			],
 		}),
-		uglify(),
+		isProduction ? uglify() : null,
 	],
 };

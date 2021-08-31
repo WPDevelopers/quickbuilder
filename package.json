@@ -45,7 +45,6 @@
     "@wordpress/i18n": "^3.19.2",
     "@wordpress/media-utils": "^3.0.0",
     "@wordpress/scripts": "^17.1.0",
-    "draft-js": "^0.11.7",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
@@ -61,6 +60,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "html-to-draftjs": "^1.5.0",
     "intersect": "^1.0.1",

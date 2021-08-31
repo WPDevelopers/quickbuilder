@@ -28,6 +28,11 @@ const Button = (props) => {
             setIsLoading(true);
             hitAAJX(props.ajax, props.context).then(res => {
                 setIsLoading(false);
+
+                if(res?.status == 'error'){
+                    throw new Error(res?.message);
+                }
+
                 props.onChange({
                     target: {
                         type: 'button',
@@ -37,7 +42,9 @@ const Button = (props) => {
                 });
 
                 if (!props.ajax?.hideSwal) {
-                    props.context.alerts.toast('success');
+                    const type    = props.ajax?.swal?.icon || 'success';
+                    const message = props.ajax?.swal?.text || 'Complete';
+                    props.context.alerts.toast(type, message, {autoClose: props.ajax?.swal?.autoClose});
                 }
             }).catch(err => {
                 console.error('Error In Button Called', props.name, err);
@@ -51,7 +58,7 @@ const Button = (props) => {
                     }
                 });
                 if (!props.ajax?.hideSwal) {
-                    props.context.alerts.toast('error');
+                    props.context.alerts.toast('error', err?.message || `Something went wrong.`);
                 }
 
             });

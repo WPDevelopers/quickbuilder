@@ -88,7 +88,7 @@ export const builderReducer = (state: any, action: any) => {
             });
         case 'SET_ALERTS':
             return _extends({}, state, {
-                alerts: setIn(state.common, action.payload.name, action.payload.value)
+                alerts: setIn(state.alerts, action.payload.name, action.payload.value)
             });
         case 'SET_COMMONS':
             return _extends({}, state, {

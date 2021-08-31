@@ -9,7 +9,8 @@
     "url": "https://github.com/priyomukul/wp-react-form.git"
   },
   "files": [
-    "dist"
+    "dist/",
+    "package.json"
   ],
   "scripts": {
     "start": "set NODE_ENV=development && wp-scripts start",

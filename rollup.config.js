@@ -7,48 +7,13 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import scss from "rollup-plugin-scss";
 
-function NxPlugin() {
-	return {
-		name: "nx-plugin", // this name will show up in warnings and errors
-		resolveId(source) {
-			// if (
-			// 	source == "draft-js?commonjs-proxy" ||
-			// 	source == "draft-js?commonjs-proxy"
-			// ) {
-			// 	return "draft-js";
-			// }
-			if (source.includes("draft-js")) {
-				console.log("source", source);
-			}
-			// if (source === "draft-js") {
-			// 	return source; // this signals that rollup should not ask other plugins or check the file system to find this id
-			// }
-			return null; // other ids should be handled as usually
-		},
-		load(id) {
-			const isExternal = (id) =>
-				!id.startsWith("\0") &&
-				!id.startsWith(".") &&
-				!id.startsWith("/");
-
-			// if (id.includes("draft")) {
-			// 	console.log("id", id);
-			// }
-
-			// if (id === "draft-js") {
-			// 	return 'export default "This is virtual!"'; // the source code for "virtual-module"
-			// }
-			return null; // other ids should be handled as usually
-		},
-	};
-}
-
 const postcssPlugins = require("@wordpress/postcss-plugins-preset");
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 const isProduction = process.env.NODE_ENV === "production";
-const distFolder = isProduction ? "quickbuilder/" : "dist/";
+const distFolder = "dist/";
+
 const globalKeys = {
 	react: "React",
 	"react-dom": "ReactDOM",

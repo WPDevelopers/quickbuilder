@@ -182,7 +182,7 @@ export const hitAAJX = ( ajax, context = null ) => {
         if( isEligible ) {
             let data = {}
             Object.keys(ajax.data).map(singleData => {
-                if (ajax.data[singleData].indexOf('@') > -1) {
+                if (ajax.data[singleData].indexOf?.('@') > -1) {
                     let eligibleKey = ajax.data[singleData].substr(1);
                     data[singleData] = context.values?.[eligibleKey]
                 } else {

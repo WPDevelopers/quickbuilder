@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 import { Field } from '.';
-import Swal from 'sweetalert2';
 
 const Button = (props) => {
     if (!props?.text && props?.group !== true) {
@@ -29,6 +28,11 @@ const Button = (props) => {
             setIsLoading(true);
             hitAAJX(props.ajax, props.context).then(res => {
                 setIsLoading(false);
+
+                if(res?.status == 'error'){
+                    throw new Error(res?.message);
+                }
+
                 props.onChange({
                     target: {
                         type: 'button',
@@ -37,13 +41,11 @@ const Button = (props) => {
                     }
                 });
 
-                if (!props.ajax?.hideSwal)
-                    Swal.fire({
-                        text: props.ajax?.swal?.text || 'Complete',
-                        title: props.ajax?.swal?.title || 'Complete',
-                        icon: props.ajax?.swal?.icon || 'success',
-                        timer: 2000,
-                    });
+                if (!props.ajax?.hideSwal) {
+                    const type    = props.ajax?.swal?.icon || 'success';
+                    const message = props.ajax?.swal?.text || 'Complete';
+                    props.context.alerts.toast(type, message, {autoClose: props.ajax?.swal?.autoClose});
+                }
             }).catch(err => {
                 console.error('Error In Button Called', props.name, err);
                 setIsLoading(false);
@@ -56,12 +58,7 @@ const Button = (props) => {
                     }
                 });
                 if (!props.ajax?.hideSwal) {
-                    Swal.fire({
-                        text: 'Something went wrong.',
-                        title: '!!!',
-                        icon: 'error',
-                        timer: 2000,
-                    });
+                    props.context.alerts.toast('error', err?.message || `Something went wrong.`);
                 }
 
             });
@@ -93,18 +90,20 @@ const Button = (props) => {
     }
 
     return (
-        <button
-            {...validProps}
-            name={props.name}
-            disabled={isLoading}
-            onClick={props?.onClick ?? handleClick}
-            className={classNames('wprf-control wprf-button wprf-btn', props?.classes)}>
-            {
-                isObject(props?.text) && props?.ajax ?
-                    (isLoading ? props?.text?.loading : (props.value ? props?.text?.saved : (props?.text?.normal)))
-                    : props?.text
-            }
-        </button>
+        <>
+            <button
+                {...validProps}
+                name={props.name}
+                disabled={isLoading}
+                onClick={props?.onClick ?? handleClick}
+                className={classNames('wprf-control wprf-button wprf-btn', props?.classes)}>
+                {
+                    isObject(props?.text) && props?.ajax ?
+                        (isLoading ? props?.text?.loading : (props.value ? props?.text?.saved : (props?.text?.normal)))
+                        : props?.text
+                }
+            </button>
+        </>
     )
 }
 

@@ -31,6 +31,7 @@ const Section = (props) => {
 
     return (
         <div
+            id={props?.name}
             className={componentClasses}>
             {props.placeholder &&
                 <div className="wprf-section-title">

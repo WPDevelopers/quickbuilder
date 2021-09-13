@@ -45,7 +45,7 @@ const DateControl = (props) => {
                 return (
                     <DateTimePicker
                         // @ts-ignore
-                        currentDate={date(format, _value, undefined)}
+                        currentDate={_value.format()}
                         onChange={(date) => {
                             onChange({
                                 target: {

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { TabProps } from "./types";
 import { isString, isObject, isVisible } from "../core/utils";
+import { __ } from '@wordpress/i18n';
 
 const Menu: React.FC<TabProps> = (props) => {
     if (props.tabs === undefined) {
-        throw new Error("There are no tabs defined!");
+        throw new Error(__("There are no tabs defined!", 'notificationx'));
     }
 
     const { active, setActive, tabs, config, context } = props;

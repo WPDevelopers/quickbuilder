@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import React from 'react'
 import {
     ColorPicker,
@@ -9,7 +10,7 @@ import {
     Select,
     Slider,
     Toggle,
-    Date, Action, Test, Media, Editor, Button, Message, Modal, AdvancedTemplate, Textarea
+    Date, Action, Media, Editor, Button, Message, Modal, AdvancedTemplate, Textarea
 } from '.';
 
 import { withProps } from '../core/hooks';
@@ -17,7 +18,7 @@ import { withProps } from '../core/hooks';
 const Field = (props) => {
     if (!props.type || props.type.length === 0) {
         console.error(props);
-        throw new Error('Field must have a #type. see documentation.');
+        throw new Error(__('Field must have a #type. see documentation.', 'notificationx'));
     }
 
     switch (props.type) {

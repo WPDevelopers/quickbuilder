@@ -2,10 +2,11 @@ import React, { useCallback, useState } from 'react';
 import { GenericField } from '.';
 import { ModalContent, ModalHeader } from './helpers';
 import SweetAlert from 'react-bootstrap-sweetalert';
+import { __ } from '@wordpress/i18n';
 
 const Modal = (props) => {
     if (props?.body == undefined || props?.button == undefined) {
-        throw new Error('Modal needs button/body with it.');
+        throw new Error(__('Modal needs button/body with it.', 'notificationx'));
     }
 
     const [isOpen, setOpen] = useState(false);

@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import { useBuilderContext, withLabel } from '../core/hooks';
 import { executeChange, isArray, sortingFields } from '../core/utils';
 import { GenericField } from '.';
+import { __ } from '@wordpress/i18n';
 
 
 const Group = (props) => {
     const { name: fieldName, fields, ...rest } = props;
 
     if (!fields || !isArray(fields) || fields.length === 0) {
-        throw new Error('You should give a #fields arguments to a group field.')
+        throw new Error(__('You should give a #fields arguments to a group field.', 'notificationx'))
     }
 
     const builderContext = useBuilderContext();

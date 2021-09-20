@@ -8,17 +8,18 @@ import Submit from "./Submit";
 import SteppedButton from "./SteppedButton";
 import { useBuilderContext } from "../core/hooks";
 import when from "../core/when";
+import { __ } from '@wordpress/i18n';
 
 
 const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) => {
     if (tabs === undefined) {
-        throw new Error("There are no #tabs args defined in props.");
+        throw new Error(__("There are no #tabs args defined in props.", 'notificationx'));
     }
 
     const builderContext = useBuilderContext();
 
     if (!isArray(tabs)) {
-        throw new Error('Not an array.')
+        throw new Error(__('Not an array.', 'notificationx'))
     }
 
     const [tabsFields, setTabsFields] = useState([]);

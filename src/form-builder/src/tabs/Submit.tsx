@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react'
 import { Button } from '@wordpress/components';
 import { useBuilderContext } from '../core/hooks';
+import { __ } from '@wordpress/i18n';
 
-const Submit = ({ label = 'Save Changes', ...props }) => {
+const Submit = ({ ...props }) => {
     const context = useBuilderContext();
-
+    const label = props?.label || __('Save Changes', 'notificationx');
     const handleSubmit = useCallback(
         (event) => {
             if (context.submit?.onSubmit) {

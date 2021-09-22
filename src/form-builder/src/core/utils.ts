@@ -196,10 +196,10 @@ export const hitAAJX = ( ajax, context = null ) => {
                 if (response?.status == "success" && response?.redirect) {
                     window.location = response?.redirect;
                 }
-
-                if (response?.data?.context && isObject(response?.data?.context)) {
-                    Object.keys(response.data.context).map((eligibleKey) => {
-                        context.setFieldValue(eligibleKey, response.data.context[eligibleKey]);
+                const dataContext = response?.data?.context ? response.data.context : (response?.context ? response.context : false);
+                if (dataContext && isObject(dataContext)) {
+                    Object.keys(dataContext).map((eligibleKey) => {
+                        context.setFieldValue(eligibleKey, dataContext[eligibleKey]);
                     });
                 }
 

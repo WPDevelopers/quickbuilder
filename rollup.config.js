@@ -13,6 +13,7 @@ const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 const isProduction = process.env.NODE_ENV === "production";
 const distFolder = isProduction ? "dist/src/" : "dist/dev/";
+const styleFolder = "dist/";
 
 const globalKeys = {
 	react: "React",
@@ -57,7 +58,7 @@ export default {
 			exclude: ["node_modules/draft-js/**"],
 		}),
 		scss({
-			output: `${distFolder}quickbuilder.css`,
+			output: `${styleFolder}style.css`,
 			sourceMap: !isProduction,
 			include: ["**/*.scss", "*.css", "node_modules/**/*.css"],
 			failOnError: true,
@@ -75,6 +76,10 @@ export default {
 			exclude: "node_modules/**",
 			extensions,
 			babelHelpers: "runtime",
+			plugins: [
+				"@babel/plugin-transform-runtime",
+				"@babel/plugin-proposal-class-properties",
+			],
 		}),
 		isProduction ? uglify() : null,
 	],

@@ -1,15 +1,15 @@
 {
   "name": "quickbuilder",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "index.tsx",
+  "module": "index.tsx",
   "author": "priyomukul",
   "repository": {
     "type": "git",
     "url": "https://github.com/priyomukul/wp-react-form.git"
   },
   "files": [
-    "dist/**",
+    "dist",
     "package.json"
   ],
   "scripts": {

@@ -2,14 +2,19 @@
   "name": "quickbuilder",
   "version": "1.0.0",
   "author": "priyomukul",
-  "main": "index.tsx",
-  "module": "index.tsx",
+  "main": "index.js",
+  "module": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/priyomukul/wp-react-form.git"
   },
   "files": [
-    "dist/"
+    "dev/**",
+    "src/**",
+    "index.css",
+    "index.css.map",
+    "index.js",
+    "package.json"
   ],
   "scripts": {
     "start": "set NODE_ENV=development && wp-scripts start",

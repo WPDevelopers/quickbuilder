@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
-import { Column, Row } from '../..';
+import { Column, Row } from '../core/components';
 import { isObject, sortingFields } from '../core/utils';
 import { GenericToggle } from './helpers'
 

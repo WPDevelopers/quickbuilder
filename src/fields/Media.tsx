@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { MediaUpload } from '@wordpress/media-utils';
-import { withLabel } from '../..';
+import { withLabel } from '../core/hooks';
 
 const Media = (props) => {
     const [imageData, setImageData] = useState(props.value?.url ? props.value : null)

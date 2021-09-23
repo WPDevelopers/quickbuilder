@@ -30,7 +30,7 @@ const globalKeys = {
 const isMin = isProduction ? ".min" : "";
 
 export default {
-	input: "index.tsx",
+	input: "./index.tsx",
 	output: [
 		{
 			file: `${distFolder}quickbuilder.cjs${isMin}.js`,
@@ -55,7 +55,7 @@ export default {
 			extensions,
 		}),
 		commonjs({
-			exclude: ["node_modules/draft-js/**"],
+			exclude: ["node_modules/draft-js/**", "dist/**"],
 		}),
 		scss({
 			output: `${styleFolder}index.css`,

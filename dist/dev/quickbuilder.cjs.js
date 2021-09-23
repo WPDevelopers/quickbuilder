@@ -136,67 +136,6 @@ function combineReducers( reducers ) {
 
 var turboCombineReducers = combineReducers;
 
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-
-  var _s, _e;
-
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _arrayLikeToArray$1(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-function _unsupportedIterableToArray$1(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest();
-}
-
 function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -212,803 +151,7 @@ function _defineProperty$1(obj, key, value) {
   return obj;
 }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var runtime = {exports: {}};
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-(function (module) {
-var runtime = (function (exports) {
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined$1; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  function define(obj, key, value) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-    return obj[key];
-  }
-  try {
-    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
-    define({}, "");
-  } catch (err) {
-    define = function(obj, key, value) {
-      return obj[key] = value;
-    };
-  }
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  exports.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  define(IteratorPrototype, iteratorSymbol, function () {
-    return this;
-  });
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = GeneratorFunctionPrototype;
-  define(Gp, "constructor", GeneratorFunctionPrototype);
-  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
-  GeneratorFunction.displayName = define(
-    GeneratorFunctionPrototype,
-    toStringTagSymbol,
-    "GeneratorFunction"
-  );
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      define(prototype, method, function(arg) {
-        return this._invoke(method, arg);
-      });
-    });
-  }
-
-  exports.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  exports.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      define(genFun, toStringTagSymbol, "GeneratorFunction");
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  exports.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator, PromiseImpl) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return PromiseImpl.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return PromiseImpl.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new PromiseImpl(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
-    return this;
-  });
-  exports.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-    if (PromiseImpl === void 0) PromiseImpl = Promise;
-
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList),
-      PromiseImpl
-    );
-
-    return exports.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined$1) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined$1;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined$1;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  define(Gp, toStringTagSymbol, "Generator");
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  define(Gp, iteratorSymbol, function() {
-    return this;
-  });
-
-  define(Gp, "toString", function() {
-    return "[object Generator]";
-  });
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  exports.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined$1;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  exports.values = values;
-
-  function doneResult() {
-    return { value: undefined$1, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined$1;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined$1;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined$1;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined$1;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined$1;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-
-  // Regardless of whether this script is executing as a CommonJS module
-  // or not, return the runtime object so that we can declare the variable
-  // regeneratorRuntime in the outer scope, which allows this module to be
-  // injected easily by `bin/regenerator --include-runtime script.js`.
-  return exports;
-
-}(
-  // If this script is executing as a CommonJS module, use module.exports
-  // as the regeneratorRuntime namespace. Otherwise create a new empty
-  // object. Either way, the resulting object will be used to initialize
-  // the regeneratorRuntime variable at the top of this file.
-  module.exports 
-));
-
-try {
-  regeneratorRuntime = runtime;
-} catch (accidentalStrictMode) {
-  // This module should not be running in strict mode, so the above
-  // assignment should always work unless something is misconfigured. Just
-  // in case runtime.js accidentally runs in strict mode, in modern engines
-  // we can explicitly access globalThis. In older engines we can escape
-  // strict mode using a global Function call. This could conceivably fail
-  // if a Content Security Policy forbids using Function, but in that case
-  // the proper solution is to fix the accidental strict mode problem. If
-  // you've misconfigured your bundler to force strict mode and applied a
-  // CSP to forbid Function, and you're not willing to fix either of those
-  // problems, please detail your unique predicament in a GitHub issue.
-  if (typeof globalThis === "object") {
-    globalThis.regeneratorRuntime = runtime;
-  } else {
-    Function("r", "regeneratorRuntime = r")(runtime);
-  }
-}
-}(runtime));
-
-var regenerator = runtime.exports;
-
-function ownKeys$g(object, enumerableOnly) {
+function ownKeys$b(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
@@ -1031,13 +174,13 @@ function _objectSpread2$1(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys$g(Object(source), true).forEach(function (key) {
+      ownKeys$b(Object(source), true).forEach(function (key) {
         _defineProperty$1(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys$g(Object(source)).forEach(function (key) {
+      ownKeys$b(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -1847,16 +990,19 @@ function () {
 
 var equivalentKeyMap = EquivalentKeyMap;
 
+/* eslint-disable jsdoc/valid-types */
+
 /**
  * Returns true if the given object is a generator, or false otherwise.
  *
  * @see https://www.ecma-international.org/ecma-262/6.0/#sec-generator-objects
  *
- * @param {*} object Object to test.
+ * @param {any} object Object to test.
  *
- * @return {boolean} Whether object is a generator.
+ * @return {object is Generator} Whether object is a generator.
  */
 function isGenerator(object) {
+  /* eslint-enable jsdoc/valid-types */
   // Check that iterator (next) and iterable (Symbol.iterator) interfaces are satisfied.
   // These checks seem to be compatible with several generator helpers as well as the native implementation.
   return !!object && typeof object[Symbol.iterator] === 'function' && typeof object.next === 'function';
@@ -2476,12 +1622,14 @@ function isPromise(obj) {
 /**
  * External dependencies
  */
+/* eslint-disable jsdoc/valid-types */
+
 /**
  * Returns true if the given object quacks like an action.
  *
- * @param {*} object Object to test
+ * @param {any} object Object to test
  *
- * @return {boolean}  Whether object is an action.
+ * @return {object is import('redux').AnyAction}  Whether object is an action.
  */
 
 function isAction(object) {
@@ -2491,13 +1639,14 @@ function isAction(object) {
  * Returns true if the given object quacks like an action and has a specific
  * action type
  *
- * @param {*}      object       Object to test
- * @param {string} expectedType The expected type for the action.
+ * @param {unknown} object       Object to test
+ * @param {string}  expectedType The expected type for the action.
  *
- * @return {boolean} Whether object is an action and is of specific type.
+ * @return {object is import('redux').AnyAction} Whether object is an action and is of specific type.
  */
 
 function isActionOfType(object, expectedType) {
+  /* eslint-enable jsdoc/valid-types */
   return isAction(object) && object.type === expectedType;
 }
 
@@ -2507,35 +1656,29 @@ function isActionOfType(object, expectedType) {
 /**
  * Create a co-routine runtime.
  *
- * @param {Object}    controls Object of control handlers.
- * @param {Function}  dispatch Unhandled action dispatch.
- *
- * @return {Function} co-routine runtime
+ * @param  controls Object of control handlers.
+ * @param  dispatch Unhandled action dispatch.
  */
 
-function createRuntime() {
-  var controls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var dispatch = arguments.length > 1 ? arguments[1] : undefined;
-  var rungenControls = lodash.map(controls, function (control, actionType) {
-    return function (value, next, iterate, yieldNext, yieldError) {
-      if (!isActionOfType(value, actionType)) {
-        return false;
-      }
+function createRuntime(controls = {}, dispatch) {
+  const rungenControls = lodash.map(controls, (control, actionType) => (value, next, iterate, yieldNext, yieldError) => {
+    if (!isActionOfType(value, actionType)) {
+      return false;
+    }
 
-      var routine = control(value);
+    const routine = control(value);
 
-      if (isPromise(routine)) {
-        // Async control routine awaits resolution.
-        routine.then(yieldNext, yieldError);
-      } else {
-        yieldNext(routine);
-      }
+    if (isPromise(routine)) {
+      // Async control routine awaits resolution.
+      routine.then(yieldNext, yieldError);
+    } else {
+      yieldNext(routine);
+    }
 
-      return true;
-    };
+    return true;
   });
 
-  var unhandledActionControl = function unhandledActionControl(value, next) {
+  const unhandledActionControl = (value, next) => {
     if (!isAction(value)) {
       return false;
     }
@@ -2546,18 +1689,14 @@ function createRuntime() {
   };
 
   rungenControls.push(unhandledActionControl);
-  var rungenRuntime = dist$1.create(rungenControls);
-  return function (action) {
-    return new Promise(function (resolve, reject) {
-      return rungenRuntime(action, function (result) {
-        if (isAction(result)) {
-          dispatch(result);
-        }
+  const rungenRuntime = dist$1.create(rungenControls);
+  return action => new Promise((resolve, reject) => rungenRuntime(action, result => {
+    if (isAction(result)) {
+      dispatch(result);
+    }
 
-        resolve(result);
-      }, reject);
-    });
-  };
+    resolve(result);
+  }, reject));
 }
 
 /**
@@ -2571,41 +1710,22 @@ function createRuntime() {
  * value of the yield assignment. If the control handler returns undefined, the
  * execution is not continued.
  *
- * @param {Object} controls Object of control handlers.
+ * @param {Record<string, (value: import('redux').AnyAction) => Promise<boolean> | boolean>} controls Object of control handlers.
  *
- * @return {Function} Co-routine runtime
+ * @return {import('redux').Middleware} Co-routine runtime
  */
 
-function createMiddleware() {
-  var controls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return function (store) {
-    var runtime = createRuntime(controls, store.dispatch);
-    return function (next) {
-      return function (action) {
-        if (!isGenerator(action)) {
-          return next(action);
-        }
+function createMiddleware(controls = {}) {
+  return store => {
+    const runtime = createRuntime(controls, store.dispatch);
+    return next => action => {
+      if (!isGenerator(action)) {
+        return next(action);
+      }
 
-        return runtime(action);
-      };
+      return runtime(action);
     };
   };
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
-}
-
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
 }
 
 /**
@@ -2641,7 +1761,7 @@ function _toConsumableArray(arr) {
  * with a store.
  *
  * @param {Function} registrySelector Function receiving a registry `select`
- * function and returning a state selector.
+ *                                    function and returning a state selector.
  *
  * @return {Function} Registry selector that can be registered with a store.
  */
@@ -2671,39 +1791,34 @@ function createRegistryControl(registryControl) {
   return registryControl;
 }
 
-var _builtinControls;
-var SELECT = '@@data/SELECT';
-var RESOLVE_SELECT = '@@data/RESOLVE_SELECT';
-var DISPATCH = '@@data/DISPATCH';
-var builtinControls = (_builtinControls = {}, _defineProperty$1(_builtinControls, SELECT, createRegistryControl(function (registry) {
-  return function (_ref) {
-    var _registry$select;
+/**
+ * External dependencies
+ */
+/** @typedef {import('./types').WPDataStore} WPDataStore */
 
-    var storeKey = _ref.storeKey,
-        selectorName = _ref.selectorName,
-        args = _ref.args;
-    return (_registry$select = registry.select(storeKey))[selectorName].apply(_registry$select, _toConsumableArray(args));
-  };
-})), _defineProperty$1(_builtinControls, RESOLVE_SELECT, createRegistryControl(function (registry) {
-  return function (_ref2) {
-    var _registry$method;
-
-    var storeKey = _ref2.storeKey,
-        selectorName = _ref2.selectorName,
-        args = _ref2.args;
-    var method = registry.select(storeKey)[selectorName].hasResolver ? 'resolveSelect' : 'select';
-    return (_registry$method = registry[method](storeKey))[selectorName].apply(_registry$method, _toConsumableArray(args));
-  };
-})), _defineProperty$1(_builtinControls, DISPATCH, createRegistryControl(function (registry) {
-  return function (_ref3) {
-    var _registry$dispatch;
-
-    var storeKey = _ref3.storeKey,
-        actionName = _ref3.actionName,
-        args = _ref3.args;
-    return (_registry$dispatch = registry.dispatch(storeKey))[actionName].apply(_registry$dispatch, _toConsumableArray(args));
-  };
-})), _builtinControls);
+const SELECT = '@@data/SELECT';
+const RESOLVE_SELECT = '@@data/RESOLVE_SELECT';
+const DISPATCH = '@@data/DISPATCH';
+const builtinControls = {
+  [SELECT]: createRegistryControl(registry => ({
+    storeKey,
+    selectorName,
+    args
+  }) => registry.select(storeKey)[selectorName](...args)),
+  [RESOLVE_SELECT]: createRegistryControl(registry => ({
+    storeKey,
+    selectorName,
+    args
+  }) => {
+    const method = registry.select(storeKey)[selectorName].hasResolver ? 'resolveSelect' : 'select';
+    return registry[method](storeKey)[selectorName](...args);
+  }),
+  [DISPATCH]: createRegistryControl(registry => ({
+    storeKey,
+    actionName,
+    args
+  }) => registry.dispatch(storeKey)[actionName](...args))
+};
 
 /**
  * External dependencies
@@ -2711,27 +1826,33 @@ var builtinControls = (_builtinControls = {}, _defineProperty$1(_builtinControls
 /**
  * Simplest possible promise redux middleware.
  *
- * @return {Function} middleware.
+ * @type {import('redux').Middleware}
  */
 
-var promiseMiddleware = function promiseMiddleware() {
-  return function (next) {
-    return function (action) {
-      if (isPromise(action)) {
-        return action.then(function (resolvedAction) {
-          if (resolvedAction) {
-            return next(resolvedAction);
-          }
-        });
+const promiseMiddleware = () => next => action => {
+  if (isPromise(action)) {
+    return action.then(resolvedAction => {
+      if (resolvedAction) {
+        return next(resolvedAction);
       }
+    });
+  }
 
-      return next(action);
-    };
-  };
+  return next(action);
 };
 
 var promise = promiseMiddleware;
 
+/**
+ * The identifier for the core/data store.
+ *
+ * @type {string}
+ */
+const STORE_NAME = 'core/data';
+
+/**
+ * External dependencies
+ */
 /** @typedef {import('./registry').WPDataRegistry} WPDataRegistry */
 
 /**
@@ -2745,130 +1866,122 @@ var promise = promiseMiddleware;
  * @return {Function} Middleware function.
  */
 
-var createResolversCacheMiddleware = function createResolversCacheMiddleware(registry, reducerKey) {
-  return function () {
-    return function (next) {
-      return function (action) {
-        var resolvers = registry.select('core/data').getCachedResolvers(reducerKey);
-        Object.entries(resolvers).forEach(function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 2),
-              selectorName = _ref2[0],
-              resolversByArgs = _ref2[1];
+const createResolversCacheMiddleware = (registry, reducerKey) => () => next => action => {
+  const resolvers = registry.select(STORE_NAME).getCachedResolvers(reducerKey);
+  Object.entries(resolvers).forEach(([selectorName, resolversByArgs]) => {
+    const resolver = lodash.get(registry.stores, [reducerKey, 'resolvers', selectorName]);
 
-          var resolver = lodash.get(registry.stores, [reducerKey, 'resolvers', selectorName]);
+    if (!resolver || !resolver.shouldInvalidate) {
+      return;
+    }
 
-          if (!resolver || !resolver.shouldInvalidate) {
-            return;
-          }
-
-          resolversByArgs.forEach(function (value, args) {
-            // resolversByArgs is the map Map([ args ] => boolean) storing the cache resolution status for a given selector.
-            // If the value is false it means this resolver has finished its resolution which means we need to invalidate it,
-            // if it's true it means it's inflight and the invalidation is not necessary.
-            if (value !== false || !resolver.shouldInvalidate.apply(resolver, [action].concat(_toConsumableArray(args)))) {
-              return;
-            } // Trigger cache invalidation
+    resolversByArgs.forEach((value, args) => {
+      // resolversByArgs is the map Map([ args ] => boolean) storing the cache resolution status for a given selector.
+      // If the value is false it means this resolver has finished its resolution which means we need to invalidate it,
+      // if it's true it means it's inflight and the invalidation is not necessary.
+      if (value !== false || !resolver.shouldInvalidate(action, ...args)) {
+        return;
+      } // Trigger cache invalidation
 
 
-            registry.dispatch('core/data').invalidateResolution(reducerKey, selectorName, args);
-          });
-        });
-        return next(action);
-      };
-    };
-  };
+      registry.dispatch(STORE_NAME).invalidateResolution(reducerKey, selectorName, args);
+    });
+  });
+  return next(action);
 };
 
 var createResolversCacheMiddleware$1 = createResolversCacheMiddleware;
 
 function createThunkMiddleware(args) {
-  return function () {
-    return function (next) {
-      return function (action) {
-        if (typeof action === 'function') {
-          return action(args);
-        }
+  return () => next => action => {
+    if (typeof action === 'function') {
+      return action(args);
+    }
 
-        return next(action);
-      };
-    };
+    return next(action);
   };
 }
-
-function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
  * Higher-order reducer creator which creates a combined reducer object, keyed
  * by a property on the action object.
  *
+ * @template {any} TState
+ * @template {import('redux').AnyAction} TAction
+ *
  * @param {string} actionProperty Action property by which to key object.
  *
- * @return {Function} Higher-order reducer.
+ * @return {(reducer: import('redux').Reducer<TState, TAction>) => import('redux').Reducer<Record<string, TState>, TAction>} Higher-order reducer.
  */
-var onSubKey = function onSubKey(actionProperty) {
-  return function (reducer) {
-    return function () {
-      var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var action = arguments.length > 1 ? arguments[1] : undefined;
-      // Retrieve subkey from action. Do not track if undefined; useful for cases
-      // where reducer is scoped by action shape.
-      var key = action[actionProperty];
+const onSubKey = actionProperty => reducer => (
+/* eslint-disable jsdoc/no-undefined-types */
+state =
+/** @type {Record<string, TState>} */
+{}, action) => {
+  // Retrieve subkey from action. Do not track if undefined; useful for cases
+  // where reducer is scoped by action shape.
 
-      if (key === undefined) {
-        return state;
-      } // Avoid updating state if unchanged. Note that this also accounts for a
-      // reducer which returns undefined on a key which is not yet tracked.
+  /** @type {keyof state} */
+
+  /* eslint-enable jsdoc/no-undefined-types */
+  const key = action[actionProperty];
+
+  if (key === undefined) {
+    return state;
+  } // Avoid updating state if unchanged. Note that this also accounts for a
+  // reducer which returns undefined on a key which is not yet tracked.
 
 
-      var nextKeyState = reducer(state[key], action);
+  const nextKeyState = reducer(state[key], action);
 
-      if (nextKeyState === state[key]) {
-        return state;
-      }
+  if (nextKeyState === state[key]) {
+    return state;
+  }
 
-      return _objectSpread$e(_objectSpread$e({}, state), {}, _defineProperty$1({}, key, nextKeyState));
-    };
+  return { ...state,
+    [key]: nextKeyState
   };
 };
 
 /**
  * External dependencies
  */
+
 /**
  * Reducer function returning next state for selector resolution of
  * subkeys, object form:
  *
  *  selectorName -> EquivalentKeyMap<Array,boolean>
- *
- * @param {Object} state  Current state.
- * @param {Object} action Dispatched action.
- *
- * @return {Object} Next state.
  */
-
-var subKeysIsResolved = onSubKey('selectorName')(function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new equivalentKeyMap();
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
+const subKeysIsResolved = onSubKey('selectorName')((state = new equivalentKeyMap(), action) => {
   switch (action.type) {
     case 'START_RESOLUTION':
     case 'FINISH_RESOLUTION':
       {
-        var isStarting = action.type === 'START_RESOLUTION';
-        var nextState = new equivalentKeyMap(state);
+        const isStarting = action.type === 'START_RESOLUTION';
+        const nextState = new equivalentKeyMap(state);
         nextState.set(action.args, isStarting);
+        return nextState;
+      }
+
+    case 'START_RESOLUTIONS':
+    case 'FINISH_RESOLUTIONS':
+      {
+        const isStarting = action.type === 'START_RESOLUTIONS';
+        const nextState = new equivalentKeyMap(state);
+
+        for (const resolutionArgs of action.args) {
+          nextState.set(resolutionArgs, isStarting);
+        }
+
         return nextState;
       }
 
     case 'INVALIDATE_RESOLUTION':
       {
-        var _nextState = new equivalentKeyMap(state);
-
-        _nextState.delete(action.args);
-
-        return _nextState;
+        const nextState = new equivalentKeyMap(state);
+        nextState.delete(action.args);
+        return nextState;
       }
   }
 
@@ -2879,16 +1992,13 @@ var subKeysIsResolved = onSubKey('selectorName')(function () {
  *
  *   selectorName -> EquivalentKeyMap<Array, boolean>
  *
- * @param {Object} state   Current state.
- * @param {Object} action  Dispatched action.
+ * @param  state  Current state.
+ * @param  action Dispatched action.
  *
- * @return {Object} Next state.
+ * @return Next state.
  */
 
-var isResolved = function isResolved() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
+const isResolved = (state = {}, action) => {
   switch (action.type) {
     case 'INVALIDATE_RESOLUTION_FOR_STORE':
       return {};
@@ -2898,6 +2008,8 @@ var isResolved = function isResolved() {
 
     case 'START_RESOLUTION':
     case 'FINISH_RESOLUTION':
+    case 'START_RESOLUTIONS':
+    case 'FINISH_RESOLUTIONS':
     case 'INVALIDATE_RESOLUTION':
       return subKeysIsResolved(state, action);
   }
@@ -2910,24 +2022,26 @@ var metadataReducer = isResolved;
 /**
  * External dependencies
  */
+/** @typedef {Record<string, import('./reducer').State>} State */
+
 /**
  * Returns the raw `isResolving` value for a given selector name,
  * and arguments set. May be undefined if the selector has never been resolved
  * or not resolved for the given set of arguments, otherwise true or false for
  * resolution started and completed respectively.
  *
- * @param {Object} state        Data state.
- * @param {string} selectorName Selector name.
- * @param {Array}  args         Arguments passed to selector.
+ * @param {State}     state        Data state.
+ * @param {string}    selectorName Selector name.
+ * @param {unknown[]} args         Arguments passed to selector.
  *
- * @return {?boolean} isResolving value.
+ * @return {boolean | undefined} isResolving value.
  */
 
 function getIsResolving(state, selectorName, args) {
-  var map = lodash.get(state, [selectorName]);
+  const map = lodash.get(state, [selectorName]);
 
   if (!map) {
-    return;
+    return undefined;
   }
 
   return map.get(args);
@@ -2936,53 +2050,50 @@ function getIsResolving(state, selectorName, args) {
  * Returns true if resolution has already been triggered for a given
  * selector name, and arguments set.
  *
- * @param {Object} state        Data state.
- * @param {string} selectorName Selector name.
- * @param {?Array} args         Arguments passed to selector (default `[]`).
+ * @param {State}     state        Data state.
+ * @param {string}    selectorName Selector name.
+ * @param {unknown[]} [args]       Arguments passed to selector (default `[]`).
  *
  * @return {boolean} Whether resolution has been triggered.
  */
 
-function hasStartedResolution(state, selectorName) {
-  var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+function hasStartedResolution(state, selectorName, args = []) {
   return getIsResolving(state, selectorName, args) !== undefined;
 }
 /**
  * Returns true if resolution has completed for a given selector
  * name, and arguments set.
  *
- * @param {Object} state        Data state.
- * @param {string} selectorName Selector name.
- * @param {?Array} args         Arguments passed to selector.
+ * @param {State}     state        Data state.
+ * @param {string}    selectorName Selector name.
+ * @param {unknown[]} [args]       Arguments passed to selector.
  *
  * @return {boolean} Whether resolution has completed.
  */
 
-function hasFinishedResolution(state, selectorName) {
-  var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+function hasFinishedResolution(state, selectorName, args = []) {
   return getIsResolving(state, selectorName, args) === false;
 }
 /**
  * Returns true if resolution has been triggered but has not yet completed for
  * a given selector name, and arguments set.
  *
- * @param {Object} state        Data state.
- * @param {string} selectorName Selector name.
- * @param {?Array} args         Arguments passed to selector.
+ * @param {State}     state        Data state.
+ * @param {string}    selectorName Selector name.
+ * @param {unknown[]} [args]       Arguments passed to selector.
  *
  * @return {boolean} Whether resolution is in progress.
  */
 
-function isResolving(state, selectorName) {
-  var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+function isResolving(state, selectorName, args = []) {
   return getIsResolving(state, selectorName, args) === true;
 }
 /**
  * Returns the list of the cached resolvers.
  *
- * @param {Object} state      Data state.
+ * @param {State} state Data state.
  *
- * @return {Object} Resolvers mapped by args and selectorName.
+ * @return {State} Resolvers mapped by args and selectorName.
  */
 
 function getCachedResolvers(state) {
@@ -3002,56 +2113,92 @@ var metadataSelectors = /*#__PURE__*/Object.freeze({
  * Returns an action object used in signalling that selector resolution has
  * started.
  *
- * @param {string} selectorName Name of selector for which resolver triggered.
- * @param {...*}   args         Arguments to associate for uniqueness.
+ * @param {string}    selectorName Name of selector for which resolver triggered.
+ * @param {unknown[]} args         Arguments to associate for uniqueness.
  *
- * @return {Object} Action object.
+ * @return {{ type: 'START_RESOLUTION', selectorName: string, args: unknown[] }} Action object.
  */
 function startResolution(selectorName, args) {
   return {
     type: 'START_RESOLUTION',
-    selectorName: selectorName,
-    args: args
+    selectorName,
+    args
   };
 }
 /**
  * Returns an action object used in signalling that selector resolution has
  * completed.
  *
- * @param {string} selectorName Name of selector for which resolver triggered.
- * @param {...*}   args         Arguments to associate for uniqueness.
+ * @param {string}    selectorName Name of selector for which resolver triggered.
+ * @param {unknown[]} args         Arguments to associate for uniqueness.
  *
- * @return {Object} Action object.
+ * @return {{ type: 'FINISH_RESOLUTION', selectorName: string, args: unknown[] }} Action object.
  */
 
 function finishResolution(selectorName, args) {
   return {
     type: 'FINISH_RESOLUTION',
-    selectorName: selectorName,
-    args: args
+    selectorName,
+    args
+  };
+}
+/**
+ * Returns an action object used in signalling that a batch of selector resolutions has
+ * started.
+ *
+ * @param {string}    selectorName Name of selector for which resolver triggered.
+ * @param {unknown[]} args         Array of arguments to associate for uniqueness, each item
+ *                                 is associated to a resolution.
+ *
+ * @return {{ type: 'START_RESOLUTIONS', selectorName: string, args: unknown[] }} Action object.
+ */
+
+function startResolutions(selectorName, args) {
+  return {
+    type: 'START_RESOLUTIONS',
+    selectorName,
+    args
+  };
+}
+/**
+ * Returns an action object used in signalling that a batch of selector resolutions has
+ * completed.
+ *
+ * @param {string}    selectorName Name of selector for which resolver triggered.
+ * @param {unknown[]} args         Array of arguments to associate for uniqueness, each item
+ *                                 is associated to a resolution.
+ *
+ * @return {{ type: 'FINISH_RESOLUTIONS', selectorName: string, args: unknown[] }} Action object.
+ */
+
+function finishResolutions(selectorName, args) {
+  return {
+    type: 'FINISH_RESOLUTIONS',
+    selectorName,
+    args
   };
 }
 /**
  * Returns an action object used in signalling that we should invalidate the resolution cache.
  *
- * @param {string} selectorName Name of selector for which resolver should be invalidated.
- * @param {Array}  args         Arguments to associate for uniqueness.
+ * @param {string}    selectorName Name of selector for which resolver should be invalidated.
+ * @param {unknown[]} args         Arguments to associate for uniqueness.
  *
- * @return {Object} Action object.
+ * @return {{ type: 'INVALIDATE_RESOLUTION', selectorName: string, args: any[] }} Action object.
  */
 
 function invalidateResolution(selectorName, args) {
   return {
     type: 'INVALIDATE_RESOLUTION',
-    selectorName: selectorName,
-    args: args
+    selectorName,
+    args
   };
 }
 /**
  * Returns an action object used in signalling that the resolution
  * should be invalidated.
  *
- * @return {Object} Action object.
+ * @return {{ type: 'INVALIDATE_RESOLUTION_FOR_STORE' }} Action object.
  */
 
 function invalidateResolutionForStore() {
@@ -3066,13 +2213,13 @@ function invalidateResolutionForStore() {
  * @param {string} selectorName Name of selector for which all resolvers should
  *                              be invalidated.
  *
- * @return  {Object} Action object.
+ * @return  {{ type: 'INVALIDATE_RESOLUTION_FOR_STORE_SELECTOR', selectorName: string }} Action object.
  */
 
 function invalidateResolutionForStoreSelector(selectorName) {
   return {
     type: 'INVALIDATE_RESOLUTION_FOR_STORE_SELECTOR',
-    selectorName: selectorName
+    selectorName
   };
 }
 
@@ -3080,14 +2227,16 @@ var metadataActions = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	startResolution: startResolution,
 	finishResolution: finishResolution,
+	startResolutions: startResolutions,
+	finishResolutions: finishResolutions,
 	invalidateResolution: invalidateResolution,
 	invalidateResolutionForStore: invalidateResolutionForStore,
 	invalidateResolutionForStoreSelector: invalidateResolutionForStoreSelector
 });
 
-function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+/**
+ * External dependencies
+ */
 /** @typedef {import('../types').WPDataRegistry} WPDataRegistry */
 
 /** @typedef {import('../types').WPDataStore} WPDataStore */
@@ -3101,23 +2250,26 @@ function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { 
  */
 
 function createResolversCache() {
-  var cache = {};
+  const cache = {};
   return {
-    isRunning: function isRunning(selectorName, args) {
+    isRunning(selectorName, args) {
       return cache[selectorName] && cache[selectorName].get(args);
     },
-    clear: function clear(selectorName, args) {
+
+    clear(selectorName, args) {
       if (cache[selectorName]) {
         cache[selectorName].delete(args);
       }
     },
-    markAsRunning: function markAsRunning(selectorName, args) {
+
+    markAsRunning(selectorName, args) {
       if (!cache[selectorName]) {
         cache[selectorName] = new equivalentKeyMap();
       }
 
       cache[selectorName].set(args, true);
     }
+
   };
 }
 /**
@@ -3136,10 +2288,10 @@ function createResolversCache() {
  * } );
  * ```
  *
- * @param {string}                 key      Unique namespace identifier.
- * @param {WPDataReduxStoreConfig} options  Registered store options, with properties
- *                                          describing reducer, actions, selectors,
- *                                          and resolvers.
+ * @param {string}                 key     Unique namespace identifier.
+ * @param {WPDataReduxStoreConfig} options Registered store options, with properties
+ *                                         describing reducer, actions, selectors,
+ *                                         and resolvers.
  *
  * @return {WPDataStore} Store Object.
  */
@@ -3148,21 +2300,17 @@ function createResolversCache() {
 function createReduxStore(key, options) {
   return {
     name: key,
-    instantiate: function instantiate(registry) {
-      var reducer = options.reducer;
-      var thunkArgs = {
-        registry: registry,
+    instantiate: registry => {
+      const reducer = options.reducer;
+      const thunkArgs = {
+        registry,
 
         get dispatch() {
-          return Object.assign(function (action) {
-            return store.dispatch(action);
-          }, getActions());
+          return Object.assign(action => store.dispatch(action), getActions());
         },
 
         get select() {
-          return Object.assign(function (selector) {
-            return selector(store.__unstableOriginalGetState());
-          }, getSelectors());
+          return Object.assign(selector => selector(store.__unstableOriginalGetState()), getSelectors());
         },
 
         get resolveSelect() {
@@ -3170,90 +2318,72 @@ function createReduxStore(key, options) {
         }
 
       };
-      var store = instantiateReduxStore(key, options, registry, thunkArgs);
-      var resolversCache = createResolversCache();
-      var resolvers;
-      var actions = mapActions(_objectSpread$d(_objectSpread$d({}, metadataActions), options.actions), store);
-      var selectors = mapSelectors(_objectSpread$d(_objectSpread$d({}, lodash.mapValues(metadataSelectors, function (selector) {
-        return function (state) {
-          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
+      const store = instantiateReduxStore(key, options, registry, thunkArgs);
+      const resolversCache = createResolversCache();
+      let resolvers;
+      const actions = mapActions({ ...metadataActions,
+        ...options.actions
+      }, store);
+      let selectors = mapSelectors({ ...lodash.mapValues(metadataSelectors, selector => (state, ...args) => selector(state.metadata, ...args)),
+        ...lodash.mapValues(options.selectors, selector => {
+          if (selector.isRegistrySelector) {
+            selector.registry = registry;
           }
 
-          return selector.apply(void 0, [state.metadata].concat(args));
-        };
-      })), lodash.mapValues(options.selectors, function (selector) {
-        if (selector.isRegistrySelector) {
-          selector.registry = registry;
-        }
-
-        return function (state) {
-          for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-            args[_key2 - 1] = arguments[_key2];
-          }
-
-          return selector.apply(void 0, [state.root].concat(args));
-        };
-      })), store);
+          return (state, ...args) => selector(state.root, ...args);
+        })
+      }, store);
 
       if (options.resolvers) {
-        var result = mapResolvers(options.resolvers, selectors, store, resolversCache);
+        const result = mapResolvers(options.resolvers, selectors, store, resolversCache);
         resolvers = result.resolvers;
         selectors = result.selectors;
       }
 
-      var resolveSelectors = mapResolveSelectors(selectors, store);
+      const resolveSelectors = mapResolveSelectors(selectors, store);
 
-      var getSelectors = function getSelectors() {
-        return selectors;
-      };
+      const getSelectors = () => selectors;
 
-      var getActions = function getActions() {
-        return actions;
-      };
+      const getActions = () => actions;
 
-      var getResolveSelectors = function getResolveSelectors() {
-        return resolveSelectors;
-      }; // We have some modules monkey-patching the store object
+      const getResolveSelectors = () => resolveSelectors; // We have some modules monkey-patching the store object
       // It's wrong to do so but until we refactor all of our effects to controls
       // We need to keep the same "store" instance here.
 
 
       store.__unstableOriginalGetState = store.getState;
 
-      store.getState = function () {
-        return store.__unstableOriginalGetState().root;
-      }; // Customize subscribe behavior to call listeners only on effective change,
+      store.getState = () => store.__unstableOriginalGetState().root; // Customize subscribe behavior to call listeners only on effective change,
       // not on every dispatch.
 
 
-      var subscribe = store && function (listener) {
-        var lastState = store.__unstableOriginalGetState();
+      const subscribe = store && (listener => {
+        let lastState = store.__unstableOriginalGetState();
 
-        return store.subscribe(function () {
-          var state = store.__unstableOriginalGetState();
+        return store.subscribe(() => {
+          const state = store.__unstableOriginalGetState();
 
-          var hasChanged = state !== lastState;
+          const hasChanged = state !== lastState;
           lastState = state;
 
           if (hasChanged) {
             listener();
           }
         });
-      }; // This can be simplified to just { subscribe, getSelectors, getActions }
+      }); // This can be simplified to just { subscribe, getSelectors, getActions }
       // Once we remove the use function.
 
 
       return {
-        reducer: reducer,
-        store: store,
-        actions: actions,
-        selectors: selectors,
-        resolvers: resolvers,
-        getSelectors: getSelectors,
-        getResolveSelectors: getResolveSelectors,
-        getActions: getActions,
-        subscribe: subscribe
+        reducer,
+        store,
+        actions,
+        selectors,
+        resolvers,
+        getSelectors,
+        getResolveSelectors,
+        getActions,
+        subscribe
       };
     }
   };
@@ -3261,28 +2391,27 @@ function createReduxStore(key, options) {
 /**
  * Creates a redux store for a namespace.
  *
- * @param {string}         key      Unique namespace identifier.
- * @param {Object}         options  Registered store options, with properties
- *                                  describing reducer, actions, selectors,
- *                                  and resolvers.
- * @param {WPDataRegistry} registry Registry reference.
- * @param {Object} thunkArgs        Argument object for the thunk middleware.
+ * @param {string}         key       Unique namespace identifier.
+ * @param {Object}         options   Registered store options, with properties
+ *                                   describing reducer, actions, selectors,
+ *                                   and resolvers.
+ * @param {WPDataRegistry} registry  Registry reference.
+ * @param {Object}         thunkArgs Argument object for the thunk middleware.
  * @return {Object} Newly created redux store.
  */
 
 function instantiateReduxStore(key, options, registry, thunkArgs) {
-  var controls = _objectSpread$d(_objectSpread$d({}, options.controls), builtinControls);
-
-  var normalizedControls = lodash.mapValues(controls, function (control) {
-    return control.isRegistryControl ? control(registry) : control;
-  });
-  var middlewares = [createResolversCacheMiddleware$1(registry, key), promise, createMiddleware(normalizedControls)];
+  const controls = { ...options.controls,
+    ...builtinControls
+  };
+  const normalizedControls = lodash.mapValues(controls, control => control.isRegistryControl ? control(registry) : control);
+  const middlewares = [createResolversCacheMiddleware$1(registry, key), promise, createMiddleware(normalizedControls)];
 
   if (options.__experimentalUseThunks) {
     middlewares.push(createThunkMiddleware(thunkArgs));
   }
 
-  var enhancers = [applyMiddleware.apply(void 0, middlewares)];
+  const enhancers = [applyMiddleware(...middlewares)];
 
   if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) {
     enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__({
@@ -3291,9 +2420,11 @@ function instantiateReduxStore(key, options, registry, thunkArgs) {
     }));
   }
 
-  var reducer = options.reducer,
-      initialState = options.initialState;
-  var enhancedReducer = turboCombineReducers({
+  const {
+    reducer,
+    initialState
+  } = options;
+  const enhancedReducer = turboCombineReducers({
     metadata: metadataReducer,
     root: reducer
   });
@@ -3313,8 +2444,8 @@ function instantiateReduxStore(key, options, registry, thunkArgs) {
 
 
 function mapSelectors(selectors, store) {
-  var createStateSelector = function createStateSelector(registrySelector) {
-    var selector = function runSelector() {
+  const createStateSelector = registrySelector => {
+    const selector = function runSelector() {
       // This function is an optimized implementation of:
       //
       //   selector( store.getState(), ...arguments )
@@ -3322,15 +2453,15 @@ function mapSelectors(selectors, store) {
       // Where the above would incur an `Array#concat` in its application,
       // the logic here instead efficiently constructs an arguments array via
       // direct assignment.
-      var argsLength = arguments.length;
-      var args = new Array(argsLength + 1);
+      const argsLength = arguments.length;
+      const args = new Array(argsLength + 1);
       args[0] = store.__unstableOriginalGetState();
 
-      for (var i = 0; i < argsLength; i++) {
+      for (let i = 0; i < argsLength; i++) {
         args[i + 1] = arguments[i];
       }
 
-      return registrySelector.apply(void 0, args);
+      return registrySelector(...args);
     };
 
     selector.hasResolver = false;
@@ -3342,17 +2473,16 @@ function mapSelectors(selectors, store) {
 /**
  * Maps actions to dispatch from a given store.
  *
- * @param {Object} actions    Actions to register.
- * @param {Object} store      The redux store to which the actions should be mapped.
- * @return {Object}           Actions mapped to the redux store provided.
+ * @param {Object} actions Actions to register.
+ * @param {Object} store   The redux store to which the actions should be mapped.
+ *
+ * @return {Object} Actions mapped to the redux store provided.
  */
 
 
 function mapActions(actions, store) {
-  var createBoundAction = function createBoundAction(action) {
-    return function () {
-      return Promise.resolve(store.dispatch(action.apply(void 0, arguments)));
-    };
+  const createBoundAction = action => (...args) => {
+    return Promise.resolve(store.dispatch(action(...args)));
   };
 
   return lodash.mapValues(actions, createBoundAction);
@@ -3362,42 +2492,31 @@ function mapActions(actions, store) {
  *
  * @param {Object} selectors Selectors to map.
  * @param {Object} store     The redux store the selectors select from.
- * @return {Object}          Selectors mapped to their resolution functions.
+ *
+ * @return {Object} Selectors mapped to their resolution functions.
  */
 
 
 function mapResolveSelectors(selectors, store) {
-  return lodash.mapValues(lodash.omit(selectors, ['getIsResolving', 'hasStartedResolution', 'hasFinishedResolution', 'isResolving', 'getCachedResolvers']), function (selector, selectorName) {
-    return function () {
-      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        args[_key3] = arguments[_key3];
+  return lodash.mapValues(lodash.omit(selectors, ['getIsResolving', 'hasStartedResolution', 'hasFinishedResolution', 'isResolving', 'getCachedResolvers']), (selector, selectorName) => (...args) => new Promise(resolve => {
+    const hasFinished = () => selectors.hasFinishedResolution(selectorName, args);
+
+    const getResult = () => selector.apply(null, args); // trigger the selector (to trigger the resolver)
+
+
+    const result = getResult();
+
+    if (hasFinished()) {
+      return resolve(result);
+    }
+
+    const unsubscribe = store.subscribe(() => {
+      if (hasFinished()) {
+        unsubscribe();
+        resolve(getResult());
       }
-
-      return new Promise(function (resolve) {
-        var hasFinished = function hasFinished() {
-          return selectors.hasFinishedResolution(selectorName, args);
-        };
-
-        var getResult = function getResult() {
-          return selector.apply(null, args);
-        }; // trigger the selector (to trigger the resolver)
-
-
-        var result = getResult();
-
-        if (hasFinished()) {
-          return resolve(result);
-        }
-
-        var unsubscribe = store.subscribe(function () {
-          if (hasFinished()) {
-            unsubscribe();
-            resolve(getResult());
-          }
-        });
-      });
-    };
-  });
+    });
+  }));
 }
 /**
  * Returns resolvers with matched selectors for a given namespace.
@@ -3415,97 +2534,53 @@ function mapResolvers(resolvers, selectors, store, resolversCache) {
   // The `resolver` can be either a function that does the resolution, or, in more advanced
   // cases, an object with a `fullfill` method and other optional methods like `isFulfilled`.
   // Here we normalize the `resolver` function to an object with `fulfill` method.
-  var mappedResolvers = lodash.mapValues(resolvers, function (resolver) {
+  const mappedResolvers = lodash.mapValues(resolvers, resolver => {
     if (resolver.fulfill) {
       return resolver;
     }
 
-    return _objectSpread$d(_objectSpread$d({}, resolver), {}, {
+    return { ...resolver,
       // copy the enumerable properties of the resolver function
       fulfill: resolver // add the fulfill method
 
-    });
+    };
   });
 
-  var mapSelector = function mapSelector(selector, selectorName) {
-    var resolver = resolvers[selectorName];
+  const mapSelector = (selector, selectorName) => {
+    const resolver = resolvers[selectorName];
 
     if (!resolver) {
       selector.hasResolver = false;
       return selector;
     }
 
-    var selectorResolver = function selectorResolver() {
-      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        args[_key4] = arguments[_key4];
+    const selectorResolver = (...args) => {
+      async function fulfillSelector() {
+        const state = store.getState();
+
+        if (resolversCache.isRunning(selectorName, args) || typeof resolver.isFulfilled === 'function' && resolver.isFulfilled(state, ...args)) {
+          return;
+        }
+
+        const {
+          metadata
+        } = store.__unstableOriginalGetState();
+
+        if (hasStartedResolution(metadata, selectorName, args)) {
+          return;
+        }
+
+        resolversCache.markAsRunning(selectorName, args);
+        setTimeout(async () => {
+          resolversCache.clear(selectorName, args);
+          store.dispatch(startResolution(selectorName, args));
+          await fulfillResolver(store, mappedResolvers, selectorName, ...args);
+          store.dispatch(finishResolution(selectorName, args));
+        });
       }
 
-      function fulfillSelector() {
-        return _fulfillSelector.apply(this, arguments);
-      }
-
-      function _fulfillSelector() {
-        _fulfillSelector = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2() {
-          var state, _store$__unstableOrig, metadata;
-
-          return regenerator.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  state = store.getState();
-
-                  if (!(resolversCache.isRunning(selectorName, args) || typeof resolver.isFulfilled === 'function' && resolver.isFulfilled.apply(resolver, [state].concat(args)))) {
-                    _context2.next = 3;
-                    break;
-                  }
-
-                  return _context2.abrupt("return");
-
-                case 3:
-                  _store$__unstableOrig = store.__unstableOriginalGetState(), metadata = _store$__unstableOrig.metadata;
-
-                  if (!hasStartedResolution(metadata, selectorName, args)) {
-                    _context2.next = 6;
-                    break;
-                  }
-
-                  return _context2.abrupt("return");
-
-                case 6:
-                  resolversCache.markAsRunning(selectorName, args);
-                  setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee() {
-                    return regenerator.wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            resolversCache.clear(selectorName, args);
-                            store.dispatch(startResolution(selectorName, args));
-                            _context.next = 4;
-                            return fulfillResolver.apply(void 0, [store, mappedResolvers, selectorName].concat(args));
-
-                          case 4:
-                            store.dispatch(finishResolution(selectorName, args));
-
-                          case 5:
-                          case "end":
-                            return _context.stop();
-                        }
-                      }
-                    }, _callee);
-                  })));
-
-                case 8:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }));
-        return _fulfillSelector.apply(this, arguments);
-      }
-
-      fulfillSelector.apply(void 0, args);
-      return selector.apply(void 0, args);
+      fulfillSelector(...args);
+      return selector(...args);
     };
 
     selectorResolver.hasResolver = true;
@@ -3523,114 +2598,110 @@ function mapResolvers(resolvers, selectors, store, resolversCache) {
  * @param {Object} store        Store reference, for fulfilling via resolvers
  * @param {Object} resolvers    Store Resolvers
  * @param {string} selectorName Selector name to fulfill.
- * @param {Array} args          Selector Arguments.
+ * @param {Array}  args         Selector Arguments.
  */
 
 
-function fulfillResolver(_x, _x2, _x3) {
-  return _fulfillResolver.apply(this, arguments);
+async function fulfillResolver(store, resolvers, selectorName, ...args) {
+  const resolver = lodash.get(resolvers, [selectorName]);
+
+  if (!resolver) {
+    return;
+  }
+
+  const action = resolver.fulfill(...args);
+
+  if (action) {
+    await store.dispatch(action);
+  }
 }
-
-function _fulfillResolver() {
-  _fulfillResolver = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3(store, resolvers, selectorName) {
-    var resolver,
-        _len5,
-        args,
-        _key5,
-        action,
-        _args3 = arguments;
-
-    return regenerator.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            resolver = lodash.get(resolvers, [selectorName]);
-
-            if (resolver) {
-              _context3.next = 3;
-              break;
-            }
-
-            return _context3.abrupt("return");
-
-          case 3:
-            for (_len5 = _args3.length, args = new Array(_len5 > 3 ? _len5 - 3 : 0), _key5 = 3; _key5 < _len5; _key5++) {
-              args[_key5 - 3] = _args3[_key5];
-            }
-
-            action = resolver.fulfill.apply(resolver, args);
-
-            if (!action) {
-              _context3.next = 8;
-              break;
-            }
-
-            _context3.next = 8;
-            return store.dispatch(action);
-
-          case 8:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-  return _fulfillResolver.apply(this, arguments);
-}
-
-function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function createCoreDataStore(registry) {
-  var getCoreDataSelector = function getCoreDataSelector(selectorName) {
-    return function (key) {
-      var _registry$select;
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      return (_registry$select = registry.select(key))[selectorName].apply(_registry$select, args);
-    };
+  const getCoreDataSelector = selectorName => (key, ...args) => {
+    return registry.select(key)[selectorName](...args);
   };
 
-  var getCoreDataAction = function getCoreDataAction(actionName) {
-    return function (key) {
-      var _registry$dispatch;
-
-      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-        args[_key2 - 1] = arguments[_key2];
-      }
-
-      return (_registry$dispatch = registry.dispatch(key))[actionName].apply(_registry$dispatch, args);
-    };
+  const getCoreDataAction = actionName => (key, ...args) => {
+    return registry.dispatch(key)[actionName](...args);
   };
 
   return {
-    getSelectors: function getSelectors() {
-      return ['getIsResolving', 'hasStartedResolution', 'hasFinishedResolution', 'isResolving', 'getCachedResolvers'].reduce(function (memo, selectorName) {
-        return _objectSpread$c(_objectSpread$c({}, memo), {}, _defineProperty$1({}, selectorName, getCoreDataSelector(selectorName)));
-      }, {});
+    getSelectors() {
+      return ['getIsResolving', 'hasStartedResolution', 'hasFinishedResolution', 'isResolving', 'getCachedResolvers'].reduce((memo, selectorName) => ({ ...memo,
+        [selectorName]: getCoreDataSelector(selectorName)
+      }), {});
     },
-    getActions: function getActions() {
-      return ['startResolution', 'finishResolution', 'invalidateResolution', 'invalidateResolutionForStore', 'invalidateResolutionForStoreSelector'].reduce(function (memo, actionName) {
-        return _objectSpread$c(_objectSpread$c({}, memo), {}, _defineProperty$1({}, actionName, getCoreDataAction(actionName)));
-      }, {});
+
+    getActions() {
+      return ['startResolution', 'finishResolution', 'invalidateResolution', 'invalidateResolutionForStore', 'invalidateResolutionForStoreSelector'].reduce((memo, actionName) => ({ ...memo,
+        [actionName]: getCoreDataAction(actionName)
+      }), {});
     },
-    subscribe: function subscribe() {
+
+    subscribe() {
       // There's no reasons to trigger any listener when we subscribe to this store
       // because there's no state stored in this store that need to retrigger selectors
       // if a change happens, the corresponding store where the tracking stated live
       // would have already triggered a "subscribe" call.
-      return function () {};
+      return () => {};
     }
+
   };
 }
 
-function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/**
+ * Create an event emitter.
+ *
+ * @return {import("../types").WPDataEmitter} Emitter.
+ */
+function createEmitter() {
+  let isPaused = false;
+  let isPending = false;
+  const listeners = new Set();
 
-function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  const notifyListeners = () => // We use Array.from to clone the listeners Set
+  // This ensures that we don't run a listener
+  // that was added as a response to another listener.
+  Array.from(listeners).forEach(listener => listener());
+
+  return {
+    get isPaused() {
+      return isPaused;
+    },
+
+    subscribe(listener) {
+      listeners.add(listener);
+      return () => listeners.delete(listener);
+    },
+
+    pause() {
+      isPaused = true;
+    },
+
+    resume() {
+      isPaused = false;
+
+      if (isPending) {
+        isPending = false;
+        notifyListeners();
+      }
+    },
+
+    emit() {
+      if (isPaused) {
+        isPending = true;
+        return;
+      }
+
+      notifyListeners();
+    }
+
+  };
+}
+
+/**
+ * External dependencies
+ */
 /** @typedef {import('./types').WPDataStore} WPDataStore */
 
 /**
@@ -3669,37 +2740,30 @@ function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { 
  * @return {WPDataRegistry} Data registry.
  */
 
-function createRegistry() {
-  var storeConfigs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var stores = {};
-  var listeners = [];
+function createRegistry(storeConfigs = {}, parent = null) {
+  const stores = {};
+  const emitter = createEmitter();
 
-  var __experimentalListeningStores = new Set();
+  const __experimentalListeningStores = new Set();
   /**
    * Global listener called for each store's update.
    */
 
 
   function globalListener() {
-    listeners.forEach(function (listener) {
-      return listener();
-    });
+    emitter.emit();
   }
   /**
    * Subscribe to changes to any data.
    *
-   * @param {Function}   listener Listener function.
+   * @param {Function} listener Listener function.
    *
-   * @return {Function}           Unsubscribe function.
+   * @return {Function} Unsubscribe function.
    */
 
 
-  var subscribe = function subscribe(listener) {
-    listeners.push(listener);
-    return function () {
-      listeners = lodash.without(listeners, listener);
-    };
+  const subscribe = listener => {
+    return emitter.subscribe(listener);
   };
   /**
    * Calls a selector given the current state and extra arguments.
@@ -3712,11 +2776,11 @@ function createRegistry() {
 
 
   function select(storeNameOrDefinition) {
-    var storeName = lodash.isObject(storeNameOrDefinition) ? storeNameOrDefinition.name : storeNameOrDefinition;
+    const storeName = lodash.isObject(storeNameOrDefinition) ? storeNameOrDefinition.name : storeNameOrDefinition;
 
     __experimentalListeningStores.add(storeName);
 
-    var store = stores[storeName];
+    const store = stores[storeName];
 
     if (store) {
       return store.getSelectors();
@@ -3728,7 +2792,7 @@ function createRegistry() {
   function __experimentalMarkListeningStores(callback, ref) {
     __experimentalListeningStores.clear();
 
-    var result = callback.call(this);
+    const result = callback.call(this);
     ref.current = Array.from(__experimentalListeningStores);
     return result;
   }
@@ -3746,11 +2810,11 @@ function createRegistry() {
 
 
   function resolveSelect(storeNameOrDefinition) {
-    var storeName = lodash.isObject(storeNameOrDefinition) ? storeNameOrDefinition.name : storeNameOrDefinition;
+    const storeName = lodash.isObject(storeNameOrDefinition) ? storeNameOrDefinition.name : storeNameOrDefinition;
 
     __experimentalListeningStores.add(storeName);
 
-    var store = stores[storeName];
+    const store = stores[storeName];
 
     if (store) {
       return store.getResolveSelectors();
@@ -3769,8 +2833,8 @@ function createRegistry() {
 
 
   function dispatch(storeNameOrDefinition) {
-    var storeName = lodash.isObject(storeNameOrDefinition) ? storeNameOrDefinition.name : storeNameOrDefinition;
-    var store = stores[storeName];
+    const storeName = lodash.isObject(storeNameOrDefinition) ? storeNameOrDefinition.name : storeNameOrDefinition;
+    const store = stores[storeName];
 
     if (store) {
       return store.getActions();
@@ -3784,7 +2848,7 @@ function createRegistry() {
 
 
   function withPlugins(attributes) {
-    return lodash.mapValues(attributes, function (attribute, key) {
+    return lodash.mapValues(attributes, (attribute, key) => {
       if (typeof attribute !== 'function') {
         return attribute;
       }
@@ -3813,7 +2877,32 @@ function createRegistry() {
 
     if (typeof config.subscribe !== 'function') {
       throw new TypeError('config.subscribe must be a function');
-    }
+    } // Thi emitter is used to keep track of active listeners when the registry
+    // get paused, that way, when resumed we should be able to call all these
+    // pending listeners.
+
+
+    config.emitter = createEmitter();
+    const currentSubscribe = config.subscribe;
+
+    config.subscribe = listener => {
+      const unsubscribeFromStoreEmitter = config.emitter.subscribe(listener);
+      const unsubscribeFromRootStore = currentSubscribe(() => {
+        if (config.emitter.isPaused) {
+          config.emitter.emit();
+          return;
+        }
+
+        listener();
+      });
+      return () => {
+        if (unsubscribeFromRootStore) {
+          unsubscribeFromRootStore();
+        }
+
+        unsubscribeFromStoreEmitter();
+      };
+    };
 
     stores[key] = config;
     config.subscribe(globalListener);
@@ -3853,35 +2942,44 @@ function createRegistry() {
     return parent.__experimentalSubscribeStore(storeName, handler);
   }
 
-  var registry = {
-    registerGenericStore: registerGenericStore,
-    stores: stores,
+  function batch(callback) {
+    emitter.pause();
+    lodash.forEach(stores, store => store.emitter.pause());
+    callback();
+    emitter.resume();
+    lodash.forEach(stores, store => store.emitter.resume());
+  }
+
+  let registry = {
+    batch,
+    registerGenericStore,
+    stores,
     namespaces: stores,
     // TODO: Deprecate/remove this.
-    subscribe: subscribe,
-    select: select,
-    resolveSelect: resolveSelect,
-    dispatch: dispatch,
-    use: use,
-    register: register,
-    __experimentalMarkListeningStores: __experimentalMarkListeningStores,
-    __experimentalSubscribeStore: __experimentalSubscribeStore
+    subscribe,
+    select,
+    resolveSelect,
+    dispatch,
+    use,
+    register,
+    __experimentalMarkListeningStores,
+    __experimentalSubscribeStore
   };
   /**
    * Registers a standard `@wordpress/data` store.
    *
-   * @param {string} storeName  Unique namespace identifier.
-   * @param {Object} options    Store description (reducer, actions, selectors, resolvers).
+   * @param {string} storeName Unique namespace identifier.
+   * @param {Object} options   Store description (reducer, actions, selectors, resolvers).
    *
    * @return {Object} Registered store object.
    */
 
-  registry.registerStore = function (storeName, options) {
+  registry.registerStore = (storeName, options) => {
     if (!options.reducer) {
       throw new TypeError('Must specify store reducer');
     }
 
-    var store = createReduxStore(storeName, options).instantiate(registry);
+    const store = createReduxStore(storeName, options).instantiate(registry);
     registerGenericStore(storeName, store);
     return store.store;
   }; //
@@ -3891,18 +2989,14 @@ function createRegistry() {
 
 
   function use(plugin, options) {
-    registry = _objectSpread$b(_objectSpread$b({}, registry), plugin(registry, options));
+    registry = { ...registry,
+      ...plugin(registry, options)
+    };
     return registry;
   }
 
-  registerGenericStore('core/data', createCoreDataStore(registry));
-  Object.entries(storeConfigs).forEach(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        name = _ref2[0],
-        config = _ref2[1];
-
-    return registry.registerStore(name, config);
-  });
+  registerGenericStore(STORE_NAME, createCoreDataStore(registry));
+  Object.entries(storeConfigs).forEach(([name, config]) => registry.registerStore(name, config));
 
   if (parent) {
     parent.subscribe(globalListener);
@@ -3916,11 +3010,534 @@ function createRegistry() {
  */
 var defaultRegistry = createRegistry();
 
-function _classCallCheck$1(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
+/**
+ * Validate a namespace string.
+ *
+ * @param {string} namespace The namespace to validate - should take the form
+ *                           `vendor/plugin/function`.
+ *
+ * @return {boolean} Whether the namespace is valid.
+ */
+function validateNamespace(namespace) {
+  if ('string' !== typeof namespace || '' === namespace) {
+    // eslint-disable-next-line no-console
+    console.error('The namespace must be a non-empty string.');
+    return false;
   }
+
+  if (!/^[a-zA-Z][a-zA-Z0-9_.\-\/]*$/.test(namespace)) {
+    // eslint-disable-next-line no-console
+    console.error('The namespace can only contain numbers, letters, dashes, periods, underscores and slashes.');
+    return false;
+  }
+
+  return true;
 }
+
+/**
+ * Validate a hookName string.
+ *
+ * @param {string} hookName The hook name to validate. Should be a non empty string containing
+ *                          only numbers, letters, dashes, periods and underscores. Also,
+ *                          the hook name cannot begin with `__`.
+ *
+ * @return {boolean} Whether the hook name is valid.
+ */
+function validateHookName(hookName) {
+  if ('string' !== typeof hookName || '' === hookName) {
+    // eslint-disable-next-line no-console
+    console.error('The hook name must be a non-empty string.');
+    return false;
+  }
+
+  if (/^__/.test(hookName)) {
+    // eslint-disable-next-line no-console
+    console.error('The hook name cannot begin with `__`.');
+    return false;
+  }
+
+  if (!/^[a-zA-Z][a-zA-Z0-9_.-]*$/.test(hookName)) {
+    // eslint-disable-next-line no-console
+    console.error('The hook name can only contain numbers, letters, dashes, periods and underscores.');
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Internal dependencies
+ */
+/**
+ * @callback AddHook
+ *
+ * Adds the hook to the appropriate hooks container.
+ *
+ * @param {string}               hookName      Name of hook to add
+ * @param {string}               namespace     The unique namespace identifying the callback in the form `vendor/plugin/function`.
+ * @param {import('.').Callback} callback      Function to call when the hook is run
+ * @param {number}               [priority=10] Priority of this hook
+ */
+
+/**
+ * Returns a function which, when invoked, will add a hook.
+ *
+ * @param {import('.').Hooks}    hooks    Hooks instance.
+ * @param {import('.').StoreKey} storeKey
+ *
+ * @return {AddHook} Function that adds a new hook.
+ */
+
+function createAddHook(hooks, storeKey) {
+  return function addHook(hookName, namespace, callback, priority = 10) {
+    const hooksStore = hooks[storeKey];
+
+    if (!validateHookName(hookName)) {
+      return;
+    }
+
+    if (!validateNamespace(namespace)) {
+      return;
+    }
+
+    if ('function' !== typeof callback) {
+      // eslint-disable-next-line no-console
+      console.error('The hook callback must be a function.');
+      return;
+    } // Validate numeric priority
+
+
+    if ('number' !== typeof priority) {
+      // eslint-disable-next-line no-console
+      console.error('If specified, the hook priority must be a number.');
+      return;
+    }
+
+    const handler = {
+      callback,
+      priority,
+      namespace
+    };
+
+    if (hooksStore[hookName]) {
+      // Find the correct insert index of the new hook.
+      const handlers = hooksStore[hookName].handlers;
+      /** @type {number} */
+
+      let i;
+
+      for (i = handlers.length; i > 0; i--) {
+        if (priority >= handlers[i - 1].priority) {
+          break;
+        }
+      }
+
+      if (i === handlers.length) {
+        // If append, operate via direct assignment.
+        handlers[i] = handler;
+      } else {
+        // Otherwise, insert before index via splice.
+        handlers.splice(i, 0, handler);
+      } // We may also be currently executing this hook.  If the callback
+      // we're adding would come after the current callback, there's no
+      // problem; otherwise we need to increase the execution index of
+      // any other runs by 1 to account for the added element.
+
+
+      hooksStore.__current.forEach(hookInfo => {
+        if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
+          hookInfo.currentIndex++;
+        }
+      });
+    } else {
+      // This is the first hook of its type.
+      hooksStore[hookName] = {
+        handlers: [handler],
+        runs: 0
+      };
+    }
+
+    if (hookName !== 'hookAdded') {
+      hooks.doAction('hookAdded', hookName, namespace, callback, priority);
+    }
+  };
+}
+
+/**
+ * Internal dependencies
+ */
+/**
+ * @callback RemoveHook
+ * Removes the specified callback (or all callbacks) from the hook with a given hookName
+ * and namespace.
+ *
+ * @param {string} hookName  The name of the hook to modify.
+ * @param {string} namespace The unique namespace identifying the callback in the
+ *                           form `vendor/plugin/function`.
+ *
+ * @return {number | undefined} The number of callbacks removed.
+ */
+
+/**
+ * Returns a function which, when invoked, will remove a specified hook or all
+ * hooks by the given name.
+ *
+ * @param {import('.').Hooks}    hooks             Hooks instance.
+ * @param {import('.').StoreKey} storeKey
+ * @param {boolean}              [removeAll=false] Whether to remove all callbacks for a hookName,
+ *                                                 without regard to namespace. Used to create
+ *                                                 `removeAll*` functions.
+ *
+ * @return {RemoveHook} Function that removes hooks.
+ */
+
+function createRemoveHook(hooks, storeKey, removeAll = false) {
+  return function removeHook(hookName, namespace) {
+    const hooksStore = hooks[storeKey];
+
+    if (!validateHookName(hookName)) {
+      return;
+    }
+
+    if (!removeAll && !validateNamespace(namespace)) {
+      return;
+    } // Bail if no hooks exist by this name
+
+
+    if (!hooksStore[hookName]) {
+      return 0;
+    }
+
+    let handlersRemoved = 0;
+
+    if (removeAll) {
+      handlersRemoved = hooksStore[hookName].handlers.length;
+      hooksStore[hookName] = {
+        runs: hooksStore[hookName].runs,
+        handlers: []
+      };
+    } else {
+      // Try to find the specified callback to remove.
+      const handlers = hooksStore[hookName].handlers;
+
+      for (let i = handlers.length - 1; i >= 0; i--) {
+        if (handlers[i].namespace === namespace) {
+          handlers.splice(i, 1);
+          handlersRemoved++; // This callback may also be part of a hook that is
+          // currently executing.  If the callback we're removing
+          // comes after the current callback, there's no problem;
+          // otherwise we need to decrease the execution index of any
+          // other runs by 1 to account for the removed element.
+
+          hooksStore.__current.forEach(hookInfo => {
+            if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
+              hookInfo.currentIndex--;
+            }
+          });
+        }
+      }
+    }
+
+    if (hookName !== 'hookRemoved') {
+      hooks.doAction('hookRemoved', hookName, namespace);
+    }
+
+    return handlersRemoved;
+  };
+}
+
+/**
+ * @callback HasHook
+ *
+ * Returns whether any handlers are attached for the given hookName and optional namespace.
+ *
+ * @param {string} hookName    The name of the hook to check for.
+ * @param {string} [namespace] Optional. The unique namespace identifying the callback
+ *                             in the form `vendor/plugin/function`.
+ *
+ * @return {boolean} Whether there are handlers that are attached to the given hook.
+ */
+
+/**
+ * Returns a function which, when invoked, will return whether any handlers are
+ * attached to a particular hook.
+ *
+ * @param {import('.').Hooks}    hooks    Hooks instance.
+ * @param {import('.').StoreKey} storeKey
+ *
+ * @return {HasHook} Function that returns whether any handlers are
+ *                   attached to a particular hook and optional namespace.
+ */
+function createHasHook(hooks, storeKey) {
+  return function hasHook(hookName, namespace) {
+    const hooksStore = hooks[storeKey]; // Use the namespace if provided.
+
+    if ('undefined' !== typeof namespace) {
+      return hookName in hooksStore && hooksStore[hookName].handlers.some(hook => hook.namespace === namespace);
+    }
+
+    return hookName in hooksStore;
+  };
+}
+
+/**
+ * Returns a function which, when invoked, will execute all callbacks
+ * registered to a hook of the specified type, optionally returning the final
+ * value of the call chain.
+ *
+ * @param {import('.').Hooks}    hooks                  Hooks instance.
+ * @param {import('.').StoreKey} storeKey
+ * @param {boolean}              [returnFirstArg=false] Whether each hook callback is expected to
+ *                                                      return its first argument.
+ *
+ * @return {(hookName:string, ...args: unknown[]) => unknown} Function that runs hook callbacks.
+ */
+function createRunHook(hooks, storeKey, returnFirstArg = false) {
+  return function runHooks(hookName, ...args) {
+    const hooksStore = hooks[storeKey];
+
+    if (!hooksStore[hookName]) {
+      hooksStore[hookName] = {
+        handlers: [],
+        runs: 0
+      };
+    }
+
+    hooksStore[hookName].runs++;
+    const handlers = hooksStore[hookName].handlers; // The following code is stripped from production builds.
+
+    if ('production' !== process.env.NODE_ENV) {
+      // Handle any 'all' hooks registered.
+      if ('hookAdded' !== hookName && hooksStore.all) {
+        handlers.push(...hooksStore.all.handlers);
+      }
+    }
+
+    if (!handlers || !handlers.length) {
+      return returnFirstArg ? args[0] : undefined;
+    }
+
+    const hookInfo = {
+      name: hookName,
+      currentIndex: 0
+    };
+
+    hooksStore.__current.push(hookInfo);
+
+    while (hookInfo.currentIndex < handlers.length) {
+      const handler = handlers[hookInfo.currentIndex];
+      const result = handler.callback.apply(null, args);
+
+      if (returnFirstArg) {
+        args[0] = result;
+      }
+
+      hookInfo.currentIndex++;
+    }
+
+    hooksStore.__current.pop();
+
+    if (returnFirstArg) {
+      return args[0];
+    }
+  };
+}
+
+/**
+ * Returns a function which, when invoked, will return the name of the
+ * currently running hook, or `null` if no hook of the given type is currently
+ * running.
+ *
+ * @param {import('.').Hooks}    hooks    Hooks instance.
+ * @param {import('.').StoreKey} storeKey
+ *
+ * @return {() => string | null} Function that returns the current hook name or null.
+ */
+function createCurrentHook(hooks, storeKey) {
+  return function currentHook() {
+    var _hooksStore$__current, _hooksStore$__current2;
+
+    const hooksStore = hooks[storeKey];
+    return (_hooksStore$__current = (_hooksStore$__current2 = hooksStore.__current[hooksStore.__current.length - 1]) === null || _hooksStore$__current2 === void 0 ? void 0 : _hooksStore$__current2.name) !== null && _hooksStore$__current !== void 0 ? _hooksStore$__current : null;
+  };
+}
+
+/**
+ * @callback DoingHook
+ * Returns whether a hook is currently being executed.
+ *
+ * @param {string} [hookName] The name of the hook to check for.  If
+ *                            omitted, will check for any hook being executed.
+ *
+ * @return {boolean} Whether the hook is being executed.
+ */
+
+/**
+ * Returns a function which, when invoked, will return whether a hook is
+ * currently being executed.
+ *
+ * @param {import('.').Hooks}    hooks    Hooks instance.
+ * @param {import('.').StoreKey} storeKey
+ *
+ * @return {DoingHook} Function that returns whether a hook is currently
+ *                     being executed.
+ */
+function createDoingHook(hooks, storeKey) {
+  return function doingHook(hookName) {
+    const hooksStore = hooks[storeKey]; // If the hookName was not passed, check for any current hook.
+
+    if ('undefined' === typeof hookName) {
+      return 'undefined' !== typeof hooksStore.__current[0];
+    } // Return the __current hook.
+
+
+    return hooksStore.__current[0] ? hookName === hooksStore.__current[0].name : false;
+  };
+}
+
+/**
+ * Internal dependencies
+ */
+/**
+ * @callback DidHook
+ *
+ * Returns the number of times an action has been fired.
+ *
+ * @param {string} hookName The hook name to check.
+ *
+ * @return {number | undefined} The number of times the hook has run.
+ */
+
+/**
+ * Returns a function which, when invoked, will return the number of times a
+ * hook has been called.
+ *
+ * @param {import('.').Hooks}    hooks    Hooks instance.
+ * @param {import('.').StoreKey} storeKey
+ *
+ * @return {DidHook} Function that returns a hook's call count.
+ */
+
+function createDidHook(hooks, storeKey) {
+  return function didHook(hookName) {
+    const hooksStore = hooks[storeKey];
+
+    if (!validateHookName(hookName)) {
+      return;
+    }
+
+    return hooksStore[hookName] && hooksStore[hookName].runs ? hooksStore[hookName].runs : 0;
+  };
+}
+
+/**
+ * Internal dependencies
+ */
+/**
+ * Internal class for constructing hooks. Use `createHooks()` function
+ *
+ * Note, it is necessary to expose this class to make its type public.
+ *
+ * @private
+ */
+
+class _Hooks {
+  constructor() {
+    /** @type {import('.').Store} actions */
+    this.actions = Object.create(null);
+    this.actions.__current = [];
+    /** @type {import('.').Store} filters */
+
+    this.filters = Object.create(null);
+    this.filters.__current = [];
+    this.addAction = createAddHook(this, 'actions');
+    this.addFilter = createAddHook(this, 'filters');
+    this.removeAction = createRemoveHook(this, 'actions');
+    this.removeFilter = createRemoveHook(this, 'filters');
+    this.hasAction = createHasHook(this, 'actions');
+    this.hasFilter = createHasHook(this, 'filters');
+    this.removeAllActions = createRemoveHook(this, 'actions', true);
+    this.removeAllFilters = createRemoveHook(this, 'filters', true);
+    this.doAction = createRunHook(this, 'actions');
+    this.applyFilters = createRunHook(this, 'filters', true);
+    this.currentAction = createCurrentHook(this, 'actions');
+    this.currentFilter = createCurrentHook(this, 'filters');
+    this.doingAction = createDoingHook(this, 'actions');
+    this.doingFilter = createDoingHook(this, 'filters');
+    this.didAction = createDidHook(this, 'actions');
+    this.didFilter = createDidHook(this, 'filters');
+  }
+
+}
+/** @typedef {_Hooks} Hooks */
+
+/**
+ * Returns an instance of the hooks object.
+ *
+ * @return {Hooks} A Hooks instance.
+ */
+
+function createHooks() {
+  return new _Hooks();
+}
+
+/**
+ * Internal dependencies
+ */
+/** @typedef {(...args: any[])=>any} Callback */
+
+/**
+ * @typedef Handler
+ * @property {Callback} callback  The callback
+ * @property {string}   namespace The namespace
+ * @property {number}   priority  The namespace
+ */
+
+/**
+ * @typedef Hook
+ * @property {Handler[]} handlers Array of handlers
+ * @property {number}    runs     Run counter
+ */
+
+/**
+ * @typedef Current
+ * @property {string} name         Hook name
+ * @property {number} currentIndex The index
+ */
+
+/**
+ * @typedef {Record<string, Hook> & {__current: Current[]}} Store
+ */
+
+/**
+ * @typedef {'actions' | 'filters'} StoreKey
+ */
+
+/**
+ * @typedef {import('./createHooks').Hooks} Hooks
+ */
+
+const defaultHooks = createHooks();
+const {
+  addAction,
+  addFilter,
+  removeAction,
+  removeFilter,
+  hasAction,
+  hasFilter,
+  removeAllActions,
+  removeAllFilters,
+  doAction,
+  applyFilters,
+  currentAction,
+  currentFilter,
+  doingAction,
+  doingFilter,
+  didAction,
+  didFilter,
+  actions: actions$1,
+  filters
+} = defaultHooks;
 
 function _extends$2() {
   _extends$2 = Object.assign || function (target) {
@@ -3940,95 +3557,42 @@ function _extends$2() {
   return _extends$2.apply(this, arguments);
 }
 
-function _typeof$1(obj) {
-  "@babel/helpers - typeof";
+// Disable reason: Object and object are distinctly different types in TypeScript and we mean the lowercase object in thise case
+/**
+ * @type {WeakMap<object, number>}
+ */
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof$1 = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof$1 = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
+const instanceMap = new WeakMap();
+/**
+ * Creates a new id for a given object.
+ *
+ * @param {object} object Object reference to create an id for.
+ * @return {number} The instance id (index).
+ */
 
-  return _typeof$1(obj);
+function createId(object) {
+  const instances = instanceMap.get(object) || 0;
+  instanceMap.set(object, instances + 1);
+  return instances;
 }
+/**
+ * Provides a unique instance ID.
+ *
+ * @param {object}          object           Object reference to create an id for.
+ * @param {string}          [prefix]         Prefix for the unique id.
+ * @param {string | number} [preferredId=''] Default ID to use.
+ * @return {string | number} The unique instance id.
+ */
 
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
 
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
+function useInstanceId(object, prefix, preferredId = '') {
+  return React.useMemo(() => {
+    if (preferredId) return preferredId;
+    const id = createId(object);
+    return prefix ? `${prefix}-${id}` : id;
+  }, [object]);
 }
-
-function _objectWithoutProperties$1(source, excluded) {
-  if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass$1(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-function _inherits$1(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
+/* eslint-enable jsdoc/check-types */
 
 /**
  * Memize options object.
@@ -4435,29 +3999,28 @@ var sprintf$1 = {};
  * @param {...*} args Arguments to pass to `console.error`
  */
 
-var logErrorOnce = memize_1(console.error); // eslint-disable-line no-console
+const logErrorOnce = memize_1(console.error); // eslint-disable-line no-console
 
 /**
  * Returns a formatted string. If an error occurs in applying the format, the
  * original format string is returned.
  *
- * @param {string}    format The format of the string to generate.
- * @param {...*} args Arguments to apply to the format.
+ * @param {string} format The format of the string to generate.
+ * @param {...*}   args   Arguments to apply to the format.
  *
  * @see https://www.npmjs.com/package/sprintf-js
  *
  * @return {string} The formatted string.
  */
 
-function sprintf(format) {
+function sprintf(format, ...args) {
   try {
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
+    return sprintf$1.sprintf(format, ...args);
+  } catch (error) {
+    if (error instanceof Error) {
+      logErrorOnce('sprintf error: \n\n' + error.toString());
     }
 
-    return sprintf$1.sprintf.apply(sprintf$1, [format].concat(args));
-  } catch (error) {
-    logErrorOnce('sprintf error: \n\n' + error.toString());
     return format;
   }
 }
@@ -4954,9 +4517,9 @@ Tannin.prototype.dcnpgettext = function( domain, context, singular, plural, n ) 
 	return index === 0 ? singular : plural;
 };
 
-function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+/**
+ * External dependencies
+ */
 /**
  * @typedef {Record<string,any>} LocaleData
  */
@@ -4968,12 +4531,13 @@ function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { 
  * @type {LocaleData}
  */
 
-var DEFAULT_LOCALE_DATA$2 = {
+const DEFAULT_LOCALE_DATA = {
   '': {
     /** @param {number} n */
-    plural_forms: function plural_forms(n) {
+    plural_forms(n) {
       return n === 1 ? 0 : 1;
     }
+
   }
 };
 /*
@@ -4981,7 +4545,7 @@ var DEFAULT_LOCALE_DATA$2 = {
  * `i18n.gettext_domain` or `i18n.ngettext_with_context` or `i18n.has_translation`.
  */
 
-var I18N_HOOK_REGEXP$2 = /^i18n\.(n?gettext|has_translation)(_|$)/;
+const I18N_HOOK_REGEXP = /^i18n\.(n?gettext|has_translation)(_|$)/;
 /**
  * @typedef {(domain?: string) => LocaleData} GetLocaleData
  *
@@ -5081,44 +4645,43 @@ var I18N_HOOK_REGEXP$2 = /^i18n\.(n?gettext|has_translation)(_|$)/;
  * An i18n instance
  *
  * @typedef I18n
- * @property {GetLocaleData} getLocaleData     Returns locale data by domain in a Jed-formatted JSON object shape.
- * @property {SetLocaleData} setLocaleData     Merges locale data into the Tannin instance by domain. Accepts data in a
+ * @property {GetLocaleData}   getLocaleData   Returns locale data by domain in a Jed-formatted JSON object shape.
+ * @property {SetLocaleData}   setLocaleData   Merges locale data into the Tannin instance by domain. Accepts data in a
  *                                             Jed-formatted JSON object shape.
  * @property {ResetLocaleData} resetLocaleData Resets all current Tannin instance locale data and sets the specified
  *                                             locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
- * @property {Subscribe} subscribe             Subscribes to changes of Tannin locale data.
- * @property {__} __                           Retrieve the translation of text.
- * @property {_x} _x                           Retrieve translated string with gettext context.
- * @property {_n} _n                           Translates and retrieves the singular or plural form based on the supplied
+ * @property {Subscribe}       subscribe       Subscribes to changes of Tannin locale data.
+ * @property {__}              __              Retrieve the translation of text.
+ * @property {_x}              _x              Retrieve translated string with gettext context.
+ * @property {_n}              _n              Translates and retrieves the singular or plural form based on the supplied
  *                                             number.
- * @property {_nx} _nx                         Translates and retrieves the singular or plural form based on the supplied
+ * @property {_nx}             _nx             Translates and retrieves the singular or plural form based on the supplied
  *                                             number, with gettext context.
- * @property {IsRtl} isRTL                     Check if current locale is RTL.
- * @property {HasTranslation} hasTranslation   Check if there is a translation for a given string.
+ * @property {IsRtl}           isRTL           Check if current locale is RTL.
+ * @property {HasTranslation}  hasTranslation  Check if there is a translation for a given string.
  */
 
 /**
  * Create an i18n instance
  *
- * @param {LocaleData} [initialData]    Locale data configuration.
- * @param {string}     [initialDomain]  Domain for which configuration applies.
- * @param {Hooks} [hooks]     Hooks implementation.
- * @return {I18n}                       I18n instance
+ * @param {LocaleData} [initialData]   Locale data configuration.
+ * @param {string}     [initialDomain] Domain for which configuration applies.
+ * @param {Hooks}      [hooks]         Hooks implementation.
+ *
+ * @return {I18n} I18n instance.
  */
 
-var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
+const createI18n = (initialData, initialDomain, hooks) => {
   /**
    * The underlying instance of Tannin to which exported functions interface.
    *
    * @type {Tannin}
    */
-  var tannin = new Tannin({});
-  var listeners = new Set();
+  const tannin = new Tannin({});
+  const listeners = new Set();
 
-  var notifyListeners = function notifyListeners() {
-    listeners.forEach(function (listener) {
-      return listener();
-    });
+  const notifyListeners = () => {
+    listeners.forEach(listener => listener());
   };
   /**
    * Subscribe to changes of locale data.
@@ -5128,43 +4691,42 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
    */
 
 
-  var subscribe = function subscribe(callback) {
+  const subscribe = callback => {
     listeners.add(callback);
-    return function () {
-      return listeners.delete(callback);
-    };
+    return () => listeners.delete(callback);
   };
   /** @type {GetLocaleData} */
 
 
-  var getLocaleData = function getLocaleData() {
-    var domain = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'default';
-    return tannin.data[domain];
-  };
+  const getLocaleData = (domain = 'default') => tannin.data[domain];
   /**
    * @param {LocaleData} [data]
-   * @param {string} [domain]
+   * @param {string}     [domain]
    */
 
 
-  var doSetLocaleData = function doSetLocaleData(data) {
-    var domain = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'default';
-    tannin.data[domain] = _objectSpread$a(_objectSpread$a(_objectSpread$a({}, DEFAULT_LOCALE_DATA$2), tannin.data[domain]), data); // Populate default domain configuration (supported locale date which omits
+  const doSetLocaleData = (data, domain = 'default') => {
+    tannin.data[domain] = { ...DEFAULT_LOCALE_DATA,
+      ...tannin.data[domain],
+      ...data
+    }; // Populate default domain configuration (supported locale date which omits
     // a plural forms expression).
 
-    tannin.data[domain][''] = _objectSpread$a(_objectSpread$a({}, DEFAULT_LOCALE_DATA$2['']), tannin.data[domain]['']);
+    tannin.data[domain][''] = { ...DEFAULT_LOCALE_DATA[''],
+      ...tannin.data[domain]['']
+    };
   };
   /** @type {SetLocaleData} */
 
 
-  var setLocaleData = function setLocaleData(data, domain) {
+  const setLocaleData = (data, domain) => {
     doSetLocaleData(data, domain);
     notifyListeners();
   };
   /** @type {ResetLocaleData} */
 
 
-  var resetLocaleData = function resetLocaleData(data, domain) {
+  const resetLocaleData = (data, domain) => {
     // Reset all current Tannin locale data.
     tannin.data = {}; // Reset cached plural forms functions cache.
 
@@ -5188,13 +4750,7 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
    */
 
 
-  var dcnpgettext = function dcnpgettext() {
-    var domain = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'default';
-    var context = arguments.length > 1 ? arguments[1] : undefined;
-    var single = arguments.length > 2 ? arguments[2] : undefined;
-    var plural = arguments.length > 3 ? arguments[3] : undefined;
-    var number = arguments.length > 4 ? arguments[4] : undefined;
-
+  const dcnpgettext = (domain = 'default', context, single, plural, number) => {
     if (!tannin.data[domain]) {
       // use `doSetLocaleData` to set silently, without notifying listeners
       doSetLocaleData(undefined, domain);
@@ -5205,15 +4761,12 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
   /** @type {GetFilterDomain} */
 
 
-  var getFilterDomain = function getFilterDomain() {
-    var domain = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'default';
-    return domain;
-  };
+  const getFilterDomain = (domain = 'default') => domain;
   /** @type {__} */
 
 
-  var __ = function __(text, domain) {
-    var translation = dcnpgettext(domain, undefined, text);
+  const __ = (text, domain) => {
+    let translation = dcnpgettext(domain, undefined, text);
 
     if (!hooks) {
       return translation;
@@ -5242,8 +4795,8 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
   /** @type {_x} */
 
 
-  var _x = function _x(text, context, domain) {
-    var translation = dcnpgettext(domain, context, text);
+  const _x = (text, context, domain) => {
+    let translation = dcnpgettext(domain, context, text);
 
     if (!hooks) {
       return translation;
@@ -5273,8 +4826,8 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
   /** @type {_n} */
 
 
-  var _n = function _n(single, plural, number, domain) {
-    var translation = dcnpgettext(domain, undefined, single, plural, number);
+  const _n = (single, plural, number, domain) => {
+    let translation = dcnpgettext(domain, undefined, single, plural, number);
 
     if (!hooks) {
       return translation;
@@ -5305,8 +4858,8 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
   /** @type {_nx} */
 
 
-  var _nx = function _nx(single, plural, number, context, domain) {
-    var translation = dcnpgettext(domain, context, single, plural, number);
+  const _nx = (single, plural, number, context, domain) => {
+    let translation = dcnpgettext(domain, context, single, plural, number);
 
     if (!hooks) {
       return translation;
@@ -5338,26 +4891,26 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
   /** @type {IsRtl} */
 
 
-  var isRTL = function isRTL() {
+  const isRTL = () => {
     return 'rtl' === _x('ltr', 'text direction');
   };
   /** @type {HasTranslation} */
 
 
-  var hasTranslation = function hasTranslation(single, context, domain) {
+  const hasTranslation = (single, context, domain) => {
     var _tannin$data, _tannin$data2;
 
-    var key = context ? context + "\x04" + single : single;
-    var result = !!((_tannin$data = tannin.data) !== null && _tannin$data !== void 0 && (_tannin$data2 = _tannin$data[domain !== null && domain !== void 0 ? domain : 'default']) !== null && _tannin$data2 !== void 0 && _tannin$data2[key]);
+    const key = context ? context + '\u0004' + single : single;
+    let result = !!((_tannin$data = tannin.data) !== null && _tannin$data !== void 0 && (_tannin$data2 = _tannin$data[domain !== null && domain !== void 0 ? domain : 'default']) !== null && _tannin$data2 !== void 0 && _tannin$data2[key]);
 
     if (hooks) {
       /**
        * Filters the presence of a translation in the locale data.
        *
        * @param {boolean} hasTranslation Whether the translation is present or not..
-       * @param {string} single The singular form of the translated text (used as key in locale data)
-       * @param {string} context Context information for the translators.
-       * @param {string} domain Text domain. Unique identifier for retrieving translated strings.
+       * @param {string}  single         The singular form of the translated text (used as key in locale data)
+       * @param {string}  context        Context information for the translators.
+       * @param {string}  domain         Text domain. Unique identifier for retrieving translated strings.
        */
       result =
       /** @type { boolean } */
@@ -5382,8 +4935,8 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
     /**
      * @param {string} hookName
      */
-    var onHookAddedOrRemoved = function onHookAddedOrRemoved(hookName) {
-      if (I18N_HOOK_REGEXP$2.test(hookName)) {
+    const onHookAddedOrRemoved = hookName => {
+      if (I18N_HOOK_REGEXP.test(hookName)) {
         notifyListeners();
       }
     };
@@ -5393,559 +4946,23 @@ var createI18n$2 = function createI18n(initialData, initialDomain, hooks) {
   }
 
   return {
-    getLocaleData: getLocaleData,
-    setLocaleData: setLocaleData,
-    resetLocaleData: resetLocaleData,
-    subscribe: subscribe,
-    __: __,
-    _x: _x,
-    _n: _n,
-    _nx: _nx,
-    isRTL: isRTL,
-    hasTranslation: hasTranslation
+    getLocaleData,
+    setLocaleData,
+    resetLocaleData,
+    subscribe,
+    __,
+    _x,
+    _n,
+    _nx,
+    isRTL,
+    hasTranslation
   };
 };
 
 /**
- * Validate a namespace string.
- *
- * @param  {string} namespace The namespace to validate - should take the form
- *                            `vendor/plugin/function`.
- *
- * @return {boolean}             Whether the namespace is valid.
- */
-function validateNamespace$1(namespace) {
-  if ('string' !== typeof namespace || '' === namespace) {
-    // eslint-disable-next-line no-console
-    console.error('The namespace must be a non-empty string.');
-    return false;
-  }
-
-  if (!/^[a-zA-Z][a-zA-Z0-9_.\-\/]*$/.test(namespace)) {
-    // eslint-disable-next-line no-console
-    console.error('The namespace can only contain numbers, letters, dashes, periods, underscores and slashes.');
-    return false;
-  }
-
-  return true;
-}
-
-/**
- * Validate a hookName string.
- *
- * @param  {string} hookName The hook name to validate. Should be a non empty string containing
- *                           only numbers, letters, dashes, periods and underscores. Also,
- *                           the hook name cannot begin with `__`.
- *
- * @return {boolean}            Whether the hook name is valid.
- */
-function validateHookName$1(hookName) {
-  if ('string' !== typeof hookName || '' === hookName) {
-    // eslint-disable-next-line no-console
-    console.error('The hook name must be a non-empty string.');
-    return false;
-  }
-
-  if (/^__/.test(hookName)) {
-    // eslint-disable-next-line no-console
-    console.error('The hook name cannot begin with `__`.');
-    return false;
-  }
-
-  if (!/^[a-zA-Z][a-zA-Z0-9_.-]*$/.test(hookName)) {
-    // eslint-disable-next-line no-console
-    console.error('The hook name can only contain numbers, letters, dashes, periods and underscores.');
-    return false;
-  }
-
-  return true;
-}
-
-/**
  * Internal dependencies
  */
-/**
- * @callback AddHook
- *
- * Adds the hook to the appropriate hooks container.
- *
- * @param {string}               hookName  Name of hook to add
- * @param {string}               namespace The unique namespace identifying the callback in the form `vendor/plugin/function`.
- * @param {import('.').Callback} callback  Function to call when the hook is run
- * @param {number}               [priority=10]  Priority of this hook
- */
-
-/**
- * Returns a function which, when invoked, will add a hook.
- *
- * @param  {import('.').Hooks}    hooks Hooks instance.
- * @param  {import('.').StoreKey} storeKey
- *
- * @return {AddHook} Function that adds a new hook.
- */
-
-function createAddHook$1(hooks, storeKey) {
-  return function addHook(hookName, namespace, callback) {
-    var priority = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 10;
-    var hooksStore = hooks[storeKey];
-
-    if (!validateHookName$1(hookName)) {
-      return;
-    }
-
-    if (!validateNamespace$1(namespace)) {
-      return;
-    }
-
-    if ('function' !== typeof callback) {
-      // eslint-disable-next-line no-console
-      console.error('The hook callback must be a function.');
-      return;
-    } // Validate numeric priority
-
-
-    if ('number' !== typeof priority) {
-      // eslint-disable-next-line no-console
-      console.error('If specified, the hook priority must be a number.');
-      return;
-    }
-
-    var handler = {
-      callback: callback,
-      priority: priority,
-      namespace: namespace
-    };
-
-    if (hooksStore[hookName]) {
-      // Find the correct insert index of the new hook.
-      var handlers = hooksStore[hookName].handlers;
-      /** @type {number} */
-
-      var i;
-
-      for (i = handlers.length; i > 0; i--) {
-        if (priority >= handlers[i - 1].priority) {
-          break;
-        }
-      }
-
-      if (i === handlers.length) {
-        // If append, operate via direct assignment.
-        handlers[i] = handler;
-      } else {
-        // Otherwise, insert before index via splice.
-        handlers.splice(i, 0, handler);
-      } // We may also be currently executing this hook.  If the callback
-      // we're adding would come after the current callback, there's no
-      // problem; otherwise we need to increase the execution index of
-      // any other runs by 1 to account for the added element.
-
-
-      hooksStore.__current.forEach(function (hookInfo) {
-        if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
-          hookInfo.currentIndex++;
-        }
-      });
-    } else {
-      // This is the first hook of its type.
-      hooksStore[hookName] = {
-        handlers: [handler],
-        runs: 0
-      };
-    }
-
-    if (hookName !== 'hookAdded') {
-      hooks.doAction('hookAdded', hookName, namespace, callback, priority);
-    }
-  };
-}
-
-/**
- * Internal dependencies
- */
-/**
- * @callback RemoveHook
- * Removes the specified callback (or all callbacks) from the hook with a given hookName
- * and namespace.
- *
- * @param {string} hookName  The name of the hook to modify.
- * @param {string} namespace The unique namespace identifying the callback in the
- *                           form `vendor/plugin/function`.
- *
- * @return {number | undefined} The number of callbacks removed.
- */
-
-/**
- * Returns a function which, when invoked, will remove a specified hook or all
- * hooks by the given name.
- *
- * @param  {import('.').Hooks}    hooks Hooks instance.
- * @param  {import('.').StoreKey} storeKey
- * @param  {boolean}              [removeAll=false] Whether to remove all callbacks for a hookName,
- *                                                  without regard to namespace. Used to create
- *                                                  `removeAll*` functions.
- *
- * @return {RemoveHook} Function that removes hooks.
- */
-
-function createRemoveHook$1(hooks, storeKey) {
-  var removeAll = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  return function removeHook(hookName, namespace) {
-    var hooksStore = hooks[storeKey];
-
-    if (!validateHookName$1(hookName)) {
-      return;
-    }
-
-    if (!removeAll && !validateNamespace$1(namespace)) {
-      return;
-    } // Bail if no hooks exist by this name
-
-
-    if (!hooksStore[hookName]) {
-      return 0;
-    }
-
-    var handlersRemoved = 0;
-
-    if (removeAll) {
-      handlersRemoved = hooksStore[hookName].handlers.length;
-      hooksStore[hookName] = {
-        runs: hooksStore[hookName].runs,
-        handlers: []
-      };
-    } else {
-      // Try to find the specified callback to remove.
-      var handlers = hooksStore[hookName].handlers;
-
-      var _loop = function _loop(i) {
-        if (handlers[i].namespace === namespace) {
-          handlers.splice(i, 1);
-          handlersRemoved++; // This callback may also be part of a hook that is
-          // currently executing.  If the callback we're removing
-          // comes after the current callback, there's no problem;
-          // otherwise we need to decrease the execution index of any
-          // other runs by 1 to account for the removed element.
-
-          hooksStore.__current.forEach(function (hookInfo) {
-            if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
-              hookInfo.currentIndex--;
-            }
-          });
-        }
-      };
-
-      for (var i = handlers.length - 1; i >= 0; i--) {
-        _loop(i);
-      }
-    }
-
-    if (hookName !== 'hookRemoved') {
-      hooks.doAction('hookRemoved', hookName, namespace);
-    }
-
-    return handlersRemoved;
-  };
-}
-
-/**
- * @callback HasHook
- *
- * Returns whether any handlers are attached for the given hookName and optional namespace.
- *
- * @param {string} hookName    The name of the hook to check for.
- * @param {string} [namespace] Optional. The unique namespace identifying the callback
- *                             in the form `vendor/plugin/function`.
- *
- * @return {boolean} Whether there are handlers that are attached to the given hook.
- */
-
-/**
- * Returns a function which, when invoked, will return whether any handlers are
- * attached to a particular hook.
- *
- * @param  {import('.').Hooks}    hooks Hooks instance.
- * @param  {import('.').StoreKey} storeKey
- *
- * @return {HasHook} Function that returns whether any handlers are
- *                   attached to a particular hook and optional namespace.
- */
-function createHasHook$1(hooks, storeKey) {
-  return function hasHook(hookName, namespace) {
-    var hooksStore = hooks[storeKey]; // Use the namespace if provided.
-
-    if ('undefined' !== typeof namespace) {
-      return hookName in hooksStore && hooksStore[hookName].handlers.some(function (hook) {
-        return hook.namespace === namespace;
-      });
-    }
-
-    return hookName in hooksStore;
-  };
-}
-
-/**
- * Returns a function which, when invoked, will execute all callbacks
- * registered to a hook of the specified type, optionally returning the final
- * value of the call chain.
- *
- * @param  {import('.').Hooks}    hooks Hooks instance.
- * @param  {import('.').StoreKey} storeKey
- * @param  {boolean}              [returnFirstArg=false] Whether each hook callback is expected to
- *                                                       return its first argument.
- *
- * @return {(hookName:string, ...args: unknown[]) => unknown} Function that runs hook callbacks.
- */
-function createRunHook$1(hooks, storeKey) {
-  var returnFirstArg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  return function runHooks(hookName) {
-    var hooksStore = hooks[storeKey];
-
-    if (!hooksStore[hookName]) {
-      hooksStore[hookName] = {
-        handlers: [],
-        runs: 0
-      };
-    }
-
-    hooksStore[hookName].runs++;
-    var handlers = hooksStore[hookName].handlers; // The following code is stripped from production builds.
-
-    if ('production' !== process.env.NODE_ENV) {
-      // Handle any 'all' hooks registered.
-      if ('hookAdded' !== hookName && hooksStore.all) {
-        handlers.push.apply(handlers, _toConsumableArray(hooksStore.all.handlers));
-      }
-    }
-
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    if (!handlers || !handlers.length) {
-      return returnFirstArg ? args[0] : undefined;
-    }
-
-    var hookInfo = {
-      name: hookName,
-      currentIndex: 0
-    };
-
-    hooksStore.__current.push(hookInfo);
-
-    while (hookInfo.currentIndex < handlers.length) {
-      var handler = handlers[hookInfo.currentIndex];
-      var result = handler.callback.apply(null, args);
-
-      if (returnFirstArg) {
-        args[0] = result;
-      }
-
-      hookInfo.currentIndex++;
-    }
-
-    hooksStore.__current.pop();
-
-    if (returnFirstArg) {
-      return args[0];
-    }
-  };
-}
-
-/**
- * Returns a function which, when invoked, will return the name of the
- * currently running hook, or `null` if no hook of the given type is currently
- * running.
- *
- * @param  {import('.').Hooks}    hooks Hooks instance.
- * @param  {import('.').StoreKey} storeKey
- *
- * @return {() => string | null} Function that returns the current hook name or null.
- */
-function createCurrentHook$1(hooks, storeKey) {
-  return function currentHook() {
-    var _hooksStore$__current, _hooksStore$__current2;
-
-    var hooksStore = hooks[storeKey];
-    return (_hooksStore$__current = (_hooksStore$__current2 = hooksStore.__current[hooksStore.__current.length - 1]) === null || _hooksStore$__current2 === void 0 ? void 0 : _hooksStore$__current2.name) !== null && _hooksStore$__current !== void 0 ? _hooksStore$__current : null;
-  };
-}
-
-/**
- * @callback DoingHook
- * Returns whether a hook is currently being executed.
- *
- * @param  {string} [hookName] The name of the hook to check for.  If
- *                             omitted, will check for any hook being executed.
- *
- * @return {boolean} Whether the hook is being executed.
- */
-
-/**
- * Returns a function which, when invoked, will return whether a hook is
- * currently being executed.
- *
- * @param  {import('.').Hooks}    hooks Hooks instance.
- * @param  {import('.').StoreKey} storeKey
- *
- * @return {DoingHook} Function that returns whether a hook is currently
- *                     being executed.
- */
-function createDoingHook$1(hooks, storeKey) {
-  return function doingHook(hookName) {
-    var hooksStore = hooks[storeKey]; // If the hookName was not passed, check for any current hook.
-
-    if ('undefined' === typeof hookName) {
-      return 'undefined' !== typeof hooksStore.__current[0];
-    } // Return the __current hook.
-
-
-    return hooksStore.__current[0] ? hookName === hooksStore.__current[0].name : false;
-  };
-}
-
-/**
- * Internal dependencies
- */
-/**
- * @callback DidHook
- *
- * Returns the number of times an action has been fired.
- *
- * @param  {string} hookName The hook name to check.
- *
- * @return {number | undefined} The number of times the hook has run.
- */
-
-/**
- * Returns a function which, when invoked, will return the number of times a
- * hook has been called.
- *
- * @param  {import('.').Hooks}    hooks Hooks instance.
- * @param  {import('.').StoreKey} storeKey
- *
- * @return {DidHook} Function that returns a hook's call count.
- */
-
-function createDidHook$1(hooks, storeKey) {
-  return function didHook(hookName) {
-    var hooksStore = hooks[storeKey];
-
-    if (!validateHookName$1(hookName)) {
-      return;
-    }
-
-    return hooksStore[hookName] && hooksStore[hookName].runs ? hooksStore[hookName].runs : 0;
-  };
-}
-
-/**
- * Internal class for constructing hooks. Use `createHooks()` function
- *
- * Note, it is necessary to expose this class to make its type public.
- *
- * @private
- */
-
-var _Hooks$1 = function _Hooks() {
-  _classCallCheck$1(this, _Hooks);
-
-  /** @type {import('.').Store} actions */
-  this.actions = Object.create(null);
-  this.actions.__current = [];
-  /** @type {import('.').Store} filters */
-
-  this.filters = Object.create(null);
-  this.filters.__current = [];
-  this.addAction = createAddHook$1(this, 'actions');
-  this.addFilter = createAddHook$1(this, 'filters');
-  this.removeAction = createRemoveHook$1(this, 'actions');
-  this.removeFilter = createRemoveHook$1(this, 'filters');
-  this.hasAction = createHasHook$1(this, 'actions');
-  this.hasFilter = createHasHook$1(this, 'filters');
-  this.removeAllActions = createRemoveHook$1(this, 'actions', true);
-  this.removeAllFilters = createRemoveHook$1(this, 'filters', true);
-  this.doAction = createRunHook$1(this, 'actions');
-  this.applyFilters = createRunHook$1(this, 'filters', true);
-  this.currentAction = createCurrentHook$1(this, 'actions');
-  this.currentFilter = createCurrentHook$1(this, 'filters');
-  this.doingAction = createDoingHook$1(this, 'actions');
-  this.doingFilter = createDoingHook$1(this, 'filters');
-  this.didAction = createDidHook$1(this, 'actions');
-  this.didFilter = createDidHook$1(this, 'filters');
-};
-/** @typedef {_Hooks} Hooks */
-
-/**
- * Returns an instance of the hooks object.
- *
- * @return {Hooks} A Hooks instance.
- */
-
-function createHooks$1() {
-  return new _Hooks$1();
-}
-
-/**
- * Internal dependencies
- */
-/** @typedef {(...args: any[])=>any} Callback */
-
-/**
- * @typedef Handler
- * @property {Callback} callback  The callback
- * @property {string}   namespace The namespace
- * @property {number}   priority  The namespace
- */
-
-/**
- * @typedef Hook
- * @property {Handler[]} handlers Array of handlers
- * @property {number}    runs     Run counter
- */
-
-/**
- * @typedef Current
- * @property {string} name         Hook name
- * @property {number} currentIndex The index
- */
-
-/**
- * @typedef {Record<string, Hook> & {__current: Current[]}} Store
- */
-
-/**
- * @typedef {'actions' | 'filters'} StoreKey
- */
-
-/**
- * @typedef {import('./createHooks').Hooks} Hooks
- */
-
-var defaultHooks$1 = createHooks$1();
-defaultHooks$1.addAction;
-    defaultHooks$1.addFilter;
-    defaultHooks$1.removeAction;
-    defaultHooks$1.removeFilter;
-    defaultHooks$1.hasAction;
-    defaultHooks$1.hasFilter;
-    defaultHooks$1.removeAllActions;
-    defaultHooks$1.removeAllFilters;
-    defaultHooks$1.doAction;
-    defaultHooks$1.applyFilters;
-    defaultHooks$1.currentAction;
-    defaultHooks$1.currentFilter;
-    defaultHooks$1.doingAction;
-    defaultHooks$1.doingFilter;
-    defaultHooks$1.didAction;
-    defaultHooks$1.didFilter;
-    defaultHooks$1.actions;
-    defaultHooks$1.filters;
-
-/**
- * Internal dependencies
- */
-var i18n$2 = createI18n$2(undefined, undefined, defaultHooks$1);
+const i18n = createI18n(undefined, undefined, defaultHooks);
 /*
  * Comments in this file are duplicated from ./i18n due to
  * https://github.com/WordPress/gutenberg/pull/20318#issuecomment-590837722
@@ -5966,7 +4983,7 @@ var i18n$2 = createI18n$2(undefined, undefined, defaultHooks$1);
  * @return {LocaleData} Locale data.
  */
 
-i18n$2.getLocaleData.bind(i18n$2);
+i18n.getLocaleData.bind(i18n);
 /**
  * Merges locale data into the Tannin instance by domain. Accepts data in a
  * Jed-formatted JSON object shape.
@@ -5977,7 +4994,7 @@ i18n$2.getLocaleData.bind(i18n$2);
  * @param {string}     [domain] Domain for which configuration applies.
  */
 
-i18n$2.setLocaleData.bind(i18n$2);
+i18n.setLocaleData.bind(i18n);
 /**
  * Resets all current Tannin instance locale data and sets the specified
  * locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
@@ -5988,7 +5005,7 @@ i18n$2.setLocaleData.bind(i18n$2);
  * @param {string}     [domain] Domain for which configuration applies.
  */
 
-i18n$2.resetLocaleData.bind(i18n$2);
+i18n.resetLocaleData.bind(i18n);
 /**
  * Subscribes to changes of locale data
  *
@@ -5996,7 +5013,7 @@ i18n$2.resetLocaleData.bind(i18n$2);
  * @return {UnsubscribeCallback} Unsubscribe callback
  */
 
-i18n$2.subscribe.bind(i18n$2);
+i18n.subscribe.bind(i18n);
 /**
  * Retrieve the translation of text.
  *
@@ -6008,7 +5025,7 @@ i18n$2.subscribe.bind(i18n$2);
  * @return {string} Translated text.
  */
 
-var __$2 = i18n$2.__.bind(i18n$2);
+const __ = i18n.__.bind(i18n);
 /**
  * Retrieve translated string with gettext context.
  *
@@ -6021,7 +5038,7 @@ var __$2 = i18n$2.__.bind(i18n$2);
  * @return {string} Translated context string without pipe.
  */
 
-i18n$2._x.bind(i18n$2);
+i18n._x.bind(i18n);
 /**
  * Translates and retrieves the singular or plural form based on the supplied
  * number.
@@ -6037,7 +5054,7 @@ i18n$2._x.bind(i18n$2);
  * @return {string} The translated singular or plural form.
  */
 
-i18n$2._n.bind(i18n$2);
+i18n._n.bind(i18n);
 /**
  * Translates and retrieves the singular or plural form based on the supplied
  * number, with gettext context.
@@ -6054,7 +5071,7 @@ i18n$2._n.bind(i18n$2);
  * @return {string} The translated singular or plural form.
  */
 
-i18n$2._nx.bind(i18n$2);
+i18n._nx.bind(i18n);
 /**
  * Check if current locale is RTL.
  *
@@ -6066,17 +5083,17 @@ i18n$2._nx.bind(i18n$2);
  * @return {boolean} Whether locale is RTL.
  */
 
-i18n$2.isRTL.bind(i18n$2);
+i18n.isRTL.bind(i18n);
 /**
  * Check if there is a translation for a given string (in singular form).
  *
- * @param {string} single Singular form of the string to look up.
+ * @param {string} single    Singular form of the string to look up.
  * @param {string} [context] Context information for the translators.
- * @param {string} [domain] Domain to retrieve the translated text.
+ * @param {string} [domain]  Domain to retrieve the translated text.
  * @return {boolean} Whether the translation exists or not.
  */
 
-i18n$2.hasTranslation.bind(i18n$2);
+i18n.hasTranslation.bind(i18n);
 
 /**
  * External dependencies
@@ -6099,7 +5116,7 @@ i18n$2.hasTranslation.bind(i18n$2);
  * @return {Object} Object containing the store's selectors.
  */
 
-var select = defaultRegistry.select;
+const select = defaultRegistry.select;
 /**
  * Given the name of a registered store, returns an object containing the store's
  * selectors pre-bound to state so that you only need to supply additional arguments,
@@ -6139,7 +5156,7 @@ defaultRegistry.resolveSelect;
  * @return {Object} Object containing the action creators.
  */
 
-var dispatch = defaultRegistry.dispatch;
+const dispatch = defaultRegistry.dispatch;
 /**
  * Given a listener function, the function will be called any time the state value
  * of one of the registered stores has changed. This function returns a `unsubscribe`
@@ -6183,7 +5200,7 @@ defaultRegistry.registerGenericStore;
  * @return {Object} Registered store object.
  */
 
-var registerStore = defaultRegistry.registerStore;
+const registerStore = defaultRegistry.registerStore;
 /**
  * Extends a registry to inherit functionality provided by a given plugin. A
  * plugin is an object with properties aligning to that of a registry, merged
@@ -6213,6 +5230,57 @@ defaultRegistry.use;
  */
 
 defaultRegistry.register;
+
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1 = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1 = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1(obj);
+}
+
+function _arrayLikeToArray$1(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray$1(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
+}
 
 var sweetalert2_all = {exports: {}};
 
@@ -9859,1126 +8927,6 @@ if (typeof commonjsGlobal !== 'undefined' && commonjsGlobal.Sweetalert2){  commo
 var Swal = sweetalert2_all.exports;
 
 /**
- * External dependencies
- */
-/**
- * Log to console, once per message; or more precisely, per referentially equal
- * argument set. Because Jed throws errors, we log these to the console instead
- * to avoid crashing the application.
- *
- * @param {...*} args Arguments to pass to `console.error`
- */
-
-memize_1(console.error); // eslint-disable-line no-console
-
-/**
- * External dependencies
- */
-/**
- * @typedef {Record<string,any>} LocaleData
- */
-
-/**
- * Default locale data to use for Tannin domain when not otherwise provided.
- * Assumes an English plural forms expression.
- *
- * @type {LocaleData}
- */
-
-const DEFAULT_LOCALE_DATA$1 = {
-  '': {
-    /** @param {number} n */
-    plural_forms(n) {
-      return n === 1 ? 0 : 1;
-    }
-
-  }
-};
-/*
- * Regular expression that matches i18n hooks like `i18n.gettext`, `i18n.ngettext`,
- * `i18n.gettext_domain` or `i18n.ngettext_with_context` or `i18n.has_translation`.
- */
-
-const I18N_HOOK_REGEXP$1 = /^i18n\.(n?gettext|has_translation)(_|$)/;
-/**
- * @typedef {(domain?: string) => LocaleData} GetLocaleData
- *
- * Returns locale data by domain in a
- * Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- */
-
-/**
- * @typedef {(data?: LocaleData, domain?: string) => void} SetLocaleData
- *
- * Merges locale data into the Tannin instance by domain. Accepts data in a
- * Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- */
-
-/**
- * @typedef {(data?: LocaleData, domain?: string) => void} ResetLocaleData
- *
- * Resets all current Tannin instance locale data and sets the specified
- * locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- */
-
-/** @typedef {() => void} SubscribeCallback */
-
-/** @typedef {() => void} UnsubscribeCallback */
-
-/**
- * @typedef {(callback: SubscribeCallback) => UnsubscribeCallback} Subscribe
- *
- * Subscribes to changes of locale data
- */
-
-/**
- * @typedef {(domain?: string) => string} GetFilterDomain
- * Retrieve the domain to use when calling domain-specific filters.
- */
-
-/**
- * @typedef {(text: string, domain?: string) => string} __
- *
- * Retrieve the translation of text.
- *
- * @see https://developer.wordpress.org/reference/functions/__/
- */
-
-/**
- * @typedef {(text: string, context: string, domain?: string) => string} _x
- *
- * Retrieve translated string with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_x/
- */
-
-/**
- * @typedef {(single: string, plural: string, number: number, domain?: string) => string} _n
- *
- * Translates and retrieves the singular or plural form based on the supplied
- * number.
- *
- * @see https://developer.wordpress.org/reference/functions/_n/
- */
-
-/**
- * @typedef {(single: string, plural: string, number: number, context: string, domain?: string) => string} _nx
- *
- * Translates and retrieves the singular or plural form based on the supplied
- * number, with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_nx/
- */
-
-/**
- * @typedef {() => boolean} IsRtl
- *
- * Check if current locale is RTL.
- *
- * **RTL (Right To Left)** is a locale property indicating that text is written from right to left.
- * For example, the `he` locale (for Hebrew) specifies right-to-left. Arabic (ar) is another common
- * language written RTL. The opposite of RTL, LTR (Left To Right) is used in other languages,
- * including English (`en`, `en-US`, `en-GB`, etc.), Spanish (`es`), and French (`fr`).
- */
-
-/**
- * @typedef {(single: string, context?: string, domain?: string) => boolean} HasTranslation
- *
- * Check if there is a translation for a given string in singular form.
- */
-
-/** @typedef {import('@wordpress/hooks').Hooks} Hooks */
-
-/**
- * An i18n instance
- *
- * @typedef I18n
- * @property {GetLocaleData}   getLocaleData   Returns locale data by domain in a Jed-formatted JSON object shape.
- * @property {SetLocaleData}   setLocaleData   Merges locale data into the Tannin instance by domain. Accepts data in a
- *                                             Jed-formatted JSON object shape.
- * @property {ResetLocaleData} resetLocaleData Resets all current Tannin instance locale data and sets the specified
- *                                             locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
- * @property {Subscribe}       subscribe       Subscribes to changes of Tannin locale data.
- * @property {__}              __              Retrieve the translation of text.
- * @property {_x}              _x              Retrieve translated string with gettext context.
- * @property {_n}              _n              Translates and retrieves the singular or plural form based on the supplied
- *                                             number.
- * @property {_nx}             _nx             Translates and retrieves the singular or plural form based on the supplied
- *                                             number, with gettext context.
- * @property {IsRtl}           isRTL           Check if current locale is RTL.
- * @property {HasTranslation}  hasTranslation  Check if there is a translation for a given string.
- */
-
-/**
- * Create an i18n instance
- *
- * @param {LocaleData} [initialData]   Locale data configuration.
- * @param {string}     [initialDomain] Domain for which configuration applies.
- * @param {Hooks}      [hooks]         Hooks implementation.
- *
- * @return {I18n} I18n instance.
- */
-
-const createI18n$1 = (initialData, initialDomain, hooks) => {
-  /**
-   * The underlying instance of Tannin to which exported functions interface.
-   *
-   * @type {Tannin}
-   */
-  const tannin = new Tannin({});
-  const listeners = new Set();
-
-  const notifyListeners = () => {
-    listeners.forEach(listener => listener());
-  };
-  /**
-   * Subscribe to changes of locale data.
-   *
-   * @param {SubscribeCallback} callback Subscription callback.
-   * @return {UnsubscribeCallback} Unsubscribe callback.
-   */
-
-
-  const subscribe = callback => {
-    listeners.add(callback);
-    return () => listeners.delete(callback);
-  };
-  /** @type {GetLocaleData} */
-
-
-  const getLocaleData = (domain = 'default') => tannin.data[domain];
-  /**
-   * @param {LocaleData} [data]
-   * @param {string}     [domain]
-   */
-
-
-  const doSetLocaleData = (data, domain = 'default') => {
-    tannin.data[domain] = { ...DEFAULT_LOCALE_DATA$1,
-      ...tannin.data[domain],
-      ...data
-    }; // Populate default domain configuration (supported locale date which omits
-    // a plural forms expression).
-
-    tannin.data[domain][''] = { ...DEFAULT_LOCALE_DATA$1[''],
-      ...tannin.data[domain]['']
-    };
-  };
-  /** @type {SetLocaleData} */
-
-
-  const setLocaleData = (data, domain) => {
-    doSetLocaleData(data, domain);
-    notifyListeners();
-  };
-  /** @type {ResetLocaleData} */
-
-
-  const resetLocaleData = (data, domain) => {
-    // Reset all current Tannin locale data.
-    tannin.data = {}; // Reset cached plural forms functions cache.
-
-    tannin.pluralForms = {};
-    setLocaleData(data, domain);
-  };
-  /**
-   * Wrapper for Tannin's `dcnpgettext`. Populates default locale data if not
-   * otherwise previously assigned.
-   *
-   * @param {string|undefined} domain   Domain to retrieve the translated text.
-   * @param {string|undefined} context  Context information for the translators.
-   * @param {string}           single   Text to translate if non-plural. Used as
-   *                                    fallback return value on a caught error.
-   * @param {string}           [plural] The text to be used if the number is
-   *                                    plural.
-   * @param {number}           [number] The number to compare against to use
-   *                                    either the singular or plural form.
-   *
-   * @return {string} The translated string.
-   */
-
-
-  const dcnpgettext = (domain = 'default', context, single, plural, number) => {
-    if (!tannin.data[domain]) {
-      // use `doSetLocaleData` to set silently, without notifying listeners
-      doSetLocaleData(undefined, domain);
-    }
-
-    return tannin.dcnpgettext(domain, context, single, plural, number);
-  };
-  /** @type {GetFilterDomain} */
-
-
-  const getFilterDomain = (domain = 'default') => domain;
-  /** @type {__} */
-
-
-  const __ = (text, domain) => {
-    let translation = dcnpgettext(domain, undefined, text);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters text with its translation.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} text        Text to translate.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.gettext', translation, text, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.gettext_' + getFilterDomain(domain), translation, text, domain)
-    );
-  };
-  /** @type {_x} */
-
-
-  const _x = (text, context, domain) => {
-    let translation = dcnpgettext(domain, context, text);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters text with its translation based on context information.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} text        Text to translate.
-     * @param {string} context     Context information for the translators.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.gettext_with_context', translation, text, context, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.gettext_with_context_' + getFilterDomain(domain), translation, text, context, domain)
-    );
-  };
-  /** @type {_n} */
-
-
-  const _n = (single, plural, number, domain) => {
-    let translation = dcnpgettext(domain, undefined, single, plural, number);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters the singular or plural form of a string.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} single      The text to be used if the number is singular.
-     * @param {string} plural      The text to be used if the number is plural.
-     * @param {string} number      The number to compare against to use either the singular or plural form.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.ngettext', translation, single, plural, number, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.ngettext_' + getFilterDomain(domain), translation, single, plural, number, domain)
-    );
-  };
-  /** @type {_nx} */
-
-
-  const _nx = (single, plural, number, context, domain) => {
-    let translation = dcnpgettext(domain, context, single, plural, number);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters the singular or plural form of a string with gettext context.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} single      The text to be used if the number is singular.
-     * @param {string} plural      The text to be used if the number is plural.
-     * @param {string} number      The number to compare against to use either the singular or plural form.
-     * @param {string} context     Context information for the translators.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.ngettext_with_context', translation, single, plural, number, context, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.ngettext_with_context_' + getFilterDomain(domain), translation, single, plural, number, context, domain)
-    );
-  };
-  /** @type {IsRtl} */
-
-
-  const isRTL = () => {
-    return 'rtl' === _x('ltr', 'text direction');
-  };
-  /** @type {HasTranslation} */
-
-
-  const hasTranslation = (single, context, domain) => {
-    var _tannin$data, _tannin$data2;
-
-    const key = context ? context + '\u0004' + single : single;
-    let result = !!((_tannin$data = tannin.data) !== null && _tannin$data !== void 0 && (_tannin$data2 = _tannin$data[domain !== null && domain !== void 0 ? domain : 'default']) !== null && _tannin$data2 !== void 0 && _tannin$data2[key]);
-
-    if (hooks) {
-      /**
-       * Filters the presence of a translation in the locale data.
-       *
-       * @param {boolean} hasTranslation Whether the translation is present or not..
-       * @param {string}  single         The singular form of the translated text (used as key in locale data)
-       * @param {string}  context        Context information for the translators.
-       * @param {string}  domain         Text domain. Unique identifier for retrieving translated strings.
-       */
-      result =
-      /** @type { boolean } */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.has_translation', result, single, context, domain);
-      result =
-      /** @type { boolean } */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.has_translation_' + getFilterDomain(domain), result, single, context, domain);
-    }
-
-    return result;
-  };
-
-  if (initialData) {
-    setLocaleData(initialData, initialDomain);
-  }
-
-  if (hooks) {
-    /**
-     * @param {string} hookName
-     */
-    const onHookAddedOrRemoved = hookName => {
-      if (I18N_HOOK_REGEXP$1.test(hookName)) {
-        notifyListeners();
-      }
-    };
-
-    hooks.addAction('hookAdded', 'core/i18n', onHookAddedOrRemoved);
-    hooks.addAction('hookRemoved', 'core/i18n', onHookAddedOrRemoved);
-  }
-
-  return {
-    getLocaleData,
-    setLocaleData,
-    resetLocaleData,
-    subscribe,
-    __,
-    _x,
-    _n,
-    _nx,
-    isRTL,
-    hasTranslation
-  };
-};
-
-/**
- * Validate a namespace string.
- *
- * @param {string} namespace The namespace to validate - should take the form
- *                           `vendor/plugin/function`.
- *
- * @return {boolean} Whether the namespace is valid.
- */
-function validateNamespace(namespace) {
-  if ('string' !== typeof namespace || '' === namespace) {
-    // eslint-disable-next-line no-console
-    console.error('The namespace must be a non-empty string.');
-    return false;
-  }
-
-  if (!/^[a-zA-Z][a-zA-Z0-9_.\-\/]*$/.test(namespace)) {
-    // eslint-disable-next-line no-console
-    console.error('The namespace can only contain numbers, letters, dashes, periods, underscores and slashes.');
-    return false;
-  }
-
-  return true;
-}
-
-/**
- * Validate a hookName string.
- *
- * @param {string} hookName The hook name to validate. Should be a non empty string containing
- *                          only numbers, letters, dashes, periods and underscores. Also,
- *                          the hook name cannot begin with `__`.
- *
- * @return {boolean} Whether the hook name is valid.
- */
-function validateHookName(hookName) {
-  if ('string' !== typeof hookName || '' === hookName) {
-    // eslint-disable-next-line no-console
-    console.error('The hook name must be a non-empty string.');
-    return false;
-  }
-
-  if (/^__/.test(hookName)) {
-    // eslint-disable-next-line no-console
-    console.error('The hook name cannot begin with `__`.');
-    return false;
-  }
-
-  if (!/^[a-zA-Z][a-zA-Z0-9_.-]*$/.test(hookName)) {
-    // eslint-disable-next-line no-console
-    console.error('The hook name can only contain numbers, letters, dashes, periods and underscores.');
-    return false;
-  }
-
-  return true;
-}
-
-/**
- * Internal dependencies
- */
-/**
- * @callback AddHook
- *
- * Adds the hook to the appropriate hooks container.
- *
- * @param {string}               hookName      Name of hook to add
- * @param {string}               namespace     The unique namespace identifying the callback in the form `vendor/plugin/function`.
- * @param {import('.').Callback} callback      Function to call when the hook is run
- * @param {number}               [priority=10] Priority of this hook
- */
-
-/**
- * Returns a function which, when invoked, will add a hook.
- *
- * @param {import('.').Hooks}    hooks    Hooks instance.
- * @param {import('.').StoreKey} storeKey
- *
- * @return {AddHook} Function that adds a new hook.
- */
-
-function createAddHook(hooks, storeKey) {
-  return function addHook(hookName, namespace, callback, priority = 10) {
-    const hooksStore = hooks[storeKey];
-
-    if (!validateHookName(hookName)) {
-      return;
-    }
-
-    if (!validateNamespace(namespace)) {
-      return;
-    }
-
-    if ('function' !== typeof callback) {
-      // eslint-disable-next-line no-console
-      console.error('The hook callback must be a function.');
-      return;
-    } // Validate numeric priority
-
-
-    if ('number' !== typeof priority) {
-      // eslint-disable-next-line no-console
-      console.error('If specified, the hook priority must be a number.');
-      return;
-    }
-
-    const handler = {
-      callback,
-      priority,
-      namespace
-    };
-
-    if (hooksStore[hookName]) {
-      // Find the correct insert index of the new hook.
-      const handlers = hooksStore[hookName].handlers;
-      /** @type {number} */
-
-      let i;
-
-      for (i = handlers.length; i > 0; i--) {
-        if (priority >= handlers[i - 1].priority) {
-          break;
-        }
-      }
-
-      if (i === handlers.length) {
-        // If append, operate via direct assignment.
-        handlers[i] = handler;
-      } else {
-        // Otherwise, insert before index via splice.
-        handlers.splice(i, 0, handler);
-      } // We may also be currently executing this hook.  If the callback
-      // we're adding would come after the current callback, there's no
-      // problem; otherwise we need to increase the execution index of
-      // any other runs by 1 to account for the added element.
-
-
-      hooksStore.__current.forEach(hookInfo => {
-        if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
-          hookInfo.currentIndex++;
-        }
-      });
-    } else {
-      // This is the first hook of its type.
-      hooksStore[hookName] = {
-        handlers: [handler],
-        runs: 0
-      };
-    }
-
-    if (hookName !== 'hookAdded') {
-      hooks.doAction('hookAdded', hookName, namespace, callback, priority);
-    }
-  };
-}
-
-/**
- * Internal dependencies
- */
-/**
- * @callback RemoveHook
- * Removes the specified callback (or all callbacks) from the hook with a given hookName
- * and namespace.
- *
- * @param {string} hookName  The name of the hook to modify.
- * @param {string} namespace The unique namespace identifying the callback in the
- *                           form `vendor/plugin/function`.
- *
- * @return {number | undefined} The number of callbacks removed.
- */
-
-/**
- * Returns a function which, when invoked, will remove a specified hook or all
- * hooks by the given name.
- *
- * @param {import('.').Hooks}    hooks             Hooks instance.
- * @param {import('.').StoreKey} storeKey
- * @param {boolean}              [removeAll=false] Whether to remove all callbacks for a hookName,
- *                                                 without regard to namespace. Used to create
- *                                                 `removeAll*` functions.
- *
- * @return {RemoveHook} Function that removes hooks.
- */
-
-function createRemoveHook(hooks, storeKey, removeAll = false) {
-  return function removeHook(hookName, namespace) {
-    const hooksStore = hooks[storeKey];
-
-    if (!validateHookName(hookName)) {
-      return;
-    }
-
-    if (!removeAll && !validateNamespace(namespace)) {
-      return;
-    } // Bail if no hooks exist by this name
-
-
-    if (!hooksStore[hookName]) {
-      return 0;
-    }
-
-    let handlersRemoved = 0;
-
-    if (removeAll) {
-      handlersRemoved = hooksStore[hookName].handlers.length;
-      hooksStore[hookName] = {
-        runs: hooksStore[hookName].runs,
-        handlers: []
-      };
-    } else {
-      // Try to find the specified callback to remove.
-      const handlers = hooksStore[hookName].handlers;
-
-      for (let i = handlers.length - 1; i >= 0; i--) {
-        if (handlers[i].namespace === namespace) {
-          handlers.splice(i, 1);
-          handlersRemoved++; // This callback may also be part of a hook that is
-          // currently executing.  If the callback we're removing
-          // comes after the current callback, there's no problem;
-          // otherwise we need to decrease the execution index of any
-          // other runs by 1 to account for the removed element.
-
-          hooksStore.__current.forEach(hookInfo => {
-            if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
-              hookInfo.currentIndex--;
-            }
-          });
-        }
-      }
-    }
-
-    if (hookName !== 'hookRemoved') {
-      hooks.doAction('hookRemoved', hookName, namespace);
-    }
-
-    return handlersRemoved;
-  };
-}
-
-/**
- * @callback HasHook
- *
- * Returns whether any handlers are attached for the given hookName and optional namespace.
- *
- * @param {string} hookName    The name of the hook to check for.
- * @param {string} [namespace] Optional. The unique namespace identifying the callback
- *                             in the form `vendor/plugin/function`.
- *
- * @return {boolean} Whether there are handlers that are attached to the given hook.
- */
-
-/**
- * Returns a function which, when invoked, will return whether any handlers are
- * attached to a particular hook.
- *
- * @param {import('.').Hooks}    hooks    Hooks instance.
- * @param {import('.').StoreKey} storeKey
- *
- * @return {HasHook} Function that returns whether any handlers are
- *                   attached to a particular hook and optional namespace.
- */
-function createHasHook(hooks, storeKey) {
-  return function hasHook(hookName, namespace) {
-    const hooksStore = hooks[storeKey]; // Use the namespace if provided.
-
-    if ('undefined' !== typeof namespace) {
-      return hookName in hooksStore && hooksStore[hookName].handlers.some(hook => hook.namespace === namespace);
-    }
-
-    return hookName in hooksStore;
-  };
-}
-
-/**
- * Returns a function which, when invoked, will execute all callbacks
- * registered to a hook of the specified type, optionally returning the final
- * value of the call chain.
- *
- * @param {import('.').Hooks}    hooks                  Hooks instance.
- * @param {import('.').StoreKey} storeKey
- * @param {boolean}              [returnFirstArg=false] Whether each hook callback is expected to
- *                                                      return its first argument.
- *
- * @return {(hookName:string, ...args: unknown[]) => unknown} Function that runs hook callbacks.
- */
-function createRunHook(hooks, storeKey, returnFirstArg = false) {
-  return function runHooks(hookName, ...args) {
-    const hooksStore = hooks[storeKey];
-
-    if (!hooksStore[hookName]) {
-      hooksStore[hookName] = {
-        handlers: [],
-        runs: 0
-      };
-    }
-
-    hooksStore[hookName].runs++;
-    const handlers = hooksStore[hookName].handlers; // The following code is stripped from production builds.
-
-    if ('production' !== process.env.NODE_ENV) {
-      // Handle any 'all' hooks registered.
-      if ('hookAdded' !== hookName && hooksStore.all) {
-        handlers.push(...hooksStore.all.handlers);
-      }
-    }
-
-    if (!handlers || !handlers.length) {
-      return returnFirstArg ? args[0] : undefined;
-    }
-
-    const hookInfo = {
-      name: hookName,
-      currentIndex: 0
-    };
-
-    hooksStore.__current.push(hookInfo);
-
-    while (hookInfo.currentIndex < handlers.length) {
-      const handler = handlers[hookInfo.currentIndex];
-      const result = handler.callback.apply(null, args);
-
-      if (returnFirstArg) {
-        args[0] = result;
-      }
-
-      hookInfo.currentIndex++;
-    }
-
-    hooksStore.__current.pop();
-
-    if (returnFirstArg) {
-      return args[0];
-    }
-  };
-}
-
-/**
- * Returns a function which, when invoked, will return the name of the
- * currently running hook, or `null` if no hook of the given type is currently
- * running.
- *
- * @param {import('.').Hooks}    hooks    Hooks instance.
- * @param {import('.').StoreKey} storeKey
- *
- * @return {() => string | null} Function that returns the current hook name or null.
- */
-function createCurrentHook(hooks, storeKey) {
-  return function currentHook() {
-    var _hooksStore$__current, _hooksStore$__current2;
-
-    const hooksStore = hooks[storeKey];
-    return (_hooksStore$__current = (_hooksStore$__current2 = hooksStore.__current[hooksStore.__current.length - 1]) === null || _hooksStore$__current2 === void 0 ? void 0 : _hooksStore$__current2.name) !== null && _hooksStore$__current !== void 0 ? _hooksStore$__current : null;
-  };
-}
-
-/**
- * @callback DoingHook
- * Returns whether a hook is currently being executed.
- *
- * @param {string} [hookName] The name of the hook to check for.  If
- *                            omitted, will check for any hook being executed.
- *
- * @return {boolean} Whether the hook is being executed.
- */
-
-/**
- * Returns a function which, when invoked, will return whether a hook is
- * currently being executed.
- *
- * @param {import('.').Hooks}    hooks    Hooks instance.
- * @param {import('.').StoreKey} storeKey
- *
- * @return {DoingHook} Function that returns whether a hook is currently
- *                     being executed.
- */
-function createDoingHook(hooks, storeKey) {
-  return function doingHook(hookName) {
-    const hooksStore = hooks[storeKey]; // If the hookName was not passed, check for any current hook.
-
-    if ('undefined' === typeof hookName) {
-      return 'undefined' !== typeof hooksStore.__current[0];
-    } // Return the __current hook.
-
-
-    return hooksStore.__current[0] ? hookName === hooksStore.__current[0].name : false;
-  };
-}
-
-/**
- * Internal dependencies
- */
-/**
- * @callback DidHook
- *
- * Returns the number of times an action has been fired.
- *
- * @param {string} hookName The hook name to check.
- *
- * @return {number | undefined} The number of times the hook has run.
- */
-
-/**
- * Returns a function which, when invoked, will return the number of times a
- * hook has been called.
- *
- * @param {import('.').Hooks}    hooks    Hooks instance.
- * @param {import('.').StoreKey} storeKey
- *
- * @return {DidHook} Function that returns a hook's call count.
- */
-
-function createDidHook(hooks, storeKey) {
-  return function didHook(hookName) {
-    const hooksStore = hooks[storeKey];
-
-    if (!validateHookName(hookName)) {
-      return;
-    }
-
-    return hooksStore[hookName] && hooksStore[hookName].runs ? hooksStore[hookName].runs : 0;
-  };
-}
-
-/**
- * Internal dependencies
- */
-/**
- * Internal class for constructing hooks. Use `createHooks()` function
- *
- * Note, it is necessary to expose this class to make its type public.
- *
- * @private
- */
-
-class _Hooks {
-  constructor() {
-    /** @type {import('.').Store} actions */
-    this.actions = Object.create(null);
-    this.actions.__current = [];
-    /** @type {import('.').Store} filters */
-
-    this.filters = Object.create(null);
-    this.filters.__current = [];
-    this.addAction = createAddHook(this, 'actions');
-    this.addFilter = createAddHook(this, 'filters');
-    this.removeAction = createRemoveHook(this, 'actions');
-    this.removeFilter = createRemoveHook(this, 'filters');
-    this.hasAction = createHasHook(this, 'actions');
-    this.hasFilter = createHasHook(this, 'filters');
-    this.removeAllActions = createRemoveHook(this, 'actions', true);
-    this.removeAllFilters = createRemoveHook(this, 'filters', true);
-    this.doAction = createRunHook(this, 'actions');
-    this.applyFilters = createRunHook(this, 'filters', true);
-    this.currentAction = createCurrentHook(this, 'actions');
-    this.currentFilter = createCurrentHook(this, 'filters');
-    this.doingAction = createDoingHook(this, 'actions');
-    this.doingFilter = createDoingHook(this, 'filters');
-    this.didAction = createDidHook(this, 'actions');
-    this.didFilter = createDidHook(this, 'filters');
-  }
-
-}
-/** @typedef {_Hooks} Hooks */
-
-/**
- * Returns an instance of the hooks object.
- *
- * @return {Hooks} A Hooks instance.
- */
-
-function createHooks() {
-  return new _Hooks();
-}
-
-/**
- * Internal dependencies
- */
-/** @typedef {(...args: any[])=>any} Callback */
-
-/**
- * @typedef Handler
- * @property {Callback} callback  The callback
- * @property {string}   namespace The namespace
- * @property {number}   priority  The namespace
- */
-
-/**
- * @typedef Hook
- * @property {Handler[]} handlers Array of handlers
- * @property {number}    runs     Run counter
- */
-
-/**
- * @typedef Current
- * @property {string} name         Hook name
- * @property {number} currentIndex The index
- */
-
-/**
- * @typedef {Record<string, Hook> & {__current: Current[]}} Store
- */
-
-/**
- * @typedef {'actions' | 'filters'} StoreKey
- */
-
-/**
- * @typedef {import('./createHooks').Hooks} Hooks
- */
-
-const defaultHooks = createHooks();
-const {
-  addAction,
-  addFilter,
-  removeAction,
-  removeFilter,
-  hasAction,
-  hasFilter,
-  removeAllActions,
-  removeAllFilters,
-  doAction,
-  applyFilters,
-  currentAction,
-  currentFilter,
-  doingAction,
-  doingFilter,
-  didAction,
-  didFilter,
-  actions: actions$1,
-  filters
-} = defaultHooks;
-
-/**
- * Internal dependencies
- */
-const i18n$1 = createI18n$1(undefined, undefined, defaultHooks);
-/*
- * Comments in this file are duplicated from ./i18n due to
- * https://github.com/WordPress/gutenberg/pull/20318#issuecomment-590837722
- */
-
-/**
- * @typedef {import('./create-i18n').LocaleData} LocaleData
- * @typedef {import('./create-i18n').SubscribeCallback} SubscribeCallback
- * @typedef {import('./create-i18n').UnsubscribeCallback} UnsubscribeCallback
- */
-
-/**
- * Returns locale data by domain in a Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- *
- * @param {string} [domain] Domain for which to get the data.
- * @return {LocaleData} Locale data.
- */
-
-i18n$1.getLocaleData.bind(i18n$1);
-/**
- * Merges locale data into the Tannin instance by domain. Accepts data in a
- * Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- *
- * @param {LocaleData} [data]   Locale data configuration.
- * @param {string}     [domain] Domain for which configuration applies.
- */
-
-i18n$1.setLocaleData.bind(i18n$1);
-/**
- * Resets all current Tannin instance locale data and sets the specified
- * locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- *
- * @param {LocaleData} [data]   Locale data configuration.
- * @param {string}     [domain] Domain for which configuration applies.
- */
-
-i18n$1.resetLocaleData.bind(i18n$1);
-/**
- * Subscribes to changes of locale data
- *
- * @param {SubscribeCallback} callback Subscription callback
- * @return {UnsubscribeCallback} Unsubscribe callback
- */
-
-i18n$1.subscribe.bind(i18n$1);
-/**
- * Retrieve the translation of text.
- *
- * @see https://developer.wordpress.org/reference/functions/__/
- *
- * @param {string} text     Text to translate.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} Translated text.
- */
-
-const __$1 = i18n$1.__.bind(i18n$1);
-/**
- * Retrieve translated string with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_x/
- *
- * @param {string} text     Text to translate.
- * @param {string} context  Context information for the translators.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} Translated context string without pipe.
- */
-
-i18n$1._x.bind(i18n$1);
-/**
- * Translates and retrieves the singular or plural form based on the supplied
- * number.
- *
- * @see https://developer.wordpress.org/reference/functions/_n/
- *
- * @param {string} single   The text to be used if the number is singular.
- * @param {string} plural   The text to be used if the number is plural.
- * @param {number} number   The number to compare against to use either the
- *                          singular or plural form.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} The translated singular or plural form.
- */
-
-i18n$1._n.bind(i18n$1);
-/**
- * Translates and retrieves the singular or plural form based on the supplied
- * number, with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_nx/
- *
- * @param {string} single   The text to be used if the number is singular.
- * @param {string} plural   The text to be used if the number is plural.
- * @param {number} number   The number to compare against to use either the
- *                          singular or plural form.
- * @param {string} context  Context information for the translators.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} The translated singular or plural form.
- */
-
-i18n$1._nx.bind(i18n$1);
-/**
- * Check if current locale is RTL.
- *
- * **RTL (Right To Left)** is a locale property indicating that text is written from right to left.
- * For example, the `he` locale (for Hebrew) specifies right-to-left. Arabic (ar) is another common
- * language written RTL. The opposite of RTL, LTR (Left To Right) is used in other languages,
- * including English (`en`, `en-US`, `en-GB`, etc.), Spanish (`es`), and French (`fr`).
- *
- * @return {boolean} Whether locale is RTL.
- */
-
-i18n$1.isRTL.bind(i18n$1);
-/**
- * Check if there is a translation for a given string (in singular form).
- *
- * @param {string} single    Singular form of the string to look up.
- * @param {string} [context] Context information for the translators.
- * @param {string} [domain]  Domain to retrieve the translated text.
- * @return {boolean} Whether the translation exists or not.
- */
-
-i18n$1.hasTranslation.bind(i18n$1);
-
-/**
  * @param {string} nonce
  * @return {import('../types').APIFetchMiddleware & { nonce: string }} A middleware to enhance a request with a nonce.
  */
@@ -11624,7 +9572,7 @@ const parseResponse = (response, shouldParseResponse = true) => {
 const parseJsonAndNormalizeError = response => {
   const invalidJsonError = {
     code: 'invalid_json',
-    message: __$1('The response is not a valid JSON response.')
+    message: __('The response is not a valid JSON response.')
   };
 
   if (!response || !response.json) {
@@ -11664,7 +9612,7 @@ function parseAndThrowError(response, shouldParseResponse = true) {
   return parseJsonAndNormalizeError(response).then(error => {
     const unknownError = {
       code: 'unknown_error',
-      message: __$1('An unknown error occurred.')
+      message: __('An unknown error occurred.')
     };
     throw error || unknownError;
   });
@@ -11725,7 +9673,7 @@ const mediaUploadMiddleware = (options, next) => {
         if (options.parse !== false) {
           return Promise.reject({
             code: 'post_process',
-            message: __$1('Media upload failed. If this is a photo or a large image, please scale it down and try again.')
+            message: __('Media upload failed. If this is a photo or a large image, please scale it down and try again.')
           });
         }
 
@@ -11843,7 +9791,7 @@ const defaultFetchHandler = nextOptions => {
 
     throw {
       code: 'fetch_error',
-      message: __$1('You are probably offline.')
+      message: __('You are probably offline.')
     };
   });
 };
@@ -11914,8 +9862,8 @@ var SweetAlert$2 = function SweetAlert() {
     target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
     type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
     html: args === null || args === void 0 ? void 0 : args.html,
-    title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : __$2("Title Goes Here: title", 'notificationx'),
-    text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : __$2("Test Goes Here: text", 'notificationx'),
+    title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : __("Title Goes Here: title", 'notificationx'),
+    text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : __("Test Goes Here: text", 'notificationx'),
     icon: (_args$icon = args === null || args === void 0 ? void 0 : args.icon) !== null && _args$icon !== void 0 ? _args$icon : (args === null || args === void 0 ? void 0 : args.type) || "success",
     timer: (_args$timer = args === null || args === void 0 ? void 0 : args.timer) !== null && _args$timer !== void 0 ? _args$timer : null
   }, args));
@@ -14724,7 +12672,7 @@ var rules = {
   },
   allOf: function allOf(key, values, data) {
     if (!Array.isArray(values)) {
-      throw Error(__$2('"allOf" condition requires an array as #3 argument', 'notificationx'));
+      throw Error(__('"allOf" condition requires an array as #3 argument', 'notificationx'));
     }
 
     var dataValues = get(data, key);
@@ -14734,7 +12682,7 @@ var rules = {
   },
   anyOf: function anyOf(key, values, data) {
     if (!Array.isArray(values)) {
-      throw Error(__$2('"anyOf" condition requires an array as #3 argument', 'notificationx'));
+      throw Error(__('"anyOf" condition requires an array as #3 argument', 'notificationx'));
     }
 
     var dataValue = get(data, key);
@@ -14762,7 +12710,7 @@ var logicalRules = {
   },
   not: function not(data) {
     if (data.length !== 1) {
-      throw Error(__$2('"not" can have only one comparison rule, multiple rules given', 'notificationx'));
+      throw Error(__('"not" can have only one comparison rule, multiple rules given', 'notificationx'));
     }
 
     return !data[0];
@@ -14783,7 +12731,7 @@ var processRule = function processRule(_ref, data) {
       value = _ref[2];
 
   if (typeof condition !== "string" || rules[condition] === undefined) {
-    throw Error(sprintf(__$2("Invalid comparison rule %s.", 'notificationx'), condition));
+    throw Error(sprintf(__("Invalid comparison rule %s.", 'notificationx'), condition));
   }
 
   return rules[condition](key, value, data);
@@ -15004,11 +12952,53 @@ var store = {
   }
 };
 
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest();
+}
+
 var Menu$1 = function Menu(props) {
   var _context$values, _context$values2;
 
   if (props.tabs === undefined) {
-    throw new Error(__$2("There are no tabs defined!", 'notificationx'));
+    throw new Error(__("There are no tabs defined!", 'notificationx'));
   }
 
   var active = props.active,
@@ -15056,6 +13046,40 @@ var Menu$1 = function Menu(props) {
     }) : isObject(tab.icon) ? context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : (_context$icons$tab$ic = _context$icons[tab === null || tab === void 0 ? void 0 : (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons$tab$ic === void 0 ? void 0 : _context$icons$tab$ic[tab === null || tab === void 0 ? void 0 : (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), React.createElement("span", null, tab.label));
   })));
 };
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties$1(source, excluded) {
+  if (source == null) return {};
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
 
 var BuilderContext = /*#__PURE__*/React.createContext(undefined);
 BuilderContext.displayName = process.env.NODE_ENV === 'production' ? 'Anonymous' : 'BuilderContext';
@@ -16090,7 +14114,7 @@ var withProps = function withProps(WrappedComponent) {
 var Field = function Field(props) {
   if (!props.type || props.type.length === 0) {
     console.error(props);
-    throw new Error(__$2('Field must have a #type. see documentation.', 'notificationx'));
+    throw new Error(__('Field must have a #type. see documentation.', 'notificationx'));
   }
 
   switch (props.type) {
@@ -16276,7 +14300,7 @@ var Group$1 = function Group(props) {
       rest = _objectWithoutProperties$1(props, _excluded$2);
 
   if (!fields || !isArray(fields) || fields.length === 0) {
-    throw new Error(__$2('You should give a #fields arguments to a group field.', 'notificationx'));
+    throw new Error(__('You should give a #fields arguments to a group field.', 'notificationx'));
   }
 
   var builderContext = useBuilderContext();
@@ -19735,7 +17759,7 @@ Object.defineProperty(AutosizeInput$1, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass$1 = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = React__default["default"];
 
@@ -19749,11 +17773,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck$1(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn$1(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits$1(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var sizerStyle = {
 	position: 'absolute',
@@ -19792,9 +17816,9 @@ var generateId = function generateId() {
 };
 
 var AutosizeInput = function (_Component) {
-	_inherits(AutosizeInput, _Component);
+	_inherits$1(AutosizeInput, _Component);
 
-	_createClass(AutosizeInput, null, [{
+	_createClass$1(AutosizeInput, null, [{
 		key: 'getDerivedStateFromProps',
 		value: function getDerivedStateFromProps(props, state) {
 			var id = props.id;
@@ -19804,7 +17828,7 @@ var AutosizeInput = function (_Component) {
 	}]);
 
 	function AutosizeInput(props) {
-		_classCallCheck(this, AutosizeInput);
+		_classCallCheck$1(this, AutosizeInput);
 
 		var _this = _possibleConstructorReturn$1(this, (AutosizeInput.__proto__ || Object.getPrototypeOf(AutosizeInput)).call(this, props));
 
@@ -19831,7 +17855,7 @@ var AutosizeInput = function (_Component) {
 		return _this;
 	}
 
-	_createClass(AutosizeInput, [{
+	_createClass$1(AutosizeInput, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			this.mounted = true;
@@ -19996,6 +18020,52 @@ AutosizeInput.defaultProps = {
 };
 
 var _default$1 = AutosizeInput$1.default = AutosizeInput;
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -20522,14 +18592,14 @@ var PortalPlacementContext = /*#__PURE__*/React.createContext({
 }); // NOTE: internal only
 
 var MenuPlacer = /*#__PURE__*/function (_Component) {
-  _inherits$1(MenuPlacer, _Component);
+  _inherits(MenuPlacer, _Component);
 
   var _super = _createSuper(MenuPlacer);
 
   function MenuPlacer() {
     var _this;
 
-    _classCallCheck$1(this, MenuPlacer);
+    _classCallCheck(this, MenuPlacer);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -20580,7 +18650,7 @@ var MenuPlacer = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass$1(MenuPlacer, [{
+  _createClass(MenuPlacer, [{
     key: "render",
     value: function render() {
       var children = this.props.children;
@@ -20709,14 +18779,14 @@ var menuPortalCSS = function menuPortalCSS(_ref6) {
   };
 };
 var MenuPortal = /*#__PURE__*/function (_Component2) {
-  _inherits$1(MenuPortal, _Component2);
+  _inherits(MenuPortal, _Component2);
 
   var _super2 = _createSuper(MenuPortal);
 
   function MenuPortal() {
     var _this2;
 
-    _classCallCheck$1(this, MenuPortal);
+    _classCallCheck(this, MenuPortal);
 
     for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       args[_key2] = arguments[_key2];
@@ -20741,7 +18811,7 @@ var MenuPortal = /*#__PURE__*/function (_Component2) {
     return _this2;
   }
 
-  _createClass$1(MenuPortal, [{
+  _createClass(MenuPortal, [{
     key: "render",
     value: function render() {
       var _this$props2 = this.props,
@@ -22652,7 +20722,7 @@ var shouldHideSelectedOptions = function shouldHideSelectedOptions(props) {
 var instanceId = 1;
 
 var Select$2 = /*#__PURE__*/function (_Component) {
-  _inherits$1(Select, _Component);
+  _inherits(Select, _Component);
 
   var _super = _createSuper(Select);
 
@@ -22666,7 +20736,7 @@ var Select$2 = /*#__PURE__*/function (_Component) {
   function Select(_props) {
     var _this;
 
-    _classCallCheck$1(this, Select);
+    _classCallCheck(this, Select);
 
     _this = _super.call(this, _props);
     _this.state = {
@@ -23318,7 +21388,7 @@ var Select$2 = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass$1(Select, [{
+  _createClass(Select, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.startListeningComposition();
@@ -24206,14 +22276,14 @@ var manageState = function manageState(SelectComponent) {
   var _class, _temp;
 
   return _temp = _class = /*#__PURE__*/function (_Component) {
-    _inherits$1(StateManager, _Component);
+    _inherits(StateManager, _Component);
 
     var _super = _createSuper(StateManager);
 
     function StateManager() {
       var _this;
 
-      _classCallCheck$1(this, StateManager);
+      _classCallCheck(this, StateManager);
 
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
@@ -24264,7 +22334,7 @@ var manageState = function manageState(SelectComponent) {
       return _this;
     }
 
-    _createClass$1(StateManager, [{
+    _createClass(StateManager, [{
       key: "focus",
       value: function focus() {
         this.select.focus();
@@ -24462,43 +22532,6 @@ var Select = function Select(props) {
 
 var Select$1 = withLabel(Select);
 
-// Disable reason: Object and object are distinctly different types in TypeScript and we mean the lowercase object in thise case
-/**
- * @type {WeakMap<object, number>}
- */
-
-const instanceMap = new WeakMap();
-/**
- * Creates a new id for a given object.
- *
- * @param {object} object Object reference to create an id for.
- * @return {number} The instance id (index).
- */
-
-function createId(object) {
-  const instances = instanceMap.get(object) || 0;
-  instanceMap.set(object, instances + 1);
-  return instances;
-}
-/**
- * Provides a unique instance ID.
- *
- * @param {object}          object           Object reference to create an id for.
- * @param {string}          [prefix]         Prefix for the unique id.
- * @param {string | number} [preferredId=''] Default ID to use.
- * @return {string | number} The unique instance id.
- */
-
-
-function useInstanceId(object, prefix, preferredId = '') {
-  return React.useMemo(() => {
-    if (preferredId) return preferredId;
-    const id = createId(object);
-    return prefix ? `${prefix}-${id}` : id;
-  }, [object]);
-}
-/* eslint-enable jsdoc/check-types */
-
 var RepeaterField = function RepeaterField(props) {
   var fields = props.fields,
       _onChange = props.onChange,
@@ -24637,7 +22670,7 @@ var ModalHeader = function ModalHeader(_ref) {
 };
 
 var Loading = function Loading(props) {
-  return React.createElement("p", null, __$2('Loading...', 'notificationx'));
+  return React.createElement("p", null, __('Loading...', 'notificationx'));
 };
 
 var toolbarOptions = {
@@ -24753,7 +22786,7 @@ var RadioCard = function RadioCard(props) {
       option = _useOptions.option;
 
   if (!options) {
-    throw new Error(__$2('#options is a required arguments for RadioCard field.', 'notificationx'));
+    throw new Error(__('#options is a required arguments for RadioCard field.', 'notificationx'));
   }
 
   var instanceId = useInstanceId(RadioCard);
@@ -25111,7 +23144,7 @@ var ColorPicker = function ColorPicker(props) {
       setColor(defaultColor);
       setShowPicker(false);
     }
-  }, __$2('Reset', 'notificationx')), React.createElement(components$1.ColorPicker, {
+  }, __('Reset', 'notificationx')), React.createElement(components$1.ColorPicker, {
     color: value,
     onChangeComplete: function onChangeComplete(event) {
       return setColor(event.hex);
@@ -25124,597 +23157,6 @@ var ColorPicker$1 = withLabel(ColorPicker);
 var Action = function Action(props) {
   return React.createElement(React.Fragment, null, applyFilters(props.action, '', props));
 };
-
-/**
- * External dependencies
- */
-/**
- * Log to console, once per message; or more precisely, per referentially equal
- * argument set. Because Jed throws errors, we log these to the console instead
- * to avoid crashing the application.
- *
- * @param {...*} args Arguments to pass to `console.error`
- */
-
-memize_1(console.error); // eslint-disable-line no-console
-
-/**
- * External dependencies
- */
-/**
- * @typedef {Record<string,any>} LocaleData
- */
-
-/**
- * Default locale data to use for Tannin domain when not otherwise provided.
- * Assumes an English plural forms expression.
- *
- * @type {LocaleData}
- */
-
-const DEFAULT_LOCALE_DATA = {
-  '': {
-    /** @param {number} n */
-    plural_forms(n) {
-      return n === 1 ? 0 : 1;
-    }
-
-  }
-};
-/*
- * Regular expression that matches i18n hooks like `i18n.gettext`, `i18n.ngettext`,
- * `i18n.gettext_domain` or `i18n.ngettext_with_context` or `i18n.has_translation`.
- */
-
-const I18N_HOOK_REGEXP = /^i18n\.(n?gettext|has_translation)(_|$)/;
-/**
- * @typedef {(domain?: string) => LocaleData} GetLocaleData
- *
- * Returns locale data by domain in a
- * Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- */
-
-/**
- * @typedef {(data?: LocaleData, domain?: string) => void} SetLocaleData
- *
- * Merges locale data into the Tannin instance by domain. Accepts data in a
- * Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- */
-
-/**
- * @typedef {(data?: LocaleData, domain?: string) => void} ResetLocaleData
- *
- * Resets all current Tannin instance locale data and sets the specified
- * locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- */
-
-/** @typedef {() => void} SubscribeCallback */
-
-/** @typedef {() => void} UnsubscribeCallback */
-
-/**
- * @typedef {(callback: SubscribeCallback) => UnsubscribeCallback} Subscribe
- *
- * Subscribes to changes of locale data
- */
-
-/**
- * @typedef {(domain?: string) => string} GetFilterDomain
- * Retrieve the domain to use when calling domain-specific filters.
- */
-
-/**
- * @typedef {(text: string, domain?: string) => string} __
- *
- * Retrieve the translation of text.
- *
- * @see https://developer.wordpress.org/reference/functions/__/
- */
-
-/**
- * @typedef {(text: string, context: string, domain?: string) => string} _x
- *
- * Retrieve translated string with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_x/
- */
-
-/**
- * @typedef {(single: string, plural: string, number: number, domain?: string) => string} _n
- *
- * Translates and retrieves the singular or plural form based on the supplied
- * number.
- *
- * @see https://developer.wordpress.org/reference/functions/_n/
- */
-
-/**
- * @typedef {(single: string, plural: string, number: number, context: string, domain?: string) => string} _nx
- *
- * Translates and retrieves the singular or plural form based on the supplied
- * number, with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_nx/
- */
-
-/**
- * @typedef {() => boolean} IsRtl
- *
- * Check if current locale is RTL.
- *
- * **RTL (Right To Left)** is a locale property indicating that text is written from right to left.
- * For example, the `he` locale (for Hebrew) specifies right-to-left. Arabic (ar) is another common
- * language written RTL. The opposite of RTL, LTR (Left To Right) is used in other languages,
- * including English (`en`, `en-US`, `en-GB`, etc.), Spanish (`es`), and French (`fr`).
- */
-
-/**
- * @typedef {(single: string, context?: string, domain?: string) => boolean} HasTranslation
- *
- * Check if there is a translation for a given string in singular form.
- */
-
-/** @typedef {import('@wordpress/hooks').Hooks} Hooks */
-
-/**
- * An i18n instance
- *
- * @typedef I18n
- * @property {GetLocaleData}   getLocaleData   Returns locale data by domain in a Jed-formatted JSON object shape.
- * @property {SetLocaleData}   setLocaleData   Merges locale data into the Tannin instance by domain. Accepts data in a
- *                                             Jed-formatted JSON object shape.
- * @property {ResetLocaleData} resetLocaleData Resets all current Tannin instance locale data and sets the specified
- *                                             locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
- * @property {Subscribe}       subscribe       Subscribes to changes of Tannin locale data.
- * @property {__}              __              Retrieve the translation of text.
- * @property {_x}              _x              Retrieve translated string with gettext context.
- * @property {_n}              _n              Translates and retrieves the singular or plural form based on the supplied
- *                                             number.
- * @property {_nx}             _nx             Translates and retrieves the singular or plural form based on the supplied
- *                                             number, with gettext context.
- * @property {IsRtl}           isRTL           Check if current locale is RTL.
- * @property {HasTranslation}  hasTranslation  Check if there is a translation for a given string.
- */
-
-/**
- * Create an i18n instance
- *
- * @param {LocaleData} [initialData]   Locale data configuration.
- * @param {string}     [initialDomain] Domain for which configuration applies.
- * @param {Hooks}      [hooks]         Hooks implementation.
- *
- * @return {I18n} I18n instance.
- */
-
-const createI18n = (initialData, initialDomain, hooks) => {
-  /**
-   * The underlying instance of Tannin to which exported functions interface.
-   *
-   * @type {Tannin}
-   */
-  const tannin = new Tannin({});
-  const listeners = new Set();
-
-  const notifyListeners = () => {
-    listeners.forEach(listener => listener());
-  };
-  /**
-   * Subscribe to changes of locale data.
-   *
-   * @param {SubscribeCallback} callback Subscription callback.
-   * @return {UnsubscribeCallback} Unsubscribe callback.
-   */
-
-
-  const subscribe = callback => {
-    listeners.add(callback);
-    return () => listeners.delete(callback);
-  };
-  /** @type {GetLocaleData} */
-
-
-  const getLocaleData = (domain = 'default') => tannin.data[domain];
-  /**
-   * @param {LocaleData} [data]
-   * @param {string}     [domain]
-   */
-
-
-  const doSetLocaleData = (data, domain = 'default') => {
-    tannin.data[domain] = { ...DEFAULT_LOCALE_DATA,
-      ...tannin.data[domain],
-      ...data
-    }; // Populate default domain configuration (supported locale date which omits
-    // a plural forms expression).
-
-    tannin.data[domain][''] = { ...DEFAULT_LOCALE_DATA[''],
-      ...tannin.data[domain]['']
-    };
-  };
-  /** @type {SetLocaleData} */
-
-
-  const setLocaleData = (data, domain) => {
-    doSetLocaleData(data, domain);
-    notifyListeners();
-  };
-  /** @type {ResetLocaleData} */
-
-
-  const resetLocaleData = (data, domain) => {
-    // Reset all current Tannin locale data.
-    tannin.data = {}; // Reset cached plural forms functions cache.
-
-    tannin.pluralForms = {};
-    setLocaleData(data, domain);
-  };
-  /**
-   * Wrapper for Tannin's `dcnpgettext`. Populates default locale data if not
-   * otherwise previously assigned.
-   *
-   * @param {string|undefined} domain   Domain to retrieve the translated text.
-   * @param {string|undefined} context  Context information for the translators.
-   * @param {string}           single   Text to translate if non-plural. Used as
-   *                                    fallback return value on a caught error.
-   * @param {string}           [plural] The text to be used if the number is
-   *                                    plural.
-   * @param {number}           [number] The number to compare against to use
-   *                                    either the singular or plural form.
-   *
-   * @return {string} The translated string.
-   */
-
-
-  const dcnpgettext = (domain = 'default', context, single, plural, number) => {
-    if (!tannin.data[domain]) {
-      // use `doSetLocaleData` to set silently, without notifying listeners
-      doSetLocaleData(undefined, domain);
-    }
-
-    return tannin.dcnpgettext(domain, context, single, plural, number);
-  };
-  /** @type {GetFilterDomain} */
-
-
-  const getFilterDomain = (domain = 'default') => domain;
-  /** @type {__} */
-
-
-  const __ = (text, domain) => {
-    let translation = dcnpgettext(domain, undefined, text);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters text with its translation.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} text        Text to translate.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.gettext', translation, text, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.gettext_' + getFilterDomain(domain), translation, text, domain)
-    );
-  };
-  /** @type {_x} */
-
-
-  const _x = (text, context, domain) => {
-    let translation = dcnpgettext(domain, context, text);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters text with its translation based on context information.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} text        Text to translate.
-     * @param {string} context     Context information for the translators.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.gettext_with_context', translation, text, context, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.gettext_with_context_' + getFilterDomain(domain), translation, text, context, domain)
-    );
-  };
-  /** @type {_n} */
-
-
-  const _n = (single, plural, number, domain) => {
-    let translation = dcnpgettext(domain, undefined, single, plural, number);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters the singular or plural form of a string.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} single      The text to be used if the number is singular.
-     * @param {string} plural      The text to be used if the number is plural.
-     * @param {string} number      The number to compare against to use either the singular or plural form.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.ngettext', translation, single, plural, number, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.ngettext_' + getFilterDomain(domain), translation, single, plural, number, domain)
-    );
-  };
-  /** @type {_nx} */
-
-
-  const _nx = (single, plural, number, context, domain) => {
-    let translation = dcnpgettext(domain, context, single, plural, number);
-
-    if (!hooks) {
-      return translation;
-    }
-    /**
-     * Filters the singular or plural form of a string with gettext context.
-     *
-     * @param {string} translation Translated text.
-     * @param {string} single      The text to be used if the number is singular.
-     * @param {string} plural      The text to be used if the number is plural.
-     * @param {string} number      The number to compare against to use either the singular or plural form.
-     * @param {string} context     Context information for the translators.
-     * @param {string} domain      Text domain. Unique identifier for retrieving translated strings.
-     */
-
-
-    translation =
-    /** @type {string} */
-
-    /** @type {*} */
-    hooks.applyFilters('i18n.ngettext_with_context', translation, single, plural, number, context, domain);
-    return (
-      /** @type {string} */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.ngettext_with_context_' + getFilterDomain(domain), translation, single, plural, number, context, domain)
-    );
-  };
-  /** @type {IsRtl} */
-
-
-  const isRTL = () => {
-    return 'rtl' === _x('ltr', 'text direction');
-  };
-  /** @type {HasTranslation} */
-
-
-  const hasTranslation = (single, context, domain) => {
-    var _tannin$data, _tannin$data2;
-
-    const key = context ? context + '\u0004' + single : single;
-    let result = !!((_tannin$data = tannin.data) !== null && _tannin$data !== void 0 && (_tannin$data2 = _tannin$data[domain !== null && domain !== void 0 ? domain : 'default']) !== null && _tannin$data2 !== void 0 && _tannin$data2[key]);
-
-    if (hooks) {
-      /**
-       * Filters the presence of a translation in the locale data.
-       *
-       * @param {boolean} hasTranslation Whether the translation is present or not..
-       * @param {string}  single         The singular form of the translated text (used as key in locale data)
-       * @param {string}  context        Context information for the translators.
-       * @param {string}  domain         Text domain. Unique identifier for retrieving translated strings.
-       */
-      result =
-      /** @type { boolean } */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.has_translation', result, single, context, domain);
-      result =
-      /** @type { boolean } */
-
-      /** @type {*} */
-      hooks.applyFilters('i18n.has_translation_' + getFilterDomain(domain), result, single, context, domain);
-    }
-
-    return result;
-  };
-
-  if (initialData) {
-    setLocaleData(initialData, initialDomain);
-  }
-
-  if (hooks) {
-    /**
-     * @param {string} hookName
-     */
-    const onHookAddedOrRemoved = hookName => {
-      if (I18N_HOOK_REGEXP.test(hookName)) {
-        notifyListeners();
-      }
-    };
-
-    hooks.addAction('hookAdded', 'core/i18n', onHookAddedOrRemoved);
-    hooks.addAction('hookRemoved', 'core/i18n', onHookAddedOrRemoved);
-  }
-
-  return {
-    getLocaleData,
-    setLocaleData,
-    resetLocaleData,
-    subscribe,
-    __,
-    _x,
-    _n,
-    _nx,
-    isRTL,
-    hasTranslation
-  };
-};
-
-/**
- * Internal dependencies
- */
-const i18n = createI18n(undefined, undefined, defaultHooks);
-/*
- * Comments in this file are duplicated from ./i18n due to
- * https://github.com/WordPress/gutenberg/pull/20318#issuecomment-590837722
- */
-
-/**
- * @typedef {import('./create-i18n').LocaleData} LocaleData
- * @typedef {import('./create-i18n').SubscribeCallback} SubscribeCallback
- * @typedef {import('./create-i18n').UnsubscribeCallback} UnsubscribeCallback
- */
-
-/**
- * Returns locale data by domain in a Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- *
- * @param {string} [domain] Domain for which to get the data.
- * @return {LocaleData} Locale data.
- */
-
-i18n.getLocaleData.bind(i18n);
-/**
- * Merges locale data into the Tannin instance by domain. Accepts data in a
- * Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- *
- * @param {LocaleData} [data]   Locale data configuration.
- * @param {string}     [domain] Domain for which configuration applies.
- */
-
-i18n.setLocaleData.bind(i18n);
-/**
- * Resets all current Tannin instance locale data and sets the specified
- * locale data for the domain. Accepts data in a Jed-formatted JSON object shape.
- *
- * @see http://messageformat.github.io/Jed/
- *
- * @param {LocaleData} [data]   Locale data configuration.
- * @param {string}     [domain] Domain for which configuration applies.
- */
-
-i18n.resetLocaleData.bind(i18n);
-/**
- * Subscribes to changes of locale data
- *
- * @param {SubscribeCallback} callback Subscription callback
- * @return {UnsubscribeCallback} Unsubscribe callback
- */
-
-i18n.subscribe.bind(i18n);
-/**
- * Retrieve the translation of text.
- *
- * @see https://developer.wordpress.org/reference/functions/__/
- *
- * @param {string} text     Text to translate.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} Translated text.
- */
-
-const __ = i18n.__.bind(i18n);
-/**
- * Retrieve translated string with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_x/
- *
- * @param {string} text     Text to translate.
- * @param {string} context  Context information for the translators.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} Translated context string without pipe.
- */
-
-i18n._x.bind(i18n);
-/**
- * Translates and retrieves the singular or plural form based on the supplied
- * number.
- *
- * @see https://developer.wordpress.org/reference/functions/_n/
- *
- * @param {string} single   The text to be used if the number is singular.
- * @param {string} plural   The text to be used if the number is plural.
- * @param {number} number   The number to compare against to use either the
- *                          singular or plural form.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} The translated singular or plural form.
- */
-
-i18n._n.bind(i18n);
-/**
- * Translates and retrieves the singular or plural form based on the supplied
- * number, with gettext context.
- *
- * @see https://developer.wordpress.org/reference/functions/_nx/
- *
- * @param {string} single   The text to be used if the number is singular.
- * @param {string} plural   The text to be used if the number is plural.
- * @param {number} number   The number to compare against to use either the
- *                          singular or plural form.
- * @param {string} context  Context information for the translators.
- * @param {string} [domain] Domain to retrieve the translated text.
- *
- * @return {string} The translated singular or plural form.
- */
-
-i18n._nx.bind(i18n);
-/**
- * Check if current locale is RTL.
- *
- * **RTL (Right To Left)** is a locale property indicating that text is written from right to left.
- * For example, the `he` locale (for Hebrew) specifies right-to-left. Arabic (ar) is another common
- * language written RTL. The opposite of RTL, LTR (Left To Right) is used in other languages,
- * including English (`en`, `en-US`, `en-GB`, etc.), Spanish (`es`), and French (`fr`).
- *
- * @return {boolean} Whether locale is RTL.
- */
-
-i18n.isRTL.bind(i18n);
-/**
- * Check if there is a translation for a given string (in singular form).
- *
- * @param {string} single    Singular form of the string to look up.
- * @param {string} [context] Context information for the translators.
- * @param {string} [domain]  Domain to retrieve the translated text.
- * @return {boolean} Whether the translation exists or not.
- */
-
-i18n.hasTranslation.bind(i18n);
 
 /**
  * External dependencies
@@ -31931,7 +29373,7 @@ var Button = function Button(props) {
   var _props$onClick, _props$text, _props$text2, _props$text3;
 
   if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
-    throw new Error(__$2('Button has a required params #text.', 'notificationx'));
+    throw new Error(__('Button has a required params #text.', 'notificationx'));
   }
 
   var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", 'ajax', 'text']);
@@ -31985,7 +29427,7 @@ var Button = function Button(props) {
         });
 
         if (!((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.hideSwal)) {
-          props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || __$2("Something went wrong.", 'notificationx'));
+          props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || __("Something went wrong.", 'notificationx'));
         }
       });
     }
@@ -33551,7 +30993,7 @@ var Modal = function Modal(props) {
   var _props$body;
 
   if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
-    throw new Error(__$2('Modal needs button/body with it.', 'notificationx'));
+    throw new Error(__('Modal needs button/body with it.', 'notificationx'));
   }
 
   var _useState = React.useState(false),
@@ -33856,7 +31298,7 @@ var Submit = function Submit(_ref) {
 
   var context = useBuilderContext();
 
-  var label = (props === null || props === void 0 ? void 0 : props.label) || __$2('Save Changes', 'notificationx');
+  var label = (props === null || props === void 0 ? void 0 : props.label) || __('Save Changes', 'notificationx');
 
   var handleSubmit = React.useCallback(function (event) {
     var _context$submit;
@@ -33933,13 +31375,13 @@ var Content = function Content(_ref) {
       rest = _objectWithoutProperties$1(_ref, _excluded);
 
   if (tabs === undefined) {
-    throw new Error(__$2("There are no #tabs args defined in props.", 'notificationx'));
+    throw new Error(__("There are no #tabs args defined in props.", 'notificationx'));
   }
 
   var builderContext = useBuilderContext();
 
   if (!isArray(tabs)) {
-    throw new Error(__$2('Not an array.', 'notificationx'));
+    throw new Error(__('Not an array.', 'notificationx'));
   }
 
   var _useState = React.useState([]),

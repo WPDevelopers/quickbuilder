@@ -1,5 +1,6 @@
 import { isArray, isEmptyObj } from "./utils";
 import intersect from "intersect";
+import { __, sprintf } from "@wordpress/i18n";
 
 const _typeof = (obj) => {
 	if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -63,7 +64,7 @@ const rules = {
     },
     allOf: (key, values, data) => {
         if (!Array.isArray(values)) {
-            throw Error('"allOf" condition requires an array as #3 argument');
+            throw Error(__('"allOf" condition requires an array as #3 argument', 'notificationx'));
         }
 
         let dataValues = get(data, key);
@@ -73,7 +74,7 @@ const rules = {
     },
     anyOf: (key, values, data) => {
         if (!Array.isArray(values)) {
-            throw Error('"anyOf" condition requires an array as #3 argument');
+            throw Error(__('"anyOf" condition requires an array as #3 argument', 'notificationx'));
         }
         var dataValue = get(data, key);
         return values.includes(dataValue);
@@ -101,7 +102,7 @@ const logicalRules = {
 	not: (data) => {
 		if (data.length !== 1) {
 			throw Error(
-				'"not" can have only one comparison rule, multiple rules given'
+				__('"not" can have only one comparison rule, multiple rules given', 'notificationx')
 			);
 		}
 		return !data[0];
@@ -127,7 +128,7 @@ const processRule = (_ref, data) => {
 		value = _ref[2];
 
 	if (typeof condition !== "string" || rules[condition] === undefined) {
-		throw Error("Invalid comparison rule " + condition + ".");
+		throw Error(sprintf(__("Invalid comparison rule %s.", 'notificationx'), condition));
 	}
 
 	return rules[condition](key, value, data);

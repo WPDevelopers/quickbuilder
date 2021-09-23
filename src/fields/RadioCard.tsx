@@ -7,6 +7,7 @@ import useOptions from "../core/hooks/useOptions";
 import { GenericInput } from ".";
 import { validFieldProps } from "../core/utils";
 import { useBuilderContext, withLabel } from "../core/hooks";
+import { __ } from '@wordpress/i18n';
 
 
 const RadioCard = (props) => {
@@ -14,7 +15,7 @@ const RadioCard = (props) => {
     const { options, option } = useOptions(props, 'options');
 
     if (!options) {
-        throw new Error('#options is a required arguments for RadioCard field.');
+        throw new Error(__('#options is a required arguments for RadioCard field.', 'notificationx'));
     }
 
     const instanceId = useInstanceId(RadioCard);

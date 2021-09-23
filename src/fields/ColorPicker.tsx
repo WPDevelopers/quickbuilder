@@ -60,7 +60,7 @@ const ColorPicker = (props) => {
                                 setShowPicker(false);
                             }}
                         >
-                            {__('Reset', 'wprf')}
+                            {__('Reset', 'notificationx')}
                         </button>
                         <WPColorPicker
                             color={value}

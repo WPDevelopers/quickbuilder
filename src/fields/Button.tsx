@@ -3,10 +3,11 @@ import classNames from 'classnames';
 import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 import { Field } from '.';
+import { __ } from '@wordpress/i18n';
 
 const Button = (props) => {
     if (!props?.text && props?.group !== true) {
-        throw new Error('Button has a required params #text.')
+        throw new Error(__('Button has a required params #text.', 'notificationx'))
     }
     const validProps = validFieldProps(props, [
         "is_pro",
@@ -58,7 +59,7 @@ const Button = (props) => {
                     }
                 });
                 if (!props.ajax?.hideSwal) {
-                    props.context.alerts.toast('error', err?.message || `Something went wrong.`);
+                    props.context.alerts.toast('error', err?.message || __(`Something went wrong.`, 'notificationx'));
                 }
 
             });

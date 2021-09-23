@@ -10,6 +10,7 @@ import { dispatch, select } from "@wordpress/data";
 
 import when from "./when";
 import { isArray, isEmptyObj } from "./utils";
+import { __ } from "@wordpress/i18n";
 // import store from "../store";
 
 export const SweetAlert = ( args: any = {} ) => {
@@ -17,8 +18,8 @@ export const SweetAlert = ( args: any = {} ) => {
 		target: args?.target ?? "#notificationx",
 		type: args?.type ?? "success",
 		html: args?.html,
-		title: args?.title ?? "Title Goes Here: title",
-		text: args?.text ?? "Test Goes Here: text",
+		title: args?.title ?? __("Title Goes Here: title", 'notificationx'),
+		text: args?.text ?? __("Test Goes Here: text", 'notificationx'),
 		icon: args?.icon ?? (args?.type || "success"),
 		timer: args?.timer ?? null,
 		...args,

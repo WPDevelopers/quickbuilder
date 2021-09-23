@@ -16,5 +16,4 @@ export { default as Editor } from "./Editor";
 export { default as Button } from './Button';
 export { default as Message } from './Message';
 export { default as Modal } from './Modal';
-export { default as Test } from './Test';
 export { default as AdvancedTemplate } from './AdvancedTemplate';

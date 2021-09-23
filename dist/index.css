@@ -1,6 +1,3 @@
-body {
-  display: none !important; }
-
 .toplevel_page_wp-react-form #wpcontent {
   padding-left: 0px; }
 
@@ -2691,5 +2688,3 @@ button.wprf-btn {
   counter-reset: ol4; }
 
 /*# sourceMappingURL=react-draft-wysiwyg.css.map*/
-
-/*# sourceMappingURL=style.css.map */

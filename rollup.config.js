@@ -58,7 +58,7 @@ export default {
 			exclude: ["node_modules/draft-js/**"],
 		}),
 		scss({
-			output: `${styleFolder}style.css`,
+			output: `${styleFolder}index.css`,
 			sourceMap: !isProduction,
 			include: ["**/*.scss", "*.css", "node_modules/**/*.css"],
 			failOnError: true,

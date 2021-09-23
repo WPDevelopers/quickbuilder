@@ -2,7 +2,7 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('lodash'), require('lodash-es'), require('moment'), require('@wordpress/components'), require('react-draft-wysiwyg'), require('draft-js'), require('react-dom')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'react', 'lodash', 'lodash-es', 'moment', '@wordpress/components', 'react-draft-wysiwyg', 'draft-js', 'react-dom'], factory) :
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.lodash, global.lodashEs, global.momentLib, global.wpComponents, global.reactDraftWysiwyg, global.draftJs, global.ReactDOM));
-}(this, (function (exports, React, lodash, lodashEs, momentLib, components$1, reactDraftWysiwyg, require$$1$1, reactDom) { 'use strict';
+})(this, (function (exports, React, lodash, lodashEs, momentLib, components$1, reactDraftWysiwyg, require$$1$1, reactDom) { 'use strict';
 
 	function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -4191,7 +4191,7 @@
 
 	var memize_1 = memize;
 
-	var sprintf = {};
+	var sprintf$1 = {};
 
 	/* global window, exports, define */
 
@@ -4415,7 +4415,7 @@
 	    }
 	    /* eslint-enable quote-props */
 	}(); // eslint-disable-line
-	}(sprintf));
+	}(sprintf$1));
 
 	/**
 	 * External dependencies
@@ -4428,7 +4428,32 @@
 	 * @param {...*} args Arguments to pass to `console.error`
 	 */
 
-	memize_1(console.error); // eslint-disable-line no-console
+	var logErrorOnce = memize_1(console.error); // eslint-disable-line no-console
+
+	/**
+	 * Returns a formatted string. If an error occurs in applying the format, the
+	 * original format string is returned.
+	 *
+	 * @param {string}    format The format of the string to generate.
+	 * @param {...*} args Arguments to apply to the format.
+	 *
+	 * @see https://www.npmjs.com/package/sprintf-js
+	 *
+	 * @return {string} The formatted string.
+	 */
+
+	function sprintf(format) {
+	  try {
+	    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	      args[_key - 1] = arguments[_key];
+	    }
+
+	    return sprintf$1.sprintf.apply(sprintf$1, [format].concat(args));
+	  } catch (error) {
+	    logErrorOnce('sprintf error: \n\n' + error.toString());
+	    return format;
+	  }
+	}
 
 	var PRECEDENCE, OPENERS, TERMINATORS, PATTERN;
 
@@ -11882,8 +11907,8 @@
 	    target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
 	    type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
 	    html: args === null || args === void 0 ? void 0 : args.html,
-	    title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : "Title Goes Here: title",
-	    text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : "Test Goes Here: text",
+	    title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : __$2("Title Goes Here: title", 'notificationx'),
+	    text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : __$2("Test Goes Here: text", 'notificationx'),
 	    icon: (_args$icon = args === null || args === void 0 ? void 0 : args.icon) !== null && _args$icon !== void 0 ? _args$icon : (args === null || args === void 0 ? void 0 : args.type) || "success",
 	    timer: (_args$timer = args === null || args === void 0 ? void 0 : args.timer) !== null && _args$timer !== void 0 ? _args$timer : null
 	  }, args));
@@ -12034,7 +12059,7 @@
 
 		/*global define*/
 		if (module.exports) {
-			module.exports = factory(momentLib__default['default']); // Node
+			module.exports = factory(momentLib__default["default"]); // Node
 		} else {
 			factory(root.moment);                        // Browser
 		}
@@ -14024,7 +14049,7 @@
 
 	function setupWPTimezone() {
 	  // Create WP timezone based off dateSettings.
-	  momentLib__default['default'].tz.add(momentLib__default['default'].tz.pack({
+	  momentLib__default["default"].tz.add(momentLib__default["default"].tz.pack({
 	    name: WP_ZONE,
 	    abbrs: [WP_ZONE],
 	    untils: [null],
@@ -14148,7 +14173,7 @@
 	   * @return {number} Formatted date.
 	   */
 	  B(momentDate) {
-	    const timezoned = momentLib__default['default'](momentDate).utcOffset(60);
+	    const timezoned = momentLib__default["default"](momentDate).utcOffset(60);
 	    const seconds = parseInt(timezoned.format('s'), 10),
 	          minutes = parseInt(timezoned.format('m'), 10),
 	          hours = parseInt(timezoned.format('H'), 10);
@@ -14216,7 +14241,7 @@
 	function format(dateFormat, dateValue = new Date()) {
 	  let i, char;
 	  const newFormat = [];
-	  const momentDate = momentLib__default['default'](dateValue);
+	  const momentDate = momentLib__default["default"](dateValue);
 
 	  for (i = 0; i < dateFormat.length; i++) {
 	    char = dateFormat[i]; // Is this an escape?
@@ -14286,7 +14311,7 @@
 	 */
 
 	function buildMoment(dateValue, timezone = '') {
-	  const dateMoment = momentLib__default['default'](dateValue);
+	  const dateMoment = momentLib__default["default"](dateValue);
 
 	  if (timezone && !isUTCOffset(timezone)) {
 	    return dateMoment.tz(timezone);
@@ -14515,15 +14540,17 @@
 	        path: ajax.api,
 	        data: data
 	      }).then(function (response) {
-	        var _response$data, _response$data2;
+	        var _response$data;
 
 	        if ((response === null || response === void 0 ? void 0 : response.status) == "success" && response !== null && response !== void 0 && response.redirect) {
 	          window.location = response === null || response === void 0 ? void 0 : response.redirect;
 	        }
 
-	        if (response !== null && response !== void 0 && (_response$data = response.data) !== null && _response$data !== void 0 && _response$data.context && isObject(response === null || response === void 0 ? void 0 : (_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.context)) {
-	          Object.keys(response.data.context).map(function (eligibleKey) {
-	            context.setFieldValue(eligibleKey, response.data.context[eligibleKey]);
+	        var dataContext = response !== null && response !== void 0 && (_response$data = response.data) !== null && _response$data !== void 0 && _response$data.context ? response.data.context : response !== null && response !== void 0 && response.context ? response.context : false;
+
+	        if (dataContext && isObject(dataContext)) {
+	          Object.keys(dataContext).map(function (eligibleKey) {
+	            context.setFieldValue(eligibleKey, dataContext[eligibleKey]);
 	          });
 	        }
 
@@ -14559,7 +14586,7 @@
 
 	  var settings = __experimentalGetSettings();
 
-	  var _value = momentLib__default['default'].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 ? void 0 : (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
+	  var _value = momentLib__default["default"].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 ? void 0 : (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
 
 	  return _value;
 	};
@@ -14690,7 +14717,7 @@
 	  },
 	  allOf: function allOf(key, values, data) {
 	    if (!Array.isArray(values)) {
-	      throw Error('"allOf" condition requires an array as #3 argument');
+	      throw Error(__$2('"allOf" condition requires an array as #3 argument', 'notificationx'));
 	    }
 
 	    var dataValues = get(data, key);
@@ -14700,7 +14727,7 @@
 	  },
 	  anyOf: function anyOf(key, values, data) {
 	    if (!Array.isArray(values)) {
-	      throw Error('"anyOf" condition requires an array as #3 argument');
+	      throw Error(__$2('"anyOf" condition requires an array as #3 argument', 'notificationx'));
 	    }
 
 	    var dataValue = get(data, key);
@@ -14728,7 +14755,7 @@
 	  },
 	  not: function not(data) {
 	    if (data.length !== 1) {
-	      throw Error('"not" can have only one comparison rule, multiple rules given');
+	      throw Error(__$2('"not" can have only one comparison rule, multiple rules given', 'notificationx'));
 	    }
 
 	    return !data[0];
@@ -14749,7 +14776,7 @@
 	      value = _ref[2];
 
 	  if (typeof condition !== "string" || rules[condition] === undefined) {
-	    throw Error("Invalid comparison rule " + condition + ".");
+	    throw Error(sprintf(__$2("Invalid comparison rule %s.", 'notificationx'), condition));
 	  }
 
 	  return rules[condition](key, value, data);
@@ -14974,7 +15001,7 @@
 	  var _context$values, _context$values2;
 
 	  if (props.tabs === undefined) {
-	    throw new Error("There are no tabs defined!");
+	    throw new Error(__$2("There are no tabs defined!", 'notificationx'));
 	  }
 
 	  var active = props.active,
@@ -15832,7 +15859,7 @@
 	  }), 'right')), renderComponent());
 	};
 
-	var _excluded$5 = ["id", "label", "badge", "badgePosition", "context"];
+	var _excluded$4 = ["id", "label", "badge", "badgePosition", "context"];
 
 	var ControlLabel = function ControlLabel(props) {
 	  var _context$icons;
@@ -15842,7 +15869,7 @@
 	      badge = props.badge,
 	      badgePosition = props.badgePosition,
 	      context = props.context,
-	      rest = _objectWithoutProperties$1(props, _excluded$5);
+	      rest = _objectWithoutProperties$1(props, _excluded$4);
 
 	  if (!(label && label.length > 0)) {
 	    return;
@@ -15889,7 +15916,7 @@
 	  }));
 	};
 
-	var _excluded$4 = ["label", "id", "name", "type", "style", "is_pro", "badge"];
+	var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge"];
 
 	function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -15906,7 +15933,7 @@
 	        prevStyle = props.style,
 	        is_pro = props.is_pro,
 	        badge = props.badge,
-	        rest = _objectWithoutProperties$1(props, _excluded$4); // const instanceId = useInstanceId(withLabel);
+	        rest = _objectWithoutProperties$1(props, _excluded$3); // const instanceId = useInstanceId(withLabel);
 
 
 	    if (id == undefined) {
@@ -16056,7 +16083,7 @@
 	var Field = function Field(props) {
 	  if (!props.type || props.type.length === 0) {
 	    console.error(props);
-	    throw new Error('Field must have a #type. see documentation.');
+	    throw new Error(__$2('Field must have a #type. see documentation.', 'notificationx'));
 	  }
 
 	  switch (props.type) {
@@ -16169,7 +16196,7 @@
 	    renderContent: function renderContent() {
 	      return React.createElement(components$1.DateTimePicker // @ts-ignore
 	      , {
-	        currentDate: date(format, _value, undefined),
+	        currentDate: getTime(_value),
 	        onChange: function onChange(date) {
 	          _onChange({
 	            target: {
@@ -16205,7 +16232,7 @@
 	    }
 	  }
 
-	  return /*#__PURE__*/React__default['default'].createElement('input', _objectSpread$4(_objectSpread$4({}, validProps), {}, {
+	  return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$4(_objectSpread$4({}, validProps), {}, {
 	    onChange: handleChange
 	  }));
 	};
@@ -16213,8 +16240,8 @@
 	Input$3.defaultProps = {
 	  type: 'text'
 	};
-	var GenericInput = /*#__PURE__*/React__default['default'].memo(Input$3);
-	var Input$4 = withLabel( /*#__PURE__*/React__default['default'].memo(Input$3));
+	var GenericInput = /*#__PURE__*/React__default["default"].memo(Input$3);
+	var Input$4 = withLabel( /*#__PURE__*/React__default["default"].memo(Input$3));
 
 	function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -16227,22 +16254,22 @@
 	      isPro: !!props.is_pro
 	    });
 	  }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-	  return /*#__PURE__*/React__default['default'].createElement('textarea', _objectSpread$3(_objectSpread$3({}, validProps), {}, {
+	  return /*#__PURE__*/React__default["default"].createElement('textarea', _objectSpread$3(_objectSpread$3({}, validProps), {}, {
 	    onChange: handleChange,
 	    rows: 5
 	  }));
 	};
-	var Textarea$1 = withLabel( /*#__PURE__*/React__default['default'].memo(Textarea));
+	var Textarea$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Textarea));
 
-	var _excluded$3 = ["name", "fields"];
+	var _excluded$2 = ["name", "fields"];
 
 	var Group$1 = function Group(props) {
 	  var fieldName = props.name,
 	      fields = props.fields,
-	      rest = _objectWithoutProperties$1(props, _excluded$3);
+	      rest = _objectWithoutProperties$1(props, _excluded$2);
 
 	  if (!fields || !isArray(fields) || fields.length === 0) {
-	    throw new Error('You should give a #fields arguments to a group field.');
+	    throw new Error(__$2('You should give a #fields arguments to a group field.', 'notificationx'));
 	  }
 
 	  var builderContext = useBuilderContext();
@@ -19703,7 +19730,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _react = React__default['default'];
+	var _react = React__default["default"];
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -21702,7 +21729,7 @@
 	    "aria-live": ariaLive,
 	    "aria-atomic": "false",
 	    "aria-relevant": "additions text"
-	  }, isFocused && jsx(React__default['default'].Fragment, null, jsx("span", {
+	  }, isFocused && jsx(React__default["default"].Fragment, null, jsx("span", {
 	    id: "aria-selection"
 	  }, ariaSelected), jsx("span", {
 	    id: "aria-context"
@@ -22351,7 +22378,7 @@
 	    setScrollLockTarget(element);
 	  };
 
-	  return jsx(React__default['default'].Fragment, null, lockEnabled && jsx("div", {
+	  return jsx(React__default["default"].Fragment, null, lockEnabled && jsx("div", {
 	    onClick: blurSelectInput,
 	    css: _ref2
 	  }), children(targetRef));
@@ -23663,7 +23690,7 @@
 
 	      if (!isSearchable) {
 	        // use a dummy input to maintain focus/blur functionality
-	        return /*#__PURE__*/React__default['default'].createElement(DummyInput, _extends$2({
+	        return /*#__PURE__*/React__default["default"].createElement(DummyInput, _extends$2({
 	          id: id,
 	          innerRef: this.getInputRef,
 	          onBlur: this.onInputBlur,
@@ -23677,7 +23704,7 @@
 	        }, ariaAttributes));
 	      }
 
-	      return /*#__PURE__*/React__default['default'].createElement(Input, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(Input, _extends$2({}, commonProps, {
 	        autoCapitalize: "none",
 	        autoComplete: "off",
 	        autoCorrect: "off",
@@ -23721,7 +23748,7 @@
 	          isFocused = _this$state4.isFocused;
 
 	      if (!this.hasValue() || !controlShouldRenderValue) {
-	        return inputValue ? null : /*#__PURE__*/React__default['default'].createElement(Placeholder, _extends$2({}, commonProps, {
+	        return inputValue ? null : /*#__PURE__*/React__default["default"].createElement(Placeholder, _extends$2({}, commonProps, {
 	          key: "placeholder",
 	          isDisabled: isDisabled,
 	          isFocused: isFocused
@@ -23731,7 +23758,7 @@
 	      if (isMulti) {
 	        var selectValues = selectValue.map(function (opt, index) {
 	          var isOptionFocused = opt === focusedValue;
-	          return /*#__PURE__*/React__default['default'].createElement(MultiValue, _extends$2({}, commonProps, {
+	          return /*#__PURE__*/React__default["default"].createElement(MultiValue, _extends$2({}, commonProps, {
 	            components: {
 	              Container: MultiValueContainer,
 	              Label: MultiValueLabel,
@@ -23764,7 +23791,7 @@
 	      }
 
 	      var singleValue = selectValue[0];
-	      return /*#__PURE__*/React__default['default'].createElement(SingleValue, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(SingleValue, _extends$2({}, commonProps, {
 	        data: singleValue,
 	        isDisabled: isDisabled
 	      }), this.formatOptionLabel(singleValue, 'value'));
@@ -23790,7 +23817,7 @@
 	        onTouchEnd: this.onClearIndicatorTouchEnd,
 	        'aria-hidden': 'true'
 	      };
-	      return /*#__PURE__*/React__default['default'].createElement(ClearIndicator, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(ClearIndicator, _extends$2({}, commonProps, {
 	        innerProps: innerProps,
 	        isFocused: isFocused
 	      }));
@@ -23810,7 +23837,7 @@
 	      var innerProps = {
 	        'aria-hidden': 'true'
 	      };
-	      return /*#__PURE__*/React__default['default'].createElement(LoadingIndicator, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(LoadingIndicator, _extends$2({}, commonProps, {
 	        innerProps: innerProps,
 	        isDisabled: isDisabled,
 	        isFocused: isFocused
@@ -23828,7 +23855,7 @@
 	      var commonProps = this.commonProps;
 	      var isDisabled = this.props.isDisabled;
 	      var isFocused = this.state.isFocused;
-	      return /*#__PURE__*/React__default['default'].createElement(IndicatorSeparator, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(IndicatorSeparator, _extends$2({}, commonProps, {
 	        isDisabled: isDisabled,
 	        isFocused: isFocused
 	      }));
@@ -23848,7 +23875,7 @@
 	        onTouchEnd: this.onDropdownIndicatorTouchEnd,
 	        'aria-hidden': 'true'
 	      };
-	      return /*#__PURE__*/React__default['default'].createElement(DropdownIndicator, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(DropdownIndicator, _extends$2({}, commonProps, {
 	        innerProps: innerProps,
 	        isDisabled: isDisabled,
 	        isFocused: isFocused
@@ -23911,7 +23938,7 @@
 	          onMouseOver: onHover,
 	          tabIndex: -1
 	        };
-	        return /*#__PURE__*/React__default['default'].createElement(Option, _extends$2({}, commonProps, {
+	        return /*#__PURE__*/React__default["default"].createElement(Option, _extends$2({}, commonProps, {
 	          innerProps: innerProps,
 	          data: data,
 	          isDisabled: isDisabled,
@@ -23935,7 +23962,7 @@
 	                groupIndex = item.index;
 	            var groupId = "".concat(_this4.getElementId('group'), "-").concat(groupIndex);
 	            var headingId = "".concat(groupId, "-heading");
-	            return /*#__PURE__*/React__default['default'].createElement(Group, _extends$2({}, commonProps, {
+	            return /*#__PURE__*/React__default["default"].createElement(Group, _extends$2({}, commonProps, {
 	              key: groupId,
 	              data: data,
 	              options: options,
@@ -23957,14 +23984,14 @@
 	          inputValue: inputValue
 	        });
 	        if (message === null) return null;
-	        menuUI = /*#__PURE__*/React__default['default'].createElement(LoadingMessage, commonProps, message);
+	        menuUI = /*#__PURE__*/React__default["default"].createElement(LoadingMessage, commonProps, message);
 	      } else {
 	        var _message = noOptionsMessage({
 	          inputValue: inputValue
 	        });
 
 	        if (_message === null) return null;
-	        menuUI = /*#__PURE__*/React__default['default'].createElement(NoOptionsMessage, commonProps, _message);
+	        menuUI = /*#__PURE__*/React__default["default"].createElement(NoOptionsMessage, commonProps, _message);
 	      }
 
 	      var menuPlacementProps = {
@@ -23974,12 +24001,12 @@
 	        menuPosition: menuPosition,
 	        menuShouldScrollIntoView: menuShouldScrollIntoView
 	      };
-	      var menuElement = /*#__PURE__*/React__default['default'].createElement(MenuPlacer, _extends$2({}, commonProps, menuPlacementProps), function (_ref4) {
+	      var menuElement = /*#__PURE__*/React__default["default"].createElement(MenuPlacer, _extends$2({}, commonProps, menuPlacementProps), function (_ref4) {
 	        var ref = _ref4.ref,
 	            _ref4$placerProps = _ref4.placerProps,
 	            placement = _ref4$placerProps.placement,
 	            maxHeight = _ref4$placerProps.maxHeight;
-	        return /*#__PURE__*/React__default['default'].createElement(Menu, _extends$2({}, commonProps, menuPlacementProps, {
+	        return /*#__PURE__*/React__default["default"].createElement(Menu, _extends$2({}, commonProps, menuPlacementProps, {
 	          innerRef: ref,
 	          innerProps: {
 	            onMouseDown: _this4.onMenuMouseDown,
@@ -23987,13 +24014,13 @@
 	          },
 	          isLoading: isLoading,
 	          placement: placement
-	        }), /*#__PURE__*/React__default['default'].createElement(ScrollManager, {
+	        }), /*#__PURE__*/React__default["default"].createElement(ScrollManager, {
 	          captureEnabled: captureMenuScroll,
 	          onTopArrive: onMenuScrollToTop,
 	          onBottomArrive: onMenuScrollToBottom,
 	          lockEnabled: menuShouldBlockScroll
 	        }, function (scrollTargetRef) {
-	          return /*#__PURE__*/React__default['default'].createElement(MenuList, _extends$2({}, commonProps, {
+	          return /*#__PURE__*/React__default["default"].createElement(MenuList, _extends$2({}, commonProps, {
 	            innerRef: function innerRef(instance) {
 	              _this4.getMenuListRef(instance);
 
@@ -24008,7 +24035,7 @@
 	      // so we use the same component. the actual portalling logic is forked
 	      // within the component based on `menuPosition`
 
-	      return menuPortalTarget || menuPosition === 'fixed' ? /*#__PURE__*/React__default['default'].createElement(MenuPortal, _extends$2({}, commonProps, {
+	      return menuPortalTarget || menuPosition === 'fixed' ? /*#__PURE__*/React__default["default"].createElement(MenuPortal, _extends$2({}, commonProps, {
 	        appendTo: menuPortalTarget,
 	        controlElement: this.controlRef,
 	        menuPlacement: menuPlacement,
@@ -24033,29 +24060,29 @@
 	          var value = selectValue.map(function (opt) {
 	            return _this5.getOptionValue(opt);
 	          }).join(delimiter);
-	          return /*#__PURE__*/React__default['default'].createElement("input", {
+	          return /*#__PURE__*/React__default["default"].createElement("input", {
 	            name: name,
 	            type: "hidden",
 	            value: value
 	          });
 	        } else {
 	          var input = selectValue.length > 0 ? selectValue.map(function (opt, i) {
-	            return /*#__PURE__*/React__default['default'].createElement("input", {
+	            return /*#__PURE__*/React__default["default"].createElement("input", {
 	              key: "i-".concat(i),
 	              name: name,
 	              type: "hidden",
 	              value: _this5.getOptionValue(opt)
 	            });
-	          }) : /*#__PURE__*/React__default['default'].createElement("input", {
+	          }) : /*#__PURE__*/React__default["default"].createElement("input", {
 	            name: name,
 	            type: "hidden"
 	          });
-	          return /*#__PURE__*/React__default['default'].createElement("div", null, input);
+	          return /*#__PURE__*/React__default["default"].createElement("div", null, input);
 	        }
 	      } else {
 	        var _value = selectValue[0] ? this.getOptionValue(selectValue[0]) : '';
 
-	        return /*#__PURE__*/React__default['default'].createElement("input", {
+	        return /*#__PURE__*/React__default["default"].createElement("input", {
 	          name: name,
 	          type: "hidden",
 	          value: _value
@@ -24073,7 +24100,7 @@
 	          isFocused = _this$state5.isFocused,
 	          selectValue = _this$state5.selectValue;
 	      var focusableOptions = this.getFocusableOptions();
-	      return /*#__PURE__*/React__default['default'].createElement(LiveRegion, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(LiveRegion, _extends$2({}, commonProps, {
 	        ariaSelection: ariaSelection,
 	        focusedOption: focusedOption,
 	        focusedValue: focusedValue,
@@ -24098,7 +24125,7 @@
 	          menuIsOpen = _this$props14.menuIsOpen;
 	      var isFocused = this.state.isFocused;
 	      var commonProps = this.commonProps = this.getCommonProps();
-	      return /*#__PURE__*/React__default['default'].createElement(SelectContainer, _extends$2({}, commonProps, {
+	      return /*#__PURE__*/React__default["default"].createElement(SelectContainer, _extends$2({}, commonProps, {
 	        className: className,
 	        innerProps: {
 	          id: id,
@@ -24106,7 +24133,7 @@
 	        },
 	        isDisabled: isDisabled,
 	        isFocused: isFocused
-	      }), this.renderLiveRegion(), /*#__PURE__*/React__default['default'].createElement(Control, _extends$2({}, commonProps, {
+	      }), this.renderLiveRegion(), /*#__PURE__*/React__default["default"].createElement(Control, _extends$2({}, commonProps, {
 	        innerRef: this.getControlRef,
 	        innerProps: {
 	          onMouseDown: this.onControlMouseDown,
@@ -24115,9 +24142,9 @@
 	        isDisabled: isDisabled,
 	        isFocused: isFocused,
 	        menuIsOpen: menuIsOpen
-	      }), /*#__PURE__*/React__default['default'].createElement(ValueContainer, _extends$2({}, commonProps, {
+	      }), /*#__PURE__*/React__default["default"].createElement(ValueContainer, _extends$2({}, commonProps, {
 	        isDisabled: isDisabled
-	      }), this.renderPlaceholderOrValue(), this.renderInput()), /*#__PURE__*/React__default['default'].createElement(IndicatorsContainer, _extends$2({}, commonProps, {
+	      }), this.renderPlaceholderOrValue(), this.renderInput()), /*#__PURE__*/React__default["default"].createElement(IndicatorsContainer, _extends$2({}, commonProps, {
 	        isDisabled: isDisabled
 	      }), this.renderClearIndicator(), this.renderLoadingIndicator(), this.renderIndicatorSeparator(), this.renderDropdownIndicator())), this.renderMenu(), this.renderFormField());
 	    }
@@ -24271,7 +24298,7 @@
 	            _this$props2.defaultValue;
 	            var props = _objectWithoutProperties$1(_this$props2, ["defaultInputValue", "defaultMenuIsOpen", "defaultValue"]);
 
-	        return /*#__PURE__*/React__default['default'].createElement(SelectComponent, _extends$2({}, props, {
+	        return /*#__PURE__*/React__default["default"].createElement(SelectComponent, _extends$2({}, props, {
 	          ref: function ref(_ref) {
 	            _this2.select = _ref;
 	          },
@@ -24603,7 +24630,7 @@
 	};
 
 	var Loading = function Loading(props) {
-	  return React.createElement("p", null, "Loading...");
+	  return React.createElement("p", null, __$2('Loading...', 'notificationx'));
 	};
 
 	var toolbarOptions = {
@@ -24705,7 +24732,7 @@
 	  return React.createElement(GenericToggle$1, props);
 	};
 
-	var _excluded$2 = ["label", "value", "icon", "is_pro"];
+	var _excluded$1 = ["label", "value", "icon", "is_pro"];
 
 	function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -24719,7 +24746,7 @@
 	      option = _useOptions.option;
 
 	  if (!options) {
-	    throw new Error('#options is a required arguments for RadioCard field.');
+	    throw new Error(__$2('#options is a required arguments for RadioCard field.', 'notificationx'));
 	  }
 
 	  var instanceId = useInstanceId(RadioCard);
@@ -24748,7 +24775,7 @@
 	        value = _ref.value,
 	        icon = _ref.icon,
 	        is_pro = _ref.is_pro,
-	        rest = _objectWithoutProperties$1(_ref, _excluded$2);
+	        rest = _objectWithoutProperties$1(_ref, _excluded$1);
 
 	    return React.createElement(Column, {
 	      column: +(rest === null || rest === void 0 ? void 0 : rest.column) || 4,
@@ -24820,6 +24847,7 @@
 	    'wprf-section-collapsed': (props === null || props === void 0 ? void 0 : props.collapsible) && isCollapse
 	  });
 	  return React.createElement("div", {
+	    id: props === null || props === void 0 ? void 0 : props.name,
 	    className: componentClasses
 	  }, props.placeholder && React.createElement("div", {
 	    className: "wprf-section-title"
@@ -24832,7 +24860,7 @@
 	  }, fields));
 	};
 
-	var Section$1 = /*#__PURE__*/React__default['default'].memo(Section);
+	var Section$1 = /*#__PURE__*/React__default["default"].memo(Section);
 
 	var Repeater = function Repeater(props) {
 	  var _builderContext$value, _builderContext$value4;
@@ -25076,7 +25104,7 @@
 	      setColor(defaultColor);
 	      setShowPicker(false);
 	    }
-	  }, __$2('Reset', 'wprf')), React.createElement(components$1.ColorPicker, {
+	  }, __$2('Reset', 'notificationx')), React.createElement(components$1.ColorPicker, {
 	    color: value,
 	    onChangeComplete: function onChangeComplete(event) {
 	      return setColor(event.hex);
@@ -31845,7 +31873,7 @@
 	}(immutable));
 
 	(function (module, exports) {
-	!function(e,t){module.exports=t(immutable.exports,require$$1__default['default']);}(window,function(n,r){return o={},i.m=a=[function(e,t){e.exports=n;},function(e,t){e.exports=r;},function(e,t,n){e.exports=n(3);},function(e,t,n){n.r(t);var v=n(1),u=n(0),s=function(e){var t,n=null;return document.implementation&&document.implementation.createHTMLDocument&&((t=document.implementation.createHTMLDocument("foo")).documentElement.innerHTML=e,n=t.getElementsByTagName("body")[0]),n},x=function(e,t,n){var r,i=e.textContent;return ""===i.trim()?{chunk:(r=n,{text:" ",inlines:[new u.OrderedSet],entities:[r],blocks:[]})}:{chunk:{text:i,inlines:Array(i.length).fill(t),entities:Array(i.length).fill(n),blocks:[]}}},M=function(){return {text:"\n",inlines:[new u.OrderedSet],entities:new Array(1),blocks:[]}},k=function(){return {text:"",inlines:[],entities:[],blocks:[]}},E=function(e,t){return {text:"",inlines:[],entities:[],blocks:[{type:e,depth:0,data:t||new u.Map({})}]}},w=function(e,t,n){return {text:"\r",inlines:[],entities:[],blocks:[{type:e,depth:Math.max(0,Math.min(4,t)),data:n||new u.Map({})}]}},T=function(e){return {text:"\r ",inlines:[new u.OrderedSet],entities:[e],blocks:[{type:"atomic",depth:0,data:new u.Map({})}]}},L=function(e,t){return {text:e.text+t.text,inlines:e.inlines.concat(t.inlines),entities:e.entities.concat(t.entities),blocks:e.blocks.concat(t.blocks)}},A=new u.Map({"header-one":{element:"h1"},"header-two":{element:"h2"},"header-three":{element:"h3"},"header-four":{element:"h4"},"header-five":{element:"h5"},"header-six":{element:"h6"},"unordered-list-item":{element:"li",wrapper:"ul"},"ordered-list-item":{element:"li",wrapper:"ol"},blockquote:{element:"blockquote"},code:{element:"pre"},atomic:{element:"figure"},unstyled:{element:"p",aliasedElements:["div"]}});var O={code:"CODE",del:"STRIKETHROUGH",em:"ITALIC",strong:"BOLD",ins:"UNDERLINE",sub:"SUBSCRIPT",sup:"SUPERSCRIPT"};function S(e){return e.style.textAlign?new u.Map({"text-align":e.style.textAlign}):e.style.marginLeft?new u.Map({"margin-left":e.style.marginLeft}):void 0}var _=function(e){var t=void 0;if(e instanceof HTMLAnchorElement){var n={};t=e.dataset&&void 0!==e.dataset.mention?(n.url=e.href,n.text=e.innerHTML,n.value=e.dataset.value,v.Entity.__create("MENTION","IMMUTABLE",n)):(n.url=e.getAttribute&&e.getAttribute("href")||e.href,n.title=e.innerHTML,n.targetOption=e.target,v.Entity.__create("LINK","MUTABLE",n));}return t};n.d(t,"default",function(){return r});var d=" ",f=new RegExp("&nbsp;","g"),j=!0;function I(e,t,n,r,i,a){var o=e.nodeName.toLowerCase();if(a){var l=a(o,e);if(l){var c=v.Entity.__create(l.type,l.mutability,l.data||{});return {chunk:T(c)}}}if("#text"===o&&"\n"!==e.textContent)return x(e,t,i);if("br"===o)return {chunk:M()};if("img"===o&&e instanceof HTMLImageElement){var u={};u.src=e.getAttribute&&e.getAttribute("src")||e.src,u.alt=e.alt,u.height=e.style.height,u.width=e.style.width,e.style.float&&(u.alignment=e.style.float);var s=v.Entity.__create("IMAGE","MUTABLE",u);return {chunk:T(s)}}if("video"===o&&e instanceof HTMLVideoElement){var d={};d.src=e.getAttribute&&e.getAttribute("src")||e.src,d.alt=e.alt,d.height=e.style.height,d.width=e.style.width,e.style.float&&(d.alignment=e.style.float);var f=v.Entity.__create("VIDEO","MUTABLE",d);return {chunk:T(f)}}if("iframe"===o&&e instanceof HTMLIFrameElement){var m={};m.src=e.getAttribute&&e.getAttribute("src")||e.src,m.height=e.height,m.width=e.width;var p=v.Entity.__create("EMBEDDED_LINK","MUTABLE",m);return {chunk:T(p)}}var h,y=function(t,n){var e=A.filter(function(e){return e.element===t&&(!e.wrapper||e.wrapper===n)||e.wrapper===t||e.aliasedElements&&-1<e.aliasedElements.indexOf(t)}).keySeq().toSet().toArray();if(1===e.length)return e[0]}(o,r);y&&("ul"===o||"ol"===o?(r=o,n+=1):("unordered-list-item"!==y&&"ordered-list-item"!==y&&(r="",n=-1),j?(h=E(y,S(e)),j=!1):h=w(y,n,S(e)))),h=h||k(),t=function(e,t,n){var r,i=O[e];if(i)r=n.add(i).toOrderedSet();else if(t instanceof HTMLElement){var c=t;r=(r=n).withMutations(function(e){var t=c.style.color,n=c.style.backgroundColor,r=c.style.fontSize,i=c.style.fontFamily.replace(/^"|"$/g,""),a=c.style.fontWeight,o=c.style.textDecoration,l=c.style.fontStyle;t&&e.add("color-".concat(t.replace(/ /g,""))),n&&e.add("bgcolor-".concat(n.replace(/ /g,""))),r&&e.add("fontsize-".concat(r.replace(/px$/g,""))),i&&e.add("fontfamily-".concat(i)),"bold"===a&&e.add(O.strong),"underline"===o&&e.add(O.ins),"italic"===l&&e.add(O.em);}).toOrderedSet();}return r}(o,e,t);for(var b=e.firstChild;b;){var g=I(b,t,n,r,_(b)||i,a).chunk;h=L(h,g),b=b.nextSibling;}return {chunk:h}}function r(e,t){var n,r,i,a=(n=t,r=e.trim().replace(f,d),(i=s(r))?(j=!0,{chunk:I(i,new u.OrderedSet,-1,"",void 0,n).chunk}):null);if(a){var o=a.chunk,l=new u.OrderedMap({});o.entities&&o.entities.forEach(function(e){e&&(l=l.set(e,v.Entity.__get(e)));});var c=0;return {contentBlocks:o.text.split("\r").map(function(e,t){var n=c+e.length,r=o&&o.inlines.slice(c,n),i=o&&o.entities.slice(c,n),a=new u.List(r.map(function(e,t){var n={style:e,entity:null};return i[t]&&(n.entity=i[t]),v.CharacterMetadata.create(n)}));return c=n,new v.ContentBlock({key:Object(v.genKey)(),type:o&&o.blocks[t]&&o.blocks[t].type||"unstyled",depth:o&&o.blocks[t]&&o.blocks[t].depth,data:o&&o.blocks[t]&&o.blocks[t].data||new u.Map({}),text:e,characterList:a})}),entityMap:l}}return null}}],i.c=o,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n});},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0});},i.t=function(t,e){if(1&e&&(t=i(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var r in t)i.d(n,r,function(e){return t[e]}.bind(null,r));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=2);function i(e){if(o[e])return o[e].exports;var t=o[e]={i:e,l:!1,exports:{}};return a[e].call(t.exports,t,t.exports,i),t.l=!0,t.exports}var a,o;});
+	!function(e,t){module.exports=t(immutable.exports,require$$1__default["default"]);}(window,function(n,r){return o={},i.m=a=[function(e,t){e.exports=n;},function(e,t){e.exports=r;},function(e,t,n){e.exports=n(3);},function(e,t,n){n.r(t);var v=n(1),u=n(0),s=function(e){var t,n=null;return document.implementation&&document.implementation.createHTMLDocument&&((t=document.implementation.createHTMLDocument("foo")).documentElement.innerHTML=e,n=t.getElementsByTagName("body")[0]),n},x=function(e,t,n){var r,i=e.textContent;return ""===i.trim()?{chunk:(r=n,{text:" ",inlines:[new u.OrderedSet],entities:[r],blocks:[]})}:{chunk:{text:i,inlines:Array(i.length).fill(t),entities:Array(i.length).fill(n),blocks:[]}}},M=function(){return {text:"\n",inlines:[new u.OrderedSet],entities:new Array(1),blocks:[]}},k=function(){return {text:"",inlines:[],entities:[],blocks:[]}},E=function(e,t){return {text:"",inlines:[],entities:[],blocks:[{type:e,depth:0,data:t||new u.Map({})}]}},w=function(e,t,n){return {text:"\r",inlines:[],entities:[],blocks:[{type:e,depth:Math.max(0,Math.min(4,t)),data:n||new u.Map({})}]}},T=function(e){return {text:"\r ",inlines:[new u.OrderedSet],entities:[e],blocks:[{type:"atomic",depth:0,data:new u.Map({})}]}},L=function(e,t){return {text:e.text+t.text,inlines:e.inlines.concat(t.inlines),entities:e.entities.concat(t.entities),blocks:e.blocks.concat(t.blocks)}},A=new u.Map({"header-one":{element:"h1"},"header-two":{element:"h2"},"header-three":{element:"h3"},"header-four":{element:"h4"},"header-five":{element:"h5"},"header-six":{element:"h6"},"unordered-list-item":{element:"li",wrapper:"ul"},"ordered-list-item":{element:"li",wrapper:"ol"},blockquote:{element:"blockquote"},code:{element:"pre"},atomic:{element:"figure"},unstyled:{element:"p",aliasedElements:["div"]}});var O={code:"CODE",del:"STRIKETHROUGH",em:"ITALIC",strong:"BOLD",ins:"UNDERLINE",sub:"SUBSCRIPT",sup:"SUPERSCRIPT"};function S(e){return e.style.textAlign?new u.Map({"text-align":e.style.textAlign}):e.style.marginLeft?new u.Map({"margin-left":e.style.marginLeft}):void 0}var _=function(e){var t=void 0;if(e instanceof HTMLAnchorElement){var n={};t=e.dataset&&void 0!==e.dataset.mention?(n.url=e.href,n.text=e.innerHTML,n.value=e.dataset.value,v.Entity.__create("MENTION","IMMUTABLE",n)):(n.url=e.getAttribute&&e.getAttribute("href")||e.href,n.title=e.innerHTML,n.targetOption=e.target,v.Entity.__create("LINK","MUTABLE",n));}return t};n.d(t,"default",function(){return r});var d=" ",f=new RegExp("&nbsp;","g"),j=!0;function I(e,t,n,r,i,a){var o=e.nodeName.toLowerCase();if(a){var l=a(o,e);if(l){var c=v.Entity.__create(l.type,l.mutability,l.data||{});return {chunk:T(c)}}}if("#text"===o&&"\n"!==e.textContent)return x(e,t,i);if("br"===o)return {chunk:M()};if("img"===o&&e instanceof HTMLImageElement){var u={};u.src=e.getAttribute&&e.getAttribute("src")||e.src,u.alt=e.alt,u.height=e.style.height,u.width=e.style.width,e.style.float&&(u.alignment=e.style.float);var s=v.Entity.__create("IMAGE","MUTABLE",u);return {chunk:T(s)}}if("video"===o&&e instanceof HTMLVideoElement){var d={};d.src=e.getAttribute&&e.getAttribute("src")||e.src,d.alt=e.alt,d.height=e.style.height,d.width=e.style.width,e.style.float&&(d.alignment=e.style.float);var f=v.Entity.__create("VIDEO","MUTABLE",d);return {chunk:T(f)}}if("iframe"===o&&e instanceof HTMLIFrameElement){var m={};m.src=e.getAttribute&&e.getAttribute("src")||e.src,m.height=e.height,m.width=e.width;var p=v.Entity.__create("EMBEDDED_LINK","MUTABLE",m);return {chunk:T(p)}}var h,y=function(t,n){var e=A.filter(function(e){return e.element===t&&(!e.wrapper||e.wrapper===n)||e.wrapper===t||e.aliasedElements&&-1<e.aliasedElements.indexOf(t)}).keySeq().toSet().toArray();if(1===e.length)return e[0]}(o,r);y&&("ul"===o||"ol"===o?(r=o,n+=1):("unordered-list-item"!==y&&"ordered-list-item"!==y&&(r="",n=-1),j?(h=E(y,S(e)),j=!1):h=w(y,n,S(e)))),h=h||k(),t=function(e,t,n){var r,i=O[e];if(i)r=n.add(i).toOrderedSet();else if(t instanceof HTMLElement){var c=t;r=(r=n).withMutations(function(e){var t=c.style.color,n=c.style.backgroundColor,r=c.style.fontSize,i=c.style.fontFamily.replace(/^"|"$/g,""),a=c.style.fontWeight,o=c.style.textDecoration,l=c.style.fontStyle;t&&e.add("color-".concat(t.replace(/ /g,""))),n&&e.add("bgcolor-".concat(n.replace(/ /g,""))),r&&e.add("fontsize-".concat(r.replace(/px$/g,""))),i&&e.add("fontfamily-".concat(i)),"bold"===a&&e.add(O.strong),"underline"===o&&e.add(O.ins),"italic"===l&&e.add(O.em);}).toOrderedSet();}return r}(o,e,t);for(var b=e.firstChild;b;){var g=I(b,t,n,r,_(b)||i,a).chunk;h=L(h,g),b=b.nextSibling;}return {chunk:h}}function r(e,t){var n,r,i,a=(n=t,r=e.trim().replace(f,d),(i=s(r))?(j=!0,{chunk:I(i,new u.OrderedSet,-1,"",void 0,n).chunk}):null);if(a){var o=a.chunk,l=new u.OrderedMap({});o.entities&&o.entities.forEach(function(e){e&&(l=l.set(e,v.Entity.__get(e)));});var c=0;return {contentBlocks:o.text.split("\r").map(function(e,t){var n=c+e.length,r=o&&o.inlines.slice(c,n),i=o&&o.entities.slice(c,n),a=new u.List(r.map(function(e,t){var n={style:e,entity:null};return i[t]&&(n.entity=i[t]),v.CharacterMetadata.create(n)}));return c=n,new v.ContentBlock({key:Object(v.genKey)(),type:o&&o.blocks[t]&&o.blocks[t].type||"unstyled",depth:o&&o.blocks[t]&&o.blocks[t].depth,data:o&&o.blocks[t]&&o.blocks[t].data||new u.Map({}),text:e,characterList:a})}),entityMap:l}}return null}}],i.c=o,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n});},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0});},i.t=function(t,e){if(1&e&&(t=i(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var r in t)i.d(n,r,function(e){return t[e]}.bind(null,r));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=2);function i(e){if(o[e])return o[e].exports;var t=o[e]={i:e,l:!1,exports:{}};return a[e].call(t.exports,t,t.exports,i),t.l=!0,t.exports}var a,o;});
 	}(htmlToDraftjs));
 
 	var htmlToDraft = /*@__PURE__*/getDefaultExportFromCjs(htmlToDraftjs.exports);
@@ -31896,7 +31924,7 @@
 	  var _props$onClick, _props$text, _props$text2, _props$text3;
 
 	  if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
-	    throw new Error('Button has a required params #text.');
+	    throw new Error(__$2('Button has a required params #text.', 'notificationx'));
 	  }
 
 	  var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", 'ajax', 'text']);
@@ -31950,7 +31978,7 @@
 	        });
 
 	        if (!((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.hideSwal)) {
-	          props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || "Something went wrong.");
+	          props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || __$2("Something went wrong.", 'notificationx'));
 	        }
 	      });
 	    }
@@ -32366,7 +32394,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(SuccessIcon$1, "__esModule", { value: true });
-	var react_1$b = __importDefault$d(React__default['default']);
+	var react_1$b = __importDefault$d(React__default["default"]);
 	var styles$8 = __importStar$8(SweetAlertStyles);
 	var SuccessIcon = function () { return (react_1$b.default.createElement("div", { style: Object.assign({}, styles$8.icon, styles$8.iconSuccess) },
 	    react_1$b.default.createElement("div", { style: Object.assign({}, styles$8.iconSuccessBeforeAfter, styles$8.iconSuccessBefore) }),
@@ -32402,7 +32430,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(ErrorIcon$1, "__esModule", { value: true });
-	var react_1$a = __importDefault$c(React__default['default']);
+	var react_1$a = __importDefault$c(React__default["default"]);
 	var styles$7 = __importStar$7(SweetAlertStyles);
 	var ErrorIcon = function () { return (react_1$a.default.createElement("div", { style: Object.assign({}, styles$7.icon, styles$7.iconError) },
 	    react_1$a.default.createElement("span", { style: styles$7.iconErrorX },
@@ -32435,7 +32463,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(InfoIcon$1, "__esModule", { value: true });
-	var react_1$9 = __importDefault$b(React__default['default']);
+	var react_1$9 = __importDefault$b(React__default["default"]);
 	var styles$6 = __importStar$6(SweetAlertStyles);
 	var InfoIcon = function () { return (react_1$9.default.createElement("div", { style: Object.assign({}, styles$6.icon, styles$6.iconInfo) },
 	    react_1$9.default.createElement("div", { style: styles$6.iconInfoBefore }),
@@ -32467,7 +32495,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(WarningIcon, "__esModule", { value: true });
-	var react_1$8 = __importDefault$a(React__default['default']);
+	var react_1$8 = __importDefault$a(React__default["default"]);
 	var styles$5 = __importStar$5(SweetAlertStyles);
 	WarningIcon.default = (function () { return (react_1$8.default.createElement("div", { style: Object.assign({}, styles$5.icon, styles$5.iconWarning) },
 	    react_1$8.default.createElement("span", { style: styles$5.iconWarningBody }),
@@ -32498,7 +32526,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(CustomIcon$1, "__esModule", { value: true });
-	var react_1$7 = __importDefault$9(React__default['default']);
+	var react_1$7 = __importDefault$9(React__default["default"]);
 	var styles$4 = __importStar$4(SweetAlertStyles);
 	var defaultStyle = Object.assign({}, styles$4.icon, styles$4.iconCustom);
 	var CustomIcon = function (_a) {
@@ -32547,7 +32575,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(Buttons$1, "__esModule", { value: true });
-	var react_1$6 = __importDefault$8(React__default['default']);
+	var react_1$6 = __importDefault$8(React__default["default"]);
 	var styles$3 = __importStar$3(SweetAlertStyles);
 	var SweetAlertStyles_1$3 = SweetAlertStyles;
 	var Buttons = /** @class */ (function (_super) {
@@ -32745,7 +32773,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(Input$1, "__esModule", { value: true });
-	var react_1$5 = __importDefault$7(React__default['default']);
+	var react_1$5 = __importDefault$7(React__default["default"]);
 	var styles$2 = __importStar$2(SweetAlertStyles);
 	var Input = /** @class */ (function (_super) {
 	    __extends$2(Input, _super);
@@ -32804,7 +32832,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(ValidationMessage$1, "__esModule", { value: true });
-	var react_1$4 = __importDefault$6(React__default['default']);
+	var react_1$4 = __importDefault$6(React__default["default"]);
 	var styles$1 = __importStar$1(SweetAlertStyles);
 	var defaultMessage = 'Please enter a response!';
 	var emailMessage = 'Please enter a valid email!';
@@ -32823,7 +32851,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(Title$1, "__esModule", { value: true });
-	var react_1$3 = __importDefault$5(React__default['default']);
+	var react_1$3 = __importDefault$5(React__default["default"]);
 	var SweetAlertStyles_1$2 = SweetAlertStyles;
 	var Title = function (_a) {
 	    var children = _a.children;
@@ -32837,7 +32865,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(Content$2, "__esModule", { value: true });
-	var react_1$2 = __importDefault$4(React__default['default']);
+	var react_1$2 = __importDefault$4(React__default["default"]);
 	var SweetAlertStyles_1$1 = SweetAlertStyles;
 	var Content$1 = function (_a) {
 	    var children = _a.children;
@@ -32875,7 +32903,7 @@
 	    return (mod && mod.__esModule) ? mod : { "default": mod };
 	};
 	Object.defineProperty(Overlay$1, "__esModule", { value: true });
-	var react_1$1 = __importDefault$3(React__default['default']);
+	var react_1$1 = __importDefault$3(React__default["default"]);
 	var SweetAlertStyles_1 = SweetAlertStyles;
 	var Overlay = /** @class */ (function (_super) {
 	    __extends$1(Overlay, _super);
@@ -33060,7 +33088,7 @@
 	};
 	Object.defineProperty(SweetAlert$1, "__esModule", { value: true });
 	// third-party
-	var react_1 = __importDefault$1(React__default['default']);
+	var react_1 = __importDefault$1(React__default["default"]);
 	// components
 	var SuccessIcon_1 = __importDefault$1(SuccessIcon$1);
 	var ErrorIcon_1 = __importDefault$1(ErrorIcon$1);
@@ -33516,7 +33544,7 @@
 	  var _props$body;
 
 	  if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
-	    throw new Error('Modal needs button/body with it.');
+	    throw new Error(__$2('Modal needs button/body with it.', 'notificationx'));
 	  }
 
 	  var _useState = React.useState(false),
@@ -33589,10 +33617,6 @@
 	    context: props.context,
 	    onConfirm: onConfirm
 	  }))));
-	};
-
-	var Test = function Test() {
-	  return React.createElement("div", null, React.createElement("h1", null, "Test"));
 	};
 
 	var AdvancedTemplate = function AdvancedTemplate(props) {
@@ -33760,7 +33784,7 @@
 	  }, "Variables:", builderContext.eligibleOptions(templateOptions).map(function (val, i) {
 	    if (val.value != 'tag_custom' && val.value != 'select_a_tag') {
 	      var tag = val.value.replace('tag_', '');
-	      return React.createElement(React__default['default'].Fragment, {
+	      return React.createElement(React__default["default"].Fragment, {
 	        key: i
 	      }, React.createElement("span", {
 	        className: "button button-secondary",
@@ -33820,14 +33844,13 @@
 	  return React.createElement(React.Fragment, null, fieldViews);
 	};
 
-	var _excluded$1 = ["label"];
-
 	var Submit = function Submit(_ref) {
-	  var _ref$label = _ref.label,
-	      label = _ref$label === void 0 ? 'Save Changes' : _ref$label;
-	      _objectWithoutProperties$1(_ref, _excluded$1);
+	  var props = _extends$2({}, _ref);
 
 	  var context = useBuilderContext();
+
+	  var label = (props === null || props === void 0 ? void 0 : props.label) || __$2('Save Changes', 'notificationx');
+
 	  var handleSubmit = React.useCallback(function (event) {
 	    var _context$submit;
 
@@ -33878,7 +33901,7 @@
 	  }, Object.keys(props.config.buttons).map(function (button, index) {
 	    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3;
 
-	    return React.createElement(React__default['default'].Fragment, {
+	    return React.createElement(React__default["default"].Fragment, {
 	      key: "button_".concat(button, "_").concat(index)
 	    }, (button === 'next' && nextTab !== undefined || button === 'prev' && prevTab !== undefined) && React.createElement(components$1.Button, {
 	      className: "wprf-btn wprf-step-btn-".concat(button),
@@ -33889,7 +33912,7 @@
 	  }));
 	};
 
-	var SteppedButton$1 = /*#__PURE__*/React__default['default'].memo(SteppedButton);
+	var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
 
 	var _excluded = ["tabs", "active", "submit", "config"];
 
@@ -33903,13 +33926,13 @@
 	      rest = _objectWithoutProperties$1(_ref, _excluded);
 
 	  if (tabs === undefined) {
-	    throw new Error("There are no #tabs args defined in props.");
+	    throw new Error(__$2("There are no #tabs args defined in props.", 'notificationx'));
 	  }
 
 	  var builderContext = useBuilderContext();
 
 	  if (!isArray(tabs)) {
-	    throw new Error('Not an array.');
+	    throw new Error(__$2('Not an array.', 'notificationx'));
 	  }
 
 	  var _useState = React.useState([]),
@@ -34028,7 +34051,6 @@
 	exports.Select = Select$1;
 	exports.Slider = Slider;
 	exports.SweetAlert = SweetAlert$2;
-	exports.Test = Test;
 	exports.Textarea = Textarea$1;
 	exports.Toggle = Toggle;
 	exports._extends = _extends$1;
@@ -34066,4 +34088,4 @@
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));

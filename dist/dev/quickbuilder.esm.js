@@ -25112,7 +25112,7 @@ var ColorPicker = function ColorPicker(props) {
 var ColorPicker$1 = withLabel(ColorPicker);
 
 var Action = function Action(props) {
-  return createElement(Fragment, null, applyFilters(props.action, props));
+  return createElement(Fragment, null, applyFilters(props.action, '', props));
 };
 
 /**

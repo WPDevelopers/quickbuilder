@@ -25115,7 +25115,7 @@
 	var ColorPicker$1 = withLabel(ColorPicker);
 
 	var Action = function Action(props) {
-	  return React.createElement(React.Fragment, null, applyFilters(props.action, props));
+	  return React.createElement(React.Fragment, null, applyFilters(props.action, '', props));
 	};
 
 	/**

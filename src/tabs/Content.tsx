@@ -54,7 +54,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
                         );
                     })}
                 </div>
-                {applyFilters('wprf_tab_content', rest)}
+                {applyFilters('wprf_tab_content', '', rest)}
             </div>
             {
                 config?.step?.show &&

@@ -1,3 +1,6 @@
+body {
+  display: none !important; }
+
 .toplevel_page_wp-react-form #wpcontent {
   padding-left: 0px; }
 
@@ -2689,4 +2692,4 @@ button.wprf-btn {
 
 /*# sourceMappingURL=react-draft-wysiwyg.css.map*/
 
-/*# sourceMappingURL=quickbuilder.css.map */
+/*# sourceMappingURL=style.css.map */

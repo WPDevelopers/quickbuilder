@@ -1,14 +1,6 @@
 import Swal from "sweetalert2";
-import apiFetch from "@wordpress/api-fetch";
 import { dispatch, select } from "@wordpress/data";
 
-// const { api_nonce } = NotificationXGlobal;
-// wpFetch.use(wpFetch.createNonceMiddleware(notificationxTabs.rest.nonce));
-// wpFetch.use(
-//     wpFetch.createRootURLMiddleware("http://my-wordpress-site/wp-json/")
-// );
-
-import when from "./when";
 import { isArray, isEmptyObj } from "./utils";
 import { __ } from "@wordpress/i18n";
 // import store from "../store";
@@ -92,10 +84,6 @@ export const triggerDefaults = (defaults, checkType, value = null) => {
 export const getStoreData = () => select("formbuilder");
 export const setStoreData = () => dispatch("formbuilder");
 
-export const wpFetch = (params) => {
-	let args = { ...params, method: "POST" };
-	return apiFetch(args);
-};
 
 export const processAjaxData = (data) => {
 	let newData = {};

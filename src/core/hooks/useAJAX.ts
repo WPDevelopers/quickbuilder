@@ -1,4 +1,4 @@
-import { wpFetch } from '../functions';
+import { wpFetch } from '../utils';
 import when from '../when';
 import useBuilderContext from './useBuilderContext';
 

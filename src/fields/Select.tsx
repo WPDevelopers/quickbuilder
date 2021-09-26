@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactSelect from "react-select";
-import { isArray, isObject, merge } from '../core/utils';
+import { isArray, isObject, merge, wpFetch } from '../core/utils';
 import { withLabel, useOptions, useBuilderContext } from '../core/hooks';
-import { wpFetch } from '../core/functions';
 import { when } from '../core';
 
 const Select = (props) => {

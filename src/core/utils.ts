@@ -1,9 +1,14 @@
 import { clone, toPath } from "lodash-es";
-import { wpFetch } from "./functions";
+import apiFetch from "@wordpress/api-fetch";
 import when from "./when";
 // @ts-ignore
 import { __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
+
+export const wpFetch = (params) => {
+	let args = { ...params, method: "POST" };
+	return apiFetch(args);
+};
 
 export const isString = (args) => {
     return args !== null && typeof args === "string";

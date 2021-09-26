@@ -21,13 +21,16 @@ const globalKeys = {
 	lodash: "lodash",
 	"lodash-es": "lodashEs",
 	moment: "momentLib",
+	"react-draft-wysiwyg": "reactDraftWysiwyg",
+	"draft-js": "draftJs",
+	"draft-js?commonjs-proxy": "draftJs",
 	"@wordpress/components": "wpComponents",
 	"@wordpress/api-fetch": "wpApiFetch",
 	"@wordpress/date": "wpDate",
 	"@wordpress/data": "wpData",
-	"react-draft-wysiwyg": "reactDraftWysiwyg",
-	"draft-js": "draftJs",
-	"draft-js?commonjs-proxy": "draftJs",
+	"@wordpress/hooks": "wpHooks",
+	"@wordpress/i18n": "wpI18n",
+	"@wordpress/media-utils": "wpMedia",
 };
 
 const isMin = isProduction ? ".min" : "";

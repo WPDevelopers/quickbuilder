@@ -31,6 +31,14 @@ const globalKeys = {
 	"@wordpress/hooks": "wpHooks",
 	"@wordpress/i18n": "wpI18n",
 	"@wordpress/media-utils": "wpMedia",
+	"classnames": "classNames",
+	"draftjs-to-html": "draftjsToHtml",
+	"html-to-draftjs": "htmlToDraftjs",
+	"intersect": "intersect",
+	"lodash-es": "lodashEs",
+	"react-bootstrap-sweetalert": "sweetalert",
+	"react-select": "reactSelect",
+	"sweetalert2": "sweetalert2",
 };
 
 const isMin = isProduction ? ".min" : "";

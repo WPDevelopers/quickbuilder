@@ -3033,13 +3033,7 @@ var ColorPicker = function ColorPicker(props) {
 var ColorPicker$1 = withLabel(ColorPicker);
 
 var Action = function Action(props) {
-  var actions = applyFilters(props.action, props);
-
-  if (actions == props) {
-    actions = createElement(Fragment, null);
-  }
-
-  return createElement(Fragment, null, actions);
+  return createElement(Fragment, null, applyFilters(props.action, '', props));
 };
 
 var Media = function Media(props) {

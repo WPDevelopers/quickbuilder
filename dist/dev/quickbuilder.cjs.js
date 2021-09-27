@@ -3050,8 +3050,13 @@ var ColorPicker = function ColorPicker(props) {
 var ColorPicker$1 = withLabel(ColorPicker);
 
 var Action = function Action(props) {
-  console.log("props", props);
-  return React.createElement(React.Fragment, null, hooks.applyFilters(props.action, '', props));
+  var actions = hooks.applyFilters(props.action, props);
+
+  if (actions == props) {
+    actions = React.createElement(React.Fragment, null);
+  }
+
+  return React.createElement(React.Fragment, null, actions);
 };
 
 var Media = function Media(props) {

@@ -3033,6 +3033,7 @@ var ColorPicker = function ColorPicker(props) {
 var ColorPicker$1 = withLabel(ColorPicker);
 
 var Action = function Action(props) {
+  console.log("props", props);
   return createElement(Fragment, null, applyFilters(props.action, '', props));
 };
 

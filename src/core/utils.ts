@@ -161,7 +161,7 @@ export const setIn = (obj, path, value) => {
     return res;
 }
 
-export const validFieldProps = ( defaultProps, exclude = [] ) => {
+export const validFieldProps = ( defaultProps, exclude: string[] = [] ) => {
     const type = defaultProps.type;
     let filterOutArray = [ 'validation_rules', 'default', 'rules', 'meta', 'switch', ...exclude ];
     if( type !== 'select' && type !== 'radio-card' && ( type !== 'toggle' && defaultProps.multiple ) ) {

@@ -11,6 +11,7 @@ import 'lodash';
 import { applyFilters } from '@wordpress/hooks';
 import Swal from 'sweetalert2';
 import { Dropdown, Button as Button$2, DateTimePicker, Icon, RangeControl, ColorPicker as ColorPicker$2 } from '@wordpress/components';
+import copy from 'copy-to-clipboard';
 import ReactSelect from 'react-select';
 import { MediaUpload } from '@wordpress/media-utils';
 import { Editor as Editor$2 } from 'react-draft-wysiwyg';
@@ -2175,16 +2176,29 @@ function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if 
 function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var Textarea = function Textarea(props) {
-  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
+  var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
   var handleChange = useCallback(function (event) {
     return validProps.onChange(event, {
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-  return /*#__PURE__*/React.createElement('textarea', _objectSpread$3(_objectSpread$3({}, validProps), {}, {
+  var extraProps = {
     onChange: handleChange,
     rows: 5
-  }));
+  };
+
+  if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
+    extraProps["onClick"] = function () {
+      copy(props.value, {
+        format: 'text/plain',
+        onCopy: function onCopy() {
+          props.context.alerts.toast("success", __("Notification Alert has been copied to Clipboard.", "notificationx"));
+        }
+      });
+    };
+  }
+
+  return /*#__PURE__*/React.createElement("textarea", _objectSpread$3(_objectSpread$3({}, validProps), extraProps));
 };
 var Textarea$1 = withLabel( /*#__PURE__*/React.memo(Textarea));
 
@@ -3150,7 +3164,7 @@ var Button = function Button(props) {
     if (props !== null && props !== void 0 && props.ajax) {
       setIsLoading(true);
       hitAAJX(props.ajax, props.context).then(function (res) {
-        var _props$ajax;
+        var _props$ajax, _props$ajax5;
 
         setIsLoading(false);
 
@@ -3175,8 +3189,14 @@ var Button = function Button(props) {
             autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 ? void 0 : (_props$ajax4$swal = _props$ajax4.swal) === null || _props$ajax4$swal === void 0 ? void 0 : _props$ajax4$swal.autoClose
           });
         }
+
+        if ((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.reload) {
+          setTimeout(function () {
+            return window.location.reload();
+          }, 1000);
+        }
       })["catch"](function (err) {
-        var _props$ajax5;
+        var _props$ajax6;
 
         console.error('Error In Button Called', props.name, err);
         setIsLoading(false); //TODO: need to be fixed.
@@ -3189,7 +3209,7 @@ var Button = function Button(props) {
           }
         });
 
-        if (!((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.hideSwal)) {
+        if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
           props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || __("Something went wrong.", 'notificationx'));
         }
       });

@@ -39,6 +39,7 @@ const globalKeys = {
 	"react-bootstrap-sweetalert": "sweetalert",
 	"react-select": "reactSelect",
 	"sweetalert2": "sweetalert2",
+	"copy-to-clipboard": "copy",
 };
 
 const isMin = isProduction ? ".min" : "";

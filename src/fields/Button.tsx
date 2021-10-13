@@ -47,6 +47,9 @@ const Button = (props) => {
                     const message = props.ajax?.swal?.text || 'Complete';
                     props.context.alerts.toast(type, message, {autoClose: props.ajax?.swal?.autoClose});
                 }
+                if (props.ajax?.reload) {
+                    setTimeout(() => window.location.reload(), 1000);
+                }
             }).catch(err => {
                 console.error('Error In Button Called', props.name, err);
                 setIsLoading(false);

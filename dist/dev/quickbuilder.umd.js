@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('classnames'), require('@wordpress/data'), require('lodash-es'), require('@wordpress/api-fetch'), require('@wordpress/date'), require('moment'), require('intersect'), require('@wordpress/i18n'), require('lodash'), require('@wordpress/hooks'), require('sweetalert2'), require('@wordpress/components'), require('react-select'), require('@wordpress/media-utils'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-bootstrap-sweetalert')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', 'classnames', '@wordpress/data', 'lodash-es', '@wordpress/api-fetch', '@wordpress/date', 'moment', 'intersect', '@wordpress/i18n', 'lodash', '@wordpress/hooks', 'sweetalert2', '@wordpress/components', 'react-select', '@wordpress/media-utils', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-bootstrap-sweetalert'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.classNames, global.wpData, global.lodashEs, global.wpApiFetch, global.wpDate, global.momentLib, global.intersect, global.wpI18n, global.lodash, global.wpHooks, global.sweetalert2, global.wpComponents, global.reactSelect, global.wpMedia, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, global.sweetalert));
-})(this, (function (exports, React, classNames, data, lodashEs, apiFetch, date, moment, intersect, i18n, lodash, hooks, Swal, components, ReactSelect, mediaUtils, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, SweetAlert$1) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('classnames'), require('@wordpress/data'), require('lodash-es'), require('@wordpress/api-fetch'), require('@wordpress/date'), require('moment'), require('intersect'), require('@wordpress/i18n'), require('lodash'), require('@wordpress/hooks'), require('sweetalert2'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-select'), require('@wordpress/media-utils'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-bootstrap-sweetalert')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', 'classnames', '@wordpress/data', 'lodash-es', '@wordpress/api-fetch', '@wordpress/date', 'moment', 'intersect', '@wordpress/i18n', 'lodash', '@wordpress/hooks', 'sweetalert2', '@wordpress/components', 'copy-to-clipboard', 'react-select', '@wordpress/media-utils', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-bootstrap-sweetalert'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.classNames, global.wpData, global.lodashEs, global.wpApiFetch, global.wpDate, global.momentLib, global.intersect, global.wpI18n, global.lodash, global.wpHooks, global.sweetalert2, global.wpComponents, global.copy, global.reactSelect, global.wpMedia, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, global.sweetalert));
+})(this, (function (exports, React, classNames, data, lodashEs, apiFetch, date, moment, intersect, i18n, lodash, hooks, Swal, components, copy, ReactSelect, mediaUtils, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, SweetAlert$1) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -12,6 +12,7 @@
   var moment__default = /*#__PURE__*/_interopDefaultLegacy(moment);
   var intersect__default = /*#__PURE__*/_interopDefaultLegacy(intersect);
   var Swal__default = /*#__PURE__*/_interopDefaultLegacy(Swal);
+  var copy__default = /*#__PURE__*/_interopDefaultLegacy(copy);
   var ReactSelect__default = /*#__PURE__*/_interopDefaultLegacy(ReactSelect);
   var draftToHtml__default = /*#__PURE__*/_interopDefaultLegacy(draftToHtml);
   var htmlToDraft__default = /*#__PURE__*/_interopDefaultLegacy(htmlToDraft);
@@ -2173,16 +2174,29 @@
   function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   var Textarea = function Textarea(props) {
-    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
+    var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
     var handleChange = React.useCallback(function (event) {
       return validProps.onChange(event, {
         isPro: !!props.is_pro
       });
     }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-    return /*#__PURE__*/React__default["default"].createElement('textarea', _objectSpread$3(_objectSpread$3({}, validProps), {}, {
+    var extraProps = {
       onChange: handleChange,
       rows: 5
-    }));
+    };
+
+    if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
+      extraProps["onClick"] = function () {
+        copy__default["default"](props.value, {
+          format: 'text/plain',
+          onCopy: function onCopy() {
+            props.context.alerts.toast("success", i18n.__("Notification Alert has been copied to Clipboard.", "notificationx"));
+          }
+        });
+      };
+    }
+
+    return /*#__PURE__*/React__default["default"].createElement("textarea", _objectSpread$3(_objectSpread$3({}, validProps), extraProps));
   };
   var Textarea$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Textarea));
 
@@ -3148,7 +3162,7 @@
       if (props !== null && props !== void 0 && props.ajax) {
         setIsLoading(true);
         hitAAJX(props.ajax, props.context).then(function (res) {
-          var _props$ajax;
+          var _props$ajax, _props$ajax5;
 
           setIsLoading(false);
 
@@ -3173,8 +3187,14 @@
               autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 ? void 0 : (_props$ajax4$swal = _props$ajax4.swal) === null || _props$ajax4$swal === void 0 ? void 0 : _props$ajax4$swal.autoClose
             });
           }
+
+          if ((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.reload) {
+            setTimeout(function () {
+              return window.location.reload();
+            }, 1000);
+          }
         })["catch"](function (err) {
-          var _props$ajax5;
+          var _props$ajax6;
 
           console.error('Error In Button Called', props.name, err);
           setIsLoading(false); //TODO: need to be fixed.
@@ -3187,7 +3207,7 @@
             }
           });
 
-          if (!((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.hideSwal)) {
+          if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
             props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || i18n.__("Something went wrong.", 'notificationx'));
           }
         });

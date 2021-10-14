@@ -1,0 +1,43 @@
+.wprf-code-viewer {
+	position: relative;
+	textarea {
+    width: 100%;
+    min-height: 300px;
+		background: #2e3246;
+		color: #eae8eb;
+		resize: none;
+		border-radius: 15px;
+		border-width: 15px;
+		border-color: transparent;
+		line-height: 1.7;
+		font-style: italic;
+		cursor: pointer;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+  textarea.readonly,
+  textarea[readonly] {
+      background: #fff;
+      cursor: not-allowed;
+  }
+	.wprf-copy-button {
+    border: none;
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		background: #15c7a3;
+		padding: 5px 20px;
+		color: #fff;
+		text-transform: uppercase;
+		border-radius: 5px;
+		box-shadow: 0 5px 5px rgba(#000, 0.5),
+			inset 0 5px 5px 5px rgba(#000, 0.05),
+			inset 0 -5px 5px 5px rgba(#fff, 0.1);
+		height: 36px;
+		display: flex;
+		align-items: center;
+		pointer-events: none;
+		font-weight: 600;
+	}
+}

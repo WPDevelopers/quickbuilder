@@ -86,11 +86,11 @@ function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
 }
 
-function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var wpFetch = function wpFetch(params) {
-  var args = _objectSpread$a(_objectSpread$a({}, params), {}, {
+  var args = _objectSpread$b(_objectSpread$b({}, params), {}, {
     method: "POST"
   });
 
@@ -501,9 +501,9 @@ var when = function when(conditions, data) {
   return validate(conditions, data);
 };
 
-function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var DEFAULT_STATE = {
   savedValues: {
     type: "conversions",
@@ -569,9 +569,9 @@ var store = {
     switch (action.type) {
       case "SET_SAVED_VALUES":
         {
-          var _updatedState = _objectSpread$9({}, state);
+          var _updatedState = _objectSpread$a({}, state);
 
-          _updatedState = _objectSpread$9(_objectSpread$9({}, _updatedState), {}, {
+          _updatedState = _objectSpread$a(_objectSpread$a({}, _updatedState), {}, {
             values: action.payload,
             savedValues: action.payload
           });
@@ -582,12 +582,12 @@ var store = {
         {
           var _updatedState3;
 
-          var _updatedState2 = _objectSpread$9({}, state);
+          var _updatedState2 = _objectSpread$a({}, state);
 
           var payload = action.payload;
               action.name;
-          _updatedState2 = _objectSpread$9(_objectSpread$9({}, _updatedState2), {}, {
-            values: _objectSpread$9(_objectSpread$9({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
+          _updatedState2 = _objectSpread$a(_objectSpread$a({}, _updatedState2), {}, {
+            values: _objectSpread$a(_objectSpread$a({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
           });
           return _updatedState2;
         }
@@ -596,7 +596,7 @@ var store = {
         {
           var _updatedState4$values;
 
-          var _updatedState4 = _objectSpread$9({}, state);
+          var _updatedState4 = _objectSpread$a({}, state);
 
           var _payload = action.payload;
 
@@ -611,7 +611,7 @@ var store = {
         {
           var _updatedState5$values;
 
-          var _updatedState5 = _objectSpread$9({}, state);
+          var _updatedState5 = _objectSpread$a({}, state);
 
           if ((_updatedState5$values = _updatedState5.values) !== null && _updatedState5$values !== void 0 && _updatedState5$values[action.payload]) {
             var _updatedState5$savedV;
@@ -627,19 +627,19 @@ var store = {
         }
 
       case "FIELD_ERROR":
-        return _objectSpread$9(_objectSpread$9({}, state), {}, {
-          errors: _objectSpread$9(_objectSpread$9({}, state.errors), action.payload)
+        return _objectSpread$a(_objectSpread$a({}, state), {}, {
+          errors: _objectSpread$a(_objectSpread$a({}, state.errors), action.payload)
         });
 
       case "REMOVE_FIELD_ERROR":
-        var updatedState = _objectSpread$9({}, state);
+        var updatedState = _objectSpread$a({}, state);
 
         delete updatedState.errors[action.payload];
         return updatedState;
 
       case "FIELD_TOUCHED":
-        return _objectSpread$9(_objectSpread$9({}, state), {}, {
-          touched: _objectSpread$9(_objectSpread$9({}, state.touched), action.payload)
+        return _objectSpread$a(_objectSpread$a({}, state), {}, {
+          touched: _objectSpread$a(_objectSpread$a({}, state.touched), action.payload)
         });
     }
 
@@ -1030,15 +1030,15 @@ var useDefaults = function useDefaults(parentName, helpers, value, trigger) {
   }
 };
 
-function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var SweetAlert = function SweetAlert() {
   var _args$target, _args$type, _args$title, _args$text, _args$icon, _args$timer;
 
   var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Swal.fire(_objectSpread$8({
+  return Swal.fire(_objectSpread$9({
     target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
     type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
     html: args === null || args === void 0 ? void 0 : args.html,
@@ -1174,24 +1174,24 @@ function _extends() {
 //     return (number < 10 ? '0' : '') + number
 // }
 
-function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var builderReducer = function builderReducer(state, action) {
   switch (action.type) {
     case 'SET_CONTEXT':
       return _extends({}, state, setIn(state, action.payload.field, action.payload.value));
 
     case 'SET_ACTIVE_TAB':
-      return _objectSpread$7(_objectSpread$7({}, state), {}, {
-        config: _objectSpread$7(_objectSpread$7({}, state.config), {}, {
+      return _objectSpread$8(_objectSpread$8({}, state), {}, {
+        config: _objectSpread$8(_objectSpread$8({}, state.config), {}, {
           active: action.payload
         })
       });
 
     case 'SET_REDIRECT':
-      return _objectSpread$7(_objectSpread$7({}, state), {}, {
-        redirect: _objectSpread$7(_objectSpread$7({}, state.redirect), action.payload)
+      return _objectSpread$8(_objectSpread$8({}, state), {}, {
+        redirect: _objectSpread$8(_objectSpread$8({}, state.redirect), action.payload)
       });
 
     case 'SET_VALUES':
@@ -1224,7 +1224,7 @@ var builderReducer = function builderReducer(state, action) {
       });
 
     case 'SET_ISSUBMITTING':
-      return _objectSpread$7(_objectSpread$7({}, state), {}, {
+      return _objectSpread$8(_objectSpread$8({}, state), {}, {
         isSubmitting: action.payload
       });
 
@@ -1234,8 +1234,8 @@ var builderReducer = function builderReducer(state, action) {
       });
 
     case 'SET_FIELD_TOUCHED':
-      return _objectSpread$7(_objectSpread$7({}, state), {}, {
-        touched: _objectSpread$7(_objectSpread$7({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
+      return _objectSpread$8(_objectSpread$8({}, state), {}, {
+        touched: _objectSpread$8(_objectSpread$8({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
       });
     // return _extends({}, state, {
     //     touched: setIn(state.touched, action.payload.field, action.payload.value)
@@ -1295,9 +1295,9 @@ var builderReducer = function builderReducer(state, action) {
   }
 };
 
-function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var useBuilder = function useBuilder(props) {
   // Set is Mounted or NOT
@@ -1309,7 +1309,7 @@ var useBuilder = function useBuilder(props) {
     };
   }, []);
 
-  var _useReducer = useReducer(builderReducer, _objectSpread$6(_objectSpread$6({}, props), {}, {
+  var _useReducer = useReducer(builderReducer, _objectSpread$7(_objectSpread$7({}, props), {}, {
     savedValues: props.savedValues || {},
     values: props.values || {},
     errors: props.initialErrors || {},
@@ -1434,7 +1434,7 @@ var useBuilder = function useBuilder(props) {
     }
   });
   var getFieldProps = useCallback(function (args) {
-    var defaultProps = _objectSpread$6({}, args);
+    var defaultProps = _objectSpread$7({}, args);
 
     var validProps = validFieldProps(defaultProps);
     var name = validProps.name;
@@ -1518,7 +1518,7 @@ var useBuilder = function useBuilder(props) {
       value = getIn(state.values, name) || ((_props$meta = props.meta) === null || _props$meta === void 0 ? void 0 : _props$meta["default"]);
     }
 
-    return _objectSpread$6(_objectSpread$6({}, props.meta), {}, {
+    return _objectSpread$7(_objectSpread$7({}, props.meta), {}, {
       value: value,
       error: getIn(state.errors, name),
       touched: !!getIn(state.touched, name),
@@ -1637,7 +1637,7 @@ var useBuilder = function useBuilder(props) {
     });
   });
 
-  var context = _objectSpread$6(_objectSpread$6(_objectSpread$6({}, props), state), {}, {
+  var context = _objectSpread$7(_objectSpread$7(_objectSpread$7({}, props), state), {}, {
     setContext: setContext,
     values: state.values,
     savedValues: state.savedValues,
@@ -1846,9 +1846,9 @@ var ControlField = function ControlField(_ref) {
 
 var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge"];
 
-function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var withLabel = function withLabel(WrappedComponent) {
   var WithLabel = function WithLabel(props) {
@@ -1868,7 +1868,7 @@ var withLabel = function withLabel(WrappedComponent) {
       id = name;
     }
 
-    var styles = _objectSpread$5({
+    var styles = _objectSpread$6({
       description: {
         position: 'right'
       }
@@ -2027,6 +2027,9 @@ var Field = function Field(props) {
     case "textarea":
       return createElement(Textarea$1, props);
 
+    case "codeviewer":
+      return createElement(CodeViewer$1, props);
+
     case "message":
       return createElement(Message, props);
 
@@ -2142,9 +2145,9 @@ var DateControl = function DateControl(props) {
 
 var Date = withLabel(DateControl);
 
-function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var Input = function Input(props) {
   var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge']);
@@ -2160,7 +2163,7 @@ var Input = function Input(props) {
     }
   }
 
-  return /*#__PURE__*/React.createElement('input', _objectSpread$4(_objectSpread$4({}, validProps), {}, {
+  return /*#__PURE__*/React.createElement('input', _objectSpread$5(_objectSpread$5({}, validProps), {}, {
     onChange: handleChange
   }));
 };
@@ -2171,11 +2174,29 @@ Input.defaultProps = {
 var GenericInput = /*#__PURE__*/React.memo(Input);
 var Input$1 = withLabel( /*#__PURE__*/React.memo(Input));
 
+function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var Textarea = function Textarea(props) {
+  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
+  var handleChange = useCallback(function (event) {
+    return validProps.onChange(event, {
+      isPro: !!props.is_pro
+    });
+  }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+  return /*#__PURE__*/React.createElement('textarea', _objectSpread$4(_objectSpread$4({}, validProps), {}, {
+    onChange: handleChange,
+    rows: 5
+  }));
+};
+var Textarea$1 = withLabel( /*#__PURE__*/React.memo(Textarea));
+
 function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-var Textarea = function Textarea(props) {
+var CodeViewer = function CodeViewer(props) {
   var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
   var handleChange = useCallback(function (event) {
     return validProps.onChange(event, {
@@ -2198,9 +2219,14 @@ var Textarea = function Textarea(props) {
     };
   }
 
-  return /*#__PURE__*/React.createElement("textarea", _objectSpread$3(_objectSpread$3({}, validProps), extraProps));
+  var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : "Click to Copy";
+  return createElement("span", {
+    className: "wprf-code-viewer"
+  }, /*#__PURE__*/React.createElement("textarea", _objectSpread$3(_objectSpread$3({}, validProps), extraProps)), createElement(Button$2, {
+    className: "wprf-copy-button"
+  }, ButtonText));
 };
-var Textarea$1 = withLabel( /*#__PURE__*/React.memo(Textarea));
+var CodeViewer$1 = withLabel( /*#__PURE__*/React.memo(CodeViewer));
 
 var _excluded$2 = ["name", "fields"];
 
@@ -3770,4 +3796,4 @@ var FormBuilder = function FormBuilder(props) {
   }, createElement(Tab, props));
 };
 
-export { Action, AdvancedTemplate, BuilderConsumer, BuilderProvider, Button$1 as Button, ColorPicker$1 as ColorPicker, Column, Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, Row, Section$1 as Section, Select$1 as Select, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, validFieldProps, when, withLabel, withProps, withState, wpFetch };
+export { Action, AdvancedTemplate, BuilderConsumer, BuilderProvider, Button$1 as Button, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, Row, Section$1 as Section, Select$1 as Select, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, validFieldProps, when, withLabel, withProps, withState, wpFetch };

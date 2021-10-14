@@ -1675,10 +1675,6 @@ button.wprf-btn {
     cursor: pointer; }
     .wprf-code-viewer textarea::-webkit-scrollbar {
       display: none; }
-  .wprf-code-viewer textarea.readonly,
-  .wprf-code-viewer textarea[readonly] {
-    background: #fff;
-    cursor: not-allowed; }
   .wprf-code-viewer .wprf-copy-button {
     border: none;
     position: absolute;
@@ -1695,6 +1691,10 @@ button.wprf-btn {
     align-items: center;
     pointer-events: none;
     font-weight: 600; }
+
+.wprf-code-viewer .pro-deactivated textarea {
+  background: #555;
+  cursor: not-allowed; }
 
 .rdw-option-wrapper {
   border: 1px solid #F1F1F1;

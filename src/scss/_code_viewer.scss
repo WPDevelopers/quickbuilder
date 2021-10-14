@@ -16,11 +16,6 @@
 			display: none;
 		}
 	}
-  textarea.readonly,
-  textarea[readonly] {
-      background: #fff;
-      cursor: not-allowed;
-  }
 	.wprf-copy-button {
     border: none;
 		position: absolute;
@@ -40,4 +35,12 @@
 		pointer-events: none;
 		font-weight: 600;
 	}
+}
+.wprf-code-viewer {
+	.pro-deactivated {
+		textarea {
+				background: #555;
+				cursor: not-allowed;
+		}
+  }
 }

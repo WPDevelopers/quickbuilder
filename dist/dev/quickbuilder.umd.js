@@ -2208,16 +2208,17 @@
 
     if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
       extraProps["onClick"] = function () {
+        var successText = props !== null && props !== void 0 && props.success_text ? props.success_text : i18n.__("Copied to Clipboard.", "notificationx");
         copy__default["default"](props.value, {
           format: 'text/plain',
           onCopy: function onCopy() {
-            props.context.alerts.toast("success", i18n.__("Notification Alert has been copied to Clipboard.", "notificationx"));
+            props.context.alerts.toast("success", successText);
           }
         });
       };
     }
 
-    var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : "Click to Copy";
+    var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : i18n.__("Click to Copy", "notificationx");
     return React.createElement("span", {
       className: "wprf-code-viewer"
     }, /*#__PURE__*/React__default["default"].createElement("textarea", _objectSpread$3(_objectSpread$3({}, validProps), extraProps)), React.createElement(components.Button, {

@@ -2210,16 +2210,17 @@ var CodeViewer = function CodeViewer(props) {
 
   if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
     extraProps["onClick"] = function () {
+      var successText = props !== null && props !== void 0 && props.success_text ? props.success_text : __("Copied to Clipboard.", "notificationx");
       copy(props.value, {
         format: 'text/plain',
         onCopy: function onCopy() {
-          props.context.alerts.toast("success", __("Notification Alert has been copied to Clipboard.", "notificationx"));
+          props.context.alerts.toast("success", successText);
         }
       });
     };
   }
 
-  var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : "Click to Copy";
+  var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : __("Click to Copy", "notificationx");
   return createElement("span", {
     className: "wprf-code-viewer"
   }, /*#__PURE__*/React.createElement("textarea", _objectSpread$3(_objectSpread$3({}, validProps), extraProps)), createElement(Button$2, {

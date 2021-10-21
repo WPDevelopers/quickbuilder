@@ -1,5 +1,6 @@
-import { __ } from '@wordpress/i18n';
 import React from 'react'
+import { __ } from '@wordpress/i18n';
+import { applyFilters } from '@wordpress/hooks';
 import {
     ColorPicker,
     Group,
@@ -10,7 +11,7 @@ import {
     Select,
     Slider,
     Toggle,
-    Date, Action, Media, Editor, Button, Message, Modal, AdvancedTemplate, Textarea, CodeViewer
+    Date, Action, Media, Editor, Button, Message, Modal, Textarea, CodeViewer
 } from '.';
 
 import { withProps } from '../core/hooks';
@@ -58,8 +59,6 @@ const Field = (props) => {
             return <Media {...props} />;
         case "editor":
             return <Editor {...props} />;
-        case "advanced-template":
-            return <AdvancedTemplate {...props} />;
         case "action":
             return <Action {...props} />;
         case "button":
@@ -69,7 +68,8 @@ const Field = (props) => {
         // case "test":
         //     return <Test {...props} />;
         default:
-            return <></>;
+            const customField = applyFilters('custom_field', '', props.type, props);
+            return <>{customField}</>;
     }
 };
 

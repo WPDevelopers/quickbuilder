@@ -2,7 +2,7 @@ import React from 'react'
 const ControlLabel = (props) => {
     const { id, label, badge, badgePosition, context, ...rest } = props;
     if (!(label && label.length > 0)) {
-        return;
+        return null;
     }
 
     /**

@@ -1798,7 +1798,7 @@
         rest = _objectWithoutProperties(props, _excluded$4);
 
     if (!(label && label.length > 0)) {
-      return;
+      return null;
     }
     /**
      * Icon need to be fixed
@@ -1868,23 +1868,23 @@
 
       var styles = _objectSpread$6({
         description: {
-          position: 'right'
+          position: "right"
         }
       }, prevStyle);
 
-      var styleClasses = classNames__default["default"]((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, 'wprf-label-none', label === undefined || label === '' || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || 'inline', "-label"), ((_styles$label$positio = styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
+      var styleClasses = classNames__default["default"]((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
 
-      if (type === 'hidden') {
+      if (type === "hidden") {
         return React.createElement(WrappedComponent, _extends$1({}, props, {
           id: id
         }));
       }
 
-      var validProps = validFieldProps(props, ['description', 'label', 'help', 'style']);
+      var validProps = validFieldProps(props, ["description", "label", "help", "style"]);
       var componentClasses = classNames__default["default"]("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
       return React.createElement("div", {
         className: componentClasses
-      }, is_pro == true && React.createElement(Badge, _extends$1({}, badge, {
+      }, is_pro == true && React.createElement(React.Fragment, null, React.createElement(Badge, _extends$1({}, badge, {
         renderLabel: function renderLabel(badge, position) {
           return React.createElement(ControlLabel, _extends$1({}, validProps, {
             context: rest === null || rest === void 0 ? void 0 : rest.context,
@@ -1898,7 +1898,7 @@
           var _styles$description;
 
           return React.createElement(ControlField, {
-            help: props === null || props === void 0 ? void 0 : props.help,
+            help: null,
             description: props === null || props === void 0 ? void 0 : props.description,
             position: styles === null || styles === void 0 ? void 0 : (_styles$description = styles.description) === null || _styles$description === void 0 ? void 0 : _styles$description.position,
             renderComponent: function renderComponent() {
@@ -1908,7 +1908,18 @@
             }
           });
         }
-      })), (is_pro == false || is_pro == undefined) && React.createElement(React.Fragment, null, label && label.length > 0 && React.createElement(ControlLabel, _extends$1({}, validProps, {
+      })), (props === null || props === void 0 ? void 0 : props.help) && React.createElement("div", {
+        className: "wprf-badge-wrapper"
+      }, React.createElement("div", {
+        className: "wprf-control-label"
+      }), React.createElement("div", {
+        className: "wprf-control-field"
+      }, React.createElement("p", {
+        className: "wprf-help",
+        dangerouslySetInnerHTML: {
+          __html: props.help
+        }
+      })))), (is_pro == false || is_pro == undefined) && React.createElement(React.Fragment, null, label && label.length > 0 && React.createElement(ControlLabel, _extends$1({}, validProps, {
         context: rest === null || rest === void 0 ? void 0 : rest.context,
         label: label,
         id: id
@@ -2064,9 +2075,6 @@
       case "editor":
         return React.createElement(Editor$1, props);
 
-      case "advanced-template":
-        return React.createElement(AdvancedTemplate, props);
-
       case "action":
         return React.createElement(Action, props);
 
@@ -2079,7 +2087,8 @@
       //     return <Test {...props} />;
 
       default:
-        return React.createElement(React.Fragment, null);
+        var customField = hooks.applyFilters('custom_field', '', props.type, props);
+        return React.createElement(React.Fragment, null, customField);
     }
   };
 
@@ -3391,184 +3400,6 @@
     }))));
   };
 
-  var AdvancedTemplate = function AdvancedTemplate(props) {
-    var _field2, _field2$;
-
-    var builderContext = useBuilderContext();
-    var editor = React.useRef();
-
-    var _useState = React.useState(draftJs.EditorState.createEmpty()),
-        _useState2 = _slicedToArray(_useState, 2),
-        editorState = _useState2[0],
-        setEditorState = _useState2[1];
-
-    var _useState3 = React.useState([]),
-        _useState4 = _slicedToArray(_useState3, 2),
-        templateOptions = _useState4[0],
-        setTemplateOptions = _useState4[1];
-
-    var getField = function getField(arr, name) {
-      if (arr.length) {
-        var _arr$find;
-
-        return (_arr$find = arr.find(function (field) {
-          return field.name == name;
-        })) === null || _arr$find === void 0 ? void 0 : _arr$find.fields;
-      }
-
-      return [];
-    };
-
-    var field = getField(builderContext.tabs, 'content_tab');
-    field = getField(field, 'content');
-    field = getField(field, 'notification-template');
-    React.useEffect(function () {
-      if (props.value) {
-        var _htmlToDraft = htmlToDraft__default["default"](props.value),
-            contentBlocks = _htmlToDraft.contentBlocks,
-            entityMap = _htmlToDraft.entityMap;
-
-        var contentState = draftJs.ContentState.createFromBlockArray(contentBlocks, entityMap);
-
-        var _editorState = draftJs.EditorState.createWithContent(contentState);
-
-        setEditorState(_editorState);
-      } // notification-template
-      // console.log(builderContext.tabs[2].fields[0].fields);
-
-
-      var field = getField(builderContext.tabs, 'content_tab');
-      field = getField(field, 'content');
-      field = getField(field, 'notification-template');
-      var templateIndex = props.parentIndex;
-      templateIndex = [].concat(_toConsumableArray(templateIndex), [templateIndex.pop() - 1]);
-      field[0].menuOpen = true;
-      builderContext.setFormField(templateIndex, field);
-      var options = field.filter(function (f) {
-        return f === null || f === void 0 ? void 0 : f.options;
-      }).map(function (f) {
-        return f === null || f === void 0 ? void 0 : f.options;
-      }).flat();
-      setTemplateOptions(options);
-    }, []);
-    React.useEffect(function () {
-      var _field, _field$, _field$$options;
-
-      if (((_field = field) === null || _field === void 0 ? void 0 : (_field$ = _field[0]) === null || _field$ === void 0 ? void 0 : (_field$$options = _field$.options) === null || _field$$options === void 0 ? void 0 : _field$$options.length) > 0) {
-        var options = field.filter(function (f) {
-          return f === null || f === void 0 ? void 0 : f.options;
-        }).map(function (f) {
-          return f === null || f === void 0 ? void 0 : f.options;
-        }).flat();
-        setTemplateOptions(options);
-      }
-    }, [(_field2 = field) === null || _field2 === void 0 ? void 0 : (_field2$ = _field2[0]) === null || _field2$ === void 0 ? void 0 : _field2$.options]);
-    React.useEffect(function () {
-      var tempValue = draftToHtml__default["default"](draftJs.convertToRaw(editorState.getCurrentContent()));
-      props.onChange({
-        target: {
-          type: 'advanced-template',
-          value: tempValue,
-          name: props.name
-        }
-      });
-    }, [editorState]);
-
-    var handleBeforeInput = function handleBeforeInput(chars, editorState, eventTimeStamp) {
-      var raw = draftJs.convertToRaw(editorState.getCurrentContent());
-
-      if (raw.blocks.length > 3) {
-        return 'handled';
-      }
-    };
-
-    var handleReturn = function handleReturn(e, editorState) {
-      var raw = draftJs.convertToRaw(editorState.getCurrentContent());
-
-      if (raw.blocks.length >= 3) {
-        e.preventDefault();
-        e.stopPropagation();
-        return 'handled';
-      }
-    };
-
-    var handlePastedText = function handlePastedText(text, html, editorState) {
-      var raw = draftJs.convertToRaw(editorState.getCurrentContent());
-      var editorLine = raw.blocks.length;
-      var clipboardLine = text.split(/\r\n|\r|\n/).length;
-
-      if (editorLine + clipboardLine > 3) {
-        return true;
-      }
-    };
-
-    var clicked = function clicked(value) {
-      var contentState = editorState.getCurrentContent();
-      var sectionState = editorState.getSelection();
-      var nextContentState;
-      var nextEditorState = draftJs.EditorState.createEmpty();
-
-      if (sectionState.isCollapsed()) {
-        nextContentState = draftJs.Modifier.insertText(contentState, sectionState, "{{".concat(value, "}}"));
-      } else {
-        nextContentState = draftJs.Modifier.replaceText(contentState, sectionState, "{{".concat(value, "}}"));
-      }
-
-      nextEditorState = draftJs.EditorState.push(editorState, nextContentState, 'insert-fragment');
-      setEditorState(nextEditorState);
-      setTimeout(function () {
-        editor.current.editor.focus();
-      }, 300);
-    };
-
-    React.useEffect(function () {
-      var _builderContext$saved;
-
-      if (!((_builderContext$saved = builderContext.savedValues) !== null && _builderContext$saved !== void 0 && _builderContext$saved['advanced_template'])) {
-        var tmpl = hooks.applyFilters('nx_adv_template_default', builderContext.values);
-
-        var _htmlToDraft2 = htmlToDraft__default["default"](tmpl.map(function (val) {
-          return "<p>".concat(val, "</p>");
-        }).join("\r\n")),
-            contentBlocks = _htmlToDraft2.contentBlocks,
-            entityMap = _htmlToDraft2.entityMap;
-
-        var contentState = draftJs.ContentState.createFromBlockArray(contentBlocks, entityMap);
-
-        var _editorState2 = draftJs.EditorState.createWithContent(contentState);
-
-        setEditorState(_editorState2);
-      }
-    }, [builderContext.values.themes, builderContext.values['notification-template']]);
-    return React.createElement(React.Fragment, null, React.createElement(reactDraftWysiwyg.Editor, {
-      ref: editor,
-      toolbar: toolbarOptions,
-      editorState: editorState,
-      toolbarClassName: "wprf-editor-toolbar",
-      wrapperClassName: "wprf-editor wprf-control",
-      editorClassName: "wprf-editor-main",
-      onEditorStateChange: setEditorState,
-      handleBeforeInput: handleBeforeInput,
-      handleReturn: handleReturn,
-      handlePastedText: handlePastedText
-    }), React.createElement("div", {
-      className: "template-options"
-    }, "Variables:", builderContext.eligibleOptions(templateOptions).map(function (val, i) {
-      if (val.value != 'tag_custom' && val.value != 'select_a_tag') {
-        var tag = val.value.replace('tag_', '');
-        return React.createElement(React__default["default"].Fragment, {
-          key: i
-        }, React.createElement("span", {
-          className: "button button-secondary",
-          "data-value": val.label,
-          onClick: function onClick() {
-            return clicked(tag);
-          }
-        }, "{{".concat(tag, "}}")), " ");
-      }
-    })));
-  };
-
   var InnerContent = function InnerContent(_ref) {
     var fields = _ref.fields,
         parentIndex = _ref.parentIndex,
@@ -3796,7 +3627,6 @@
   };
 
   exports.Action = Action;
-  exports.AdvancedTemplate = AdvancedTemplate;
   exports.BuilderConsumer = BuilderConsumer;
   exports.BuilderProvider = BuilderProvider;
   exports.Button = Button$1;

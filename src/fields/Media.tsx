@@ -18,7 +18,7 @@ const Media = (props) => {
     return (
         <div className="wprf-control wprf-media">
             {
-                imageData != null &&
+                imageData != null && !props?.notImage &&
                 <div className="wprf-image-preview">
                     {imageData != null && imageData?.url && <img src={imageData.url} alt={imageData.title} />}
                 </div>

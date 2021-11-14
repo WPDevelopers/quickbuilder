@@ -13,6 +13,7 @@ const eligibleMessage = (props) => {
     }
     return {
         message: props?.message,
+        html: props?.html,
         type: 'normal'
     };
 }
@@ -25,7 +26,7 @@ const Message = (props) => {
     }
 
     return (
-        <div className={classNames('wprf-control', 'wprf-message', `wprf-${type}-message`, `wprf-${props.name}-message`)}>
+        <div className={classNames('wprf-control', 'wprf-message', `wprf-${type}-message`, `wprf-${props.name}-message`, props?.classes)}>
             {html && <p dangerouslySetInnerHTML={{ __html: message }}></p>}
             {!html && <p>{message}</p>}
         </div>

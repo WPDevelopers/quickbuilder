@@ -207,6 +207,13 @@ export const hitAAJX = ( ajax, context = null ) => {
                         context.setFieldValue(eligibleKey, dataContext[eligibleKey]);
                     });
                 }
+                if(response?.data?.download){
+                    downloadFile({
+                        data: JSON.stringify(response.data.download),
+                        fileName: 'export.json',
+                        fileType: 'text/json',
+                      })
+                }
 
                 if( ajax?.trigger && isString(ajax?.trigger) ) {
                     let at = ajax.trigger.indexOf('@');
@@ -248,3 +255,21 @@ export const merge = (array_one: Array<object>, array_two: Array<object>, key: s
     const _array_two = array_two.filter((element: any) => data.findIndex((_element: any) => _element[key] === element[key]) <= -1);
     return [...data, ..._array_two];
 }
+
+
+const downloadFile = ({ data, fileName, fileType }) => {
+    // Create a blob with the data we want to download as a file
+    const blob = new Blob([data], { type: fileType })
+    // Create an anchor element and dispatch a click event on it
+    // to trigger a download
+    const a = document.createElement('a')
+    a.download = fileName
+    a.href = window.URL.createObjectURL(blob)
+    const clickEvt = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    })
+    a.dispatchEvent(clickEvt)
+    a.remove()
+  }

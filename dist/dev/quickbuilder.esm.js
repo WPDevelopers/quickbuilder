@@ -290,7 +290,7 @@ var hitAAJX = function hitAAJX(ajax) {
         path: ajax.api,
         data: data
       }).then(function (response) {
-        var _response$data;
+        var _response$data, _response$data2;
 
         if ((response === null || response === void 0 ? void 0 : response.status) == "success" && response !== null && response !== void 0 && response.redirect) {
           window.location = response === null || response === void 0 ? void 0 : response.redirect;
@@ -301,6 +301,14 @@ var hitAAJX = function hitAAJX(ajax) {
         if (dataContext && isObject(dataContext)) {
           Object.keys(dataContext).map(function (eligibleKey) {
             context.setFieldValue(eligibleKey, dataContext[eligibleKey]);
+          });
+        }
+
+        if (response !== null && response !== void 0 && (_response$data2 = response.data) !== null && _response$data2 !== void 0 && _response$data2.download) {
+          downloadFile({
+            data: JSON.stringify(response.data.download),
+            fileName: 'export.json',
+            fileType: 'text/json'
           });
         }
 
@@ -353,6 +361,28 @@ var merge = function merge(array_one, array_two, key) {
   });
 
   return [].concat(_toConsumableArray(data), _toConsumableArray(_array_two));
+};
+
+var downloadFile = function downloadFile(_ref) {
+  var data = _ref.data,
+      fileName = _ref.fileName,
+      fileType = _ref.fileType;
+  // Create a blob with the data we want to download as a file
+  var blob = new Blob([data], {
+    type: fileType
+  }); // Create an anchor element and dispatch a click event on it
+  // to trigger a download
+
+  var a = document.createElement('a');
+  a.download = fileName;
+  a.href = window.URL.createObjectURL(blob);
+  var clickEvt = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
+  a.dispatchEvent(clickEvt);
+  a.remove();
 };
 
 var _typeof = function _typeof(obj) {
@@ -2451,7 +2481,8 @@ function createId(object) {
  */
 
 
-function useInstanceId(object, prefix, preferredId = '') {
+function useInstanceId(object, prefix) {
+  let preferredId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   return useMemo(() => {
     if (preferredId) return preferredId;
     const id = createId(object);
@@ -3105,7 +3136,7 @@ var Media = function Media(props) {
   }, [imageData]);
   return createElement("div", {
     className: "wprf-control wprf-media"
-  }, imageData != null && createElement("div", {
+  }, imageData != null && !(props !== null && props !== void 0 && props.notImage) && createElement("div", {
     className: "wprf-image-preview"
   }, imageData != null && (imageData === null || imageData === void 0 ? void 0 : imageData.url) && createElement("img", {
     src: imageData.url,
@@ -3299,6 +3330,7 @@ var eligibleMessage = function eligibleMessage(props) {
 
   return {
     message: props === null || props === void 0 ? void 0 : props.message,
+    html: props === null || props === void 0 ? void 0 : props.html,
     type: 'normal'
   };
 };
@@ -3315,7 +3347,7 @@ var Message = function Message(props) {
   }
 
   return createElement("div", {
-    className: classNames('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"))
+    className: classNames('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"), props === null || props === void 0 ? void 0 : props.classes)
   }, html && createElement("p", {
     dangerouslySetInnerHTML: {
       __html: message

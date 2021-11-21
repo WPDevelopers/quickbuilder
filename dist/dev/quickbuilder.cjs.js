@@ -2070,7 +2070,7 @@ var withProps = function withProps(WrappedComponent) {
 var Field = function Field(props) {
   if (!props.type || props.type.length === 0) {
     console.error(props);
-    throw new Error(i18n.__('Field must have a #type. see documentation.', 'notificationx'));
+    throw new Error(i18n.__("Field must have a #type. see documentation.", "notificationx"));
   }
 
   switch (props.type) {
@@ -2116,6 +2116,9 @@ var Field = function Field(props) {
     case "colorpicker":
       return React.createElement(ColorPicker$1, props);
 
+    case "jsonuploader":
+      return React.createElement(JsonUploader$1, props);
+
     case "repeater":
       return React.createElement(Repeater, props);
 
@@ -2137,7 +2140,7 @@ var Field = function Field(props) {
     //     return <Test {...props} />;
 
     default:
-      var customField = hooks.applyFilters('custom_field', '', props.type, props);
+      var customField = hooks.applyFilters("custom_field", "", props.type, props);
       return React.createElement(React.Fragment, null, customField);
   }
 };
@@ -2285,6 +2288,77 @@ var CodeViewer = function CodeViewer(props) {
   }, ButtonText));
 };
 var CodeViewer$1 = withLabel( /*#__PURE__*/React__default["default"].memo(CodeViewer));
+
+var JsonUploader = function JsonUploader(props) {
+  validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
+
+  var _useState = React.useState(),
+      _useState2 = _slicedToArray(_useState, 2),
+      uploadedFile = _useState2[0],
+      setUploadedFile = _useState2[1];
+
+  var handleChange = function handleChange(e) {
+    if (!e.target.files.length) {
+      return;
+    }
+
+    var file = e.target.files[0];
+    setUploadedFile(file);
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      var _event$target;
+
+      var json = event === null || event === void 0 ? void 0 : (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.result;
+      props.onChange({
+        target: {
+          type: 'jsonuploader',
+          name: props.name,
+          value: json
+        }
+      });
+    };
+
+    reader.readAsText(file);
+  };
+
+  var removeFile = function removeFile() {
+    setUploadedFile(null);
+    props.onChange({
+      target: {
+        type: 'jsonuploader',
+        name: props.name,
+        value: null
+      }
+    });
+  };
+
+  React.useEffect(function () {
+    if (!(props !== null && props !== void 0 && props.value)) {
+      setUploadedFile(null);
+    }
+  }, [props === null || props === void 0 ? void 0 : props.value]);
+  return React.createElement("span", {
+    className: "wprf-json-uploader"
+  }, !uploadedFile && React.createElement("label", {
+    className: "wprf-json-uploaderButton"
+  }, React.createElement("span", null, i18n.__("Upload")), React.createElement("input", {
+    type: "file",
+    accept: "application/JSON",
+    onChange: function onChange(e) {
+      handleChange(e);
+    }
+  })), uploadedFile && (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name) && React.createElement("span", {
+    className: "wpfr-json-file-name-wrapper"
+  }, React.createElement("span", {
+    className: "wpfr-json-file-name"
+  }, (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) > 20 ? "".concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr(0, 9), "...").concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr((uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) - 7)) : uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name), React.createElement("span", {
+    className: "wprf-json-file-delete-button",
+    onClick: removeFile
+  }, "x")));
+};
+
+var JsonUploader$1 = withLabel( /*#__PURE__*/React__default["default"].memo(JsonUploader));
 
 var _excluded$2 = ["name", "fields"];
 
@@ -3694,6 +3768,7 @@ exports.GenericInput = GenericInput;
 exports.Group = Group$1;
 exports.Image = Image;
 exports.Input = Input$1;
+exports.JsonUploader = JsonUploader$1;
 exports.Label = Label;
 exports.Media = Media$1;
 exports.Message = Message;

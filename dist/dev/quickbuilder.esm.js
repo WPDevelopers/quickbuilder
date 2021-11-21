@@ -2052,7 +2052,7 @@ var withProps = function withProps(WrappedComponent) {
 var Field = function Field(props) {
   if (!props.type || props.type.length === 0) {
     console.error(props);
-    throw new Error(__('Field must have a #type. see documentation.', 'notificationx'));
+    throw new Error(__("Field must have a #type. see documentation.", "notificationx"));
   }
 
   switch (props.type) {
@@ -2098,6 +2098,9 @@ var Field = function Field(props) {
     case "colorpicker":
       return createElement(ColorPicker$1, props);
 
+    case "jsonuploader":
+      return createElement(JsonUploader$1, props);
+
     case "repeater":
       return createElement(Repeater, props);
 
@@ -2119,7 +2122,7 @@ var Field = function Field(props) {
     //     return <Test {...props} />;
 
     default:
-      var customField = applyFilters('custom_field', '', props.type, props);
+      var customField = applyFilters("custom_field", "", props.type, props);
       return createElement(Fragment, null, customField);
   }
 };
@@ -2267,6 +2270,77 @@ var CodeViewer = function CodeViewer(props) {
   }, ButtonText));
 };
 var CodeViewer$1 = withLabel( /*#__PURE__*/React.memo(CodeViewer));
+
+var JsonUploader = function JsonUploader(props) {
+  validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
+
+  var _useState = useState(),
+      _useState2 = _slicedToArray(_useState, 2),
+      uploadedFile = _useState2[0],
+      setUploadedFile = _useState2[1];
+
+  var handleChange = function handleChange(e) {
+    if (!e.target.files.length) {
+      return;
+    }
+
+    var file = e.target.files[0];
+    setUploadedFile(file);
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      var _event$target;
+
+      var json = event === null || event === void 0 ? void 0 : (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.result;
+      props.onChange({
+        target: {
+          type: 'jsonuploader',
+          name: props.name,
+          value: json
+        }
+      });
+    };
+
+    reader.readAsText(file);
+  };
+
+  var removeFile = function removeFile() {
+    setUploadedFile(null);
+    props.onChange({
+      target: {
+        type: 'jsonuploader',
+        name: props.name,
+        value: null
+      }
+    });
+  };
+
+  useEffect(function () {
+    if (!(props !== null && props !== void 0 && props.value)) {
+      setUploadedFile(null);
+    }
+  }, [props === null || props === void 0 ? void 0 : props.value]);
+  return createElement("span", {
+    className: "wprf-json-uploader"
+  }, !uploadedFile && createElement("label", {
+    className: "wprf-json-uploaderButton"
+  }, createElement("span", null, __("Upload")), createElement("input", {
+    type: "file",
+    accept: "application/JSON",
+    onChange: function onChange(e) {
+      handleChange(e);
+    }
+  })), uploadedFile && (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name) && createElement("span", {
+    className: "wpfr-json-file-name-wrapper"
+  }, createElement("span", {
+    className: "wpfr-json-file-name"
+  }, (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) > 20 ? "".concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr(0, 9), "...").concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr((uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) - 7)) : uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name), createElement("span", {
+    className: "wprf-json-file-delete-button",
+    onClick: removeFile
+  }, "x")));
+};
+
+var JsonUploader$1 = withLabel( /*#__PURE__*/React.memo(JsonUploader));
 
 var _excluded$2 = ["name", "fields"];
 
@@ -3660,4 +3734,4 @@ var FormBuilder = function FormBuilder(props) {
   }, createElement(Tab, props));
 };
 
-export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, Row, Section$1 as Section, Select$1 as Select, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, validFieldProps, when, withLabel, withProps, withState, wpFetch };
+export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, Row, Section$1 as Section, Select$1 as Select, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, validFieldProps, when, withLabel, withProps, withState, wpFetch };

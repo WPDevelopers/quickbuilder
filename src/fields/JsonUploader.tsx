@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
 import { __ } from "@wordpress/i18n";
@@ -14,11 +14,47 @@ const JsonUploader = (props) => {
 		"copyOnClick",
 	]);
 
-	const [uploadedFile, setUploadedFile] = useState(undefined);
+	const [uploadedFile, setUploadedFile] = useState<any>();
 
 	const handleChange = (e) => {
-		setUploadedFile(e.target.files[0]);
+		if (!e.target.files.length) {
+			return;
+		}
+
+		const file = e.target.files[0];
+		setUploadedFile(file);
+
+		let reader = new FileReader();
+		const self = this;
+		reader.onload = (event) => {
+			const json = event?.target?.result;
+			props.onChange({
+				target: {
+					type: 'jsonuploader',
+					name: props.name,
+					value: json,
+				}
+			});
+		};
+		reader.readAsText(file);
 	};
+
+	const removeFile = () => {
+		setUploadedFile(null);
+		props.onChange({
+			target: {
+				type: 'jsonuploader',
+				name: props.name,
+				value: null,
+			}
+		});
+	}
+
+	useEffect(() => {
+		if(!props?.value){
+			setUploadedFile(null);
+		}
+	}, [props?.value])
 
 	return (
 		<span className="wprf-json-uploader">
@@ -48,7 +84,7 @@ const JsonUploader = (props) => {
 					</span>
 					<span
 						className="wprf-json-file-delete-button"
-						onClick={() => setUploadedFile(undefined)}
+						onClick={removeFile}
 					>
 						x
 					</span>

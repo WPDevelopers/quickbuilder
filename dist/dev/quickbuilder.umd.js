@@ -2285,6 +2285,12 @@
       }
 
       var file = e.target.files[0];
+
+      if ((file === null || file === void 0 ? void 0 : file.type) != 'application/json' && (file === null || file === void 0 ? void 0 : file.type) != 'text/json') {
+        props.context.alerts.toast('error', i18n.__("Invalid file type.", 'notificationx'));
+        return;
+      }
+
       setUploadedFile(file);
       var reader = new FileReader();
 

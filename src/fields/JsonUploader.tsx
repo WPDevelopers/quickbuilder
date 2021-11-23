@@ -23,7 +23,11 @@ const JsonUploader = (props) => {
 
 		const file = e.target.files[0];
 
-		if(file?.type != 'application/json' && file?.type != 'text/json'){
+		if(file?.size == 0){
+			props.context.alerts.toast('error', __(`File can't be empty.`, 'notificationx'));
+			return;
+		}
+		else if(file?.type != 'application/json' && file?.type != 'text/json'){
 			props.context.alerts.toast('error', __(`Invalid file type.`, 'notificationx'));
 			return;
 		}

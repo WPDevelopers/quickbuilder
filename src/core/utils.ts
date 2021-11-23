@@ -210,7 +210,7 @@ export const hitAAJX = ( ajax, context = null ) => {
                 if(response?.data?.download){
                     downloadFile({
                         data: JSON.stringify(response.data.download),
-                        fileName: 'export.json',
+                        fileName: response?.data?.filename || 'export.json',
                         fileType: 'text/json',
                       })
                 }

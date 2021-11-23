@@ -22,6 +22,12 @@ const JsonUploader = (props) => {
 		}
 
 		const file = e.target.files[0];
+
+		if(file?.type != 'application/json' && file?.type != 'text/json'){
+			props.context.alerts.toast('error', __(`Invalid file type.`, 'notificationx'));
+			return;
+		}
+
 		setUploadedFile(file);
 
 		let reader = new FileReader();

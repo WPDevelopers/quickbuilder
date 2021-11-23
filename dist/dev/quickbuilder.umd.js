@@ -303,9 +303,11 @@
           }
 
           if (response !== null && response !== void 0 && (_response$data2 = response.data) !== null && _response$data2 !== void 0 && _response$data2.download) {
+            var _response$data3;
+
             downloadFile({
               data: JSON.stringify(response.data.download),
-              fileName: 'export.json',
+              fileName: (response === null || response === void 0 ? void 0 : (_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : _response$data3.filename) || 'export.json',
               fileType: 'text/json'
             });
           }

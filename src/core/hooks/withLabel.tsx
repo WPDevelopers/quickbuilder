@@ -82,6 +82,7 @@ const withLabel = (WrappedComponent) => {
 									renderComponent={() => (
 										<WrappedComponent
 											{...validProps}
+											disable={true}
 											id={id}
 										/>
 									)}

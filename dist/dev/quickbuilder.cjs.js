@@ -1955,6 +1955,7 @@ var withLabel = function withLabel(WrappedComponent) {
           position: styles === null || styles === void 0 ? void 0 : (_styles$description = styles.description) === null || _styles$description === void 0 ? void 0 : _styles$description.position,
           renderComponent: function renderComponent() {
             return React.createElement(WrappedComponent, _extends$1({}, validProps, {
+              disable: true,
               id: id
             }));
           }

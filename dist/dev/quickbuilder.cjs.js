@@ -2166,16 +2166,16 @@ var DateControl = function DateControl(props) {
 
   var is12HourTime = /a(?!\\)/i.test(settings.formats.datetime.toLowerCase().replace(/\\\\/g, "").split("").reverse().join(""));
   React.useEffect(function () {
-    if (!value) {
-      _onChange({
-        target: {
-          type: 'date',
-          name: name,
-          value: _value
-        }
-      }); //     // helpers.setValue(name, date('c', value))
+    // if (!value) {
+    _onChange({
+      target: {
+        type: 'date',
+        name: name,
+        value: _value
+      }
+    }); //     // helpers.setValue(name, date('c', value))
+    // }
 
-    }
   }, []);
   return React.createElement(components.Dropdown, {
     className: "wprf-control-datetime",

@@ -22,7 +22,7 @@ const DateControl = (props) => {
     );
 
     useEffect(() => {
-        if (!value) {
+        // if (!value) {
             onChange({
                 target: {
                     type: 'date',
@@ -31,7 +31,7 @@ const DateControl = (props) => {
                 },
             });
             //     // helpers.setValue(name, date('c', value))
-        }
+        // }
     }, [])
 
     return (

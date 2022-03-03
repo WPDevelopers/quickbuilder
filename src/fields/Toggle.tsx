@@ -53,7 +53,7 @@ export const Toggle = (props) => {
                                     ...item,
                                     context: props?.context,
                                     id: item.value,
-                                    checked: localState?.[item.value] ? value : !!localState?.[item.value],
+                                    checked: typeof localState[item.value] === 'undefined' ? true : (localState?.[item.value] ? value : !!localState?.[item.value]),
                                     type: 'checkbox',
                                     onChange: handleChange,
                                     style: styles

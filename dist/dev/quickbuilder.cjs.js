@@ -2824,7 +2824,7 @@ var Toggle = function Toggle(props) {
       }, React.createElement(GenericToggle$1, _objectSpread$1(_objectSpread$1({}, item), {}, {
         context: props === null || props === void 0 ? void 0 : props.context,
         id: item.value,
-        checked: localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
+        checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
         type: 'checkbox',
         onChange: handleChange,
         style: styles

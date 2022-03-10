@@ -19,21 +19,32 @@ const useDefaults = ( parentName, helpers, value, trigger : any ) => {
                     }
                 }
             }
-            else if( defaults?.[ value ] && (isArray(defaults?.[ value ]) || isObject(defaults?.[ value ])) ) {
-                for( let eachKey of Object.values<string>(defaults?.[ value ]) ) {
-                    let at = eachKey.indexOf("@"),
-                        colon = eachKey.indexOf(":");
-                    if (at === 0 && colon > 0) {
-                        let eligibleKey:any = eachKey.substr(1, colon - 1);
-                        let eligibleDataToSet:any = eachKey.substr(colon + 1);
-                        if( eachKey.indexOf(".") > -1 ) {
-                            eligibleKey = eligibleKey.split('.')
+            else if( defaults?.[ value ] && (isArray(defaults[ value ]) || isObject(defaults[ value ])) ) {
+                for( let property in defaults[ value ] ) {
+                    let eachKey = defaults[ value ][property];
+                    if( eachKey && (isArray(eachKey) || isObject(eachKey))){
+                        let eligibleDefaultData = helpers.getValueForDefault( property, parentName );
+                        if (property != "" && eachKey != "") {
+                            eachKey = eachKey === 'false' ? false : eachKey;
+                            defaultsData[property] = eligibleDefaultData ? eligibleDefaultData : eachKey;
+                            helpers.setValue( property, eligibleDefaultData ? eligibleDefaultData : eachKey);
                         }
-                        let eligibleDefaultData = helpers.getValueForDefault( eligibleKey, parentName );
-                        if (eligibleKey != "" && eligibleDataToSet != "") {
-                            eligibleDataToSet = eligibleDataToSet === 'false' ? false : eligibleDataToSet;
-                            defaultsData[eligibleKey] = eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet;
-                            helpers.setValue( eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet);
+                    }
+                    else if(eachKey) {
+                        let at = eachKey.indexOf("@"),
+                            colon = eachKey.indexOf(":");
+                        if (at === 0 && colon > 0) {
+                            let eligibleKey:any = eachKey.substr(1, colon - 1);
+                            let eligibleDataToSet:any = eachKey.substr(colon + 1);
+                            if( eachKey.indexOf(".") > -1 ) {
+                                eligibleKey = eligibleKey.split('.')
+                            }
+                            let eligibleDefaultData = helpers.getValueForDefault( eligibleKey, parentName );
+                            if (eligibleKey != "" && eligibleDataToSet != "") {
+                                eligibleDataToSet = eligibleDataToSet === 'false' ? false : eligibleDataToSet;
+                                defaultsData[eligibleKey] = eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet;
+                                helpers.setValue( eligibleKey, eligibleDefaultData ? eligibleDefaultData : eligibleDataToSet);
+                            }
                         }
                     }
                 }

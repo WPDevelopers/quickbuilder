@@ -3,22 +3,22 @@ import { withLabel } from '../core/hooks';
 import { isString, validFieldProps } from '../core/utils';
 
 const Input = (props) => {
-    const validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge']);
-    const handleChange = useCallback((event) => validProps.onChange(event, { isPro: !!props.is_pro }), [validProps?.value]);
+	const validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+	const handleChange = useCallback((event) => validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro }), [validProps?.value]);
 
-    if (validProps.type === 'checkbox') {
-        if (validProps?.name) {
-            validProps.checked = validProps?.checked || validProps?.value;
-        }
-    }
+	if (validProps.type === 'checkbox') {
+		if (validProps?.name) {
+			validProps.checked = validProps?.checked || validProps?.value;
+		}
+	}
 
-    return React.createElement('input', {
-        ...validProps, onChange: handleChange
-    })
+	return React.createElement('input', {
+		...validProps, onChange: handleChange
+	})
 }
 
 Input.defaultProps = {
-    type: 'text'
+	type: 'text'
 }
 
 export const GenericInput = React.memo(Input);

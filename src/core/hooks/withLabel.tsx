@@ -58,12 +58,14 @@ const withLabel = (WrappedComponent) => {
 			}
 		);
 
+
 		return (
 			<div className={componentClasses}>
 				{is_pro == true && (
 					<>
 						<Badge
 							{...badge}
+							{...rest}
 							renderLabel={(badge, position) => (
 								<ControlLabel
 									{...validProps}

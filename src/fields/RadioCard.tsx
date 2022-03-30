@@ -30,6 +30,8 @@ const RadioCard = (props) => {
     const styles = { ...props?.style };
     const validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
 
+
+
     useEffect(() => {
         if (option) {
             props.onChange({
@@ -73,6 +75,7 @@ const RadioCard = (props) => {
                                     {label}
                                 </Label>
                                 <GenericInput
+                                    {...rest}
                                     {...validProps}
                                     is_pro={is_pro}
                                     type="radio"

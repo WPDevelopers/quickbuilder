@@ -1450,7 +1450,11 @@ var useBuilder = function useBuilder(props) {
       executeBlur(eventOrString);
     }
   });
-  var executeChange$1 = useCallback(function (eventOrTextValue, maybePath) {
+  var executeChange$1 = useCallback(function (eventOrTextValue, maybePath, validProps) {
+    if (validProps !== null && validProps !== void 0 && validProps.isPro && Boolean(state.is_pro_active) === false) {
+      return;
+    }
+
     var _eChange = executeChange(eventOrTextValue, maybePath),
         field = _eChange.field,
         value = _eChange.val;
@@ -1463,16 +1467,15 @@ var useBuilder = function useBuilder(props) {
     if (validProps !== null && validProps !== void 0 && validProps.isPro && Boolean(state.is_pro_active) === false) {
       var _state$alerts, _state$alerts$pro_ale;
 
-      (_state$alerts = state.alerts) === null || _state$alerts === void 0 ? void 0 : (_state$alerts$pro_ale = _state$alerts.pro_alert) === null || _state$alerts$pro_ale === void 0 ? void 0 : _state$alerts$pro_ale.fire();
-      return false;
+      (_state$alerts = state.alerts) === null || _state$alerts === void 0 ? void 0 : (_state$alerts$pro_ale = _state$alerts.pro_alert(validProps === null || validProps === void 0 ? void 0 : validProps.popup)) === null || _state$alerts$pro_ale === void 0 ? void 0 : _state$alerts$pro_ale.fire(); // return false;
     }
 
     if (typeof eventOrString === 'string') {
       return function (event) {
-        return executeChange$1(eventOrString, event);
+        return executeChange$1(eventOrString, event, validProps);
       };
     } else {
-      executeChange$1(eventOrString);
+      executeChange$1(eventOrString, null, validProps);
     }
   });
   var getFieldProps = useCallback(function (args) {
@@ -1811,7 +1814,7 @@ var Badge = function Badge(props) {
     componentProps = {
       onClick: function onClick(e) {
         e.preventDefault();
-        builderContext.alerts.pro_alert.fire();
+        builderContext.alerts.pro_alert(props === null || props === void 0 ? void 0 : props.popup).fire();
       }
     };
   }
@@ -1928,7 +1931,7 @@ var withLabel = function withLabel(WrappedComponent) {
     var componentClasses = classNames("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
     return createElement("div", {
       className: componentClasses
-    }, is_pro == true && createElement(Fragment, null, createElement(Badge, _extends$1({}, badge, {
+    }, is_pro == true && createElement(Fragment, null, createElement(Badge, _extends$1({}, badge, rest, {
       renderLabel: function renderLabel(badge, position) {
         return createElement(ControlLabel, _extends$1({}, validProps, {
           context: rest === null || rest === void 0 ? void 0 : rest.context,
@@ -2205,9 +2208,10 @@ function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if 
 function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var Input = function Input(props) {
-  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge']);
+  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
   var handleChange = useCallback(function (event) {
     return validProps.onChange(event, {
+      popup: props === null || props === void 0 ? void 0 : props.popup,
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
@@ -2891,7 +2895,7 @@ var RadioCard = function RadioCard(props) {
         value: is_pro,
         active: Boolean(builderContext.is_pro_active)
       }
-    }, label), createElement(GenericInput, _extends$1({}, validProps, {
+    }, label), createElement(GenericInput, _extends$1({}, rest, validProps, {
       is_pro: is_pro,
       type: "radio",
       value: value,

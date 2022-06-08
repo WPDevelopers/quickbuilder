@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import { useBuilderContext } from '../core/hooks';
 import { RepeaterField } from './helpers';
 import { executeChange } from '../core/utils';
+import { ReactSortable } from "react-sortablejs";
 
 
 const Repeater = (props) => {
@@ -20,6 +21,10 @@ const Repeater = (props) => {
         }
     }, [builderContext.values?.[fieldName]])
 
+
+    const handleSort = (value) => {
+        builderContext.setFieldValue(fieldName, value);
+    }
 
     const handleChange = (event, index) => {
         if (event.persist) {
@@ -51,7 +56,7 @@ const Repeater = (props) => {
 
     return (
         <div className="wprf-repeater-control">
-            <div className="wprf-repeater-content">
+            <ReactSortable className="wprf-repeater-content" list={localMemoizedValue || [{}]} setList={handleSort}>
                 {
                     localMemoizedValue && localMemoizedValue?.length > 0 && localMemoizedValue.map((value, index) => {
                         return <RepeaterField
@@ -66,7 +71,7 @@ const Repeater = (props) => {
                         />
                     })
                 }
-            </div>
+            </ReactSortable>
             <div className="wprf-repeater-label">
                 <button className="wprf-repeater-button"
                     onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {}])}>

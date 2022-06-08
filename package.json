@@ -71,7 +71,9 @@
     "react-bootstrap-sweetalert": "^5.2.0",
     "react-draft-wysiwyg": "^1.14.7",
     "react-select": "^4.3.1",
+    "react-sortablejs": "^6.1.4",
     "rollup": "^2.56.3",
+    "sortablejs": "^1.15.0",
     "sweetalert2": "11.4.8"
   },
   "peerDependencies": {

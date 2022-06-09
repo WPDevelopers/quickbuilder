@@ -1221,7 +1221,8 @@ button.wprf-btn {
     align-items: center; }
     .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title h4 {
       margin: 0;
-      flex-basis: 100%; }
+      flex-basis: 100%;
+      cursor: grab; }
     .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title .wprf-repeater-field-controls {
       align-self: flex-end;
       display: flex; }
@@ -1235,6 +1236,9 @@ button.wprf-btn {
     padding: 20px;
     background-color: #fff;
     border: 1px solid #f2f2f2; }
+
+.wprf-repeater-control .wprf-repeater-content .wprf-repeater-field.sortable-chosen .wprf-repeater-field-title h4 {
+  cursor: grabbing; }
 
 .wprf-toggle-wrap {
   display: flex;

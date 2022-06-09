@@ -2,17 +2,21 @@ import React, { useState } from 'react'
 import { Icon } from '@wordpress/components';
 import { GenericField } from '../index';
 import { useInstanceId } from "@wordpress/compose";
+import { useBuilderContext } from '../../core/hooks';
 
 const RepeaterField = (props) => {
+    const builderContext = useBuilderContext();
     const { fields, onChange, index, parent } = props;
     const [isCollapse, setIsCollapse] = useState(props.isOpen);
     const instanceId = useInstanceId(RepeaterField);
     // onClick={() => setIsCollapse(!isCollapse)}
+    const values = builderContext.values?.[parent]?.[index];
+    const title = values?.title || values?.post_title || values?.username || values?.plugin_theme_name;
+
     return (
         <div className="wprf-repeater-field">
             <div className="wprf-repeater-field-title" onClick={() => setIsCollapse(!isCollapse)} >
-                <Icon icon="sort" />
-                <h4>{'\u00A0'}{'\u00A0'}#ID: {props.index}</h4>
+                <h4><Icon icon="sort" />{'\u00A0'}{'\u00A0'}#ID: {props.index} {title ? `(${title})` : ''}</h4>
                 <div className="wprf-repeater-field-controls">
                     <Icon onClick={() => props.clone(props.index)} icon="admin-page" />
                     <Icon onClick={() => props.remove(props.index)} icon="trash" />

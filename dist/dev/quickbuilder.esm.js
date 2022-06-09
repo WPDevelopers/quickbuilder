@@ -508,7 +508,7 @@ var processCondition = function processCondition(condition, data) {
   return logicalRules[condition.toLowerCase()](data);
 };
 
-var validate = function validate(conditions, data) {
+var validate$1 = function validate(conditions, data) {
   if (!isValidCondition(conditions)) {
     return processRule(conditions, data);
   }
@@ -530,7 +530,7 @@ var when = function when(conditions, data) {
     return Promise.resolve(conditions(data));
   }
 
-  return validate(conditions, data);
+  return validate$1(conditions, data);
 };
 
 function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -2607,6 +2607,9 @@ function getAugmentedNamespace(n) {
 }
 
 var RepeaterField = function RepeaterField(props) {
+  var _builderContext$value, _builderContext$value2;
+
+  var builderContext = useBuilderContext();
   var fields = props.fields,
       _onChange = props.onChange,
       index = props.index,
@@ -2619,6 +2622,8 @@ var RepeaterField = function RepeaterField(props) {
 
   var instanceId = useInstanceId(RepeaterField); // onClick={() => setIsCollapse(!isCollapse)}
 
+  var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : (_builderContext$value2 = _builderContext$value[parent]) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[index];
+  var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
   return createElement("div", {
     className: "wprf-repeater-field"
   }, createElement("div", {
@@ -2626,9 +2631,9 @@ var RepeaterField = function RepeaterField(props) {
     onClick: function onClick() {
       return setIsCollapse(!isCollapse);
     }
-  }, createElement(Icon, {
+  }, createElement("h4", null, createElement(Icon, {
     icon: "sort"
-  }), createElement("h4", null, "\xA0", "\xA0", "#ID: ", props.index), createElement("div", {
+  }), "\xA0", "\xA0", "#ID: ", props.index, " ", title ? "(".concat(title, ")") : ''), createElement("div", {
     className: "wprf-repeater-field-controls"
   }, createElement(Icon, {
     onClick: function onClick() {
@@ -7217,6 +7222,80 @@ $parcel$exportWildcard(module.exports, $faefaad95e5fcca0$exports);
 
 }(dist));
 
+// Unique ID creation requires a high quality random # generator. In the browser we therefore
+// require the crypto API and do not support built-in fallback to lower quality random number
+// generators (like Math.random()).
+var getRandomValues;
+var rnds8 = new Uint8Array(16);
+function rng() {
+  // lazy load so that environments that need to polyfill have a chance to do so
+  if (!getRandomValues) {
+    // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation. Also,
+    // find the complete implementation of crypto (msCrypto) on IE11.
+    getRandomValues = typeof crypto !== 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== 'undefined' && typeof msCrypto.getRandomValues === 'function' && msCrypto.getRandomValues.bind(msCrypto);
+
+    if (!getRandomValues) {
+      throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+    }
+  }
+
+  return getRandomValues(rnds8);
+}
+
+var REGEX = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
+
+function validate(uuid) {
+  return typeof uuid === 'string' && REGEX.test(uuid);
+}
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+
+var byteToHex = [];
+
+for (var i = 0; i < 256; ++i) {
+  byteToHex.push((i + 0x100).toString(16).substr(1));
+}
+
+function stringify(arr) {
+  var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  // Note: Be careful editing this code!  It's been tuned for performance
+  // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+  var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
+  // of the following:
+  // - One or more input array values don't map to a hex octet (leading to
+  // "undefined" in the uuid)
+  // - Invalid input values for the RFC `version` or `variant` fields
+
+  if (!validate(uuid)) {
+    throw TypeError('Stringified UUID is invalid');
+  }
+
+  return uuid;
+}
+
+function v4(options, buf, offset) {
+  options = options || {};
+  var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    offset = offset || 0;
+
+    for (var i = 0; i < 16; ++i) {
+      buf[offset + i] = rnds[i];
+    }
+
+    return buf;
+  }
+
+  return stringify(rnds);
+}
+
 var Repeater = function Repeater(props) {
   var _builderContext$value, _builderContext$value4;
 
@@ -7246,6 +7325,7 @@ var Repeater = function Repeater(props) {
   }, [(_builderContext$value4 = builderContext.values) === null || _builderContext$value4 === void 0 ? void 0 : _builderContext$value4[fieldName]]);
 
   var handleSort = function handleSort(value) {
+    console.log(localMemoizedValue);
     builderContext.setFieldValue(fieldName, value);
   };
 
@@ -7277,19 +7357,21 @@ var Repeater = function Repeater(props) {
   }, [localMemoizedValue]);
   useEffect(function () {
     if (localMemoizedValue == undefined) {
-      setLocalMemoizedValue([{}]);
+      setLocalMemoizedValue([{
+        'index': v4()
+      }]);
     }
   }, []);
   return createElement("div", {
     className: "wprf-repeater-control"
-  }, createElement(dist.exports.ReactSortable, {
+  }, localMemoizedValue && (localMemoizedValue === null || localMemoizedValue === void 0 ? void 0 : localMemoizedValue.length) > 0 && createElement(dist.exports.ReactSortable, {
     className: "wprf-repeater-content",
-    list: localMemoizedValue || [{}],
+    list: localMemoizedValue,
     setList: handleSort
-  }, localMemoizedValue && (localMemoizedValue === null || localMemoizedValue === void 0 ? void 0 : localMemoizedValue.length) > 0 && localMemoizedValue.map(function (value, index) {
+  }, localMemoizedValue.map(function (value, index) {
     return createElement(RepeaterField, {
       isOpen: true,
-      key: index,
+      key: (value === null || value === void 0 ? void 0 : value.index) || index,
       fields: fields,
       index: index,
       parent: fieldName,
@@ -7304,7 +7386,9 @@ var Repeater = function Repeater(props) {
   }, createElement("button", {
     className: "wprf-repeater-button",
     onClick: function onClick() {
-      return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray$1(localMemoizedValue), [{}]));
+      return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray$1(localMemoizedValue), [{
+        'index': v4()
+      }]));
     }
   }, button === null || button === void 0 ? void 0 : button.label)));
 };

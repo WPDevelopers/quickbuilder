@@ -3,6 +3,7 @@ import { useBuilderContext } from '../core/hooks';
 import { RepeaterField } from './helpers';
 import { executeChange } from '../core/utils';
 import { ReactSortable } from "react-sortablejs";
+import { v4 } from "uuid";
 
 
 const Repeater = (props) => {
@@ -50,18 +51,20 @@ const Repeater = (props) => {
 
     useEffect(() => {
         if (localMemoizedValue == undefined) {
-            setLocalMemoizedValue([{}]);
+            setLocalMemoizedValue([{'index': v4()}]);
         }
     }, [])
 
     return (
         <div className="wprf-repeater-control">
-            <ReactSortable className="wprf-repeater-content" list={localMemoizedValue || [{}]} setList={handleSort}>
+            {
+            localMemoizedValue && localMemoizedValue?.length > 0 &&
+            <ReactSortable className="wprf-repeater-content" list={localMemoizedValue} setList={handleSort}>
                 {
-                    localMemoizedValue && localMemoizedValue?.length > 0 && localMemoizedValue.map((value, index) => {
+                    localMemoizedValue.map((value, index) => {
                         return <RepeaterField
                             isOpen={true}
-                            key={index}
+                            key={value?.index || index}
                             fields={fields}
                             index={index}
                             parent={fieldName}
@@ -72,9 +75,10 @@ const Repeater = (props) => {
                     })
                 }
             </ReactSortable>
+            }
             <div className="wprf-repeater-label">
                 <button className="wprf-repeater-button"
-                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {}])}>
+                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {'index': v4()}])}>
                     {button?.label}
                 </button>
             </div>

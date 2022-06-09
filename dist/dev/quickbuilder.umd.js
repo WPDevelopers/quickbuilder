@@ -7323,7 +7323,6 @@ Please read the updated README.md at https://github.com/SortableJS/react-sortabl
     }, [(_builderContext$value4 = builderContext.values) === null || _builderContext$value4 === void 0 ? void 0 : _builderContext$value4[fieldName]]);
 
     var handleSort = function handleSort(value) {
-      console.log(localMemoizedValue);
       builderContext.setFieldValue(fieldName, value);
     };
 

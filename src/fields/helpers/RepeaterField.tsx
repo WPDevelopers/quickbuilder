@@ -11,7 +11,8 @@ const RepeaterField = (props) => {
     return (
         <div className="wprf-repeater-field">
             <div className="wprf-repeater-field-title" onClick={() => setIsCollapse(!isCollapse)} >
-                <h4>#ID: {props.index}</h4>
+                <Icon icon="sort" />
+                <h4>{'\u00A0'}{'\u00A0'}#ID: {props.index}</h4>
                 <div className="wprf-repeater-field-controls">
                     <Icon onClick={() => props.clone(props.index)} icon="admin-page" />
                     <Icon onClick={() => props.remove(props.index)} icon="trash" />

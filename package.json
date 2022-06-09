@@ -15,7 +15,7 @@
   "scripts": {
     "start": "rollup -c -w --environment NODE_ENV:development",
     "predev": "rimraf dist/dev",
-    "dev": "rollup -c --watch --environment NODE_ENV:development",
+    "dev": "rollup -c --environment NODE_ENV:development",
     "prepkg": "rimraf dist/src",
     "pkg": "rollup -c --environment NODE_ENV:production",
     "build": "npm run dev && npm run pkg",

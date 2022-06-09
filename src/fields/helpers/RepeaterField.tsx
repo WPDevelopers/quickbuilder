@@ -12,11 +12,11 @@ const RepeaterField = (props) => {
     // onClick={() => setIsCollapse(!isCollapse)}
     const values = builderContext.values?.[parent]?.[index];
     const title = values?.title || values?.post_title || values?.username || values?.plugin_theme_name;
-
+    const _title = title ? ('(' + (title.length < 20 ? title : title.substr(0, 30) + "...") + ')') : '';
     return (
         <div className="wprf-repeater-field">
             <div className="wprf-repeater-field-title" onClick={() => setIsCollapse(!isCollapse)} >
-                <h4><Icon icon="sort" />{'\u00A0'}{'\u00A0'}#ID: {props.index} {title ? `(${title})` : ''}</h4>
+                <h4><Icon icon="sort" />{'\u00A0'}{'\u00A0'}#ID: {props.index} {_title}</h4>
                 <div className="wprf-repeater-field-controls">
                     <Icon onClick={() => props.clone(props.index)} icon="admin-page" />
                     <Icon onClick={() => props.remove(props.index)} icon="trash" />

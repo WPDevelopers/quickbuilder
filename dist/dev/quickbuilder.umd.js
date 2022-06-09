@@ -2622,6 +2622,9 @@
 
     var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : (_builderContext$value2 = _builderContext$value[parent]) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[index];
     var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
+
+    var _title = title ? '(' + (title.length < 20 ? title : title.substr(0, 30) + "...") + ')' : '';
+
     return React.createElement("div", {
       className: "wprf-repeater-field"
     }, React.createElement("div", {
@@ -2631,7 +2634,7 @@
       }
     }, React.createElement("h4", null, React.createElement(components.Icon, {
       icon: "sort"
-    }), "\xA0", "\xA0", "#ID: ", props.index, " ", title ? "(".concat(title, ")") : ''), React.createElement("div", {
+    }), "\xA0", "\xA0", "#ID: ", props.index, " ", _title), React.createElement("div", {
       className: "wprf-repeater-field-controls"
     }, React.createElement(components.Icon, {
       onClick: function onClick() {

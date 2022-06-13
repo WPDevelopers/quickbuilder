@@ -1223,7 +1223,19 @@ button.wprf-btn {
       margin: 0;
       flex-basis: 100%;
       cursor: grab;
-      color: #3D4F7F; }
+      color: #3D4F7F;
+      line-height: 18px; }
+      .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title h4 .dashicon,
+      .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title h4 .icon,
+      .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title h4 svg {
+        font-size: 18px;
+        height: 18px;
+        line-height: 18px;
+        width: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 5px; }
     .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title .wprf-repeater-field-controls {
       align-self: flex-end;
       display: flex; }

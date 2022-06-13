@@ -17,6 +17,19 @@
                     flex-basis: 100%;
                     cursor: grab;
                     color: #3D4F7F;
+                    line-height: 18px;
+                    .dashicon,
+                    .icon,
+                    svg {
+                        font-size: 18px;
+                        height: 18px;
+                        line-height: 18px;
+                        width: 18px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 5px;
+                    }
                 }
                 .wprf-repeater-field-controls {
                     align-self: flex-end;

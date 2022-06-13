@@ -2625,7 +2625,7 @@ var RepeaterField = function RepeaterField(props) {
   var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : (_builderContext$value2 = _builderContext$value[parent]) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[index];
   var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
 
-  var _title = title ? title.length < 20 ? title : title.substr(0, 40) + "..." : '';
+  var _title = title ? title.length < 40 ? title : title.substr(0, 40) + "..." : '';
 
   var onClone = function onClone(event) {
     event === null || event === void 0 ? void 0 : event.stopPropagation();
@@ -2649,7 +2649,7 @@ var RepeaterField = function RepeaterField(props) {
     }
   }, createElement("h4", null, createElement(Icon, {
     icon: "move"
-  }), "\xA0", "\xA0", props.index + 1, ":  ", _title), createElement("div", {
+  }), props.index + 1, ":", _title), createElement("div", {
     className: "wprf-repeater-field-controls"
   }, createElement(Icon, {
     onClick: onClone,
@@ -7353,7 +7353,6 @@ var Repeater = function Repeater(props) {
         field = _executeChange.field,
         value = _executeChange.val;
 
-    console.log(index, field);
     builderContext.setFieldValue([fieldName, index, field], value);
   };
 

@@ -12,7 +12,7 @@ const RepeaterField = (props) => {
     // onClick={() => setIsCollapse(!isCollapse)}
     const values = builderContext.values?.[parent]?.[index];
     const title = values?.title || values?.post_title || values?.username || values?.plugin_theme_name;
-    const _title = title ? ((title.length < 20 ? title : title.substr(0, 40) + "...")) : '';
+    const _title = title ? ((title.length < 40 ? title : title.substr(0, 40) + "...")) : '';
 
     const onClone = (event:Event) => {
         event?.stopPropagation();
@@ -31,7 +31,7 @@ const RepeaterField = (props) => {
     return (
         <div className="wprf-repeater-field">
             <div className="wprf-repeater-field-title" onClick={() => setIsCollapsed(!isCollapsed)} >
-                <h4><Icon icon="move" />{'\u00A0'}{'\u00A0'}{props.index+1}:  {_title}</h4>
+                <h4><Icon icon="move"/>{props.index+1}:{_title}</h4>
                 <div className="wprf-repeater-field-controls">
                     <Icon onClick={onClone} icon="admin-page" />
                     <Icon onClick={onDelete} icon="trash" />

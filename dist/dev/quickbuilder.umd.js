@@ -2647,7 +2647,7 @@
       }
     }, React.createElement("h4", null, React.createElement(components.Icon, {
       icon: "move"
-    }), props.index + 1, ":", _title), React.createElement("div", {
+    }), props.index + 1, ": ", _title), React.createElement("div", {
       className: "wprf-repeater-field-controls"
     }, React.createElement(components.Icon, {
       onClick: onClone,

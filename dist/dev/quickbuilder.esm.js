@@ -2649,7 +2649,7 @@ var RepeaterField = function RepeaterField(props) {
     }
   }, createElement("h4", null, createElement(Icon, {
     icon: "move"
-  }), props.index + 1, ":", _title), createElement("div", {
+  }), props.index + 1, ": ", _title), createElement("div", {
     className: "wprf-repeater-field-controls"
   }, createElement(Icon, {
     onClick: onClone,

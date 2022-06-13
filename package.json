@@ -36,6 +36,7 @@
     "@types/lodash-es": "^4.17.4",
     "@types/react": "^17.0.18",
     "@types/react-select": "^4.0.17",
+    "@types/sortablejs": "^1.13.0",
     "@types/wordpress__components": "^14.0.3",
     "@types/wordpress__date": "^3.3.2",
     "@types/wordpress__media-utils": "^2.0.1",

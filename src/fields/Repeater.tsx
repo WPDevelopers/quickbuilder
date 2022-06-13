@@ -44,14 +44,32 @@ const Repeater = (props) => {
     const handleClone = useCallback((index) => {
         let lValue = [...localMemoizedValue];
         if (lValue.length > 0) {
-            const indexedCopy = lValue?.[index] || {};
+            let indexedCopy = lValue?.[index] || {};
+            if(indexedCopy?.title){
+                indexedCopy = {...indexedCopy, title: (indexedCopy.title + ' - Copy')}
+            }
+            if(indexedCopy?.post_title){
+                indexedCopy = {...indexedCopy, post_title: (indexedCopy.post_title + ' - Copy')}
+            }
+            if(indexedCopy?.username){
+                indexedCopy = {...indexedCopy, username: (indexedCopy.username + ' - Copy')}
+            }
+            if(indexedCopy?.plugin_theme_name){
+                indexedCopy = {...indexedCopy, plugin_theme_name: (indexedCopy.plugin_theme_name + ' - Copy')}
+            }
+            indexedCopy = {...indexedCopy, index: v4(), isCollapsed: false};
             builderContext.setFieldValue([fieldName, localMemoizedValue.length], indexedCopy);
         }
     }, [localMemoizedValue])
 
     useEffect(() => {
         if (localMemoizedValue == undefined) {
-            setLocalMemoizedValue([{'index': v4()}]);
+            setLocalMemoizedValue([{index: v4()}]);
+        }
+        else{
+            setLocalMemoizedValue((items) => items.map((item) => {
+                return {...item, index: v4()};
+            }))
         }
     }, [])
 
@@ -59,11 +77,11 @@ const Repeater = (props) => {
         <div className="wprf-repeater-control">
             {
             localMemoizedValue && localMemoizedValue?.length > 0 &&
-            <ReactSortable className="wprf-repeater-content" list={localMemoizedValue} setList={handleSort}>
+            <ReactSortable className="wprf-repeater-content" list={localMemoizedValue} setList={handleSort} handle={'.wprf-repeater-field-title'} filter={'.wprf-repeater-field-controls'} forceFallback={true}>
                 {
                     localMemoizedValue.map((value, index) => {
                         return <RepeaterField
-                            isOpen={true}
+                            isCollapsed={value?.isCollapsed}
                             key={value?.index || index}
                             fields={fields}
                             index={index}
@@ -78,7 +96,7 @@ const Repeater = (props) => {
             }
             <div className="wprf-repeater-label">
                 <button className="wprf-repeater-button"
-                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {'index': v4()}])}>
+                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {index: v4()}])}>
                     {button?.label}
                 </button>
             </div>

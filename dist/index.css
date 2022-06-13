@@ -1222,7 +1222,8 @@ button.wprf-btn {
     .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title h4 {
       margin: 0;
       flex-basis: 100%;
-      cursor: grab; }
+      cursor: grab;
+      color: #3D4F7F; }
     .wprf-repeater-control .wprf-repeater-content .wprf-repeater-field .wprf-repeater-field-title .wprf-repeater-field-controls {
       align-self: flex-end;
       display: flex; }

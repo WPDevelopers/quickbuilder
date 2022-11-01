@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
 import { __ } from "@wordpress/i18n";

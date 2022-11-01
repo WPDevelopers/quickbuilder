@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { withLabel } from '../core/hooks';
-import { isString, validFieldProps } from '../core/utils';
+import { validFieldProps } from '../core/utils';
 
 const Input = (props) => {
 	const validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);

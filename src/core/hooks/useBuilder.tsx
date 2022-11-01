@@ -1,11 +1,10 @@
 import { useEffect, useReducer, useRef, useCallback, useLayoutEffect } from "react";
 import { builderReducer, when } from '../index'
-import { SweetAlert } from "../functions";
 import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, getTime, sortingFields } from "../utils";
 
 const useBuilder = (props) => {
 	// Set is Mounted or NOT
-	const isMounted = useRef(null);
+	const isMounted = useRef(false);
 	useEffect(() => {
 		isMounted.current = true;
 		return () => { isMounted.current = false };

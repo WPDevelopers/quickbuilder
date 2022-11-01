@@ -1,5 +1,11 @@
 const path = require("path");
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
+const MiniCSSExtractPlugin = require( 'mini-css-extract-plugin' );
+
+const plugins = defaultConfig.plugins.filter(
+    (plugin) =>
+        plugin.constructor.name != "MiniCssExtractPlugin"
+);
 
 module.exports = {
 	...defaultConfig,
@@ -33,4 +39,20 @@ module.exports = {
 		// library: ["wp", "quickbuilder"],
 		// libraryTarget: "window",
 	},
+    plugins: [
+        new CleanWebpackPlugin({
+            // dry: true,
+            cleanOnceBeforeBuildPatterns: [
+                "admin/css/admin.css",
+                "admin/css/admin.css.map",
+                "admin/js/admin.js",
+                "admin/js/admin.js.map",
+                "admin/js/admin.asset.php",
+            ],
+        }),
+        new MiniCSSExtractPlugin({
+            filename: `admin/css/admin.css`,
+        }),
+        ...plugins,
+    ],
 };

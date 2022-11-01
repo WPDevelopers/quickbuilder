@@ -72,7 +72,7 @@ const store = {
             }
             case "FIELD_VALUE": {
                 let updatedState = { ...state };
-                const { payload, name } = action;
+                const { payload } = action;
                 updatedState = {
                     ...updatedState,
                     values: { ...updatedState?.values, ...payload },

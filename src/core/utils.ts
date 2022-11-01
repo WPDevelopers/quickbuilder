@@ -96,7 +96,6 @@ export const executeChange = (eventOrTextValue, maybePath?) =>  {
                 name = target.name,
                 value = target.value,
                 checked = target.checked,
-                options = target.options,
                 multiple = target.multiple;
 
 
@@ -252,7 +251,12 @@ export const merge = (array_one: Array<object>, array_two: Array<object>, key: s
     //     return { ...array_one, ...array_two }
     // }
     const data = [...array_one];
-    const _array_two = array_two.filter((element: any) => data.findIndex((_element: any) => _element[key] === element[key]) <= -1);
+    const _array_two = array_two.filter(
+        (element: any) =>
+            data.findIndex(
+                (_element: any) =>
+                    _element[key] === element[key]) <= -1
+        );
     return [...data, ..._array_two];
 }
 

@@ -4,6 +4,7 @@ import { DateTimePicker, Dropdown, Button } from "@wordpress/components";
 import { __experimentalGetSettings, date } from "@wordpress/date";
 import { withLabel } from "../core/hooks";
 import { getTime } from "../core/utils";
+import moment from "moment";
 
 const DateControl = (props) => {
     const { name, value, onChange, position } = props;
@@ -55,7 +56,7 @@ const DateControl = (props) => {
                                 target: {
                                     type: 'date',
                                     name,
-                                    value: getTime(date, true),
+                                    value: moment(date).utc().format(),
                                 },
                             });
                         }}

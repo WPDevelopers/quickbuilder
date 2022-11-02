@@ -1963,7 +1963,7 @@ var DateControl = function DateControl(props) {
             target: {
               type: 'date',
               name: name,
-              value: getTime(date, true)
+              value: moment__default["default"](date).utc().format()
             }
           });
         },

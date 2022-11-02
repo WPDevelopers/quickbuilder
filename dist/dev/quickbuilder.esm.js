@@ -1931,7 +1931,7 @@ var DateControl = function DateControl(props) {
       return createElement(Button$2, {
         isTertiary: true,
         onClick: onToggle
-      }, date(format, _value, undefined));
+      }, date(format, _value, -new Date().getTimezoneOffset()));
     },
     renderContent: function renderContent() {
       return createElement(DateTimePicker

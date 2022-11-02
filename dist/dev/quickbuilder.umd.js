@@ -1929,7 +1929,7 @@
         return React.createElement(components.Button, {
           isTertiary: true,
           onClick: onToggle
-        }, date.date(format, _value, undefined));
+        }, date.date(format, _value, -new Date().getTimezoneOffset()));
       },
       renderContent: function renderContent() {
         return React.createElement(components.DateTimePicker

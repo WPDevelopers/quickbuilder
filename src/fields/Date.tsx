@@ -42,7 +42,7 @@ const DateControl = (props) => {
             position={position ? position : "bottom right"}
             renderToggle={({ isOpen, onToggle }) => (<Button isTertiary onClick={onToggle}>
                 {/* @ts-ignore */}
-                {date(format, _value, undefined)}
+                {date(format, _value, -(new Date).getTimezoneOffset())}
             </Button>)}
             renderContent={() => {
                 return (

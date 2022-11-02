@@ -391,6 +391,8 @@ button.wprf-btn {
  */
 .wprf-control-datetime {
   position: relative; }
+  .wprf-control-datetime .wprf-control-datetime-content {
+    z-index: 1; }
   .wprf-control-datetime .components-button.is-tertiary {
     background-color: #f2f2f2;
     border: none;
@@ -1101,6 +1103,8 @@ button.wprf-btn {
     .wprf-control-datetime .components-datetime .components-datetime__date {
       min-height: 236px;
       border-top: 1px solid #ddd; }
+      .wprf-control-datetime .components-datetime .components-datetime__date button {
+        border: none; }
       .wprf-control-datetime .components-datetime .components-datetime__date .DayPickerNavigation_leftButton__horizontalDefault {
         left: 0; }
       .wprf-control-datetime .components-datetime .components-datetime__date .CalendarMonth_caption {
@@ -2794,3 +2798,5 @@ button.wprf-btn {
   counter-reset: ol4; }
 
 /*# sourceMappingURL=react-draft-wysiwyg.css.map*/
+
+/*# sourceMappingURL=index.css.map */

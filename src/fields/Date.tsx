@@ -6,7 +6,7 @@ import { withLabel } from "../core/hooks";
 import { getTime } from "../core/utils";
 
 const DateControl = (props) => {
-    const { name, value, onChange } = props;
+    const { name, value, onChange, position } = props;
 
     const settings: any = __experimentalGetSettings();
     const format = props?.format ?? settings.formats.datetime;
@@ -37,6 +37,8 @@ const DateControl = (props) => {
     return (
         <Dropdown
             className="wprf-control-datetime"
+            contentClassName="wprf-control-datetime-content"
+            position={position ? position : "bottom right"}
             renderToggle={({ isOpen, onToggle }) => (<Button isTertiary onClick={onToggle}>
                 {/* @ts-ignore */}
                 {date(format, _value, undefined)}

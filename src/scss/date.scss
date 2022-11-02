@@ -5,6 +5,9 @@
 
 .wprf-control-datetime {
     position: relative;
+		.wprf-control-datetime-content {
+			z-index: 1;
+		}
 
 	.components-button.is-tertiary {
 		background-color: #f2f2f2;
@@ -886,6 +889,9 @@
 		.components-datetime__date {
 			min-height: 236px;
 			border-top: 1px solid $gray-300;
+			button {
+				border: none;
+			}
 
 			// Override external DatePicker styles.
 			.DayPickerNavigation_leftButton__horizontalDefault {

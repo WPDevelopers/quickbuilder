@@ -1903,7 +1903,8 @@ var DateControl = function DateControl(props) {
   var _props$format;
   var name = props.name,
     value = props.value,
-    _onChange = props.onChange;
+    _onChange = props.onChange,
+    position = props.position;
   var settings = __experimentalGetSettings();
   var format = (_props$format = props === null || props === void 0 ? void 0 : props.format) !== null && _props$format !== void 0 ? _props$format : settings.formats.datetime;
   var _value = getTime(value);
@@ -1922,6 +1923,8 @@ var DateControl = function DateControl(props) {
   }, []);
   return createElement(Dropdown, {
     className: "wprf-control-datetime",
+    contentClassName: "wprf-control-datetime-content",
+    position: position ? position : "bottom right",
     renderToggle: function renderToggle(_ref) {
       _ref.isOpen;
         var onToggle = _ref.onToggle;

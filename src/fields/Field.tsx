@@ -21,6 +21,7 @@ import {
 	Textarea,
 	CodeViewer,
 	JsonUploader,
+	SelectAsync,
 } from ".";
 
 import { withProps } from "../core/hooks";
@@ -50,6 +51,8 @@ const Field = (props) => {
 			return <Message {...props} />;
 		case "select":
 			return <Select {...props} />;
+		case "select-async":
+			return <SelectAsync {...props} />;
 		case "slider":
 			return <Slider {...props} />;
 		case "group":

@@ -11,37 +11,44 @@ const SelectAsync = (props) => {
 	const [options, setOptions] = useState(props?.options);
 	const [sOption, setSOption] = useState(props?.value);
 	const [isAjaxComplete, setIsAjaxComplete] = useState(false);
+	const [timeOutId, setTimeOutId] = useState();
 
 	const handleMenuOpen = (
 		inputValue: string,
 		callback: (options: []) => void
 	) => {
-		// AJAX
-		if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
-			let data = { inputValue };
-			Object.keys(props?.ajax.data).map((singleData) => {
-				if (props?.ajax.data[singleData].indexOf("@") > -1) {
-					let eligibleKey = props?.ajax.data[singleData].substr(1);
-					data[singleData] = builderContext.values?.[eligibleKey];
-				} else {
-					data[singleData] = props?.ajax.data[singleData];
-				}
-			});
-			if (!isAjaxComplete) {
-				return wpFetch({
-					path: props?.ajax.api,
-					data: data,
-				}).then((response: any) => {
-					callback(response);
-					setData({
-						options: response,
-						parentIndex: [...parentIndex, "options"],
-					});
-					// setIsAjaxComplete(true);
-					return response;
-				});
-			}
+		if(timeOutId){
+			clearTimeout(timeOutId);
 		}
+		let id = setTimeout(() => {
+			// AJAX
+			if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
+				let data = { inputValue };
+				Object.keys(props?.ajax.data).map((singleData) => {
+					if (props?.ajax.data[singleData].indexOf("@") > -1) {
+						let eligibleKey = props?.ajax.data[singleData].substr(1);
+						data[singleData] = builderContext.values?.[eligibleKey];
+					} else {
+						data[singleData] = props?.ajax.data[singleData];
+					}
+				});
+				if (!isAjaxComplete) {
+					return wpFetch({
+						path: props?.ajax.api,
+						data: data,
+					}).then((response: any) => {
+						callback(response);
+						// setData({
+						// 	options: response,
+						// 	parentIndex: [...parentIndex, "options"],
+						// });
+						// setIsAjaxComplete(true);
+						return response;
+					});
+				}
+			}
+		}, 300);
+		setTimeOutId(id);
 	};
 
 	useEffect(() => {
@@ -50,7 +57,7 @@ const SelectAsync = (props) => {
 				target: {
 					type: "select",
 					name,
-					value: sOption.value,
+					value: sOption,
 					options,
 					multiple,
 				},
@@ -61,7 +68,7 @@ const SelectAsync = (props) => {
 				target: {
 					type: "select",
 					name,
-					value: sOption.map((item) => item.value),
+					value: sOption,
 					options,
 					multiple,
 				},

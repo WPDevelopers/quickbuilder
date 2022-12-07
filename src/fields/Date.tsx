@@ -45,12 +45,14 @@ const DateControl = (props) => {
                 {date(format, _value, -(new Date).getTimezoneOffset())}
             </Button>)}
             renderContent={() => {
+                console.log(getTime(value), getTime(value).toDate());
+
                 return (
                     <DateTimePicker
                         // @ts-ignore
                         __nextRemoveHelpButton={true}
                         __nextRemoveResetButton={true}
-                        currentDate={getTime(_value).toString()}
+                        currentDate={getTime(_value).toDate()}
                         onChange={(date) => {
                             onChange({
                                 target: {

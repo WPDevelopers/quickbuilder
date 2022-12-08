@@ -11,51 +11,90 @@ const SelectAsync = (props) => {
 
 	const [options, setOptions] = useState(props?.options);
 	const [sOption, setSOption] = useState(props?.value);
-	const [isAjaxComplete, setIsAjaxComplete] = useState(false);
-	const [timeOutId, setTimeOutId] = useState();
+	const [isAjaxRunning, setIsAjaxRunning] = useState(false);
+	const [lastRequest, setLastRequest] = useState("");
 
 	const handleMenuOpen = (
 		inputValue: string,
 		callback: (options: []) => void
 	) => {
-		if (timeOutId) {
-			clearTimeout(timeOutId);
-		}
-		let id = setTimeout(() => {
-			// AJAX
-			if (
-				props?.ajax &&
-				when(props?.ajax?.rules, builderContext.values)
-			) {
-				let data = { inputValue };
-				Object.keys(props?.ajax.data).map((singleData) => {
-					if (props?.ajax.data[singleData].indexOf("@") > -1) {
-						let eligibleKey =
-							props?.ajax.data[singleData].substr(1);
-						data[singleData] = builderContext.values?.[eligibleKey];
-					} else {
-						data[singleData] = props?.ajax.data[singleData];
-					}
-				});
-				if (!isAjaxComplete) {
-					return wpFetch({
-						path: props?.ajax.api,
-						data: data,
-					}).then((response: any) => {
+		// AJAX
+		if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
+			let data = { inputValue };
+			Object.keys(props?.ajax.data).map((singleData) => {
+				if (props?.ajax.data[singleData].indexOf("@") > -1) {
+					let eligibleKey = props?.ajax.data[singleData].substr(1);
+					data[singleData] = builderContext.values?.[eligibleKey];
+				} else {
+					data[singleData] = props?.ajax.data[singleData];
+				}
+			});
+			if (!isAjaxRunning) {
+				setIsAjaxRunning(true);
+				return wpFetch({
+					path: props?.ajax.api,
+					data: data,
+				})
+					.then((response: any) => {
 						callback(response);
 						// setData({
 						// 	options: response,
 						// 	parentIndex: [...parentIndex, "options"],
 						// });
-						// setIsAjaxComplete(true);
 						return response;
+					})
+					.finally(() => {
+						setIsAjaxRunning(false);
 					});
-				}
+			} else {
+				setLastRequest(inputValue);
 			}
-		}, 300);
-		//@ts-ignore
-		setTimeOutId(id);
+		}
 	};
+
+	// const handleMenuOpen = (
+	// 	inputValue: string,
+	// 	callback: (options: []) => void
+	// ) => {
+	// 	if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
+	// 		let data = { inputValue };
+	// 		Object.keys(props?.ajax.data).map((singleData) => {
+	// 			if (props?.ajax.data[singleData].indexOf("@") > -1) {
+	// 				let eligibleKey = props?.ajax.data[singleData].substr(1);
+	// 				data[singleData] = builderContext.values?.[eligibleKey];
+	// 			} else {
+	// 				data[singleData] = props?.ajax.data[singleData];
+	// 			}
+	// 		});
+	// 		if (!isAjaxComplete) {
+	// 			setIsAjaxComplete(true);
+	// 			const x = [...lastRequest];
+	// 			setLastRequest([]);
+	// 			return wpFetch({
+	// 				path: props?.ajax.api,
+	// 				data: data,
+	// 			})
+	// 				.then((response: any) => {
+	// 					callback(response);
+	// 					// setData({
+	// 					// 	options: response,
+	// 					// 	parentIndex: [...parentIndex, "options"],
+	// 					// });
+	// 					return response;
+	// 				})
+	// 				.finally(() => {
+	// 					if (x.length) {
+	// 						setTimeout(() => {
+	// 							handleMenuOpen(...x);
+	// 						}, 1000);
+	// 					}
+	// 					setIsAjaxComplete(false);
+	// 				});
+	// 		} else {
+	// 			setLastRequest([inputValue, callback]);
+	// 		}
+	// 	}
+	// };
 
 	useEffect(() => {
 		onChange({
@@ -78,7 +117,6 @@ const SelectAsync = (props) => {
 				isDisabled={props?.disable}
 				classNamePrefix="wprf-async-select"
 				defaultMenuIsOpen={true}
-				menuIsOpen={true}
 				id={id}
 				name={name}
 				placeholder={placeholder}

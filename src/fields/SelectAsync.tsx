@@ -12,7 +12,7 @@ const SelectAsync = (props) => {
 	const [options, setOptions] = useState(props?.options);
 	const [sOption, setSOption] = useState(props?.value);
 	const [isAjaxRunning, setIsAjaxRunning] = useState(false);
-	const [lastRequest, setLastRequest] = useState("");
+	// const [lastRequest, setLastRequest] = useState("");
 
 	const handleMenuOpen = (
 		inputValue: string,
@@ -29,8 +29,11 @@ const SelectAsync = (props) => {
 					data[singleData] = props?.ajax.data[singleData];
 				}
 			});
-			if (!isAjaxRunning) {
+			console.log("input: \t", inputValue);
+			if (!isAjaxRunning && inputValue) {
 				setIsAjaxRunning(true);
+				// @ts-ignore
+				window.lastRequest = null;
 				return wpFetch({
 					path: props?.ajax.api,
 					data: data,
@@ -44,13 +47,40 @@ const SelectAsync = (props) => {
 						return response;
 					})
 					.finally(() => {
+						// @ts-ignore
+						// console.log(window.lastRequest, "\t\t", window.lastCompleteRequest, "\t\t", inputValue);
+						console.log('');
+						// @ts-ignore
+						console.log("lastRequest: \t", window.lastRequest);
+						// @ts-ignore
+						console.log("lastCompleteRequest: \t", window.lastCompleteRequest);
+						console.log("inputValue: \t", inputValue);
+
 						setIsAjaxRunning(false);
+
+						// @ts-ignore
+						if(window.lastRequest){
+							// @ts-ignore
+							const lr = window.lastRequest;
+							// @ts-ignore
+							window.lastRequest = null;
+							// @ts-ignore
+							handleMenuOpen(lr, callback);
+						}
+
+
+						// @ts-ignore
+						window.lastCompleteRequest = inputValue;
 					});
 			} else {
-				setLastRequest(inputValue);
+				// @ts-ignore
+				window.lastRequest = inputValue;
 			}
 		}
 	};
+
+	// @ts-ignore
+	// console.log(window.lastRequest);
 
 	// const handleMenuOpen = (
 	// 	inputValue: string,
@@ -123,7 +153,7 @@ const SelectAsync = (props) => {
 				formatOptionLabel={(option, meta) => {
 					if (meta?.inputValue?.length) {
 						if (
-							option?.name
+							option.name
 								.toLowerCase()
 								.includes(meta?.inputValue?.toLowerCase())
 						) {
@@ -132,26 +162,26 @@ const SelectAsync = (props) => {
 								`(${meta?.inputValue})`,
 								"gi"
 							);
-							let name = option?.name.replace(
+							let name = option.name?.replace(
 								regX,
 								"<strong style={font-weight: 900}>$1</strong>"
 							);
-							let address = option?.address.replace(
+							let address = option.address?.replace(
 								regX,
 								"<strong style={font-weight: 900}>$1</strong>"
 							);
 							return (
 								<>
-									{parse(name)}{" "}
-									<small>{parse(address)}</small>
+									{parse(name || '')}{" "}
+									<small>{parse(address || '')}</small>
 								</>
 							);
 						}
 					}
 					return (
 						<>
-							<b>{option?.name}</b>{" "}
-							<small>{option?.address}</small>
+							<b>{option.name}</b>{" "}
+							<small>{option.address}</small>
 						</>
 					);
 				}}

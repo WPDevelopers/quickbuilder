@@ -20,6 +20,11 @@ const SelectAsync = (props) => {
 	) => {
 		// AJAX
 		if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
+			if (!inputValue) {
+				callback(options);
+				return;
+			}
+
 			let data = { inputValue };
 			Object.keys(props?.ajax.data).map((singleData) => {
 				if (props?.ajax.data[singleData].indexOf("@") > -1) {
@@ -29,7 +34,7 @@ const SelectAsync = (props) => {
 					data[singleData] = props?.ajax.data[singleData];
 				}
 			});
-			console.log("input: \t", inputValue);
+
 			if (!isAjaxRunning && inputValue) {
 				setIsAjaxRunning(true);
 				// @ts-ignore
@@ -39,92 +44,34 @@ const SelectAsync = (props) => {
 					data: data,
 				})
 					.then((response: any) => {
+						console.log(inputValue, response, callback);
+
 						callback(response);
-						// setData({
-						// 	options: response,
-						// 	parentIndex: [...parentIndex, "options"],
-						// });
 						return response;
 					})
 					.finally(() => {
-						// @ts-ignore
-						// console.log(window.lastRequest, "\t\t", window.lastCompleteRequest, "\t\t", inputValue);
-						console.log('');
-						// @ts-ignore
-						console.log("lastRequest: \t", window.lastRequest);
-						// @ts-ignore
-						console.log("lastCompleteRequest: \t", window.lastCompleteRequest);
-						console.log("inputValue: \t", inputValue);
-
 						setIsAjaxRunning(false);
-
 						// @ts-ignore
-						if(window.lastRequest){
+						if (window.lastRequest) {
 							// @ts-ignore
 							const lr = window.lastRequest;
 							// @ts-ignore
 							window.lastRequest = null;
-							// @ts-ignore
-							handleMenuOpen(lr, callback);
-						}
+							console.log("recursive call: ", lr, callback);
 
+							// @ts-ignore
+							handleMenuOpen(...lr);
+						}
 
 						// @ts-ignore
 						window.lastCompleteRequest = inputValue;
 					});
 			} else {
 				// @ts-ignore
-				window.lastRequest = inputValue;
+				window.lastRequest = [inputValue, callback];
 			}
 		}
 	};
-
-	// @ts-ignore
-	// console.log(window.lastRequest);
-
-	// const handleMenuOpen = (
-	// 	inputValue: string,
-	// 	callback: (options: []) => void
-	// ) => {
-	// 	if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
-	// 		let data = { inputValue };
-	// 		Object.keys(props?.ajax.data).map((singleData) => {
-	// 			if (props?.ajax.data[singleData].indexOf("@") > -1) {
-	// 				let eligibleKey = props?.ajax.data[singleData].substr(1);
-	// 				data[singleData] = builderContext.values?.[eligibleKey];
-	// 			} else {
-	// 				data[singleData] = props?.ajax.data[singleData];
-	// 			}
-	// 		});
-	// 		if (!isAjaxComplete) {
-	// 			setIsAjaxComplete(true);
-	// 			const x = [...lastRequest];
-	// 			setLastRequest([]);
-	// 			return wpFetch({
-	// 				path: props?.ajax.api,
-	// 				data: data,
-	// 			})
-	// 				.then((response: any) => {
-	// 					callback(response);
-	// 					// setData({
-	// 					// 	options: response,
-	// 					// 	parentIndex: [...parentIndex, "options"],
-	// 					// });
-	// 					return response;
-	// 				})
-	// 				.finally(() => {
-	// 					if (x.length) {
-	// 						setTimeout(() => {
-	// 							handleMenuOpen(...x);
-	// 						}, 1000);
-	// 					}
-	// 					setIsAjaxComplete(false);
-	// 				});
-	// 		} else {
-	// 			setLastRequest([inputValue, callback]);
-	// 		}
-	// 	}
-	// };
 
 	useEffect(() => {
 		onChange({
@@ -146,7 +93,7 @@ const SelectAsync = (props) => {
 				defaultOptions
 				isDisabled={props?.disable}
 				classNamePrefix="wprf-async-select"
-				defaultMenuIsOpen={true}
+				// defaultMenuIsOpen={true}
 				id={id}
 				name={name}
 				placeholder={placeholder}
@@ -172,15 +119,21 @@ const SelectAsync = (props) => {
 							);
 							return (
 								<>
-									{parse(name || '')}{" "}
-									<small>{parse(address || '')}</small>
+									{parse(name || "")}{" "}
+									<small>{parse(address || "")}</small>
 								</>
 							);
 						}
 					}
 					return (
 						<>
-							<b>{option.name}</b>{" "}
+							{option.name ? (
+								<>
+									<b>{option.name}</b>{" "}
+								</>
+							) : (
+								<>{option.label}{" "}</>
+							)}
 							<small>{option.address}</small>
 						</>
 					);

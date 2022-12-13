@@ -13,8 +13,8 @@
     "package.json"
   ],
   "scripts": {
-    "start": "rollup -c -w --environment NODE_ENV:development",
     "predev": "rimraf dist/dev",
+    "start": "npm run predev && rollup -c -w --environment NODE_ENV:development",
     "dev": "npm run predev && rollup -c --environment NODE_ENV:development",
     "prepkg": "rimraf dist/src",
     "pkg": "npm run prepkg && rollup -c --environment NODE_ENV:production",

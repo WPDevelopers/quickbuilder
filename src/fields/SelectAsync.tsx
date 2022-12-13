@@ -26,7 +26,7 @@ const SelectAsync = (props) => {
 			}
 
 			let data = { inputValue };
-			Object.keys(props?.ajax.data).map((singleData) => {
+			Object.keys(props?.ajax.data)?.map((singleData) => {
 				if (props?.ajax.data[singleData].indexOf("@") > -1) {
 					let eligibleKey = props?.ajax.data[singleData].substr(1);
 					data[singleData] = builderContext.values?.[eligibleKey];

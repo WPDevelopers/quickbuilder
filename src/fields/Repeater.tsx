@@ -63,7 +63,7 @@ const Repeater = (props) => {
     }, [localMemoizedValue])
 
     useEffect(() => {
-        if (localMemoizedValue == undefined) {
+        if (localMemoizedValue == undefined || localMemoizedValue == '') {
             setLocalMemoizedValue([{index: v4()}]);
         }
         else{

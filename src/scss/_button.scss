@@ -1,7 +1,30 @@
 .wprf-control {
-    &.wprf-button-group {
-        & > div {
-            margin-right: 15px;
-        }
-    }
+	&.wprf-button-group {
+		& > div {
+			margin-right: 15px;
+		}
+	}
+}
+
+.responsive-button {
+	all: initial;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 5px;
+    cursor: pointer;
+    height: 22px;
+    width: 22px;
+    background: rgba(#ccc, 0.25);
+    border-radius: 2px;
+	img {
+		display: inline-flex;
+		filter: brightness(50%) invert(55%);
+	}
+    &:hover,
+	&.active {
+		img {
+			filter: brightness(100%) invert(0%);
+		}
+	}
 }

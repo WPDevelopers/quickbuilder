@@ -22,6 +22,7 @@ import {
 	CodeViewer,
 	JsonUploader,
 	SelectAsync,
+	ResponsiveNumber,
 } from ".";
 
 import { withProps } from "../core/hooks";
@@ -83,6 +84,8 @@ const Field = (props) => {
 			return <Modal {...props} />;
 		// case "test":
 		//     return <Test {...props} />;
+		case "responsive-number":
+			return <ResponsiveNumber {...props} />;
 		default:
 			const customField = applyFilters(
 				"custom_field",

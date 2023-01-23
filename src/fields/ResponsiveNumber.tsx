@@ -1,34 +1,42 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { withLabel } from "../core/hooks";
-import { validFieldProps } from "../core/utils";
+import { isObject, validFieldProps } from "../core/utils";
 
 const ResponsiveNumber = (props) => {
-	const validProps = validFieldProps(props, [
-		"is_pro",
-		"visible",
-		"trigger",
-		"disable",
-		"parentIndex",
-		"context",
-		"badge",
-		"popup",
-	]);
-	const handleChange = useCallback(
-		(event) =>
-			validProps.onChange(event, {
-				popup: props?.popup,
-				isPro: !!props.is_pro,
-			}),
-		[validProps?.value]
-	);
+	const validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+	const [responsive, setResponsive] = useState(Object.keys(props.controls)[0]);
 
-	if (validProps.type === "checkbox") {
-		if (validProps?.name) {
-			validProps.checked = validProps?.checked || validProps?.value;
-		}
+	// backward compatibility
+	let value = validProps.value;
+	if(!isObject(validProps.value)){
+		Object.keys(props.controls).reduce((acc, key) => {
+			return {...acc, [key]: validProps.value};
+		  }, {});
+	}
+	const [responsiveSize, setResponsiveSize] = useState(value);
+
+	console.log(responsive, responsiveSize[responsive], value, validProps.value, props);
+
+	const handleChange = (event) =>{
+		setResponsiveSize({
+			...responsiveSize,
+			[responsive]: event.target.value,
+		});
 	}
 
-	const [responsive, setResponsive] = useState("desktop");
+	useEffect(() => {
+		validProps.onChange({
+			target: {
+				type: 'input',
+				name: validProps.name,
+				value: responsiveSize,
+				checked: null,
+				multiple: null,
+			},
+		});
+	}, [responsiveSize])
+
+
 
 	return (
 		<div
@@ -43,10 +51,11 @@ const ResponsiveNumber = (props) => {
 			{React.createElement("input", {
 				...validProps,
 				type: "number",
+				value: responsiveSize?.[responsive],
 				onChange: handleChange,
 			})}
 			<div style={{ display: "flex", alignItems: "center" }}>
-				{Object.keys(props?.controls)?.map((key) => (
+				{Object.keys(props.controls)?.map((key) => (
 					<button
 						type="button"
 						key={key}

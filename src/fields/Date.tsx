@@ -52,7 +52,7 @@ const DateControl = (props) => {
                         // @ts-ignore
                         __nextRemoveHelpButton={true}
                         __nextRemoveResetButton={true}
-                        currentDate={getTime(_value).toDate()}
+                        currentDate={getTime(_value).toDate().toString()}
                         onChange={(date) => {
                             onChange({
                                 target: {

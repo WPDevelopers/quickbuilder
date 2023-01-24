@@ -9,6 +9,7 @@ import SteppedButton from "./SteppedButton";
 import { useBuilderContext } from "../core/hooks";
 import when from "../core/when";
 import { __ } from '@wordpress/i18n';
+import { Field } from '../fields';
 
 
 const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) => {
@@ -49,7 +50,16 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
 
                         return (
                             <div id={tab?.id} className={componentClasses} key={tab?.id} >
-                                {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
+                                <div>
+                                    {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
+                                    <div>
+                                        {config?.content_heading && Object.keys(config.content_heading).map((button, index) => {
+                                            return (<React.Fragment key={`button_${button}_${index}`}>
+                                                <Field {...config.content_heading[button]} />
+                                            </React.Fragment>);
+                                        })}
+                                    </div>
+                                </div>
                                 <InnerContent context={builderContext} fields={tab?.fields} parentIndex={index} />
                             </div>
                         );

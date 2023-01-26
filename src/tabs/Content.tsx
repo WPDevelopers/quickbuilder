@@ -50,7 +50,7 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
 
                         return (
                             <div id={tab?.id} className={componentClasses} key={tab?.id} >
-                                <div>
+                                <div className="wprf-tab-heading-wrapper">
                                     {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
                                     <div>
                                         {config?.content_heading && Object.keys(config.content_heading).map((button, index) => {

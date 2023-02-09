@@ -15,7 +15,6 @@ const ResponsiveNumber = (props) => {
 	}
 	const [responsiveSize, setResponsiveSize] = useState(value);
 
-	console.log(responsive, responsiveSize[responsive], value, validProps.value, props);
 
 	const handleChange = (event) =>{
 		setResponsiveSize({

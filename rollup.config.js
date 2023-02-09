@@ -1,6 +1,7 @@
 import builtins from "rollup-plugin-node-builtins";
 import { uglify } from "rollup-plugin-uglify";
 import ignoreImport from "rollup-plugin-ignore-import";
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import babel from "@rollup/plugin-babel";
 import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
@@ -64,6 +65,7 @@ export default {
 	],
 	external: Object.keys(globalKeys),
 	plugins: [
+		peerDepsExternal(),
 		builtins(),
 		nodeResolve({
 			mainFields: ["browser", "module", "main"],

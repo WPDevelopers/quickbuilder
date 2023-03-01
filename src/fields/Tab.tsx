@@ -1,46 +1,63 @@
 import React, { useEffect, useState } from 'react'
-import Menu from './Menu'
-import Content from './Content'
-import { TabConfig } from './types';
+import Menu from './tabs/Menu'
+import Content from './tabs/Content'
+import { TabConfig } from '../types/Tabs';
 // import { BuilderProvider } from '../core/hooks/useBuilderContext';
 // import useBuilder from '../core/hooks/useBuilder';
 
 import '../scss/index.scss';
 import { useBuilderContext } from '../core/hooks';
+import classNames from 'classnames';
 
 
 const Tab: React.FC<TabConfig> = (props) => {
     // const builderContextState = useBuilder(props);
     const builderContext = useBuilderContext();
-    const [activeTab, setActiveTab] = useState(props.config.active);
+    const [activeTab, setActiveTab] = useState(props.value || props.active);
+
+	const componentClasses = classNames(
+		"wp-react-form wprf-tabs-wrapper",
+		props?.className,
+		{
+			"wprf-tab-menu-as-sidebar": props?.sidebar,
+		}
+	);
+
+    // console.log(props.value, props);
+
+
+    // useEffect(() => {
+    //     setActiveTab(props.value);
+    // }, [props.value])
 
     useEffect(() => {
-        setActiveTab(builderContext.config.active);
-    }, [builderContext.config.active])
-
-    useEffect(() => {
-        builderContext.setActiveTab(activeTab);
+        props.onChange({
+            target: {
+                type: 'button',
+                name: props.name,
+                value: activeTab
+            }
+        });
     }, [activeTab])
 
     return (
-        <>
+        <div className={componentClasses}>
             {/* <BuilderProvider value={builderContextState}> */}
             <Menu
+                {...props}
                 active={activeTab}
                 setActive={(tabId) => setActiveTab(tabId)}
-                tabs={builderContext.tabs}
-                config={props.config}
+                fields={props.fields}
                 context={builderContext}
             />
             <Content
                 {...props}
-                tabs={builderContext.tabs}
+                fields={props.fields}
                 active={activeTab}
                 submit={props?.submit}
-                config={props.config}
             />
             {/* </BuilderProvider> */}
-        </>
+        </div>
     )
 }
 

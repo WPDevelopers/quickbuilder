@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@wordpress/components'
-import { useBuilderContext } from '../core/hooks';
-import { Field } from '../fields';
+import { useBuilderContext } from '../../core/hooks';
+import { Field } from '../../fields';
+import { SteppedButtonConfig } from '../../types/Tabs';
 
-const SteppedButton = (props) => {
+const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
     const [nextTab, setNextTab] = useState(undefined);
     const [prevTab, setPrevTab] = useState(undefined)
     const builderContext = useBuilderContext();
 
     useEffect(() => {
-        const tabIds = props.tabs.map(tab => tab.id);
+        const tabIds = props.fields.map(tab => tab.id);
         const currentTabIndex = tabIds.findIndex(tab => tab === builderContext.config.active);
         if (currentTabIndex != -1) {
             setPrevTab(tabIds[currentTabIndex - 1])
@@ -17,7 +18,7 @@ const SteppedButton = (props) => {
         if (currentTabIndex <= tabIds.length) {
             setNextTab(tabIds[currentTabIndex + 1])
         }
-    }, [builderContext.config.active, props.tabs])
+    }, [builderContext.config.active, props.fields])
 
     return (
         <div className="wprf-stepped-button">

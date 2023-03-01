@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { Button } from '@wordpress/components';
-import { useBuilderContext } from '../core/hooks';
+import { useBuilderContext } from '../../core/hooks';
 import { __ } from '@wordpress/i18n';
 
 const Submit = ({ ...props }) => {

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
-import { TabProps } from "./types";
-import { isString, isObject, isVisible } from "../core/utils";
+import { Fields, TabMenuConfig } from "../../types/Tabs";
+import { isString, isObject, isVisible } from "../../core/utils";
 import { __ } from '@wordpress/i18n';
 
-const Menu: React.FC<TabProps> = (props) => {
-    if (props.tabs === undefined) {
+const Menu: React.FC<TabMenuConfig> = (props) => {
+    if (props.fields === undefined) {
         throw new Error(__("There are no tabs defined!", 'notificationx'));
     }
 
-    const { active, setActive, tabs, config, context } = props;
+    const { active, setActive, fields: tabs, context } = props;
 
-    const [tabsFields, setTabsFields] = useState([]);
+    const [tabsFields, setTabsFields] = useState<Fields>([]);
 
     useEffect(() => {
 
@@ -23,7 +23,7 @@ const Menu: React.FC<TabProps> = (props) => {
     const componentClasses = classNames(
         "wprf-tab-menu-wrapper",
         props?.className,
-        { "wprf-tab-menu-sidebar": config?.sidebar },
+        { "wprf-tab-menu-sidebar": props?.sidebar },
         context?.values?.source
     );
 
@@ -38,11 +38,11 @@ const Menu: React.FC<TabProps> = (props) => {
                             className={classNames("wprf-tab-nav-item", {
                                 [`${tab.classes}`]: tab.classes,
                                 "wprf-active-nav": active === tab.id,
-                                "wprf-tab-complete": config?.completionTrack ? (index <= currentTabIndex) : false
+                                "wprf-tab-complete": props?.completionTrack ? (index <= currentTabIndex) : false
                             })}
                             data-key={tab.id}
                             key={tab.id}
-                            onClick={() => (config?.clickable ?? true) && setActive(tab.id)}
+                            onClick={() => (props?.clickable ?? true) && setActive(tab.id)}
                         >
                             {
                                 tab?.icon && (

@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { applyFilters } from '@wordpress/hooks'
 import classNames from "classnames";
-import { TabProps } from "./types";
-import { isArray, isVisible } from "../core/utils";
+import { Fields, TabContentConfig } from "../../types/Tabs";
+import { isArray, isVisible } from "../../core/utils";
 import InnerContent from "./InnerContent";
 import Submit from "./Submit";
 import SteppedButton from "./SteppedButton";
-import { useBuilderContext } from "../core/hooks";
-import when from "../core/when";
+import { useBuilderContext } from "../../core/hooks";
+import when from "../../core/when";
 import { __ } from '@wordpress/i18n';
-import { Field } from '../fields';
+import { Field } from '../../fields';
 
 
-const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) => {
+const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, submit, ...rest }) => {
     if (tabs === undefined) {
         throw new Error(__("There are no #tabs args defined in props.", 'notificationx'));
     }
 
     const builderContext = useBuilderContext();
+    const parentIndex = rest.parentIndex || [];
 
     if (!isArray(tabs)) {
         throw new Error(__('Not an array.', 'notificationx'))
     }
 
-    const [tabsFields, setTabsFields] = useState([]);
+    const [tabsFields, setTabsFields] = useState<Fields>([]);
 
     useEffect(() => {
 
@@ -51,16 +52,16 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
                         return (
                             <div id={tab?.id} className={componentClasses} key={tab?.id} >
                                 <div className="wprf-tab-heading-wrapper">
-                                    {tab?.label && (config?.title ?? true) && <h4>{tab.label}</h4>}
+                                    {tab?.label && (rest?.title ?? true) && <h4>{tab.label}</h4>}
                                     <div>
-                                        {config?.content_heading && Object.keys(config.content_heading).map((button, index) => {
+                                        {rest?.content_heading && Object.keys(rest.content_heading).map((button, index) => {
                                             return (<React.Fragment key={`button_${button}_${index}`}>
-                                                <Field {...config.content_heading[button]} />
+                                                <Field {...rest.content_heading[button]} />
                                             </React.Fragment>);
                                         })}
                                     </div>
                                 </div>
-                                <InnerContent context={builderContext} fields={tab?.fields} parentIndex={index} />
+                                <InnerContent context={builderContext} fields={tab?.fields} parentIndex={[...parentIndex, index]} />
                             </div>
                         );
                     })}
@@ -68,10 +69,10 @@ const Content: React.FC<TabProps> = ({ tabs, active, submit, config, ...rest }) 
                 {applyFilters('wprf_tab_content', '', rest)}
             </div>
             {
-                config?.step?.show &&
-                <SteppedButton tabs={tabsFields} config={config.step ?? {}} />
+                rest?.step?.show &&
+                <SteppedButton fields={tabsFields} config={rest.step ?? {}} />
             }
-            {(submit?.show ?? true) && (submit?.rules ? when(submit?.rules, { config }) : true) && <Submit {...submit} />}
+            {(submit?.show ?? true) && (submit?.rules ? when(submit?.rules, { rest }) : true) && <Submit {...submit} />}
         </div>
     );
 };

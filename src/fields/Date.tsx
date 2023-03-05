@@ -1,10 +1,10 @@
+import { Button, DateTimePicker, Dropdown } from "@wordpress/components";
 import React, { useEffect } from "react";
-import { DateTimePicker, Dropdown, Button } from "@wordpress/components";
 // @ts-ignore
-import { __experimentalGetSettings, date } from "@wordpress/date";
+import { date, __experimentalGetSettings } from "@wordpress/date";
+import moment from "moment";
 import { withLabel } from "../core/hooks";
 import { getTime } from "../core/utils";
-import moment from "moment";
 
 const DateControl = (props) => {
     const { name, value, onChange, position } = props;
@@ -45,7 +45,7 @@ const DateControl = (props) => {
                 {date(format, _value, -(new Date).getTimezoneOffset())}
             </Button>)}
             renderContent={() => {
-                console.log(getTime(value), getTime(value).toDate());
+                // console.log(getTime(value), getTime(value).toDate());
 
                 return (
                     <DateTimePicker

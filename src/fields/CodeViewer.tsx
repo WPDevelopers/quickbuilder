@@ -1,9 +1,9 @@
+import { Button } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
+import copy from "copy-to-clipboard";
 import React, { useCallback } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
-import copy from "copy-to-clipboard";
-import { __ } from "@wordpress/i18n";
-import { Button } from "@wordpress/components";
 
 const CodeViewer = (props) => {
 	const validProps = validFieldProps(props, [

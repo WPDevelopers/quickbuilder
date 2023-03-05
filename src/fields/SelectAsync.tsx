@@ -1,9 +1,9 @@
+import parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
 import AsyncSelect from "react-select/async";
-import { isArray, isObject, merge, wpFetch } from "../core/utils";
-import { withLabel, useBuilderContext } from "../core/hooks";
 import { when } from "../core";
-import parse from "html-react-parser";
+import { useBuilderContext, withLabel } from "../core/hooks";
+import { wpFetch } from "../core/utils";
 
 const SelectAsync = (props) => {
 	const builderContext = useBuilderContext();
@@ -44,7 +44,7 @@ const SelectAsync = (props) => {
 					data: data,
 				})
 					.then((response: any) => {
-						console.log(inputValue, response, callback);
+						// console.log(inputValue, response, callback);
 
 						callback(response);
 						return response;
@@ -57,7 +57,7 @@ const SelectAsync = (props) => {
 							const lr = window.lastRequest;
 							// @ts-ignore
 							window.lastRequest = null;
-							console.log("recursive call: ", lr, callback);
+							// console.log("recursive call: ", lr, callback);
 
 							// @ts-ignore
 							handleMenuOpen(...lr);

@@ -166,7 +166,7 @@ export const validFieldProps = ( defaultProps, exclude: string[] = [] ) => {
     if( type !== 'select' && type !== 'radio-card' && ( type !== 'toggle' && defaultProps.multiple ) ) {
         filterOutArray.push( 'options' );
     }
-    if( type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button' ) {
+    if( type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button' ) {
         filterOutArray.push( 'fields' );
     }
 

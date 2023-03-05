@@ -26,6 +26,7 @@ import {
 } from ".";
 
 import { withProps } from "../core/hooks";
+import Tab from "./Tab";
 
 const Field = (props) => {
 	if (!props.type || props.type.length === 0) {
@@ -82,6 +83,8 @@ const Field = (props) => {
 			return <Button {...props} />;
 		case "modal":
 			return <Modal {...props} />;
+		case "tab":
+			return <Tab {...props} />;
 		// case "test":
 		//     return <Test {...props} />;
 		case "responsive-number":

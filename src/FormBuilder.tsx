@@ -8,22 +8,29 @@ import store from "./store";
 registerStore("formbuilder", store);
 
 import { BuilderProps } from "./types/Builder";
+import Tab from "./fields/Tab";
+import { useBuilderContext } from "./core/hooks";
+import { TabProps } from "./types/Tabs";
 
-import Tab from "./tabs/Tab";
 
-const FormBuilder: React.FC<BuilderProps> = (props) => {
-	const componentClasses = classNames(
-		"wp-react-form wprf-tabs-wrapper",
-		props?.className,
-		{
-			"wprf-tab-menu-as-sidebar": props.config?.sidebar,
-		}
-	);
-
+const FormBuilder: React.FC<BuilderProps | TabProps> = (props) => {
+    const builderContext = useBuilderContext();
+	let tabs = props.tabs;
+	if(!tabs?.type){
+		tabs = {
+			...props.config,
+			fields: props.tabs,
+			tabs: undefined,
+			submit: props?.submit,
+			onChange: (event) => {
+				builderContext.setActiveTab(event?.target?.value);
+			},
+		};
+	}
 	return (
-		<div className={componentClasses}>
-			<Tab {...props} />
-		</div>
+		<>
+			<Tab {...tabs} />
+		</>
 	);
 };
 

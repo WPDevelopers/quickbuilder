@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('lodash-es'), require('@wordpress/api-fetch'), require('@wordpress/date'), require('moment'), require('intersect'), require('@wordpress/i18n'), require('classnames'), require('lodash'), require('@wordpress/hooks'), require('sweetalert2'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-select'), require('react-sortablejs'), require('react-select/async'), require('html-react-parser'), require('@wordpress/media-utils'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('react-bootstrap-sweetalert')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', 'lodash-es', '@wordpress/api-fetch', '@wordpress/date', 'moment', 'intersect', '@wordpress/i18n', 'classnames', 'lodash', '@wordpress/hooks', 'sweetalert2', '@wordpress/components', 'copy-to-clipboard', 'react-select', 'react-sortablejs', 'react-select/async', 'html-react-parser', '@wordpress/media-utils', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', 'react-bootstrap-sweetalert'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.lodashEs, global.wpApiFetch, global.wpDate, global.momentLib, global.intersect, global.wpI18n, global.classNames, global.lodash, global.wpHooks, global.sweetalert2, global.wpComponents, global.copy, global.reactSelect, global.reactSortablejs, global.AsyncSelect, global.parse, global.wpMedia, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.sweetalert));
-})(this, (function (exports, React, data, lodashEs, apiFetch, date, moment, intersect, i18n, classNames, lodash, hooks, Swal, components, copy, ReactSelect, reactSortablejs, AsyncSelect, parse, mediaUtils, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, SweetAlert$1) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('lodash-es'), require('@wordpress/api-fetch'), require('@wordpress/date'), require('moment'), require('intersect'), require('@wordpress/i18n'), require('classnames'), require('lodash'), require('@wordpress/hooks'), require('sweetalert2'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-select'), require('react-sortablejs'), require('html-react-parser'), require('react-select/async'), require('@wordpress/media-utils'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('react-bootstrap-sweetalert')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', 'lodash-es', '@wordpress/api-fetch', '@wordpress/date', 'moment', 'intersect', '@wordpress/i18n', 'classnames', 'lodash', '@wordpress/hooks', 'sweetalert2', '@wordpress/components', 'copy-to-clipboard', 'react-select', 'react-sortablejs', 'html-react-parser', 'react-select/async', '@wordpress/media-utils', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', 'react-bootstrap-sweetalert'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.lodashEs, global.wpApiFetch, global.wpDate, global.momentLib, global.intersect, global.wpI18n, global.classNames, global.lodash, global.wpHooks, global.sweetalert2, global.wpComponents, global.copy, global.reactSelect, global.reactSortablejs, global.parse, global.AsyncSelect, global.wpMedia, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.sweetalert));
+})(this, (function (exports, React, data, lodashEs, apiFetch, date, moment, intersect, i18n, classNames, lodash, hooks, Swal, components, copy, ReactSelect, reactSortablejs, parse, AsyncSelect, mediaUtils, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, SweetAlert$1) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -14,8 +14,8 @@
   var Swal__default = /*#__PURE__*/_interopDefaultLegacy(Swal);
   var copy__default = /*#__PURE__*/_interopDefaultLegacy(copy);
   var ReactSelect__default = /*#__PURE__*/_interopDefaultLegacy(ReactSelect);
-  var AsyncSelect__default = /*#__PURE__*/_interopDefaultLegacy(AsyncSelect);
   var parse__default = /*#__PURE__*/_interopDefaultLegacy(parse);
+  var AsyncSelect__default = /*#__PURE__*/_interopDefaultLegacy(AsyncSelect);
   var draftToHtml__default = /*#__PURE__*/_interopDefaultLegacy(draftToHtml);
   var htmlToDraft__default = /*#__PURE__*/_interopDefaultLegacy(htmlToDraft);
   var SweetAlert__default = /*#__PURE__*/_interopDefaultLegacy(SweetAlert$1);
@@ -1939,7 +1939,8 @@
         }, date.date(format, _value, -new Date().getTimezoneOffset()));
       },
       renderContent: function renderContent() {
-        console.log(getTime(value), getTime(value).toDate());
+        // console.log(getTime(value), getTime(value).toDate());
+
         return React.createElement(components.DateTimePicker
         // @ts-ignore
         , {
@@ -1965,7 +1966,7 @@
   function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$9(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var Input = function Input(props) {
-    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
     var handleChange = React.useCallback(function (event) {
       return validProps.onChange(event, {
         popup: props === null || props === void 0 ? void 0 : props.popup,
@@ -1976,6 +1977,47 @@
       if (validProps !== null && validProps !== void 0 && validProps.name) {
         validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
       }
+    }
+    var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isCopied = _useState2[0],
+      setIsCopied = _useState2[1];
+    React.useEffect(function () {
+      var CopyInterval;
+      if (isCopied) {
+        CopyInterval = setTimeout(function () {
+          setIsCopied(false);
+        }, 2000);
+      }
+      return function () {
+        return CopyInterval && clearTimeout(CopyInterval);
+      };
+    }, [isCopied]);
+    if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
+      var copyMessage = (props === null || props === void 0 ? void 0 : props.copyMessage) || "Click To Copy!";
+      var copiedMessage = (props === null || props === void 0 ? void 0 : props.copiedMessage) || "Copied!";
+      var handleCopy = function handleCopy() {
+        copy__default["default"](props.value, {
+          format: 'text/plain',
+          onCopy: function onCopy() {
+            setIsCopied(true);
+          }
+        });
+      };
+      return React.createElement("span", {
+        className: "wprf-clipboard-wrapper"
+      }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$9(_objectSpread$9({}, validProps), {}, {
+        onChange: handleChange
+      })), React.createElement("span", {
+        className: "wprf-clipboard-tooltip"
+      }, React.createElement("span", {
+        className: "wprf-clipboard-tooltip-text"
+      }, isCopied ? copiedMessage : copyMessage), React.createElement(components.Button, {
+        className: "wprf-copy-icon",
+        onClick: function onClick() {
+          return handleCopy();
+        }
+      }, "Copy")));
     }
     return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$9(_objectSpread$9({}, validProps), {}, {
       onChange: handleChange
@@ -2984,7 +3026,8 @@
             path: props === null || props === void 0 ? void 0 : props.ajax.api,
             data: data
           }).then(function (response) {
-            console.log(inputValue, response, callback);
+            // console.log(inputValue, response, callback);
+
             callback(response);
             return response;
           })["finally"](function () {
@@ -2995,7 +3038,7 @@
               var lr = window.lastRequest;
               // @ts-ignore
               window.lastRequest = null;
-              console.log("recursive call: ", lr, callback);
+              // console.log("recursive call: ", lr, callback);
 
               // @ts-ignore
               handleMenuOpen.apply(void 0, _toConsumableArray(lr));
@@ -3663,7 +3706,9 @@
       }));
     })), hooks.applyFilters('wprf_tab_content', '', rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && React.createElement(SteppedButton$1, {
       fields: tabsFields,
-      config: (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 ? _rest$step2 : {}
+      config: (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 ? _rest$step2 : {
+        show: false
+      }
     }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
       rest: rest
     }) : true) && React.createElement(Submit, submit));

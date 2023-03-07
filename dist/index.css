@@ -1785,3 +1785,42 @@ button.wprf-btn {
       .wprf-json-uploader .wpfr-json-file-name-wrapper .wprf-json-file-delete-button:hover {
         background: red;
         color: white; }
+
+.wprf-clipboard-wrapper {
+  position: relative; }
+  .wprf-clipboard-wrapper input {
+    padding-right: 20px !important;
+    width: 100% !important; }
+  .wprf-clipboard-wrapper .wprf-clipboard-tooltip {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%); }
+    .wprf-clipboard-wrapper .wprf-clipboard-tooltip .wprf-clipboard-tooltip-text {
+      position: absolute;
+      max-width: 30ch;
+      white-space: pre;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #5725ff;
+      padding: 5px 10px;
+      line-height: 1;
+      border-radius: 3px;
+      color: white;
+      visibility: hidden;
+      opacity: 0; }
+      .wprf-clipboard-wrapper .wprf-clipboard-tooltip .wprf-clipboard-tooltip-text:after {
+        content: '';
+        position: absolute;
+        border-top: 5px solid #5725ff;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%); }
+    .wprf-clipboard-wrapper .wprf-clipboard-tooltip .wprf-copy-icon {
+      cursor: pointer; }
+  .wprf-clipboard-wrapper:hover .wprf-clipboard-tooltip-text, .wprf-clipboard-wrapper:focus .wprf-clipboard-tooltip-text {
+    visibility: visible;
+    opacity: 1; }

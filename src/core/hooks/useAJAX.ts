@@ -22,7 +22,7 @@ export const useAJAX = ( props ) => {
             path: props?.ajax.api,
             data: data
         }).then(response => {
-            console.log(response);
+            // console.log(response);
         })
 
         let ajaxOptions = data;

@@ -10,8 +10,8 @@ export interface Field {
 export type Fields = Array<Field>;
 
 interface Step {
-    'show'   : boolean,
-    'buttons': { [key: string] : string } | Field,
+    'show'    : boolean,
+    'buttons'?: { [key: string] : string } | Field,
 }
 
 export interface TabConfig extends Field {

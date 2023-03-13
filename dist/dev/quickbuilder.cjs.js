@@ -18,8 +18,8 @@ var components = require('@wordpress/components');
 var copy = require('copy-to-clipboard');
 var ReactSelect = require('react-select');
 var reactSortablejs = require('react-sortablejs');
-var AsyncSelect = require('react-select/async');
 var parse = require('html-react-parser');
+var AsyncSelect = require('react-select/async');
 var mediaUtils = require('@wordpress/media-utils');
 var reactDraftWysiwyg = require('react-draft-wysiwyg');
 var draftJs = require('draft-js');
@@ -38,8 +38,8 @@ var classNames__default = /*#__PURE__*/_interopDefaultLegacy(classNames);
 var Swal__default = /*#__PURE__*/_interopDefaultLegacy(Swal);
 var copy__default = /*#__PURE__*/_interopDefaultLegacy(copy);
 var ReactSelect__default = /*#__PURE__*/_interopDefaultLegacy(ReactSelect);
-var AsyncSelect__default = /*#__PURE__*/_interopDefaultLegacy(AsyncSelect);
 var parse__default = /*#__PURE__*/_interopDefaultLegacy(parse);
+var AsyncSelect__default = /*#__PURE__*/_interopDefaultLegacy(AsyncSelect);
 var draftToHtml__default = /*#__PURE__*/_interopDefaultLegacy(draftToHtml);
 var htmlToDraft__default = /*#__PURE__*/_interopDefaultLegacy(htmlToDraft);
 var SweetAlert__default = /*#__PURE__*/_interopDefaultLegacy(SweetAlert$1);
@@ -1963,7 +1963,8 @@ var DateControl = function DateControl(props) {
       }, date.date(format, _value, -new Date().getTimezoneOffset()));
     },
     renderContent: function renderContent() {
-      console.log(getTime(value), getTime(value).toDate());
+      // console.log(getTime(value), getTime(value).toDate());
+
       return React.createElement(components.DateTimePicker
       // @ts-ignore
       , {
@@ -1989,7 +1990,7 @@ var Date$1 = withLabel(DateControl);
 function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$9(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var Input = function Input(props) {
-  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
   var handleChange = React.useCallback(function (event) {
     return validProps.onChange(event, {
       popup: props === null || props === void 0 ? void 0 : props.popup,
@@ -2000,6 +2001,47 @@ var Input = function Input(props) {
     if (validProps !== null && validProps !== void 0 && validProps.name) {
       validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
     }
+  }
+  var _useState = React.useState(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isCopied = _useState2[0],
+    setIsCopied = _useState2[1];
+  React.useEffect(function () {
+    var CopyInterval;
+    if (isCopied) {
+      CopyInterval = setTimeout(function () {
+        setIsCopied(false);
+      }, 2000);
+    }
+    return function () {
+      return CopyInterval && clearTimeout(CopyInterval);
+    };
+  }, [isCopied]);
+  if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
+    var copyMessage = (props === null || props === void 0 ? void 0 : props.copyMessage) || "Click To Copy!";
+    var copiedMessage = (props === null || props === void 0 ? void 0 : props.copiedMessage) || "Copied!";
+    var handleCopy = function handleCopy() {
+      copy__default["default"](props.value, {
+        format: 'text/plain',
+        onCopy: function onCopy() {
+          setIsCopied(true);
+        }
+      });
+    };
+    return React.createElement("span", {
+      className: "wprf-clipboard-wrapper"
+    }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$9(_objectSpread$9({}, validProps), {}, {
+      onChange: handleChange
+    })), React.createElement("span", {
+      className: "wprf-clipboard-tooltip"
+    }, React.createElement("span", {
+      className: "wprf-clipboard-tooltip-text"
+    }, isCopied ? copiedMessage : copyMessage), React.createElement(components.Button, {
+      className: "wprf-copy-icon",
+      onClick: function onClick() {
+        return handleCopy();
+      }
+    }, "Copy")));
   }
   return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$9(_objectSpread$9({}, validProps), {}, {
     onChange: handleChange
@@ -3008,7 +3050,8 @@ var SelectAsync = function SelectAsync(props) {
           path: props === null || props === void 0 ? void 0 : props.ajax.api,
           data: data
         }).then(function (response) {
-          console.log(inputValue, response, callback);
+          // console.log(inputValue, response, callback);
+
           callback(response);
           return response;
         })["finally"](function () {
@@ -3019,7 +3062,7 @@ var SelectAsync = function SelectAsync(props) {
             var lr = window.lastRequest;
             // @ts-ignore
             window.lastRequest = null;
-            console.log("recursive call: ", lr, callback);
+            // console.log("recursive call: ", lr, callback);
 
             // @ts-ignore
             handleMenuOpen.apply(void 0, _toConsumableArray(lr));
@@ -3687,7 +3730,9 @@ var Content = function Content(_ref) {
     }));
   })), hooks.applyFilters('wprf_tab_content', '', rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && React.createElement(SteppedButton$1, {
     fields: tabsFields,
-    config: (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 ? _rest$step2 : {}
+    config: (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 ? _rest$step2 : {
+      show: false
+    }
   }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
     rest: rest
   }) : true) && React.createElement(Submit, submit));

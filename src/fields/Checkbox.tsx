@@ -44,7 +44,7 @@ function GenericCheckbox(props) {
     return (
         <div className={componentClasses}>
             <GenericInput {...{ ...props, type: 'checkbox' }} />
-            {/* <Label htmlFor={props.id} /> */}
+            <label htmlFor={props.id}>{props.label}</label>
         </div>
     );
 }

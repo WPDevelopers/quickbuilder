@@ -55,7 +55,7 @@ function _typeof$1(obj) {
   return _typeof$1(obj);
 }
 
-function _arrayLikeToArray$1(arr, len) {
+function _arrayLikeToArray$2(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
 
   for (var i = 0, arr2 = new Array(len); i < len; i++) {
@@ -66,20 +66,20 @@ function _arrayLikeToArray$1(arr, len) {
 }
 
 function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
+  if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
 }
 
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
-function _unsupportedIterableToArray$1(o, minLen) {
+function _unsupportedIterableToArray$2(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
+  if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
 }
 
 function _nonIterableSpread() {
@@ -87,7 +87,7 @@ function _nonIterableSpread() {
 }
 
 function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread();
 }
 
 function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -228,7 +228,7 @@ var validFieldProps = function validFieldProps(defaultProps) {
   var exclude = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var type = defaultProps.type;
   var filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch'].concat(_toConsumableArray(exclude));
-  if (type !== 'select' && type !== 'radio-card' && type !== 'toggle' && defaultProps.multiple) {
+  if (type !== 'select' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
     filterOutArray.push('options');
   }
   if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {
@@ -683,7 +683,7 @@ function _nonIterableRest() {
 }
 
 function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest();
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest();
 }
 
 var Menu = function Menu(props) {
@@ -1842,6 +1842,113 @@ var withProps = function withProps(WrappedComponent) {
   return WithProps;
 };
 
+function _createForOfIteratorHelper$1(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
+function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$9(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function GenericCheckbox(props) {
+  var _styles$label, _styles$label2, _classNames;
+  var prevStyles = props.style;
+  var styles = _objectSpread$9({
+    type: "",
+    // card
+    label: {
+      position: "right"
+    },
+    column: 4
+  }, prevStyles);
+  var isChecked = useMemo(function () {
+    var _isChecked = false;
+    if (props !== null && props !== void 0 && props.checked && isObject(props.checked) && isString(props === null || props === void 0 ? void 0 : props.value)) {
+      _isChecked = props.checked[props.value];
+    } else {
+      if (!isString(props.value)) {
+        _isChecked = props.value;
+      }
+    }
+    return _isChecked;
+  }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
+  var componentClasses = classNames("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+  return createElement("div", {
+    className: componentClasses
+  }, createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
+    type: 'checkbox'
+  })));
+}
+function Checkbox(props) {
+  var passedOptions = props.options,
+    value = props.value,
+    multiple = props.multiple,
+    prevStyles = props.style;
+  var options = sortingFields(passedOptions);
+  var styles = _objectSpread$9({
+    column: 4
+  }, prevStyles);
+  if (multiple) {
+    console.log(props);
+    var _useState = useState({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      localState = _useState2[0],
+      setLocalState = _useState2[1];
+    var handleChange = function handleChange(event) {
+      var target = event.target ? event.target : event.currentTarget;
+      setLocalState(function (prevState) {
+        return _objectSpread$9(_objectSpread$9({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+      });
+      console.log(_defineProperty({}, target.value, target.checked), props);
+    };
+    useEffect(function () {
+      props.onChange({
+        target: {
+          type: 'checkbox',
+          name: props.name,
+          value: localState
+        }
+      });
+    }, [localState]);
+    useEffect(function () {
+      if (!isObject(value)) {
+        var lState = {};
+        var _iterator = _createForOfIteratorHelper$1(options),
+          _step;
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var option = _step.value;
+            lState[option.value] = value;
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+        setLocalState(lState);
+      } else {
+        setLocalState(value);
+      }
+    }, []);
+    return createElement("div", {
+      className: "wprf-checkbox-wrapper wprf-control"
+    }, createElement(Row, null, options.map(function (item) {
+      return createElement(Column, {
+        key: item.value,
+        column: styles.column
+      }, createElement(GenericCheckbox, _objectSpread$9(_objectSpread$9({}, item), {}, {
+        context: props === null || props === void 0 ? void 0 : props.context,
+        id: item.value,
+        checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
+        type: 'checkbox',
+        onChange: handleChange,
+        style: styles
+      })));
+    })));
+  }
+  return createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
+    type: 'checkbox'
+  }));
+}
+var Checkbox$1 = withLabel(Checkbox);
+
 var Field = function Field(props) {
   if (!props.type || props.type.length === 0) {
     console.error(props);
@@ -1849,13 +1956,15 @@ var Field = function Field(props) {
   }
   switch (props.type) {
     case "text":
-    case "checkbox":
+    // case "checkbox":
     case "radio":
     case "email":
     case "range":
     case "number":
     case "hidden":
       return createElement(Input$1, props);
+    case "checkbox":
+      return createElement(Checkbox$1, props);
     case "textarea":
       return createElement(Textarea$1, props);
     case "codeviewer":
@@ -1967,8 +2076,8 @@ var DateControl = function DateControl(props) {
 };
 var Date$1 = withLabel(DateControl);
 
-function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$9(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var Input = function Input(props) {
   var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
   var handleChange = useCallback(function (event) {
@@ -2010,7 +2119,7 @@ var Input = function Input(props) {
     };
     return createElement("span", {
       className: "wprf-clipboard-wrapper"
-    }, /*#__PURE__*/React.createElement("input", _objectSpread$9(_objectSpread$9({}, validProps), {}, {
+    }, /*#__PURE__*/React.createElement("input", _objectSpread$8(_objectSpread$8({}, validProps), {}, {
       onChange: handleChange
     })), createElement("span", {
       className: "wprf-clipboard-tooltip"
@@ -2023,7 +2132,7 @@ var Input = function Input(props) {
       }
     }, "Copy")));
   }
-  return /*#__PURE__*/React.createElement('input', _objectSpread$9(_objectSpread$9({}, validProps), {}, {
+  return /*#__PURE__*/React.createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
     onChange: handleChange
   }));
 };
@@ -2033,8 +2142,8 @@ Input.defaultProps = {
 var GenericInput = /*#__PURE__*/React.memo(Input);
 var Input$1 = withLabel( /*#__PURE__*/React.memo(Input));
 
-function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$7(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var Textarea = function Textarea(props) {
   var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
   var handleChange = useCallback(function (event) {
@@ -2042,15 +2151,15 @@ var Textarea = function Textarea(props) {
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-  return /*#__PURE__*/React.createElement('textarea', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
+  return /*#__PURE__*/React.createElement('textarea', _objectSpread$7(_objectSpread$7({}, validProps), {}, {
     onChange: handleChange,
     rows: 5
   }));
 };
 var Textarea$1 = withLabel( /*#__PURE__*/React.memo(Textarea));
 
-function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$7(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var CodeViewer = function CodeViewer(props) {
   var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
   var handleChange = useCallback(function (event) {
@@ -2076,7 +2185,7 @@ var CodeViewer = function CodeViewer(props) {
   var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : __("Click to Copy", "notificationx");
   return createElement("span", {
     className: "wprf-code-viewer"
-  }, /*#__PURE__*/React.createElement("textarea", _objectSpread$7(_objectSpread$7({}, validProps), extraProps)), createElement(Button$2, {
+  }, /*#__PURE__*/React.createElement("textarea", _objectSpread$6(_objectSpread$6({}, validProps), extraProps)), createElement(Button$2, {
     className: "wprf-copy-button"
   }, ButtonText));
 };
@@ -2423,12 +2532,12 @@ var RepeaterField = function RepeaterField(props) {
   })));
 };
 
-function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var GenericToggle = function GenericToggle(props) {
   var _styles$label, _styles$label2, _classNames;
   var prevStyles = props.style;
-  var styles = _objectSpread$6({
+  var styles = _objectSpread$5({
     type: "",
     // card
     label: {
@@ -2450,7 +2559,7 @@ var GenericToggle = function GenericToggle(props) {
   var componentClasses = classNames("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
   return createElement("div", {
     className: componentClasses
-  }, createElement(GenericInput, _objectSpread$6(_objectSpread$6({}, props), {}, {
+  }, createElement(Input$1, _objectSpread$5(_objectSpread$5({}, props), {}, {
     type: 'checkbox',
     placeholder: undefined
   })), createElement(Label, {
@@ -2521,15 +2630,15 @@ var toolbarOptions = {
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var Toggle = function Toggle(props) {
   var passedOptions = props.options,
     value = props.value,
     multiple = props.multiple,
     prevStyles = props.style;
   var options = sortingFields(passedOptions);
-  var styles = _objectSpread$5({
+  var styles = _objectSpread$4({
     column: 4
   }, prevStyles);
   if (multiple) {
@@ -2540,7 +2649,7 @@ var Toggle = function Toggle(props) {
     var handleChange = function handleChange(event) {
       var target = event.target ? event.target : event.currentTarget;
       setLocalState(function (prevState) {
-        return _objectSpread$5(_objectSpread$5({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+        return _objectSpread$4(_objectSpread$4({}, prevState), {}, _defineProperty({}, target.value, target.checked));
       });
     };
     useEffect(function () {
@@ -2578,7 +2687,7 @@ var Toggle = function Toggle(props) {
       return createElement(Column, {
         key: item.value,
         column: styles.column
-      }, createElement(GenericToggle$1, _objectSpread$5(_objectSpread$5({}, item), {}, {
+      }, createElement(GenericToggle$1, _objectSpread$4(_objectSpread$4({}, item), {}, {
         context: props === null || props === void 0 ? void 0 : props.context,
         id: item.value,
         checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
@@ -2592,8 +2701,8 @@ var Toggle = function Toggle(props) {
 };
 
 var _excluded$1 = ["label", "value", "icon", "is_pro"];
-function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var RadioCard = function RadioCard(props) {
   var builderContext = useBuilderContext();
   var _useOptions = useOptions(props, 'options'),
@@ -2604,7 +2713,7 @@ var RadioCard = function RadioCard(props) {
   }
   var instanceId = useInstanceId(RadioCard);
   var componentClasses = classNames(["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
-  var styles = _objectSpread$4({}, props === null || props === void 0 ? void 0 : props.style);
+  var styles = _objectSpread$3({}, props === null || props === void 0 ? void 0 : props.style);
   var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
   useEffect(function () {
     if (option) {
@@ -2778,8 +2887,8 @@ function v4(options, buf, offset) {
   return stringify(rnds);
 }
 
-function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var Repeater = function Repeater(props) {
   var _builderContext$value, _builderContext$value4;
   var fieldName = props.name;
@@ -2827,26 +2936,26 @@ var Repeater = function Repeater(props) {
       var _indexedCopy, _indexedCopy2, _indexedCopy3, _indexedCopy4;
       var indexedCopy = (lValue === null || lValue === void 0 ? void 0 : lValue[index]) || {};
       if ((_indexedCopy = indexedCopy) !== null && _indexedCopy !== void 0 && _indexedCopy.title) {
-        indexedCopy = _objectSpread$3(_objectSpread$3({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
           title: indexedCopy.title + ' - Copy'
         });
       }
       if ((_indexedCopy2 = indexedCopy) !== null && _indexedCopy2 !== void 0 && _indexedCopy2.post_title) {
-        indexedCopy = _objectSpread$3(_objectSpread$3({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
           post_title: indexedCopy.post_title + ' - Copy'
         });
       }
       if ((_indexedCopy3 = indexedCopy) !== null && _indexedCopy3 !== void 0 && _indexedCopy3.username) {
-        indexedCopy = _objectSpread$3(_objectSpread$3({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
           username: indexedCopy.username + ' - Copy'
         });
       }
       if ((_indexedCopy4 = indexedCopy) !== null && _indexedCopy4 !== void 0 && _indexedCopy4.plugin_theme_name) {
-        indexedCopy = _objectSpread$3(_objectSpread$3({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
           plugin_theme_name: indexedCopy.plugin_theme_name + ' - Copy'
         });
       }
-      indexedCopy = _objectSpread$3(_objectSpread$3({}, indexedCopy), {}, {
+      indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
         index: v4(),
         isCollapsed: false
       });
@@ -2861,7 +2970,7 @@ var Repeater = function Repeater(props) {
     } else {
       setLocalMemoizedValue(function (items) {
         return items.map(function (item) {
-          return _objectSpread$3(_objectSpread$3({}, item), {}, {
+          return _objectSpread$2(_objectSpread$2({}, item), {}, {
             index: v4()
           });
         });
@@ -3365,8 +3474,8 @@ var Button = function Button(props) {
 };
 var Button$1 = withLabel(Button);
 
-function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var ResponsiveNumber = function ResponsiveNumber(props) {
   var _Object$keys;
   var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
@@ -3379,7 +3488,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
   var value = validProps.value;
   if (!isObject(validProps.value)) {
     Object.keys(props.controls).reduce(function (acc, key) {
-      return _objectSpread$2(_objectSpread$2({}, acc), {}, _defineProperty({}, key, validProps.value));
+      return _objectSpread$1(_objectSpread$1({}, acc), {}, _defineProperty({}, key, validProps.value));
     }, {});
   }
   var _useState3 = useState(value),
@@ -3387,7 +3496,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
     responsiveSize = _useState4[0],
     setResponsiveSize = _useState4[1];
   var handleChange = function handleChange(event) {
-    setResponsiveSize(_objectSpread$2(_objectSpread$2({}, responsiveSize), {}, _defineProperty({}, responsive, event.target.value)));
+    setResponsiveSize(_objectSpread$1(_objectSpread$1({}, responsiveSize), {}, _defineProperty({}, responsive, event.target.value)));
   };
   useEffect(function () {
     validProps.onChange({
@@ -3408,7 +3517,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
       columnGap: 10,
       flexWrap: "wrap"
     }
-  }, /*#__PURE__*/React.createElement("input", _objectSpread$2(_objectSpread$2({}, validProps), {}, {
+  }, /*#__PURE__*/React.createElement("input", _objectSpread$1(_objectSpread$1({}, validProps), {}, {
     type: "number",
     value: responsiveSize === null || responsiveSize === void 0 ? void 0 : responsiveSize[responsive],
     onChange: handleChange
@@ -3544,8 +3653,6 @@ var Modal = function Modal(props) {
   }))));
 };
 
-function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var InnerContent = function InnerContent(_ref) {
   var fields = _ref.fields,
     parentIndex = _ref.parentIndex,
@@ -3563,7 +3670,6 @@ var InnerContent = function InnerContent(_ref) {
     var newFields = sortingFields(fields);
     context.setFormField([parentIndex, 'fields'], newFields);
     setFields(newFields);
-    console.log(_objectSpread$1({}, newFields));
   }, []);
   useEffect(function () {
     if (isArray(_fields) && _fields.length > 0) {

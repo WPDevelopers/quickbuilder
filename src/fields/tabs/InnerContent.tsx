@@ -11,7 +11,6 @@ const InnerContent: React.FC<InnerContentConfig> = ({ fields, parentIndex, conte
         const newFields = sortingFields(fields);
         context.setFormField([parentIndex, 'fields'], newFields);
         setFields(newFields);
-        console.log({...newFields});
 
     }, [])
 

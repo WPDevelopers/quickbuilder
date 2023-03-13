@@ -27,6 +27,7 @@ import {
 
 import { withProps } from "../core/hooks";
 import Tab from "./Tab";
+import Checkbox from "./Checkbox";
 
 const Field = (props) => {
 	if (!props.type || props.type.length === 0) {
@@ -38,13 +39,15 @@ const Field = (props) => {
 
 	switch (props.type) {
 		case "text":
-		case "checkbox":
+		// case "checkbox":
 		case "radio":
 		case "email":
 		case "range":
 		case "number":
 		case "hidden":
 			return <Input {...props} />;
+		case "checkbox":
+			return <Checkbox {...props} />;
 		case "textarea":
 			return <Textarea {...props} />;
 		case "codeviewer":

@@ -165,7 +165,7 @@ const useBuilder = (props) => {
 		validProps.onBlur = handleBlur;
 
 		let valueProp = validProps.value;
-		if (type === 'checkbox') {
+		if (type === 'checkbox' && !validProps.multiple) {
 			validProps.checked = !!valueState;
 			validProps.value = !!valueState;
 			if (isString(valueState) && valueState === "0") {

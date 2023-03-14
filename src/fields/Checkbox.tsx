@@ -60,21 +60,20 @@ function Checkbox(props) {
 
 
     if (multiple) {
-        console.log(props);
         const [localState, setLocalState] = useState({});
         const handleChange = (event) => {
             const target = event.target ? event.target : event.currentTarget;
             setLocalState(prevState => ({ ...prevState, [target.value]: target.checked }))
-            console.log({[target.value]: target.checked}, props);
 
         }
 
         useEffect(() => {
             props.onChange({
                 target: {
-                    type: 'checkbox',
-                    name: props.name,
-                    value: localState,
+                    type    : 'checkbox',
+                    name    : props.name,
+                    value   : localState,
+                    multiple: true,
                 }
             });
         }, [localState])

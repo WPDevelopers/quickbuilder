@@ -54,6 +54,7 @@ const Tab: React.FC<TabConfig> = (props) => {
                 {...props}
                 fields={props.fields}
                 active={activeTab}
+                setActive={(tabId) => setActiveTab(tabId)}
                 submit={props?.submit}
             />
             {/* </BuilderProvider> */}

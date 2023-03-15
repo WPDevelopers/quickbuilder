@@ -40,8 +40,10 @@ export interface InnerContentConfig {
 }
 
 export interface SteppedButtonConfig {
-    fields: Fields,
-    config: Step,
+    active   : string,
+    setActive: (tabId?: string) => void,
+    fields   : Fields,
+    config   : Step,
 }
 
 // export type TabContentProps = TabConfig &&

@@ -172,8 +172,24 @@ var executeChange = function executeChange(eventOrTextValue, maybePath) {
       checked = target.checked,
       multiple = target.multiple;
     field = maybePath ? maybePath : name;
-    val = /number|range/.test(type) ? (parsed = parseFloat(value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type) // checkboxes
-    ? checked : !!multiple ? value : value;
+
+    // val = /number|range/.test(type) ? (parsed = parseFloat(value), isNaN(parsed) ? '' : parsed) : /checkbox/.test(type) // checkboxes
+    //     ? checked : !!multiple ? value : value;
+
+    switch (type) {
+      case 'number':
+      case 'range':
+        parsed = parseFloat(value);
+        val = parsed;
+        break;
+      case 'checkbox':
+        val = !!multiple ? value : checked;
+        break;
+      case 'toggle':
+      default:
+        val = value;
+        break;
+    }
   }
   return {
     field: field,
@@ -1336,7 +1352,7 @@ var useBuilder = function useBuilder(props) {
     validProps.onChange = handleChange;
     validProps.onBlur = handleBlur;
     var valueProp = validProps.value;
-    if (type === 'checkbox') {
+    if (type === 'checkbox' && !validProps.multiple) {
       validProps.checked = !!valueState;
       validProps.value = !!valueState;
       if (isString(valueState) && valueState === "0") {
@@ -1874,7 +1890,9 @@ function GenericCheckbox(props) {
     className: componentClasses
   }, createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
     type: 'checkbox'
-  })));
+  })), createElement("label", {
+    htmlFor: props.id
+  }, props.label));
 }
 function Checkbox(props) {
   var passedOptions = props.options,
@@ -1886,7 +1904,6 @@ function Checkbox(props) {
     column: 4
   }, prevStyles);
   if (multiple) {
-    console.log(props);
     var _useState = useState({}),
       _useState2 = _slicedToArray(_useState, 2),
       localState = _useState2[0],
@@ -1896,14 +1913,14 @@ function Checkbox(props) {
       setLocalState(function (prevState) {
         return _objectSpread$9(_objectSpread$9({}, prevState), {}, _defineProperty({}, target.value, target.checked));
       });
-      console.log(_defineProperty({}, target.value, target.checked), props);
     };
     useEffect(function () {
       props.onChange({
         target: {
           type: 'checkbox',
           name: props.name,
-          value: localState
+          value: localState,
+          multiple: true
         }
       });
     }, [localState]);
@@ -2559,7 +2576,7 @@ var GenericToggle = function GenericToggle(props) {
   var componentClasses = classNames("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
   return createElement("div", {
     className: componentClasses
-  }, createElement(Input$1, _objectSpread$5(_objectSpread$5({}, props), {}, {
+  }, createElement(GenericInput, _objectSpread$5(_objectSpread$5({}, props), {}, {
     type: 'checkbox',
     placeholder: undefined
   })), createElement(Label, {
@@ -3729,13 +3746,13 @@ var SteppedButton = function SteppedButton(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     prevTab = _useState4[0],
     setPrevTab = _useState4[1];
-  var builderContext = useBuilderContext();
+  useBuilderContext();
   useEffect(function () {
     var tabIds = props.fields.map(function (tab) {
       return tab.id;
     });
     var currentTabIndex = tabIds.findIndex(function (tab) {
-      return tab === builderContext.config.active;
+      return tab === props.active;
     });
     if (currentTabIndex != -1) {
       setPrevTab(tabIds[currentTabIndex - 1]);
@@ -3743,28 +3760,29 @@ var SteppedButton = function SteppedButton(props) {
     if (currentTabIndex <= tabIds.length) {
       setNextTab(tabIds[currentTabIndex + 1]);
     }
-  }, [builderContext.config.active, props.fields]);
+  }, [props.active, props.fields]);
   return createElement("div", {
     className: "wprf-stepped-button"
-  }, Object.keys(props.config.buttons).map(function (button, index) {
-    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3;
+  }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
+    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4;
     return createElement(React.Fragment, {
       key: "button_".concat(button, "_").concat(index)
     }, (button === 'next' && nextTab !== undefined || button === 'prev' && prevTab !== undefined) && createElement(Button$2, {
       className: "wprf-btn wprf-step-btn-".concat(button),
       onClick: function onClick() {
-        return builderContext.setActiveTab(button === 'next' ? nextTab : prevTab);
+        return props.setActive(button === 'next' ? nextTab : prevTab);
       }
-    }, props.config.buttons[button]), nextTab == undefined && ((_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : (_props$config$buttons2 = _props$config$buttons[button]) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2.type) && createElement(Field$1, (_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3[button]));
+    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), nextTab == undefined && ((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.type) && createElement(Field$1, (_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4[button]));
   }));
 };
 var SteppedButton$1 = /*#__PURE__*/React.memo(SteppedButton);
 
-var _excluded = ["fields", "active", "submit"];
+var _excluded = ["fields", "active", "setActive", "submit"];
 var Content = function Content(_ref) {
   var _builderContext$value, _builderContext$value2, _builderContext$value3, _rest$step, _rest$step2, _submit$show;
   var tabs = _ref.fields,
     active = _ref.active,
+    setActive = _ref.setActive,
     submit = _ref.submit,
     rest = _objectWithoutProperties(_ref, _excluded);
   if (tabs === undefined) {
@@ -3816,6 +3834,8 @@ var Content = function Content(_ref) {
     }));
   })), applyFilters('wprf_tab_content', '', rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && createElement(SteppedButton$1, {
     fields: tabsFields,
+    active: active,
+    setActive: setActive,
     config: (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 ? _rest$step2 : {
       show: false
     }
@@ -3862,6 +3882,9 @@ var Tab = function Tab(props) {
   })), createElement(Content, _extends$1({}, props, {
     fields: props.fields,
     active: activeTab,
+    setActive: function setActive(tabId) {
+      return setActiveTab(tabId);
+    },
     submit: props === null || props === void 0 ? void 0 : props.submit
   })));
 };

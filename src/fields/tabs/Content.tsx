@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { Field } from '../../fields';
 
 
-const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, submit, ...rest }) => {
+const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, setActive, submit, ...rest }) => {
     if (tabs === undefined) {
         throw new Error(__("There are no #tabs args defined in props.", 'notificationx'));
     }
@@ -70,7 +70,7 @@ const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, submit, ...
             </div>
             {
                 rest?.step?.show &&
-                <SteppedButton fields={tabsFields} config={rest.step ?? {show: false}} />
+                <SteppedButton fields={tabsFields} active={active} setActive={setActive} config={rest.step ?? {show: false}} />
             }
             {(submit?.show ?? true) && (submit?.rules ? when(submit?.rules, { rest }) : true) && <Submit {...submit} />}
         </div>

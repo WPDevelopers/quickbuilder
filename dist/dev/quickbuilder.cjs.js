@@ -11,7 +11,6 @@ var moment = require('moment');
 var intersect = require('intersect');
 var i18n = require('@wordpress/i18n');
 var classNames = require('classnames');
-require('lodash');
 var hooks = require('@wordpress/hooks');
 var Swal = require('sweetalert2');
 var components = require('@wordpress/components');
@@ -44,7 +43,34 @@ var draftToHtml__default = /*#__PURE__*/_interopDefaultLegacy(draftToHtml);
 var htmlToDraft__default = /*#__PURE__*/_interopDefaultLegacy(htmlToDraft);
 var SweetAlert__default = /*#__PURE__*/_interopDefaultLegacy(SweetAlert$1);
 
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof$1(obj);
+}
+
+function _toPrimitive(input, hint) {
+  if (_typeof$1(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof$1(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return _typeof$1(key) === "symbol" ? key : String(key);
+}
+
 function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -55,33 +81,12 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
-
   return obj;
-}
-
-function _typeof$1(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof$1 = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof$1 = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof$1(obj);
 }
 
 function _arrayLikeToArray$2(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 
@@ -264,7 +269,7 @@ var validFieldProps = function validFieldProps(defaultProps) {
   var exclude = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var type = defaultProps.type;
   var filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch'].concat(_toConsumableArray(exclude));
-  if (type !== 'select' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
+  if (type !== 'select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
     filterOutArray.push('options');
   }
   if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {
@@ -663,20 +668,17 @@ var store = {
 };
 
 function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends$1.apply(this, arguments);
 }
 
@@ -685,33 +687,31 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-
-  var _s, _e;
-
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
     try {
-      if (!_n && _i["return"] != null) _i["return"]();
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
     } finally {
-      if (_d) throw _e;
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
     }
+    return _arr;
   }
-
-  return _arr;
 }
 
 function _nonIterableRest() {
@@ -773,13 +773,11 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
 
@@ -787,10 +785,8 @@ function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
   var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
-
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -798,7 +794,6 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
-
   return target;
 }
 
@@ -1880,7 +1875,7 @@ var withProps = function withProps(WrappedComponent) {
 
 function _createForOfIteratorHelper$1(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
-function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$9(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function GenericCheckbox(props) {
@@ -2666,7 +2661,7 @@ var toolbarOptions = {
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var Toggle = function Toggle(props) {
@@ -3133,10 +3128,10 @@ var SelectAsync = function SelectAsync(props) {
     placeholder = props.placeholder,
     onChange = props.onChange;
     props.parentIndex;
-  var _useState = React.useState(props === null || props === void 0 ? void 0 : props.options),
+  var _useState = React.useState(builderContext.eligibleOptions(props.options)),
     _useState2 = _slicedToArray(_useState, 2),
-    options = _useState2[0];
-    _useState2[1];
+    options = _useState2[0],
+    setOptions = _useState2[1];
   var _useState3 = React.useState(props === null || props === void 0 ? void 0 : props.value),
     _useState4 = _slicedToArray(_useState3, 2),
     sOption = _useState4[0],
@@ -3148,24 +3143,31 @@ var SelectAsync = function SelectAsync(props) {
   // const [lastRequest, setLastRequest] = useState("");
 
   var handleMenuOpen = function handleMenuOpen(inputValue, callback) {
-    var _props$ajax;
     // AJAX
-    if (props !== null && props !== void 0 && props.ajax && when(props === null || props === void 0 ? void 0 : (_props$ajax = props.ajax) === null || _props$ajax === void 0 ? void 0 : _props$ajax.rules, builderContext.values)) {
+    if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
       var _Object$keys;
       if (!inputValue) {
         callback(options);
         return;
       }
+      if (inputValue.length < 3) {
+        callback([{
+          'label': "Please type 3 or more characters.",
+          'value': null,
+          'disabled': true
+        }]);
+        return;
+      }
       var data = {
         inputValue: inputValue
       };
-      (_Object$keys = Object.keys(props === null || props === void 0 ? void 0 : props.ajax.data)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (singleData) {
-        if ((props === null || props === void 0 ? void 0 : props.ajax.data[singleData].indexOf("@")) > -1) {
+      (_Object$keys = Object.keys(props.ajax.data)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (singleData) {
+        if (props.ajax.data[singleData].indexOf("@") > -1) {
           var _builderContext$value;
-          var eligibleKey = props === null || props === void 0 ? void 0 : props.ajax.data[singleData].substr(1);
+          var eligibleKey = props.ajax.data[singleData].substr(1);
           data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];
         } else {
-          data[singleData] = props === null || props === void 0 ? void 0 : props.ajax.data[singleData];
+          data[singleData] = props.ajax.data[singleData];
         }
       });
       if (!isAjaxRunning && inputValue) {
@@ -3173,11 +3175,9 @@ var SelectAsync = function SelectAsync(props) {
         // @ts-ignore
         window.lastRequest = null;
         return wpFetch({
-          path: props === null || props === void 0 ? void 0 : props.ajax.api,
+          path: props.ajax.api,
           data: data
         }).then(function (response) {
-          // console.log(inputValue, response, callback);
-
           callback(response);
           return response;
         })["finally"](function () {
@@ -3204,12 +3204,14 @@ var SelectAsync = function SelectAsync(props) {
     }
   };
   React.useEffect(function () {
+    setOptions(builderContext.eligibleOptions(props.options));
+  }, [builderContext.values.source]);
+  React.useEffect(function () {
     onChange({
       target: {
         type: "select",
         name: name,
         value: sOption,
-        options: options,
         multiple: multiple
       }
     });
@@ -3219,8 +3221,9 @@ var SelectAsync = function SelectAsync(props) {
   }, React.createElement(AsyncSelect__default["default"], {
     cacheOptions: true,
     loadOptions: handleMenuOpen,
-    defaultOptions: true,
+    defaultOptions: options,
     isDisabled: props === null || props === void 0 ? void 0 : props.disable,
+    isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
     classNamePrefix: "wprf-async-select"
     // defaultMenuIsOpen={true}
     ,
@@ -3229,7 +3232,7 @@ var SelectAsync = function SelectAsync(props) {
     placeholder: placeholder,
     formatOptionLabel: function formatOptionLabel(option, meta) {
       var _meta$inputValue;
-      if (meta !== null && meta !== void 0 && (_meta$inputValue = meta.inputValue) !== null && _meta$inputValue !== void 0 && _meta$inputValue.length) {
+      if (meta !== null && meta !== void 0 && (_meta$inputValue = meta.inputValue) !== null && _meta$inputValue !== void 0 && _meta$inputValue.length && option.name) {
         var _meta$inputValue2;
         if (option.name.toLowerCase().includes(meta === null || meta === void 0 ? void 0 : (_meta$inputValue2 = meta.inputValue) === null || _meta$inputValue2 === void 0 ? void 0 : _meta$inputValue2.toLowerCase())) {
           var _option$name, _option$address;
@@ -3240,7 +3243,7 @@ var SelectAsync = function SelectAsync(props) {
           return React.createElement(React.Fragment, null, parse__default["default"](_name || ""), " ", React.createElement("small", null, parse__default["default"](address || "")));
         }
       }
-      return React.createElement(React.Fragment, null, option.name ? React.createElement(React.Fragment, null, React.createElement("b", null, option.name), " ") : React.createElement(React.Fragment, null, option.label, " "), React.createElement("small", null, option.address));
+      return React.createElement(React.Fragment, null, option.name ? React.createElement(React.Fragment, null, React.createElement("b", null, option.name), " ") : React.createElement(React.Fragment, null, option.label, " "), option.address && React.createElement("small", null, option.address));
     },
     value: sOption,
     isClearable: true,
@@ -3734,7 +3737,7 @@ var InnerContent = function InnerContent(_ref) {
 };
 
 function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure undefined");
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
 }
 
 var Submit = function Submit(_ref) {

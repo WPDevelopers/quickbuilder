@@ -9,29 +9,39 @@ const SelectAsync = (props) => {
 	const builderContext = useBuilderContext();
 	let { id, name, multiple, placeholder, onChange, parentIndex } = props;
 
-	const [options, setOptions] = useState(props?.options);
+	const [options, setOptions] = useState(builderContext.eligibleOptions(props.options));
 	const [sOption, setSOption] = useState(props?.value);
 	const [isAjaxRunning, setIsAjaxRunning] = useState(false);
 	// const [lastRequest, setLastRequest] = useState("");
 
 	const handleMenuOpen = (
 		inputValue: string,
-		callback: (options: []) => void
+		callback: (options: any[]) => void
 	) => {
 		// AJAX
-		if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
+		if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
 			if (!inputValue) {
 				callback(options);
 				return;
 			}
+			if (inputValue.length < 3) {
+				callback([
+					{
+						'label'   : "Please type 3 or more characters.",
+						'value'   : null,
+						'disabled': true,
+					}
+				]);
+				return;
+			}
 
 			let data = { inputValue };
-			Object.keys(props?.ajax.data)?.map((singleData) => {
-				if (props?.ajax.data[singleData].indexOf("@") > -1) {
-					let eligibleKey = props?.ajax.data[singleData].substr(1);
+			Object.keys(props.ajax.data)?.map((singleData) => {
+				if (props.ajax.data[singleData].indexOf("@") > -1) {
+					let eligibleKey = props.ajax.data[singleData].substr(1);
 					data[singleData] = builderContext.values?.[eligibleKey];
 				} else {
-					data[singleData] = props?.ajax.data[singleData];
+					data[singleData] = props.ajax.data[singleData];
 				}
 			});
 
@@ -40,12 +50,10 @@ const SelectAsync = (props) => {
 				// @ts-ignore
 				window.lastRequest = null;
 				return wpFetch({
-					path: props?.ajax.api,
+					path: props.ajax.api,
 					data: data,
 				})
 					.then((response: any) => {
-						// console.log(inputValue, response, callback);
-
 						callback(response);
 						return response;
 					})
@@ -74,12 +82,15 @@ const SelectAsync = (props) => {
 	};
 
 	useEffect(() => {
+		setOptions(builderContext.eligibleOptions(props.options));
+	}, [builderContext.values.source]);
+
+	useEffect(() => {
 		onChange({
 			target: {
 				type: "select",
 				name,
 				value: sOption,
-				options,
 				multiple,
 			},
 		});
@@ -90,15 +101,16 @@ const SelectAsync = (props) => {
 			<AsyncSelect
 				cacheOptions
 				loadOptions={handleMenuOpen}
-				defaultOptions
+				defaultOptions={options}
 				isDisabled={props?.disable}
+                isMulti={multiple ?? false}
 				classNamePrefix="wprf-async-select"
 				// defaultMenuIsOpen={true}
 				id={id}
 				name={name}
 				placeholder={placeholder}
 				formatOptionLabel={(option, meta) => {
-					if (meta?.inputValue?.length) {
+					if (meta?.inputValue?.length && option.name) {
 						if (
 							option.name
 								.toLowerCase()
@@ -134,7 +146,7 @@ const SelectAsync = (props) => {
 							) : (
 								<>{option.label}{" "}</>
 							)}
-							<small>{option.address}</small>
+							{option.address && <small>{option.address}</small>}
 						</>
 					);
 				}}

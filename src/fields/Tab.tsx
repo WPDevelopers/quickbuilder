@@ -13,7 +13,7 @@ import classNames from 'classnames';
 const Tab: React.FC<TabConfig> = (props) => {
     // const builderContextState = useBuilder(props);
     const builderContext = useBuilderContext();
-    const [activeTab, setActiveTab] = useState(props.value);
+    const [activeTab, setActiveTab] = useState(props.value || props.active);
 
 	const componentClasses = classNames(
 		"wp-react-form wprf-tabs-wrapper",

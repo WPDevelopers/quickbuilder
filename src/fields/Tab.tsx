@@ -13,7 +13,7 @@ import classNames from 'classnames';
 const Tab: React.FC<TabConfig> = (props) => {
     // const builderContextState = useBuilder(props);
     const builderContext = useBuilderContext();
-    const [activeTab, setActiveTab] = useState(props.value || props.active);
+    const [activeTab, setActiveTab] = useState(props.value);
 
 	const componentClasses = classNames(
 		"wp-react-form wprf-tabs-wrapper",
@@ -25,19 +25,22 @@ const Tab: React.FC<TabConfig> = (props) => {
 
     // console.log(props.value, props);
 
-
-    // useEffect(() => {
-    //     setActiveTab(props.value);
-    // }, [props.value])
+    useEffect(() => {
+        if(props.value !== activeTab){
+            setActiveTab(props.value);
+        }
+    }, [props.value])
 
     useEffect(() => {
-        props.onChange({
-            target: {
-                type: 'button',
-                name: props.name,
-                value: activeTab
-            }
-        });
+        if(props.value !== activeTab){
+            props.onChange({
+                target: {
+                    type: 'button',
+                    name: props.name,
+                    value: activeTab
+                }
+            });
+        }
     }, [activeTab])
 
     return (

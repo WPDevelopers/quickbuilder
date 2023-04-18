@@ -19,6 +19,7 @@ const FormBuilder: React.FC<BuilderProps | TabProps> = (props) => {
 	if(!tabs?.type){
 		tabs = {
 			...props.config,
+			value: props.config.active,
 			fields: props.tabs,
 			tabs: undefined,
 			submit: props?.submit,

@@ -2364,9 +2364,8 @@ var Select = function Select(props) {
     isAjaxComplete = _useState6[0];
     _useState6[1];
   var handleMenuOpen = function handleMenuOpen() {
-    var _props$ajax;
     // AJAX
-    if (props !== null && props !== void 0 && props.ajax && when(props === null || props === void 0 ? void 0 : (_props$ajax = props.ajax) === null || _props$ajax === void 0 ? void 0 : _props$ajax.rules, builderContext.values)) {
+    if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
       setIsLoading(true);
       var data = {};
       Object.keys(props === null || props === void 0 ? void 0 : props.ajax.data).map(function (singleData) {
@@ -3880,18 +3879,21 @@ var Tab = function Tab(props) {
 
   // console.log(props.value, props);
 
-  // useEffect(() => {
-  //     setActiveTab(props.value);
-  // }, [props.value])
-
   React.useEffect(function () {
-    props.onChange({
-      target: {
-        type: 'button',
-        name: props.name,
-        value: activeTab
-      }
-    });
+    if (props.value !== activeTab) {
+      setActiveTab(props.value);
+    }
+  }, [props.value]);
+  React.useEffect(function () {
+    if (props.value !== activeTab) {
+      props.onChange({
+        target: {
+          type: 'button',
+          name: props.name,
+          value: activeTab
+        }
+      });
+    }
   }, [activeTab]);
   return React.createElement("div", {
     className: componentClasses
@@ -3921,6 +3923,7 @@ var FormBuilder = function FormBuilder(props) {
   var tabs = props.tabs;
   if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
     tabs = _objectSpread(_objectSpread({}, props.config), {}, {
+      value: props.config.active,
       fields: props.tabs,
       tabs: undefined,
       submit: props === null || props === void 0 ? void 0 : props.submit,

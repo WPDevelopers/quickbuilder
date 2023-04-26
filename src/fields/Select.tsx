@@ -14,7 +14,7 @@ const Select = (props) => {
 
     const handleMenuOpen = () => {
         // AJAX
-        if (props?.ajax && when(props?.ajax?.rules, builderContext.values)) {
+        if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
             setIsLoading(true);
             let data = {};
             Object.keys(props?.ajax.data).map(singleData => {

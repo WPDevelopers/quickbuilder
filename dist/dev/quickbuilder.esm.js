@@ -2090,14 +2090,19 @@ var Date$1 = withLabel(DateControl);
 
 function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var Input = function Input(props) {
-  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+var Input = function Input(props, ref) {
+  var type = props.type ? props.type : 'text';
+  var validProps = validFieldProps(_objectSpread$8(_objectSpread$8({}, props), {}, {
+    type: type
+  }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
   var handleChange = useCallback(function (event) {
     return validProps.onChange(event, {
       popup: props === null || props === void 0 ? void 0 : props.popup,
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+  var localRef = useRef(null);
+  var inputRef = ref !== null && ref !== void 0 && ref.current ? ref : localRef;
   if (validProps.type === 'checkbox') {
     if (validProps !== null && validProps !== void 0 && validProps.name) {
       validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
@@ -2145,13 +2150,11 @@ var Input = function Input(props) {
     }, "Copy")));
   }
   return /*#__PURE__*/React.createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
-    onChange: handleChange
+    onChange: handleChange,
+    ref: inputRef
   }));
 };
-Input.defaultProps = {
-  type: 'text'
-};
-var GenericInput = /*#__PURE__*/React.memo(Input);
+var GenericInput = /*#__PURE__*/React.memo( /*#__PURE__*/React.forwardRef(Input));
 var Input$1 = withLabel( /*#__PURE__*/React.memo(Input));
 
 function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -3842,7 +3845,10 @@ var Content = function Content(_ref) {
       show: false
     }
   }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
-    rest: rest
+    rest: rest,
+    config: {
+      active: active
+    }
   }) : true) && createElement(Submit, submit));
 };
 

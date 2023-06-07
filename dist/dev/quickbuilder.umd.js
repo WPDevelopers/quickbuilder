@@ -2087,19 +2087,14 @@
 
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var Input = function Input(props, ref) {
-    var type = props.type ? props.type : 'text';
-    var validProps = validFieldProps(_objectSpread$8(_objectSpread$8({}, props), {}, {
-      type: type
-    }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
+  var Input = function Input(props) {
+    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
     var handleChange = React.useCallback(function (event) {
       return validProps.onChange(event, {
         popup: props === null || props === void 0 ? void 0 : props.popup,
         isPro: !!props.is_pro
       });
     }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-    var localRef = React.useRef(null);
-    var inputRef = ref !== null && ref !== void 0 && ref.current ? ref : localRef;
     if (validProps.type === 'checkbox') {
       if (validProps !== null && validProps !== void 0 && validProps.name) {
         validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
@@ -2147,11 +2142,13 @@
       }, "Copy")));
     }
     return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
-      onChange: handleChange,
-      ref: inputRef
+      onChange: handleChange
     }));
   };
-  var GenericInput = /*#__PURE__*/React__default["default"].memo( /*#__PURE__*/React__default["default"].forwardRef(Input));
+  Input.defaultProps = {
+    type: 'text'
+  };
+  var GenericInput = /*#__PURE__*/React__default["default"].memo(Input);
   var Input$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Input));
 
   function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -3131,7 +3128,7 @@
         }
         if (inputValue.length < 3) {
           callback([{
-            'label': "Please type 3 or more characters.",
+            'label': i18n.__("Please input a minimum of 3 characters."),
             'value': null,
             'disabled': true
           }]);
@@ -3851,22 +3848,22 @@
 
   var Tab = function Tab(props) {
     // const builderContextState = useBuilder(props);
+
     var builderContext = useBuilderContext();
-    var _useState = React.useState(props.value || props.active),
+    var _useState = React.useState((props === null || props === void 0 ? void 0 : props.value) || (props === null || props === void 0 ? void 0 : props.active)),
       _useState2 = _slicedToArray(_useState, 2),
       activeTab = _useState2[0],
       setActiveTab = _useState2[1];
     var componentClasses = classNames__default["default"]("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
       "wprf-tab-menu-as-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
     });
-
-    // console.log(props.value, props);
-
     React.useEffect(function () {
-      if (props.value !== activeTab) {
-        setActiveTab(props.value);
+      var _props$value;
+      var _activeTab = (_props$value = props.value) !== null && _props$value !== void 0 ? _props$value : props.active;
+      if (_activeTab != activeTab) {
+        setActiveTab(_activeTab);
       }
-    }, [props.value]);
+    }, [props === null || props === void 0 ? void 0 : props.value]);
     React.useEffect(function () {
       if (props.value !== activeTab) {
         props.onChange({
@@ -3905,8 +3902,9 @@
     var builderContext = useBuilderContext();
     var tabs = props.tabs;
     if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
+      var _props$config;
       tabs = _objectSpread(_objectSpread({}, props.config), {}, {
-        value: props.config.active,
+        value: props === null || props === void 0 ? void 0 : (_props$config = props.config) === null || _props$config === void 0 ? void 0 : _props$config.active,
         fields: props.tabs,
         tabs: undefined,
         submit: props === null || props === void 0 ? void 0 : props.submit,

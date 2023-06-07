@@ -2412,6 +2412,24 @@ var Select = function Select(props) {
       handleMenuOpen();
     }
   }, [props === null || props === void 0 ? void 0 : props.menuOpen]);
+  var handleOptionChange = function handleOptionChange(option, value) {
+    var _value$option;
+    option.map(function (item) {
+      return item.value;
+    });
+    var updatedOptions = option;
+    if ((value === null || value === void 0 ? void 0 : (_value$option = value.option) === null || _value$option === void 0 ? void 0 : _value$option.value) == 'all') {
+      updatedOptions = option.filter(function (item) {
+        return item.value == 'all';
+      });
+    } else {
+      // Remove "all" if any other option is selected
+      updatedOptions = option.filter(function (item) {
+        return item.value !== 'all';
+      });
+    }
+    setSOption(updatedOptions);
+  };
   return createElement("div", {
     className: "wprf-select-wrapper"
   }, createElement(ReactSelect, {
@@ -2430,9 +2448,7 @@ var Select = function Select(props) {
     isOptionDisabled: function isOptionDisabled(option) {
       return option === null || option === void 0 ? void 0 : option.disabled;
     },
-    onChange: function onChange(option) {
-      return setSOption(option);
-    } // option or options
+    onChange: handleOptionChange // option or options
   }));
 };
 

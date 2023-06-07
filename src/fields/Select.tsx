@@ -82,6 +82,20 @@ const Select = (props) => {
         }
     }, [props?.menuOpen])
 
+	const handleOptionChange = (option, value) => {
+		const values = option.map((item) => item.value);
+		let updatedOptions = option;
+
+		if ( value?.option?.value == 'all') {
+		  updatedOptions = option.filter((item) => item.value == 'all');
+		} else {
+		  // Remove "all" if any other option is selected
+		  updatedOptions = option.filter((item) => item.value !== 'all');
+		}
+
+		setSOption(updatedOptions);
+  	};
+
     return (
         <div className="wprf-select-wrapper">
             <ReactSelect
@@ -98,7 +112,7 @@ const Select = (props) => {
                 onMenuOpen={handleMenuOpen}
                 onMenuClose={handleMenuClose}
                 isOptionDisabled={(option) => option?.disabled}
-                onChange={(option) => setSOption(option)} // option or options
+                onChange={handleOptionChange} // option or options
             />
         </div>
     )

@@ -3167,7 +3167,7 @@ var SelectAsync = function SelectAsync(props) {
       }
       if (inputValue.length < 3) {
         callback([{
-          'label': "Please type 3 or more characters.",
+          'label': i18n.__("Please input a minimum of 3 characters."),
           'value': null,
           'disabled': true
         }]);
@@ -3878,28 +3878,31 @@ var Content = function Content(_ref) {
       show: false
     }
   }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
-    rest: rest
+    rest: rest,
+    config: {
+      active: active
+    }
   }) : true) && React.createElement(Submit, submit));
 };
 
 var Tab = function Tab(props) {
   // const builderContextState = useBuilder(props);
+
   var builderContext = useBuilderContext();
-  var _useState = React.useState(props.value || props.active),
+  var _useState = React.useState((props === null || props === void 0 ? void 0 : props.value) || (props === null || props === void 0 ? void 0 : props.active)),
     _useState2 = _slicedToArray(_useState, 2),
     activeTab = _useState2[0],
     setActiveTab = _useState2[1];
   var componentClasses = classNames__default["default"]("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
     "wprf-tab-menu-as-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
   });
-
-  // console.log(props.value, props);
-
   React.useEffect(function () {
-    if (props.value !== activeTab) {
-      setActiveTab(props.value);
+    var _props$value;
+    var _activeTab = (_props$value = props.value) !== null && _props$value !== void 0 ? _props$value : props.active;
+    if (_activeTab != activeTab) {
+      setActiveTab(_activeTab);
     }
-  }, [props.value]);
+  }, [props === null || props === void 0 ? void 0 : props.value]);
   React.useEffect(function () {
     if (props.value !== activeTab) {
       props.onChange({
@@ -3938,8 +3941,9 @@ var FormBuilder = function FormBuilder(props) {
   var builderContext = useBuilderContext();
   var tabs = props.tabs;
   if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
+    var _props$config;
     tabs = _objectSpread(_objectSpread({}, props.config), {}, {
-      value: props.config.active,
+      value: props === null || props === void 0 ? void 0 : (_props$config = props.config) === null || _props$config === void 0 ? void 0 : _props$config.active,
       fields: props.tabs,
       tabs: undefined,
       submit: props === null || props === void 0 ? void 0 : props.submit,

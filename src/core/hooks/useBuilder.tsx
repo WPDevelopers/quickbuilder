@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useRef, useCallback, useLayoutEffect } from "react";
 import { builderReducer, when } from '../index'
 import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, getTime, sortingFields } from "../utils";
+import { doAction } from '@wordpress/hooks'
 
 const useBuilder = (props) => {
 	// Set is Mounted or NOT
@@ -122,6 +123,7 @@ const useBuilder = (props) => {
 		const { field, val: value } = eChange(eventOrTextValue, maybePath);
 		if (field) {
 			setFieldValue(field, value);
+			doAction( 'quickBuilder_setFieldValue', field, value, validProps )
 		}
 	}, [setFieldValue, state.values]);
 

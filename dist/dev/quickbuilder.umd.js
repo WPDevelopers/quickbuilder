@@ -1300,6 +1300,7 @@
         value = _eChange.val;
       if (field) {
         setFieldValue(field, value);
+        hooks.doAction('quickBuilder_setFieldValue', field, value, validProps);
       }
     }, [setFieldValue, state.values]);
     var handleChange = useEventCallback(function (eventOrString, validProps) {
@@ -2092,7 +2093,8 @@
     var handleChange = React.useCallback(function (event) {
       return validProps.onChange(event, {
         popup: props === null || props === void 0 ? void 0 : props.popup,
-        isPro: !!props.is_pro
+        isPro: !!props.is_pro,
+        originProps: props
       });
     }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
     if (validProps.type === 'checkbox') {

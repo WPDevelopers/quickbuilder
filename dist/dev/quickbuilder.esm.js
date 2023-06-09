@@ -7,7 +7,7 @@ import moment from 'moment';
 import intersect from 'intersect';
 import { sprintf, __ } from '@wordpress/i18n';
 import classNames from 'classnames';
-import { applyFilters } from '@wordpress/hooks';
+import { doAction, applyFilters } from '@wordpress/hooks';
 import Swal from 'sweetalert2';
 import { Dropdown, Button as Button$2, DateTimePicker, Icon, RangeControl, ColorPicker as ColorPicker$2 } from '@wordpress/components';
 import copy from 'copy-to-clipboard';
@@ -1303,6 +1303,7 @@ var useBuilder = function useBuilder(props) {
       value = _eChange.val;
     if (field) {
       setFieldValue(field, value);
+      doAction('quickBuilder_setFieldValue', field, value, validProps);
     }
   }, [setFieldValue, state.values]);
   var handleChange = useEventCallback(function (eventOrString, validProps) {
@@ -2095,7 +2096,8 @@ var Input = function Input(props) {
   var handleChange = useCallback(function (event) {
     return validProps.onChange(event, {
       popup: props === null || props === void 0 ? void 0 : props.popup,
-      isPro: !!props.is_pro
+      isPro: !!props.is_pro,
+      originProps: props
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
   if (validProps.type === 'checkbox') {

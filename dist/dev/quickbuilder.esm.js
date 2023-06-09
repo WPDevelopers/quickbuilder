@@ -121,6 +121,14 @@ var isArray = function isArray(args) {
 var isObject = function isObject(obj) {
   return obj !== null && _typeof$1(obj) === 'object' && !isArray(obj);
 };
+var valueExists = function valueExists(arrayOptions, needles) {
+  if (isArray(needles)) {
+    return arrayOptions.some(function (value) {
+      return needles.includes(value);
+    });
+  }
+  return arrayOptions.includes(needles);
+};
 var isVisible = function isVisible(values, props) {
   if (!(props !== null && props !== void 0 && props.rules) || props.name == undefined) {
     return true;
@@ -2414,24 +2422,27 @@ var Select = function Select(props) {
       handleMenuOpen();
     }
   }, [props === null || props === void 0 ? void 0 : props.menuOpen]);
-  var handleOptionChange = function handleOptionChange(option, value) {
-    var _value$option;
-    option.map(function (item) {
-      return item.value;
-    });
-    var updatedOptions = option;
-    if ((value === null || value === void 0 ? void 0 : (_value$option = value.option) === null || _value$option === void 0 ? void 0 : _value$option.value) == 'all') {
-      updatedOptions = option.filter(function (item) {
-        return item.value == 'all';
-      });
-    } else {
-      // Remove "all" if any other option is selected
-      updatedOptions = option.filter(function (item) {
-        return item.value !== 'all';
-      });
+  var handleOptionChange = useCallback(function (option) {
+    var _props$filterValue;
+    if (isArray(option) && (props === null || props === void 0 ? void 0 : (_props$filterValue = props.filterValue) === null || _props$filterValue === void 0 ? void 0 : _props$filterValue.length) > 0) {
+      var _props$filterValue2;
+      var origialValues = option;
+      var values = origialValues;
+      var filterValue = (_props$filterValue2 = props === null || props === void 0 ? void 0 : props.filterValue) !== null && _props$filterValue2 !== void 0 ? _props$filterValue2 : ['all'];
+      if (!isArray(filterValue)) {
+        filterValue = [filterValue];
+      }
+      if ((origialValues === null || origialValues === void 0 ? void 0 : origialValues.length) > 1 && valueExists(origialValues.map(function (item) {
+        return item.value;
+      }), filterValue)) {
+        values = origialValues.filter(function (item) {
+          return !filterValue.includes(item === null || item === void 0 ? void 0 : item.value);
+        });
+      }
+      option = values;
     }
-    setSOption(updatedOptions);
-  };
+    setSOption(option);
+  }, [name, id, parentIndex]);
   return createElement("div", {
     className: "wprf-select-wrapper"
   }, createElement(ReactSelect, {
@@ -3938,4 +3949,4 @@ var FormBuilder = function FormBuilder(props) {
   return createElement(Fragment, null, createElement(Tab, tabs));
 };
 
-export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, validFieldProps, when, withLabel, withProps, withState, wpFetch };
+export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };

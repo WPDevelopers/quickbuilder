@@ -38,6 +38,9 @@ const withProps = (WrappedComponent, isGeneric = false) => {
         }, [])
 
         useEffect(() => {
+            if(['ft_theme_three_line_one', 'ft_theme_three_line_two', 'ft_theme_four_line_two'].includes(props.name)){
+                return;
+            }
             if (meta.visible && isFieldMounted.current[props.name]) {
                 // Not needed / Confused
                 if (!isGeneric && field.type !== 'group') {

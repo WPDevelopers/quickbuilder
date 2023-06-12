@@ -21,6 +21,7 @@ export interface TabConfig extends Field {
     title          ?: boolean,
     submit         ?: any,
     fields          : Fields,
+    type            : string,
     step           ?: Step,
 }
 

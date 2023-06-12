@@ -13,9 +13,9 @@ import { useBuilderContext } from "./core/hooks";
 import { TabProps } from "./types/Tabs";
 
 
-const FormBuilder: React.FC<BuilderProps | TabProps> = (props) => {
+const FormBuilder = (props) => {
     const builderContext = useBuilderContext();
-	let tabs = props.tabs;
+	let tabs = props;
 	if(!tabs?.type){
 		tabs = {
 			...props.config,

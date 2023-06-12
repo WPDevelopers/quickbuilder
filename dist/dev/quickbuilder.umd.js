@@ -3897,7 +3897,7 @@
   var FormBuilder = function FormBuilder(props) {
     var _tabs;
     var builderContext = useBuilderContext();
-    var tabs = props.tabs;
+    var tabs = props;
     if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
       tabs = _objectSpread(_objectSpread({}, props.config), {}, {
         value: props.config.active,

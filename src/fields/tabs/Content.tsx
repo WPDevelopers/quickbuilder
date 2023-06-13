@@ -51,16 +51,18 @@ const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, setActive, 
 
                         return (
                             <div id={tab?.id} className={componentClasses} key={tab?.id} >
-                                <div className="wprf-tab-heading-wrapper">
-                                    {tab?.label && (rest?.title ?? true) && <h4>{tab.label}</h4>}
-                                    <div>
-                                        {rest?.content_heading && Object.keys(rest.content_heading).map((button, index) => {
-                                            return (<React.Fragment key={`button_${button}_${index}`}>
-                                                <Field {...rest.content_heading[button]} />
-                                            </React.Fragment>);
-                                        })}
-                                    </div>
-                                </div>
+								{((tab?.label && (rest?.title ?? true)) || rest?.content_heading) &&
+									<div className="wprf-tab-heading-wrapper">
+										{tab?.label && (rest?.title ?? true) && <h4>{tab.label}</h4>}
+										<div>
+											{rest?.content_heading && Object.keys(rest.content_heading).map((button, index) => {
+												return (<React.Fragment key={`button_${button}_${index}`}>
+													<Field {...rest.content_heading[button]} />
+												</React.Fragment>);
+											})}
+										</div>
+									</div>
+								}
                                 <InnerContent context={builderContext} fields={tab?.fields} parentIndex={[...parentIndex, index]} />
                             </div>
                         );

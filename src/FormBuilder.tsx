@@ -18,6 +18,7 @@ const FormBuilder = (props) => {
 	let tabs = props;
 	if(!tabs?.type){
 		tabs = {
+			...props,
 			...props.config,
 			value: props.config.active,
 			fields: props.tabs,

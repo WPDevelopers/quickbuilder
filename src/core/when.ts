@@ -37,7 +37,7 @@ const rules = {
             let newData = get(selectedData, key);
             if (_typeof(newData) != "function") {
                 if (isArray(checkAgainst) && isArray(newData)) {
-                    return intersect(newData, checkAgainst)?.length;
+                    return !!intersect(newData, checkAgainst)?.length;
                 } else if (
                     isArray(checkAgainst) &&
                     _typeof(newData) == "string"

@@ -409,7 +409,7 @@ var rules = {
       if (_typeof(newData) != "function") {
         if (isArray(checkAgainst) && isArray(newData)) {
           var _intersect;
-          return (_intersect = intersect__default["default"](newData, checkAgainst)) === null || _intersect === void 0 ? void 0 : _intersect.length;
+          return !!((_intersect = intersect__default["default"](newData, checkAgainst)) !== null && _intersect !== void 0 && _intersect.length);
         } else if (isArray(checkAgainst) && _typeof(newData) == "string") {
           return checkAgainst.includes(newData);
         } else if (isArray(newData) && _typeof(checkAgainst) == "string") {
@@ -1834,6 +1834,9 @@ var withProps = function withProps(WrappedComponent) {
       };
     }, []);
     React.useEffect(function () {
+      if (['ft_theme_three_line_one', 'ft_theme_three_line_two', 'ft_theme_four_line_two'].includes(props.name)) {
+        return;
+      }
       if (meta.visible && isFieldMounted.current[props.name]) {
         // Not needed / Confused
         if (!isGeneric && field.type !== 'group') {
@@ -2110,14 +2113,19 @@ var Date$1 = withLabel(DateControl);
 
 function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var Input = function Input(props) {
-  var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+var Input = function Input(props, ref) {
+  var type = props.type ? props.type : 'text';
+  var validProps = validFieldProps(_objectSpread$8(_objectSpread$8({}, props), {}, {
+    type: type
+  }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
   var handleChange = React.useCallback(function (event) {
     return validProps.onChange(event, {
       popup: props === null || props === void 0 ? void 0 : props.popup,
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+  var localRef = React.useRef(null);
+  var inputRef = ref !== null && ref !== void 0 && ref.current ? ref : localRef;
   if (validProps.type === 'checkbox') {
     if (validProps !== null && validProps !== void 0 && validProps.name) {
       validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
@@ -2165,13 +2173,11 @@ var Input = function Input(props) {
     }, "Copy")));
   }
   return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
-    onChange: handleChange
+    onChange: handleChange,
+    ref: inputRef
   }));
 };
-Input.defaultProps = {
-  type: 'text'
-};
-var GenericInput = /*#__PURE__*/React__default["default"].memo(Input);
+var GenericInput = /*#__PURE__*/React__default["default"].memo( /*#__PURE__*/React__default["default"].forwardRef(Input));
 var Input$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Input));
 
 function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -3832,7 +3838,7 @@ var Content = function Content(_ref) {
   }, React.createElement("div", {
     className: "wprf-tab-contents"
   }, tabs.map(function (tab, index) {
-    var _rest$title;
+    var _rest$title, _rest$title2;
     if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
       return '';
     }
@@ -3843,9 +3849,9 @@ var Content = function Content(_ref) {
       id: tab === null || tab === void 0 ? void 0 : tab.id,
       className: componentClasses,
       key: tab === null || tab === void 0 ? void 0 : tab.id
-    }, React.createElement("div", {
+    }, ((tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) || (rest === null || rest === void 0 ? void 0 : rest.content_heading)) && React.createElement("div", {
       className: "wprf-tab-heading-wrapper"
-    }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
+    }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title2 = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title2 !== void 0 ? _rest$title2 : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
       return React.createElement(React__default["default"].Fragment, {
         key: "button_".concat(button, "_").concat(index)
       }, React.createElement(Field$1, rest.content_heading[button]));
@@ -3922,7 +3928,7 @@ var FormBuilder = function FormBuilder(props) {
   var builderContext = useBuilderContext();
   var tabs = props;
   if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
-    tabs = _objectSpread(_objectSpread({}, props.config), {}, {
+    tabs = _objectSpread(_objectSpread(_objectSpread({}, props), props.config), {}, {
       value: props.config.active,
       fields: props.tabs,
       tabs: undefined,

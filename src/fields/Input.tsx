@@ -6,7 +6,7 @@ import { validFieldProps } from '../core/utils';
 const Input = (props, ref?) => {
 	const type = props.type ? props.type : 'text';
 	const validProps = validFieldProps({...props, type}, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
-	const handleChange = useCallback((event) => validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro }), [validProps?.value]);
+	const handleChange = (event) => validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro });
 	const localRef = useRef(null);
 	const inputRef = ref?.current ? ref : localRef;
 

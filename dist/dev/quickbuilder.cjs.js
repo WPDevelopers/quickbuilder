@@ -2118,12 +2118,12 @@ var Input = function Input(props, ref) {
   var validProps = validFieldProps(_objectSpread$8(_objectSpread$8({}, props), {}, {
     type: type
   }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
-  var handleChange = React.useCallback(function (event) {
+  var handleChange = function handleChange(event) {
     return validProps.onChange(event, {
       popup: props === null || props === void 0 ? void 0 : props.popup,
       isPro: !!props.is_pro
     });
-  }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+  };
   var localRef = React.useRef(null);
   var inputRef = ref !== null && ref !== void 0 && ref.current ? ref : localRef;
   if (validProps.type === 'checkbox') {

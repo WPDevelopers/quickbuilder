@@ -3,6 +3,7 @@ import { Field } from '../fields';
 import { sortingFields } from '../core/utils';
 import { useBuilderContext } from '../core/hooks';
 import classNames from 'classnames';
+import { Icon, chevronDown, chevronUp } from '@wordpress/icons';
 
 const Section = (props) => {
     const builderContext = useBuilderContext();
@@ -38,10 +39,7 @@ const Section = (props) => {
                     <h4>{props.placeholder}</h4>
                     {props.collapsible && (
                         <button onClick={() => setCollapse(!isCollapse)}>
-                            {/* <Icon
-                            icon={`arrow-${isCollapse ? "down" : "up"}-alt2`}
-                        /> */}
-                            Icon
+                            <Icon icon={isCollapse ? chevronDown : chevronUp} />
                         </button>
                     )}
                 </div>

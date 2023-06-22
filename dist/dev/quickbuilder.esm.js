@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createElement, useContext, createContext, useRef, useReducer, useCallback, useLayoutEffect, Fragment, useMemo } from 'react';
+import React, { useState, useEffect, createElement, useContext, createContext, useRef, useReducer, useCallback, useLayoutEffect, Fragment, useMemo, cloneElement } from 'react';
 import { select, dispatch, registerStore } from '@wordpress/data';
 import { toPath, clone } from 'lodash-es';
 import apiFetch from '@wordpress/api-fetch';
@@ -9,7 +9,7 @@ import { sprintf, __ } from '@wordpress/i18n';
 import classNames from 'classnames';
 import { applyFilters } from '@wordpress/hooks';
 import Swal from 'sweetalert2';
-import { Dropdown, Button as Button$2, DateTimePicker, Icon, RangeControl, ColorPicker as ColorPicker$2 } from '@wordpress/components';
+import { Dropdown, Button as Button$2, DateTimePicker, Icon as Icon$1, RangeControl, ColorPicker as ColorPicker$2 } from '@wordpress/components';
 import copy from 'copy-to-clipboard';
 import ReactSelect from 'react-select';
 import { ReactSortable } from 'react-sortablejs';
@@ -2522,14 +2522,14 @@ var RepeaterField = function RepeaterField(props) {
     onClick: function onClick() {
       return setIsCollapsed(!isCollapsed);
     }
-  }, createElement("h4", null, createElement(Icon, {
+  }, createElement("h4", null, createElement(Icon$1, {
     icon: "move"
   }), props.index + 1, ": ", _title), createElement("div", {
     className: "wprf-repeater-field-controls"
-  }, createElement(Icon, {
+  }, createElement(Icon$1, {
     onClick: onClone,
     icon: "admin-page"
-  }), createElement(Icon, {
+  }), createElement(Icon$1, {
     onClick: onDelete,
     icon: "trash"
   }))), !isCollapsed && createElement("div", {
@@ -2782,6 +2782,86 @@ var RadioCard = function RadioCard(props) {
 };
 var Radio = withLabel(RadioCard);
 
+/**
+ * WordPress dependencies
+ */
+/** @typedef {{icon: JSX.Element, size?: number} & import('@wordpress/primitives').SVGProps} IconProps */
+
+/**
+ * Return an SVG icon.
+ *
+ * @param {IconProps} props icon is the SVG component to render
+ *                          size is a number specifiying the icon size in pixels
+ *                          Other props will be passed to wrapped SVG component
+ *
+ * @return {JSX.Element}  Icon component
+ */
+
+function Icon(_ref) {
+  let {
+    icon,
+    size = 24,
+    ...props
+  } = _ref;
+  return cloneElement(icon, {
+    width: size,
+    height: size,
+    ...props
+  });
+}
+
+/**
+ * External dependencies
+ */
+/**
+ * @param {import('react').ComponentPropsWithoutRef<'path'>} props
+ *
+ * @return {JSX.Element} Path component
+ */
+
+const Path = props => createElement('path', props);
+/**
+ *
+ * @param {SVGProps} props isPressed indicates whether the SVG should appear as pressed.
+ *                         Other props will be passed through to svg component.
+ *
+ * @return {JSX.Element} Stop component
+ */
+
+const SVG = _ref => {
+  let {
+    className,
+    isPressed,
+    ...props
+  } = _ref;
+  const appliedProps = { ...props,
+    className: classNames(className, {
+      'is-pressed': isPressed
+    }) || undefined,
+    'aria-hidden': true,
+    focusable: false
+  }; // Disable reason: We need to have a way to render HTML tag for web.
+  // eslint-disable-next-line react/forbid-elements
+
+  return createElement("svg", appliedProps);
+};
+
+const chevronDown = createElement(SVG, {
+  viewBox: "0 0 24 24",
+  xmlns: "http://www.w3.org/2000/svg"
+}, createElement(Path, {
+  d: "M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"
+}));
+var chevronDown$1 = chevronDown;
+
+const chevronUp = createElement(SVG, {
+  viewBox: "0 0 24 24",
+  xmlns: "http://www.w3.org/2000/svg"
+}, createElement(Path, {
+  d: "M6.5 12.4L12 8l5.5 4.4-.9 1.2L12 10l-4.5 3.6-1-1.2z"
+}));
+var chevronUp$1 = chevronUp;
+
 var Section = function Section(props) {
   var _props$collapsed;
   var builderContext = useBuilderContext();
@@ -2824,7 +2904,9 @@ var Section = function Section(props) {
     onClick: function onClick() {
       return setCollapse(!isCollapse);
     }
-  }, "Icon")), createElement("div", {
+  }, createElement(Icon, {
+    icon: isCollapse ? chevronDown$1 : chevronUp$1
+  }))), createElement("div", {
     className: "wprf-section-fields"
   }, fields));
 };

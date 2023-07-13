@@ -4,6 +4,7 @@ import AsyncSelect from "react-select/async";
 import { when } from "../core";
 import { useBuilderContext, withLabel } from "../core/hooks";
 import { wpFetch } from "../core/utils";
+import { __ } from "@wordpress/i18n";
 
 const SelectAsync = (props) => {
 	const builderContext = useBuilderContext();
@@ -27,7 +28,7 @@ const SelectAsync = (props) => {
 			if (inputValue.length < 3) {
 				callback([
 					{
-						'label'   : "Please type 3 or more characters.",
+						'label'   : __("Please input a minimum of 3 characters."),
 						'value'   : null,
 						'disabled': true,
 					}

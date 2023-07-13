@@ -118,6 +118,14 @@
   var isObject = function isObject(obj) {
     return obj !== null && _typeof$1(obj) === 'object' && !isArray(obj);
   };
+  var valueExists = function valueExists(arrayOptions, needles) {
+    if (isArray(needles)) {
+      return arrayOptions.some(function (value) {
+        return needles.includes(value);
+      });
+    }
+    return arrayOptions.includes(needles);
+  };
   var isVisible = function isVisible(values, props) {
     if (!(props !== null && props !== void 0 && props.rules) || props.name == undefined) {
       return true;
@@ -386,7 +394,7 @@
         if (_typeof(newData) != "function") {
           if (isArray(checkAgainst) && isArray(newData)) {
             var _intersect;
-            return !!((_intersect = intersect__default["default"](newData, checkAgainst)) !== null && _intersect !== void 0 && _intersect.length);
+            return (_intersect = intersect__default["default"](newData, checkAgainst)) === null || _intersect === void 0 ? void 0 : _intersect.length;
           } else if (isArray(checkAgainst) && _typeof(newData) == "string") {
             return checkAgainst.includes(newData);
           } else if (isArray(newData) && _typeof(checkAgainst) == "string") {
@@ -1300,6 +1308,7 @@
         value = _eChange.val;
       if (field) {
         setFieldValue(field, value);
+        hooks.doAction('quickBuilder_setFieldValue', field, value, validProps);
       }
     }, [setFieldValue, state.values]);
     var handleChange = useEventCallback(function (eventOrString, validProps) {
@@ -1811,9 +1820,6 @@
         };
       }, []);
       React.useEffect(function () {
-        if (['ft_theme_three_line_one', 'ft_theme_three_line_two', 'ft_theme_four_line_two'].includes(props.name)) {
-          return;
-        }
         if (meta.visible && isFieldMounted.current[props.name]) {
           // Not needed / Confused
           if (!isGeneric && field.type !== 'group') {
@@ -2090,19 +2096,15 @@
 
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var Input = function Input(props, ref) {
-    var type = props.type ? props.type : 'text';
-    var validProps = validFieldProps(_objectSpread$8(_objectSpread$8({}, props), {}, {
-      type: type
-    }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
-    var handleChange = function handleChange(event) {
+  var Input = function Input(props) {
+    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+    var handleChange = React.useCallback(function (event) {
       return validProps.onChange(event, {
         popup: props === null || props === void 0 ? void 0 : props.popup,
-        isPro: !!props.is_pro
+        isPro: !!props.is_pro,
+        originProps: props
       });
-    };
-    var localRef = React.useRef(null);
-    var inputRef = ref !== null && ref !== void 0 && ref.current ? ref : localRef;
+    }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
     if (validProps.type === 'checkbox') {
       if (validProps !== null && validProps !== void 0 && validProps.name) {
         validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
@@ -2150,11 +2152,13 @@
       }, "Copy")));
     }
     return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
-      onChange: handleChange,
-      ref: inputRef
+      onChange: handleChange
     }));
   };
-  var GenericInput = /*#__PURE__*/React__default["default"].memo( /*#__PURE__*/React__default["default"].forwardRef(Input));
+  Input.defaultProps = {
+    type: 'text'
+  };
+  var GenericInput = /*#__PURE__*/React__default["default"].memo(Input);
   var Input$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Input));
 
   function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -2415,6 +2419,27 @@
         handleMenuOpen();
       }
     }, [props === null || props === void 0 ? void 0 : props.menuOpen]);
+    var handleOptionChange = React.useCallback(function (option) {
+      var _props$filterValue;
+      if (isArray(option) && (props === null || props === void 0 ? void 0 : (_props$filterValue = props.filterValue) === null || _props$filterValue === void 0 ? void 0 : _props$filterValue.length) > 0) {
+        var _props$filterValue2;
+        var origialValues = option;
+        var values = origialValues;
+        var filterValue = (_props$filterValue2 = props === null || props === void 0 ? void 0 : props.filterValue) !== null && _props$filterValue2 !== void 0 ? _props$filterValue2 : ['all'];
+        if (!isArray(filterValue)) {
+          filterValue = [filterValue];
+        }
+        if ((origialValues === null || origialValues === void 0 ? void 0 : origialValues.length) > 1 && valueExists(origialValues.map(function (item) {
+          return item.value;
+        }), filterValue)) {
+          values = origialValues.filter(function (item) {
+            return !filterValue.includes(item === null || item === void 0 ? void 0 : item.value);
+          });
+        }
+        option = values;
+      }
+      setSOption(option);
+    }, [name, id, parentIndex]);
     return React.createElement("div", {
       className: "wprf-select-wrapper"
     }, React.createElement(ReactSelect__default["default"], {
@@ -2433,9 +2458,7 @@
       isOptionDisabled: function isOptionDisabled(option) {
         return option === null || option === void 0 ? void 0 : option.disabled;
       },
-      onChange: function onChange(option) {
-        return setSOption(option);
-      } // option or options
+      onChange: handleOptionChange // option or options
     }));
   };
 
@@ -3134,7 +3157,7 @@
         }
         if (inputValue.length < 3) {
           callback([{
-            'label': "Please type 3 or more characters.",
+            'label': i18n.__("Please input a minimum of 3 characters."),
             'value': null,
             'disabled': true
           }]);
@@ -3815,7 +3838,7 @@
     }, React.createElement("div", {
       className: "wprf-tab-contents"
     }, tabs.map(function (tab, index) {
-      var _rest$title, _rest$title2;
+      var _rest$title;
       if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
         return '';
       }
@@ -3826,9 +3849,9 @@
         id: tab === null || tab === void 0 ? void 0 : tab.id,
         className: componentClasses,
         key: tab === null || tab === void 0 ? void 0 : tab.id
-      }, ((tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) || (rest === null || rest === void 0 ? void 0 : rest.content_heading)) && React.createElement("div", {
+      }, React.createElement("div", {
         className: "wprf-tab-heading-wrapper"
-      }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title2 = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title2 !== void 0 ? _rest$title2 : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
+      }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
         return React.createElement(React__default["default"].Fragment, {
           key: "button_".concat(button, "_").concat(index)
         }, React.createElement(Field$1, rest.content_heading[button]));
@@ -3845,28 +3868,31 @@
         show: false
       }
     }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
-      rest: rest
+      rest: rest,
+      config: {
+        active: active
+      }
     }) : true) && React.createElement(Submit, submit));
   };
 
   var Tab = function Tab(props) {
     // const builderContextState = useBuilder(props);
+
     var builderContext = useBuilderContext();
-    var _useState = React.useState(props.value || props.active),
+    var _useState = React.useState((props === null || props === void 0 ? void 0 : props.value) || (props === null || props === void 0 ? void 0 : props.active)),
       _useState2 = _slicedToArray(_useState, 2),
       activeTab = _useState2[0],
       setActiveTab = _useState2[1];
     var componentClasses = classNames__default["default"]("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
       "wprf-tab-menu-as-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
     });
-
-    // console.log(props.value, props);
-
     React.useEffect(function () {
-      if (props.value !== activeTab) {
-        setActiveTab(props.value);
+      var _props$value;
+      var _activeTab = (_props$value = props.value) !== null && _props$value !== void 0 ? _props$value : props.active;
+      if (_activeTab != activeTab) {
+        setActiveTab(_activeTab);
       }
-    }, [props.value]);
+    }, [props === null || props === void 0 ? void 0 : props.value]);
     React.useEffect(function () {
       if (props.value !== activeTab) {
         props.onChange({
@@ -3903,10 +3929,11 @@
   var FormBuilder = function FormBuilder(props) {
     var _tabs;
     var builderContext = useBuilderContext();
-    var tabs = props;
+    var tabs = props.tabs;
     if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
-      tabs = _objectSpread(_objectSpread(_objectSpread({}, props), props.config), {}, {
-        value: props.config.active,
+      var _props$config;
+      tabs = _objectSpread(_objectSpread({}, props.config), {}, {
+        value: props === null || props === void 0 ? void 0 : (_props$config = props.config) === null || _props$config === void 0 ? void 0 : _props$config.active,
         fields: props.tabs,
         tabs: undefined,
         submit: props === null || props === void 0 ? void 0 : props.submit,
@@ -3979,6 +4006,7 @@
   exports.useBuilderContext = useBuilderContext;
   exports.useDefaults = useDefaults;
   exports.validFieldProps = validFieldProps;
+  exports.valueExists = valueExists;
   exports.when = when;
   exports.withLabel = withLabel;
   exports.withProps = withProps;

@@ -24,7 +24,7 @@
   "devDependencies": {
     "@wordpress/babel-preset-default": "7.6.0",
     "@wordpress/eslint-plugin": "13.6.0",
-    "@wordpress/scripts": "^24.6.0",
+    "@wordpress/scripts": "^26.7.0",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/runtime": "^7.13.17",
@@ -98,7 +98,6 @@
     "@wordpress/date": "^4.22.0",
     "@wordpress/i18n": "^4.22.0",
     "@wordpress/media-utils": "^4.13.0",
-    "@wordpress/scripts": "^24.6.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "classnames": "^2.2.6",

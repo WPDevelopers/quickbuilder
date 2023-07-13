@@ -36,7 +36,7 @@ const Tab: React.FC<TabConfig> = (props) => {
         if(props.value !== activeTab){
             props.onChange({
                 target: {
-                    type: 'button',
+                    type: 'tab',
                     name: props.name,
                     value: activeTab
                 }

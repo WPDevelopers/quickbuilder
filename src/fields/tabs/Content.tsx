@@ -74,7 +74,7 @@ const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, setActive, 
                 rest?.step?.show &&
                 <SteppedButton fields={tabsFields} active={active} setActive={setActive} config={rest.step ?? {show: false}} />
             }
-            {(submit?.show ?? true) && (submit?.rules ? when(submit?.rules, { rest }) : true) && <Submit {...submit} />}
+            {(submit?.show ?? true) && (submit?.rules ? when(submit?.rules, { rest, config: { active } }) : true) && <Submit {...submit} />}
         </div>
     );
 };

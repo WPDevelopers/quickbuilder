@@ -1,4 +1,5 @@
 interface BuilderConfig {
+	active?: string,
     sidebar?: boolean
 }
 export interface Builder  {

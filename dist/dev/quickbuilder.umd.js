@@ -303,7 +303,7 @@
             var _response$data3;
             downloadFile({
               data: JSON.stringify(response.data.download),
-              fileName: (response === null || response === void 0 ? void 0 : (_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : _response$data3.filename) || 'export.json',
+              fileName: (response === null || response === void 0 || (_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : _response$data3.filename) || 'export.json',
               fileType: 'text/json'
             });
           }
@@ -331,7 +331,7 @@
     var _settings$timezone;
     var keepLocalTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var settings = date.__experimentalGetSettings();
-    var _value = moment__default["default"].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 ? void 0 : (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
+    var _value = moment__default["default"].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 || (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
     return _value;
   };
   var merge = function merge(array_one, array_two, key) {
@@ -394,7 +394,7 @@
         if (_typeof(newData) != "function") {
           if (isArray(checkAgainst) && isArray(newData)) {
             var _intersect;
-            return (_intersect = intersect__default["default"](newData, checkAgainst)) === null || _intersect === void 0 ? void 0 : _intersect.length;
+            return !!((_intersect = intersect__default["default"](newData, checkAgainst)) !== null && _intersect !== void 0 && _intersect.length);
           } else if (isArray(checkAgainst) && _typeof(newData) == "string") {
             return checkAgainst.includes(newData);
           } else if (isArray(newData) && _typeof(checkAgainst) == "string") {
@@ -725,10 +725,10 @@
         return isVisible(context === null || context === void 0 ? void 0 : context.values, tab);
       });
       setTabsFields(filteredTabs);
-    }, [tabs, context === null || context === void 0 ? void 0 : (_context$values = context.values) === null || _context$values === void 0 ? void 0 : _context$values.source]);
+    }, [tabs, context === null || context === void 0 || (_context$values = context.values) === null || _context$values === void 0 ? void 0 : _context$values.source]);
     var componentClasses = classNames__default["default"]("wprf-tab-menu-wrapper", props === null || props === void 0 ? void 0 : props.className, {
       "wprf-tab-menu-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
-    }, context === null || context === void 0 ? void 0 : (_context$values2 = context.values) === null || _context$values2 === void 0 ? void 0 : _context$values2.source);
+    }, context === null || context === void 0 || (_context$values2 = context.values) === null || _context$values2 === void 0 ? void 0 : _context$values2.source);
     var currentTabIndex = tabsFields.findIndex(function (tab) {
       return tab.id === active;
     });
@@ -737,7 +737,7 @@
     }, React.createElement("ul", {
       className: "wprf-tab-nav"
     }, tabsFields.map(function (tab, index) {
-      var _classNames, _context$icons, _context$icons$tab$ic, _tab$icon, _tab$icon2;
+      var _classNames, _context$icons, _tab$icon, _tab$icon2;
       return React.createElement("li", {
         className: classNames__default["default"]("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
         "data-key": tab.id,
@@ -749,7 +749,7 @@
       }, (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? React.createElement("img", {
         src: tab.icon,
         alt: tab === null || tab === void 0 ? void 0 : tab.label
-      }) : isObject(tab.icon) ? context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : (_context$icons$tab$ic = _context$icons[tab === null || tab === void 0 ? void 0 : (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons$tab$ic === void 0 ? void 0 : _context$icons$tab$ic[tab === null || tab === void 0 ? void 0 : (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), React.createElement("span", null, tab.label));
+      }) : isObject(tab.icon) ? context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 || (_context$icons = _context$icons[tab === null || tab === void 0 || (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons === void 0 ? void 0 : _context$icons[tab === null || tab === void 0 || (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), React.createElement("span", null, tab.label));
     })));
   };
 
@@ -867,7 +867,7 @@
       }).length === 0) {
         var _options$;
         var _options = sortingFields(lOptions);
-        setOption((_options === null || _options === void 0 ? void 0 : (_options$ = _options[0]) === null || _options$ === void 0 ? void 0 : _options$.value) || savedValue);
+        setOption((_options === null || _options === void 0 || (_options$ = _options[0]) === null || _options$ === void 0 ? void 0 : _options$.value) || savedValue);
       }
     }, [option, lOptions]);
     var options = sortingFields(lOptions);
@@ -1313,8 +1313,8 @@
     }, [setFieldValue, state.values]);
     var handleChange = useEventCallback(function (eventOrString, validProps) {
       if (validProps !== null && validProps !== void 0 && validProps.isPro && Boolean(state.is_pro_active) === false) {
-        var _state$alerts, _state$alerts$pro_ale;
-        (_state$alerts = state.alerts) === null || _state$alerts === void 0 ? void 0 : (_state$alerts$pro_ale = _state$alerts.pro_alert(validProps === null || validProps === void 0 ? void 0 : validProps.popup)) === null || _state$alerts$pro_ale === void 0 ? void 0 : _state$alerts$pro_ale.fire();
+        var _state$alerts;
+        (_state$alerts = state.alerts) === null || _state$alerts === void 0 || (_state$alerts = _state$alerts.pro_alert(validProps === null || validProps === void 0 ? void 0 : validProps.popup)) === null || _state$alerts === void 0 ? void 0 : _state$alerts.fire();
         // return false;
       }
 
@@ -1345,7 +1345,7 @@
       } else if (parent && parentType === 'repeater') {
         var _getIn2, _parentValue$validPro, _parentValue$validPro2;
         var _parentValue = (_getIn2 = getIn(state.values, parent)) !== null && _getIn2 !== void 0 ? _getIn2 : [];
-        valueState = (_parentValue$validPro = _parentValue === null || _parentValue === void 0 ? void 0 : (_parentValue$validPro2 = _parentValue[validProps.index]) === null || _parentValue$validPro2 === void 0 ? void 0 : _parentValue$validPro2[name]) !== null && _parentValue$validPro !== void 0 ? _parentValue$validPro : defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps["default"];
+        valueState = (_parentValue$validPro = _parentValue === null || _parentValue === void 0 || (_parentValue$validPro2 = _parentValue[validProps.index]) === null || _parentValue$validPro2 === void 0 ? void 0 : _parentValue$validPro2[name]) !== null && _parentValue$validPro !== void 0 ? _parentValue$validPro : defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps["default"];
       } else {
         var _getIn3;
         valueState = (_getIn3 = getIn(state.values, name)) !== null && _getIn3 !== void 0 ? _getIn3 : defaultProps === null || defaultProps === void 0 ? void 0 : defaultProps["default"];
@@ -1576,13 +1576,13 @@
     return React.createElement("label", {
       htmlFor: props === null || props === void 0 ? void 0 : props.htmlFor,
       className: componentClasses
-    }, (props === null || props === void 0 ? void 0 : (_props$badge = props.badge) === null || _props$badge === void 0 ? void 0 : _props$badge.value) && React.createElement("div", {
+    }, (props === null || props === void 0 || (_props$badge = props.badge) === null || _props$badge === void 0 ? void 0 : _props$badge.value) && React.createElement("div", {
       className: "wprf-badge"
     }, React.createElement("sup", {
       className: classNames__default["default"]("wprf-badge-item", {
-        'wprf-badge-active': props === null || props === void 0 ? void 0 : (_props$badge2 = props.badge) === null || _props$badge2 === void 0 ? void 0 : _props$badge2.active
+        'wprf-badge-active': props === null || props === void 0 || (_props$badge2 = props.badge) === null || _props$badge2 === void 0 ? void 0 : _props$badge2.active
       })
-    }, props === null || props === void 0 ? void 0 : (_props$badge3 = props.badge) === null || _props$badge3 === void 0 ? void 0 : _props$badge3.label)), !(props !== null && props !== void 0 && props.src) && (props === null || props === void 0 ? void 0 : props.children), (props === null || props === void 0 ? void 0 : props.src) && React.createElement(Image, {
+    }, props === null || props === void 0 || (_props$badge3 = props.badge) === null || _props$badge3 === void 0 ? void 0 : _props$badge3.label)), !(props !== null && props !== void 0 && props.src) && (props === null || props === void 0 ? void 0 : props.children), (props === null || props === void 0 ? void 0 : props.src) && React.createElement(Image, {
       className: "wprf-label-image",
       src: props.src,
       alt: props === null || props === void 0 ? void 0 : props.label
@@ -1672,7 +1672,7 @@
       rel: "nofollow",
       target: "_blank",
       href: rest.link
-    }, context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link), badgePosition == 'right' && badge);
+    }, context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link), badgePosition == 'right' && badge);
   };
 
   var ControlField = function ControlField(_ref) {
@@ -1727,7 +1727,7 @@
           position: "right"
         }
       }, prevStyle);
-      var styleClasses = classNames__default["default"]((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
+      var styleClasses = classNames__default["default"]((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
       if (type === "hidden") {
         return React.createElement(WrappedComponent, _extends$1({}, props, {
           id: id
@@ -1752,7 +1752,7 @@
           return React.createElement(ControlField, {
             help: null,
             description: props === null || props === void 0 ? void 0 : props.description,
-            position: styles === null || styles === void 0 ? void 0 : (_styles$description = styles.description) === null || _styles$description === void 0 ? void 0 : _styles$description.position,
+            position: styles === null || styles === void 0 || (_styles$description = styles.description) === null || _styles$description === void 0 ? void 0 : _styles$description.position,
             renderComponent: function renderComponent() {
               return React.createElement(WrappedComponent, _extends$1({}, validProps, {
                 disable: true,
@@ -1779,7 +1779,7 @@
       })), React.createElement(ControlField, {
         help: props === null || props === void 0 ? void 0 : props.help,
         description: props === null || props === void 0 ? void 0 : props.description,
-        position: styles === null || styles === void 0 ? void 0 : (_styles$description2 = styles.description) === null || _styles$description2 === void 0 ? void 0 : _styles$description2.position,
+        position: styles === null || styles === void 0 || (_styles$description2 = styles.description) === null || _styles$description2 === void 0 ? void 0 : _styles$description2.position,
         renderComponent: function renderComponent() {
           return React.createElement(WrappedComponent, _extends$1({}, validProps, {
             id: id
@@ -1820,6 +1820,9 @@
         };
       }, []);
       React.useEffect(function () {
+        if (['ft_theme_three_line_one', 'ft_theme_three_line_two', 'ft_theme_four_line_two'].includes(props.name)) {
+          return;
+        }
         if (meta.visible && isFieldMounted.current[props.name]) {
           // Not needed / Confused
           if (!isGeneric && field.type !== 'group') {
@@ -1886,7 +1889,7 @@
       }
       return _isChecked;
     }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-    var componentClasses = classNames__default["default"]("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+    var componentClasses = classNames__default["default"]("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
     return React.createElement("div", {
       className: componentClasses
     }, React.createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
@@ -2096,15 +2099,17 @@
 
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var Input = function Input(props) {
-    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
-    var handleChange = React.useCallback(function (event) {
+  var Input = function Input(props, ref) {
+    var type = props.type ? props.type : 'text';
+    var validProps = validFieldProps(_objectSpread$8(_objectSpread$8({}, props), {}, {
+      type: type
+    }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
+    var handleChange = function handleChange(event) {
       return validProps.onChange(event, {
         popup: props === null || props === void 0 ? void 0 : props.popup,
-        isPro: !!props.is_pro,
-        originProps: props
+        isPro: !!props.is_pro
       });
-    }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+    };
     if (validProps.type === 'checkbox') {
       if (validProps !== null && validProps !== void 0 && validProps.name) {
         validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
@@ -2232,7 +2237,7 @@
       var reader = new FileReader();
       reader.onload = function (event) {
         var _event$target;
-        var json = event === null || event === void 0 ? void 0 : (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.result;
+        var json = event === null || event === void 0 || (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.result;
         props.onChange({
           target: {
             type: 'jsonuploader',
@@ -2421,7 +2426,7 @@
     }, [props === null || props === void 0 ? void 0 : props.menuOpen]);
     var handleOptionChange = React.useCallback(function (option) {
       var _props$filterValue;
-      if (isArray(option) && (props === null || props === void 0 ? void 0 : (_props$filterValue = props.filterValue) === null || _props$filterValue === void 0 ? void 0 : _props$filterValue.length) > 0) {
+      if (isArray(option) && (props === null || props === void 0 || (_props$filterValue = props.filterValue) === null || _props$filterValue === void 0 ? void 0 : _props$filterValue.length) > 0) {
         var _props$filterValue2;
         var origialValues = option;
         var values = origialValues;
@@ -2509,7 +2514,7 @@
   }
 
   var RepeaterField = function RepeaterField(props) {
-    var _builderContext$value, _builderContext$value2;
+    var _builderContext$value;
     var builderContext = useBuilderContext();
     var fields = props.fields,
       _onChange = props.onChange,
@@ -2521,7 +2526,7 @@
       setIsCollapsed = _useState2[1];
     var instanceId = useInstanceId(RepeaterField);
     // onClick={() => setIsCollapse(!isCollapse)}
-    var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : (_builderContext$value2 = _builderContext$value[parent]) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[index];
+    var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 || (_builderContext$value = _builderContext$value[parent]) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[index];
     var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
     var _title = title ? title.length < 40 ? title : title.substr(0, 40) + "..." : '';
     var onClone = function onClone(event) {
@@ -2593,7 +2598,7 @@
       }
       return _isChecked;
     }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-    var componentClasses = classNames__default["default"]("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+    var componentClasses = classNames__default["default"]("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
     return React.createElement("div", {
       className: componentClasses
     }, React.createElement(GenericInput, _objectSpread$5(_objectSpread$5({}, props), {}, {
@@ -2802,6 +2807,86 @@
   };
   var Radio = withLabel(RadioCard);
 
+  /**
+   * WordPress dependencies
+   */
+  /** @typedef {{icon: JSX.Element, size?: number} & import('@wordpress/primitives').SVGProps} IconProps */
+
+  /**
+   * Return an SVG icon.
+   *
+   * @param {IconProps} props icon is the SVG component to render
+   *                          size is a number specifiying the icon size in pixels
+   *                          Other props will be passed to wrapped SVG component
+   *
+   * @return {JSX.Element}  Icon component
+   */
+
+  function Icon(_ref) {
+    let {
+      icon,
+      size = 24,
+      ...props
+    } = _ref;
+    return React.cloneElement(icon, {
+      width: size,
+      height: size,
+      ...props
+    });
+  }
+
+  /**
+   * External dependencies
+   */
+  /**
+   * @param {import('react').ComponentPropsWithoutRef<'path'>} props
+   *
+   * @return {JSX.Element} Path component
+   */
+
+  const Path = props => React.createElement('path', props);
+  /**
+   *
+   * @param {SVGProps} props isPressed indicates whether the SVG should appear as pressed.
+   *                         Other props will be passed through to svg component.
+   *
+   * @return {JSX.Element} Stop component
+   */
+
+  const SVG = _ref => {
+    let {
+      className,
+      isPressed,
+      ...props
+    } = _ref;
+    const appliedProps = { ...props,
+      className: classNames__default["default"](className, {
+        'is-pressed': isPressed
+      }) || undefined,
+      'aria-hidden': true,
+      focusable: false
+    }; // Disable reason: We need to have a way to render HTML tag for web.
+    // eslint-disable-next-line react/forbid-elements
+
+    return React.createElement("svg", appliedProps);
+  };
+
+  const chevronDown = React.createElement(SVG, {
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement(Path, {
+    d: "M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"
+  }));
+  var chevronDown$1 = chevronDown;
+
+  const chevronUp = React.createElement(SVG, {
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, React.createElement(Path, {
+    d: "M6.5 12.4L12 8l5.5 4.4-.9 1.2L12 10l-4.5 3.6-1-1.2z"
+  }));
+  var chevronUp$1 = chevronUp;
+
   var Section = function Section(props) {
     var _props$collapsed;
     var builderContext = useBuilderContext();
@@ -2844,7 +2929,9 @@
       onClick: function onClick() {
         return setCollapse(!isCollapse);
       }
-    }, "Icon")), React.createElement("div", {
+    }, React.createElement(Icon, {
+      icon: isCollapse ? chevronDown$1 : chevronUp$1
+    }))), React.createElement("div", {
       className: "wprf-section-fields"
     }, fields));
   };
@@ -3239,7 +3326,7 @@
         var _meta$inputValue;
         if (meta !== null && meta !== void 0 && (_meta$inputValue = meta.inputValue) !== null && _meta$inputValue !== void 0 && _meta$inputValue.length && option.name) {
           var _meta$inputValue2;
-          if (option.name.toLowerCase().includes(meta === null || meta === void 0 ? void 0 : (_meta$inputValue2 = meta.inputValue) === null || _meta$inputValue2 === void 0 ? void 0 : _meta$inputValue2.toLowerCase())) {
+          if (option.name.toLowerCase().includes(meta === null || meta === void 0 || (_meta$inputValue2 = meta.inputValue) === null || _meta$inputValue2 === void 0 ? void 0 : _meta$inputValue2.toLowerCase())) {
             var _option$name, _option$address;
             option === null || option === void 0 ? void 0 : option.name;
             var regX = new RegExp("(".concat(meta === null || meta === void 0 ? void 0 : meta.inputValue, ")"), "gi");
@@ -3459,11 +3546,11 @@
             }
           });
           if (!((_props$ajax = props.ajax) !== null && _props$ajax !== void 0 && _props$ajax.hideSwal)) {
-            var _props$ajax2, _props$ajax2$swal, _props$ajax3, _props$ajax3$swal, _props$ajax4, _props$ajax4$swal;
-            var type = ((_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : (_props$ajax2$swal = _props$ajax2.swal) === null || _props$ajax2$swal === void 0 ? void 0 : _props$ajax2$swal.icon) || 'success';
-            var message = ((_props$ajax3 = props.ajax) === null || _props$ajax3 === void 0 ? void 0 : (_props$ajax3$swal = _props$ajax3.swal) === null || _props$ajax3$swal === void 0 ? void 0 : _props$ajax3$swal.text) || 'Complete';
+            var _props$ajax2, _props$ajax3, _props$ajax4;
+            var type = ((_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 || (_props$ajax2 = _props$ajax2.swal) === null || _props$ajax2 === void 0 ? void 0 : _props$ajax2.icon) || 'success';
+            var message = ((_props$ajax3 = props.ajax) === null || _props$ajax3 === void 0 || (_props$ajax3 = _props$ajax3.swal) === null || _props$ajax3 === void 0 ? void 0 : _props$ajax3.text) || 'Complete';
             props.context.alerts.toast(type, message, {
-              autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 ? void 0 : (_props$ajax4$swal = _props$ajax4.swal) === null || _props$ajax4$swal === void 0 ? void 0 : _props$ajax4$swal.autoClose
+              autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.swal) === null || _props$ajax4 === void 0 ? void 0 : _props$ajax4.autoClose
             });
           }
           if ((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.reload) {
@@ -3515,7 +3602,7 @@
       disabled: isLoading,
       onClick: (_props$onClick = props === null || props === void 0 ? void 0 : props.onClick) !== null && _props$onClick !== void 0 ? _props$onClick : handleClick,
       className: classNames__default["default"]('wprf-control wprf-button wprf-btn', props === null || props === void 0 ? void 0 : props.classes)
-    }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 ? void 0 : (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 ? void 0 : (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 ? void 0 : (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
+    }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 || (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 || (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 || (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
   };
   var Button$1 = withLabel(Button);
 
@@ -3675,7 +3762,7 @@
         justifyContent: 'center'
       },
       title: React.createElement(ModalHeader, {
-        content: props === null || props === void 0 ? void 0 : (_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.header
+        content: props === null || props === void 0 || (_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.header
       }),
       onConfirm: onConfirm,
       showConfirm: false,
@@ -3792,7 +3879,7 @@
     return React.createElement("div", {
       className: "wprf-stepped-button"
     }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
-      var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4;
+      var _props$config$buttons, _props$config$buttons2, _props$config$buttons3;
       return React.createElement(React__default["default"].Fragment, {
         key: "button_".concat(button, "_").concat(index)
       }, (button === 'next' && nextTab !== undefined || button === 'prev' && prevTab !== undefined) && React.createElement(components.Button, {
@@ -3800,7 +3887,7 @@
         onClick: function onClick() {
           return props.setActive(button === 'next' ? nextTab : prevTab);
         }
-      }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), nextTab == undefined && ((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.type) && React.createElement(Field$1, (_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4[button]));
+      }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), nextTab == undefined && ((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 || (_props$config$buttons2 = _props$config$buttons2[button]) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2.type) && React.createElement(Field$1, (_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3[button]));
     }));
   };
   var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
@@ -3830,15 +3917,15 @@
         return isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab);
       });
       setTabsFields(filteredTabs);
-    }, [tabs, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value.source]);
+    }, [tabs, builderContext === null || builderContext === void 0 || (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value.source]);
     return React.createElement("div", {
-      className: classNames__default["default"]("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes)
+      className: classNames__default["default"]("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 || (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 || (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes)
     }, React.createElement("div", {
       className: "wprf-tab-flex"
     }, React.createElement("div", {
       className: "wprf-tab-contents"
     }, tabs.map(function (tab, index) {
-      var _rest$title;
+      var _rest$title, _rest$title2;
       if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
         return '';
       }
@@ -3849,9 +3936,9 @@
         id: tab === null || tab === void 0 ? void 0 : tab.id,
         className: componentClasses,
         key: tab === null || tab === void 0 ? void 0 : tab.id
-      }, React.createElement("div", {
+      }, ((tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) || (rest === null || rest === void 0 ? void 0 : rest.content_heading)) && React.createElement("div", {
         className: "wprf-tab-heading-wrapper"
-      }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
+      }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title2 = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title2 !== void 0 ? _rest$title2 : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
         return React.createElement(React__default["default"].Fragment, {
           key: "button_".concat(button, "_").concat(index)
         }, React.createElement(Field$1, rest.content_heading[button]));
@@ -3860,7 +3947,7 @@
         fields: tab === null || tab === void 0 ? void 0 : tab.fields,
         parentIndex: [].concat(_toConsumableArray(parentIndex), [index])
       }));
-    })), hooks.applyFilters('wprf_tab_content', '', rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && React.createElement(SteppedButton$1, {
+    })), hooks.applyFilters('wprf_tab_content', '', rest)), (rest === null || rest === void 0 || (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && React.createElement(SteppedButton$1, {
       fields: tabsFields,
       active: active,
       setActive: setActive,
@@ -3897,7 +3984,7 @@
       if (props.value !== activeTab) {
         props.onChange({
           target: {
-            type: 'button',
+            type: 'tab',
             name: props.name,
             value: activeTab
           }
@@ -3932,15 +4019,16 @@
     var tabs = props.tabs;
     if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
       var _props$config;
-      tabs = _objectSpread(_objectSpread({}, props.config), {}, {
-        value: props === null || props === void 0 ? void 0 : (_props$config = props.config) === null || _props$config === void 0 ? void 0 : _props$config.active,
+      var onChange = function onChange(event) {
+        var _event$target;
+        builderContext.setActiveTab(event === null || event === void 0 || (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.value);
+      };
+      tabs = _objectSpread(_objectSpread(_objectSpread({}, props), props.config), {}, {
+        value: (_props$config = props.config) === null || _props$config === void 0 ? void 0 : _props$config.active,
         fields: props.tabs,
         tabs: undefined,
-        submit: props === null || props === void 0 ? void 0 : props.submit,
-        onChange: function onChange(event) {
-          var _event$target;
-          builderContext.setActiveTab(event === null || event === void 0 ? void 0 : (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.value);
-        }
+        submit: props.submit,
+        onChange: props.onChange || onChange
       });
     }
     return React.createElement(React.Fragment, null, React.createElement(Tab, tabs));

@@ -1646,7 +1646,7 @@
     }), 'right')), renderComponent());
   };
 
-  var _excluded$4 = ["id", "label", "badge", "badgePosition", "context"];
+  var _excluded$4 = ["id", "label", "badge", "badgePosition", "context", "info"];
   var ControlLabel = function ControlLabel(props) {
     var _context$icons;
     var id = props.id,
@@ -1654,6 +1654,7 @@
       badge = props.badge,
       badgePosition = props.badgePosition,
       context = props.context,
+      info = props.info,
       rest = _objectWithoutProperties(props, _excluded$4);
     if (!(label && label.length > 0)) {
       return null;
@@ -1668,7 +1669,17 @@
       className: "wprf-control-label"
     }, badgePosition == 'left' && badge, React.createElement("label", {
       htmlFor: id
-    }, label), (rest === null || rest === void 0 ? void 0 : rest.link) && React.createElement("a", {
+    }, label), info && React.createElement("div", {
+      className: "wprf-info"
+    }, React.createElement("button", {
+      className: "wprf-info-button"
+    }, "Info"), React.createElement("p", {
+      className: "wprf-info-text"
+    }, React.createElement("span", {
+      dangerouslySetInnerHTML: {
+        __html: info
+      }
+    }))), (rest === null || rest === void 0 ? void 0 : rest.link) && React.createElement("a", {
       rel: "nofollow",
       target: "_blank",
       href: rest.link

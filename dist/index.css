@@ -63,6 +63,19 @@
   .wprf-control-wrapper .wprf-control-label {
     flex-basis: 20%;
     font-weight: 700; }
+    .wprf-control-wrapper .wprf-control-label .wprf-info {
+      display: inline-flex;
+      position: relative; }
+      .wprf-control-wrapper .wprf-control-label .wprf-info .wprf-info-button {
+        display: inline-flex; }
+      .wprf-control-wrapper .wprf-control-label .wprf-info .wprf-info-text {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none; }
+      .wprf-control-wrapper .wprf-control-label .wprf-info .wprf-info-button:hover + .wprf-info-text {
+        display: block; }
   .wprf-control-wrapper .wprf-control-field {
     display: flex;
     align-items: center;

@@ -42,6 +42,9 @@ const Section = (props) => {
                             <Icon icon={isCollapse ? chevronDown : chevronUp} />
                         </button>
                     )}
+                    {props?.sub_title && 
+                        <p dangerouslySetInnerHTML={{ __html: props?.sub_title }}></p>
+                    }
                 </div>
             }
             <div className="wprf-section-fields">{fields}</div>

@@ -4,11 +4,12 @@ import { sortingFields } from '../core/utils';
 import { useBuilderContext } from '../core/hooks';
 import classNames from 'classnames';
 import { Icon, chevronDown, chevronUp } from '@wordpress/icons';
+import Submit from './tabs/Submit';
 
 const Section = (props) => {
     const builderContext = useBuilderContext();
     const [isCollapse, setCollapse] = useState(props.collapsed ?? false);
-    const [fields, setFields] = useState([]);
+    const [fields, setFields] = useState<React.JSX.Element[]>([]);
 
     useEffect(() => {
         const newFields = sortingFields(props.fields);
@@ -48,6 +49,7 @@ const Section = (props) => {
                 </div>
             }
             <div className="wprf-section-fields">{fields}</div>
+            {(props.showSubmit) && <Submit {...builderContext.submit} />}
         </div>
     )
 }

@@ -2901,6 +2901,30 @@ const chevronUp = createElement(SVG, {
 }));
 var chevronUp$1 = chevronUp;
 
+function _objectDestructuringEmpty(obj) {
+  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+}
+
+var Submit = function Submit(_ref) {
+  var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
+  var context = useBuilderContext();
+  var label = (props === null || props === void 0 ? void 0 : props.label) || __('Save Changes', 'notificationx');
+  var handleSubmit = useCallback(function (event) {
+    var _context$submit;
+    if ((_context$submit = context.submit) !== null && _context$submit !== void 0 && _context$submit.onSubmit) {
+      context.submit.onSubmit(event, context);
+      return;
+    }
+    // console.log('on submit wprf.');
+  }, [context]);
+  return createElement("div", {
+    className: "wprf-submit wprf-control"
+  }, createElement(Button$2, {
+    className: "wprf-submit-button",
+    onClick: handleSubmit
+  }, label));
+};
+
 var Section = function Section(props) {
   var _props$collapsed;
   var builderContext = useBuilderContext();
@@ -2945,9 +2969,13 @@ var Section = function Section(props) {
     }
   }, createElement(Icon, {
     icon: isCollapse ? chevronDown$1 : chevronUp$1
-  }))), createElement("div", {
+  })), (props === null || props === void 0 ? void 0 : props.sub_title) && createElement("p", {
+    dangerouslySetInnerHTML: {
+      __html: props === null || props === void 0 ? void 0 : props.sub_title
+    }
+  })), createElement("div", {
     className: "wprf-section-fields"
-  }, fields));
+  }, fields), props.showSubmit && createElement(Submit, builderContext.submit));
 };
 var Section$1 = /*#__PURE__*/React.memo(Section);
 
@@ -3840,30 +3868,6 @@ var InnerContent = function InnerContent(_ref) {
     }
   }, [_fields]);
   return createElement(Fragment, null, fieldViews);
-};
-
-function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure " + obj);
-}
-
-var Submit = function Submit(_ref) {
-  var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
-  var context = useBuilderContext();
-  var label = (props === null || props === void 0 ? void 0 : props.label) || __('Save Changes', 'notificationx');
-  var handleSubmit = useCallback(function (event) {
-    var _context$submit;
-    if ((_context$submit = context.submit) !== null && _context$submit !== void 0 && _context$submit.onSubmit) {
-      context.submit.onSubmit(event, context);
-      return;
-    }
-    // console.log('on submit wprf.');
-  }, [context]);
-  return createElement("div", {
-    className: "wprf-submit wprf-control"
-  }, createElement(Button$2, {
-    className: "wprf-submit-button",
-    onClick: handleSubmit
-  }, label));
 };
 
 var SteppedButton = function SteppedButton(props) {

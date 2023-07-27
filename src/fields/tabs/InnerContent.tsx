@@ -23,7 +23,7 @@ const InnerContent: React.FC<InnerContentConfig> = ({ fields, parentIndex, conte
                 } else if(item) {
                     return <Field key={`input-${item.name}-${index}`} {...item} parentIndex={pIndex} />;
                 }
-                return <></>;
+                return <React.Fragment key={index}></React.Fragment>;
             });
             setFieldViews(allFields);
         }

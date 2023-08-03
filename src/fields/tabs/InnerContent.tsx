@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { isArray, sortingFields } from '../../core/utils';
 import { Field, GenericField } from '../../fields';
 import { Fields, InnerContentConfig } from '../../types/Tabs';
@@ -19,11 +19,11 @@ const InnerContent: React.FC<InnerContentConfig> = ({ fields, parentIndex, conte
             const allFields = _fields.map((item, index) => {
                 let pIndex = [...parentIndex, 'fields', index];
                 if (item?.type === 'section') {
-                    return <GenericField key={`input-${item.name}-${index}`} {...item} parentIndex={pIndex} />;
+                    return <GenericField key={`input-${item.name}-${Math.random()}`} {...item} parentIndex={pIndex} />;
                 } else if(item) {
-                    return <Field key={`input-${item.name}-${index}`} {...item} parentIndex={pIndex} />;
+                    return <Field key={`input-${item.name}-${Math.random()}`} {...item} parentIndex={pIndex} />;
                 }
-                return <React.Fragment key={index}></React.Fragment>;
+                return <React.Fragment key={Math.random()}></React.Fragment>;
             });
             setFieldViews(allFields);
         }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { isEmptyObj, isFunction, isObject } from "../utils";
+import { isArray, isEmptyObj, isFunction, isObject } from "../utils";
 import { useBuilderContext, useDefaults } from "./index";
 
 const withProps = (WrappedComponent, isGeneric = false) => {
@@ -49,7 +49,8 @@ const withProps = (WrappedComponent, isGeneric = false) => {
                     let parent = props?.parent;
                     let parenttype = props?.parenttype;
                     if (parent && parenttype === 'group' && field.value) {
-                        helpers.setValue([parent, field.name], field.value)
+                        const _parent = isArray(parent) ? [...parent, field.name] : [parent, field.name];
+                        helpers.setValue(_parent, field.value);
                     }
                     // if (parent && parenttype === 'repeater') {
                     //     // let parentValues = helpers.getValue(parent) || [];

@@ -20,7 +20,11 @@ const Group = (props) => {
             event.persist();
         }
         const { field, val: value } = executeChange(event);
-        builderContext.setFieldValue([fieldName, field], value);
+        const _fieldName = [fieldName, field];
+        if (props.parent) {
+            _fieldName.unshift(props.parent);
+        }
+        builderContext.setFieldValue(_fieldName, value);
     }, [props.value])
 
     const newFields = sortingFields(fields);
@@ -32,6 +36,10 @@ const Group = (props) => {
 
     const allFields = newFields.map((item, index) => {
         let parentIndex = [...props.parentIndex, 'fields', index]
+        const parent = [fieldName];
+        if (props.parent) {
+            parent.unshift(props.parent);
+        }
         return <GenericField
             {...rest}
             key={item.name}
@@ -39,7 +47,7 @@ const Group = (props) => {
             onChange={handleChange}
             {...item}
             parenttype='group'
-            parent={fieldName}
+            parent={parent}
             parentIndex={parentIndex}
         />;
     });

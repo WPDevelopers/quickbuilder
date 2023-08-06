@@ -1845,7 +1845,8 @@ var withProps = function withProps(WrappedComponent) {
           var parent = props === null || props === void 0 ? void 0 : props.parent;
           var parenttype = props === null || props === void 0 ? void 0 : props.parenttype;
           if (parent && parenttype === 'group' && field.value) {
-            helpers.setValue([parent, field.name], field.value);
+            var _parent = isArray(parent) ? [].concat(_toConsumableArray(parent), [field.name]) : [parent, field.name];
+            helpers.setValue(_parent, field.value);
           }
           // if (parent && parenttype === 'repeater') {
           //     // let parentValues = helpers.getValue(parent) || [];
@@ -2314,7 +2315,11 @@ var Group = function Group(props) {
     var _executeChange = executeChange(event),
       field = _executeChange.field,
       value = _executeChange.val;
-    builderContext.setFieldValue([fieldName, field], value);
+    var _fieldName = [fieldName, field];
+    if (props.parent) {
+      _fieldName.unshift(props.parent);
+    }
+    builderContext.setFieldValue(_fieldName, value);
   }, [props.value]);
   var newFields = sortingFields(fields);
   useEffect(function () {
@@ -2322,13 +2327,17 @@ var Group = function Group(props) {
   }, []);
   var allFields = newFields.map(function (item, index) {
     var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
+    var parent = [fieldName];
+    if (props.parent) {
+      parent.unshift(props.parent);
+    }
     return createElement(GenericField, _extends$1({}, rest, {
       key: item.name,
       index: props.index,
       onChange: handleChange
     }, item, {
       parenttype: "group",
-      parent: fieldName,
+      parent: parent,
       parentIndex: parentIndex
     }));
   });
@@ -3851,18 +3860,20 @@ var InnerContent = function InnerContent(_ref) {
         var pIndex = [].concat(_toConsumableArray(parentIndex), ['fields', index]);
         if ((item === null || item === void 0 ? void 0 : item.type) === 'section') {
           return createElement(GenericField, _extends$1({
-            key: "input-".concat(item.name, "-").concat(index)
+            key: "input-".concat(item.name, "-").concat(Math.random())
           }, item, {
             parentIndex: pIndex
           }));
         } else if (item) {
           return createElement(Field$1, _extends$1({
-            key: "input-".concat(item.name, "-").concat(index)
+            key: "input-".concat(item.name, "-").concat(Math.random())
           }, item, {
             parentIndex: pIndex
           }));
         }
-        return createElement(Fragment, null);
+        return createElement(React.Fragment, {
+          key: Math.random()
+        });
       });
       setFieldViews(allFields);
     }

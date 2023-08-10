@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { MediaUpload } from '@wordpress/media-utils';
+import { addFilter } from "@wordpress/hooks";
 import { withLabel } from '../core/hooks';
 
-const Media = (props) => {
+const _Media = (props) => {
     const [imageData, setImageData] = useState(props.value?.url ? props.value : null)
 
     useEffect(() => {
@@ -56,5 +57,12 @@ const Media = (props) => {
         </div>
     )
 }
+const Media = withLabel(_Media);
+export default Media;
 
-export default withLabel(Media);
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('media' === type) {
+    return <Media {...props} />;
+  }
+  return field;
+});

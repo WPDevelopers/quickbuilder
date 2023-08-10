@@ -1,12 +1,13 @@
 import parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
 import AsyncSelect from "react-select/async";
+import { addFilter } from "@wordpress/hooks";
 import { when } from "../core";
 import { useBuilderContext, withLabel } from "../core/hooks";
 import { wpFetch } from "../core/utils";
 import { __ } from "@wordpress/i18n";
 
-const SelectAsync = (props) => {
+const _SelectAsync = (props) => {
 	const builderContext = useBuilderContext();
 	let { id, name, multiple, placeholder, onChange, parentIndex } = props;
 
@@ -160,4 +161,12 @@ const SelectAsync = (props) => {
 	);
 };
 
-export default withLabel(SelectAsync);
+const SelectAsync = withLabel(_SelectAsync);
+export default SelectAsync;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('select-async' === type) {
+    return <SelectAsync {...props} />;
+  }
+  return field;
+});

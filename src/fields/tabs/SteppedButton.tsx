@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@wordpress/components'
 import { useBuilderContext } from '../../core/hooks';
-import { Field } from '../../fields';
+import Field from '../Field';
 import { SteppedButtonConfig } from '../../types/Tabs';
-import { isObject } from '../../core/utils';
 
 const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
     const [nextTab, setNextTab] = useState(undefined);

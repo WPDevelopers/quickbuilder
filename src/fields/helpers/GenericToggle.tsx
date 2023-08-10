@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import classNames from "classnames";
 import { Label } from '../../core/components';
 import { withLabel } from '../../core/hooks';
-import { GenericInput } from '../.';
+import { GenericInput } from '../Input';
 import { isObject, isString } from '../../core/utils';
 
 const GenericToggle = (props) => {

@@ -4,13 +4,14 @@ import classNames from "classnames";
 import { Row, Column, Label } from '../core/components';
 
 import useOptions from "../core/hooks/useOptions";
-import { GenericInput } from ".";
+import { GenericInput } from "./Input";
 import { validFieldProps } from "../core/utils";
 import { useBuilderContext, withLabel } from "../core/hooks";
 import { __ } from '@wordpress/i18n';
+import { addFilter } from "@wordpress/hooks";
 
 
-const RadioCard = (props) => {
+const _RadioCard = (props) => {
     const builderContext = useBuilderContext();
     const { options, option } = useOptions(props, 'options');
 
@@ -92,4 +93,12 @@ const RadioCard = (props) => {
     );
 }
 
-export default withLabel(RadioCard);
+const RadioCard = withLabel(_RadioCard);
+export default RadioCard;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('radio-card' === type) {
+    return <RadioCard {...props} />;
+  }
+  return field;
+});

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, RangeControl } from '@wordpress/components';
+import { addFilter } from "@wordpress/hooks";
 import { Label } from '../core/components';
 import { isArray, isNumber, isString } from '../core/utils';
 
@@ -69,3 +70,10 @@ const Slider = (props) => {
 }
 
 export default Slider;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('slider' === type) {
+    return <Slider {...props} />;
+  }
+  return field;
+});

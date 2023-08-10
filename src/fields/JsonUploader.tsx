@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { addFilter } from "@wordpress/hooks";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
 import { __ } from "@wordpress/i18n";
 
-const JsonUploader = (props) => {
+const _JsonUploader = (props) => {
 	const validProps = validFieldProps(props, [
 		"is_pro",
 		"visible",
@@ -104,4 +105,12 @@ const JsonUploader = (props) => {
 	);
 };
 
-export default withLabel(React.memo(JsonUploader));
+const JsonUploader = withLabel(React.memo(_JsonUploader));
+export default JsonUploader;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('jsonuploader' === type) {
+    return <JsonUploader {...props} />;
+  }
+  return field;
+});

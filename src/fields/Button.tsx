@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import classNames from 'classnames';
 import { withLabel, useTrigger } from '../core/hooks';
 import { hitAAJX, isObject, validFieldProps } from '../core/utils';
-import { Field } from '.';
 import { __ } from '@wordpress/i18n';
+import { addFilter } from "@wordpress/hooks";
+import Field from './Field';
 
-const Button = (props) => {
+const _Button = (props) => {
     if (!props?.text && props?.group !== true) {
         throw new Error(__('Button has a required params #text.', 'notificationx'))
     }
@@ -111,4 +112,12 @@ const Button = (props) => {
     )
 }
 
-export default withLabel(Button);
+const Button = withLabel(_Button);
+export default Button;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('button' === type) {
+    return <Button {...props} />;
+  }
+  return field;
+});

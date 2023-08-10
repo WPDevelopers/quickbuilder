@@ -9,7 +9,7 @@ import SteppedButton from "./SteppedButton";
 import { useBuilderContext } from "../../core/hooks";
 import when from "../../core/when";
 import { __ } from '@wordpress/i18n';
-import { Field } from '../../fields';
+import Field from "../Field";
 
 
 const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, setActive, submit, ...rest }) => {

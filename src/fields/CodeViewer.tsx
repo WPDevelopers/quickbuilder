@@ -2,10 +2,11 @@ import { Button } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import copy from "copy-to-clipboard";
 import React, { useCallback } from "react";
+import { addFilter } from "@wordpress/hooks";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
 
-const CodeViewer = (props) => {
+const _CodeViewer = (props) => {
 	const validProps = validFieldProps(props, [
 		"is_pro",
 		"visible",
@@ -42,5 +43,13 @@ const CodeViewer = (props) => {
 		</span>;
 };
 
-export const GenericInput = React.memo(CodeViewer);
-export default withLabel(React.memo(CodeViewer));
+export const GenericCodeViewer = React.memo(_CodeViewer);
+const CodeViewer = withLabel(React.memo(_CodeViewer));
+export default CodeViewer;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('codeviewer' === type) {
+    return <CodeViewer {...props} />;
+  }
+  return field;
+});

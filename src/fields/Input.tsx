@@ -1,12 +1,18 @@
 import { Button } from "@wordpress/components";
 import copy from "copy-to-clipboard";
 import React, { useCallback, useEffect, useState } from 'react';
+import { addFilter } from "@wordpress/hooks";
 import { withLabel } from '../core/hooks';
 import { validFieldProps } from '../core/utils';
-const Input = (props, ref?) => {
+
+const _Input = (props, ref?) => {
 	const type = props.type ? props.type : 'text';
 	const validProps = validFieldProps({...props, type}, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
-	const handleChange = (event) => validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro });
+	const handleChange = (event) => {
+		console.log(props);
+
+		return validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro })
+	};
 
 	if (validProps.type === 'checkbox') {
 		if (validProps?.name) {
@@ -56,9 +62,17 @@ const Input = (props, ref?) => {
 	})
 }
 
-Input.defaultProps = {
+_Input.defaultProps = {
 	type: 'text'
 }
 
-export const GenericInput = React.memo(Input);
-export default withLabel(React.memo(Input));
+export const GenericInput = React.memo(_Input);
+const Input = withLabel(React.memo(_Input));
+export default Input;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+	if (type === 'text' || type === 'radio' || type === 'email' || type === 'range' || type === 'number' || type === 'hidden') {
+		return <Input {...props} />
+	}
+	return field;
+});

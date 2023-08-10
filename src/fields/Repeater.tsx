@@ -4,6 +4,7 @@ import { RepeaterField } from './helpers';
 import { executeChange } from '../core/utils';
 import { ReactSortable } from "react-sortablejs";
 import { v4 } from "uuid";
+import { addFilter } from "@wordpress/hooks";
 
 
 const Repeater = (props) => {
@@ -105,3 +106,10 @@ const Repeater = (props) => {
 }
 
 export default Repeater;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('repeater' === type) {
+    return <Repeater {...props} />;
+  }
+  return field;
+});

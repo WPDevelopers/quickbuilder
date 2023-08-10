@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { addFilter } from "@wordpress/hooks";
 import { withLabel } from "../core/hooks";
 import { isObject, validFieldProps } from "../core/utils";
 
-const ResponsiveNumber = (props) => {
+const _ResponsiveNumber = (props) => {
 	const validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
 	const [responsive, setResponsive] = useState(Object.keys(props.controls)[0]);
 
@@ -75,9 +76,17 @@ const ResponsiveNumber = (props) => {
 	);
 };
 
-ResponsiveNumber.defaultProps = {
+_ResponsiveNumber.defaultProps = {
 	type: "number",
 };
 
-export const GenericInput = React.memo(ResponsiveNumber);
-export default withLabel(React.memo(ResponsiveNumber));
+export const GenericResponsiveNumber = React.memo(_ResponsiveNumber);
+const ResponsiveNumber = withLabel(React.memo(_ResponsiveNumber));
+export default ResponsiveNumber;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('responsive-number' === type) {
+    return <ResponsiveNumber {...props} />;
+  }
+  return field;
+});

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { isArray, sortingFields } from '../../core/utils';
-import { Field, GenericField } from '../../fields';
+import Field, { GenericField } from '../Field';
 import { Fields, InnerContentConfig } from '../../types/Tabs';
 
 const InnerContent: React.FC<InnerContentConfig> = ({ fields, parentIndex, context }) => {

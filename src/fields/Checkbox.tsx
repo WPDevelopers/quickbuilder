@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import React, { useEffect, useMemo, useState } from "react";
-import { GenericInput, Input } from ".";
+import { addFilter } from "@wordpress/hooks";
 import { Column, Row } from "../core/components";
 import { withLabel } from "../core/hooks";
 import { isObject, isString, sortingFields } from "../core/utils";
+import { GenericInput } from "./Input";
 
 function GenericCheckbox(props) {
     const { style: prevStyles } = props;
@@ -49,7 +50,7 @@ function GenericCheckbox(props) {
     );
 }
 
-function Checkbox(props) {
+function _Checkbox(props) {
     const { options: passedOptions, value, multiple, style: prevStyles } = props;
     const options: {label: string, value: string, rules?:{}[]}[] = sortingFields(passedOptions);
 
@@ -116,4 +117,13 @@ function Checkbox(props) {
     return <GenericInput {...{...props, type: 'checkbox'}} />;
 }
 
-export default withLabel(Checkbox);
+const Checkbox = withLabel(_Checkbox);
+export default Checkbox;
+
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+	if ('checkbox' === type) {
+		return <Checkbox {...props} />
+	}
+	return field;
+});

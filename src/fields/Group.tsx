@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames';
+import { addFilter } from "@wordpress/hooks";
 
 import { useBuilderContext, withLabel } from '../core/hooks';
 import { executeChange, isArray, sortingFields } from '../core/utils';
-import { GenericField } from '.';
 import { __ } from '@wordpress/i18n';
+import { GenericField } from './Field';
 
 
-const Group = (props) => {
+const _Group = (props) => {
     const { name: fieldName, fields, ...rest } = props;
 
     if (!fields || !isArray(fields) || fields.length === 0) {
@@ -65,4 +66,12 @@ const Group = (props) => {
     )
 }
 
-export default withLabel(Group)
+const Group = withLabel(_Group);
+export default Group;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('group' === type) {
+    return <Group {...props} />;
+  }
+  return field;
+});

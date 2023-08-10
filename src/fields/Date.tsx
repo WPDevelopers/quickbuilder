@@ -3,10 +3,11 @@ import React, { useEffect } from "react";
 // @ts-ignore
 import { date, __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
+import { addFilter } from "@wordpress/hooks";
 import { withLabel } from "../core/hooks";
 import { getTime } from "../core/utils";
 
-const DateControl = (props) => {
+const _DateControl = (props) => {
     const { name, value, onChange, position } = props;
 
     const settings: any = __experimentalGetSettings();
@@ -71,4 +72,12 @@ const DateControl = (props) => {
 };
 
 
-export default withLabel(DateControl);
+const DateControl = withLabel(_DateControl);
+export default DateControl;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('date' === type) {
+    return <DateControl {...props} />;
+  }
+  return field;
+});

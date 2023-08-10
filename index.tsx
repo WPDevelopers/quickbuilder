@@ -3,7 +3,6 @@ export { default as FormBuilder } from './src/FormBuilder';
 
 export { when, builderReducer } from './src/core';
 export * from './src/core/utils';
-export * from './src/fields';
 export * from './src/core/functions';
 
 export {

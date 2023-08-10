@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from "classnames";
 import { Column, Label, Row } from '../core/components';
 import { withLabel } from '../core/hooks';
-import { Input, GenericInput } from '.';
+import { GenericInput } from './Input';
 
 export const Toggle = (props) => {
     const { options, value, multiple, style: prevStyles } = props;

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Field } from '../fields';
 import { sortingFields } from '../core/utils';
 import { useBuilderContext } from '../core/hooks';
 import classNames from 'classnames';
 import { Icon, chevronDown, chevronUp } from '@wordpress/icons';
+import { addFilter } from "@wordpress/hooks";
 import Submit from './tabs/Submit';
+import Field from './Field';
 
-const Section = (props) => {
+const _Section = (props) => {
     const builderContext = useBuilderContext();
     const [isCollapse, setCollapse] = useState(props.collapsed ?? false);
     const [fields, setFields] = useState<React.JSX.Element[]>([]);
@@ -43,7 +44,7 @@ const Section = (props) => {
                             <Icon icon={isCollapse ? chevronDown : chevronUp} />
                         </button>
                     )}
-                    {props?.sub_title && 
+                    {props?.sub_title &&
                         <p dangerouslySetInnerHTML={{ __html: props?.sub_title }}></p>
                     }
                 </div>
@@ -54,4 +55,12 @@ const Section = (props) => {
     )
 }
 
-export default React.memo(Section);
+const Section = React.memo(_Section);
+export default Section;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('section' === type) {
+    return <Section {...props} />;
+  }
+  return field;
+});

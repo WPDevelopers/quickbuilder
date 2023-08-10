@@ -13,12 +13,10 @@
     "package.json"
   ],
   "scripts": {
-    "predev": "rimraf dist/dev",
+    "predev": "rimraf dist",
     "start": "npm run predev && rollup -c -w --environment NODE_ENV:development",
     "dev": "npm run predev && rollup -c --environment NODE_ENV:development",
-    "prepkg": "rimraf dist/src",
-    "pkg": "npm run prepkg && rollup -c --environment NODE_ENV:production",
-    "build": "npm run dev && npm run pkg",
+    "build": "npm run dev",
     "packages-update": "wp-scripts packages-update"
   },
   "devDependencies": {
@@ -90,6 +88,7 @@
     "sweetalert2": "11.4.8"
   },
   "peerDependencies": {
+    "@babel/runtime": "^7.22.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "@wordpress/api-fetch": "^6.19.0",
@@ -98,6 +97,10 @@
     "@wordpress/date": "^4.22.0",
     "@wordpress/i18n": "^4.22.0",
     "@wordpress/media-utils": "^4.13.0",
+    "@wordpress/primitives": "^3.20.0",
+    "@wordpress/compose": "^5.20.0",
+    "@wordpress/icons": "^9.13.0",
+    "uuid": "^8.3.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "classnames": "^2.2.6",

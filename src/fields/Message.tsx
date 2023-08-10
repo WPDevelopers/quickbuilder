@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react'
+import { addFilter } from "@wordpress/hooks";
 import { when } from '../core';
 
 const eligibleMessage = (props) => {
@@ -34,3 +35,10 @@ const Message = (props) => {
 }
 
 export default Message;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('message' === type) {
+    return <Message {...props} />;
+  }
+  return field;
+});

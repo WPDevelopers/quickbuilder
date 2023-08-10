@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import { GenericField } from '.';
+import { GenericField } from './Field';
 import { ModalContent, ModalHeader } from './helpers';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { __ } from '@wordpress/i18n';
+import { addFilter } from "@wordpress/hooks";
 
 const Modal = (props) => {
     if (props?.body == undefined || props?.button == undefined) {
@@ -69,3 +70,10 @@ const Modal = (props) => {
 }
 
 export default Modal;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('modal' === type) {
+    return <Modal {...props} />;
+  }
+  return field;
+});

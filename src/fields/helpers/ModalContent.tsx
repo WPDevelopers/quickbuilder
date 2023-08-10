@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { isString, sortingFields } from '../../core/utils';
-import { Field, GenericField } from '../.';
+import Field, { GenericField } from '../Field';
 import { Loading } from '.';
 
 const ModalContent = (props) => {

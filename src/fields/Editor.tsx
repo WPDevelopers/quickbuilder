@@ -3,13 +3,26 @@ import { Editor as Wysiwyg } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import { addFilter } from "@wordpress/hooks";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { toolbarOptions } from './helpers';
 import { withLabel } from '../core/hooks';
 
-const Editor = (props) => {
+const _Editor = (props) => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
+	const toolbarOptions = {
+		options: ['inline', 'blockType', 'textAlign', 'colorPicker', 'link'],
+		inline: {
+			options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace'],
+		},
+		blockType: {
+			inDropdown: true,
+			options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
+			className: undefined,
+			component: undefined,
+			dropdownClassName: undefined,
+		},
+	};
 
     useEffect(() => {
         if (props.value) {
@@ -44,4 +57,12 @@ const Editor = (props) => {
     );
 }
 
-export default withLabel(Editor);
+const Editor = withLabel(_Editor);
+export default Editor;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('editor' === type) {
+    return <Editor {...props} />;
+  }
+  return field;
+});

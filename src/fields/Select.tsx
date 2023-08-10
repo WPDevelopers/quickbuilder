@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import ReactSelect from "react-select";
+import { addFilter } from "@wordpress/hooks";
 import { isArray, isObject, merge, wpFetch, valueExists } from '../core/utils';
 import { withLabel, useOptions, useBuilderContext } from '../core/hooks';
 import { when } from '../core';
 
-const Select = (props) => {
+const _Select = (props) => {
 	const builderContext = useBuilderContext();
 	let { id, name, multiple, placeholder, search = false, onChange, parentIndex } = props;
 	const { options, selectedOption, setOptions, setData } = useOptions(props, 'options');
@@ -124,4 +125,12 @@ const Select = (props) => {
 	)
 }
 
-export default withLabel(Select);
+const Select = withLabel(_Select);
+export default Select;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('select' === type) {
+    return <Select {...props} />;
+  }
+  return field;
+});

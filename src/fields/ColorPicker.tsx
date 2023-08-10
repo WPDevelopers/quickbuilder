@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ColorPicker as WPColorPicker } from "@wordpress/components";
 import { __ } from '@wordpress/i18n';
+import { addFilter } from "@wordpress/hooks";
 import { withLabel } from '../core/hooks';
 
 
-const ColorPicker = (props) => {
+const _ColorPicker = (props) => {
     const { value, name, id, onChange } = props;
     const [showPicker, setShowPicker] = useState(false);
     const [color, setColor] = useState(value || null)
@@ -73,4 +74,12 @@ const ColorPicker = (props) => {
     )
 }
 
-export default withLabel(ColorPicker);
+const ColorPicker = withLabel(_ColorPicker);
+export default ColorPicker;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('colorpicker' === type) {
+    return <ColorPicker {...props} />;
+  }
+  return field;
+});

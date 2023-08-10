@@ -1,22 +1,70 @@
-export { default as Field, GenericField } from "./Field";
-export { default as Date } from "./Date";
-export { default as Input, GenericInput } from "./Input";
-export { default as Textarea } from "./Textarea";
-export { default as CodeViewer } from "./CodeViewer";
-export { default as JsonUploader } from "./JsonUploader";
-export { default as Group } from "./Group";
-export { default as Select } from "./Select";
-export { default as Toggle } from "./Toggle";
-export { default as Radio } from "./RadioCard";
-export { default as Section } from "./Section";
-export { default as Repeater } from "./Repeater";
-export { default as Slider } from "./Slider";
-export { default as SelectAsync } from "./SelectAsync";
-export { default as ColorPicker } from "./ColorPicker";
-export { default as Action } from "./Action";
-export { default as Media } from "./Media";
-export { default as Editor } from "./Editor";
-export { default as Button } from "./Button";
-export { default as ResponsiveNumber } from "./ResponsiveNumber";
-export { default as Message } from "./Message";
-export { default as Modal } from "./Modal";
+import Date from "./Date";
+import Input, { GenericInput } from "./Input";
+import Textarea from "./Textarea";
+import CodeViewer from "./CodeViewer";
+import JsonUploader from "./JsonUploader";
+import Group from "./Group";
+import Select from "./Select";
+import Toggle from "./Toggle";
+import Radio from "./RadioCard";
+import Section from "./Section";
+import Repeater from "./Repeater";
+import Slider from "./Slider";
+import SelectAsync from "./SelectAsync";
+import ColorPicker from "./ColorPicker";
+import Action from "./Action";
+import Media from "./Media";
+import Editor from "./Editor";
+import Button from "./Button";
+import ResponsiveNumber from "./ResponsiveNumber";
+import Message from "./Message";
+import Modal from "./Modal";
+
+export {
+  Date,
+  Input,
+  GenericInput,
+  Textarea,
+  CodeViewer,
+  JsonUploader,
+  Group,
+  Select,
+  Toggle,
+  Radio,
+  Section,
+  Repeater,
+  Slider,
+  SelectAsync,
+  ColorPicker,
+  Action,
+  Media,
+  Editor,
+  Button,
+  ResponsiveNumber,
+  Message,
+  Modal,
+};
+export default {
+	Date,
+	Input,
+	GenericInput,
+	Textarea,
+	CodeViewer,
+	JsonUploader,
+	Group,
+	Select,
+	Toggle,
+	Radio,
+	Section,
+	Repeater,
+	Slider,
+	SelectAsync,
+	ColorPicker,
+	Action,
+	Media,
+	Editor,
+	Button,
+	ResponsiveNumber,
+	Message,
+	Modal,
+  };

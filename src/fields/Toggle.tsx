@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react'
+import { addFilter } from "@wordpress/hooks";
 import { Column, Row } from '../core/components';
 import { isObject, sortingFields } from '../core/utils';
 import { GenericToggle } from './helpers'
@@ -70,3 +71,10 @@ export const Toggle = (props) => {
 }
 
 export default Toggle;
+
+addFilter('custom_field', 'wprf', (field, type, props) => {
+  if ('toggle' === type) {
+    return <Toggle {...props} />;
+  }
+  return field;
+});

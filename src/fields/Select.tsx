@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import ReactSelect from "react-select";
 import { addFilter } from "@wordpress/hooks";
 import { isArray, isObject, merge, wpFetch, valueExists } from '../core/utils';
-import { withLabel, useOptions, useBuilderContext } from '../core/hooks';
+import { withLabel, useOptions } from '../core/hooks';
 import { when } from '../core';
+import useBuilderContext from '../core/hooks/useBuilderContext';
 
 const _Select = (props) => {
 	const builderContext = useBuilderContext();

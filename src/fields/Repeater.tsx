@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useEffect, useState } from 'react'
-import { useBuilderContext } from '../core/hooks';
+import useBuilderContext from '../core/hooks/useBuilderContext';
 import { RepeaterField } from './helpers';
 import { executeChange } from '../core/utils';
 import { ReactSortable } from "react-sortablejs";

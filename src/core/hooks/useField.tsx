@@ -1,4 +1,4 @@
-import { useBuilderContext } from './index';
+import useBuilderContext from './useBuilderContext';
 
 const useField = (props) => {
     const builderContext = useBuilderContext();

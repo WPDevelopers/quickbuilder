@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import classNames from "classnames";
-import { useBuilderContext } from '../hooks';
+import useBuilderContext from '../hooks/useBuilderContext';
 
 
 const BadgeComp = ({ componentClasses, label }) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { isArray, isEmptyObj, isFunction, isObject } from "../utils";
-import { useBuilderContext, useDefaults } from "./index";
+import useDefaults from "./useDefaults";
+import useBuilderContext from "./useBuilderContext";
 
 const withProps = (WrappedComponent, isGeneric = false) => {
     const WithProps = (props) => {

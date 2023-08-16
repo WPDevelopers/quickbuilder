@@ -1,16 +1,22 @@
 import { Button, DateTimePicker, Dropdown } from "@wordpress/components";
 import React, { useEffect } from "react";
 // @ts-ignore
-import { date, __experimentalGetSettings } from "@wordpress/date";
+import { date, getSettings } from "@wordpress/date";
 import moment from "moment";
 import { addFilter } from "@wordpress/hooks";
 import { withLabel } from "../core/hooks";
-import { getTime } from "../core/utils";
+
+
+const getTime = (value?, keepLocalTime: boolean = false) => {
+	const settings = getSettings();
+	const _value = moment.utc(value ? value : undefined).utcOffset(+settings?.timezone?.offset, keepLocalTime);
+	return _value;
+}
 
 const _DateControl = (props) => {
     const { name, value, onChange, position } = props;
 
-    const settings: any = __experimentalGetSettings();
+    const settings: any = getSettings();
     const format = props?.format ?? settings.formats.datetime;
     const _value = getTime(value);
 
@@ -80,4 +86,9 @@ addFilter('custom_field', 'wprf', (field, type, props) => {
     return <DateControl {...props} />;
   }
   return field;
+});
+
+addFilter('builder_date_format', 'wprf', (valueState, validProps) => {
+	// console.log(valueState, validProps);
+	return valueState == undefined ? getTime() : valueState;
 });

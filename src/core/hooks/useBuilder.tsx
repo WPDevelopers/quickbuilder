@@ -1,7 +1,8 @@
 import { useEffect, useReducer, useRef, useCallback, useLayoutEffect } from "react";
 import { builderReducer, when } from '../index'
-import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, getTime, sortingFields } from "../utils";
+import { getIn, executeChange as eChange, isVisible, isArray, validFieldProps, isString, sortingFields } from "../utils";
 import { doAction } from '@wordpress/hooks'
+import { applyFilters } from '@wordpress/hooks'
 
 const useBuilder = (props) => {
 	// Set is Mounted or NOT
@@ -181,7 +182,7 @@ const useBuilder = (props) => {
 			validProps.checked = valueState === valueProp;
 			validProps.value = valueProp;
 		} else if (type === 'date') {
-			validProps.value = valueState == undefined ? getTime() : valueState;
+			validProps.value = applyFilters('builder_date_format', valueState, validProps);
 		} else {
 			validProps.value = valueState;
 		}

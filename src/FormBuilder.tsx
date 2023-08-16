@@ -9,7 +9,7 @@ registerStore("formbuilder", store);
 
 import { BuilderProps } from "./types/Builder";
 import Tab from "./fields/Tab";
-import { useBuilderContext } from "./core/hooks";
+import useBuilderContext from "./core/hooks/useBuilderContext";
 import { TabProps } from "./types/Tabs";
 
 

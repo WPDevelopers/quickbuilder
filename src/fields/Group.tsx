@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames';
 import { addFilter } from "@wordpress/hooks";
 
-import { useBuilderContext, withLabel } from '../core/hooks';
+import { withLabel } from '../core/hooks';
 import { executeChange, isArray, sortingFields } from '../core/utils';
 import { __ } from '@wordpress/i18n';
 import { GenericField } from './Field';
+import useBuilderContext from '../core/hooks/useBuilderContext';
 
 
 const _Group = (props) => {

@@ -6,9 +6,10 @@ import { Row, Column, Label } from '../core/components';
 import useOptions from "../core/hooks/useOptions";
 import { GenericInput } from "./Input";
 import { validFieldProps } from "../core/utils";
-import { useBuilderContext, withLabel } from "../core/hooks";
+import { withLabel } from "../core/hooks";
 import { __ } from '@wordpress/i18n';
 import { addFilter } from "@wordpress/hooks";
+import useBuilderContext from "../core/hooks/useBuilderContext";
 
 
 const _RadioCard = (props) => {
@@ -75,6 +76,12 @@ const _RadioCard = (props) => {
                                 >
                                     {label}
                                 </Label>
+								{console.log(
+                                    {
+										...rest,
+										...validProps
+									})
+								}
                                 <GenericInput
                                     {...rest}
                                     {...validProps}

@@ -1,3 +1,4 @@
+export { default as useBuilderContext, BuilderProvider, BuilderConsumer} from './src/core/hooks/useBuilderContext';
 
 export { default as FormBuilder } from './src/FormBuilder';
 
@@ -7,9 +8,6 @@ export * from './src/core/functions';
 
 export {
     useBuilder,
-    useBuilderContext,
-    BuilderProvider,
-    BuilderConsumer,
     useDefaults,
     withProps,
     withLabel

@@ -6,7 +6,7 @@ import { TabConfig } from '../types/Tabs';
 // import useBuilder from '../core/hooks/useBuilder';
 
 import '../scss/index.scss';
-import { useBuilderContext } from '../core/hooks';
+import useBuilderContext from '../core/hooks/useBuilderContext';
 import classNames from 'classnames';
 
 

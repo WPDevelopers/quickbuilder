@@ -6,7 +6,7 @@ import { isArray, isVisible } from "../../core/utils";
 import InnerContent from "./InnerContent";
 import Submit from "./Submit";
 import SteppedButton from "./SteppedButton";
-import { useBuilderContext } from "../../core/hooks";
+import useBuilderContext from "../../core/hooks/useBuilderContext";
 import when from "../../core/when";
 import { __ } from '@wordpress/i18n';
 import Field from "../Field";

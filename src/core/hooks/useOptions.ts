@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { isArray, sortingFields } from "../utils";
-import { useBuilderContext } from "./index";
+import useBuilderContext from './useBuilderContext';
 
 const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     if( ! props?.[propertyName] ) {

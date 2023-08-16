@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Icon } from '@wordpress/components';
 import { GenericField } from '../Field';
 import { useInstanceId } from "@wordpress/compose";
-import { useBuilderContext } from '../../core/hooks';
+import useBuilderContext from '../../core/hooks/useBuilderContext';
 
 const RepeaterField = (props) => {
     const builderContext = useBuilderContext();

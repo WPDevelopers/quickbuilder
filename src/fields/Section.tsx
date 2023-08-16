@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { sortingFields } from '../core/utils';
-import { useBuilderContext } from '../core/hooks';
+import useBuilderContext from '../core/hooks/useBuilderContext';
 import classNames from 'classnames';
 import { Icon, chevronDown, chevronUp } from '@wordpress/icons';
 import { addFilter } from "@wordpress/hooks";

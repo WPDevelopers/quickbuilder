@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@wordpress/components'
-import { useBuilderContext } from '../../core/hooks';
+import useBuilderContext from '../../core/hooks/useBuilderContext';
 import Field from '../Field';
 import { SteppedButtonConfig } from '../../types/Tabs';
 

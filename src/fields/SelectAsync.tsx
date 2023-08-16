@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import AsyncSelect from "react-select/async";
 import { addFilter } from "@wordpress/hooks";
 import { when } from "../core";
-import { useBuilderContext, withLabel } from "../core/hooks";
+import { withLabel } from "../core/hooks";
 import { wpFetch } from "../core/utils";
 import { __ } from "@wordpress/i18n";
+import useBuilderContext from "../core/hooks/useBuilderContext";
 
 const _SelectAsync = (props) => {
 	const builderContext = useBuilderContext();

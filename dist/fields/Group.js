@@ -4,11 +4,11 @@ import _objectWithoutProperties from '@babel/runtime/helpers/objectWithoutProper
 import { createElement, useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 import { addFilter } from '@wordpress/hooks';
-import useBuilderContext from '../core/hooks/useBuilderContext.js';
 import { isArray, executeChange, sortingFields } from '../core/utils.js';
 import '@babel/runtime/helpers/typeof';
 import 'intersect';
 import { __ } from '@wordpress/i18n';
+import useBuilderContext from '../core/hooks/useBuilderContext.js';
 import '@babel/runtime/helpers/slicedToArray';
 import '@babel/runtime/helpers/defineProperty';
 import 'sweetalert2';

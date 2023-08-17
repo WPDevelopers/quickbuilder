@@ -4,8 +4,6 @@ import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import { toPath, clone } from 'lodash-es';
 import apiFetch from '@wordpress/api-fetch';
 import when from './when.js';
-import { __experimentalGetSettings } from '@wordpress/date';
-import moment from 'moment';
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -242,13 +240,6 @@ var hitAAJX = function hitAAJX(ajax) {
   }
   return Promise.reject(false);
 };
-var getTime = function getTime(value) {
-  var _settings$timezone;
-  var keepLocalTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var settings = __experimentalGetSettings();
-  var _value = moment.utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 || (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
-  return _value;
-};
 var merge = function merge(array_one, array_two, key) {
   // if( ! isArray(array_one) && ! isArray( array_two ) && isObject( array_one ) && isObject( array_two ) ) {
   //     return { ...array_one, ...array_two }
@@ -283,4 +274,4 @@ var downloadFile = function downloadFile(_ref) {
   a.remove();
 };
 
-export { executeChange, getIn, getSelectedValues, getTime, hitAAJX, isArray, isEmptyObj, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, setIn, sortingFields, validFieldProps, valueExists, withState, wpFetch };
+export { executeChange, getIn, getSelectedValues, hitAAJX, isArray, isEmptyObj, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, setIn, sortingFields, validFieldProps, valueExists, withState, wpFetch };

@@ -4,18 +4,6 @@ import '@babel/runtime/helpers/defineProperty';
 import Image from './Image.js';
 import '@babel/runtime/helpers/extends';
 import '../hooks/useBuilderContext.js';
-import '@babel/runtime/helpers/toConsumableArray';
-import '@babel/runtime/helpers/typeof';
-import 'lodash-es';
-import '@wordpress/api-fetch';
-import 'intersect';
-import '@wordpress/i18n';
-import '@wordpress/date';
-import 'moment';
-import '@babel/runtime/helpers/slicedToArray';
-import 'sweetalert2';
-import '@wordpress/data';
-import '@wordpress/hooks';
 import '@babel/runtime/helpers/objectWithoutProperties';
 
 var Label = function Label(props) {

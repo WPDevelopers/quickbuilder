@@ -9,8 +9,6 @@ import '@wordpress/data';
 import '@babel/runtime/helpers/toConsumableArray';
 import 'lodash-es';
 import '@wordpress/api-fetch';
-import '@wordpress/date';
-import 'moment';
 import '@wordpress/i18n';
 
 var eligibleMessage = function eligibleMessage(props) {

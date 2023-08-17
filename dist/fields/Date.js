@@ -1,29 +1,37 @@
 import { Dropdown, Button, DateTimePicker } from '@wordpress/components';
 import { createElement, useEffect } from 'react';
-import { __experimentalGetSettings, date } from '@wordpress/date';
+import { getSettings, date } from '@wordpress/date';
 import moment from 'moment';
 import { addFilter } from '@wordpress/hooks';
-import '../core/hooks/useBuilderContext.js';
-import { getTime } from '../core/utils.js';
+import '@babel/runtime/helpers/toConsumableArray';
 import '@babel/runtime/helpers/typeof';
+import '@babel/runtime/helpers/defineProperty';
+import 'lodash-es';
+import '@wordpress/api-fetch';
 import 'intersect';
 import '@wordpress/i18n';
+import '../core/hooks/useBuilderContext.js';
 import '@babel/runtime/helpers/slicedToArray';
-import '@babel/runtime/helpers/defineProperty';
 import 'sweetalert2';
 import '@wordpress/data';
 import withLabel from '../core/hooks/withLabel.js';
-import '@babel/runtime/helpers/toConsumableArray';
 import '@babel/runtime/helpers/extends';
 import 'classnames';
 
+var getTime = function getTime(value) {
+  var _settings$timezone;
+  var keepLocalTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var settings = getSettings();
+  var _value = moment.utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 || (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
+  return _value;
+};
 var _DateControl = function _DateControl(props) {
   var _props$format;
   var name = props.name,
     value = props.value,
     _onChange = props.onChange,
     position = props.position;
-  var settings = __experimentalGetSettings();
+  var settings = getSettings();
   var format = (_props$format = props === null || props === void 0 ? void 0 : props.format) !== null && _props$format !== void 0 ? _props$format : settings.formats.datetime;
   var _value = getTime(value);
   var is12HourTime = /a(?!\\)/i.test(settings.formats.datetime.toLowerCase().replace(/\\\\/g, "").split("").reverse().join(""));
@@ -80,6 +88,10 @@ addFilter('custom_field', 'wprf', function (field, type, props) {
     return createElement(DateControl, props);
   }
   return field;
+});
+addFilter('builder_date_format', 'wprf', function (valueState, validProps) {
+  // console.log(valueState, validProps);
+  return valueState == undefined ? getTime() : valueState;
 });
 
 export { DateControl as default };

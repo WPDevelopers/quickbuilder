@@ -8,18 +8,18 @@ import Row from '../core/components/Row.js';
 import Column from '../core/components/Column.js';
 import Label from '../core/components/Label.js';
 import useBuilderContext from '../core/hooks/useBuilderContext.js';
+import useOptions from '../core/hooks/useOptions.js';
+import { GenericInput } from './Input.js';
 import { validFieldProps } from '../core/utils.js';
 import '@babel/runtime/helpers/typeof';
 import 'intersect';
 import { __ } from '@wordpress/i18n';
-import useOptions from '../core/hooks/useOptions.js';
 import '@babel/runtime/helpers/slicedToArray';
 import 'sweetalert2';
 import '@wordpress/data';
 import { addFilter } from '@wordpress/hooks';
 import withLabel from '../core/hooks/withLabel.js';
 import '@babel/runtime/helpers/toConsumableArray';
-import { GenericInput } from './Input.js';
 
 var _excluded = ["label", "value", "icon", "is_pro"];
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -75,7 +75,7 @@ var _RadioCard = function _RadioCard(props) {
         value: is_pro,
         active: Boolean(builderContext.is_pro_active)
       }
-    }, label), createElement(GenericInput, _extends({}, rest, validProps, {
+    }, label), console.log(_objectSpread(_objectSpread({}, rest), validProps)), createElement(GenericInput, _extends({}, rest, validProps, {
       is_pro: is_pro,
       type: "radio",
       value: value,

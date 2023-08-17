@@ -7,15 +7,15 @@ import Field, { GenericField } from '../Field.js';
 import '@wordpress/components';
 import '@wordpress/compose';
 import '../../core/hooks/useBuilderContext.js';
+import '@babel/runtime/helpers/defineProperty';
+import 'classnames';
+import '@babel/runtime/helpers/objectWithoutProperties';
 import '@babel/runtime/helpers/typeof';
 import 'intersect';
 import '@wordpress/i18n';
-import '@babel/runtime/helpers/defineProperty';
 import 'sweetalert2';
 import '@wordpress/data';
 import '@wordpress/hooks';
-import '@babel/runtime/helpers/objectWithoutProperties';
-import 'classnames';
 import '../Input.js';
 import Loading from './Loading.js';
 

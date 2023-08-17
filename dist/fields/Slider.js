@@ -7,14 +7,8 @@ import '@babel/runtime/helpers/defineProperty';
 import Label from '../core/components/Label.js';
 import '@babel/runtime/helpers/extends';
 import '../core/hooks/useBuilderContext.js';
-import { isNumber, isString, isArray } from '../core/utils.js';
-import '@babel/runtime/helpers/typeof';
-import 'intersect';
-import '@wordpress/i18n';
-import 'sweetalert2';
-import '@wordpress/data';
 import '@babel/runtime/helpers/objectWithoutProperties';
-import '@babel/runtime/helpers/toConsumableArray';
+import { isNumber, isString, isArray } from '../core/utils.js';
 
 var Slider = function Slider(props) {
   var name = props.name,

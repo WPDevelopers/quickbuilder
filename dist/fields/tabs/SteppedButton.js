@@ -2,21 +2,6 @@ import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React, { useState, useEffect, createElement } from 'react';
 import { Button } from '@wordpress/components';
 import useBuilderContext from '../../core/hooks/useBuilderContext.js';
-import '@babel/runtime/helpers/toConsumableArray';
-import '@babel/runtime/helpers/typeof';
-import '@babel/runtime/helpers/defineProperty';
-import 'lodash-es';
-import '@wordpress/api-fetch';
-import 'intersect';
-import '@wordpress/i18n';
-import '@wordpress/date';
-import 'moment';
-import 'sweetalert2';
-import '@wordpress/data';
-import '@wordpress/hooks';
-import '@babel/runtime/helpers/extends';
-import '@babel/runtime/helpers/objectWithoutProperties';
-import 'classnames';
 import Field from '../Field.js';
 
 var SteppedButton = function SteppedButton(props) {

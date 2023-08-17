@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Label from '../../core/components/Label.js';
 import '@babel/runtime/helpers/extends';
 import '../../core/hooks/useBuilderContext.js';
+import '@babel/runtime/helpers/objectWithoutProperties';
 import { isObject, isString } from '../../core/utils.js';
 import '@babel/runtime/helpers/typeof';
 import 'intersect';
@@ -14,7 +15,6 @@ import '@wordpress/data';
 import '@wordpress/hooks';
 import withLabel from '../../core/hooks/withLabel.js';
 import '@babel/runtime/helpers/toConsumableArray';
-import '@babel/runtime/helpers/objectWithoutProperties';
 import { GenericInput } from '../Input.js';
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }

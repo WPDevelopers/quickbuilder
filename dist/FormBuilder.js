@@ -4,20 +4,6 @@ import { registerStore } from '@wordpress/data';
 import store from './store/index.js';
 import Tab from './fields/Tab.js';
 import useBuilderContext from './core/hooks/useBuilderContext.js';
-import '@babel/runtime/helpers/toConsumableArray';
-import '@babel/runtime/helpers/typeof';
-import 'lodash-es';
-import '@wordpress/api-fetch';
-import 'intersect';
-import '@wordpress/i18n';
-import '@wordpress/date';
-import 'moment';
-import '@babel/runtime/helpers/slicedToArray';
-import 'sweetalert2';
-import '@wordpress/hooks';
-import '@babel/runtime/helpers/extends';
-import '@babel/runtime/helpers/objectWithoutProperties';
-import 'classnames';
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }

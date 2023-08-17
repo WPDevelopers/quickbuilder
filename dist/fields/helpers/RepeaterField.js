@@ -5,20 +5,6 @@ import { Icon } from '@wordpress/components';
 import { GenericField } from '../Field.js';
 import { useInstanceId } from '@wordpress/compose';
 import useBuilderContext from '../../core/hooks/useBuilderContext.js';
-import '@babel/runtime/helpers/toConsumableArray';
-import '@babel/runtime/helpers/typeof';
-import '@babel/runtime/helpers/defineProperty';
-import 'lodash-es';
-import '@wordpress/api-fetch';
-import 'intersect';
-import '@wordpress/i18n';
-import '@wordpress/date';
-import 'moment';
-import 'sweetalert2';
-import '@wordpress/data';
-import '@wordpress/hooks';
-import '@babel/runtime/helpers/objectWithoutProperties';
-import 'classnames';
 
 var RepeaterField = function RepeaterField(props) {
   var _builderContext$value;

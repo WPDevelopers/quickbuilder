@@ -1,19 +1,8 @@
 import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
 import { useRef, useEffect, createElement, Fragment } from 'react';
 import { isFunction, isArray, isObject, isEmptyObj } from '../utils.js';
-import useBuilderContext from './useBuilderContext.js';
-import '@babel/runtime/helpers/typeof';
-import 'intersect';
-import '@wordpress/i18n';
-import '@babel/runtime/helpers/slicedToArray';
 import useDefaults from './useDefaults.js';
-import '@babel/runtime/helpers/defineProperty';
-import 'sweetalert2';
-import '@wordpress/data';
-import '@wordpress/hooks';
-import '@babel/runtime/helpers/extends';
-import '@babel/runtime/helpers/objectWithoutProperties';
-import 'classnames';
+import useBuilderContext from './useBuilderContext.js';
 
 var withProps = function withProps(WrappedComponent) {
   var isGeneric = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;

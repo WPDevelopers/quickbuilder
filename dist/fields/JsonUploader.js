@@ -1,11 +1,11 @@
 import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React, { createElement, useState, useEffect } from 'react';
 import { addFilter } from '@wordpress/hooks';
-import '../core/hooks/useBuilderContext.js';
 import { validFieldProps } from '../core/utils.js';
 import '@babel/runtime/helpers/typeof';
 import 'intersect';
 import { __ } from '@wordpress/i18n';
+import '../core/hooks/useBuilderContext.js';
 import '@babel/runtime/helpers/defineProperty';
 import 'sweetalert2';
 import '@wordpress/data';

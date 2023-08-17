@@ -1,11 +1,11 @@
 import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import React, { createElement, useCallback } from 'react';
 import { addFilter } from '@wordpress/hooks';
-import '../core/hooks/useBuilderContext.js';
 import { validFieldProps } from '../core/utils.js';
 import '@babel/runtime/helpers/typeof';
 import 'intersect';
 import '@wordpress/i18n';
+import '../core/hooks/useBuilderContext.js';
 import '@babel/runtime/helpers/slicedToArray';
 import 'sweetalert2';
 import '@wordpress/data';

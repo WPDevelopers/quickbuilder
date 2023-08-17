@@ -10,12 +10,7 @@ import Submit from './Submit.js';
 import SteppedButton from './SteppedButton.js';
 import useBuilderContext from '../../core/hooks/useBuilderContext.js';
 import when from '../../core/when.js';
-import '@babel/runtime/helpers/defineProperty';
-import '@babel/runtime/helpers/typeof';
-import 'sweetalert2';
-import '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import '@babel/runtime/helpers/extends';
 import Field from '../Field.js';
 
 var _excluded = ["fields", "active", "setActive", "submit"];

@@ -3,21 +3,7 @@ import _extends from '@babel/runtime/helpers/extends';
 import { useCallback, createElement } from 'react';
 import { Button } from '@wordpress/components';
 import useBuilderContext from '../../core/hooks/useBuilderContext.js';
-import '@babel/runtime/helpers/toConsumableArray';
-import '@babel/runtime/helpers/typeof';
-import '@babel/runtime/helpers/defineProperty';
-import 'lodash-es';
-import '@wordpress/api-fetch';
-import 'intersect';
 import { __ } from '@wordpress/i18n';
-import '@wordpress/date';
-import 'moment';
-import '@babel/runtime/helpers/slicedToArray';
-import 'sweetalert2';
-import '@wordpress/data';
-import '@wordpress/hooks';
-import '@babel/runtime/helpers/objectWithoutProperties';
-import 'classnames';
 
 var Submit = function Submit(_ref) {
   var props = _extends({}, (_objectDestructuringEmpty(_ref), _ref));

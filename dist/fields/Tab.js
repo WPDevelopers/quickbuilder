@@ -4,19 +4,6 @@ import { useState, useEffect, createElement } from 'react';
 import Menu from './tabs/Menu.js';
 import Content from './tabs/Content.js';
 import useBuilderContext from '../core/hooks/useBuilderContext.js';
-import '@babel/runtime/helpers/toConsumableArray';
-import '@babel/runtime/helpers/typeof';
-import '@babel/runtime/helpers/defineProperty';
-import 'lodash-es';
-import '@wordpress/api-fetch';
-import 'intersect';
-import '@wordpress/i18n';
-import '@wordpress/date';
-import 'moment';
-import 'sweetalert2';
-import '@wordpress/data';
-import '@wordpress/hooks';
-import '@babel/runtime/helpers/objectWithoutProperties';
 import classNames from 'classnames';
 
 var Tab = function Tab(props) {

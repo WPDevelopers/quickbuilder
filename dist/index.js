@@ -1,9 +1,9 @@
+export { BuilderConsumer, BuilderProvider, default as useBuilderContext } from './core/hooks/useBuilderContext.js';
 export { default as FormBuilder } from './FormBuilder.js';
 export { default as when } from './core/when.js';
 export { builderReducer } from './core/builderReducer.js';
-export { executeChange, getIn, getSelectedValues, getTime, hitAAJX, isArray, isEmptyObj, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, setIn, sortingFields, validFieldProps, valueExists, withState, wpFetch } from './core/utils.js';
+export { executeChange, getIn, getSelectedValues, hitAAJX, isArray, isEmptyObj, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, setIn, sortingFields, validFieldProps, valueExists, withState, wpFetch } from './core/utils.js';
 export { ObjectFilter, SweetAlert, _extends, getStoreData, isExists, processAjaxData, setStoreData, triggerDefaults } from './core/functions.js';
-export { BuilderConsumer, BuilderProvider, default as useBuilderContext } from './core/hooks/useBuilderContext.js';
 import '@babel/runtime/helpers/slicedToArray';
 import 'react';
 export { default as useDefaults } from './core/hooks/useDefaults.js';

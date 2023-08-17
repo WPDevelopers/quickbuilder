@@ -3,8 +3,8 @@ import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import { useRef, useEffect, useReducer, useCallback, useLayoutEffect } from 'react';
 import when from '../when.js';
 import { builderReducer } from '../builderReducer.js';
-import { sortingFields, getIn, executeChange, validFieldProps, isString, getTime, isVisible, isArray } from '../utils.js';
-import { doAction } from '@wordpress/hooks';
+import { sortingFields, getIn, executeChange, validFieldProps, isString, isVisible, isArray } from '../utils.js';
+import { doAction, applyFilters } from '@wordpress/hooks';
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -182,7 +182,7 @@ var useBuilder = function useBuilder(props) {
       validProps.checked = valueState === valueProp;
       validProps.value = valueProp;
     } else if (type === 'date') {
-      validProps.value = valueState == undefined ? getTime() : valueState;
+      validProps.value = applyFilters('builder_date_format', valueState, validProps);
     } else {
       validProps.value = valueState;
     }

@@ -1,15 +1,13 @@
 import { createElement, Fragment } from 'react';
 import { __ } from '@wordpress/i18n';
 import { applyFilters } from '@wordpress/hooks';
-import '../core/hooks/useBuilderContext.js';
 import '@babel/runtime/helpers/toConsumableArray';
 import '@babel/runtime/helpers/typeof';
 import '@babel/runtime/helpers/defineProperty';
 import 'lodash-es';
 import '@wordpress/api-fetch';
 import 'intersect';
-import '@wordpress/date';
-import 'moment';
+import '../core/hooks/useBuilderContext.js';
 import '@babel/runtime/helpers/slicedToArray';
 import 'sweetalert2';
 import '@wordpress/data';

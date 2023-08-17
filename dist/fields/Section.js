@@ -4,16 +4,9 @@ import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React, { createElement, useState, useEffect } from 'react';
 import { sortingFields } from '../core/utils.js';
 import useBuilderContext from '../core/hooks/useBuilderContext.js';
-import '@babel/runtime/helpers/typeof';
-import 'intersect';
-import '@wordpress/i18n';
-import '@babel/runtime/helpers/defineProperty';
-import 'sweetalert2';
-import '@wordpress/data';
-import { addFilter } from '@wordpress/hooks';
-import '@babel/runtime/helpers/objectWithoutProperties';
 import classNames from 'classnames';
 import { Icon, chevronDown, chevronUp } from '@wordpress/icons';
+import { addFilter } from '@wordpress/hooks';
 import Submit from './tabs/Submit.js';
 import Field from './Field.js';
 

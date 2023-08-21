@@ -1,33 +1,34 @@
-import React from "react";
-import { __ } from "@wordpress/i18n";
 import { applyFilters } from "@wordpress/hooks";
+import { __ } from "@wordpress/i18n";
+import React from "react";
 import {
+	Action,
+	Button,
+	CodeViewer,
 	ColorPicker,
+	CopyToClipboard,
+	Date,
+	Editor,
 	Group,
 	Input,
-	Radio,
-	Repeater,
-	Section,
-	Select,
-	Slider,
-	Toggle,
-	Date,
-	Action,
+	JsonUploader,
 	Media,
-	Editor,
-	Button,
 	Message,
 	Modal,
-	Textarea,
-	CodeViewer,
-	JsonUploader,
-	SelectAsync,
+	Radio,
+	Repeater,
 	ResponsiveNumber,
+	Section,
+	Select,
+	SelectAsync,
+	Slider,
+	Textarea,
+	Toggle,
 } from ".";
 
 import { withProps } from "../core/hooks";
-import Tab from "./Tab";
 import Checkbox from "./Checkbox";
+import Tab from "./Tab";
 
 const Field = (props) => {
 	if (!props.type || props.type.length === 0) {
@@ -52,6 +53,8 @@ const Field = (props) => {
 			return <Textarea {...props} />;
 		case "codeviewer":
 			return <CodeViewer {...props} />;
+		case "copy-to-clipboard":
+			return <CopyToClipboard {...props} />;
 		case "message":
 			return <Message {...props} />;
 		case "select":

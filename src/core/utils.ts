@@ -1,8 +1,6 @@
 import { clone, toPath } from "lodash-es";
 import apiFetch from "@wordpress/api-fetch";
 import when from "./when";
-import { getSettings } from "@wordpress/date";
-import moment from "moment";
 
 export const wpFetch = (params) => {
 	let args = { ...params, method: "POST" };

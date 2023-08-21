@@ -1,6 +1,6 @@
 import { Dropdown, Button, DateTimePicker } from '@wordpress/components';
 import { createElement, useEffect } from 'react';
-import { getSettings, date } from '@wordpress/date';
+import { __experimentalGetSettings, date } from '@wordpress/date';
 import moment from 'moment';
 import { addFilter } from '@wordpress/hooks';
 import '@babel/runtime/helpers/toConsumableArray';
@@ -21,7 +21,7 @@ import 'classnames';
 var getTime = function getTime(value) {
   var _settings$timezone;
   var keepLocalTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var settings = getSettings();
+  var settings = __experimentalGetSettings();
   var _value = moment.utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 || (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
   return _value;
 };
@@ -31,7 +31,7 @@ var _DateControl = function _DateControl(props) {
     value = props.value,
     _onChange = props.onChange,
     position = props.position;
-  var settings = getSettings();
+  var settings = __experimentalGetSettings();
   var format = (_props$format = props === null || props === void 0 ? void 0 : props.format) !== null && _props$format !== void 0 ? _props$format : settings.formats.datetime;
   var _value = getTime(value);
   var is12HourTime = /a(?!\\)/i.test(settings.formats.datetime.toLowerCase().replace(/\\\\/g, "").split("").reverse().join(""));

@@ -1,5 +1,6 @@
 export { default as Action } from "./Action";
 export { default as Button } from "./Button";
+export { default as CheckboxSelect } from "./CheckboxSelect";
 export { default as CodeViewer } from "./CodeViewer";
 export { default as ColorPicker } from "./ColorPicker";
 export { default as CopyToClipboard } from "./CopyToClipboard";

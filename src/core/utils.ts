@@ -1,5 +1,5 @@
-import { clone, toPath } from "lodash-es";
 import apiFetch from "@wordpress/api-fetch";
+import { clone, toPath } from "lodash-es";
 import when from "./when";
 // @ts-ignore
 import { __experimentalGetSettings } from "@wordpress/date";
@@ -186,7 +186,7 @@ export const setIn = (obj, path, value) => {
 export const validFieldProps = (defaultProps, exclude: string[] = []) => {
 	const type = defaultProps.type;
 	let filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch', ...exclude];
-	if (type !== 'select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && (type !== 'toggle' && defaultProps.multiple)) {
+	if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && (type !== 'toggle' && defaultProps.multiple)) {
 		filterOutArray.push('options');
 	}
 	if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {

@@ -65,7 +65,7 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     }, [option, lOptions])
 
     let options = sortingFields(lOptions);
-    return { options, option, selectedOption, setOptions, setData }
+    return { options, option, selectedOption, setOptions, setData, setSelectedOption }
 }
 
 export default useOptions;

@@ -4,6 +4,7 @@ import React from "react";
 import {
 	Action,
 	Button,
+	CheckboxSelect,
 	CodeViewer,
 	ColorPicker,
 	CopyToClipboard,
@@ -59,6 +60,8 @@ const Field = (props) => {
 			return <Message {...props} />;
 		case "select":
 			return <Select {...props} />;
+		case "checkbox-select":
+			return <CheckboxSelect {...props} />;
 		case "select-async":
 			return <SelectAsync {...props} />;
 		case "slider":

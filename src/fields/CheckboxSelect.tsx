@@ -149,10 +149,11 @@ const CheckboxSelect = (props) => {
 	};
 
 	return (
-		<div className="wprf-select-wrapper">
+		<div className="wprf-checkbox-select-wrapper">
 			<ReactSelect
 				isDisabled={props?.disable}
-				classNamePrefix="wprf-select"
+				className="wprf-checkbox-select"
+				classNamePrefix="wprf-checkbox-select"
 				isSearchable={search ?? false}
 				id={id}
 				isClearable={false}

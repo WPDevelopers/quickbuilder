@@ -5,7 +5,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { __experimentalGetSettings, date } from '@wordpress/date';
 import moment from 'moment';
 import intersect from 'intersect';
-import { sprintf, __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import classNames from 'classnames';
 import { doAction, applyFilters } from '@wordpress/hooks';
 import Swal from 'sweetalert2';
@@ -23,34 +23,7 @@ import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import SweetAlert$1 from 'react-bootstrap-sweetalert';
 
-function _typeof$1(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof$1(obj);
-}
-
-function _toPrimitive(input, hint) {
-  if (_typeof$1(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (_typeof$1(res) !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (hint === "string" ? String : Number)(input);
-}
-
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
-  return _typeof$1(key) === "symbol" ? key : String(key);
-}
-
 function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -61,12 +34,33 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
+
   return obj;
+}
+
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1 = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1 = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1(obj);
 }
 
 function _arrayLikeToArray$2(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
   return arr2;
 }
 
@@ -656,17 +650,20 @@ var store = {
 };
 
 function _extends$1() {
-  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
+  _extends$1 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
+
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
+
     return target;
   };
+
   return _extends$1.apply(this, arguments);
 }
 
@@ -675,31 +672,33 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
+  var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
     }
-    return _arr;
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
   }
+
+  return _arr;
 }
 
 function _nonIterableRest() {
@@ -761,11 +760,13 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
+
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
+
   return target;
 }
 
@@ -773,8 +774,10 @@ function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
   var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
+
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -782,6 +785,7 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
+
   return target;
 }
 
@@ -1197,6 +1201,7 @@ var builderReducer = function builderReducer(state, action) {
 function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$b(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var useBuilder = function useBuilder(props) {
+  var _state$isSubmitting;
   // Set is Mounted or NOT
   var isMounted = useRef(false);
   useEffect(function () {
@@ -1518,7 +1523,7 @@ var useBuilder = function useBuilder(props) {
     savedValues: state.savedValues,
     errors: state.errors,
     touched: state.touched,
-    isSubmitting: false,
+    isSubmitting: (_state$isSubmitting = state === null || state === void 0 ? void 0 : state.isSubmitting) !== null && _state$isSubmitting !== void 0 ? _state$isSubmitting : false,
     setActiveTab: setActiveTab,
     setRedirect: setRedirect,
     setSubmitting: setSubmitting,
@@ -1669,13 +1674,18 @@ var ControlLabel = function ControlLabel(props) {
 
   return createElement("div", {
     className: "wprf-control-label"
-  }, badgePosition == 'left' && badge, createElement("label", {
+  }, badgePosition == "left" && badge, createElement("label", {
     htmlFor: id
-  }, label), (rest === null || rest === void 0 ? void 0 : rest.link) && createElement("a", {
+  }, label), (rest === null || rest === void 0 ? void 0 : rest.label_subtitle) && createElement("p", {
+    className: "wprf-label-subtitle",
+    dangerouslySetInnerHTML: {
+      __html: rest === null || rest === void 0 ? void 0 : rest.label_subtitle
+    }
+  }), (rest === null || rest === void 0 ? void 0 : rest.link) && createElement("a", {
     rel: "nofollow",
     target: "_blank",
     href: rest.link
-  }, context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link), badgePosition == 'right' && badge);
+  }, context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link), badgePosition == "right" && badge);
 };
 
 var ControlField = function ControlField(_ref) {
@@ -3745,24 +3755,28 @@ var InnerContent = function InnerContent(_ref) {
 };
 
 function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+  if (obj == null) throw new TypeError("Cannot destructure undefined");
 }
 
 var Submit = function Submit(_ref) {
   var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
   var context = useBuilderContext();
   var label = (props === null || props === void 0 ? void 0 : props.label) || __('Save Changes', 'notificationx');
+  if (context.isSubmitting) {
+    var _props$loadingLabel;
+    label = (_props$loadingLabel = props === null || props === void 0 ? void 0 : props.loadingLabel) !== null && _props$loadingLabel !== void 0 ? _props$loadingLabel : 'Saving...';
+  }
   var handleSubmit = useCallback(function (event) {
     var _context$submit;
     if ((_context$submit = context.submit) !== null && _context$submit !== void 0 && _context$submit.onSubmit) {
       context.submit.onSubmit(event, context);
       return;
     }
-    // console.log('on submit wprf.');
   }, [context]);
   return createElement("div", {
     className: "wprf-submit wprf-control"
   }, createElement(Button$2, {
+    disabled: context === null || context === void 0 ? void 0 : context.isSubmitting,
     className: "wprf-submit-button",
     onClick: handleSubmit
   }, label));

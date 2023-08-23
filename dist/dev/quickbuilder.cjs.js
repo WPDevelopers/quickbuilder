@@ -43,34 +43,7 @@ var draftToHtml__default = /*#__PURE__*/_interopDefaultLegacy(draftToHtml);
 var htmlToDraft__default = /*#__PURE__*/_interopDefaultLegacy(htmlToDraft);
 var SweetAlert__default = /*#__PURE__*/_interopDefaultLegacy(SweetAlert$1);
 
-function _typeof$1(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof$1(obj);
-}
-
-function _toPrimitive(input, hint) {
-  if (_typeof$1(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (_typeof$1(res) !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (hint === "string" ? String : Number)(input);
-}
-
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
-  return _typeof$1(key) === "symbol" ? key : String(key);
-}
-
 function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -81,12 +54,33 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
+
   return obj;
+}
+
+function _typeof$1(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof$1 = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof$1 = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof$1(obj);
 }
 
 function _arrayLikeToArray$2(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
   return arr2;
 }
 
@@ -121,7 +115,7 @@ var wpFetch = function wpFetch(params) {
   var args = _objectSpread$f(_objectSpread$f({}, params), {}, {
     method: "POST"
   });
-  return apiFetch__default["default"](args);
+  return apiFetch__default['default'](args);
 };
 var isString = function isString(args) {
   return args !== null && typeof args === "string";
@@ -354,7 +348,7 @@ var getTime = function getTime(value) {
   var _settings$timezone;
   var keepLocalTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var settings = date.__experimentalGetSettings();
-  var _value = moment__default["default"].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 ? void 0 : (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
+  var _value = moment__default['default'].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 ? void 0 : (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
   return _value;
 };
 var merge = function merge(array_one, array_two, key) {
@@ -417,7 +411,7 @@ var rules = {
       if (_typeof(newData) != "function") {
         if (isArray(checkAgainst) && isArray(newData)) {
           var _intersect;
-          return (_intersect = intersect__default["default"](newData, checkAgainst)) === null || _intersect === void 0 ? void 0 : _intersect.length;
+          return (_intersect = intersect__default['default'](newData, checkAgainst)) === null || _intersect === void 0 ? void 0 : _intersect.length;
         } else if (isArray(checkAgainst) && _typeof(newData) == "string") {
           return checkAgainst.includes(newData);
         } else if (isArray(newData) && _typeof(checkAgainst) == "string") {
@@ -676,17 +670,20 @@ var store = {
 };
 
 function _extends$1() {
-  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
+  _extends$1 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
+
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
+
     return target;
   };
+
   return _extends$1.apply(this, arguments);
 }
 
@@ -695,31 +692,33 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
+  var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
     }
-    return _arr;
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
   }
+
+  return _arr;
 }
 
 function _nonIterableRest() {
@@ -749,7 +748,7 @@ var Menu = function Menu(props) {
     });
     setTabsFields(filteredTabs);
   }, [tabs, context === null || context === void 0 ? void 0 : (_context$values = context.values) === null || _context$values === void 0 ? void 0 : _context$values.source]);
-  var componentClasses = classNames__default["default"]("wprf-tab-menu-wrapper", props === null || props === void 0 ? void 0 : props.className, {
+  var componentClasses = classNames__default['default']("wprf-tab-menu-wrapper", props === null || props === void 0 ? void 0 : props.className, {
     "wprf-tab-menu-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
   }, context === null || context === void 0 ? void 0 : (_context$values2 = context.values) === null || _context$values2 === void 0 ? void 0 : _context$values2.source);
   var currentTabIndex = tabsFields.findIndex(function (tab) {
@@ -762,7 +761,7 @@ var Menu = function Menu(props) {
   }, tabsFields.map(function (tab, index) {
     var _classNames, _context$icons, _context$icons$tab$ic, _tab$icon, _tab$icon2;
     return React.createElement("li", {
-      className: classNames__default["default"]("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
+      className: classNames__default['default']("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
       "data-key": tab.id,
       key: tab.id,
       onClick: function onClick() {
@@ -781,11 +780,13 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
+
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
+
   return target;
 }
 
@@ -793,8 +794,10 @@ function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
   var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
+
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -802,6 +805,7 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
+
   return target;
 }
 
@@ -988,7 +992,7 @@ function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { 
 var SweetAlert = function SweetAlert() {
   var _args$target, _args$type, _args$title, _args$text, _args$icon, _args$timer;
   var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Swal__default["default"].fire(_objectSpread$d({
+  return Swal__default['default'].fire(_objectSpread$d({
     target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
     type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
     html: args === null || args === void 0 ? void 0 : args.html,
@@ -1217,6 +1221,7 @@ var builderReducer = function builderReducer(state, action) {
 function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$b(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var useBuilder = function useBuilder(props) {
+  var _state$isSubmitting;
   // Set is Mounted or NOT
   var isMounted = React.useRef(false);
   React.useEffect(function () {
@@ -1538,7 +1543,7 @@ var useBuilder = function useBuilder(props) {
     savedValues: state.savedValues,
     errors: state.errors,
     touched: state.touched,
-    isSubmitting: false,
+    isSubmitting: (_state$isSubmitting = state === null || state === void 0 ? void 0 : state.isSubmitting) !== null && _state$isSubmitting !== void 0 ? _state$isSubmitting : false,
     setActiveTab: setActiveTab,
     setRedirect: setRedirect,
     setSubmitting: setSubmitting,
@@ -1579,7 +1584,7 @@ var useEventCallback = function useEventCallback(fn) {
 };
 
 var Row = function Row(props) {
-  var componentClasses = classNames__default["default"]("wprf-row clearfix wprf-flex", props === null || props === void 0 ? void 0 : props.className);
+  var componentClasses = classNames__default['default']("wprf-row clearfix wprf-flex", props === null || props === void 0 ? void 0 : props.className);
   return React.createElement("div", {
     className: componentClasses
   }, props === null || props === void 0 ? void 0 : props.children);
@@ -1587,7 +1592,7 @@ var Row = function Row(props) {
 
 var Column = function Column(props) {
   var _classNames;
-  var componentClasses = classNames__default["default"]("wprf-column", props === null || props === void 0 ? void 0 : props.className, (_classNames = {}, _defineProperty(_classNames, "wprf-column-".concat(12 / (props === null || props === void 0 ? void 0 : props.column)), (props === null || props === void 0 ? void 0 : props.column) && props.column !== 12), _defineProperty(_classNames, "wprf-column-12", props.column === 12), _classNames));
+  var componentClasses = classNames__default['default']("wprf-column", props === null || props === void 0 ? void 0 : props.className, (_classNames = {}, _defineProperty(_classNames, "wprf-column-".concat(12 / (props === null || props === void 0 ? void 0 : props.column)), (props === null || props === void 0 ? void 0 : props.column) && props.column !== 12), _defineProperty(_classNames, "wprf-column-12", props.column === 12), _classNames));
   return React.createElement("div", {
     className: componentClasses
   }, props === null || props === void 0 ? void 0 : props.children);
@@ -1595,14 +1600,14 @@ var Column = function Column(props) {
 
 var Label = function Label(props) {
   var _props$badge, _props$badge2, _props$badge3;
-  var componentClasses = classNames__default["default"]("wprf-input-label", props === null || props === void 0 ? void 0 : props.className);
+  var componentClasses = classNames__default['default']("wprf-input-label", props === null || props === void 0 ? void 0 : props.className);
   return React.createElement("label", {
     htmlFor: props === null || props === void 0 ? void 0 : props.htmlFor,
     className: componentClasses
   }, (props === null || props === void 0 ? void 0 : (_props$badge = props.badge) === null || _props$badge === void 0 ? void 0 : _props$badge.value) && React.createElement("div", {
     className: "wprf-badge"
   }, React.createElement("sup", {
-    className: classNames__default["default"]("wprf-badge-item", {
+    className: classNames__default['default']("wprf-badge-item", {
       'wprf-badge-active': props === null || props === void 0 ? void 0 : (_props$badge2 = props.badge) === null || _props$badge2 === void 0 ? void 0 : _props$badge2.active
     })
   }, props === null || props === void 0 ? void 0 : (_props$badge3 = props.badge) === null || _props$badge3 === void 0 ? void 0 : _props$badge3.label)), !(props !== null && props !== void 0 && props.src) && (props === null || props === void 0 ? void 0 : props.children), (props === null || props === void 0 ? void 0 : props.src) && React.createElement(Image, {
@@ -1616,7 +1621,7 @@ var Image = function Image(props) {
   if (!(props !== null && props !== void 0 && props.src)) {
     return React.createElement("p", null, "No Source( src ) Defined");
   }
-  var componentClasses = classNames__default["default"](["wprf-input-image", props === null || props === void 0 ? void 0 : props.className]);
+  var componentClasses = classNames__default['default'](["wprf-input-image", props === null || props === void 0 ? void 0 : props.className]);
   return React.createElement("img", {
     className: componentClasses,
     src: props === null || props === void 0 ? void 0 : props.src,
@@ -1644,7 +1649,7 @@ var Badge = function Badge(props) {
   if (label === undefined) {
     label = 'Pro';
   }
-  var componentClasses = classNames__default["default"]('wprf-badge-item', {
+  var componentClasses = classNames__default['default']('wprf-badge-item', {
     'wprf-badge-active': active
   });
   var componentProps = {};
@@ -1657,7 +1662,7 @@ var Badge = function Badge(props) {
     };
   }
   return React.createElement("div", _extends$1({
-    className: classNames__default["default"]("wprf-badge-wrapper", {
+    className: classNames__default['default']("wprf-badge-wrapper", {
       "pro-deactivated": !builderContext.is_pro_active
     })
   }, componentProps), position === 'left' && label.length > 0 && React.createElement(React.Fragment, null, renderLabel(React.createElement(BadgeComp, {
@@ -1689,13 +1694,18 @@ var ControlLabel = function ControlLabel(props) {
 
   return React.createElement("div", {
     className: "wprf-control-label"
-  }, badgePosition == 'left' && badge, React.createElement("label", {
+  }, badgePosition == "left" && badge, React.createElement("label", {
     htmlFor: id
-  }, label), (rest === null || rest === void 0 ? void 0 : rest.link) && React.createElement("a", {
+  }, label), (rest === null || rest === void 0 ? void 0 : rest.label_subtitle) && React.createElement("p", {
+    className: "wprf-label-subtitle",
+    dangerouslySetInnerHTML: {
+      __html: rest === null || rest === void 0 ? void 0 : rest.label_subtitle
+    }
+  }), (rest === null || rest === void 0 ? void 0 : rest.link) && React.createElement("a", {
     rel: "nofollow",
     target: "_blank",
     href: rest.link
-  }, context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link), badgePosition == 'right' && badge);
+  }, context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link), badgePosition == "right" && badge);
 };
 
 var ControlField = function ControlField(_ref) {
@@ -1750,14 +1760,14 @@ var withLabel = function withLabel(WrappedComponent) {
         position: "right"
       }
     }, prevStyle);
-    var styleClasses = classNames__default["default"]((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
+    var styleClasses = classNames__default['default']((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
     if (type === "hidden") {
       return React.createElement(WrappedComponent, _extends$1({}, props, {
         id: id
       }));
     }
     var validProps = validFieldProps(props, ["description", "label", "help", "style"]);
-    var componentClasses = classNames__default["default"]("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
+    var componentClasses = classNames__default['default']("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
     return React.createElement("div", {
       className: componentClasses
     }, is_pro == true && React.createElement(React.Fragment, null, React.createElement(Badge, _extends$1({}, badge, rest, {
@@ -1909,7 +1919,7 @@ function GenericCheckbox(props) {
     }
     return _isChecked;
   }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-  var componentClasses = classNames__default["default"]("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+  var componentClasses = classNames__default['default']("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
   return React.createElement("div", {
     className: componentClasses
   }, React.createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
@@ -2106,7 +2116,7 @@ var DateControl = function DateControl(props) {
             target: {
               type: 'date',
               name: name,
-              value: moment__default["default"](date).utc().format()
+              value: moment__default['default'](date).utc().format()
             }
           });
         },
@@ -2152,7 +2162,7 @@ var Input = function Input(props) {
     var copyMessage = (props === null || props === void 0 ? void 0 : props.copyMessage) || "Click To Copy!";
     var copiedMessage = (props === null || props === void 0 ? void 0 : props.copiedMessage) || "Copied!";
     var handleCopy = function handleCopy() {
-      copy__default["default"](props.value, {
+      copy__default['default'](props.value, {
         format: 'text/plain',
         onCopy: function onCopy() {
           setIsCopied(true);
@@ -2161,7 +2171,7 @@ var Input = function Input(props) {
     };
     return React.createElement("span", {
       className: "wprf-clipboard-wrapper"
-    }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$8(_objectSpread$8({}, validProps), {}, {
+    }, /*#__PURE__*/React__default['default'].createElement("input", _objectSpread$8(_objectSpread$8({}, validProps), {}, {
       onChange: handleChange
     })), React.createElement("span", {
       className: "wprf-clipboard-tooltip"
@@ -2174,15 +2184,15 @@ var Input = function Input(props) {
       }
     }, "Copy")));
   }
-  return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
+  return /*#__PURE__*/React__default['default'].createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
     onChange: handleChange
   }));
 };
 Input.defaultProps = {
   type: 'text'
 };
-var GenericInput = /*#__PURE__*/React__default["default"].memo(Input);
-var Input$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Input));
+var GenericInput = /*#__PURE__*/React__default['default'].memo(Input);
+var Input$1 = withLabel( /*#__PURE__*/React__default['default'].memo(Input));
 
 function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$7(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2193,12 +2203,12 @@ var Textarea = function Textarea(props) {
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-  return /*#__PURE__*/React__default["default"].createElement('textarea', _objectSpread$7(_objectSpread$7({}, validProps), {}, {
+  return /*#__PURE__*/React__default['default'].createElement('textarea', _objectSpread$7(_objectSpread$7({}, validProps), {}, {
     onChange: handleChange,
     rows: 5
   }));
 };
-var Textarea$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Textarea));
+var Textarea$1 = withLabel( /*#__PURE__*/React__default['default'].memo(Textarea));
 
 function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2216,7 +2226,7 @@ var CodeViewer = function CodeViewer(props) {
   if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
     extraProps["onClick"] = function () {
       var successText = props !== null && props !== void 0 && props.success_text ? props.success_text : i18n.__("Copied to Clipboard.", "notificationx");
-      copy__default["default"](props.value, {
+      copy__default['default'](props.value, {
         format: 'text/plain',
         onCopy: function onCopy() {
           props.context.alerts.toast("success", successText);
@@ -2227,11 +2237,11 @@ var CodeViewer = function CodeViewer(props) {
   var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : i18n.__("Click to Copy", "notificationx");
   return React.createElement("span", {
     className: "wprf-code-viewer"
-  }, /*#__PURE__*/React__default["default"].createElement("textarea", _objectSpread$6(_objectSpread$6({}, validProps), extraProps)), React.createElement(components.Button, {
+  }, /*#__PURE__*/React__default['default'].createElement("textarea", _objectSpread$6(_objectSpread$6({}, validProps), extraProps)), React.createElement(components.Button, {
     className: "wprf-copy-button"
   }, ButtonText));
 };
-var CodeViewer$1 = withLabel( /*#__PURE__*/React__default["default"].memo(CodeViewer));
+var CodeViewer$1 = withLabel( /*#__PURE__*/React__default['default'].memo(CodeViewer));
 
 var JsonUploader = function JsonUploader(props) {
   validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
@@ -2300,7 +2310,7 @@ var JsonUploader = function JsonUploader(props) {
     onClick: removeFile
   }, "x")));
 };
-var JsonUploader$1 = withLabel( /*#__PURE__*/React__default["default"].memo(JsonUploader));
+var JsonUploader$1 = withLabel( /*#__PURE__*/React__default['default'].memo(JsonUploader));
 
 var _excluded$2 = ["name", "fields"];
 var Group = function Group(props) {
@@ -2336,7 +2346,7 @@ var Group = function Group(props) {
       parentIndex: parentIndex
     }));
   });
-  var innerClasses = classNames__default["default"]('wprf-group-control-inner', {
+  var innerClasses = classNames__default['default']('wprf-group-control-inner', {
     'wprf-display-inline': (props === null || props === void 0 ? void 0 : props.display) === 'inline'
   });
   return React.createElement("div", {
@@ -2465,7 +2475,7 @@ var Select = function Select(props) {
   }, [name, id, parentIndex]);
   return React.createElement("div", {
     className: "wprf-select-wrapper"
-  }, React.createElement(ReactSelect__default["default"], {
+  }, React.createElement(ReactSelect__default['default'], {
     isDisabled: props === null || props === void 0 ? void 0 : props.disable,
     classNamePrefix: "wprf-select",
     isSearchable: search !== null && search !== void 0 ? search : false,
@@ -2616,7 +2626,7 @@ var GenericToggle = function GenericToggle(props) {
     }
     return _isChecked;
   }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-  var componentClasses = classNames__default["default"]("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+  var componentClasses = classNames__default['default']("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
   return React.createElement("div", {
     className: componentClasses
   }, React.createElement(GenericInput, _objectSpread$5(_objectSpread$5({}, props), {}, {
@@ -2772,7 +2782,7 @@ var RadioCard = function RadioCard(props) {
     throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'notificationx'));
   }
   var instanceId = useInstanceId(RadioCard);
-  var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
+  var componentClasses = classNames__default['default'](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
   var styles = _objectSpread$3({}, props === null || props === void 0 ? void 0 : props.style);
   var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
   React.useEffect(function () {
@@ -2799,12 +2809,12 @@ var RadioCard = function RadioCard(props) {
       column: +(rest === null || rest === void 0 ? void 0 : rest.column) || 4,
       key: index
     }, React.createElement("div", {
-      className: classNames__default["default"]("wprf-input-radio-option", {
+      className: classNames__default['default']("wprf-input-radio-option", {
         "wprf-option-has-image": icon !== null && icon !== void 0 ? icon : false,
         "wprf-option-selected": value == option
       })
     }, React.createElement(Label, {
-      className: classNames__default["default"](_defineProperty({
+      className: classNames__default['default'](_defineProperty({
         "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false
       }, "wprf-size-".concat(styles.size), (_ref2 = icon && (styles === null || styles === void 0 ? void 0 : styles.size)) !== null && _ref2 !== void 0 ? _ref2 : false)),
       htmlFor: "wprf-input-radio-".concat(instanceId, "-").concat(index),
@@ -2855,7 +2865,7 @@ var Section = function Section(props) {
     });
     setFields(allFields);
   }, []);
-  var componentClasses = classNames__default["default"]('wprf-control-section', props === null || props === void 0 ? void 0 : props.classes, props === null || props === void 0 ? void 0 : props.name, {
+  var componentClasses = classNames__default['default']('wprf-control-section', props === null || props === void 0 ? void 0 : props.classes, props === null || props === void 0 ? void 0 : props.name, {
     'wprf-section-collapsed': (props === null || props === void 0 ? void 0 : props.collapsible) && isCollapse
   });
   return React.createElement("div", {
@@ -2871,7 +2881,7 @@ var Section = function Section(props) {
     className: "wprf-section-fields"
   }, fields));
 };
-var Section$1 = /*#__PURE__*/React__default["default"].memo(Section);
+var Section$1 = /*#__PURE__*/React__default['default'].memo(Section);
 
 // Unique ID creation requires a high quality random # generator. In the browser we therefore
 // require the crypto API and do not support built-in fallback to lower quality random number
@@ -3246,7 +3256,7 @@ var SelectAsync = function SelectAsync(props) {
   }, [sOption]);
   return React.createElement("div", {
     className: "wprf-async-select-wrapper"
-  }, React.createElement(AsyncSelect__default["default"], {
+  }, React.createElement(AsyncSelect__default['default'], {
     cacheOptions: true,
     loadOptions: handleMenuOpen,
     defaultOptions: options,
@@ -3268,7 +3278,7 @@ var SelectAsync = function SelectAsync(props) {
           var regX = new RegExp("(".concat(meta === null || meta === void 0 ? void 0 : meta.inputValue, ")"), "gi");
           var _name = (_option$name = option.name) === null || _option$name === void 0 ? void 0 : _option$name.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
           var address = (_option$address = option.address) === null || _option$address === void 0 ? void 0 : _option$address.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
-          return React.createElement(React.Fragment, null, parse__default["default"](_name || ""), " ", React.createElement("small", null, parse__default["default"](address || "")));
+          return React.createElement(React.Fragment, null, parse__default['default'](_name || ""), " ", React.createElement("small", null, parse__default['default'](address || "")));
         }
       }
       return React.createElement(React.Fragment, null, option.name ? React.createElement(React.Fragment, null, React.createElement("b", null, option.name), " ") : React.createElement(React.Fragment, null, option.label, " "), option.address && React.createElement("small", null, option.address));
@@ -3425,7 +3435,7 @@ var Editor = function Editor(props) {
     setEditorState = _useState2[1];
   React.useEffect(function () {
     if (props.value) {
-      var _htmlToDraft = htmlToDraft__default["default"](props.value),
+      var _htmlToDraft = htmlToDraft__default['default'](props.value),
         contentBlocks = _htmlToDraft.contentBlocks,
         entityMap = _htmlToDraft.entityMap;
       var contentState = draftJs.ContentState.createFromBlockArray(contentBlocks, entityMap);
@@ -3434,7 +3444,7 @@ var Editor = function Editor(props) {
     }
   }, []);
   React.useEffect(function () {
-    var tempValue = draftToHtml__default["default"](draftJs.convertToRaw(editorState.getCurrentContent()));
+    var tempValue = draftToHtml__default['default'](draftJs.convertToRaw(editorState.getCurrentContent()));
     props.onChange({
       target: {
         type: 'editor',
@@ -3517,7 +3527,7 @@ var Button = function Button(props) {
     return React.createElement("a", {
       href: (props === null || props === void 0 ? void 0 : props.href) === -1 ? props === null || props === void 0 ? void 0 : props.value : props === null || props === void 0 ? void 0 : props.href,
       target: props === null || props === void 0 ? void 0 : props.target,
-      className: classNames__default["default"]('wprf-control wprf-button wprf-href-btn', props === null || props === void 0 ? void 0 : props.classes)
+      className: classNames__default['default']('wprf-control wprf-button wprf-href-btn', props === null || props === void 0 ? void 0 : props.classes)
     }, props === null || props === void 0 ? void 0 : props.text);
   }
   if (props !== null && props !== void 0 && props.group) {
@@ -3537,7 +3547,7 @@ var Button = function Button(props) {
     name: props.name,
     disabled: isLoading,
     onClick: (_props$onClick = props === null || props === void 0 ? void 0 : props.onClick) !== null && _props$onClick !== void 0 ? _props$onClick : handleClick,
-    className: classNames__default["default"]('wprf-control wprf-button wprf-btn', props === null || props === void 0 ? void 0 : props.classes)
+    className: classNames__default['default']('wprf-control wprf-button wprf-btn', props === null || props === void 0 ? void 0 : props.classes)
   }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 ? void 0 : (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 ? void 0 : (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 ? void 0 : (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
 };
 var Button$1 = withLabel(Button);
@@ -3585,7 +3595,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
       columnGap: 10,
       flexWrap: "wrap"
     }
-  }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$1(_objectSpread$1({}, validProps), {}, {
+  }, /*#__PURE__*/React__default['default'].createElement("input", _objectSpread$1(_objectSpread$1({}, validProps), {}, {
     type: "number",
     value: responsiveSize === null || responsiveSize === void 0 ? void 0 : responsiveSize[responsive],
     onChange: handleChange
@@ -3614,7 +3624,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
 ResponsiveNumber.defaultProps = {
   type: "number"
 };
-var ResponsiveNumber$1 = withLabel( /*#__PURE__*/React__default["default"].memo(ResponsiveNumber));
+var ResponsiveNumber$1 = withLabel( /*#__PURE__*/React__default['default'].memo(ResponsiveNumber));
 
 var eligibleMessage = function eligibleMessage(props) {
   if (props !== null && props !== void 0 && props.messages) {
@@ -3641,7 +3651,7 @@ var Message = function Message(props) {
     return React.createElement(React.Fragment, null);
   }
   return React.createElement("div", {
-    className: classNames__default["default"]('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"), props === null || props === void 0 ? void 0 : props.classes)
+    className: classNames__default['default']('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"), props === null || props === void 0 ? void 0 : props.classes)
   }, html && React.createElement("p", {
     dangerouslySetInnerHTML: {
       __html: message
@@ -3676,7 +3686,7 @@ var Modal = function Modal(props) {
     type: "button"
   }, props === null || props === void 0 ? void 0 : props.button, {
     onClick: openModal
-  })), isOpen && React.createElement(SweetAlert__default["default"], {
+  })), isOpen && React.createElement(SweetAlert__default['default'], {
     customClass: "wprf-modal-inner",
     style: {
       maxWidth: '900px',
@@ -3765,24 +3775,28 @@ var InnerContent = function InnerContent(_ref) {
 };
 
 function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+  if (obj == null) throw new TypeError("Cannot destructure undefined");
 }
 
 var Submit = function Submit(_ref) {
   var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
   var context = useBuilderContext();
   var label = (props === null || props === void 0 ? void 0 : props.label) || i18n.__('Save Changes', 'notificationx');
+  if (context.isSubmitting) {
+    var _props$loadingLabel;
+    label = (_props$loadingLabel = props === null || props === void 0 ? void 0 : props.loadingLabel) !== null && _props$loadingLabel !== void 0 ? _props$loadingLabel : 'Saving...';
+  }
   var handleSubmit = React.useCallback(function (event) {
     var _context$submit;
     if ((_context$submit = context.submit) !== null && _context$submit !== void 0 && _context$submit.onSubmit) {
       context.submit.onSubmit(event, context);
       return;
     }
-    // console.log('on submit wprf.');
   }, [context]);
   return React.createElement("div", {
     className: "wprf-submit wprf-control"
   }, React.createElement(components.Button, {
+    disabled: context === null || context === void 0 ? void 0 : context.isSubmitting,
     className: "wprf-submit-button",
     onClick: handleSubmit
   }, label));
@@ -3816,7 +3830,7 @@ var SteppedButton = function SteppedButton(props) {
     className: "wprf-stepped-button"
   }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
     var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4;
-    return React.createElement(React__default["default"].Fragment, {
+    return React.createElement(React__default['default'].Fragment, {
       key: "button_".concat(button, "_").concat(index)
     }, (button === 'next' && nextTab !== undefined || button === 'prev' && prevTab !== undefined) && React.createElement(components.Button, {
       className: "wprf-btn wprf-step-btn-".concat(button),
@@ -3826,7 +3840,7 @@ var SteppedButton = function SteppedButton(props) {
     }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), nextTab == undefined && ((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.type) && React.createElement(Field$1, (_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4[button]));
   }));
 };
-var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
+var SteppedButton$1 = /*#__PURE__*/React__default['default'].memo(SteppedButton);
 
 var _excluded = ["fields", "active", "setActive", "submit"];
 var Content = function Content(_ref) {
@@ -3855,7 +3869,7 @@ var Content = function Content(_ref) {
     setTabsFields(filteredTabs);
   }, [tabs, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value.source]);
   return React.createElement("div", {
-    className: classNames__default["default"]("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes)
+    className: classNames__default['default']("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes)
   }, React.createElement("div", {
     className: "wprf-tab-flex"
   }, React.createElement("div", {
@@ -3865,7 +3879,7 @@ var Content = function Content(_ref) {
     if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
       return '';
     }
-    var componentClasses = classNames__default["default"]("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
+    var componentClasses = classNames__default['default']("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
       "wprf-active": active === tab.id
     });
     return React.createElement("div", {
@@ -3875,7 +3889,7 @@ var Content = function Content(_ref) {
     }, React.createElement("div", {
       className: "wprf-tab-heading-wrapper"
     }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
-      return React.createElement(React__default["default"].Fragment, {
+      return React.createElement(React__default['default'].Fragment, {
         key: "button_".concat(button, "_").concat(index)
       }, React.createElement(Field$1, rest.content_heading[button]));
     }))), React.createElement(InnerContent, {
@@ -3906,7 +3920,7 @@ var Tab = function Tab(props) {
     _useState2 = _slicedToArray(_useState, 2),
     activeTab = _useState2[0],
     setActiveTab = _useState2[1];
-  var componentClasses = classNames__default["default"]("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
+  var componentClasses = classNames__default['default']("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
     "wprf-tab-menu-as-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
   });
   React.useEffect(function () {

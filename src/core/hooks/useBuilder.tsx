@@ -339,7 +339,7 @@ const useBuilder = (props) => {
 		savedValues: state.savedValues,
 		errors: state.errors,
 		touched: state.touched,
-		isSubmitting: false,
+		isSubmitting: state?.isSubmitting ?? false,
 		setActiveTab: setActiveTab,
 		setRedirect: setRedirect,
 		setSubmitting: setSubmitting,

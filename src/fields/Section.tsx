@@ -9,6 +9,8 @@ const Section = (props) => {
 	const builderContext = useBuilderContext();
 	const [isCollapse, setCollapse] = useState(props.collapsed ?? false);
 	const [fields, setFields] = useState([]);
+	const [filteredFields, setFilteredFields] = useState([]);
+	const [searchString, setSearchString] = useState("");
 
 	useEffect(() => {
 		const newFields = sortingFields(props.fields);
@@ -29,7 +31,25 @@ const Section = (props) => {
 			);
 		});
 		setFields(allFields);
+		setFilteredFields(allFields);
 	}, []);
+
+	const handleSearchString = (e) => {
+		setSearchString(e?.target?.value);
+	};
+
+	useEffect(() => {
+		if (searchString) {
+			let newFields = fields.filter((field) =>
+				field?.props?.label
+					?.toLowerCase()
+					?.includes(searchString.toLowerCase())
+			);
+			setFilteredFields(newFields);
+		} else {
+			setFilteredFields(fields);
+		}
+	}, [searchString, fields]);
 
 	const componentClasses = classNames(
 		"wprf-control-section",
@@ -58,22 +78,21 @@ const Section = (props) => {
 			{searchable ? (
 				<div className="wprf-section-fields">
 					<div className="wprf-section-search-form">
-						<form>
-							<input
-								type="search"
-								name=""
-								id=""
-								placeholder={searchPlaceholder}
-							/>
-							<button className="submit" hidden>
-								Search
-							</button>
-						</form>
+						<input
+							type="search"
+							name=""
+							id=""
+							placeholder={searchPlaceholder}
+							onChange={(e) => handleSearchString(e)}
+							value={searchString}
+						/>
 					</div>
-					<div className="wprf-section-search-results">{fields}</div>
+					<div className="wprf-section-search-results">
+						{filteredFields}
+					</div>
 				</div>
 			) : (
-				<div className="wprf-section-fields">{fields}</div>
+				<div className="wprf-section-fields">{filteredFields}</div>
 			)}
 		</div>
 	);

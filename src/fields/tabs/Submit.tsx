@@ -5,21 +5,25 @@ import { __ } from '@wordpress/i18n';
 
 const Submit = ({ ...props }) => {
     const context = useBuilderContext();
-    const label = props?.label || __('Save Changes', 'notificationx');
+    let label = props?.label || __('Save Changes', 'notificationx');
+
+	if( context.isSubmitting ) {
+		label = props?.loadingLabel ?? 'Saving...';
+	}
+
     const handleSubmit = useCallback(
         (event) => {
             if (context.submit?.onSubmit) {
                 context.submit.onSubmit(event, context);
                 return;
             }
-            // console.log('on submit wprf.');
         },
         [context],
     )
 
     return (
         <div className="wprf-submit wprf-control">
-            <Button className="wprf-submit-button" onClick={handleSubmit}>{label}</Button>
+            <Button disabled={context?.isSubmitting} className="wprf-submit-button" onClick={handleSubmit}>{label}</Button>
         </div>
     )
 }

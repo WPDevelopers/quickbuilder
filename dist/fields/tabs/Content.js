@@ -68,7 +68,7 @@ var Content = function Content(_ref) {
       fields: tab === null || tab === void 0 ? void 0 : tab.fields,
       parentIndex: [].concat(_toConsumableArray(parentIndex), [index])
     }));
-  })), applyFilters('wprf_tab_content', '', rest)), (rest === null || rest === void 0 || (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && createElement(SteppedButton, {
+  })), applyFilters('wprf_tab_content', null, rest)), (rest === null || rest === void 0 || (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && createElement(SteppedButton, {
     fields: tabsFields,
     active: active,
     setActive: setActive,

@@ -68,7 +68,7 @@ const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, setActive, 
                         );
                     })}
                 </div>
-                {applyFilters('wprf_tab_content', '', rest)}
+                {applyFilters('wprf_tab_content', null, rest)}
             </div>
             {
                 rest?.step?.show &&

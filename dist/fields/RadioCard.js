@@ -75,7 +75,7 @@ var _RadioCard = function _RadioCard(props) {
         value: is_pro,
         active: Boolean(builderContext.is_pro_active)
       }
-    }, label), console.log(_objectSpread(_objectSpread({}, rest), validProps)), createElement(GenericInput, _extends({}, rest, validProps, {
+    }, label), createElement(GenericInput, _extends({}, rest, validProps, {
       is_pro: is_pro,
       type: "radio",
       value: value,

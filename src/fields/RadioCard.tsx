@@ -76,12 +76,6 @@ const _RadioCard = (props) => {
                                 >
                                     {label}
                                 </Label>
-								{console.log(
-                                    {
-										...rest,
-										...validProps
-									})
-								}
                                 <GenericInput
                                     {...rest}
                                     {...validProps}

@@ -24,7 +24,6 @@ var _Input = function _Input(props, ref) {
     type: type
   }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
   var handleChange = function handleChange(event) {
-    console.log(props);
     return validProps.onChange(event, {
       popup: props === null || props === void 0 ? void 0 : props.popup,
       isPro: !!props.is_pro

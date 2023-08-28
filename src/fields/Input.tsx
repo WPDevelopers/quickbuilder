@@ -9,8 +9,6 @@ const _Input = (props, ref?) => {
 	const type = props.type ? props.type : 'text';
 	const validProps = validFieldProps({...props, type}, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
 	const handleChange = (event) => {
-		console.log(props);
-
 		return validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro })
 	};
 

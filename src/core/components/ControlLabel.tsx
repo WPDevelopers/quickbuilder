@@ -12,8 +12,15 @@ const ControlLabel = (props) => {
 
 	return (
 		<div className="wprf-control-label">
-			{badgePosition == "left" && badge}
-			<label htmlFor={id}>{label}</label>
+			{badge ? (
+				<div className="wprf-label-with-badge">
+					{badgePosition == "left" && badge}
+					<label htmlFor={id}>{label}</label>
+					{badgePosition == "right" && badge}
+				</div>
+			) : (
+				<label htmlFor={id}>{label}</label>
+			)}
 			{rest?.label_subtitle && (
 				<p
 					className="wprf-label-subtitle"
@@ -25,7 +32,6 @@ const ControlLabel = (props) => {
 					{context?.icons?.link}
 				</a>
 			)}
-			{badgePosition == "right" && badge}
 		</div>
 	);
 };

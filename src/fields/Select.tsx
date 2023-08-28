@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactSelect from "react-select";
-import { isArray, isObject, merge, wpFetch, valueExists } from '../core/utils';
-import { withLabel, useOptions, useBuilderContext } from '../core/hooks';
 import { when } from '../core';
+import { useBuilderContext, useOptions, withLabel } from '../core/hooks';
+import { isArray, isObject, merge, valueExists, wpFetch } from '../core/utils';
 
 const Select = (props) => {
 	const builderContext = useBuilderContext();
@@ -106,6 +106,7 @@ const Select = (props) => {
 		<div className="wprf-select-wrapper">
 			<ReactSelect
 				isDisabled={props?.disable}
+				className="wprf-select"
 				classNamePrefix="wprf-select"
 				isSearchable={search ?? false}
 				id={id}

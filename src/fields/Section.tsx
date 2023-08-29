@@ -78,14 +78,16 @@ const Section = (props) => {
 			{searchable ? (
 				<div className="wprf-section-fields">
 					<div className="wprf-section-search-form">
-						<input
-							type="search"
-							name=""
-							id=""
-							placeholder={searchPlaceholder}
-							onChange={(e) => handleSearchString(e)}
-							value={searchString}
-						/>
+						<span className="wprf-section-search">
+							<input
+								type="text"
+								name=""
+								id=""
+								placeholder={searchPlaceholder}
+								onChange={(e) => handleSearchString(e)}
+								value={searchString}
+							/>
+						</span>
 					</div>
 					<div className="wprf-section-search-results">
 						{filteredFields}

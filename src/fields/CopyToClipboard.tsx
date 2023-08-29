@@ -15,6 +15,7 @@ const CopyToClipboard = (props) => {
 		"context",
 		"badge",
 		"popup",
+		"type",
 	]);
 
 	const handleChange = useCallback(
@@ -35,7 +36,7 @@ const CopyToClipboard = (props) => {
 		if (isCopied) {
 			CopyInterval = setTimeout(() => {
 				setIsCopied(false);
-			}, 2000);
+			}, 300);
 		}
 		return () => CopyInterval && clearTimeout(CopyInterval);
 	}, [isCopied]);
@@ -45,7 +46,7 @@ const CopyToClipboard = (props) => {
 		if (isDescriptionCopied) {
 			DescriptionCopyInterval = setTimeout(() => {
 				setIsDescriptionCopied(false);
-			}, 2000);
+			}, 300);
 		}
 		return () =>
 			DescriptionCopyInterval && clearTimeout(DescriptionCopyInterval);
@@ -85,14 +86,16 @@ const CopyToClipboard = (props) => {
 						className="wprf-copy-icon"
 						onClick={() => handleCopy()}
 					>
-						Copy
+						<i className="btd-icon btd-copy"></i>
 					</Button>
 				</span>
 			</div>
 			<div className="wprf-copy-to-clipboard-body">
 				{React.createElement("input", {
 					...validProps,
+					type: "text",
 					onChange: handleChange,
+					disabled: true,
 				})}
 			</div>
 			<div className="wprf-copy-to-clipboard-footer">

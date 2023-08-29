@@ -184,7 +184,7 @@ const CheckboxSelect = (props) => {
 								className="wprf-remove-button"
 								onClick={() => removeSelection(item)}
 							>
-								close
+								<i className="btd-icon btd-close-fill"></i>
 							</button>
 						</li>
 					))}

@@ -176,8 +176,12 @@ const CheckboxSelect = (props) => {
 			{selectedOption?.length ? (
 				<ul className="wprf-selected-options">
 					{/* @ts-ignore */}
-					{selectedOption?.map((item) => (
-						<li className="wprf-selected-option">
+					{selectedOption?.map((item, index) => (
+						<li
+							className={`wprf-selected-option wprf-selected-option-${
+								index%6 + 1
+							}`}
+						>
 							{item?.label}
 							<button
 								type="button"

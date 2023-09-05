@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useBuilderContext } from "../core/hooks";
 import { sortingFields } from "../core/utils";
 import { Field } from "../fields";
+import Submit from "./tabs/Submit";
 
 const Section = (props) => {
 	const { searchable = false, searchPlaceholder = "Search..." } = props;
@@ -96,6 +97,7 @@ const Section = (props) => {
 			) : (
 				<div className="wprf-section-fields">{filteredFields}</div>
 			)}
+			{props.showSubmit && <Submit {...builderContext.submit} />}
 		</div>
 	);
 };

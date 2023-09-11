@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('lodash-es'), require('@wordpress/api-fetch'), require('@wordpress/date'), require('moment'), require('intersect'), require('@wordpress/i18n'), require('classnames'), require('@wordpress/hooks'), require('sweetalert2'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-select'), require('react-sortablejs'), require('html-react-parser'), require('react-select/async'), require('@wordpress/media-utils'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('react-bootstrap-sweetalert')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', 'lodash-es', '@wordpress/api-fetch', '@wordpress/date', 'moment', 'intersect', '@wordpress/i18n', 'classnames', '@wordpress/hooks', 'sweetalert2', '@wordpress/components', 'copy-to-clipboard', 'react-select', 'react-sortablejs', 'html-react-parser', 'react-select/async', '@wordpress/media-utils', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', 'react-bootstrap-sweetalert'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.lodashEs, global.wpApiFetch, global.wpDate, global.momentLib, global.intersect, global.wpI18n, global.classNames, global.wpHooks, global.sweetalert2, global.wpComponents, global.copy, global.reactSelect, global.reactSortablejs, global.parse, global.AsyncSelect, global.wpMedia, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.sweetalert));
-}(this, (function (exports, React, data, lodashEs, apiFetch, date, moment, intersect, i18n, classNames, hooks, Swal, components, copy, ReactSelect, reactSortablejs, parse, AsyncSelect, mediaUtils, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, SweetAlert$1) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('intersect'), require('@wordpress/i18n'), require('classnames'), require('@wordpress/hooks'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('html-react-parser'), require('react-select/async')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', 'intersect', '@wordpress/i18n', 'classnames', '@wordpress/hooks', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'html-react-parser', 'react-select/async'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.intersect, global.wpI18n, global.classNames, global.wpHooks, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.wpMedia, global.sweetalert, global.reactSortablejs, global.parse, global.AsyncSelect));
+})(this, (function (exports, React, data, apiFetch, lodashEs, date, moment, intersect, i18n, classNames, hooks, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, mediaUtils, SweetAlert$1, reactSortablejs, parse, AsyncSelect) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -12,15 +12,42 @@
   var intersect__default = /*#__PURE__*/_interopDefaultLegacy(intersect);
   var classNames__default = /*#__PURE__*/_interopDefaultLegacy(classNames);
   var Swal__default = /*#__PURE__*/_interopDefaultLegacy(Swal);
-  var copy__default = /*#__PURE__*/_interopDefaultLegacy(copy);
   var ReactSelect__default = /*#__PURE__*/_interopDefaultLegacy(ReactSelect);
-  var parse__default = /*#__PURE__*/_interopDefaultLegacy(parse);
-  var AsyncSelect__default = /*#__PURE__*/_interopDefaultLegacy(AsyncSelect);
+  var copy__default = /*#__PURE__*/_interopDefaultLegacy(copy);
   var draftToHtml__default = /*#__PURE__*/_interopDefaultLegacy(draftToHtml);
   var htmlToDraft__default = /*#__PURE__*/_interopDefaultLegacy(htmlToDraft);
   var SweetAlert__default = /*#__PURE__*/_interopDefaultLegacy(SweetAlert$1);
+  var parse__default = /*#__PURE__*/_interopDefaultLegacy(parse);
+  var AsyncSelect__default = /*#__PURE__*/_interopDefaultLegacy(AsyncSelect);
+
+  function _typeof$1(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof$1(obj);
+  }
+
+  function _toPrimitive(input, hint) {
+    if (_typeof$1(input) !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (_typeof$1(res) !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return _typeof$1(key) === "symbol" ? key : String(key);
+  }
 
   function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -31,33 +58,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
-  }
-
-  function _typeof$1(obj) {
-    "@babel/helpers - typeof";
-
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof$1 = function _typeof(obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof$1 = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof$1(obj);
   }
 
   function _arrayLikeToArray$2(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
-    for (var i = 0, arr2 = new Array(len); i < len; i++) {
-      arr2[i] = arr[i];
-    }
-
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
     return arr2;
   }
 
@@ -86,13 +92,13 @@
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread();
   }
 
-  function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$f(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$g(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$g(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var wpFetch = function wpFetch(params) {
-    var args = _objectSpread$f(_objectSpread$f({}, params), {}, {
+    var args = _objectSpread$g(_objectSpread$g({}, params), {}, {
       method: "POST"
     });
-    return apiFetch__default['default'](args);
+    return apiFetch__default["default"](args);
   };
   var isString = function isString(args) {
     return args !== null && typeof args === "string";
@@ -248,7 +254,7 @@
     var exclude = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var type = defaultProps.type;
     var filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch'].concat(_toConsumableArray(exclude));
-    if (type !== 'select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
+    if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
       filterOutArray.push('options');
     }
     if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {
@@ -325,7 +331,7 @@
     var _settings$timezone;
     var keepLocalTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var settings = date.__experimentalGetSettings();
-    var _value = moment__default['default'].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 ? void 0 : (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
+    var _value = moment__default["default"].utc(value ? value : undefined).utcOffset(+(settings === null || settings === void 0 ? void 0 : (_settings$timezone = settings.timezone) === null || _settings$timezone === void 0 ? void 0 : _settings$timezone.offset), keepLocalTime);
     return _value;
   };
   var merge = function merge(array_one, array_two, key) {
@@ -388,7 +394,7 @@
         if (_typeof(newData) != "function") {
           if (isArray(checkAgainst) && isArray(newData)) {
             var _intersect;
-            return (_intersect = intersect__default['default'](newData, checkAgainst)) === null || _intersect === void 0 ? void 0 : _intersect.length;
+            return (_intersect = intersect__default["default"](newData, checkAgainst)) === null || _intersect === void 0 ? void 0 : _intersect.length;
           } else if (isArray(checkAgainst) && _typeof(newData) == "string") {
             return checkAgainst.includes(newData);
           } else if (isArray(newData) && _typeof(checkAgainst) == "string") {
@@ -489,8 +495,8 @@
     return validate$1(conditions, data);
   };
 
-  function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$e(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$f(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var DEFAULT_STATE = {
     savedValues: {
       type: "conversions",
@@ -556,8 +562,8 @@
       switch (action.type) {
         case "SET_SAVED_VALUES":
           {
-            var _updatedState = _objectSpread$e({}, state);
-            _updatedState = _objectSpread$e(_objectSpread$e({}, _updatedState), {}, {
+            var _updatedState = _objectSpread$f({}, state);
+            _updatedState = _objectSpread$f(_objectSpread$f({}, _updatedState), {}, {
               values: action.payload,
               savedValues: action.payload
             });
@@ -566,17 +572,17 @@
         case "FIELD_VALUE":
           {
             var _updatedState3;
-            var _updatedState2 = _objectSpread$e({}, state);
+            var _updatedState2 = _objectSpread$f({}, state);
             var payload = action.payload;
-            _updatedState2 = _objectSpread$e(_objectSpread$e({}, _updatedState2), {}, {
-              values: _objectSpread$e(_objectSpread$e({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
+            _updatedState2 = _objectSpread$f(_objectSpread$f({}, _updatedState2), {}, {
+              values: _objectSpread$f(_objectSpread$f({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
             });
             return _updatedState2;
           }
         case "REMOVE_FIELD_VALUE":
           {
             var _updatedState4$values;
-            var _updatedState4 = _objectSpread$e({}, state);
+            var _updatedState4 = _objectSpread$f({}, state);
             var _payload = action.payload;
             if ((_updatedState4$values = _updatedState4.values) !== null && _updatedState4$values !== void 0 && _updatedState4$values[_payload]) {
               delete _updatedState4.values[_payload];
@@ -586,7 +592,7 @@
         case "RESET_FIELD_VALUE":
           {
             var _updatedState5$values;
-            var _updatedState5 = _objectSpread$e({}, state);
+            var _updatedState5 = _objectSpread$f({}, state);
             if ((_updatedState5$values = _updatedState5.values) !== null && _updatedState5$values !== void 0 && _updatedState5$values[action.payload]) {
               var _updatedState5$savedV;
               delete _updatedState5.values[action.payload];
@@ -597,16 +603,16 @@
             return _updatedState5;
           }
         case "FIELD_ERROR":
-          return _objectSpread$e(_objectSpread$e({}, state), {}, {
-            errors: _objectSpread$e(_objectSpread$e({}, state.errors), action.payload)
+          return _objectSpread$f(_objectSpread$f({}, state), {}, {
+            errors: _objectSpread$f(_objectSpread$f({}, state.errors), action.payload)
           });
         case "REMOVE_FIELD_ERROR":
-          var updatedState = _objectSpread$e({}, state);
+          var updatedState = _objectSpread$f({}, state);
           delete updatedState.errors[action.payload];
           return updatedState;
         case "FIELD_TOUCHED":
-          return _objectSpread$e(_objectSpread$e({}, state), {}, {
-            touched: _objectSpread$e(_objectSpread$e({}, state.touched), action.payload)
+          return _objectSpread$f(_objectSpread$f({}, state), {}, {
+            touched: _objectSpread$f(_objectSpread$f({}, state.touched), action.payload)
           });
       }
       return state;
@@ -647,20 +653,17 @@
   };
 
   function _extends$1() {
-    _extends$1 = Object.assign || function (target) {
+    _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
       for (var i = 1; i < arguments.length; i++) {
         var source = arguments[i];
-
         for (var key in source) {
           if (Object.prototype.hasOwnProperty.call(source, key)) {
             target[key] = source[key];
           }
         }
       }
-
       return target;
     };
-
     return _extends$1.apply(this, arguments);
   }
 
@@ -669,33 +672,31 @@
   }
 
   function _iterableToArrayLimit(arr, i) {
-    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
-
-    if (_i == null) return;
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-
-    var _s, _e;
-
-    try {
-      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
+    var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+    if (null != _i) {
+      var _s,
+        _e,
+        _x,
+        _r,
+        _arr = [],
+        _n = !0,
+        _d = !1;
       try {
-        if (!_n && _i["return"] != null) _i["return"]();
+        if (_x = (_i = _i.call(arr)).next, 0 === i) {
+          if (Object(_i) !== _i) return;
+          _n = !1;
+        } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+      } catch (err) {
+        _d = !0, _e = err;
       } finally {
-        if (_d) throw _e;
+        try {
+          if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+        } finally {
+          if (_d) throw _e;
+        }
       }
+      return _arr;
     }
-
-    return _arr;
   }
 
   function _nonIterableRest() {
@@ -725,7 +726,7 @@
       });
       setTabsFields(filteredTabs);
     }, [tabs, context === null || context === void 0 ? void 0 : (_context$values = context.values) === null || _context$values === void 0 ? void 0 : _context$values.source]);
-    var componentClasses = classNames__default['default']("wprf-tab-menu-wrapper", props === null || props === void 0 ? void 0 : props.className, {
+    var componentClasses = classNames__default["default"]("wprf-tab-menu-wrapper", props === null || props === void 0 ? void 0 : props.className, {
       "wprf-tab-menu-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
     }, context === null || context === void 0 ? void 0 : (_context$values2 = context.values) === null || _context$values2 === void 0 ? void 0 : _context$values2.source);
     var currentTabIndex = tabsFields.findIndex(function (tab) {
@@ -738,7 +739,7 @@
     }, tabsFields.map(function (tab, index) {
       var _classNames, _context$icons, _context$icons$tab$ic, _tab$icon, _tab$icon2;
       return React.createElement("li", {
-        className: classNames__default['default']("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
+        className: classNames__default["default"]("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
         "data-key": tab.id,
         key: tab.id,
         onClick: function onClick() {
@@ -757,13 +758,11 @@
     var target = {};
     var sourceKeys = Object.keys(source);
     var key, i;
-
     for (i = 0; i < sourceKeys.length; i++) {
       key = sourceKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
       target[key] = source[key];
     }
-
     return target;
   }
 
@@ -771,10 +770,8 @@
     if (source == null) return {};
     var target = _objectWithoutPropertiesLoose(source, excluded);
     var key, i;
-
     if (Object.getOwnPropertySymbols) {
       var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
       for (i = 0; i < sourceSymbolKeys.length; i++) {
         key = sourceSymbolKeys[i];
         if (excluded.indexOf(key) >= 0) continue;
@@ -782,9 +779,12 @@
         target[key] = source[key];
       }
     }
-
     return target;
   }
+
+  var Action = function Action(props) {
+    return React.createElement(React.Fragment, null, hooks.applyFilters(props.action, '', props));
+  };
 
   var BuilderContext = /*#__PURE__*/React.createContext(undefined);
   BuilderContext.displayName = process.env.NODE_ENV === 'production' ? 'Anonymous' : 'BuilderContext';
@@ -880,7 +880,8 @@
       option: option,
       selectedOption: selectedOption,
       setOptions: setOptions,
-      setData: setData
+      setData: setData,
+      setSelectedOption: setSelectedOption
     };
   };
 
@@ -962,14 +963,14 @@
     }
   };
 
-  function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$d(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$e(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   // import store from "../store";
 
   var SweetAlert = function SweetAlert() {
     var _args$target, _args$type, _args$title, _args$text, _args$icon, _args$timer;
     var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    return Swal__default['default'].fire(_objectSpread$d({
+    return Swal__default["default"].fire(_objectSpread$e({
       target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
       type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
       html: args === null || args === void 0 ? void 0 : args.html,
@@ -1092,21 +1093,21 @@
   //     return (number < 10 ? '0' : '') + number
   // }
 
-  function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$c(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$d(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var builderReducer = function builderReducer(state, action) {
     switch (action.type) {
       case 'SET_CONTEXT':
         return _extends({}, state, setIn(state, action.payload.field, action.payload.value));
       case 'SET_ACTIVE_TAB':
-        return _objectSpread$c(_objectSpread$c({}, state), {}, {
-          config: _objectSpread$c(_objectSpread$c({}, state.config), {}, {
+        return _objectSpread$d(_objectSpread$d({}, state), {}, {
+          config: _objectSpread$d(_objectSpread$d({}, state.config), {}, {
             active: action.payload
           })
         });
       case 'SET_REDIRECT':
-        return _objectSpread$c(_objectSpread$c({}, state), {}, {
-          redirect: _objectSpread$c(_objectSpread$c({}, state.redirect), action.payload)
+        return _objectSpread$d(_objectSpread$d({}, state), {}, {
+          redirect: _objectSpread$d(_objectSpread$d({}, state.redirect), action.payload)
         });
       case 'SET_VALUES':
         return _extends({}, state, setIn(state, 'values', action.payload));
@@ -1133,7 +1134,7 @@
           status: action.payload
         });
       case 'SET_ISSUBMITTING':
-        return _objectSpread$c(_objectSpread$c({}, state), {}, {
+        return _objectSpread$d(_objectSpread$d({}, state), {}, {
           isSubmitting: action.payload
         });
       case 'SET_ISVALIDATING':
@@ -1141,8 +1142,8 @@
           isValidating: action.payload
         });
       case 'SET_FIELD_TOUCHED':
-        return _objectSpread$c(_objectSpread$c({}, state), {}, {
-          touched: _objectSpread$c(_objectSpread$c({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
+        return _objectSpread$d(_objectSpread$d({}, state), {}, {
+          touched: _objectSpread$d(_objectSpread$d({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
         });
 
       // return _extends({}, state, {
@@ -1195,8 +1196,8 @@
     }
   };
 
-  function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$b(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$c(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var useBuilder = function useBuilder(props) {
     var _state$isSubmitting;
     // Set is Mounted or NOT
@@ -1207,7 +1208,7 @@
         isMounted.current = false;
       };
     }, []);
-    var _useReducer = React.useReducer(builderReducer, _objectSpread$b(_objectSpread$b({}, props), {}, {
+    var _useReducer = React.useReducer(builderReducer, _objectSpread$c(_objectSpread$c({}, props), {}, {
         savedValues: props.savedValues || {},
         values: props.values || {},
         errors: props.initialErrors || {},
@@ -1332,7 +1333,7 @@
       }
     });
     var getFieldProps = React.useCallback(function (args) {
-      var defaultProps = _objectSpread$b({}, args);
+      var defaultProps = _objectSpread$c({}, args);
       var validProps = validFieldProps(defaultProps);
       var name = validProps.name;
       var type = validProps.type;
@@ -1403,7 +1404,7 @@
         var _props$meta;
         value = getIn(state.values, name) || ((_props$meta = props.meta) === null || _props$meta === void 0 ? void 0 : _props$meta["default"]);
       }
-      return _objectSpread$b(_objectSpread$b({}, props.meta), {}, {
+      return _objectSpread$c(_objectSpread$c({}, props.meta), {}, {
         value: value,
         error: getIn(state.errors, name),
         touched: !!getIn(state.touched, name),
@@ -1514,7 +1515,7 @@
         }
       });
     });
-    var context = _objectSpread$b(_objectSpread$b(_objectSpread$b({}, props), state), {}, {
+    var context = _objectSpread$c(_objectSpread$c(_objectSpread$c({}, props), state), {}, {
       setContext: setContext,
       values: state.values,
       savedValues: state.savedValues,
@@ -1561,7 +1562,7 @@
   };
 
   var Row = function Row(props) {
-    var componentClasses = classNames__default['default']("wprf-row clearfix wprf-flex", props === null || props === void 0 ? void 0 : props.className);
+    var componentClasses = classNames__default["default"]("wprf-row clearfix wprf-flex", props === null || props === void 0 ? void 0 : props.className);
     return React.createElement("div", {
       className: componentClasses
     }, props === null || props === void 0 ? void 0 : props.children);
@@ -1569,7 +1570,7 @@
 
   var Column = function Column(props) {
     var _classNames;
-    var componentClasses = classNames__default['default']("wprf-column", props === null || props === void 0 ? void 0 : props.className, (_classNames = {}, _defineProperty(_classNames, "wprf-column-".concat(12 / (props === null || props === void 0 ? void 0 : props.column)), (props === null || props === void 0 ? void 0 : props.column) && props.column !== 12), _defineProperty(_classNames, "wprf-column-12", props.column === 12), _classNames));
+    var componentClasses = classNames__default["default"]("wprf-column", props === null || props === void 0 ? void 0 : props.className, (_classNames = {}, _defineProperty(_classNames, "wprf-column-".concat(12 / (props === null || props === void 0 ? void 0 : props.column)), (props === null || props === void 0 ? void 0 : props.column) && props.column !== 12), _defineProperty(_classNames, "wprf-column-12", props.column === 12), _classNames));
     return React.createElement("div", {
       className: componentClasses
     }, props === null || props === void 0 ? void 0 : props.children);
@@ -1577,14 +1578,14 @@
 
   var Label = function Label(props) {
     var _props$badge, _props$badge2, _props$badge3;
-    var componentClasses = classNames__default['default']("wprf-input-label", props === null || props === void 0 ? void 0 : props.className);
+    var componentClasses = classNames__default["default"]("wprf-input-label", props === null || props === void 0 ? void 0 : props.className);
     return React.createElement("label", {
       htmlFor: props === null || props === void 0 ? void 0 : props.htmlFor,
       className: componentClasses
     }, (props === null || props === void 0 ? void 0 : (_props$badge = props.badge) === null || _props$badge === void 0 ? void 0 : _props$badge.value) && React.createElement("div", {
       className: "wprf-badge"
     }, React.createElement("sup", {
-      className: classNames__default['default']("wprf-badge-item", {
+      className: classNames__default["default"]("wprf-badge-item", {
         'wprf-badge-active': props === null || props === void 0 ? void 0 : (_props$badge2 = props.badge) === null || _props$badge2 === void 0 ? void 0 : _props$badge2.active
       })
     }, props === null || props === void 0 ? void 0 : (_props$badge3 = props.badge) === null || _props$badge3 === void 0 ? void 0 : _props$badge3.label)), !(props !== null && props !== void 0 && props.src) && (props === null || props === void 0 ? void 0 : props.children), (props === null || props === void 0 ? void 0 : props.src) && React.createElement(Image, {
@@ -1598,7 +1599,7 @@
     if (!(props !== null && props !== void 0 && props.src)) {
       return React.createElement("p", null, "No Source( src ) Defined");
     }
-    var componentClasses = classNames__default['default'](["wprf-input-image", props === null || props === void 0 ? void 0 : props.className]);
+    var componentClasses = classNames__default["default"](["wprf-input-image", props === null || props === void 0 ? void 0 : props.className]);
     return React.createElement("img", {
       className: componentClasses,
       src: props === null || props === void 0 ? void 0 : props.src,
@@ -1611,7 +1612,11 @@
       label = _ref.label;
     return React.createElement("div", {
       className: "wprf-badge"
-    }, React.createElement("sup", {
+    }, React.createElement("span", {
+      className: "wprf-badge-icon"
+    }, React.createElement("i", {
+      className: "btd-icon btd-crown"
+    })), React.createElement("span", {
       className: componentClasses
     }, label));
   };
@@ -1620,14 +1625,14 @@
     var label = props.label,
       active = props.active,
       _props$position = props.position,
-      position = _props$position === void 0 ? 'right' : _props$position,
+      position = _props$position === void 0 ? "right" : _props$position,
       renderLabel = props.renderLabel,
       renderComponent = props.renderComponent;
     if (label === undefined) {
-      label = 'Pro';
+      label = "Pro";
     }
-    var componentClasses = classNames__default['default']('wprf-badge-item', {
-      'wprf-badge-active': active
+    var componentClasses = classNames__default["default"]("wprf-badge-item", {
+      "wprf-badge-active": active
     });
     var componentProps = {};
     if (!builderContext.is_pro_active) {
@@ -1639,16 +1644,16 @@
       };
     }
     return React.createElement("div", _extends$1({
-      className: classNames__default['default']("wprf-badge-wrapper", {
+      className: classNames__default["default"]("wprf-badge-wrapper", {
         "pro-deactivated": !builderContext.is_pro_active
       })
-    }, componentProps), position === 'left' && label.length > 0 && React.createElement(React.Fragment, null, renderLabel(React.createElement(BadgeComp, {
+    }, componentProps), position === "left" && label.length > 0 && React.createElement(React.Fragment, null, renderLabel(React.createElement(BadgeComp, {
       componentClasses: componentClasses,
       label: label
-    }), 'left')), position === 'right' && label.length > 0 && React.createElement(React.Fragment, null, renderLabel(React.createElement(BadgeComp, {
+    }), "left")), position === "right" && label.length > 0 && React.createElement(React.Fragment, null, renderLabel(React.createElement(BadgeComp, {
       componentClasses: componentClasses,
       label: label
-    }), 'right')), renderComponent());
+    }), "right")), renderComponent());
   };
 
   var _excluded$4 = ["id", "label", "badge", "badgePosition", "context"];
@@ -1671,7 +1676,11 @@
 
     return React.createElement("div", {
       className: "wprf-control-label"
+    }, badge ? React.createElement("div", {
+      className: "wprf-label-with-badge"
     }, badgePosition == "left" && badge, React.createElement("label", {
+      htmlFor: id
+    }, label), badgePosition == "right" && badge) : React.createElement("label", {
       htmlFor: id
     }, label), (rest === null || rest === void 0 ? void 0 : rest.label_subtitle) && React.createElement("p", {
       className: "wprf-label-subtitle",
@@ -1682,7 +1691,7 @@
       rel: "nofollow",
       target: "_blank",
       href: rest.link
-    }, context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link), badgePosition == "right" && badge);
+    }, context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link));
   };
 
   var ControlField = function ControlField(_ref) {
@@ -1711,8 +1720,8 @@
   };
 
   var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge"];
-  function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$a(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$b(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
   // import { useInstanceId } from "@wordpress/compose";
 
@@ -1732,19 +1741,19 @@
       if (id == undefined) {
         id = name;
       }
-      var styles = _objectSpread$a({
+      var styles = _objectSpread$b({
         description: {
           position: "right"
         }
       }, prevStyle);
-      var styleClasses = classNames__default['default']((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
+      var styleClasses = classNames__default["default"]((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
       if (type === "hidden") {
         return React.createElement(WrappedComponent, _extends$1({}, props, {
           id: id
         }));
       }
       var validProps = validFieldProps(props, ["description", "label", "help", "style"]);
-      var componentClasses = classNames__default['default']("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
+      var componentClasses = classNames__default["default"]("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
       return React.createElement("div", {
         className: componentClasses
       }, is_pro == true && React.createElement(React.Fragment, null, React.createElement(Badge, _extends$1({}, badge, rest, {
@@ -1869,181 +1878,481 @@
     return WithProps;
   };
 
-  function _createForOfIteratorHelper$1(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-  function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
-  function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-  function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$9(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  function GenericCheckbox(props) {
-    var _styles$label, _styles$label2, _classNames;
-    var prevStyles = props.style;
-    var styles = _objectSpread$9({
-      type: "",
-      // card
-      label: {
-        position: "right"
-      },
-      column: 4
-    }, prevStyles);
-    var isChecked = React.useMemo(function () {
-      var _isChecked = false;
-      if (props !== null && props !== void 0 && props.checked && isObject(props.checked) && isString(props === null || props === void 0 ? void 0 : props.value)) {
-        _isChecked = props.checked[props.value];
-      } else {
-        if (!isString(props.value)) {
-          _isChecked = props.value;
+  var Button = function Button(props) {
+    var _props$onClick, _props$text, _props$text2, _props$text3;
+    if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
+      throw new Error(i18n.__('Button has a required params #text.', 'notificationx'));
+    }
+    var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", 'ajax', 'text']);
+    var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isLoading = _useState2[0],
+      setIsLoading = _useState2[1];
+    var handleClick = function handleClick(event) {
+      if (props !== null && props !== void 0 && props.ajax) {
+        setIsLoading(true);
+        hitAAJX(props.ajax, props.context).then(function (res) {
+          var _props$ajax, _props$ajax5;
+          setIsLoading(false);
+          if ((res === null || res === void 0 ? void 0 : res.status) == 'error') {
+            throw new Error(res === null || res === void 0 ? void 0 : res.message);
+          }
+          props.onChange({
+            target: {
+              type: 'button',
+              name: props.name,
+              value: true
+            }
+          });
+          if (!((_props$ajax = props.ajax) !== null && _props$ajax !== void 0 && _props$ajax.hideSwal)) {
+            var _props$ajax2, _props$ajax2$swal, _props$ajax3, _props$ajax3$swal, _props$ajax4, _props$ajax4$swal;
+            var type = ((_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : (_props$ajax2$swal = _props$ajax2.swal) === null || _props$ajax2$swal === void 0 ? void 0 : _props$ajax2$swal.icon) || 'success';
+            var message = ((_props$ajax3 = props.ajax) === null || _props$ajax3 === void 0 ? void 0 : (_props$ajax3$swal = _props$ajax3.swal) === null || _props$ajax3$swal === void 0 ? void 0 : _props$ajax3$swal.text) || 'Complete';
+            props.context.alerts.toast(type, message, {
+              autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 ? void 0 : (_props$ajax4$swal = _props$ajax4.swal) === null || _props$ajax4$swal === void 0 ? void 0 : _props$ajax4$swal.autoClose
+            });
+          }
+          if ((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.reload) {
+            setTimeout(function () {
+              return window.location.reload();
+            }, 1000);
+          }
+        })["catch"](function (err) {
+          var _props$ajax6;
+          console.error('Error In Button Called', props.name, err);
+          setIsLoading(false);
+          //TODO: need to be fixed.
+          props.onChange({
+            target: {
+              type: 'button',
+              name: props.name,
+              value: false
+            }
+          });
+          if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
+            props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || i18n.__("Something went wrong.", 'notificationx'));
+          }
+        });
+      }
+      useTrigger(props);
+    };
+    if (props !== null && props !== void 0 && props.href) {
+      return React.createElement("a", {
+        href: (props === null || props === void 0 ? void 0 : props.href) === -1 ? props === null || props === void 0 ? void 0 : props.value : props === null || props === void 0 ? void 0 : props.href,
+        target: props === null || props === void 0 ? void 0 : props.target,
+        className: classNames__default["default"]('wprf-control wprf-button wprf-href-btn', props === null || props === void 0 ? void 0 : props.classes)
+      }, props === null || props === void 0 ? void 0 : props.text);
+    }
+    if (props !== null && props !== void 0 && props.group) {
+      var allFields = props.fields.map(function (item, index) {
+        var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
+        return React.createElement(Field$1, _extends$1({
+          key: item.name
+        }, item, {
+          parentIndex: parentIndex
+        }));
+      });
+      return React.createElement("div", {
+        className: "wprf-control wprf-button-group wprf-flex"
+      }, allFields);
+    }
+    return React.createElement(React.Fragment, null, React.createElement("button", _extends$1({}, validProps, {
+      name: props.name,
+      disabled: isLoading,
+      onClick: (_props$onClick = props === null || props === void 0 ? void 0 : props.onClick) !== null && _props$onClick !== void 0 ? _props$onClick : handleClick,
+      className: classNames__default["default"]('wprf-control wprf-button wprf-btn', props === null || props === void 0 ? void 0 : props.classes)
+    }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 ? void 0 : (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 ? void 0 : (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 ? void 0 : (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
+  };
+  var Button$1 = withLabel(Button);
+
+  var CheckboxSelect = function CheckboxSelect(props) {
+    var builderContext = useBuilderContext();
+    var id = props.id,
+      name = props.name,
+      multiple = props.multiple,
+      placeholder = props.placeholder,
+      _props$search = props.search,
+      search = _props$search === void 0 ? false : _props$search,
+      onChange = props.onChange,
+      parentIndex = props.parentIndex;
+    var _useOptions = useOptions(props, "options"),
+      options = _useOptions.options,
+      selectedOption = _useOptions.selectedOption,
+      setData = _useOptions.setData,
+      setSelectedOption = _useOptions.setSelectedOption;
+    var _useState = React.useState(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      sOption = _useState2[0],
+      setSOption = _useState2[1];
+    var _useState3 = React.useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isLoading = _useState4[0],
+      setIsLoading = _useState4[1];
+    var _useState5 = React.useState(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isAjaxComplete = _useState6[0];
+      _useState6[1];
+    var handleMenuOpen = function handleMenuOpen() {
+      // AJAX
+      if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
+        setIsLoading(true);
+        var data = {};
+        Object.keys(props === null || props === void 0 ? void 0 : props.ajax.data).map(function (singleData) {
+          if ((props === null || props === void 0 ? void 0 : props.ajax.data[singleData].indexOf("@")) > -1) {
+            var _builderContext$value;
+            var eligibleKey = props === null || props === void 0 ? void 0 : props.ajax.data[singleData].substr(1);
+            data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];
+          } else {
+            data[singleData] = props === null || props === void 0 ? void 0 : props.ajax.data[singleData];
+          }
+        });
+        if (!isAjaxComplete) {
+          return wpFetch({
+            path: props === null || props === void 0 ? void 0 : props.ajax.api,
+            data: data
+          }).then(function (response) {
+            setIsLoading(false);
+            var arrayMerge = merge(props.options, response, "value");
+            builderContext.setFormField([].concat(_toConsumableArray(parentIndex), ["options"]), arrayMerge);
+            setData({
+              // @ts-ignore
+              options: arrayMerge,
+              // @ts-ignore
+              parentIndex: [].concat(_toConsumableArray(parentIndex), ["options"])
+            });
+            // setIsAjaxComplete(true);
+            return response;
+          });
         }
       }
-      return _isChecked;
-    }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-    var componentClasses = classNames__default['default']("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+    };
+    var handleMenuClose = function handleMenuClose() {
+      setIsLoading(false);
+    };
+    React.useEffect(function () {
+      if (!isArray(sOption) && isObject(sOption)) {
+        onChange({
+          target: {
+            type: "select",
+            name: name,
+            // @ts-ignore
+            value: sOption.value,
+            options: options,
+            multiple: multiple
+          }
+        });
+      }
+      if (isArray(sOption)) {
+        onChange({
+          target: {
+            type: "select",
+            name: name,
+            // @ts-ignore
+            value: sOption.map(function (item) {
+              return item.value;
+            }),
+            options: options,
+            multiple: multiple
+          }
+        });
+      }
+    }, [sOption]);
+    React.useEffect(function () {
+      handleMenuOpen();
+    }, []);
+    React.useEffect(function () {
+      if (props !== null && props !== void 0 && props.menuOpen) {
+        handleMenuOpen();
+      }
+    }, [props === null || props === void 0 ? void 0 : props.menuOpen]);
+    var handleOptionChange = React.useCallback(function (option) {
+      var _props$filterValue;
+      if (isArray(option) && (props === null || props === void 0 ? void 0 : (_props$filterValue = props.filterValue) === null || _props$filterValue === void 0 ? void 0 : _props$filterValue.length) > 0) {
+        var _props$filterValue2;
+        var origialValues = option;
+        var values = origialValues;
+        var filterValue = (_props$filterValue2 = props === null || props === void 0 ? void 0 : props.filterValue) !== null && _props$filterValue2 !== void 0 ? _props$filterValue2 : ["all"];
+        if (!isArray(filterValue)) {
+          filterValue = [filterValue];
+        }
+        if ((origialValues === null || origialValues === void 0 ? void 0 : origialValues.length) > 1 && valueExists(origialValues.map(function (item) {
+          return item.value;
+        }), filterValue)) {
+          values = origialValues.filter(function (item) {
+            return !filterValue.includes(item === null || item === void 0 ? void 0 : item.value);
+          });
+        }
+        option = values;
+      }
+      setSOption(option);
+      setSelectedOption(option);
+    }, [name, id, parentIndex]);
+    var removeSelection = function removeSelection(item) {
+      // @ts-ignore
+      var newSelectedOptions = selectedOption.filter(function (option) {
+        return (option === null || option === void 0 ? void 0 : option.value) != (item === null || item === void 0 ? void 0 : item.value);
+      });
+      setSOption(newSelectedOptions);
+      setSelectedOption(newSelectedOptions);
+    };
     return React.createElement("div", {
-      className: componentClasses
-    }, React.createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
-      type: 'checkbox'
-    })), React.createElement("label", {
-      htmlFor: props.id
-    }, props.label));
-  }
-  function Checkbox(props) {
-    var passedOptions = props.options,
-      value = props.value,
-      multiple = props.multiple,
-      prevStyles = props.style;
-    var options = sortingFields(passedOptions);
-    var styles = _objectSpread$9({
-      column: 4
-    }, prevStyles);
-    if (multiple) {
-      var _useState = React.useState({}),
-        _useState2 = _slicedToArray(_useState, 2),
-        localState = _useState2[0],
-        setLocalState = _useState2[1];
-      var handleChange = function handleChange(event) {
-        var target = event.target ? event.target : event.currentTarget;
-        setLocalState(function (prevState) {
-          return _objectSpread$9(_objectSpread$9({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+      className: "wprf-checkbox-select-wrapper"
+    }, React.createElement(ReactSelect__default["default"], {
+      isDisabled: props === null || props === void 0 ? void 0 : props.disable,
+      className: "wprf-checkbox-select",
+      classNamePrefix: "wprf-checkbox-select",
+      isSearchable: search !== null && search !== void 0 ? search : false,
+      id: id,
+      isClearable: false,
+      name: name,
+      isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
+      placeholder: placeholder,
+      isLoading: isLoading,
+      options: options,
+      value: selectedOption,
+      onMenuOpen: handleMenuOpen,
+      onMenuClose: handleMenuClose,
+      isOptionDisabled: function isOptionDisabled(option) {
+        return option === null || option === void 0 ? void 0 : option.disabled;
+      },
+      onChange: handleOptionChange // option or options
+      ,
+      closeMenuOnSelect: false,
+      hideSelectedOptions: false,
+      autoFocus: false,
+      controlShouldRenderValue: false
+    }), selectedOption !== null && selectedOption !== void 0 && selectedOption.length ? React.createElement("ul", {
+      className: "wprf-selected-options"
+    }, selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.map(function (item, index) {
+      return React.createElement("li", {
+        className: "wprf-selected-option wprf-selected-option-".concat(index % 6 + 1)
+      }, item === null || item === void 0 ? void 0 : item.label, React.createElement("button", {
+        type: "button",
+        className: "wprf-remove-button",
+        onClick: function onClick() {
+          return removeSelection(item);
+        }
+      }, React.createElement("i", {
+        className: "btd-icon btd-close-fill"
+      })));
+    })) : "");
+  };
+  var CheckboxSelect$1 = withLabel(CheckboxSelect);
+
+  function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$a(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var CodeViewer = function CodeViewer(props) {
+    var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
+    var handleChange = React.useCallback(function (event) {
+      return validProps.onChange(event, {
+        isPro: !!props.is_pro
+      });
+    }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+    var extraProps = {
+      onChange: handleChange,
+      rows: 5
+    };
+    if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
+      extraProps["onClick"] = function () {
+        var successText = props !== null && props !== void 0 && props.success_text ? props.success_text : i18n.__("Copied to Clipboard.", "notificationx");
+        copy__default["default"](props.value, {
+          format: 'text/plain',
+          onCopy: function onCopy() {
+            props.context.alerts.toast("success", successText);
+          }
         });
       };
-      React.useEffect(function () {
-        props.onChange({
-          target: {
-            type: 'checkbox',
-            name: props.name,
-            value: localState,
-            multiple: true
-          }
-        });
-      }, [localState]);
-      React.useEffect(function () {
-        if (!isObject(value)) {
-          var lState = {};
-          var _iterator = _createForOfIteratorHelper$1(options),
-            _step;
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var option = _step.value;
-              lState[option.value] = value;
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-          setLocalState(lState);
-        } else {
-          setLocalState(value);
-        }
-      }, []);
-      return React.createElement("div", {
-        className: "wprf-checkbox-wrapper wprf-control"
-      }, React.createElement(Row, null, options.map(function (item) {
-        return React.createElement(Column, {
-          key: item.value,
-          column: styles.column
-        }, React.createElement(GenericCheckbox, _objectSpread$9(_objectSpread$9({}, item), {}, {
-          context: props === null || props === void 0 ? void 0 : props.context,
-          id: item.value,
-          checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
-          type: 'checkbox',
-          onChange: handleChange,
-          style: styles
-        })));
-      })));
     }
-    return React.createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
-      type: 'checkbox'
-    }));
-  }
-  var Checkbox$1 = withLabel(Checkbox);
-
-  var Field = function Field(props) {
-    if (!props.type || props.type.length === 0) {
-      console.error(props);
-      throw new Error(i18n.__("Field must have a #type. see documentation.", "notificationx"));
-    }
-    switch (props.type) {
-      case "text":
-      // case "checkbox":
-      case "radio":
-      case "email":
-      case "range":
-      case "number":
-      case "hidden":
-        return React.createElement(Input$1, props);
-      case "checkbox":
-        return React.createElement(Checkbox$1, props);
-      case "textarea":
-        return React.createElement(Textarea$1, props);
-      case "codeviewer":
-        return React.createElement(CodeViewer$1, props);
-      case "message":
-        return React.createElement(Message, props);
-      case "select":
-        return React.createElement(Select$1, props);
-      case "select-async":
-        return React.createElement(SelectAsync$1, props);
-      case "slider":
-        return React.createElement(Slider, props);
-      case "group":
-        return React.createElement(Group$1, props);
-      case "radio-card":
-        return React.createElement(Radio, props);
-      case "section":
-        return React.createElement(Section$1, props);
-      case "date":
-        return React.createElement(Date$1, props);
-      case "toggle":
-        return React.createElement(Toggle, props);
-      case "colorpicker":
-        return React.createElement(ColorPicker$1, props);
-      case "jsonuploader":
-        return React.createElement(JsonUploader$1, props);
-      case "repeater":
-        return React.createElement(Repeater, props);
-      case "media":
-        return React.createElement(Media$1, props);
-      case "editor":
-        return React.createElement(Editor$1, props);
-      case "action":
-        return React.createElement(Action, props);
-      case "button":
-        return React.createElement(Button$1, props);
-      case "modal":
-        return React.createElement(Modal, props);
-      case "tab":
-        return React.createElement(Tab, props);
-      // case "test":
-      //     return <Test {...props} />;
-      case "responsive-number":
-        return React.createElement(ResponsiveNumber$1, props);
-      default:
-        var customField = hooks.applyFilters("custom_field", "", props.type, props);
-        return React.createElement(React.Fragment, null, customField);
-    }
+    var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : i18n.__("Click to Copy", "notificationx");
+    return React.createElement("span", {
+      className: "wprf-code-viewer"
+    }, /*#__PURE__*/React__default["default"].createElement("textarea", _objectSpread$a(_objectSpread$a({}, validProps), extraProps)), React.createElement(components.Button, {
+      className: "wprf-copy-button"
+    }, ButtonText));
   };
-  var GenericField = withProps(Field, true);
-  var Field$1 = withProps(Field);
+  var CodeViewer$1 = withLabel( /*#__PURE__*/React__default["default"].memo(CodeViewer));
+
+  var ColorPicker = function ColorPicker(props) {
+    var value = props.value,
+      name = props.name,
+      id = props.id,
+      onChange = props.onChange;
+    var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      showPicker = _useState2[0],
+      setShowPicker = _useState2[1];
+    var _useState3 = React.useState(value || null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      color = _useState4[0],
+      setColor = _useState4[1];
+    var _useState5 = React.useState(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      defaultColor = _useState6[0],
+      setDefaultColor = _useState6[1];
+    var closeRef = React.useRef(null);
+    React.useEffect(function () {
+      setDefaultColor(value);
+    }, []);
+    var handleCloseRef = function handleCloseRef(ref) {
+      React.useEffect(function () {
+        var handleClickOutside = function handleClickOutside(ev) {
+          if (ref.current && !ref.current.contains(ev.target)) {
+            setShowPicker(false);
+          }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return function () {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [ref]);
+    };
+    React.useEffect(function () {
+      onChange({
+        target: {
+          type: 'colorpicker',
+          name: name,
+          value: color
+        }
+      });
+    }, [color]);
+    handleCloseRef(closeRef);
+    return React.createElement(React.Fragment, null, React.createElement("div", {
+      className: "wprf-colorpicker-wrap",
+      ref: closeRef
+    }, React.createElement("input", {
+      type: "hidden",
+      value: value,
+      name: name,
+      id: id
+    }), React.createElement("span", {
+      className: "wprf-picker-display",
+      style: {
+        backgroundColor: value,
+        borderColor: value
+      },
+      onClick: function onClick() {
+        return setShowPicker(!showPicker);
+      }
+    }), showPicker && React.createElement(React.Fragment, null, React.createElement("button", {
+      className: "wprf-colorpicker-reset",
+      onClick: function onClick(e) {
+        e.preventDefault();
+        setColor(defaultColor);
+        setShowPicker(false);
+      }
+    }, i18n.__('Reset', 'notificationx')), React.createElement(components.ColorPicker, {
+      color: value,
+      onChangeComplete: function onChangeComplete(event) {
+        return setColor(event.hex);
+      }
+    }))));
+  };
+  var ColorPicker$1 = withLabel(ColorPicker);
+
+  function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$9(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var CopyToClipboard = function CopyToClipboard(props) {
+    var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "descriptionCopyable", "disable", "parentIndex", "context", "badge", "popup", "type"]);
+    var handleChange = React.useCallback(function (event) {
+      return validProps.onChange(event, {
+        popup: props === null || props === void 0 ? void 0 : props.popup,
+        isPro: !!props.is_pro,
+        originProps: props
+      });
+    }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+    var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isCopied = _useState2[0],
+      setIsCopied = _useState2[1];
+    var _useState3 = React.useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isDescriptionCopied = _useState4[0],
+      setIsDescriptionCopied = _useState4[1];
+    React.useEffect(function () {
+      var CopyInterval;
+      if (isCopied) {
+        CopyInterval = setTimeout(function () {
+          setIsCopied(false);
+        }, 300);
+      }
+      return function () {
+        return CopyInterval && clearTimeout(CopyInterval);
+      };
+    }, [isCopied]);
+    React.useEffect(function () {
+      var DescriptionCopyInterval;
+      if (isDescriptionCopied) {
+        DescriptionCopyInterval = setTimeout(function () {
+          setIsDescriptionCopied(false);
+        }, 300);
+      }
+      return function () {
+        return DescriptionCopyInterval && clearTimeout(DescriptionCopyInterval);
+      };
+    }, [isDescriptionCopied]);
+    var handleCopy = function handleCopy() {
+      copy__default["default"](props.value, {
+        format: "text/plain",
+        onCopy: function onCopy() {
+          setIsCopied(true);
+        }
+      });
+    };
+    var handleDescriptionCopy = function handleDescriptionCopy() {
+      copy__default["default"](props.description, {
+        format: "text/plain",
+        onCopy: function onCopy() {
+          setIsDescriptionCopied(true);
+        }
+      });
+    };
+    return React.createElement("span", {
+      className: "wprf-copy-to-clipboard-wrapper"
+    }, React.createElement("div", {
+      className: "wprf-copy-to-clipboard-header"
+    }, React.createElement(ControlLabel, props), React.createElement("span", {
+      className: "wprf-clipboard-tooltip ".concat(isCopied ? "active" : "")
+    }, React.createElement("span", {
+      className: "wprf-clipboard-tooltip-text"
+    }, React.createElement("span", null, "Copied")), React.createElement(components.Button, {
+      className: "wprf-copy-icon",
+      onClick: function onClick() {
+        return handleCopy();
+      }
+    }, React.createElement("i", {
+      className: "btd-icon btd-copy"
+    })))), React.createElement("div", {
+      className: "wprf-copy-to-clipboard-body"
+    }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$9(_objectSpread$9({}, validProps), {}, {
+      type: "text",
+      onChange: handleChange,
+      disabled: true
+    }))), React.createElement("div", {
+      className: "wprf-copy-to-clipboard-footer"
+    }, (props === null || props === void 0 ? void 0 : props.description) && (props === null || props === void 0 ? void 0 : props.descriptionLabel) && React.createElement("i", {
+      dangerouslySetInnerHTML: {
+        __html: props === null || props === void 0 ? void 0 : props.descriptionLabel
+      }
+    }), props !== null && props !== void 0 && props.description ? props !== null && props !== void 0 && props.descriptionCopyable ? React.createElement("div", {
+      className: "wprf-clipboard-tooltip ".concat(isDescriptionCopied ? "active" : "")
+    }, React.createElement("span", {
+      className: "wprf-clipboard-tooltip-text"
+    }, React.createElement("span", null, "Copied")), React.createElement("p", {
+      className: "wprf-description",
+      onClick: function onClick() {
+        return handleDescriptionCopy();
+      },
+      dangerouslySetInnerHTML: {
+        __html: props === null || props === void 0 ? void 0 : props.description
+      }
+    })) : React.createElement("p", {
+      className: "wprf-description",
+      dangerouslySetInnerHTML: {
+        __html: props === null || props === void 0 ? void 0 : props.description
+      }
+    }) : ""));
+  };
+  var CopyToClipboard$1 = /*#__PURE__*/React__default["default"].memo(CopyToClipboard);
 
   var DateControl = function DateControl(props) {
     var _props$format;
@@ -2093,7 +2402,7 @@
               target: {
                 type: 'date',
                 name: name,
-                value: moment__default['default'](date).utc().format()
+                value: moment__default["default"](date).utc().format()
               }
             });
           },
@@ -2104,10 +2413,472 @@
   };
   var Date$1 = withLabel(DateControl);
 
+  /**
+   * WordPress dependencies
+   */
+  const instanceMap = new WeakMap();
+  /**
+   * Creates a new id for a given object.
+   *
+   * @param  object Object reference to create an id for.
+   * @return The instance id (index).
+   */
+
+  function createId(object) {
+    const instances = instanceMap.get(object) || 0;
+    instanceMap.set(object, instances + 1);
+    return instances;
+  }
+  /**
+   * Specify the useInstanceId *function* signatures.
+   *
+   * More accurately, useInstanceId distinguishes between three different
+   * signatures:
+   *
+   * 1. When only object is given, the returned value is a number
+   * 2. When object and prefix is given, the returned value is a string
+   * 3. When preferredId is given, the returned value is the type of preferredId
+   */
+
+
+  /**
+   * Provides a unique instance ID.
+   *
+   * @param  object        Object reference to create an id for.
+   * @param  [prefix]      Prefix for the unique id.
+   * @param  [preferredId] Default ID to use.
+   * @return The unique instance id.
+   */
+  function useInstanceId(object, prefix, preferredId) {
+    return React.useMemo(() => {
+      if (preferredId) return preferredId;
+      const id = createId(object);
+      return prefix ? `${prefix}-${id}` : id;
+    }, [object]);
+  }
+
+  var RepeaterField = function RepeaterField(props) {
+    var _builderContext$value, _builderContext$value2;
+    var builderContext = useBuilderContext();
+    var fields = props.fields,
+      _onChange = props.onChange,
+      index = props.index,
+      parent = props.parent;
+    var _useState = React.useState(props.isCollapsed),
+      _useState2 = _slicedToArray(_useState, 2),
+      isCollapsed = _useState2[0],
+      setIsCollapsed = _useState2[1];
+    var instanceId = useInstanceId(RepeaterField);
+    // onClick={() => setIsCollapse(!isCollapse)}
+    var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : (_builderContext$value2 = _builderContext$value[parent]) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[index];
+    var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
+    var _title = title ? title.length < 40 ? title : title.substr(0, 40) + "..." : '';
+    var onClone = function onClone(event) {
+      event === null || event === void 0 ? void 0 : event.stopPropagation();
+      props.clone(props.index);
+    };
+    var onDelete = function onDelete(event) {
+      event === null || event === void 0 ? void 0 : event.stopPropagation();
+      props.remove(props.index);
+    };
+    React.useEffect(function () {
+      builderContext.setFieldValue([parent, index, 'isCollapsed'], isCollapsed);
+    }, [isCollapsed]);
+    return React.createElement("div", {
+      className: "wprf-repeater-field"
+    }, React.createElement("div", {
+      className: "wprf-repeater-field-title",
+      onClick: function onClick() {
+        return setIsCollapsed(!isCollapsed);
+      }
+    }, React.createElement("h4", null, React.createElement(components.Icon, {
+      icon: "move"
+    }), props.index + 1, ": ", _title), React.createElement("div", {
+      className: "wprf-repeater-field-controls"
+    }, React.createElement(components.Icon, {
+      onClick: onClone,
+      icon: "admin-page"
+    }), React.createElement(components.Icon, {
+      onClick: onDelete,
+      icon: "trash"
+    }))), !isCollapsed && React.createElement("div", {
+      className: "wprf-repeater-inner-field"
+    }, fields.map(function (field, fieldIndex) {
+      return React.createElement(GenericField, _extends$1({
+        key: "field-".concat(index, "-").concat(fieldIndex)
+      }, field, {
+        id: "field-".concat(instanceId, "-").concat(index, "-").concat(fieldIndex),
+        index: index,
+        parenttype: "repeater",
+        parent: parent,
+        onChange: function onChange(event) {
+          return _onChange(event, index);
+        }
+      }));
+    })));
+  };
+
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$8(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var GenericToggle = function GenericToggle(props) {
+    var _styles$label, _styles$label2, _classNames;
+    var prevStyles = props.style;
+    var styles = _objectSpread$8({
+      type: "",
+      // card
+      label: {
+        position: "right"
+      },
+      column: 4
+    }, prevStyles);
+    var isChecked = React.useMemo(function () {
+      var _isChecked = false;
+      if (props !== null && props !== void 0 && props.checked && isObject(props.checked) && isString(props === null || props === void 0 ? void 0 : props.value)) {
+        _isChecked = props.checked[props.value];
+      } else {
+        if (!isString(props.value)) {
+          _isChecked = props.value;
+        }
+      }
+      return _isChecked;
+    }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
+    var componentClasses = classNames__default["default"]("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+    return React.createElement("div", {
+      className: componentClasses
+    }, React.createElement(GenericInput, _objectSpread$8(_objectSpread$8({}, props), {}, {
+      type: 'checkbox',
+      placeholder: undefined
+    })), React.createElement(Label, {
+      htmlFor: props.id
+    }));
+  };
+  var GenericToggle$1 = withLabel(GenericToggle);
+
+  var ModalContent = function ModalContent(props) {
+    var _props$body;
+    var isLoading = props.isLoading;
+      props.closeModal;
+    var _useState = React.useState([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      fields = _useState2[0],
+      setFields = _useState2[1];
+    React.useEffect(function () {
+      var newFields = sortingFields(props.body.fields);
+      // context.setFormField([...props.parentIndex, 'fields'], newFields);
+      var allFields = newFields.map(function (item, index) {
+        var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
+        return React.createElement(Field$1, _extends$1({
+          key: item.name
+        }, item, {
+          parentIndex: parentIndex
+        }));
+      });
+      setFields(allFields);
+    }, []);
+    return React.createElement("div", {
+      className: "wprf-modal-body"
+    }, isLoading && React.createElement(Loading, null), !isLoading && React.createElement(React.Fragment, null, React.createElement("div", {
+      className: "wprf-modal-content"
+    }, fields.length > 0 && fields), React.createElement("div", {
+      className: "wprf-modal-footer clearfix"
+    }, React.createElement("div", {
+      className: "wprf-modal-footer-left"
+    }, ((_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.footer) && isString(props.body.footer) && React.createElement("p", null, props.body.footer), React.createElement(GenericField, _extends$1({
+      type: "button"
+    }, props === null || props === void 0 ? void 0 : props.confirm_button))))));
+  };
+
+  var ModalHeader = function ModalHeader(_ref) {
+    var content = _ref.content;
+    return React.createElement("div", {
+      className: "wprf-modal-header"
+    }, content && isString(content) && React.createElement("h3", null, content));
+  };
+
+  var Loading = function Loading(props) {
+    return React.createElement("p", null, i18n.__('Loading...', 'notificationx'));
+  };
+
+  var toolbarOptions = {
+    options: ['inline', 'blockType', 'textAlign', 'colorPicker', 'link'],
+    inline: {
+      options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace']
+    },
+    blockType: {
+      inDropdown: true,
+      options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
+      className: undefined,
+      component: undefined,
+      dropdownClassName: undefined
+    }
+  };
+
+  var Editor = function Editor(props) {
+    var _useState = React.useState(draftJs.EditorState.createEmpty()),
+      _useState2 = _slicedToArray(_useState, 2),
+      editorState = _useState2[0],
+      setEditorState = _useState2[1];
+    React.useEffect(function () {
+      if (props.value) {
+        var _htmlToDraft = htmlToDraft__default["default"](props.value),
+          contentBlocks = _htmlToDraft.contentBlocks,
+          entityMap = _htmlToDraft.entityMap;
+        var contentState = draftJs.ContentState.createFromBlockArray(contentBlocks, entityMap);
+        var _editorState = draftJs.EditorState.createWithContent(contentState);
+        setEditorState(_editorState);
+      }
+    }, []);
+    React.useEffect(function () {
+      var tempValue = draftToHtml__default["default"](draftJs.convertToRaw(editorState.getCurrentContent()));
+      props.onChange({
+        target: {
+          type: 'editor',
+          value: tempValue,
+          name: props.name
+        }
+      });
+    }, [editorState]);
+    return React.createElement(reactDraftWysiwyg.Editor, {
+      placeholder: props === null || props === void 0 ? void 0 : props.placeholder,
+      toolbar: toolbarOptions,
+      editorState: editorState,
+      toolbarClassName: "wprf-editor-toolbar",
+      wrapperClassName: "wprf-editor wprf-control",
+      editorClassName: "wprf-editor-main",
+      onEditorStateChange: setEditorState
+    });
+  };
+  var Editor$1 = withLabel(Editor);
+
+  function _createForOfIteratorHelper$1(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+  function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
+  function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+  function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$7(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  function GenericCheckbox(props) {
+    var _styles$label, _styles$label2, _classNames;
+    var prevStyles = props.style;
+    var styles = _objectSpread$7({
+      type: "",
+      // card
+      label: {
+        position: "right"
+      },
+      column: 4
+    }, prevStyles);
+    var isChecked = React.useMemo(function () {
+      var _isChecked = false;
+      if (props !== null && props !== void 0 && props.checked && isObject(props.checked) && isString(props === null || props === void 0 ? void 0 : props.value)) {
+        _isChecked = props.checked[props.value];
+      } else {
+        if (!isString(props.value)) {
+          _isChecked = props.value;
+        }
+      }
+      return _isChecked;
+    }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
+    var componentClasses = classNames__default["default"]("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+    return React.createElement("div", {
+      className: componentClasses
+    }, React.createElement(GenericInput, _objectSpread$7(_objectSpread$7({}, props), {}, {
+      type: 'checkbox'
+    })), React.createElement("label", {
+      htmlFor: props.id
+    }, props.label));
+  }
+  function Checkbox(props) {
+    var passedOptions = props.options,
+      value = props.value,
+      multiple = props.multiple,
+      prevStyles = props.style;
+    var options = sortingFields(passedOptions);
+    var styles = _objectSpread$7({
+      column: 4
+    }, prevStyles);
+    if (multiple) {
+      var _useState = React.useState({}),
+        _useState2 = _slicedToArray(_useState, 2),
+        localState = _useState2[0],
+        setLocalState = _useState2[1];
+      var handleChange = function handleChange(event) {
+        var target = event.target ? event.target : event.currentTarget;
+        setLocalState(function (prevState) {
+          return _objectSpread$7(_objectSpread$7({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+        });
+      };
+      React.useEffect(function () {
+        props.onChange({
+          target: {
+            type: 'checkbox',
+            name: props.name,
+            value: localState,
+            multiple: true
+          }
+        });
+      }, [localState]);
+      React.useEffect(function () {
+        if (!isObject(value)) {
+          var lState = {};
+          var _iterator = _createForOfIteratorHelper$1(options),
+            _step;
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var option = _step.value;
+              lState[option.value] = value;
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+          setLocalState(lState);
+        } else {
+          setLocalState(value);
+        }
+      }, []);
+      return React.createElement("div", {
+        className: "wprf-checkbox-wrapper wprf-control"
+      }, React.createElement(Row, null, options.map(function (item) {
+        return React.createElement(Column, {
+          key: item.value,
+          column: styles.column
+        }, React.createElement(GenericCheckbox, _objectSpread$7(_objectSpread$7({}, item), {}, {
+          context: props === null || props === void 0 ? void 0 : props.context,
+          id: item.value,
+          checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
+          type: 'checkbox',
+          onChange: handleChange,
+          style: styles
+        })));
+      })));
+    }
+    return React.createElement(GenericInput, _objectSpread$7(_objectSpread$7({}, props), {}, {
+      type: 'checkbox'
+    }));
+  }
+  var Checkbox$1 = withLabel(Checkbox);
+
+  var Field = function Field(props) {
+    if (!props.type || props.type.length === 0) {
+      console.error(props);
+      throw new Error(i18n.__("Field must have a #type. see documentation.", "notificationx"));
+    }
+    switch (props.type) {
+      case "text":
+      // case "checkbox":
+      case "radio":
+      case "email":
+      case "range":
+      case "number":
+      case "hidden":
+        return React.createElement(Input$1, props);
+      case "checkbox":
+        return React.createElement(Checkbox$1, props);
+      case "textarea":
+        return React.createElement(Textarea$1, props);
+      case "codeviewer":
+        return React.createElement(CodeViewer$1, props);
+      case "copy-to-clipboard":
+        return React.createElement(CopyToClipboard$1, props);
+      case "message":
+        return React.createElement(Message, props);
+      case "select":
+        return React.createElement(Select$1, props);
+      case "checkbox-select":
+        return React.createElement(CheckboxSelect$1, props);
+      case "select-async":
+        return React.createElement(SelectAsync$1, props);
+      case "slider":
+        return React.createElement(Slider, props);
+      case "group":
+        return React.createElement(Group$1, props);
+      case "radio-card":
+        return React.createElement(Radio, props);
+      case "section":
+        return React.createElement(Section$1, props);
+      case "date":
+        return React.createElement(Date$1, props);
+      case "toggle":
+        return React.createElement(Toggle, props);
+      case "colorpicker":
+        return React.createElement(ColorPicker$1, props);
+      case "jsonuploader":
+        return React.createElement(JsonUploader$1, props);
+      case "repeater":
+        return React.createElement(Repeater, props);
+      case "media":
+        return React.createElement(Media$1, props);
+      case "editor":
+        return React.createElement(Editor$1, props);
+      case "action":
+        return React.createElement(Action, props);
+      case "button":
+        return React.createElement(Button$1, props);
+      case "modal":
+        return React.createElement(Modal, props);
+      case "tab":
+        return React.createElement(Tab, props);
+      // case "test":
+      //     return <Test {...props} />;
+      case "responsive-number":
+        return React.createElement(ResponsiveNumber$1, props);
+      default:
+        var customField = hooks.applyFilters("custom_field", "", props.type, props);
+        return React.createElement(React.Fragment, null, customField);
+    }
+  };
+  var GenericField = withProps(Field, true);
+  var Field$1 = withProps(Field);
+
+  var _excluded$2 = ["name", "fields"];
+  var Group = function Group(props) {
+    var fieldName = props.name,
+      fields = props.fields,
+      rest = _objectWithoutProperties(props, _excluded$2);
+    if (!fields || !isArray(fields) || fields.length === 0) {
+      throw new Error(i18n.__('You should give a #fields arguments to a group field.', 'notificationx'));
+    }
+    var builderContext = useBuilderContext();
+    var handleChange = React.useCallback(function (event) {
+      if (event.persist) {
+        event.persist();
+      }
+      var _executeChange = executeChange(event),
+        field = _executeChange.field,
+        value = _executeChange.val;
+      builderContext.setFieldValue([fieldName, field], value);
+    }, [props.value]);
+    var newFields = sortingFields(fields);
+    React.useEffect(function () {
+      builderContext.setFormField([].concat(_toConsumableArray(props.parentIndex), ['fields']), newFields);
+    }, []);
+    var allFields = newFields.map(function (item, index) {
+      var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
+      return React.createElement(GenericField, _extends$1({}, rest, {
+        key: item.name,
+        index: props.index,
+        onChange: handleChange
+      }, item, {
+        parenttype: "group",
+        parent: fieldName,
+        parentIndex: parentIndex
+      }));
+    });
+    var innerClasses = classNames__default["default"]('wprf-group-control-inner', {
+      'wprf-display-inline': (props === null || props === void 0 ? void 0 : props.display) === 'inline'
+    });
+    return React.createElement("div", {
+      className: "wprf-group-control"
+    }, React.createElement("div", {
+      className: innerClasses
+    }, allFields));
+  };
+  var Group$1 = withLabel(Group);
+
+  function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var Input = function Input(props) {
-    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+    var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "copyOnClick", "disable", "parentIndex", "context", "badge", "popup"]);
     var handleChange = React.useCallback(function (event) {
       return validProps.onChange(event, {
         popup: props === null || props === void 0 ? void 0 : props.popup,
@@ -2115,7 +2886,7 @@
         originProps: props
       });
     }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-    if (validProps.type === 'checkbox') {
+    if (validProps.type === "checkbox") {
       if (validProps !== null && validProps !== void 0 && validProps.name) {
         validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
       }
@@ -2139,8 +2910,8 @@
       var copyMessage = (props === null || props === void 0 ? void 0 : props.copyMessage) || "Click To Copy!";
       var copiedMessage = (props === null || props === void 0 ? void 0 : props.copiedMessage) || "Copied!";
       var handleCopy = function handleCopy() {
-        copy__default['default'](props.value, {
-          format: 'text/plain',
+        copy__default["default"](props.value, {
+          format: "text/plain",
           onCopy: function onCopy() {
             setIsCopied(true);
           }
@@ -2148,7 +2919,7 @@
       };
       return React.createElement("span", {
         className: "wprf-clipboard-wrapper"
-      }, /*#__PURE__*/React__default['default'].createElement("input", _objectSpread$8(_objectSpread$8({}, validProps), {}, {
+      }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$6(_objectSpread$6({}, validProps), {}, {
         onChange: handleChange
       })), React.createElement("span", {
         className: "wprf-clipboard-tooltip"
@@ -2161,64 +2932,16 @@
         }
       }, "Copy")));
     }
-    return /*#__PURE__*/React__default['default'].createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
-      onChange: handleChange
+    return /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$6(_objectSpread$6({}, validProps), {}, {
+      onChange: handleChange,
+      disabled: (props === null || props === void 0 ? void 0 : props.is_pro) || false
     }));
   };
   Input.defaultProps = {
-    type: 'text'
+    type: "text"
   };
-  var GenericInput = /*#__PURE__*/React__default['default'].memo(Input);
-  var Input$1 = withLabel( /*#__PURE__*/React__default['default'].memo(Input));
-
-  function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$7(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var Textarea = function Textarea(props) {
-    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
-    var handleChange = React.useCallback(function (event) {
-      return validProps.onChange(event, {
-        isPro: !!props.is_pro
-      });
-    }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-    return /*#__PURE__*/React__default['default'].createElement('textarea', _objectSpread$7(_objectSpread$7({}, validProps), {}, {
-      onChange: handleChange,
-      rows: 5
-    }));
-  };
-  var Textarea$1 = withLabel( /*#__PURE__*/React__default['default'].memo(Textarea));
-
-  function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$6(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var CodeViewer = function CodeViewer(props) {
-    var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
-    var handleChange = React.useCallback(function (event) {
-      return validProps.onChange(event, {
-        isPro: !!props.is_pro
-      });
-    }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-    var extraProps = {
-      onChange: handleChange,
-      rows: 5
-    };
-    if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
-      extraProps["onClick"] = function () {
-        var successText = props !== null && props !== void 0 && props.success_text ? props.success_text : i18n.__("Copied to Clipboard.", "notificationx");
-        copy__default['default'](props.value, {
-          format: 'text/plain',
-          onCopy: function onCopy() {
-            props.context.alerts.toast("success", successText);
-          }
-        });
-      };
-    }
-    var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : i18n.__("Click to Copy", "notificationx");
-    return React.createElement("span", {
-      className: "wprf-code-viewer"
-    }, /*#__PURE__*/React__default['default'].createElement("textarea", _objectSpread$6(_objectSpread$6({}, validProps), extraProps)), React.createElement(components.Button, {
-      className: "wprf-copy-button"
-    }, ButtonText));
-  };
-  var CodeViewer$1 = withLabel( /*#__PURE__*/React__default['default'].memo(CodeViewer));
+  var GenericInput = /*#__PURE__*/React__default["default"].memo(Input);
+  var Input$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Input));
 
   var JsonUploader = function JsonUploader(props) {
     validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
@@ -2287,52 +3010,638 @@
       onClick: removeFile
     }, "x")));
   };
-  var JsonUploader$1 = withLabel( /*#__PURE__*/React__default['default'].memo(JsonUploader));
+  var JsonUploader$1 = withLabel( /*#__PURE__*/React__default["default"].memo(JsonUploader));
 
-  var _excluded$2 = ["name", "fields"];
-  var Group = function Group(props) {
-    var fieldName = props.name,
-      fields = props.fields,
-      rest = _objectWithoutProperties(props, _excluded$2);
-    if (!fields || !isArray(fields) || fields.length === 0) {
-      throw new Error(i18n.__('You should give a #fields arguments to a group field.', 'notificationx'));
+  var Media = function Media(props) {
+    var _props$value;
+    var _useState = React.useState((_props$value = props.value) !== null && _props$value !== void 0 && _props$value.url ? props.value : null),
+      _useState2 = _slicedToArray(_useState, 2),
+      imageData = _useState2[0],
+      setImageData = _useState2[1];
+    React.useEffect(function () {
+      props.onChange({
+        target: {
+          type: "media",
+          name: props.name,
+          value: imageData
+        }
+      });
+    }, [imageData]);
+    return React.createElement("div", {
+      className: "wprf-control wprf-media"
+    }, imageData != null && !(props !== null && props !== void 0 && props.notImage) && React.createElement("div", {
+      className: "wprf-image-preview"
+    }, imageData != null && (imageData === null || imageData === void 0 ? void 0 : imageData.url) && React.createElement("img", {
+      src: imageData.url,
+      alt: imageData.title
+    })), React.createElement("div", {
+      className: "wprf-image-uploader ".concat(imageData != null && !(props !== null && props !== void 0 && props.notImage) ? "uploaded" : "")
+    }, React.createElement(mediaUtils.MediaUpload, {
+      onSelect: function onSelect(media) {
+        setImageData({
+          id: media.id,
+          title: media.title,
+          url: media.url
+        });
+      },
+      multiple: false,
+      allowedTypes: ["image"],
+      value: imageData,
+      render: function render(_ref) {
+        var open = _ref.open;
+        return React.createElement(React.Fragment, null, imageData != null ? React.createElement("div", {
+          className: "wprf_image_overlay"
+        }, React.createElement("button", {
+          className: "wprf-btn wprf-image-change-btn",
+          onClick: open
+        }, React.createElement("i", {
+          className: "btd-icon btd-upload"
+        })), React.createElement("button", {
+          className: "wprf-btn wprf-image-remove-btn",
+          onClick: function onClick() {
+            return setImageData(null);
+          }
+        }, (props === null || props === void 0 ? void 0 : props.remove) || React.createElement("i", {
+          className: "btd-icon btd-delete"
+        }))) : React.createElement("button", {
+          className: "wprf-btn wprf-image-upload-btn",
+          onClick: open
+        }, React.createElement("span", {
+          className: "icon"
+        }, React.createElement("i", {
+          className: "btd-icon btd-upload"
+        })), React.createElement("span", {
+          className: "title"
+        }, "Click to upload"), React.createElement("span", {
+          className: "info"
+        }, "SVG, PNG, JPG or GIF (max. 800x400px)")));
+      }
+    })));
+  };
+  var Media$1 = withLabel(Media);
+
+  var eligibleMessage = function eligibleMessage(props) {
+    if (props !== null && props !== void 0 && props.messages) {
+      for (var msg in props.messages) {
+        var singleMessage = props.messages[msg];
+        if (when(singleMessage.rules, props.context.values)) {
+          return singleMessage;
+        }
+      }
     }
+    return {
+      message: props === null || props === void 0 ? void 0 : props.message,
+      html: props === null || props === void 0 ? void 0 : props.html,
+      type: 'normal'
+    };
+  };
+  var Message = function Message(props) {
+    var _eligibleMessage = eligibleMessage(props),
+      html = _eligibleMessage.html,
+      message = _eligibleMessage.message,
+      _eligibleMessage$type = _eligibleMessage.type,
+      type = _eligibleMessage$type === void 0 ? 'warning' : _eligibleMessage$type;
+    if (!message) {
+      return React.createElement(React.Fragment, null);
+    }
+    return React.createElement("div", {
+      className: classNames__default["default"]('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"), props === null || props === void 0 ? void 0 : props.classes)
+    }, html && React.createElement("p", {
+      dangerouslySetInnerHTML: {
+        __html: message
+      }
+    }), !html && React.createElement("p", null, message));
+  };
+
+  var Modal = function Modal(props) {
+    var _props$body;
+    if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
+      throw new Error(i18n.__('Modal needs button/body with it.', 'notificationx'));
+    }
+    var _useState = React.useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isOpen = _useState2[0],
+      setOpen = _useState2[1];
+    var _useState3 = React.useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isLoading = _useState4[0];
+      _useState4[1];
+    var openModal = function openModal() {
+      return setOpen(true);
+    };
+    var closeModal = function closeModal() {
+      return setOpen(false);
+    };
+    var onConfirm = React.useCallback(function () {}, []);
+    return React.createElement("div", {
+      className: "wprf-control wprf-modal",
+      id: "wprf-modal-".concat(props.name)
+    }, React.createElement(GenericField, _extends$1({
+      type: "button"
+    }, props === null || props === void 0 ? void 0 : props.button, {
+      onClick: openModal
+    })), isOpen && React.createElement(SweetAlert__default["default"], {
+      customClass: "wprf-modal-inner",
+      style: {
+        maxWidth: '900px',
+        width: '100%',
+        overflowY: 'scroll',
+        margin: '50px auto'
+      },
+      closeBtnStyle: {
+        top: '5px',
+        right: '5px',
+        color: '#f78c8c',
+        fontSize: '18px',
+        border: '1px solid #f78c8c',
+        borderRadius: '50%',
+        width: '30px',
+        height: '30px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      title: React.createElement(ModalHeader, {
+        content: props === null || props === void 0 ? void 0 : (_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.header
+      }),
+      onConfirm: onConfirm,
+      showConfirm: false,
+      showCloseButton: true,
+      closeOnClickOutside: true,
+      onCancel: closeModal,
+      afterUpdate: function afterUpdate() {
+        if (props !== null && props !== void 0 && props.cancel) {
+          var _props$context$values;
+          if ((_props$context$values = props.context.values) !== null && _props$context$values !== void 0 && _props$context$values[props.cancel]) {
+            closeModal();
+          }
+        }
+      }
+    }, React.createElement(ModalContent, _extends$1({}, props, {
+      isLoading: isLoading,
+      closeModal: closeModal,
+      context: props.context,
+      onConfirm: onConfirm
+    }))));
+  };
+
+  var _excluded$1 = ["label", "value", "icon", "is_pro"];
+  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var RadioCard = function RadioCard(props) {
     var builderContext = useBuilderContext();
-    var handleChange = React.useCallback(function (event) {
+    var _useOptions = useOptions(props, 'options'),
+      options = _useOptions.options,
+      option = _useOptions.option;
+    if (!options) {
+      throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'notificationx'));
+    }
+    var instanceId = useInstanceId(RadioCard);
+    var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
+    var styles = _objectSpread$5({}, props === null || props === void 0 ? void 0 : props.style);
+    var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
+    React.useEffect(function () {
+      if (option) {
+        props.onChange({
+          target: {
+            type: 'radio-card',
+            name: props.name,
+            value: option
+          }
+        });
+      }
+    }, [option]);
+    return React.createElement("div", {
+      className: componentClasses
+    }, React.createElement(Row, null, options.map(function (_ref, index) {
+      var _ref2;
+      var label = _ref.label,
+        value = _ref.value,
+        icon = _ref.icon,
+        is_pro = _ref.is_pro,
+        rest = _objectWithoutProperties(_ref, _excluded$1);
+      return React.createElement(Column, {
+        column: +(rest === null || rest === void 0 ? void 0 : rest.column) || 4,
+        key: index
+      }, React.createElement("div", {
+        className: classNames__default["default"]("wprf-input-radio-option", {
+          "wprf-option-has-image": icon !== null && icon !== void 0 ? icon : false,
+          "wprf-option-selected": value == option
+        })
+      }, React.createElement(Label, {
+        className: classNames__default["default"](_defineProperty({
+          "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false
+        }, "wprf-size-".concat(styles.size), (_ref2 = icon && (styles === null || styles === void 0 ? void 0 : styles.size)) !== null && _ref2 !== void 0 ? _ref2 : false)),
+        htmlFor: "wprf-input-radio-".concat(instanceId, "-").concat(index),
+        src: icon,
+        badge: {
+          label: is_pro ? 'Pro' : 'Free',
+          value: is_pro,
+          active: Boolean(builderContext.is_pro_active)
+        }
+      }, label), React.createElement(GenericInput, _extends$1({}, rest, validProps, {
+        is_pro: is_pro,
+        type: "radio",
+        value: value,
+        checked: value === option,
+        id: "wprf-input-radio-".concat(instanceId, "-").concat(index)
+      }))));
+    })));
+  };
+  var Radio = withLabel(RadioCard);
+
+  // Unique ID creation requires a high quality random # generator. In the browser we therefore
+  // require the crypto API and do not support built-in fallback to lower quality random number
+  // generators (like Math.random()).
+  var getRandomValues;
+  var rnds8 = new Uint8Array(16);
+  function rng() {
+    // lazy load so that environments that need to polyfill have a chance to do so
+    if (!getRandomValues) {
+      // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation. Also,
+      // find the complete implementation of crypto (msCrypto) on IE11.
+      getRandomValues = typeof crypto !== 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== 'undefined' && typeof msCrypto.getRandomValues === 'function' && msCrypto.getRandomValues.bind(msCrypto);
+
+      if (!getRandomValues) {
+        throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+      }
+    }
+
+    return getRandomValues(rnds8);
+  }
+
+  var REGEX = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
+
+  function validate(uuid) {
+    return typeof uuid === 'string' && REGEX.test(uuid);
+  }
+
+  /**
+   * Convert array of 16 byte values to UUID string format of the form:
+   * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+   */
+
+  var byteToHex = [];
+
+  for (var i = 0; i < 256; ++i) {
+    byteToHex.push((i + 0x100).toString(16).substr(1));
+  }
+
+  function stringify(arr) {
+    var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    // Note: Be careful editing this code!  It's been tuned for performance
+    // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+    var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
+    // of the following:
+    // - One or more input array values don't map to a hex octet (leading to
+    // "undefined" in the uuid)
+    // - Invalid input values for the RFC `version` or `variant` fields
+
+    if (!validate(uuid)) {
+      throw TypeError('Stringified UUID is invalid');
+    }
+
+    return uuid;
+  }
+
+  function v4(options, buf, offset) {
+    options = options || {};
+    var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+    rnds[6] = rnds[6] & 0x0f | 0x40;
+    rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+    if (buf) {
+      offset = offset || 0;
+
+      for (var i = 0; i < 16; ++i) {
+        buf[offset + i] = rnds[i];
+      }
+
+      return buf;
+    }
+
+    return stringify(rnds);
+  }
+
+  function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var Repeater = function Repeater(props) {
+    var _builderContext$value, _builderContext$value4;
+    var fieldName = props.name;
+      props.value;
+      var button = props.button,
+      fields = props.fields;
+    var builderContext = useBuilderContext();
+    var _useState = React.useState((_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[fieldName]),
+      _useState2 = _slicedToArray(_useState, 2),
+      localMemoizedValue = _useState2[0],
+      setLocalMemoizedValue = _useState2[1];
+
+    // const localMemoizedValue = useMemo(() => {
+    //     let localS = builderContext.values?.[fieldName];
+    //     return localS;
+    // }, [builderContext.values?.[fieldName], refresh])
+
+    React.useEffect(function () {
+      var _builderContext$value2;
+      if (((_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[fieldName]) != undefined) {
+        var _builderContext$value3;
+        setLocalMemoizedValue((_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3[fieldName]);
+      }
+    }, [(_builderContext$value4 = builderContext.values) === null || _builderContext$value4 === void 0 ? void 0 : _builderContext$value4[fieldName]]);
+    var handleSort = function handleSort(value) {
+      builderContext.setFieldValue(fieldName, value);
+    };
+    var handleChange = function handleChange(event, index) {
       if (event.persist) {
         event.persist();
       }
       var _executeChange = executeChange(event),
         field = _executeChange.field,
         value = _executeChange.val;
-      builderContext.setFieldValue([fieldName, field], value);
-    }, [props.value]);
-    var newFields = sortingFields(fields);
+      builderContext.setFieldValue([fieldName, index, field], value);
+    };
+    var handleRemove = React.useCallback(function (index) {
+      var lValue = _toConsumableArray(localMemoizedValue);
+      lValue.splice(index, 1);
+      builderContext.setFieldValue(fieldName, lValue);
+    }, [localMemoizedValue]);
+    var handleClone = React.useCallback(function (index) {
+      var lValue = _toConsumableArray(localMemoizedValue);
+      if (lValue.length > 0) {
+        var _indexedCopy, _indexedCopy2, _indexedCopy3, _indexedCopy4;
+        var indexedCopy = (lValue === null || lValue === void 0 ? void 0 : lValue[index]) || {};
+        if ((_indexedCopy = indexedCopy) !== null && _indexedCopy !== void 0 && _indexedCopy.title) {
+          indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+            title: indexedCopy.title + ' - Copy'
+          });
+        }
+        if ((_indexedCopy2 = indexedCopy) !== null && _indexedCopy2 !== void 0 && _indexedCopy2.post_title) {
+          indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+            post_title: indexedCopy.post_title + ' - Copy'
+          });
+        }
+        if ((_indexedCopy3 = indexedCopy) !== null && _indexedCopy3 !== void 0 && _indexedCopy3.username) {
+          indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+            username: indexedCopy.username + ' - Copy'
+          });
+        }
+        if ((_indexedCopy4 = indexedCopy) !== null && _indexedCopy4 !== void 0 && _indexedCopy4.plugin_theme_name) {
+          indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+            plugin_theme_name: indexedCopy.plugin_theme_name + ' - Copy'
+          });
+        }
+        indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+          index: v4(),
+          isCollapsed: false
+        });
+        builderContext.setFieldValue([fieldName, localMemoizedValue.length], indexedCopy);
+      }
+    }, [localMemoizedValue]);
     React.useEffect(function () {
-      builderContext.setFormField([].concat(_toConsumableArray(props.parentIndex), ['fields']), newFields);
+      if (localMemoizedValue == undefined || localMemoizedValue == '') {
+        setLocalMemoizedValue([{
+          index: v4()
+        }]);
+      } else {
+        setLocalMemoizedValue(function (items) {
+          return items.map(function (item) {
+            return _objectSpread$4(_objectSpread$4({}, item), {}, {
+              index: v4()
+            });
+          });
+        });
+      }
     }, []);
-    var allFields = newFields.map(function (item, index) {
-      var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
-      return React.createElement(GenericField, _extends$1({}, rest, {
-        key: item.name,
-        index: props.index,
-        onChange: handleChange
-      }, item, {
-        parenttype: "group",
+    return React.createElement("div", {
+      className: "wprf-repeater-control"
+    }, localMemoizedValue && (localMemoizedValue === null || localMemoizedValue === void 0 ? void 0 : localMemoizedValue.length) > 0 && React.createElement(reactSortablejs.ReactSortable, {
+      className: "wprf-repeater-content",
+      list: localMemoizedValue,
+      setList: handleSort,
+      handle: '.wprf-repeater-field-title',
+      filter: '.wprf-repeater-field-controls',
+      forceFallback: true
+    }, localMemoizedValue.map(function (value, index) {
+      return React.createElement(RepeaterField, {
+        isCollapsed: value === null || value === void 0 ? void 0 : value.isCollapsed,
+        key: (value === null || value === void 0 ? void 0 : value.index) || index,
+        fields: fields,
+        index: index,
         parent: fieldName,
-        parentIndex: parentIndex
+        clone: handleClone,
+        remove: handleRemove,
+        onChange: function onChange(event) {
+          return handleChange(event, index);
+        }
+      });
+    })), React.createElement("div", {
+      className: "wprf-repeater-label"
+    }, React.createElement("button", {
+      className: "wprf-repeater-button",
+      onClick: function onClick() {
+        return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [{
+          index: v4()
+        }]));
+      }
+    }, button === null || button === void 0 ? void 0 : button.label)));
+  };
+
+  function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var ResponsiveNumber = function ResponsiveNumber(props) {
+    var _Object$keys;
+    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
+    var _useState = React.useState(Object.keys(props.controls)[0]),
+      _useState2 = _slicedToArray(_useState, 2),
+      responsive = _useState2[0],
+      setResponsive = _useState2[1];
+
+    // backward compatibility
+    var value = validProps.value;
+    if (!isObject(validProps.value)) {
+      Object.keys(props.controls).reduce(function (acc, key) {
+        return _objectSpread$3(_objectSpread$3({}, acc), {}, _defineProperty({}, key, validProps.value));
+      }, {});
+    }
+    var _useState3 = React.useState(value),
+      _useState4 = _slicedToArray(_useState3, 2),
+      responsiveSize = _useState4[0],
+      setResponsiveSize = _useState4[1];
+    var handleChange = function handleChange(event) {
+      setResponsiveSize(_objectSpread$3(_objectSpread$3({}, responsiveSize), {}, _defineProperty({}, responsive, event.target.value)));
+    };
+    React.useEffect(function () {
+      validProps.onChange({
+        target: {
+          type: 'input',
+          name: validProps.name,
+          value: responsiveSize,
+          checked: null,
+          multiple: null
+        }
+      });
+    }, [responsiveSize]);
+    return React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        rowGap: 5,
+        columnGap: 10,
+        flexWrap: "wrap"
+      }
+    }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$3(_objectSpread$3({}, validProps), {}, {
+      type: "number",
+      value: responsiveSize === null || responsiveSize === void 0 ? void 0 : responsiveSize[responsive],
+      onChange: handleChange
+    })), React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center"
+      }
+    }, (_Object$keys = Object.keys(props.controls)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (key) {
+      return React.createElement("button", {
+        type: "button",
+        key: key,
+        className: "responsive-button ".concat(responsive === key ? "active" : ""),
+        onClick: function onClick() {
+          return setResponsive(key);
+        }
+      }, React.createElement("img", {
+        src: props.controls[key].icon,
+        alt: "desktop",
+        style: {
+          width: props.controls[key].size
+        }
       }));
-    });
-    var innerClasses = classNames__default['default']('wprf-group-control-inner', {
-      'wprf-display-inline': (props === null || props === void 0 ? void 0 : props.display) === 'inline'
+    })));
+  };
+  ResponsiveNumber.defaultProps = {
+    type: "number"
+  };
+  var ResponsiveNumber$1 = withLabel( /*#__PURE__*/React__default["default"].memo(ResponsiveNumber));
+
+  function _objectDestructuringEmpty(obj) {
+    if (obj == null) throw new TypeError("Cannot destructure " + obj);
+  }
+
+  var Submit = function Submit(_ref) {
+    var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
+    var context = useBuilderContext();
+    var label = (props === null || props === void 0 ? void 0 : props.label) || i18n.__('Save Changes', 'notificationx');
+    if (context.isSubmitting) {
+      var _props$loadingLabel;
+      label = (_props$loadingLabel = props === null || props === void 0 ? void 0 : props.loadingLabel) !== null && _props$loadingLabel !== void 0 ? _props$loadingLabel : 'Saving...';
+    }
+    var handleSubmit = React.useCallback(function (event) {
+      var _context$submit;
+      if ((_context$submit = context.submit) !== null && _context$submit !== void 0 && _context$submit.onSubmit) {
+        context.submit.onSubmit(event, context);
+        return;
+      }
+    }, [context]);
+    return React.createElement("div", {
+      className: "wprf-submit wprf-control"
+    }, React.createElement(components.Button, {
+      disabled: context === null || context === void 0 ? void 0 : context.isSubmitting,
+      className: "wprf-submit-button",
+      onClick: handleSubmit
+    }, label));
+  };
+
+  var Section = function Section(props) {
+    var _props$collapsed;
+    var _props$searchable = props.searchable,
+      searchable = _props$searchable === void 0 ? false : _props$searchable,
+      _props$searchPlacehol = props.searchPlaceholder,
+      searchPlaceholder = _props$searchPlacehol === void 0 ? "Search..." : _props$searchPlacehol;
+    var builderContext = useBuilderContext();
+    var _useState = React.useState((_props$collapsed = props.collapsed) !== null && _props$collapsed !== void 0 ? _props$collapsed : false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isCollapse = _useState2[0],
+      setCollapse = _useState2[1];
+    var _useState3 = React.useState([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      fields = _useState4[0],
+      setFields = _useState4[1];
+    var _useState5 = React.useState([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      filteredFields = _useState6[0],
+      setFilteredFields = _useState6[1];
+    var _useState7 = React.useState(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      searchString = _useState8[0],
+      setSearchString = _useState8[1];
+    React.useEffect(function () {
+      var newFields = sortingFields(props.fields);
+      /**
+       * FIXME: the line below the doc:
+       * Commented for Issue#11, Cycle 7
+       * Uncommented for Issue #38, Cycle 7
+       */
+      builderContext.setFormField([].concat(_toConsumableArray(props.parentIndex), ["fields"]), newFields);
+      // builderContext.setFormField([...props.parentIndex, 'sorted'], true);
+      var allFields = newFields.map(function (item, index) {
+        var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ["fields", index]);
+        return React.createElement(Field$1, _extends$1({
+          key: item.name
+        }, item, {
+          parentIndex: parentIndex
+        }));
+      });
+      setFields(allFields);
+      setFilteredFields(allFields);
+    }, []);
+    var handleSearchString = function handleSearchString(e) {
+      var _e$target;
+      setSearchString(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
+    };
+    React.useEffect(function () {
+      if (searchString) {
+        var newFields = fields.filter(function (field) {
+          var _field$props, _field$props$label, _field$props$label$to;
+          return field === null || field === void 0 ? void 0 : (_field$props = field.props) === null || _field$props === void 0 ? void 0 : (_field$props$label = _field$props.label) === null || _field$props$label === void 0 ? void 0 : (_field$props$label$to = _field$props$label.toLowerCase()) === null || _field$props$label$to === void 0 ? void 0 : _field$props$label$to.includes(searchString.toLowerCase());
+        });
+        setFilteredFields(newFields);
+      } else {
+        setFilteredFields(fields);
+      }
+    }, [searchString, fields]);
+    var componentClasses = classNames__default["default"]("wprf-control-section", props === null || props === void 0 ? void 0 : props.classes, props === null || props === void 0 ? void 0 : props.name, {
+      "wprf-section-collapsed": (props === null || props === void 0 ? void 0 : props.collapsible) && isCollapse
     });
     return React.createElement("div", {
-      className: "wprf-group-control"
+      id: props === null || props === void 0 ? void 0 : props.name,
+      className: componentClasses
+    }, props.placeholder && React.createElement("div", {
+      className: "wprf-section-title"
+    }, React.createElement("h4", null, props.placeholder), props.collapsible && React.createElement("button", {
+      onClick: function onClick() {
+        return setCollapse(!isCollapse);
+      }
+    }, "Icon")), searchable ? React.createElement("div", {
+      className: "wprf-section-fields"
     }, React.createElement("div", {
-      className: innerClasses
-    }, allFields));
+      className: "wprf-section-search-form"
+    }, React.createElement("span", {
+      className: "wprf-section-search"
+    }, React.createElement("input", {
+      type: "text",
+      name: "",
+      id: "",
+      placeholder: searchPlaceholder,
+      onChange: function onChange(e) {
+        return handleSearchString(e);
+      },
+      value: searchString
+    }))), React.createElement("div", {
+      className: "wprf-section-search-results"
+    }, filteredFields)) : React.createElement("div", {
+      className: "wprf-section-fields"
+    }, filteredFields), props.showSubmit && React.createElement(Submit, builderContext.submit));
   };
-  var Group$1 = withLabel(Group);
+  var Section$1 = /*#__PURE__*/React__default["default"].memo(Section);
 
   var Select = function Select(props) {
     var builderContext = useBuilderContext();
@@ -2452,8 +3761,9 @@
     }, [name, id, parentIndex]);
     return React.createElement("div", {
       className: "wprf-select-wrapper"
-    }, React.createElement(ReactSelect__default['default'], {
+    }, React.createElement(ReactSelect__default["default"], {
       isDisabled: props === null || props === void 0 ? void 0 : props.disable,
+      className: "wprf-select",
       classNamePrefix: "wprf-select",
       isSearchable: search !== null && search !== void 0 ? search : false,
       id: id,
@@ -2473,667 +3783,6 @@
   };
 
   var Select$1 = withLabel(Select);
-
-  /**
-   * WordPress dependencies
-   */
-  const instanceMap = new WeakMap();
-  /**
-   * Creates a new id for a given object.
-   *
-   * @param  object Object reference to create an id for.
-   * @return The instance id (index).
-   */
-
-  function createId(object) {
-    const instances = instanceMap.get(object) || 0;
-    instanceMap.set(object, instances + 1);
-    return instances;
-  }
-  /**
-   * Specify the useInstanceId *function* signatures.
-   *
-   * More accurately, useInstanceId distinguishes between three different
-   * signatures:
-   *
-   * 1. When only object is given, the returned value is a number
-   * 2. When object and prefix is given, the returned value is a string
-   * 3. When preferredId is given, the returned value is the type of preferredId
-   */
-
-
-  /**
-   * Provides a unique instance ID.
-   *
-   * @param  object        Object reference to create an id for.
-   * @param  [prefix]      Prefix for the unique id.
-   * @param  [preferredId] Default ID to use.
-   * @return The unique instance id.
-   */
-  function useInstanceId(object, prefix, preferredId) {
-    return React.useMemo(() => {
-      if (preferredId) return preferredId;
-      const id = createId(object);
-      return prefix ? `${prefix}-${id}` : id;
-    }, [object]);
-  }
-
-  var RepeaterField = function RepeaterField(props) {
-    var _builderContext$value, _builderContext$value2;
-    var builderContext = useBuilderContext();
-    var fields = props.fields,
-      _onChange = props.onChange,
-      index = props.index,
-      parent = props.parent;
-    var _useState = React.useState(props.isCollapsed),
-      _useState2 = _slicedToArray(_useState, 2),
-      isCollapsed = _useState2[0],
-      setIsCollapsed = _useState2[1];
-    var instanceId = useInstanceId(RepeaterField);
-    // onClick={() => setIsCollapse(!isCollapse)}
-    var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : (_builderContext$value2 = _builderContext$value[parent]) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[index];
-    var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
-    var _title = title ? title.length < 40 ? title : title.substr(0, 40) + "..." : '';
-    var onClone = function onClone(event) {
-      event === null || event === void 0 ? void 0 : event.stopPropagation();
-      props.clone(props.index);
-    };
-    var onDelete = function onDelete(event) {
-      event === null || event === void 0 ? void 0 : event.stopPropagation();
-      props.remove(props.index);
-    };
-    React.useEffect(function () {
-      builderContext.setFieldValue([parent, index, 'isCollapsed'], isCollapsed);
-    }, [isCollapsed]);
-    return React.createElement("div", {
-      className: "wprf-repeater-field"
-    }, React.createElement("div", {
-      className: "wprf-repeater-field-title",
-      onClick: function onClick() {
-        return setIsCollapsed(!isCollapsed);
-      }
-    }, React.createElement("h4", null, React.createElement(components.Icon, {
-      icon: "move"
-    }), props.index + 1, ": ", _title), React.createElement("div", {
-      className: "wprf-repeater-field-controls"
-    }, React.createElement(components.Icon, {
-      onClick: onClone,
-      icon: "admin-page"
-    }), React.createElement(components.Icon, {
-      onClick: onDelete,
-      icon: "trash"
-    }))), !isCollapsed && React.createElement("div", {
-      className: "wprf-repeater-inner-field"
-    }, fields.map(function (field, fieldIndex) {
-      return React.createElement(GenericField, _extends$1({
-        key: "field-".concat(index, "-").concat(fieldIndex)
-      }, field, {
-        id: "field-".concat(instanceId, "-").concat(index, "-").concat(fieldIndex),
-        index: index,
-        parenttype: "repeater",
-        parent: parent,
-        onChange: function onChange(event) {
-          return _onChange(event, index);
-        }
-      }));
-    })));
-  };
-
-  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$5(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var GenericToggle = function GenericToggle(props) {
-    var _styles$label, _styles$label2, _classNames;
-    var prevStyles = props.style;
-    var styles = _objectSpread$5({
-      type: "",
-      // card
-      label: {
-        position: "right"
-      },
-      column: 4
-    }, prevStyles);
-    var isChecked = React.useMemo(function () {
-      var _isChecked = false;
-      if (props !== null && props !== void 0 && props.checked && isObject(props.checked) && isString(props === null || props === void 0 ? void 0 : props.value)) {
-        _isChecked = props.checked[props.value];
-      } else {
-        if (!isString(props.value)) {
-          _isChecked = props.value;
-        }
-      }
-      return _isChecked;
-    }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-    var componentClasses = classNames__default['default']("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 ? void 0 : (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 ? void 0 : (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
-    return React.createElement("div", {
-      className: componentClasses
-    }, React.createElement(GenericInput, _objectSpread$5(_objectSpread$5({}, props), {}, {
-      type: 'checkbox',
-      placeholder: undefined
-    })), React.createElement(Label, {
-      htmlFor: props.id
-    }));
-  };
-  var GenericToggle$1 = withLabel(GenericToggle);
-
-  var ModalContent = function ModalContent(props) {
-    var _props$body;
-    var isLoading = props.isLoading;
-      props.closeModal;
-    var _useState = React.useState([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      fields = _useState2[0],
-      setFields = _useState2[1];
-    React.useEffect(function () {
-      var newFields = sortingFields(props.body.fields);
-      // context.setFormField([...props.parentIndex, 'fields'], newFields);
-      var allFields = newFields.map(function (item, index) {
-        var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
-        return React.createElement(Field$1, _extends$1({
-          key: item.name
-        }, item, {
-          parentIndex: parentIndex
-        }));
-      });
-      setFields(allFields);
-    }, []);
-    return React.createElement("div", {
-      className: "wprf-modal-body"
-    }, isLoading && React.createElement(Loading, null), !isLoading && React.createElement(React.Fragment, null, React.createElement("div", {
-      className: "wprf-modal-content"
-    }, fields.length > 0 && fields), React.createElement("div", {
-      className: "wprf-modal-footer clearfix"
-    }, React.createElement("div", {
-      className: "wprf-modal-footer-left"
-    }, ((_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.footer) && isString(props.body.footer) && React.createElement("p", null, props.body.footer), React.createElement(GenericField, _extends$1({
-      type: "button"
-    }, props === null || props === void 0 ? void 0 : props.confirm_button))))));
-  };
-
-  var ModalHeader = function ModalHeader(_ref) {
-    var content = _ref.content;
-    return React.createElement("div", {
-      className: "wprf-modal-header"
-    }, content && isString(content) && React.createElement("h3", null, content));
-  };
-
-  var Loading = function Loading(props) {
-    return React.createElement("p", null, i18n.__('Loading...', 'notificationx'));
-  };
-
-  var toolbarOptions = {
-    options: ['inline', 'blockType', 'textAlign', 'colorPicker', 'link'],
-    inline: {
-      options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace']
-    },
-    blockType: {
-      inDropdown: true,
-      options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
-      className: undefined,
-      component: undefined,
-      dropdownClassName: undefined
-    }
-  };
-
-  function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-  function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-  function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-  function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var Toggle = function Toggle(props) {
-    var passedOptions = props.options,
-      value = props.value,
-      multiple = props.multiple,
-      prevStyles = props.style;
-    var options = sortingFields(passedOptions);
-    var styles = _objectSpread$4({
-      column: 4
-    }, prevStyles);
-    if (multiple) {
-      var _useState = React.useState({}),
-        _useState2 = _slicedToArray(_useState, 2),
-        localState = _useState2[0],
-        setLocalState = _useState2[1];
-      var handleChange = function handleChange(event) {
-        var target = event.target ? event.target : event.currentTarget;
-        setLocalState(function (prevState) {
-          return _objectSpread$4(_objectSpread$4({}, prevState), {}, _defineProperty({}, target.value, target.checked));
-        });
-      };
-      React.useEffect(function () {
-        props.onChange({
-          target: {
-            type: 'toggle',
-            name: props.name,
-            value: localState
-          }
-        });
-      }, [localState]);
-      React.useEffect(function () {
-        if (!isObject(value)) {
-          var lState = {};
-          var _iterator = _createForOfIteratorHelper(options),
-            _step;
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var option = _step.value;
-              lState[option.value] = value;
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-          setLocalState(lState);
-        } else {
-          setLocalState(value);
-        }
-      }, []);
-      return React.createElement("div", {
-        className: "wprf-toggle-wrapper wprf-control"
-      }, React.createElement(Row, null, options.map(function (item) {
-        return React.createElement(Column, {
-          key: item.value,
-          column: styles.column
-        }, React.createElement(GenericToggle$1, _objectSpread$4(_objectSpread$4({}, item), {}, {
-          context: props === null || props === void 0 ? void 0 : props.context,
-          id: item.value,
-          checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
-          type: 'checkbox',
-          onChange: handleChange,
-          style: styles
-        })));
-      })));
-    }
-    return React.createElement(GenericToggle$1, props);
-  };
-
-  var _excluded$1 = ["label", "value", "icon", "is_pro"];
-  function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var RadioCard = function RadioCard(props) {
-    var builderContext = useBuilderContext();
-    var _useOptions = useOptions(props, 'options'),
-      options = _useOptions.options,
-      option = _useOptions.option;
-    if (!options) {
-      throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'notificationx'));
-    }
-    var instanceId = useInstanceId(RadioCard);
-    var componentClasses = classNames__default['default'](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
-    var styles = _objectSpread$3({}, props === null || props === void 0 ? void 0 : props.style);
-    var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
-    React.useEffect(function () {
-      if (option) {
-        props.onChange({
-          target: {
-            type: 'radio-card',
-            name: props.name,
-            value: option
-          }
-        });
-      }
-    }, [option]);
-    return React.createElement("div", {
-      className: componentClasses
-    }, React.createElement(Row, null, options.map(function (_ref, index) {
-      var _ref2;
-      var label = _ref.label,
-        value = _ref.value,
-        icon = _ref.icon,
-        is_pro = _ref.is_pro,
-        rest = _objectWithoutProperties(_ref, _excluded$1);
-      return React.createElement(Column, {
-        column: +(rest === null || rest === void 0 ? void 0 : rest.column) || 4,
-        key: index
-      }, React.createElement("div", {
-        className: classNames__default['default']("wprf-input-radio-option", {
-          "wprf-option-has-image": icon !== null && icon !== void 0 ? icon : false,
-          "wprf-option-selected": value == option
-        })
-      }, React.createElement(Label, {
-        className: classNames__default['default'](_defineProperty({
-          "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false
-        }, "wprf-size-".concat(styles.size), (_ref2 = icon && (styles === null || styles === void 0 ? void 0 : styles.size)) !== null && _ref2 !== void 0 ? _ref2 : false)),
-        htmlFor: "wprf-input-radio-".concat(instanceId, "-").concat(index),
-        src: icon,
-        badge: {
-          label: is_pro ? 'Pro' : 'Free',
-          value: is_pro,
-          active: Boolean(builderContext.is_pro_active)
-        }
-      }, label), React.createElement(GenericInput, _extends$1({}, rest, validProps, {
-        is_pro: is_pro,
-        type: "radio",
-        value: value,
-        checked: value === option,
-        id: "wprf-input-radio-".concat(instanceId, "-").concat(index)
-      }))));
-    })));
-  };
-  var Radio = withLabel(RadioCard);
-
-  var Section = function Section(props) {
-    var _props$collapsed;
-    var builderContext = useBuilderContext();
-    var _useState = React.useState((_props$collapsed = props.collapsed) !== null && _props$collapsed !== void 0 ? _props$collapsed : false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isCollapse = _useState2[0],
-      setCollapse = _useState2[1];
-    var _useState3 = React.useState([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      fields = _useState4[0],
-      setFields = _useState4[1];
-    React.useEffect(function () {
-      var newFields = sortingFields(props.fields);
-      /**
-       * FIXME: the line below the doc:
-       * Commented for Issue#11, Cycle 7
-       * Uncommented for Issue #38, Cycle 7
-       */
-      builderContext.setFormField([].concat(_toConsumableArray(props.parentIndex), ['fields']), newFields);
-      // builderContext.setFormField([...props.parentIndex, 'sorted'], true);
-      var allFields = newFields.map(function (item, index) {
-        var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
-        return React.createElement(Field$1, _extends$1({
-          key: item.name
-        }, item, {
-          parentIndex: parentIndex
-        }));
-      });
-      setFields(allFields);
-    }, []);
-    var componentClasses = classNames__default['default']('wprf-control-section', props === null || props === void 0 ? void 0 : props.classes, props === null || props === void 0 ? void 0 : props.name, {
-      'wprf-section-collapsed': (props === null || props === void 0 ? void 0 : props.collapsible) && isCollapse
-    });
-    return React.createElement("div", {
-      id: props === null || props === void 0 ? void 0 : props.name,
-      className: componentClasses
-    }, props.placeholder && React.createElement("div", {
-      className: "wprf-section-title"
-    }, React.createElement("h4", null, props.placeholder), props.collapsible && React.createElement("button", {
-      onClick: function onClick() {
-        return setCollapse(!isCollapse);
-      }
-    }, "Icon")), React.createElement("div", {
-      className: "wprf-section-fields"
-    }, fields));
-  };
-  var Section$1 = /*#__PURE__*/React__default['default'].memo(Section);
-
-  // Unique ID creation requires a high quality random # generator. In the browser we therefore
-  // require the crypto API and do not support built-in fallback to lower quality random number
-  // generators (like Math.random()).
-  var getRandomValues;
-  var rnds8 = new Uint8Array(16);
-  function rng() {
-    // lazy load so that environments that need to polyfill have a chance to do so
-    if (!getRandomValues) {
-      // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation. Also,
-      // find the complete implementation of crypto (msCrypto) on IE11.
-      getRandomValues = typeof crypto !== 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== 'undefined' && typeof msCrypto.getRandomValues === 'function' && msCrypto.getRandomValues.bind(msCrypto);
-
-      if (!getRandomValues) {
-        throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
-      }
-    }
-
-    return getRandomValues(rnds8);
-  }
-
-  var REGEX = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
-
-  function validate(uuid) {
-    return typeof uuid === 'string' && REGEX.test(uuid);
-  }
-
-  /**
-   * Convert array of 16 byte values to UUID string format of the form:
-   * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-   */
-
-  var byteToHex = [];
-
-  for (var i = 0; i < 256; ++i) {
-    byteToHex.push((i + 0x100).toString(16).substr(1));
-  }
-
-  function stringify(arr) {
-    var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    // Note: Be careful editing this code!  It's been tuned for performance
-    // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
-    var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
-    // of the following:
-    // - One or more input array values don't map to a hex octet (leading to
-    // "undefined" in the uuid)
-    // - Invalid input values for the RFC `version` or `variant` fields
-
-    if (!validate(uuid)) {
-      throw TypeError('Stringified UUID is invalid');
-    }
-
-    return uuid;
-  }
-
-  function v4(options, buf, offset) {
-    options = options || {};
-    var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-
-    rnds[6] = rnds[6] & 0x0f | 0x40;
-    rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
-
-    if (buf) {
-      offset = offset || 0;
-
-      for (var i = 0; i < 16; ++i) {
-        buf[offset + i] = rnds[i];
-      }
-
-      return buf;
-    }
-
-    return stringify(rnds);
-  }
-
-  function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var Repeater = function Repeater(props) {
-    var _builderContext$value, _builderContext$value4;
-    var fieldName = props.name;
-      props.value;
-      var button = props.button,
-      fields = props.fields;
-    var builderContext = useBuilderContext();
-    var _useState = React.useState((_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[fieldName]),
-      _useState2 = _slicedToArray(_useState, 2),
-      localMemoizedValue = _useState2[0],
-      setLocalMemoizedValue = _useState2[1];
-
-    // const localMemoizedValue = useMemo(() => {
-    //     let localS = builderContext.values?.[fieldName];
-    //     return localS;
-    // }, [builderContext.values?.[fieldName], refresh])
-
-    React.useEffect(function () {
-      var _builderContext$value2;
-      if (((_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2[fieldName]) != undefined) {
-        var _builderContext$value3;
-        setLocalMemoizedValue((_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3[fieldName]);
-      }
-    }, [(_builderContext$value4 = builderContext.values) === null || _builderContext$value4 === void 0 ? void 0 : _builderContext$value4[fieldName]]);
-    var handleSort = function handleSort(value) {
-      builderContext.setFieldValue(fieldName, value);
-    };
-    var handleChange = function handleChange(event, index) {
-      if (event.persist) {
-        event.persist();
-      }
-      var _executeChange = executeChange(event),
-        field = _executeChange.field,
-        value = _executeChange.val;
-      builderContext.setFieldValue([fieldName, index, field], value);
-    };
-    var handleRemove = React.useCallback(function (index) {
-      var lValue = _toConsumableArray(localMemoizedValue);
-      lValue.splice(index, 1);
-      builderContext.setFieldValue(fieldName, lValue);
-    }, [localMemoizedValue]);
-    var handleClone = React.useCallback(function (index) {
-      var lValue = _toConsumableArray(localMemoizedValue);
-      if (lValue.length > 0) {
-        var _indexedCopy, _indexedCopy2, _indexedCopy3, _indexedCopy4;
-        var indexedCopy = (lValue === null || lValue === void 0 ? void 0 : lValue[index]) || {};
-        if ((_indexedCopy = indexedCopy) !== null && _indexedCopy !== void 0 && _indexedCopy.title) {
-          indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
-            title: indexedCopy.title + ' - Copy'
-          });
-        }
-        if ((_indexedCopy2 = indexedCopy) !== null && _indexedCopy2 !== void 0 && _indexedCopy2.post_title) {
-          indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
-            post_title: indexedCopy.post_title + ' - Copy'
-          });
-        }
-        if ((_indexedCopy3 = indexedCopy) !== null && _indexedCopy3 !== void 0 && _indexedCopy3.username) {
-          indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
-            username: indexedCopy.username + ' - Copy'
-          });
-        }
-        if ((_indexedCopy4 = indexedCopy) !== null && _indexedCopy4 !== void 0 && _indexedCopy4.plugin_theme_name) {
-          indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
-            plugin_theme_name: indexedCopy.plugin_theme_name + ' - Copy'
-          });
-        }
-        indexedCopy = _objectSpread$2(_objectSpread$2({}, indexedCopy), {}, {
-          index: v4(),
-          isCollapsed: false
-        });
-        builderContext.setFieldValue([fieldName, localMemoizedValue.length], indexedCopy);
-      }
-    }, [localMemoizedValue]);
-    React.useEffect(function () {
-      if (localMemoizedValue == undefined || localMemoizedValue == '') {
-        setLocalMemoizedValue([{
-          index: v4()
-        }]);
-      } else {
-        setLocalMemoizedValue(function (items) {
-          return items.map(function (item) {
-            return _objectSpread$2(_objectSpread$2({}, item), {}, {
-              index: v4()
-            });
-          });
-        });
-      }
-    }, []);
-    return React.createElement("div", {
-      className: "wprf-repeater-control"
-    }, localMemoizedValue && (localMemoizedValue === null || localMemoizedValue === void 0 ? void 0 : localMemoizedValue.length) > 0 && React.createElement(reactSortablejs.ReactSortable, {
-      className: "wprf-repeater-content",
-      list: localMemoizedValue,
-      setList: handleSort,
-      handle: '.wprf-repeater-field-title',
-      filter: '.wprf-repeater-field-controls',
-      forceFallback: true
-    }, localMemoizedValue.map(function (value, index) {
-      return React.createElement(RepeaterField, {
-        isCollapsed: value === null || value === void 0 ? void 0 : value.isCollapsed,
-        key: (value === null || value === void 0 ? void 0 : value.index) || index,
-        fields: fields,
-        index: index,
-        parent: fieldName,
-        clone: handleClone,
-        remove: handleRemove,
-        onChange: function onChange(event) {
-          return handleChange(event, index);
-        }
-      });
-    })), React.createElement("div", {
-      className: "wprf-repeater-label"
-    }, React.createElement("button", {
-      className: "wprf-repeater-button",
-      onClick: function onClick() {
-        return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [{
-          index: v4()
-        }]));
-      }
-    }, button === null || button === void 0 ? void 0 : button.label)));
-  };
-
-  var Slider = function Slider(props) {
-    var name = props.name,
-      id = props.id,
-      label = props.label,
-      units = props.units,
-      value = props.value,
-      min = props.min,
-      max = props.max,
-      unit = props.unit;
-      props.tooltip;
-      var reset = props.reset;
-    var _useState = React.useState(value || 0),
-      _useState2 = _slicedToArray(_useState, 2),
-      isValue = _useState2[0],
-      setValue = _useState2[1];
-    var _useState3 = React.useState(unit),
-      _useState4 = _slicedToArray(_useState3, 2),
-      sunit = _useState4[0],
-      setSunit = _useState4[1];
-    React.useEffect(function () {
-      if (isValue) {
-        var finalValue;
-        if (isNumber(isValue)) {
-          if (sunit) {
-            finalValue = "".concat(isValue).concat(sunit);
-          } else {
-            finalValue = "".concat(isValue);
-          }
-        } else if (isString(isValue)) {
-          if (!(isValue.indexOf(sunit) > -1)) {
-            finalValue = "".concat(isValue).concat(sunit);
-          } else {
-            finalValue = "".concat(isValue);
-          }
-        }
-        props.onChange({
-          target: {
-            type: 'slider',
-            name: name,
-            value: finalValue
-          }
-        });
-      }
-    }, [isValue, sunit]);
-    return React.createElement("div", {
-      className: "wprf-slider-wrap"
-    }, React.createElement("div", {
-      className: "wprf-slider-control-head"
-    }, React.createElement(Label, {
-      htmlFor: id || name
-    }, label), isArray(units) && units.length > 0 && React.createElement("div", {
-      className: "wprf-slider-units"
-    }, units.map(function (unit, index) {
-      return React.createElement(components.Button, {
-        key: index,
-        isSmall: true,
-        isPrimary: true,
-        onClick: function onClick() {
-          return setSunit(unit);
-        },
-        className: unit == sunit ? "unit-active" : ""
-      }, unit);
-    }))), React.createElement("div", {
-      className: "wprf-slider-control"
-    }, React.createElement(components.RangeControl, {
-      allowReset: reset !== null && reset !== void 0 ? reset : true,
-      value: parseInt(isValue),
-      min: min,
-      max: max
-      // showTooltip={tooltip ?? false}
-      ,
-      onChange: function onChange(value) {
-        return setValue(value);
-      }
-    })));
-  };
 
   var SelectAsync = function SelectAsync(props) {
     var builderContext = useBuilderContext();
@@ -3233,7 +3882,7 @@
     }, [sOption]);
     return React.createElement("div", {
       className: "wprf-async-select-wrapper"
-    }, React.createElement(AsyncSelect__default['default'], {
+    }, React.createElement(AsyncSelect__default["default"], {
       cacheOptions: true,
       loadOptions: handleMenuOpen,
       defaultOptions: options,
@@ -3255,7 +3904,7 @@
             var regX = new RegExp("(".concat(meta === null || meta === void 0 ? void 0 : meta.inputValue, ")"), "gi");
             var _name = (_option$name = option.name) === null || _option$name === void 0 ? void 0 : _option$name.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
             var address = (_option$address = option.address) === null || _option$address === void 0 ? void 0 : _option$address.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
-            return React.createElement(React.Fragment, null, parse__default['default'](_name || ""), " ", React.createElement("small", null, parse__default['default'](address || "")));
+            return React.createElement(React.Fragment, null, parse__default["default"](_name || ""), " ", React.createElement("small", null, parse__default["default"](address || "")));
           }
         }
         return React.createElement(React.Fragment, null, option.name ? React.createElement(React.Fragment, null, React.createElement("b", null, option.name), " ") : React.createElement(React.Fragment, null, option.label, " "), option.address && React.createElement("small", null, option.address));
@@ -3273,439 +3922,170 @@
 
   var SelectAsync$1 = withLabel(SelectAsync);
 
-  var ColorPicker = function ColorPicker(props) {
-    var value = props.value,
-      name = props.name,
+  var Slider = function Slider(props) {
+    var name = props.name,
       id = props.id,
-      onChange = props.onChange;
-    var _useState = React.useState(false),
+      label = props.label,
+      units = props.units,
+      value = props.value,
+      min = props.min,
+      max = props.max,
+      unit = props.unit;
+      props.tooltip;
+      var reset = props.reset;
+    var _useState = React.useState(value || 0),
       _useState2 = _slicedToArray(_useState, 2),
-      showPicker = _useState2[0],
-      setShowPicker = _useState2[1];
-    var _useState3 = React.useState(value || null),
+      isValue = _useState2[0],
+      setValue = _useState2[1];
+    var _useState3 = React.useState(unit),
       _useState4 = _slicedToArray(_useState3, 2),
-      color = _useState4[0],
-      setColor = _useState4[1];
-    var _useState5 = React.useState(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      defaultColor = _useState6[0],
-      setDefaultColor = _useState6[1];
-    var closeRef = React.useRef(null);
+      sunit = _useState4[0],
+      setSunit = _useState4[1];
     React.useEffect(function () {
-      setDefaultColor(value);
-    }, []);
-    var handleCloseRef = function handleCloseRef(ref) {
-      React.useEffect(function () {
-        var handleClickOutside = function handleClickOutside(ev) {
-          if (ref.current && !ref.current.contains(ev.target)) {
-            setShowPicker(false);
+      if (isValue) {
+        var finalValue;
+        if (isNumber(isValue)) {
+          if (sunit) {
+            finalValue = "".concat(isValue).concat(sunit);
+          } else {
+            finalValue = "".concat(isValue);
           }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return function () {
-          document.removeEventListener("mousedown", handleClickOutside);
-        };
-      }, [ref]);
-    };
-    React.useEffect(function () {
-      onChange({
-        target: {
-          type: 'colorpicker',
-          name: name,
-          value: color
+        } else if (isString(isValue)) {
+          if (!(isValue.indexOf(sunit) > -1)) {
+            finalValue = "".concat(isValue).concat(sunit);
+          } else {
+            finalValue = "".concat(isValue);
+          }
         }
-      });
-    }, [color]);
-    handleCloseRef(closeRef);
-    return React.createElement(React.Fragment, null, React.createElement("div", {
-      className: "wprf-colorpicker-wrap",
-      ref: closeRef
-    }, React.createElement("input", {
-      type: "hidden",
-      value: value,
-      name: name,
-      id: id
-    }), React.createElement("span", {
-      className: "wprf-picker-display",
-      style: {
-        backgroundColor: value,
-        borderColor: value
-      },
-      onClick: function onClick() {
-        return setShowPicker(!showPicker);
-      }
-    }), showPicker && React.createElement(React.Fragment, null, React.createElement("button", {
-      className: "wprf-colorpicker-reset",
-      onClick: function onClick(e) {
-        e.preventDefault();
-        setColor(defaultColor);
-        setShowPicker(false);
-      }
-    }, i18n.__('Reset', 'notificationx')), React.createElement(components.ColorPicker, {
-      color: value,
-      onChangeComplete: function onChangeComplete(event) {
-        return setColor(event.hex);
-      }
-    }))));
-  };
-  var ColorPicker$1 = withLabel(ColorPicker);
-
-  var Action = function Action(props) {
-    return React.createElement(React.Fragment, null, hooks.applyFilters(props.action, '', props));
-  };
-
-  var Media = function Media(props) {
-    var _props$value;
-    var _useState = React.useState((_props$value = props.value) !== null && _props$value !== void 0 && _props$value.url ? props.value : null),
-      _useState2 = _slicedToArray(_useState, 2),
-      imageData = _useState2[0],
-      setImageData = _useState2[1];
-    React.useEffect(function () {
-      props.onChange({
-        target: {
-          type: 'media',
-          name: props.name,
-          value: imageData
-        }
-      });
-    }, [imageData]);
-    return React.createElement("div", {
-      className: "wprf-control wprf-media"
-    }, imageData != null && !(props !== null && props !== void 0 && props.notImage) && React.createElement("div", {
-      className: "wprf-image-preview"
-    }, imageData != null && (imageData === null || imageData === void 0 ? void 0 : imageData.url) && React.createElement("img", {
-      src: imageData.url,
-      alt: imageData.title
-    })), React.createElement("div", {
-      className: "wprf-image-uploader"
-    }, React.createElement(mediaUtils.MediaUpload, {
-      onSelect: function onSelect(media) {
-        setImageData({
-          id: media.id,
-          title: media.title,
-          url: media.url
+        props.onChange({
+          target: {
+            type: 'slider',
+            name: name,
+            value: finalValue
+          }
         });
-      },
-      multiple: false,
-      allowedTypes: ['image'],
-      value: imageData,
-      render: function render(_ref) {
-        var open = _ref.open;
-        return React.createElement(React.Fragment, null, imageData != null && React.createElement("button", {
-          className: "wprf-btn wprf-image-remove-btn",
-          onClick: function onClick() {
-            return setImageData(null);
-          }
-        }, (props === null || props === void 0 ? void 0 : props.remove) || 'Remove'), React.createElement("button", {
-          className: "wprf-btn wprf-image-upload-btn",
-          onClick: open
-        }, imageData != null ? (props === null || props === void 0 ? void 0 : props.reset) || 'Change Image' : (props === null || props === void 0 ? void 0 : props.button) || 'Upload'));
+      }
+    }, [isValue, sunit]);
+    return React.createElement("div", {
+      className: "wprf-slider-wrap"
+    }, React.createElement("div", {
+      className: "wprf-slider-control-head"
+    }, React.createElement(Label, {
+      htmlFor: id || name
+    }, label), isArray(units) && units.length > 0 && React.createElement("div", {
+      className: "wprf-slider-units"
+    }, units.map(function (unit, index) {
+      return React.createElement(components.Button, {
+        key: index,
+        isSmall: true,
+        isPrimary: true,
+        onClick: function onClick() {
+          return setSunit(unit);
+        },
+        className: unit == sunit ? "unit-active" : ""
+      }, unit);
+    }))), React.createElement("div", {
+      className: "wprf-slider-control"
+    }, React.createElement(components.RangeControl, {
+      allowReset: reset !== null && reset !== void 0 ? reset : true,
+      value: parseInt(isValue),
+      min: min,
+      max: max
+      // showTooltip={tooltip ?? false}
+      ,
+      onChange: function onChange(value) {
+        return setValue(value);
       }
     })));
   };
-  var Media$1 = withLabel(Media);
 
-  var Editor = function Editor(props) {
-    var _useState = React.useState(draftJs.EditorState.createEmpty()),
-      _useState2 = _slicedToArray(_useState, 2),
-      editorState = _useState2[0],
-      setEditorState = _useState2[1];
-    React.useEffect(function () {
-      if (props.value) {
-        var _htmlToDraft = htmlToDraft__default['default'](props.value),
-          contentBlocks = _htmlToDraft.contentBlocks,
-          entityMap = _htmlToDraft.entityMap;
-        var contentState = draftJs.ContentState.createFromBlockArray(contentBlocks, entityMap);
-        var _editorState = draftJs.EditorState.createWithContent(contentState);
-        setEditorState(_editorState);
-      }
-    }, []);
-    React.useEffect(function () {
-      var tempValue = draftToHtml__default['default'](draftJs.convertToRaw(editorState.getCurrentContent()));
-      props.onChange({
-        target: {
-          type: 'editor',
-          value: tempValue,
-          name: props.name
-        }
+  function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var Textarea = function Textarea(props) {
+    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
+    var handleChange = React.useCallback(function (event) {
+      return validProps.onChange(event, {
+        isPro: !!props.is_pro
       });
-    }, [editorState]);
-    return React.createElement(reactDraftWysiwyg.Editor, {
-      placeholder: props === null || props === void 0 ? void 0 : props.placeholder,
-      toolbar: toolbarOptions,
-      editorState: editorState,
-      toolbarClassName: "wprf-editor-toolbar",
-      wrapperClassName: "wprf-editor wprf-control",
-      editorClassName: "wprf-editor-main",
-      onEditorStateChange: setEditorState
-    });
+    }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
+    return /*#__PURE__*/React__default["default"].createElement('textarea', _objectSpread$2(_objectSpread$2({}, validProps), {}, {
+      onChange: handleChange,
+      rows: 2
+    }));
   };
-  var Editor$1 = withLabel(Editor);
+  var Textarea$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Textarea));
 
-  var Button = function Button(props) {
-    var _props$onClick, _props$text, _props$text2, _props$text3;
-    if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
-      throw new Error(i18n.__('Button has a required params #text.', 'notificationx'));
-    }
-    var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", 'ajax', 'text']);
-    var _useState = React.useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isLoading = _useState2[0],
-      setIsLoading = _useState2[1];
-    var handleClick = function handleClick(event) {
-      if (props !== null && props !== void 0 && props.ajax) {
-        setIsLoading(true);
-        hitAAJX(props.ajax, props.context).then(function (res) {
-          var _props$ajax, _props$ajax5;
-          setIsLoading(false);
-          if ((res === null || res === void 0 ? void 0 : res.status) == 'error') {
-            throw new Error(res === null || res === void 0 ? void 0 : res.message);
-          }
-          props.onChange({
-            target: {
-              type: 'button',
-              name: props.name,
-              value: true
-            }
-          });
-          if (!((_props$ajax = props.ajax) !== null && _props$ajax !== void 0 && _props$ajax.hideSwal)) {
-            var _props$ajax2, _props$ajax2$swal, _props$ajax3, _props$ajax3$swal, _props$ajax4, _props$ajax4$swal;
-            var type = ((_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : (_props$ajax2$swal = _props$ajax2.swal) === null || _props$ajax2$swal === void 0 ? void 0 : _props$ajax2$swal.icon) || 'success';
-            var message = ((_props$ajax3 = props.ajax) === null || _props$ajax3 === void 0 ? void 0 : (_props$ajax3$swal = _props$ajax3.swal) === null || _props$ajax3$swal === void 0 ? void 0 : _props$ajax3$swal.text) || 'Complete';
-            props.context.alerts.toast(type, message, {
-              autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 ? void 0 : (_props$ajax4$swal = _props$ajax4.swal) === null || _props$ajax4$swal === void 0 ? void 0 : _props$ajax4$swal.autoClose
-            });
-          }
-          if ((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.reload) {
-            setTimeout(function () {
-              return window.location.reload();
-            }, 1000);
-          }
-        })["catch"](function (err) {
-          var _props$ajax6;
-          console.error('Error In Button Called', props.name, err);
-          setIsLoading(false);
-          //TODO: need to be fixed.
-          props.onChange({
-            target: {
-              type: 'button',
-              name: props.name,
-              value: false
-            }
-          });
-          if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
-            props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || i18n.__("Something went wrong.", 'notificationx'));
-          }
-        });
-      }
-      useTrigger(props);
-    };
-    if (props !== null && props !== void 0 && props.href) {
-      return React.createElement("a", {
-        href: (props === null || props === void 0 ? void 0 : props.href) === -1 ? props === null || props === void 0 ? void 0 : props.value : props === null || props === void 0 ? void 0 : props.href,
-        target: props === null || props === void 0 ? void 0 : props.target,
-        className: classNames__default['default']('wprf-control wprf-button wprf-href-btn', props === null || props === void 0 ? void 0 : props.classes)
-      }, props === null || props === void 0 ? void 0 : props.text);
-    }
-    if (props !== null && props !== void 0 && props.group) {
-      var allFields = props.fields.map(function (item, index) {
-        var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
-        return React.createElement(Field$1, _extends$1({
-          key: item.name
-        }, item, {
-          parentIndex: parentIndex
-        }));
-      });
-      return React.createElement("div", {
-        className: "wprf-control wprf-button-group wprf-flex"
-      }, allFields);
-    }
-    return React.createElement(React.Fragment, null, React.createElement("button", _extends$1({}, validProps, {
-      name: props.name,
-      disabled: isLoading,
-      onClick: (_props$onClick = props === null || props === void 0 ? void 0 : props.onClick) !== null && _props$onClick !== void 0 ? _props$onClick : handleClick,
-      className: classNames__default['default']('wprf-control wprf-button wprf-btn', props === null || props === void 0 ? void 0 : props.classes)
-    }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 ? void 0 : (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 ? void 0 : (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 ? void 0 : (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
-  };
-  var Button$1 = withLabel(Button);
-
+  function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+  function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+  function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
   function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
   function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-  var ResponsiveNumber = function ResponsiveNumber(props) {
-    var _Object$keys;
-    var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
-    var _useState = React.useState(Object.keys(props.controls)[0]),
-      _useState2 = _slicedToArray(_useState, 2),
-      responsive = _useState2[0],
-      setResponsive = _useState2[1];
-
-    // backward compatibility
-    var value = validProps.value;
-    if (!isObject(validProps.value)) {
-      Object.keys(props.controls).reduce(function (acc, key) {
-        return _objectSpread$1(_objectSpread$1({}, acc), {}, _defineProperty({}, key, validProps.value));
-      }, {});
-    }
-    var _useState3 = React.useState(value),
-      _useState4 = _slicedToArray(_useState3, 2),
-      responsiveSize = _useState4[0],
-      setResponsiveSize = _useState4[1];
-    var handleChange = function handleChange(event) {
-      setResponsiveSize(_objectSpread$1(_objectSpread$1({}, responsiveSize), {}, _defineProperty({}, responsive, event.target.value)));
-    };
-    React.useEffect(function () {
-      validProps.onChange({
-        target: {
-          type: 'input',
-          name: validProps.name,
-          value: responsiveSize,
-          checked: null,
-          multiple: null
-        }
-      });
-    }, [responsiveSize]);
-    return React.createElement("div", {
-      style: {
-        display: "flex",
-        alignItems: "center",
-        rowGap: 5,
-        columnGap: 10,
-        flexWrap: "wrap"
-      }
-    }, /*#__PURE__*/React__default['default'].createElement("input", _objectSpread$1(_objectSpread$1({}, validProps), {}, {
-      type: "number",
-      value: responsiveSize === null || responsiveSize === void 0 ? void 0 : responsiveSize[responsive],
-      onChange: handleChange
-    })), React.createElement("div", {
-      style: {
-        display: "flex",
-        alignItems: "center"
-      }
-    }, (_Object$keys = Object.keys(props.controls)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (key) {
-      return React.createElement("button", {
-        type: "button",
-        key: key,
-        className: "responsive-button ".concat(responsive === key ? "active" : ""),
-        onClick: function onClick() {
-          return setResponsive(key);
-        }
-      }, React.createElement("img", {
-        src: props.controls[key].icon,
-        alt: "desktop",
-        style: {
-          width: props.controls[key].size
-        }
-      }));
-    })));
-  };
-  ResponsiveNumber.defaultProps = {
-    type: "number"
-  };
-  var ResponsiveNumber$1 = withLabel( /*#__PURE__*/React__default['default'].memo(ResponsiveNumber));
-
-  var eligibleMessage = function eligibleMessage(props) {
-    if (props !== null && props !== void 0 && props.messages) {
-      for (var msg in props.messages) {
-        var singleMessage = props.messages[msg];
-        if (when(singleMessage.rules, props.context.values)) {
-          return singleMessage;
-        }
-      }
-    }
-    return {
-      message: props === null || props === void 0 ? void 0 : props.message,
-      html: props === null || props === void 0 ? void 0 : props.html,
-      type: 'normal'
-    };
-  };
-  var Message = function Message(props) {
-    var _eligibleMessage = eligibleMessage(props),
-      html = _eligibleMessage.html,
-      message = _eligibleMessage.message,
-      _eligibleMessage$type = _eligibleMessage.type,
-      type = _eligibleMessage$type === void 0 ? 'warning' : _eligibleMessage$type;
-    if (!message) {
-      return React.createElement(React.Fragment, null);
-    }
-    return React.createElement("div", {
-      className: classNames__default['default']('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"), props === null || props === void 0 ? void 0 : props.classes)
-    }, html && React.createElement("p", {
-      dangerouslySetInnerHTML: {
-        __html: message
-      }
-    }), !html && React.createElement("p", null, message));
-  };
-
-  var Modal = function Modal(props) {
-    var _props$body;
-    if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
-      throw new Error(i18n.__('Modal needs button/body with it.', 'notificationx'));
-    }
-    var _useState = React.useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isOpen = _useState2[0],
-      setOpen = _useState2[1];
-    var _useState3 = React.useState(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isLoading = _useState4[0];
-      _useState4[1];
-    var openModal = function openModal() {
-      return setOpen(true);
-    };
-    var closeModal = function closeModal() {
-      return setOpen(false);
-    };
-    var onConfirm = React.useCallback(function () {}, []);
-    return React.createElement("div", {
-      className: "wprf-control wprf-modal",
-      id: "wprf-modal-".concat(props.name)
-    }, React.createElement(GenericField, _extends$1({
-      type: "button"
-    }, props === null || props === void 0 ? void 0 : props.button, {
-      onClick: openModal
-    })), isOpen && React.createElement(SweetAlert__default['default'], {
-      customClass: "wprf-modal-inner",
-      style: {
-        maxWidth: '900px',
-        width: '100%',
-        overflowY: 'scroll',
-        margin: '50px auto'
-      },
-      closeBtnStyle: {
-        top: '5px',
-        right: '5px',
-        color: '#f78c8c',
-        fontSize: '18px',
-        border: '1px solid #f78c8c',
-        borderRadius: '50%',
-        width: '30px',
-        height: '30px',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      },
-      title: React.createElement(ModalHeader, {
-        content: props === null || props === void 0 ? void 0 : (_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.header
-      }),
-      onConfirm: onConfirm,
-      showConfirm: false,
-      showCloseButton: true,
-      closeOnClickOutside: true,
-      onCancel: closeModal,
-      afterUpdate: function afterUpdate() {
-        if (props !== null && props !== void 0 && props.cancel) {
-          var _props$context$values;
-          if ((_props$context$values = props.context.values) !== null && _props$context$values !== void 0 && _props$context$values[props.cancel]) {
-            closeModal();
+  var Toggle = function Toggle(props) {
+    var passedOptions = props.options,
+      value = props.value,
+      multiple = props.multiple,
+      prevStyles = props.style;
+    var options = sortingFields(passedOptions);
+    var styles = _objectSpread$1({
+      column: 4
+    }, prevStyles);
+    if (multiple) {
+      var _useState = React.useState({}),
+        _useState2 = _slicedToArray(_useState, 2),
+        localState = _useState2[0],
+        setLocalState = _useState2[1];
+      var handleChange = function handleChange(event) {
+        var target = event.target ? event.target : event.currentTarget;
+        setLocalState(function (prevState) {
+          return _objectSpread$1(_objectSpread$1({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+        });
+      };
+      React.useEffect(function () {
+        props.onChange({
+          target: {
+            type: 'toggle',
+            name: props.name,
+            value: localState
           }
+        });
+      }, [localState]);
+      React.useEffect(function () {
+        if (!isObject(value)) {
+          var lState = {};
+          var _iterator = _createForOfIteratorHelper(options),
+            _step;
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var option = _step.value;
+              lState[option.value] = value;
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+          setLocalState(lState);
+        } else {
+          setLocalState(value);
         }
-      }
-    }, React.createElement(ModalContent, _extends$1({}, props, {
-      isLoading: isLoading,
-      closeModal: closeModal,
-      context: props.context,
-      onConfirm: onConfirm
-    }))));
+      }, []);
+      return React.createElement("div", {
+        className: "wprf-toggle-wrapper wprf-control"
+      }, React.createElement(Row, null, options.map(function (item) {
+        return React.createElement(Column, {
+          key: item.value,
+          column: styles.column
+        }, React.createElement(GenericToggle$1, _objectSpread$1(_objectSpread$1({}, item), {}, {
+          context: props === null || props === void 0 ? void 0 : props.context,
+          id: item.value,
+          checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
+          type: 'checkbox',
+          onChange: handleChange,
+          style: styles
+        })));
+      })));
+    }
+    return React.createElement(GenericToggle$1, props);
   };
 
   var InnerContent = function InnerContent(_ref) {
@@ -3751,34 +4131,6 @@
     return React.createElement(React.Fragment, null, fieldViews);
   };
 
-  function _objectDestructuringEmpty(obj) {
-    if (obj == null) throw new TypeError("Cannot destructure undefined");
-  }
-
-  var Submit = function Submit(_ref) {
-    var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
-    var context = useBuilderContext();
-    var label = (props === null || props === void 0 ? void 0 : props.label) || i18n.__('Save Changes', 'notificationx');
-    if (context.isSubmitting) {
-      var _props$loadingLabel;
-      label = (_props$loadingLabel = props === null || props === void 0 ? void 0 : props.loadingLabel) !== null && _props$loadingLabel !== void 0 ? _props$loadingLabel : 'Saving...';
-    }
-    var handleSubmit = React.useCallback(function (event) {
-      var _context$submit;
-      if ((_context$submit = context.submit) !== null && _context$submit !== void 0 && _context$submit.onSubmit) {
-        context.submit.onSubmit(event, context);
-        return;
-      }
-    }, [context]);
-    return React.createElement("div", {
-      className: "wprf-submit wprf-control"
-    }, React.createElement(components.Button, {
-      disabled: context === null || context === void 0 ? void 0 : context.isSubmitting,
-      className: "wprf-submit-button",
-      onClick: handleSubmit
-    }, label));
-  };
-
   var SteppedButton = function SteppedButton(props) {
     var _useState = React.useState(undefined),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3807,7 +4159,7 @@
       className: "wprf-stepped-button"
     }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
       var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4;
-      return React.createElement(React__default['default'].Fragment, {
+      return React.createElement(React__default["default"].Fragment, {
         key: "button_".concat(button, "_").concat(index)
       }, (button === 'next' && nextTab !== undefined || button === 'prev' && prevTab !== undefined) && React.createElement(components.Button, {
         className: "wprf-btn wprf-step-btn-".concat(button),
@@ -3817,7 +4169,7 @@
       }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), nextTab == undefined && ((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.type) && React.createElement(Field$1, (_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4[button]));
     }));
   };
-  var SteppedButton$1 = /*#__PURE__*/React__default['default'].memo(SteppedButton);
+  var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
 
   var _excluded = ["fields", "active", "setActive", "submit"];
   var Content = function Content(_ref) {
@@ -3846,7 +4198,7 @@
       setTabsFields(filteredTabs);
     }, [tabs, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value.source]);
     return React.createElement("div", {
-      className: classNames__default['default']("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes)
+      className: classNames__default["default"]("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes)
     }, React.createElement("div", {
       className: "wprf-tab-flex"
     }, React.createElement("div", {
@@ -3856,7 +4208,7 @@
       if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
         return '';
       }
-      var componentClasses = classNames__default['default']("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
+      var componentClasses = classNames__default["default"]("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
         "wprf-active": active === tab.id
       });
       return React.createElement("div", {
@@ -3866,7 +4218,7 @@
       }, React.createElement("div", {
         className: "wprf-tab-heading-wrapper"
       }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) && React.createElement("h4", null, tab.label), React.createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
-        return React.createElement(React__default['default'].Fragment, {
+        return React.createElement(React__default["default"].Fragment, {
           key: "button_".concat(button, "_").concat(index)
         }, React.createElement(Field$1, rest.content_heading[button]));
       }))), React.createElement(InnerContent, {
@@ -3897,7 +4249,7 @@
       _useState2 = _slicedToArray(_useState, 2),
       activeTab = _useState2[0],
       setActiveTab = _useState2[1];
-    var componentClasses = classNames__default['default']("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
+    var componentClasses = classNames__default["default"]("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
       "wprf-tab-menu-as-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
     });
     React.useEffect(function () {
@@ -3964,9 +4316,11 @@
   exports.BuilderConsumer = BuilderConsumer;
   exports.BuilderProvider = BuilderProvider;
   exports.Button = Button$1;
+  exports.CheckboxSelect = CheckboxSelect$1;
   exports.CodeViewer = CodeViewer$1;
   exports.ColorPicker = ColorPicker$1;
   exports.Column = Column;
+  exports.CopyToClipboard = CopyToClipboard$1;
   exports.Date = Date$1;
   exports.Editor = Editor$1;
   exports.Field = Field$1;
@@ -4029,4 +4383,4 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));

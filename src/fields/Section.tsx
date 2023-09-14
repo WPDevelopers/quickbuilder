@@ -6,7 +6,11 @@ import { Field } from "../fields";
 import Submit from "./tabs/Submit";
 
 const Section = (props) => {
-	const { searchable = false, searchPlaceholder = "Search..." } = props;
+	const {
+		searchable = false,
+		searchNotFoundMessage,
+		searchPlaceholder = "Search...",
+	} = props;
 	const builderContext = useBuilderContext();
 	const [isCollapse, setCollapse] = useState(props.collapsed ?? false);
 	const [fields, setFields] = useState([]);
@@ -91,7 +95,17 @@ const Section = (props) => {
 						</span>
 					</div>
 					<div className="wprf-section-search-results">
-						{filteredFields}
+						{filteredFields?.length ? (
+							filteredFields
+						) : (
+							<div
+								className="wprf-result-not-found"
+								dangerouslySetInnerHTML={{
+									__html:
+										searchNotFoundMessage ?? "Not found!",
+								}}
+							></div>
+						)}
 					</div>
 				</div>
 			) : (

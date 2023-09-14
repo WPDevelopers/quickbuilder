@@ -3554,6 +3554,7 @@
     var _props$collapsed;
     var _props$searchable = props.searchable,
       searchable = _props$searchable === void 0 ? false : _props$searchable,
+      searchNotFoundMessage = props.searchNotFoundMessage,
       _props$searchPlacehol = props.searchPlaceholder,
       searchPlaceholder = _props$searchPlacehol === void 0 ? "Search..." : _props$searchPlacehol;
     var builderContext = useBuilderContext();
@@ -3637,7 +3638,12 @@
       value: searchString
     }))), React.createElement("div", {
       className: "wprf-section-search-results"
-    }, filteredFields)) : React.createElement("div", {
+    }, filteredFields !== null && filteredFields !== void 0 && filteredFields.length ? filteredFields : React.createElement("div", {
+      className: "wprf-result-not-found",
+      dangerouslySetInnerHTML: {
+        __html: searchNotFoundMessage !== null && searchNotFoundMessage !== void 0 ? searchNotFoundMessage : "Not found!"
+      }
+    }))) : React.createElement("div", {
       className: "wprf-section-fields"
     }, filteredFields), props.showSubmit && React.createElement(Submit, builderContext.submit));
   };

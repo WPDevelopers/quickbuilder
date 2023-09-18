@@ -15,18 +15,17 @@ const CodeViewer = (props) => {
 		"context",
 		"copyOnClick",
 	]);
-	const handleChange = useCallback(
-		(event) => validProps.onChange(event, { isPro: !!props.is_pro }),
-		[validProps?.value]
-	);
+	const handleChange = () => {};
 
 	let extraProps = { onChange: handleChange, rows: 5 };
 
 	if (!props.is_pro && props?.copyOnClick && props?.value) {
 		extraProps["onClick"] = () => {
-			const successText = props?.success_text ? props.success_text : __(`Copied to Clipboard.`, "notificationx")
+			const successText = props?.success_text
+				? props.success_text
+				: __(`Copied to Clipboard.`, "notificationx");
 			copy(props.value, {
-                format: 'text/plain',
+				format: "text/plain",
 				onCopy: () => {
 					props.context.alerts.toast("success", successText);
 				},
@@ -34,12 +33,16 @@ const CodeViewer = (props) => {
 		};
 	}
 
-	const ButtonText = props?.button_text ? props.button_text : __("Click to Copy", "notificationx");
+	const ButtonText = props?.button_text
+		? props.button_text
+		: __("Click to Copy", "notificationx");
 
-	return <span className="wprf-code-viewer">
-		{React.createElement("textarea", { ...validProps, ...extraProps })}
-		<Button className="wprf-copy-button">{ButtonText}</Button>
-		</span>;
+	return (
+		<span className="wprf-code-viewer">
+			{React.createElement("textarea", { ...validProps, ...extraProps })}
+			<Button className="wprf-copy-button">{ButtonText}</Button>
+		</span>
+	);
 };
 
 export const GenericInput = React.memo(CodeViewer);

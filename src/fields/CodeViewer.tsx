@@ -44,7 +44,7 @@ const CodeViewer = (props) => {
 					{
 						...validProps,
 					},
-					props?.default || props?.value
+					props?.code ?? (props?.default || props?.value)
 				)}
 				<span
 					className={`wprf-clipboard-tooltip ${

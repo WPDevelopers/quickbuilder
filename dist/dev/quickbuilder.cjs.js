@@ -10,8 +10,8 @@ var date = require('@wordpress/date');
 var moment = require('moment');
 var intersect = require('intersect');
 var i18n = require('@wordpress/i18n');
-var classNames = require('classnames');
 var hooks = require('@wordpress/hooks');
+var classNames = require('classnames');
 var Swal = require('sweetalert2');
 var ReactSelect = require('react-select');
 var components = require('@wordpress/components');
@@ -729,52 +729,6 @@ function _nonIterableRest() {
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest();
 }
-
-var Menu = function Menu(props) {
-  var _context$values, _context$values2;
-  if (props.fields === undefined) {
-    throw new Error(i18n.__("There are no tabs defined!", 'notificationx'));
-  }
-  var active = props.active,
-    setActive = props.setActive,
-    tabs = props.fields,
-    context = props.context;
-  var _useState = React.useState([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    tabsFields = _useState2[0],
-    setTabsFields = _useState2[1];
-  React.useEffect(function () {
-    var filteredTabs = tabs.filter(function (tab) {
-      return isVisible(context === null || context === void 0 ? void 0 : context.values, tab);
-    });
-    setTabsFields(filteredTabs);
-  }, [tabs, context === null || context === void 0 ? void 0 : (_context$values = context.values) === null || _context$values === void 0 ? void 0 : _context$values.source]);
-  var componentClasses = classNames__default["default"]("wprf-tab-menu-wrapper", props === null || props === void 0 ? void 0 : props.className, {
-    "wprf-tab-menu-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
-  }, context === null || context === void 0 ? void 0 : (_context$values2 = context.values) === null || _context$values2 === void 0 ? void 0 : _context$values2.source);
-  var currentTabIndex = tabsFields.findIndex(function (tab) {
-    return tab.id === active;
-  });
-  return React.createElement("div", {
-    className: componentClasses
-  }, React.createElement("ul", {
-    className: "wprf-tab-nav"
-  }, tabsFields.map(function (tab, index) {
-    var _classNames, _context$icons, _context$icons$tab$ic, _tab$icon, _tab$icon2;
-    return React.createElement("li", {
-      className: classNames__default["default"]("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
-      "data-key": tab.id,
-      key: tab.id,
-      onClick: function onClick() {
-        var _props$clickable;
-        return ((_props$clickable = props === null || props === void 0 ? void 0 : props.clickable) !== null && _props$clickable !== void 0 ? _props$clickable : true) && setActive(tab.id);
-      }
-    }, (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? React.createElement("img", {
-      src: tab.icon,
-      alt: tab === null || tab === void 0 ? void 0 : tab.label
-    }) : isObject(tab.icon) ? context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : (_context$icons$tab$ic = _context$icons[tab === null || tab === void 0 ? void 0 : (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons$tab$ic === void 0 ? void 0 : _context$icons$tab$ic[tab === null || tab === void 0 ? void 0 : (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), React.createElement("span", null, tab.label));
-  })));
-};
 
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
@@ -2165,35 +2119,51 @@ var CheckboxSelect$1 = withLabel(CheckboxSelect);
 function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$a(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var CodeViewer = function CodeViewer(props) {
+  var _props$code;
   var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
-  var handleChange = React.useCallback(function (event) {
-    return validProps.onChange(event, {
-      isPro: !!props.is_pro
-    });
-  }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-  var extraProps = {
-    onChange: handleChange,
-    rows: 5
-  };
-  if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
-    extraProps["onClick"] = function () {
-      var successText = props !== null && props !== void 0 && props.success_text ? props.success_text : i18n.__("Copied to Clipboard.", "notificationx");
-      copy__default["default"](props.value, {
-        format: 'text/plain',
-        onCopy: function onCopy() {
-          props.context.alerts.toast("success", successText);
-        }
-      });
+  var _useState = React.useState(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isCopied = _useState2[0],
+    setIsCopied = _useState2[1];
+  React.useEffect(function () {
+    var CopyInterval;
+    if (isCopied) {
+      CopyInterval = setTimeout(function () {
+        setIsCopied(false);
+      }, 1000);
+    }
+    return function () {
+      return CopyInterval && clearTimeout(CopyInterval);
     };
-  }
-  var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : i18n.__("Click to Copy", "notificationx");
+  }, [isCopied]);
+  var handleCopy = function handleCopy() {
+    copy__default["default"](props.value, {
+      format: "text/plain",
+      onCopy: function onCopy() {
+        setIsCopied(true);
+      }
+    });
+  };
   return React.createElement("span", {
     className: "wprf-code-viewer"
-  }, /*#__PURE__*/React__default["default"].createElement("textarea", _objectSpread$a(_objectSpread$a({}, validProps), extraProps)), React.createElement(components.Button, {
-    className: "wprf-copy-button"
-  }, ButtonText));
+  }, React.createElement("span", {
+    className: "wprf-code-viewer-header"
+  }, props === null || props === void 0 ? void 0 : props.label), React.createElement("span", {
+    className: "wprf-code-viewer-body"
+  }, /*#__PURE__*/React__default["default"].createElement("pre", _objectSpread$a({}, validProps), (_props$code = props === null || props === void 0 ? void 0 : props.code) !== null && _props$code !== void 0 ? _props$code : (props === null || props === void 0 ? void 0 : props["default"]) || (props === null || props === void 0 ? void 0 : props.value)), React.createElement("span", {
+    className: "wprf-clipboard-tooltip ".concat(isCopied ? "active" : "")
+  }, React.createElement("span", {
+    className: "wprf-clipboard-tooltip-text"
+  }, React.createElement("span", null, "Copied")), React.createElement(components.Button, {
+    className: "wprf-copy-icon",
+    onClick: function onClick() {
+      return handleCopy();
+    }
+  }, React.createElement("i", {
+    className: "btd-icon btd-duplicate"
+  })))));
 };
-var CodeViewer$1 = withLabel( /*#__PURE__*/React__default["default"].memo(CodeViewer));
+var CodeViewer$1 = /*#__PURE__*/React__default["default"].memo(CodeViewer);
 
 var ColorPicker = function ColorPicker(props) {
   var value = props.value,
@@ -4270,7 +4240,54 @@ var Content = function Content(_ref) {
   }) : true) && React.createElement(Submit, submit));
 };
 
+var Menu = function Menu(props) {
+  var _context$values, _context$values2;
+  if (props.fields === undefined) {
+    throw new Error(i18n.__("There are no tabs defined!", 'notificationx'));
+  }
+  var active = props.active,
+    setActive = props.setActive,
+    tabs = props.fields,
+    context = props.context;
+  var _useState = React.useState([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    tabsFields = _useState2[0],
+    setTabsFields = _useState2[1];
+  React.useEffect(function () {
+    var filteredTabs = tabs.filter(function (tab) {
+      return isVisible(context === null || context === void 0 ? void 0 : context.values, tab);
+    });
+    setTabsFields(filteredTabs);
+  }, [tabs, context === null || context === void 0 ? void 0 : (_context$values = context.values) === null || _context$values === void 0 ? void 0 : _context$values.source]);
+  var componentClasses = classNames__default["default"]("wprf-tab-menu-wrapper", props === null || props === void 0 ? void 0 : props.className, {
+    "wprf-tab-menu-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
+  }, context === null || context === void 0 ? void 0 : (_context$values2 = context.values) === null || _context$values2 === void 0 ? void 0 : _context$values2.source);
+  var currentTabIndex = tabsFields.findIndex(function (tab) {
+    return tab.id === active;
+  });
+  return React.createElement("div", {
+    className: componentClasses
+  }, React.createElement("ul", {
+    className: "wprf-tab-nav"
+  }, tabsFields.map(function (tab, index) {
+    var _classNames, _context$icons, _context$icons$tab$ic, _tab$icon, _tab$icon2;
+    return React.createElement("li", {
+      className: classNames__default["default"]("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
+      "data-key": tab.id,
+      key: tab.id,
+      onClick: function onClick() {
+        var _props$clickable;
+        return ((_props$clickable = props === null || props === void 0 ? void 0 : props.clickable) !== null && _props$clickable !== void 0 ? _props$clickable : true) && setActive(tab.id);
+      }
+    }, (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? React.createElement("img", {
+      src: tab.icon,
+      alt: tab === null || tab === void 0 ? void 0 : tab.label
+    }) : isObject(tab.icon) ? context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : (_context$icons$tab$ic = _context$icons[tab === null || tab === void 0 ? void 0 : (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons$tab$ic === void 0 ? void 0 : _context$icons$tab$ic[tab === null || tab === void 0 ? void 0 : (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), React.createElement("span", null, tab.label));
+  })));
+};
+
 var Tab = function Tab(props) {
+  var _props$save;
   // const builderContextState = useBuilder(props);
 
   var builderContext = useBuilderContext();
@@ -4278,6 +4295,7 @@ var Tab = function Tab(props) {
     _useState2 = _slicedToArray(_useState, 2),
     activeTab = _useState2[0],
     setActiveTab = _useState2[1];
+  var saveValue = (_props$save = props === null || props === void 0 ? void 0 : props.save) !== null && _props$save !== void 0 ? _props$save : true;
   var componentClasses = classNames__default["default"]("wp-react-form wprf-tabs-wrapper", props === null || props === void 0 ? void 0 : props.className, {
     "wprf-tab-menu-as-sidebar": props === null || props === void 0 ? void 0 : props.sidebar
   });
@@ -4289,10 +4307,10 @@ var Tab = function Tab(props) {
     }
   }, [props === null || props === void 0 ? void 0 : props.value]);
   React.useEffect(function () {
-    if (props.value !== activeTab) {
+    if (props.value !== activeTab && saveValue) {
       props.onChange({
         target: {
-          type: 'button',
+          type: "button",
           name: props.name,
           value: activeTab
         }

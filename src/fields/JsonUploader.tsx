@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { __ } from "@wordpress/i18n";
+import React, { useEffect, useState } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
-import { __ } from "@wordpress/i18n";
 
 const JsonUploader = (props) => {
 	const validProps = validFieldProps(props, [
@@ -24,11 +24,11 @@ const JsonUploader = (props) => {
 		const file = e.target.files[0];
 
 		if(file?.size == 0){
-			props.context.alerts.toast('error', __(`File can't be empty.`, 'notificationx'));
+			props.context.alerts.toast('error', __(`File can't be empty.`, 'betterdocs'));
 			return;
 		}
 		else if(file?.type != 'application/json' && file?.type != 'text/json'){
-			props.context.alerts.toast('error', __(`Invalid file type.`, 'notificationx'));
+			props.context.alerts.toast('error', __(`Invalid file type.`, 'betterdocs'));
 			return;
 		}
 

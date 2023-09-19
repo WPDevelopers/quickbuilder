@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { applyFilters } from '@wordpress/hooks'
-import classNames from "classnames";
-import { Fields, TabContentConfig } from "../../types/Tabs";
-import { isArray, isVisible } from "../../core/utils";
-import InnerContent from "./InnerContent";
-import Submit from "./Submit";
-import SteppedButton from "./SteppedButton";
-import { useBuilderContext } from "../../core/hooks";
-import when from "../../core/when";
+import { applyFilters } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
+import classNames from "classnames";
+import React, { useEffect, useState } from "react";
+import { useBuilderContext } from "../../core/hooks";
+import { isArray, isVisible } from "../../core/utils";
+import when from "../../core/when";
 import { Field } from '../../fields';
+import { Fields, TabContentConfig } from "../../types/Tabs";
+import InnerContent from "./InnerContent";
+import SteppedButton from "./SteppedButton";
+import Submit from "./Submit";
 
 
 const Content: React.FC<TabContentConfig> = ({ fields: tabs, active, setActive, submit, ...rest }) => {
     if (tabs === undefined) {
-        throw new Error(__("There are no #tabs args defined in props.", 'notificationx'));
+        throw new Error(__("There are no #tabs args defined in props.", 'betterdocs'));
     }
 
     const builderContext = useBuilderContext();
     const parentIndex = rest.parentIndex || [];
 
     if (!isArray(tabs)) {
-        throw new Error(__('Not an array.', 'notificationx'))
+        throw new Error(__('Not an array.', 'betterdocs'))
     }
 
     const [tabsFields, setTabsFields] = useState<Fields>([]);

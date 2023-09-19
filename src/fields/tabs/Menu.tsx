@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import classNames from "classnames";
-import { Fields, TabMenuConfig } from "../../types/Tabs";
-import { isString, isObject, isVisible } from "../../core/utils";
 import { __ } from '@wordpress/i18n';
+import classNames from "classnames";
+import React, { useEffect, useState } from "react";
+import { isObject, isString, isVisible } from "../../core/utils";
+import { Fields, TabMenuConfig } from "../../types/Tabs";
 
 const Menu: React.FC<TabMenuConfig> = (props) => {
     if (props.fields === undefined) {
-        throw new Error(__("There are no tabs defined!", 'notificationx'));
+        throw new Error(__("There are no tabs defined!", 'betterdocs'));
     }
 
     const { active, setActive, fields: tabs, context } = props;

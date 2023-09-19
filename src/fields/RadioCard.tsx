@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
 import { useInstanceId } from "@wordpress/compose";
 import classNames from "classnames";
-import { Row, Column, Label } from '../core/components';
+import React, { useEffect } from "react";
+import { Column, Label, Row } from '../core/components';
 
-import useOptions from "../core/hooks/useOptions";
-import { GenericInput } from ".";
-import { validFieldProps } from "../core/utils";
-import { useBuilderContext, withLabel } from "../core/hooks";
 import { __ } from '@wordpress/i18n';
+import { GenericInput } from ".";
+import { useBuilderContext, withLabel } from "../core/hooks";
+import useOptions from "../core/hooks/useOptions";
+import { validFieldProps } from "../core/utils";
 
 
 const RadioCard = (props) => {
@@ -15,7 +15,7 @@ const RadioCard = (props) => {
     const { options, option } = useOptions(props, 'options');
 
     if (!options) {
-        throw new Error(__('#options is a required arguments for RadioCard field.', 'notificationx'));
+        throw new Error(__('#options is a required arguments for RadioCard field.', 'betterdocs'));
     }
 
     const instanceId = useInstanceId(RadioCard);

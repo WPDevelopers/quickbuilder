@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react'
 import { Button } from '@wordpress/components';
-import { useBuilderContext } from '../../core/hooks';
 import { __ } from '@wordpress/i18n';
+import React, { useCallback } from 'react';
+import { useBuilderContext } from '../../core/hooks';
 
 const Submit = ({ ...props }) => {
     const context = useBuilderContext();
-    let label = props?.label || __('Save Changes', 'notificationx');
+    let label = props?.label || __('Save Changes', 'betterdocs');
 
 	if( context.isSubmitting ) {
 		label = props?.loadingLabel ?? 'Saving...';

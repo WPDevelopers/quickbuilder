@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import classNames from 'classnames';
-import { withLabel, useTrigger } from '../core/hooks';
-import { hitAAJX, isObject, validFieldProps } from '../core/utils';
-import { Field } from '.';
 import { __ } from '@wordpress/i18n';
+import classNames from 'classnames';
+import React, { useState } from 'react';
+import { Field } from '.';
+import { useTrigger, withLabel } from '../core/hooks';
+import { hitAAJX, isObject, validFieldProps } from '../core/utils';
 
 const Button = (props) => {
     if (!props?.text && props?.group !== true) {
-        throw new Error(__('Button has a required params #text.', 'notificationx'))
+        throw new Error(__('Button has a required params #text.', 'betterdocs'))
     }
     const validProps = validFieldProps(props, [
         "is_pro",
@@ -62,7 +62,7 @@ const Button = (props) => {
                     }
                 });
                 if (!props.ajax?.hideSwal) {
-                    props.context.alerts.toast('error', err?.message || __(`Something went wrong.`, 'notificationx'));
+                    props.context.alerts.toast('error', err?.message || __(`Something went wrong.`, 'betterdocs'));
                 }
 
             });

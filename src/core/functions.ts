@@ -1,17 +1,17 @@
-import Swal from "sweetalert2";
 import { dispatch, select } from "@wordpress/data";
+import Swal from "sweetalert2";
 
-import { isArray, isEmptyObj } from "./utils";
 import { __ } from "@wordpress/i18n";
+import { isArray, isEmptyObj } from "./utils";
 // import store from "../store";
 
 export const SweetAlert = ( args: any = {} ) => {
 	return Swal.fire({
-		target: args?.target ?? "#notificationx",
+		target: args?.target ?? "#betterdocs",
 		type: args?.type ?? "success",
 		html: args?.html,
-		title: args?.title ?? __("Title Goes Here: title", 'notificationx'),
-		text: args?.text ?? __("Test Goes Here: text", 'notificationx'),
+		title: args?.title ?? __("Title Goes Here: title", 'betterdocs'),
+		text: args?.text ?? __("Test Goes Here: text", 'betterdocs'),
 		icon: args?.icon ?? (args?.type || "success"),
 		timer: args?.timer ?? null,
 		...args,

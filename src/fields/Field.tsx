@@ -35,7 +35,7 @@ const Field = (props) => {
 	if (!props.type || props.type.length === 0) {
 		console.error(props);
 		throw new Error(
-			__("Field must have a #type. see documentation.", "notificationx")
+			__("Field must have a #type. see documentation.", "betterdocs")
 		);
 	}
 

@@ -1,15 +1,15 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('intersect'), require('@wordpress/i18n'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('html-react-parser'), require('react-select/async')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', 'intersect', '@wordpress/i18n', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'html-react-parser', 'react-select/async'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.intersect, global.wpI18n, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.wpMedia, global.sweetalert, global.reactSortablejs, global.parse, global.AsyncSelect));
-})(this, (function (exports, React, data, apiFetch, lodashEs, date, moment, intersect, i18n, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, mediaUtils, SweetAlert$1, reactSortablejs, parse, AsyncSelect) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/i18n'), require('intersect'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('html-react-parser'), require('react-select/async')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/i18n', 'intersect', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'html-react-parser', 'react-select/async'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpI18n, global.intersect, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.wpMedia, global.sweetalert, global.reactSortablejs, global.parse, global.AsyncSelect));
+})(this, (function (exports, React, data, i18n, intersect, apiFetch, lodashEs, date, moment, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, mediaUtils, SweetAlert$1, reactSortablejs, parse, AsyncSelect) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
   var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+  var intersect__default = /*#__PURE__*/_interopDefaultLegacy(intersect);
   var apiFetch__default = /*#__PURE__*/_interopDefaultLegacy(apiFetch);
   var moment__default = /*#__PURE__*/_interopDefaultLegacy(moment);
-  var intersect__default = /*#__PURE__*/_interopDefaultLegacy(intersect);
   var classNames__default = /*#__PURE__*/_interopDefaultLegacy(classNames);
   var Swal__default = /*#__PURE__*/_interopDefaultLegacy(Swal);
   var ReactSelect__default = /*#__PURE__*/_interopDefaultLegacy(ReactSelect);
@@ -415,7 +415,7 @@
     },
     allOf: function allOf(key, values, data) {
       if (!Array.isArray(values)) {
-        throw Error(i18n.__('"allOf" condition requires an array as #3 argument', 'notificationx'));
+        throw Error(i18n.__('"allOf" condition requires an array as #3 argument', 'betterdocs'));
       }
       var dataValues = get(data, key);
       return values.every(function (currentValue) {
@@ -424,7 +424,7 @@
     },
     anyOf: function anyOf(key, values, data) {
       if (!Array.isArray(values)) {
-        throw Error(i18n.__('"anyOf" condition requires an array as #3 argument', 'notificationx'));
+        throw Error(i18n.__('"anyOf" condition requires an array as #3 argument', 'betterdocs'));
       }
       var dataValue = get(data, key);
       return values.includes(dataValue);
@@ -451,7 +451,7 @@
     },
     not: function not(data) {
       if (data.length !== 1) {
-        throw Error(i18n.__('"not" can have only one comparison rule, multiple rules given', 'notificationx'));
+        throw Error(i18n.__('"not" can have only one comparison rule, multiple rules given', 'betterdocs'));
       }
       return !data[0];
     }
@@ -467,7 +467,7 @@
       key = _ref[1],
       value = _ref[2];
     if (typeof condition !== "string" || rules[condition] === undefined) {
-      throw Error(i18n.sprintf(i18n.__("Invalid comparison rule %s.", 'notificationx'), condition));
+      throw Error(i18n.sprintf(i18n.__("Invalid comparison rule %s.", 'betterdocs'), condition));
     }
     return rules[condition](key, value, data);
   };
@@ -736,10 +736,6 @@
     return target;
   }
 
-  var Action = function Action(props) {
-    return React.createElement(React.Fragment, null, hooks.applyFilters(props.action, '', props));
-  };
-
   var BuilderContext = /*#__PURE__*/React.createContext(undefined);
   BuilderContext.displayName = process.env.NODE_ENV === 'production' ? 'Anonymous' : 'BuilderContext';
   var BuilderProvider = BuilderContext.Provider;
@@ -925,11 +921,11 @@
     var _args$target, _args$type, _args$title, _args$text, _args$icon, _args$timer;
     var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return Swal__default["default"].fire(_objectSpread$e({
-      target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
+      target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#betterdocs",
       type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
       html: args === null || args === void 0 ? void 0 : args.html,
-      title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : i18n.__("Title Goes Here: title", 'notificationx'),
-      text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : i18n.__("Test Goes Here: text", 'notificationx'),
+      title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : i18n.__("Title Goes Here: title", 'betterdocs'),
+      text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : i18n.__("Test Goes Here: text", 'betterdocs'),
       icon: (_args$icon = args === null || args === void 0 ? void 0 : args.icon) !== null && _args$icon !== void 0 ? _args$icon : (args === null || args === void 0 ? void 0 : args.type) || "success",
       timer: (_args$timer = args === null || args === void 0 ? void 0 : args.timer) !== null && _args$timer !== void 0 ? _args$timer : null
     }, args));
@@ -1832,10 +1828,14 @@
     return WithProps;
   };
 
+  var Action = function Action(props) {
+    return React.createElement(React.Fragment, null, hooks.applyFilters(props.action, '', props));
+  };
+
   var Button = function Button(props) {
     var _props$onClick, _props$text, _props$text2, _props$text3;
     if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
-      throw new Error(i18n.__('Button has a required params #text.', 'notificationx'));
+      throw new Error(i18n.__('Button has a required params #text.', 'betterdocs'));
     }
     var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", 'ajax', 'text']);
     var _useState = React.useState(false),
@@ -1884,7 +1884,7 @@
             }
           });
           if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
-            props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || i18n.__("Something went wrong.", 'notificationx'));
+            props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || i18n.__("Something went wrong.", 'betterdocs'));
           }
         });
       }
@@ -2143,6 +2143,7 @@
   var CodeViewer$1 = /*#__PURE__*/React__default["default"].memo(CodeViewer);
 
   var ColorPicker = function ColorPicker(props) {
+    var _props$reset_text;
     var value = props.value,
       name = props.name,
       id = props.id,
@@ -2155,13 +2156,13 @@
       _useState4 = _slicedToArray(_useState3, 2),
       color = _useState4[0],
       setColor = _useState4[1];
-    var _useState5 = React.useState(null),
+    var _useState5 = React.useState(value || null),
       _useState6 = _slicedToArray(_useState5, 2),
       defaultColor = _useState6[0],
       setDefaultColor = _useState6[1];
     var closeRef = React.useRef(null);
     React.useEffect(function () {
-      setDefaultColor(value);
+      if (value) setDefaultColor(value);else setDefaultColor("#ffffff00");
     }, []);
     var handleCloseRef = function handleCloseRef(ref) {
       React.useEffect(function () {
@@ -2179,7 +2180,7 @@
     React.useEffect(function () {
       onChange({
         target: {
-          type: 'colorpicker',
+          type: "colorpicker",
           name: name,
           value: color
         }
@@ -2189,33 +2190,40 @@
     return React.createElement(React.Fragment, null, React.createElement("div", {
       className: "wprf-colorpicker-wrap",
       ref: closeRef
+    }, React.createElement("div", {
+      className: "wprf-colorpicker-screen",
+      onClick: function onClick() {
+        return setShowPicker(!showPicker);
+      }
     }, React.createElement("input", {
       type: "hidden",
       value: value,
       name: name,
       id: id
     }), React.createElement("span", {
+      className: "wprf-picker-code"
+    }, value || defaultColor), React.createElement("span", {
       className: "wprf-picker-display",
       style: {
-        backgroundColor: value,
-        borderColor: value
-      },
-      onClick: function onClick() {
-        return setShowPicker(!showPicker);
+        backgroundColor: value
       }
-    }), showPicker && React.createElement(React.Fragment, null, React.createElement("button", {
+    })), showPicker && React.createElement("div", {
+      className: "wprf-colorpicker"
+    }, React.createElement(components.ColorPicker, {
+      color: value || defaultColor,
+      onChangeComplete: function onChangeComplete(event) {
+        return setColor(event.hex);
+      }
+    }), React.createElement("div", {
+      className: "wprf-colorpicker-reset-wrap"
+    }, React.createElement("button", {
       className: "wprf-colorpicker-reset",
       onClick: function onClick(e) {
         e.preventDefault();
         setColor(defaultColor);
         setShowPicker(false);
       }
-    }, i18n.__('Reset', 'notificationx')), React.createElement(components.ColorPicker, {
-      color: value,
-      onChangeComplete: function onChangeComplete(event) {
-        return setColor(event.hex);
-      }
-    }))));
+    }, (_props$reset_text = props === null || props === void 0 ? void 0 : props.reset_text) !== null && _props$reset_text !== void 0 ? _props$reset_text : i18n.__("Reset", "betterdocs"))))));
   };
   var ColorPicker$1 = withLabel(ColorPicker);
 
@@ -2566,7 +2574,7 @@
   };
 
   var Loading = function Loading(props) {
-    return React.createElement("p", null, i18n.__('Loading...', 'notificationx'));
+    return React.createElement("p", null, i18n.__('Loading...', 'betterdocs'));
   };
 
   var toolbarOptions = {
@@ -2731,7 +2739,7 @@
   var Field = function Field(props) {
     if (!props.type || props.type.length === 0) {
       console.error(props);
-      throw new Error(i18n.__("Field must have a #type. see documentation.", "notificationx"));
+      throw new Error(i18n.__("Field must have a #type. see documentation.", "betterdocs"));
     }
     switch (props.type) {
       case "text":
@@ -2806,7 +2814,7 @@
       fields = props.fields,
       rest = _objectWithoutProperties(props, _excluded$2);
     if (!fields || !isArray(fields) || fields.length === 0) {
-      throw new Error(i18n.__('You should give a #fields arguments to a group field.', 'notificationx'));
+      throw new Error(i18n.__('You should give a #fields arguments to a group field.', 'betterdocs'));
     }
     var builderContext = useBuilderContext();
     var handleChange = React.useCallback(function (event) {
@@ -2925,10 +2933,10 @@
       }
       var file = e.target.files[0];
       if ((file === null || file === void 0 ? void 0 : file.size) == 0) {
-        props.context.alerts.toast('error', i18n.__("File can't be empty.", 'notificationx'));
+        props.context.alerts.toast('error', i18n.__("File can't be empty.", 'betterdocs'));
         return;
       } else if ((file === null || file === void 0 ? void 0 : file.type) != 'application/json' && (file === null || file === void 0 ? void 0 : file.type) != 'text/json') {
-        props.context.alerts.toast('error', i18n.__("Invalid file type.", 'notificationx'));
+        props.context.alerts.toast('error', i18n.__("Invalid file type.", 'betterdocs'));
         return;
       }
       setUploadedFile(file);
@@ -3086,7 +3094,7 @@
   var Modal = function Modal(props) {
     var _props$body;
     if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
-      throw new Error(i18n.__('Modal needs button/body with it.', 'notificationx'));
+      throw new Error(i18n.__('Modal needs button/body with it.', 'betterdocs'));
     }
     var _useState = React.useState(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3164,7 +3172,7 @@
       options = _useOptions.options,
       option = _useOptions.option;
     if (!options) {
-      throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'notificationx'));
+      throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'betterdocs'));
     }
     var instanceId = useInstanceId(RadioCard);
     var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
@@ -3499,7 +3507,7 @@
   var Submit = function Submit(_ref) {
     var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
     var context = useBuilderContext();
-    var label = (props === null || props === void 0 ? void 0 : props.label) || i18n.__('Save Changes', 'notificationx');
+    var label = (props === null || props === void 0 ? void 0 : props.label) || i18n.__('Save Changes', 'betterdocs');
     if (context.isSubmitting) {
       var _props$loadingLabel;
       label = (_props$loadingLabel = props === null || props === void 0 ? void 0 : props.loadingLabel) !== null && _props$loadingLabel !== void 0 ? _props$loadingLabel : 'Saving...';
@@ -4156,12 +4164,12 @@
       submit = _ref.submit,
       rest = _objectWithoutProperties(_ref, _excluded);
     if (tabs === undefined) {
-      throw new Error(i18n.__("There are no #tabs args defined in props.", 'notificationx'));
+      throw new Error(i18n.__("There are no #tabs args defined in props.", 'betterdocs'));
     }
     var builderContext = useBuilderContext();
     var parentIndex = rest.parentIndex || [];
     if (!isArray(tabs)) {
-      throw new Error(i18n.__('Not an array.', 'notificationx'));
+      throw new Error(i18n.__('Not an array.', 'betterdocs'));
     }
     var _useState = React.useState([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -4220,7 +4228,7 @@
   var Menu = function Menu(props) {
     var _context$values, _context$values2;
     if (props.fields === undefined) {
-      throw new Error(i18n.__("There are no tabs defined!", 'notificationx'));
+      throw new Error(i18n.__("There are no tabs defined!", 'betterdocs'));
     }
     var active = props.active,
       setActive = props.setActive,

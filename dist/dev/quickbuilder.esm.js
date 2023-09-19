@@ -1,12 +1,12 @@
-import React, { createElement, Fragment, useContext, createContext, useState, useEffect, useRef, useReducer, useCallback, useLayoutEffect, useMemo } from 'react';
+import React, { useContext, createContext, useState, useEffect, useRef, useReducer, useCallback, useLayoutEffect, createElement, Fragment, useMemo } from 'react';
 import { select, dispatch, registerStore } from '@wordpress/data';
+import { sprintf, __ } from '@wordpress/i18n';
+import intersect from 'intersect';
 import apiFetch from '@wordpress/api-fetch';
 import { toPath, clone } from 'lodash-es';
 import { __experimentalGetSettings, date } from '@wordpress/date';
 import moment from 'moment';
-import intersect from 'intersect';
-import { sprintf, __ } from '@wordpress/i18n';
-import { applyFilters, doAction } from '@wordpress/hooks';
+import { doAction, applyFilters } from '@wordpress/hooks';
 import classNames from 'classnames';
 import Swal from 'sweetalert2';
 import ReactSelect from 'react-select';
@@ -418,7 +418,7 @@ var rules = {
   },
   allOf: function allOf(key, values, data) {
     if (!Array.isArray(values)) {
-      throw Error(__('"allOf" condition requires an array as #3 argument', 'notificationx'));
+      throw Error(__('"allOf" condition requires an array as #3 argument', 'betterdocs'));
     }
     var dataValues = get(data, key);
     return values.every(function (currentValue) {
@@ -427,7 +427,7 @@ var rules = {
   },
   anyOf: function anyOf(key, values, data) {
     if (!Array.isArray(values)) {
-      throw Error(__('"anyOf" condition requires an array as #3 argument', 'notificationx'));
+      throw Error(__('"anyOf" condition requires an array as #3 argument', 'betterdocs'));
     }
     var dataValue = get(data, key);
     return values.includes(dataValue);
@@ -454,7 +454,7 @@ var logicalRules = {
   },
   not: function not(data) {
     if (data.length !== 1) {
-      throw Error(__('"not" can have only one comparison rule, multiple rules given', 'notificationx'));
+      throw Error(__('"not" can have only one comparison rule, multiple rules given', 'betterdocs'));
     }
     return !data[0];
   }
@@ -470,7 +470,7 @@ var processRule = function processRule(_ref, data) {
     key = _ref[1],
     value = _ref[2];
   if (typeof condition !== "string" || rules[condition] === undefined) {
-    throw Error(sprintf(__("Invalid comparison rule %s.", 'notificationx'), condition));
+    throw Error(sprintf(__("Invalid comparison rule %s.", 'betterdocs'), condition));
   }
   return rules[condition](key, value, data);
 };
@@ -739,10 +739,6 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-var Action = function Action(props) {
-  return createElement(Fragment, null, applyFilters(props.action, '', props));
-};
-
 var BuilderContext = /*#__PURE__*/createContext(undefined);
 BuilderContext.displayName = process.env.NODE_ENV === 'production' ? 'Anonymous' : 'BuilderContext';
 var BuilderProvider = BuilderContext.Provider;
@@ -928,11 +924,11 @@ var SweetAlert = function SweetAlert() {
   var _args$target, _args$type, _args$title, _args$text, _args$icon, _args$timer;
   var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return Swal.fire(_objectSpread$e({
-    target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
+    target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#betterdocs",
     type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
     html: args === null || args === void 0 ? void 0 : args.html,
-    title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : __("Title Goes Here: title", 'notificationx'),
-    text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : __("Test Goes Here: text", 'notificationx'),
+    title: (_args$title = args === null || args === void 0 ? void 0 : args.title) !== null && _args$title !== void 0 ? _args$title : __("Title Goes Here: title", 'betterdocs'),
+    text: (_args$text = args === null || args === void 0 ? void 0 : args.text) !== null && _args$text !== void 0 ? _args$text : __("Test Goes Here: text", 'betterdocs'),
     icon: (_args$icon = args === null || args === void 0 ? void 0 : args.icon) !== null && _args$icon !== void 0 ? _args$icon : (args === null || args === void 0 ? void 0 : args.type) || "success",
     timer: (_args$timer = args === null || args === void 0 ? void 0 : args.timer) !== null && _args$timer !== void 0 ? _args$timer : null
   }, args));
@@ -1835,10 +1831,14 @@ var withProps = function withProps(WrappedComponent) {
   return WithProps;
 };
 
+var Action = function Action(props) {
+  return createElement(Fragment, null, applyFilters(props.action, '', props));
+};
+
 var Button = function Button(props) {
   var _props$onClick, _props$text, _props$text2, _props$text3;
   if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
-    throw new Error(__('Button has a required params #text.', 'notificationx'));
+    throw new Error(__('Button has a required params #text.', 'betterdocs'));
   }
   var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", 'ajax', 'text']);
   var _useState = useState(false),
@@ -1887,7 +1887,7 @@ var Button = function Button(props) {
           }
         });
         if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
-          props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || __("Something went wrong.", 'notificationx'));
+          props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || __("Something went wrong.", 'betterdocs'));
         }
       });
     }
@@ -2146,6 +2146,7 @@ var CodeViewer = function CodeViewer(props) {
 var CodeViewer$1 = /*#__PURE__*/React.memo(CodeViewer);
 
 var ColorPicker = function ColorPicker(props) {
+  var _props$reset_text;
   var value = props.value,
     name = props.name,
     id = props.id,
@@ -2158,13 +2159,13 @@ var ColorPicker = function ColorPicker(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     color = _useState4[0],
     setColor = _useState4[1];
-  var _useState5 = useState(null),
+  var _useState5 = useState(value || null),
     _useState6 = _slicedToArray(_useState5, 2),
     defaultColor = _useState6[0],
     setDefaultColor = _useState6[1];
   var closeRef = useRef(null);
   useEffect(function () {
-    setDefaultColor(value);
+    if (value) setDefaultColor(value);else setDefaultColor("#ffffff00");
   }, []);
   var handleCloseRef = function handleCloseRef(ref) {
     useEffect(function () {
@@ -2182,7 +2183,7 @@ var ColorPicker = function ColorPicker(props) {
   useEffect(function () {
     onChange({
       target: {
-        type: 'colorpicker',
+        type: "colorpicker",
         name: name,
         value: color
       }
@@ -2192,33 +2193,40 @@ var ColorPicker = function ColorPicker(props) {
   return createElement(Fragment, null, createElement("div", {
     className: "wprf-colorpicker-wrap",
     ref: closeRef
+  }, createElement("div", {
+    className: "wprf-colorpicker-screen",
+    onClick: function onClick() {
+      return setShowPicker(!showPicker);
+    }
   }, createElement("input", {
     type: "hidden",
     value: value,
     name: name,
     id: id
   }), createElement("span", {
+    className: "wprf-picker-code"
+  }, value || defaultColor), createElement("span", {
     className: "wprf-picker-display",
     style: {
-      backgroundColor: value,
-      borderColor: value
-    },
-    onClick: function onClick() {
-      return setShowPicker(!showPicker);
+      backgroundColor: value
     }
-  }), showPicker && createElement(Fragment, null, createElement("button", {
+  })), showPicker && createElement("div", {
+    className: "wprf-colorpicker"
+  }, createElement(ColorPicker$2, {
+    color: value || defaultColor,
+    onChangeComplete: function onChangeComplete(event) {
+      return setColor(event.hex);
+    }
+  }), createElement("div", {
+    className: "wprf-colorpicker-reset-wrap"
+  }, createElement("button", {
     className: "wprf-colorpicker-reset",
     onClick: function onClick(e) {
       e.preventDefault();
       setColor(defaultColor);
       setShowPicker(false);
     }
-  }, __('Reset', 'notificationx')), createElement(ColorPicker$2, {
-    color: value,
-    onChangeComplete: function onChangeComplete(event) {
-      return setColor(event.hex);
-    }
-  }))));
+  }, (_props$reset_text = props === null || props === void 0 ? void 0 : props.reset_text) !== null && _props$reset_text !== void 0 ? _props$reset_text : __("Reset", "betterdocs"))))));
 };
 var ColorPicker$1 = withLabel(ColorPicker);
 
@@ -2569,7 +2577,7 @@ var ModalHeader = function ModalHeader(_ref) {
 };
 
 var Loading = function Loading(props) {
-  return createElement("p", null, __('Loading...', 'notificationx'));
+  return createElement("p", null, __('Loading...', 'betterdocs'));
 };
 
 var toolbarOptions = {
@@ -2734,7 +2742,7 @@ var Checkbox$1 = withLabel(Checkbox);
 var Field = function Field(props) {
   if (!props.type || props.type.length === 0) {
     console.error(props);
-    throw new Error(__("Field must have a #type. see documentation.", "notificationx"));
+    throw new Error(__("Field must have a #type. see documentation.", "betterdocs"));
   }
   switch (props.type) {
     case "text":
@@ -2809,7 +2817,7 @@ var Group = function Group(props) {
     fields = props.fields,
     rest = _objectWithoutProperties(props, _excluded$2);
   if (!fields || !isArray(fields) || fields.length === 0) {
-    throw new Error(__('You should give a #fields arguments to a group field.', 'notificationx'));
+    throw new Error(__('You should give a #fields arguments to a group field.', 'betterdocs'));
   }
   var builderContext = useBuilderContext();
   var handleChange = useCallback(function (event) {
@@ -2928,10 +2936,10 @@ var JsonUploader = function JsonUploader(props) {
     }
     var file = e.target.files[0];
     if ((file === null || file === void 0 ? void 0 : file.size) == 0) {
-      props.context.alerts.toast('error', __("File can't be empty.", 'notificationx'));
+      props.context.alerts.toast('error', __("File can't be empty.", 'betterdocs'));
       return;
     } else if ((file === null || file === void 0 ? void 0 : file.type) != 'application/json' && (file === null || file === void 0 ? void 0 : file.type) != 'text/json') {
-      props.context.alerts.toast('error', __("Invalid file type.", 'notificationx'));
+      props.context.alerts.toast('error', __("Invalid file type.", 'betterdocs'));
       return;
     }
     setUploadedFile(file);
@@ -3089,7 +3097,7 @@ var Message = function Message(props) {
 var Modal = function Modal(props) {
   var _props$body;
   if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
-    throw new Error(__('Modal needs button/body with it.', 'notificationx'));
+    throw new Error(__('Modal needs button/body with it.', 'betterdocs'));
   }
   var _useState = useState(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -3167,7 +3175,7 @@ var RadioCard = function RadioCard(props) {
     options = _useOptions.options,
     option = _useOptions.option;
   if (!options) {
-    throw new Error(__('#options is a required arguments for RadioCard field.', 'notificationx'));
+    throw new Error(__('#options is a required arguments for RadioCard field.', 'betterdocs'));
   }
   var instanceId = useInstanceId(RadioCard);
   var componentClasses = classNames(["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
@@ -3502,7 +3510,7 @@ function _objectDestructuringEmpty(obj) {
 var Submit = function Submit(_ref) {
   var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
   var context = useBuilderContext();
-  var label = (props === null || props === void 0 ? void 0 : props.label) || __('Save Changes', 'notificationx');
+  var label = (props === null || props === void 0 ? void 0 : props.label) || __('Save Changes', 'betterdocs');
   if (context.isSubmitting) {
     var _props$loadingLabel;
     label = (_props$loadingLabel = props === null || props === void 0 ? void 0 : props.loadingLabel) !== null && _props$loadingLabel !== void 0 ? _props$loadingLabel : 'Saving...';
@@ -4159,12 +4167,12 @@ var Content = function Content(_ref) {
     submit = _ref.submit,
     rest = _objectWithoutProperties(_ref, _excluded);
   if (tabs === undefined) {
-    throw new Error(__("There are no #tabs args defined in props.", 'notificationx'));
+    throw new Error(__("There are no #tabs args defined in props.", 'betterdocs'));
   }
   var builderContext = useBuilderContext();
   var parentIndex = rest.parentIndex || [];
   if (!isArray(tabs)) {
-    throw new Error(__('Not an array.', 'notificationx'));
+    throw new Error(__('Not an array.', 'betterdocs'));
   }
   var _useState = useState([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -4223,7 +4231,7 @@ var Content = function Content(_ref) {
 var Menu = function Menu(props) {
   var _context$values, _context$values2;
   if (props.fields === undefined) {
-    throw new Error(__("There are no tabs defined!", 'notificationx'));
+    throw new Error(__("There are no tabs defined!", 'betterdocs'));
   }
   var active = props.active,
     setActive = props.setActive,

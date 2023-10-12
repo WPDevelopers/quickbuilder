@@ -4142,15 +4142,20 @@
     return React.createElement("div", {
       className: "wprf-stepped-button"
     }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
-      var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4;
+      var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4, _props$config$buttons5;
       return React.createElement(React__default["default"].Fragment, {
         key: "button_".concat(button, "_").concat(index)
-      }, (button === 'next' && nextTab !== undefined || button === 'prev' && prevTab !== undefined) && React.createElement(components.Button, {
+      }, button === "skip" && nextTab !== undefined && React.createElement(components.Button, {
         className: "wprf-btn wprf-step-btn-".concat(button),
         onClick: function onClick() {
-          return props.setActive(button === 'next' ? nextTab : prevTab);
+          return props.setActive(nextTab);
         }
-      }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), nextTab == undefined && ((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.type) && React.createElement(Field$1, (_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4[button]));
+      }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), (button === "next" && nextTab !== undefined || button === "prev" && prevTab !== undefined) && React.createElement(components.Button, {
+        className: "wprf-btn wprf-step-btn-".concat(button),
+        onClick: function onClick() {
+          return props.setActive(button === "next" ? nextTab : prevTab);
+        }
+      }, (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2[button]), nextTab == undefined && ((_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : (_props$config$buttons4 = _props$config$buttons3[button]) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4.type) && React.createElement(Field$1, (_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 ? void 0 : _props$config$buttons5[button]));
     }));
   };
   var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
@@ -4228,7 +4233,7 @@
   var Menu = function Menu(props) {
     var _context$values, _context$values2;
     if (props.fields === undefined) {
-      throw new Error(i18n.__("There are no tabs defined!", 'betterdocs'));
+      throw new Error(i18n.__("There are no tabs defined!", "betterdocs"));
     }
     var active = props.active,
       setActive = props.setActive,
@@ -4264,10 +4269,14 @@
           var _props$clickable;
           return ((_props$clickable = props === null || props === void 0 ? void 0 : props.clickable) !== null && _props$clickable !== void 0 ? _props$clickable : true) && setActive(tab.id);
         }
-      }, (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? React.createElement("img", {
+      }, props !== null && props !== void 0 && props.tab_number ? React.createElement("span", {
+        className: "icon"
+      }, React.createElement("span", {
+        className: "count"
+      }, index + 1)) : "", (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? React.createElement("img", {
         src: tab.icon,
         alt: tab === null || tab === void 0 ? void 0 : tab.label
-      }) : isObject(tab.icon) ? context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : (_context$icons$tab$ic = _context$icons[tab === null || tab === void 0 ? void 0 : (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons$tab$ic === void 0 ? void 0 : _context$icons$tab$ic[tab === null || tab === void 0 ? void 0 : (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), React.createElement("span", null, tab.label));
+      }) : isObject(tab.icon) ? context === null || context === void 0 ? void 0 : (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : (_context$icons$tab$ic = _context$icons[tab === null || tab === void 0 ? void 0 : (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons$tab$ic === void 0 ? void 0 : _context$icons$tab$ic[tab === null || tab === void 0 ? void 0 : (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ""), React.createElement("span", null, tab.label));
     })));
   };
 

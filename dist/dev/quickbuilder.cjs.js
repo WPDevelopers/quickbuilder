@@ -3523,6 +3523,51 @@ ResponsiveNumber.defaultProps = {
 };
 var ResponsiveNumber$1 = withLabel( /*#__PURE__*/React__default["default"].memo(ResponsiveNumber));
 
+var SteppedButton = function SteppedButton(props) {
+  var _useState = React.useState(undefined),
+    _useState2 = _slicedToArray(_useState, 2),
+    nextTab = _useState2[0],
+    setNextTab = _useState2[1];
+  var _useState3 = React.useState(undefined),
+    _useState4 = _slicedToArray(_useState3, 2),
+    prevTab = _useState4[0],
+    setPrevTab = _useState4[1];
+  useBuilderContext();
+  React.useEffect(function () {
+    var tabIds = props.fields.map(function (tab) {
+      return tab.id;
+    });
+    var currentTabIndex = tabIds.findIndex(function (tab) {
+      return tab === props.active;
+    });
+    if (currentTabIndex != -1) {
+      setPrevTab(tabIds[currentTabIndex - 1]);
+    }
+    if (currentTabIndex <= tabIds.length) {
+      setNextTab(tabIds[currentTabIndex + 1]);
+    }
+  }, [props.active, props.fields]);
+  return React.createElement("div", {
+    className: "wprf-stepped-button"
+  }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
+    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4, _props$config$buttons5, _props$config$buttons6, _props$config$buttons7, _props$config$buttons8, _props$config$buttons9, _props$config$buttons10, _props$config$buttons11, _props$config$buttons12;
+    return React.createElement(React__default["default"].Fragment, {
+      key: "button_".concat(button, "_").concat(index)
+    }, button === "skip" && nextTab !== undefined && React.createElement(components.Button, {
+      className: "wprf-btn wprf-step-btn-".concat(button),
+      onClick: function onClick() {
+        return props.setActive(nextTab);
+      }
+    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), (button === "next" && nextTab !== undefined || button === "prev" && prevTab !== undefined) && React.createElement(components.Button, {
+      className: "wprf-btn wprf-step-btn-".concat(button),
+      onClick: function onClick() {
+        return props.setActive(button === "next" ? nextTab : prevTab);
+      }
+    }, _typeof$1((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2[button]) === "object" ? React.createElement(React.Fragment, null, (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : (_props$config$buttons4 = _props$config$buttons3[button]) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4.condition) ? (_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 ? void 0 : (_props$config$buttons6 = _props$config$buttons5[button]) === null || _props$config$buttons6 === void 0 ? void 0 : _props$config$buttons6.customName : (_props$config$buttons7 = props.config.buttons) === null || _props$config$buttons7 === void 0 ? void 0 : (_props$config$buttons8 = _props$config$buttons7[button]) === null || _props$config$buttons8 === void 0 ? void 0 : _props$config$buttons8.name) : (_props$config$buttons9 = props.config.buttons) === null || _props$config$buttons9 === void 0 ? void 0 : _props$config$buttons9[button]), nextTab == undefined && ((_props$config$buttons10 = props.config.buttons) === null || _props$config$buttons10 === void 0 ? void 0 : (_props$config$buttons11 = _props$config$buttons10[button]) === null || _props$config$buttons11 === void 0 ? void 0 : _props$config$buttons11.type) && React.createElement(Field$1, (_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 ? void 0 : _props$config$buttons12[button]));
+  }));
+};
+var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
+
 function _objectDestructuringEmpty(obj) {
   if (obj == null) throw new TypeError("Cannot destructure " + obj);
 }
@@ -3552,7 +3597,7 @@ var Submit = function Submit(_ref) {
 };
 
 var Section = function Section(props) {
-  var _props$collapsed;
+  var _props$collapsed, _builderContext$confi;
   var _props$searchable = props.searchable,
     searchable = _props$searchable === void 0 ? false : _props$searchable,
     searchNotFoundMessage = props.searchNotFoundMessage,
@@ -3646,7 +3691,14 @@ var Section = function Section(props) {
     }
   }))) : React.createElement("div", {
     className: "wprf-section-fields"
-  }, filteredFields), props.showSubmit && React.createElement(Submit, builderContext.submit));
+  }, filteredFields), props.showSubmit && React.createElement(Submit, builderContext.submit), props.showSteps && React.createElement(SteppedButton$1, {
+    fields: builderContext.tabs,
+    active: builderContext.config.active,
+    setActive: builderContext.setActiveTab,
+    config: (_builderContext$confi = builderContext.config.step) !== null && _builderContext$confi !== void 0 ? _builderContext$confi : {
+      show: false
+    }
+  }));
 };
 var Section$1 = /*#__PURE__*/React__default["default"].memo(Section);
 
@@ -4137,51 +4189,6 @@ var InnerContent = function InnerContent(_ref) {
   }, [_fields]);
   return React.createElement(React.Fragment, null, fieldViews);
 };
-
-var SteppedButton = function SteppedButton(props) {
-  var _useState = React.useState(undefined),
-    _useState2 = _slicedToArray(_useState, 2),
-    nextTab = _useState2[0],
-    setNextTab = _useState2[1];
-  var _useState3 = React.useState(undefined),
-    _useState4 = _slicedToArray(_useState3, 2),
-    prevTab = _useState4[0],
-    setPrevTab = _useState4[1];
-  useBuilderContext();
-  React.useEffect(function () {
-    var tabIds = props.fields.map(function (tab) {
-      return tab.id;
-    });
-    var currentTabIndex = tabIds.findIndex(function (tab) {
-      return tab === props.active;
-    });
-    if (currentTabIndex != -1) {
-      setPrevTab(tabIds[currentTabIndex - 1]);
-    }
-    if (currentTabIndex <= tabIds.length) {
-      setNextTab(tabIds[currentTabIndex + 1]);
-    }
-  }, [props.active, props.fields]);
-  return React.createElement("div", {
-    className: "wprf-stepped-button"
-  }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
-    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4, _props$config$buttons5;
-    return React.createElement(React__default["default"].Fragment, {
-      key: "button_".concat(button, "_").concat(index)
-    }, button === "skip" && nextTab !== undefined && React.createElement(components.Button, {
-      className: "wprf-btn wprf-step-btn-".concat(button),
-      onClick: function onClick() {
-        return props.setActive(nextTab);
-      }
-    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), (button === "next" && nextTab !== undefined || button === "prev" && prevTab !== undefined) && React.createElement(components.Button, {
-      className: "wprf-btn wprf-step-btn-".concat(button),
-      onClick: function onClick() {
-        return props.setActive(button === "next" ? nextTab : prevTab);
-      }
-    }, (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2[button]), nextTab == undefined && ((_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : (_props$config$buttons4 = _props$config$buttons3[button]) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4.type) && React.createElement(Field$1, (_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 ? void 0 : _props$config$buttons5[button]));
-  }));
-};
-var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
 
 var _excluded = ["fields", "active", "setActive", "submit"];
 var Content = function Content(_ref) {

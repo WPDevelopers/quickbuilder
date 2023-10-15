@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useBuilderContext } from "../core/hooks";
 import { sortingFields } from "../core/utils";
 import { Field } from "../fields";
+import SteppedButton from "./tabs/SteppedButton";
 import Submit from "./tabs/Submit";
 
 const Section = (props) => {
@@ -112,6 +113,14 @@ const Section = (props) => {
 				<div className="wprf-section-fields">{filteredFields}</div>
 			)}
 			{props.showSubmit && <Submit {...builderContext.submit} />}
+			{props.showSteps && (
+				<SteppedButton
+					fields={builderContext.tabs}
+					active={builderContext.config.active}
+					setActive={builderContext.setActiveTab}
+					config={builderContext.config.step ?? { show: false }}
+				/>
+			)}
 		</div>
 	);
 };

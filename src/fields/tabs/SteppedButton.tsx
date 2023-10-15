@@ -26,6 +26,7 @@ const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
 				Object.keys(props.config.buttons).map((button, index) => {
 					return (
 						<React.Fragment key={`button_${button}_${index}`}>
+							{/* {console.log(props.config.buttons?.[button]?.type)} */}
 							{button === "skip" && nextTab !== undefined && (
 								<Button
 									className={`wprf-btn wprf-step-btn-${button}`}
@@ -47,7 +48,20 @@ const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
 										)
 									}
 								>
-									{props.config.buttons?.[button]}
+									{typeof props.config.buttons?.[button] ===
+									"object" ? (
+										<>
+											{props?.active ===
+											props.config.buttons?.[button]
+												?.condition
+												? props.config.buttons?.[button]
+														?.customName
+												: props.config.buttons?.[button]
+														?.name}
+										</>
+									) : (
+										props.config.buttons?.[button]
+									)}
 								</Button>
 							)}
 							{nextTab == undefined &&

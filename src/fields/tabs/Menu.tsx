@@ -3,6 +3,7 @@ import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { isObject, isString, isVisible } from "../../core/utils";
 import { Fields, TabMenuConfig } from "../../types/Tabs";
+import { BadgeComp } from "../../core/components/Badge";
 
 const Menu: React.FC<TabMenuConfig> = (props) => {
 	if (props.fields === undefined) {
@@ -67,6 +68,14 @@ const Menu: React.FC<TabMenuConfig> = (props) => {
 								""
 							))}
 						<span>{tab.label}</span>
+						{tab?.is_pro ? (
+							<BadgeComp
+								componentClasses='wprf-badge-item'
+								label="Pro"
+							/>
+						) : (
+							<></>
+						)}
 					</li>
 				))}
 			</ul>

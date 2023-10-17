@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import { useBuilderContext } from "../hooks";
 
-const BadgeComp = ({ componentClasses, label }) => {
+export const BadgeComp = ({ componentClasses, label }) => {
 	return (
 		<div className="wprf-badge">
 			<span className="wprf-badge-icon">

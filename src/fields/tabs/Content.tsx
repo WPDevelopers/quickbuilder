@@ -103,7 +103,6 @@ const Content: React.FC<TabContentConfig> = ({
 				</div>
 				{applyFilters("wprf_tab_content", "", rest)}
 			</div>
-			{console.log(rest)}
 			{rest?.step?.show && (
 				<SteppedButton
 					fields={tabsFields}

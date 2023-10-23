@@ -103,18 +103,15 @@ const Content: React.FC<TabContentConfig> = ({
 				</div>
 				{applyFilters("wprf_tab_content", "", rest)}
 			</div>
-			{console.log(rest.step)}
-			{/* {rest?.step?.show &&
-				(rest?.step?.rules
-					? when(rest?.step?.rules, { rest, config: { active } })
-					: true) && (
-					<SteppedButton
-						fields={tabsFields}
-						active={active}
-						setActive={setActive}
-						config={rest.step ?? { show: false }}
-					/>
-				)} */}
+			{console.log(rest)}
+			{rest?.step?.show && (
+				<SteppedButton
+					fields={tabsFields}
+					active={active}
+					setActive={setActive}
+					config={rest.step ?? { show: false }}
+				/>
+			)}
 			{(submit?.show ?? true) &&
 				(submit?.rules
 					? when(submit?.rules, { rest, config: { active } })

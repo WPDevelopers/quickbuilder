@@ -10,6 +10,7 @@ export interface Field {
 export type Fields = Array<Field>;
 
 interface Step {
+    'rules'    : [],
     'show'    : boolean,
     'buttons'?: { [key: string] : string } | Field,
 }

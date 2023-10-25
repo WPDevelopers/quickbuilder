@@ -2099,7 +2099,7 @@ var CheckboxSelect$1 = withLabel(CheckboxSelect);
 function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$a(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var CodeViewer = function CodeViewer(props) {
-  var _props$code;
+  var _props$code2;
   var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
   var _useState = useState(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -2117,7 +2117,8 @@ var CodeViewer = function CodeViewer(props) {
     };
   }, [isCopied]);
   var handleCopy = function handleCopy() {
-    copy(props.value, {
+    var _props$code;
+    copy((_props$code = props === null || props === void 0 ? void 0 : props.code) !== null && _props$code !== void 0 ? _props$code : (props === null || props === void 0 ? void 0 : props["default"]) || (props === null || props === void 0 ? void 0 : props.value), {
       format: "text/plain",
       onCopy: function onCopy() {
         setIsCopied(true);
@@ -2130,7 +2131,7 @@ var CodeViewer = function CodeViewer(props) {
     className: "wprf-code-viewer-header"
   }, props === null || props === void 0 ? void 0 : props.label), createElement("span", {
     className: "wprf-code-viewer-body"
-  }, /*#__PURE__*/React.createElement("pre", _objectSpread$a({}, validProps), (_props$code = props === null || props === void 0 ? void 0 : props.code) !== null && _props$code !== void 0 ? _props$code : (props === null || props === void 0 ? void 0 : props["default"]) || (props === null || props === void 0 ? void 0 : props.value)), createElement("span", {
+  }, /*#__PURE__*/React.createElement("pre", _objectSpread$a({}, validProps), (_props$code2 = props === null || props === void 0 ? void 0 : props.code) !== null && _props$code2 !== void 0 ? _props$code2 : (props === null || props === void 0 ? void 0 : props["default"]) || (props === null || props === void 0 ? void 0 : props.value)), createElement("span", {
     className: "wprf-clipboard-tooltip ".concat(isCopied ? "active" : "")
   }, createElement("span", {
     className: "wprf-clipboard-tooltip-text"

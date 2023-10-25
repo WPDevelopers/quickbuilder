@@ -4179,12 +4179,12 @@ var Content = function Content(_ref) {
     submit = _ref.submit,
     rest = _objectWithoutProperties(_ref, _excluded);
   if (tabs === undefined) {
-    throw new Error(__("There are no #tabs args defined in props.", 'betterdocs'));
+    throw new Error(__("There are no #tabs args defined in props.", "betterdocs"));
   }
   var builderContext = useBuilderContext();
   var parentIndex = rest.parentIndex || [];
   if (!isArray(tabs)) {
-    throw new Error(__('Not an array.', 'betterdocs'));
+    throw new Error(__("Not an array.", "betterdocs"));
   }
   var _useState = useState([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -4205,7 +4205,7 @@ var Content = function Content(_ref) {
   }, tabs.map(function (tab, index) {
     var _rest$title;
     if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
-      return '';
+      return "";
     }
     var componentClasses = classNames("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
       "wprf-active": active === tab.id
@@ -4225,7 +4225,7 @@ var Content = function Content(_ref) {
       fields: tab === null || tab === void 0 ? void 0 : tab.fields,
       parentIndex: [].concat(_toConsumableArray(parentIndex), [index])
     }));
-  })), applyFilters('wprf_tab_content', '', rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && createElement(SteppedButton$1, {
+  })), applyFilters("wprf_tab_content", "", rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && createElement(SteppedButton$1, {
     fields: tabsFields,
     active: active,
     setActive: setActive,

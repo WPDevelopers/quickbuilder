@@ -27,7 +27,7 @@ const CodeViewer = (props) => {
 	}, [isCopied]);
 
 	const handleCopy = () => {
-		copy(props.value, {
+		copy(props?.code ?? (props?.default || props?.value), {
 			format: "text/plain",
 			onCopy: () => {
 				setIsCopied(true);

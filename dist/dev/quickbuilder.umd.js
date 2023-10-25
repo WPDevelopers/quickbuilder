@@ -4170,7 +4170,7 @@
 
   var _excluded = ["fields", "active", "setActive", "submit"];
   var Content = function Content(_ref) {
-    var _builderContext$value, _builderContext$value2, _builderContext$value3, _rest$step, _rest$step2, _submit$show;
+    var _builderContext$value, _builderContext$value2, _builderContext$value3, _rest$step, _rest$step2, _rest$step3, _rest$step4, _submit$show;
     var tabs = _ref.fields,
       active = _ref.active,
       setActive = _ref.setActive,
@@ -4223,11 +4223,16 @@
         fields: tab === null || tab === void 0 ? void 0 : tab.fields,
         parentIndex: [].concat(_toConsumableArray(parentIndex), [index])
       }));
-    })), hooks.applyFilters("wprf_tab_content", "", rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && React.createElement(SteppedButton$1, {
+    })), hooks.applyFilters("wprf_tab_content", "", rest)), (rest === null || rest === void 0 ? void 0 : (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && (rest !== null && rest !== void 0 && (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 && _rest$step2.rules ? when(rest === null || rest === void 0 ? void 0 : (_rest$step3 = rest.step) === null || _rest$step3 === void 0 ? void 0 : _rest$step3.rules, {
+      rest: rest,
+      config: {
+        active: active
+      }
+    }) : true) && React.createElement(SteppedButton$1, {
       fields: tabsFields,
       active: active,
       setActive: setActive,
-      config: (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 ? _rest$step2 : {
+      config: (_rest$step4 = rest.step) !== null && _rest$step4 !== void 0 ? _rest$step4 : {
         show: false
       }
     }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {

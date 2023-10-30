@@ -1671,18 +1671,40 @@ var ControlField = function ControlField(_ref) {
   var position = _ref.position,
     description = _ref.description,
     renderComponent = _ref.renderComponent,
-    help = _ref.help;
+    help = _ref.help,
+    _ref$enableDisableAct = _ref.enableDisableActive,
+    enableDisableActive = _ref$enableDisableAct === void 0 ? false : _ref$enableDisableAct,
+    _ref$type = _ref.type,
+    type = _ref$type === void 0 ? undefined : _ref$type,
+    _ref$value = _ref.value,
+    value = _ref$value === void 0 ? false : _ref$value;
+  var _useState = React.useState(""),
+    _useState2 = _slicedToArray(_useState, 2),
+    descriptionText = _useState2[0],
+    setDescriptionText = _useState2[1];
+
+  // console.log(enableDisableActive);
+
+  React.useEffect(function () {
+    if (type === "toggle") {
+      if (value) {
+        setDescriptionText(i18n.__("Disable", "quickbuilder"));
+      } else {
+        setDescriptionText(i18n.__("Enable", "quickbuilder"));
+      }
+    }
+  }, [value]);
   return React.createElement("div", {
     className: "wprf-control-field"
-  }, position === 'left' && description && React.createElement("p", {
+  }, position === "left" && description && React.createElement("p", {
     className: "wprf-description",
     dangerouslySetInnerHTML: {
-      __html: description
+      __html: enableDisableActive ? "".concat(descriptionText, " ").concat(description) : description
     }
-  }), renderComponent(), position === 'right' && description && React.createElement("p", {
+  }), renderComponent(), position === "right" && description && React.createElement("p", {
     className: "wprf-description",
     dangerouslySetInnerHTML: {
-      __html: description
+      __html: enableDisableActive ? "".concat(descriptionText, " ").concat(description) : description
     }
   }), help && React.createElement("p", {
     className: "wprf-help",
@@ -1692,7 +1714,7 @@ var ControlField = function ControlField(_ref) {
   }));
 };
 
-var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge"];
+var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "enable_disable_text_active"];
 function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$b(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
@@ -1708,6 +1730,9 @@ var withLabel = function withLabel(WrappedComponent) {
       prevStyle = props.style,
       is_pro = props.is_pro,
       badge = props.badge,
+      value = props.value,
+      _props$enable_disable = props.enable_disable_text_active,
+      enable_disable_text_active = _props$enable_disable === void 0 ? false : _props$enable_disable,
       rest = _objectWithoutProperties(props, _excluded$3);
     // const instanceId = useInstanceId(withLabel);
 
@@ -1745,6 +1770,9 @@ var withLabel = function withLabel(WrappedComponent) {
           help: null,
           description: props === null || props === void 0 ? void 0 : props.description,
           position: styles === null || styles === void 0 ? void 0 : (_styles$description = styles.description) === null || _styles$description === void 0 ? void 0 : _styles$description.position,
+          type: type,
+          value: value,
+          enableDisableActive: enable_disable_text_active,
           renderComponent: function renderComponent() {
             return React.createElement(WrappedComponent, _extends$1({}, validProps, {
               disable: true,
@@ -1772,6 +1800,9 @@ var withLabel = function withLabel(WrappedComponent) {
       help: props === null || props === void 0 ? void 0 : props.help,
       description: props === null || props === void 0 ? void 0 : props.description,
       position: styles === null || styles === void 0 ? void 0 : (_styles$description2 = styles.description) === null || _styles$description2 === void 0 ? void 0 : _styles$description2.position,
+      type: type,
+      value: value,
+      enableDisableActive: enable_disable_text_active,
       renderComponent: function renderComponent() {
         return React.createElement(WrappedComponent, _extends$1({}, validProps, {
           id: id

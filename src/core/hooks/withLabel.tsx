@@ -1,7 +1,7 @@
-import React from "react";
 import classNames from "classnames";
-import { validFieldProps } from "../utils";
+import React from "react";
 import { Badge, ControlField, ControlLabel } from "../components";
+import { validFieldProps } from "../utils";
 
 // import { useInstanceId } from "@wordpress/compose";
 
@@ -15,6 +15,8 @@ const withLabel = (WrappedComponent) => {
 			style: prevStyle,
 			is_pro,
 			badge,
+			value,
+			enable_disable_text_active = false,
 			...rest
 		} = props;
 		// const instanceId = useInstanceId(withLabel);
@@ -58,7 +60,6 @@ const withLabel = (WrappedComponent) => {
 			}
 		);
 
-
 		return (
 			<div className={componentClasses}>
 				{is_pro == true && (
@@ -81,6 +82,11 @@ const withLabel = (WrappedComponent) => {
 									help={null}
 									description={props?.description}
 									position={styles?.description?.position}
+									type={type}
+									value={value}
+									enableDisableActive={
+										enable_disable_text_active
+									}
 									renderComponent={() => (
 										<WrappedComponent
 											{...validProps}
@@ -120,6 +126,9 @@ const withLabel = (WrappedComponent) => {
 							help={props?.help}
 							description={props?.description}
 							position={styles?.description?.position}
+							type={type}
+							value={value}
+							enableDisableActive={enable_disable_text_active}
 							renderComponent={() => (
 								<WrappedComponent {...validProps} id={id} />
 							)}

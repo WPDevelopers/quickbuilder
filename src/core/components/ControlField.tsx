@@ -14,9 +14,9 @@ const ControlField = ({
 	useEffect(() => {
 		if (type === "toggle" && enableDisableActive) {
 			if (value) {
-				setDescription(`${__(`Disable`, "quickbuilder")} ${descriptionText ?? ''}`);
+				setDescription(`${__(`Enabled`, "quickbuilder")} ${descriptionText ?? ''}`);
 			} else {
-				setDescription(`${__(`Enable`, "quickbuilder")} ${descriptionText ?? ''}`);
+				setDescription(`${__(`Disabled`, "quickbuilder")} ${descriptionText ?? ''}`);
 			}
 		}
 	}, [value]);

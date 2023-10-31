@@ -14,6 +14,7 @@ const Input = (props) => {
 		"context",
 		"badge",
 		"popup",
+		"enable_disable_text_active"
 	]);
 	const handleChange = useCallback(
 		(event) =>

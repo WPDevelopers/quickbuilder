@@ -2,23 +2,21 @@ import { __ } from "@wordpress/i18n";
 import React, { useEffect, useState } from "react";
 const ControlField = ({
 	position,
-	description,
+	description: descriptionText,
 	renderComponent,
 	help,
 	enableDisableActive = false,
 	type = undefined,
 	value = false,
 }) => {
-	const [descriptionText, setDescriptionText] = useState("");
-
-	// console.log(enableDisableActive);
+	const [description, setDescription] = useState( descriptionText );
 
 	useEffect(() => {
-		if (type === "toggle") {
+		if (type === "toggle" && enableDisableActive) {
 			if (value) {
-				setDescriptionText(__(`Disable`, "quickbuilder"));
+				setDescription(`${__(`Disable`, "quickbuilder")} ${descriptionText ?? ''}`);
 			} else {
-				setDescriptionText(__(`Enable`, "quickbuilder"));
+				setDescription(`${__(`Enable`, "quickbuilder")} ${descriptionText ?? ''}`);
 			}
 		}
 	}, [value]);
@@ -29,9 +27,7 @@ const ControlField = ({
 				<p
 					className="wprf-description"
 					dangerouslySetInnerHTML={{
-						__html: enableDisableActive
-							? `${descriptionText} ${description}`
-							: description,
+						__html: description,
 					}}
 				></p>
 			)}
@@ -40,9 +36,7 @@ const ControlField = ({
 				<p
 					className="wprf-description"
 					dangerouslySetInnerHTML={{
-						__html: enableDisableActive
-							? `${descriptionText} ${description}`
-							: description,
+						__html: description,
 					}}
 				></p>
 			)}

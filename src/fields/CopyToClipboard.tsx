@@ -16,6 +16,7 @@ const CopyToClipboard = (props) => {
 		"badge",
 		"popup",
 		"type",
+		'descriptionLabel'
 	]);
 
 	const handleChange = useCallback(

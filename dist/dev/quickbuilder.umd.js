@@ -1662,9 +1662,9 @@
     React.useEffect(function () {
       if (type === "toggle" && enableDisableActive) {
         if (value) {
-          setDescription("".concat(i18n.__("Disable", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
+          setDescription("".concat(i18n.__("Enabled", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
         } else {
-          setDescription("".concat(i18n.__("Enable", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
+          setDescription("".concat(i18n.__("Disabled", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
         }
       }
     }, [value]);

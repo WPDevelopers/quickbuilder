@@ -1667,9 +1667,9 @@ var ControlField = function ControlField(_ref) {
   useEffect(function () {
     if (type === "toggle" && enableDisableActive) {
       if (value) {
-        setDescription("".concat(__("Disable", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
+        setDescription("".concat(__("Enabled", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
       } else {
-        setDescription("".concat(__("Enable", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
+        setDescription("".concat(__("Disabled", "quickbuilder"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ''));
       }
     }
   }, [value]);

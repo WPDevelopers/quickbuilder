@@ -1865,35 +1865,36 @@ var Action = function Action(props) {
 };
 
 var Button = function Button(props) {
-  var _props$onClick, _props$text, _props$text2, _props$text3;
+  var _props$text, _props$text2, _props$text3;
   if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
-    throw new Error(__('Button has a required params #text.', 'betterdocs'));
+    throw new Error(__("Button has a required params #text.", "betterdocs"));
   }
-  var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", 'ajax', 'text']);
+  var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", "ajax", "text"]);
   var _useState = useState(false),
     _useState2 = _slicedToArray(_useState, 2),
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
   var handleClick = function handleClick(event) {
+    console.log(props === null || props === void 0 ? void 0 : props.ajax);
     if (props !== null && props !== void 0 && props.ajax) {
       setIsLoading(true);
       hitAAJX(props.ajax, props.context).then(function (res) {
         var _props$ajax, _props$ajax5;
         setIsLoading(false);
-        if ((res === null || res === void 0 ? void 0 : res.status) == 'error') {
+        if ((res === null || res === void 0 ? void 0 : res.status) == "error") {
           throw new Error(res === null || res === void 0 ? void 0 : res.message);
         }
         props.onChange({
           target: {
-            type: 'button',
+            type: "button",
             name: props.name,
             value: true
           }
         });
         if (!((_props$ajax = props.ajax) !== null && _props$ajax !== void 0 && _props$ajax.hideSwal)) {
           var _props$ajax2, _props$ajax2$swal, _props$ajax3, _props$ajax3$swal, _props$ajax4, _props$ajax4$swal;
-          var type = ((_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : (_props$ajax2$swal = _props$ajax2.swal) === null || _props$ajax2$swal === void 0 ? void 0 : _props$ajax2$swal.icon) || 'success';
-          var message = ((_props$ajax3 = props.ajax) === null || _props$ajax3 === void 0 ? void 0 : (_props$ajax3$swal = _props$ajax3.swal) === null || _props$ajax3$swal === void 0 ? void 0 : _props$ajax3$swal.text) || 'Complete';
+          var type = ((_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : (_props$ajax2$swal = _props$ajax2.swal) === null || _props$ajax2$swal === void 0 ? void 0 : _props$ajax2$swal.icon) || "success";
+          var message = ((_props$ajax3 = props.ajax) === null || _props$ajax3 === void 0 ? void 0 : (_props$ajax3$swal = _props$ajax3.swal) === null || _props$ajax3$swal === void 0 ? void 0 : _props$ajax3$swal.text) || "Complete";
           props.context.alerts.toast(type, message, {
             autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 ? void 0 : (_props$ajax4$swal = _props$ajax4.swal) === null || _props$ajax4$swal === void 0 ? void 0 : _props$ajax4$swal.autoClose
           });
@@ -1905,33 +1906,33 @@ var Button = function Button(props) {
         }
       })["catch"](function (err) {
         var _props$ajax6;
-        console.error('Error In Button Called', props.name, err);
+        console.error("Error In Button Called", props.name, err);
         setIsLoading(false);
         //TODO: need to be fixed.
         props.onChange({
           target: {
-            type: 'button',
+            type: "button",
             name: props.name,
             value: false
           }
         });
         if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
-          props.context.alerts.toast('error', (err === null || err === void 0 ? void 0 : err.message) || __("Something went wrong.", 'betterdocs'));
+          props.context.alerts.toast("error", (err === null || err === void 0 ? void 0 : err.message) || __("Something went wrong.", "betterdocs"));
         }
       });
     }
-    useTrigger(props);
+    props !== null && props !== void 0 && props.onClick ? props === null || props === void 0 ? void 0 : props.onClick(event) : useTrigger(props);
   };
   if (props !== null && props !== void 0 && props.href) {
     return createElement("a", {
       href: (props === null || props === void 0 ? void 0 : props.href) === -1 ? props === null || props === void 0 ? void 0 : props.value : props === null || props === void 0 ? void 0 : props.href,
       target: props === null || props === void 0 ? void 0 : props.target,
-      className: classNames('wprf-control wprf-button wprf-href-btn', props === null || props === void 0 ? void 0 : props.classes)
+      className: classNames("wprf-control wprf-button wprf-href-btn", props === null || props === void 0 ? void 0 : props.classes)
     }, props === null || props === void 0 ? void 0 : props.text);
   }
   if (props !== null && props !== void 0 && props.group) {
     var allFields = props.fields.map(function (item, index) {
-      var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
+      var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ["fields", index]);
       return createElement(Field$1, _extends$1({
         key: item.name
       }, item, {
@@ -1945,8 +1946,8 @@ var Button = function Button(props) {
   return createElement(Fragment, null, createElement("button", _extends$1({}, validProps, {
     name: props.name,
     disabled: isLoading,
-    onClick: (_props$onClick = props === null || props === void 0 ? void 0 : props.onClick) !== null && _props$onClick !== void 0 ? _props$onClick : handleClick,
-    className: classNames('wprf-control wprf-button wprf-btn', props === null || props === void 0 ? void 0 : props.classes)
+    onClick: handleClick,
+    className: classNames("wprf-control wprf-button wprf-btn", props === null || props === void 0 ? void 0 : props.classes)
   }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 ? void 0 : (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 ? void 0 : (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 ? void 0 : (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
 };
 var Button$1 = withLabel(Button);
@@ -3487,7 +3488,7 @@ var SteppedButton = function SteppedButton(props) {
   return createElement("div", {
     className: "wprf-stepped-button"
   }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
-    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4, _props$config$buttons5, _props$config$buttons6, _props$config$buttons7, _props$config$buttons8, _props$config$buttons9, _props$config$buttons10, _props$config$buttons11, _props$config$buttons12;
+    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4, _props$config$buttons5, _props$config$buttons6, _props$config$buttons7, _props$config$buttons8, _props$config$buttons9, _props$config$buttons10, _props$config$buttons11, _props$config$buttons12, _props$config$buttons13, _props$config$buttons14;
     return createElement(React.Fragment, {
       key: "button_".concat(button, "_").concat(index)
     }, button === "skip" && nextTab !== undefined && createElement(Button$2, {
@@ -3495,12 +3496,15 @@ var SteppedButton = function SteppedButton(props) {
       onClick: function onClick() {
         return props.setActive(nextTab);
       }
-    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), (button === "next" && nextTab !== undefined || button === "prev" && prevTab !== undefined) && createElement(Button$2, {
+    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), (button === "next" && nextTab !== undefined || button === "prev" && prevTab !== undefined) && createElement(Field$1, {
+      type: "button",
       className: "wprf-btn wprf-step-btn-".concat(button),
+      ajax: (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.ajax,
       onClick: function onClick() {
         return props.setActive(button === "next" ? nextTab : prevTab);
-      }
-    }, _typeof$1((_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2[button]) === "object" ? createElement(Fragment, null, (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : (_props$config$buttons4 = _props$config$buttons3[button]) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4.condition) ? (_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 ? void 0 : (_props$config$buttons6 = _props$config$buttons5[button]) === null || _props$config$buttons6 === void 0 ? void 0 : _props$config$buttons6.customName : (_props$config$buttons7 = props.config.buttons) === null || _props$config$buttons7 === void 0 ? void 0 : (_props$config$buttons8 = _props$config$buttons7[button]) === null || _props$config$buttons8 === void 0 ? void 0 : _props$config$buttons8.name) : (_props$config$buttons9 = props.config.buttons) === null || _props$config$buttons9 === void 0 ? void 0 : _props$config$buttons9[button]), nextTab == undefined && ((_props$config$buttons10 = props.config.buttons) === null || _props$config$buttons10 === void 0 ? void 0 : (_props$config$buttons11 = _props$config$buttons10[button]) === null || _props$config$buttons11 === void 0 ? void 0 : _props$config$buttons11.type) && createElement(Field$1, (_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 ? void 0 : _props$config$buttons12[button]));
+      },
+      text: _typeof$1((_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 ? void 0 : (_props$config$buttons6 = _props$config$buttons5[button]) === null || _props$config$buttons6 === void 0 ? void 0 : _props$config$buttons6.condition) ? (_props$config$buttons7 = props.config.buttons) === null || _props$config$buttons7 === void 0 ? void 0 : (_props$config$buttons8 = _props$config$buttons7[button]) === null || _props$config$buttons8 === void 0 ? void 0 : _props$config$buttons8.customName : (_props$config$buttons9 = props.config.buttons) === null || _props$config$buttons9 === void 0 ? void 0 : (_props$config$buttons10 = _props$config$buttons9[button]) === null || _props$config$buttons10 === void 0 ? void 0 : _props$config$buttons10.name : (_props$config$buttons11 = props.config.buttons) === null || _props$config$buttons11 === void 0 ? void 0 : _props$config$buttons11[button]
+    }), nextTab == undefined && ((_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 ? void 0 : (_props$config$buttons13 = _props$config$buttons12[button]) === null || _props$config$buttons13 === void 0 ? void 0 : _props$config$buttons13.type) && createElement(Field$1, (_props$config$buttons14 = props.config.buttons) === null || _props$config$buttons14 === void 0 ? void 0 : _props$config$buttons14[button]));
   }));
 };
 var SteppedButton$1 = /*#__PURE__*/React.memo(SteppedButton);
@@ -4187,14 +4191,14 @@ var Content = function Content(_ref) {
     config: {
       active: active
     }
-  }) : true) && createElement(SteppedButton$1, {
+  }) : true) && createElement(SteppedButton$1, _extends$1({
     fields: tabsFields,
     active: active,
     setActive: setActive,
     config: (_rest$step4 = rest.step) !== null && _rest$step4 !== void 0 ? _rest$step4 : {
       show: false
     }
-  }), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
+  }, rest)), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
     rest: rest,
     config: {
       active: active

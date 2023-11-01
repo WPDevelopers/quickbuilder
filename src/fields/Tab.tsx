@@ -15,6 +15,14 @@ const Tab: React.FC<TabConfig> = (props) => {
 	const builderContext = useBuilderContext();
 	const [activeTab, setActiveTab] = useState(props?.value || props?.active);
 
+	useEffect(() => {
+		if (props?.save_locally) {
+			let locally_saved_data =
+				localStorage.getItem("quickbuilder_active_tab") ?? null;
+			locally_saved_data && setActiveTab(JSON.parse(locally_saved_data));
+		}
+	}, []);
+
 	const saveValue = props?.save ?? true;
 
 	const componentClasses = classNames(
@@ -32,6 +40,15 @@ const Tab: React.FC<TabConfig> = (props) => {
 			setActiveTab(_activeTab);
 		}
 	}, [props?.value]);
+
+	useEffect(() => {
+		if (props?.save_locally) {
+			localStorage.setItem(
+				"quickbuilder_active_tab",
+				JSON.stringify(activeTab)
+			);
+		}
+	}, [activeTab]);
 
 	useEffect(() => {
 		if (props.value !== activeTab && saveValue) {

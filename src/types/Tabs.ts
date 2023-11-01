@@ -45,6 +45,7 @@ export interface SteppedButtonConfig {
     setActive: (tabId?: string) => void,
     fields   : Fields,
     config   : Step,
+	ajax? : any
 }
 
 // export type TabContentProps = TabConfig &&

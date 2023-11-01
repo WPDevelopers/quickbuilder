@@ -38,8 +38,10 @@ const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
 							{((button === "next" && nextTab !== undefined) ||
 								(button === "prev" &&
 									prevTab !== undefined)) && (
-								<Button
+								<Field
+									type="button"
 									className={`wprf-btn wprf-step-btn-${button}`}
+									ajax={props.config.buttons?.[button]?.ajax}
 									onClick={() =>
 										props.setActive(
 											button === "next"
@@ -47,22 +49,20 @@ const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
 												: prevTab
 										)
 									}
-								>
-									{typeof props.config.buttons?.[button] ===
-									"object" ? (
-										<>
-											{props?.active ===
-											props.config.buttons?.[button]
-												?.condition
+									text={
+										typeof props.config.buttons?.[
+											button
+										] === "object"
+											? props?.active ===
+											  props.config.buttons?.[button]
+													?.condition
 												? props.config.buttons?.[button]
 														?.customName
 												: props.config.buttons?.[button]
-														?.name}
-										</>
-									) : (
-										props.config.buttons?.[button]
-									)}
-								</Button>
+														?.name
+											: props.config.buttons?.[button]
+									}
+								/>
 							)}
 							{nextTab == undefined &&
 								props.config.buttons?.[button]?.type && (

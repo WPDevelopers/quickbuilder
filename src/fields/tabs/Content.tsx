@@ -112,6 +112,7 @@ const Content: React.FC<TabContentConfig> = ({
 						active={active}
 						setActive={setActive}
 						config={rest.step ?? { show: false }}
+						{...rest}
 					/>
 				)}
 			{(submit?.show ?? true) &&

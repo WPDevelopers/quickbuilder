@@ -1871,7 +1871,6 @@
       isLoading = _useState2[0],
       setIsLoading = _useState2[1];
     var handleClick = function handleClick(event) {
-      console.log(props === null || props === void 0 ? void 0 : props.ajax);
       if (props !== null && props !== void 0 && props.ajax) {
         setIsLoading(true);
         hitAAJX(props.ajax, props.context).then(function (res) {

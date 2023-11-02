@@ -3465,7 +3465,7 @@
       _useState4 = _slicedToArray(_useState3, 2),
       prevTab = _useState4[0],
       setPrevTab = _useState4[1];
-    useBuilderContext();
+    var builderContext = useBuilderContext();
     React.useEffect(function () {
       var tabIds = props.fields.map(function (tab) {
         return tab.id;
@@ -3480,6 +3480,10 @@
         setNextTab(tabIds[currentTabIndex + 1]);
       }
     }, [props.active, props.fields]);
+    React.useEffect(function () {
+      var _builderContext$confi;
+      builderContext.setFieldValue("active_tab", builderContext === null || builderContext === void 0 ? void 0 : (_builderContext$confi = builderContext.config) === null || _builderContext$confi === void 0 ? void 0 : _builderContext$confi.active);
+    }, [props.active]);
     return React.createElement("div", {
       className: "wprf-stepped-button"
     }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
@@ -3496,6 +3500,7 @@
       }, React.createElement(Field$1, {
         type: "button",
         ajax: (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.ajax,
+        name: "step-button",
         onClick: function onClick() {
           return props.setActive(button === "next" ? nextTab : prevTab);
         },

@@ -26,7 +26,6 @@ const Button = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleClick = (event) => {
-		console.log(props?.ajax);
 		if (props?.ajax) {
 			setIsLoading(true);
 			hitAAJX(props.ajax, props.context)

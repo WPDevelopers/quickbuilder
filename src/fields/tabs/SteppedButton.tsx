@@ -20,6 +20,13 @@ const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
 		}
 	}, [props.active, props.fields]);
 
+	useEffect(() => {
+		builderContext.setFieldValue(
+			"active_tab",
+			builderContext?.config?.active
+		);
+	}, [props.active]);
+
 	return (
 		<div className="wprf-stepped-button">
 			{props.config.buttons &&
@@ -46,6 +53,7 @@ const SteppedButton: React.FC<SteppedButtonConfig> = (props) => {
 										ajax={
 											props.config.buttons?.[button]?.ajax
 										}
+										name="step-button"
 										onClick={() =>
 											props.setActive(
 												button === "next"

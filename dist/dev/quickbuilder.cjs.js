@@ -3516,15 +3516,16 @@ var SteppedButton = function SteppedButton(props) {
       onClick: function onClick() {
         return props.setActive(nextTab);
       }
-    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), (button === "next" && nextTab !== undefined || button === "prev" && prevTab !== undefined) && React.createElement(Field$1, {
+    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), (button === "next" && nextTab !== undefined || button === "prev" && prevTab !== undefined) && React.createElement("div", {
+      className: "wprf-btn wprf-step-btn-".concat(button)
+    }, React.createElement(Field$1, {
       type: "button",
-      className: "wprf-btn wprf-step-btn-".concat(button),
       ajax: (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 ? void 0 : (_props$config$buttons3 = _props$config$buttons2[button]) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3.ajax,
       onClick: function onClick() {
         return props.setActive(button === "next" ? nextTab : prevTab);
       },
       text: _typeof$1((_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 ? void 0 : (_props$config$buttons6 = _props$config$buttons5[button]) === null || _props$config$buttons6 === void 0 ? void 0 : _props$config$buttons6.condition) ? (_props$config$buttons7 = props.config.buttons) === null || _props$config$buttons7 === void 0 ? void 0 : (_props$config$buttons8 = _props$config$buttons7[button]) === null || _props$config$buttons8 === void 0 ? void 0 : _props$config$buttons8.customName : (_props$config$buttons9 = props.config.buttons) === null || _props$config$buttons9 === void 0 ? void 0 : (_props$config$buttons10 = _props$config$buttons9[button]) === null || _props$config$buttons10 === void 0 ? void 0 : _props$config$buttons10.name : (_props$config$buttons11 = props.config.buttons) === null || _props$config$buttons11 === void 0 ? void 0 : _props$config$buttons11[button]
-    }), nextTab == undefined && ((_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 ? void 0 : (_props$config$buttons13 = _props$config$buttons12[button]) === null || _props$config$buttons13 === void 0 ? void 0 : _props$config$buttons13.type) && React.createElement(Field$1, (_props$config$buttons14 = props.config.buttons) === null || _props$config$buttons14 === void 0 ? void 0 : _props$config$buttons14[button]));
+    })), nextTab == undefined && ((_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 ? void 0 : (_props$config$buttons13 = _props$config$buttons12[button]) === null || _props$config$buttons13 === void 0 ? void 0 : _props$config$buttons13.type) && React.createElement(Field$1, (_props$config$buttons14 = props.config.buttons) === null || _props$config$buttons14 === void 0 ? void 0 : _props$config$buttons14[button]));
   }));
 };
 var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);

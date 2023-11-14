@@ -230,11 +230,11 @@ export const hitAAJX = (ajax, context = null) => {
 					});
 				}
 				if (response?.data?.download) {
-					downloadFile({
-						data: JSON.stringify(response.data.download),
-						fileName: response?.data?.filename || 'export.json',
-						fileType: 'text/json',
-					})
+					const fileName = response.data.filename || 'export.json';
+					const fileType = response.data.filetype || 'text/json';
+					const data     = response.data.filetype ? response.data.download : JSON.stringify(response.data.download);
+
+					downloadFile({ data, fileName, fileType });
 				}
 
 				if (ajax?.trigger && isString(ajax?.trigger)) {

@@ -276,7 +276,7 @@ export const merge = (array_one: Array<object>, array_two: Array<object>, key: s
 }
 
 
-const downloadFile = ({ data, fileName, fileType }) => {
+export const downloadFile = ({ data, fileName, fileType }) => {
     // Create a blob with the data we want to download as a file
     const blob = new Blob([data], { type: fileType })
     // Create an anchor element and dispatch a click event on it

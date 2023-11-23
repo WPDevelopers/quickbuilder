@@ -126,7 +126,7 @@ const useBuilder = (props) => {
 	}, [setFieldValue, state.values]);
 
 	const handleChange = useEventCallback((eventOrString, validProps) => {
-		if (validProps?.isPro && Boolean(state.is_pro_active) === false) {
+		if ((validProps?.isPro && Boolean(state.is_pro_active) === false) || validProps?.popup?.forced) {
 			state.alerts?.pro_alert(validProps?.popup)?.fire();
 			// return false;
 		}

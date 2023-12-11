@@ -1,6 +1,6 @@
 import React from 'react'
 const ControlLabel = (props) => {
-    const { id, label, badge, badgePosition, context, ...rest } = props;
+    const { id, label, badge, badgePosition,info, context, ...rest } = props;
     if (!(label && label.length > 0)) {
         return null;
     }
@@ -14,6 +14,10 @@ const ControlLabel = (props) => {
         <div className="wprf-control-label">
             {badgePosition == 'left' && badge}
             <label htmlFor={id}>{label}</label>
+            {info && <div className='wprf-info'>
+			<button className='wprf-info-button'>Info</button>
+				<p className="wprf-info-text"><span dangerouslySetInnerHTML={{ __html: info }} /></p>
+			</div>}
             {rest?.link && <a rel="nofollow" target="_blank" href={rest.link}>{context?.icons?.link}</a>}
             {badgePosition == 'right' && badge}
         </div>

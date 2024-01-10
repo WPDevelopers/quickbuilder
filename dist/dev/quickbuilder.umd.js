@@ -1897,9 +1897,13 @@
             });
           }
           if ((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.reload) {
-            setTimeout(function () {
-              return window.location.reload();
-            }, 1000);
+            if (typeof props.ajax.reload === "boolean" && props.ajax.reload) {
+              setTimeout(function () {
+                return window.location.reload();
+              }, 1000);
+            } else if (typeof props.ajax.reload === "string") {
+              window.location.href = props.ajax.reload;
+            }
           }
         })["catch"](function (err) {
           var _props$ajax6;

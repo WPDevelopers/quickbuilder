@@ -52,7 +52,14 @@ const Button = (props) => {
 						});
 					}
 					if (props.ajax?.reload) {
-						setTimeout(() => window.location.reload(), 1000);
+						if (
+							typeof props.ajax.reload === "boolean" &&
+							props.ajax.reload
+						) {
+							setTimeout(() => window.location.reload(), 1000);
+						} else if (typeof props.ajax.reload === "string") {
+							window.location.href = props.ajax.reload;
+						}
 					}
 				})
 				.catch((err) => {

@@ -9,14 +9,18 @@ const ControlField = ({
 	type = undefined,
 	value = false,
 }) => {
-	const [description, setDescription] = useState( descriptionText );
+	const [description, setDescription] = useState(descriptionText);
 
 	useEffect(() => {
 		if (type === "toggle" && enableDisableActive) {
 			if (value) {
-				setDescription(`${__(`Enabled`, "quickbuilder")} ${descriptionText ?? ''}`);
+				setDescription(
+					`${__(`Enabled`, "betterdocs")} ${descriptionText ?? ""}`
+				);
 			} else {
-				setDescription(`${__(`Disabled`, "quickbuilder")} ${descriptionText ?? ''}`);
+				setDescription(
+					`${__(`Disabled`, "betterdocs")} ${descriptionText ?? ""}`
+				);
 			}
 		}
 	}, [value]);

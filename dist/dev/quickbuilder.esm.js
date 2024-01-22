@@ -1668,9 +1668,9 @@ var ControlField = function ControlField(_ref) {
   useEffect(function () {
     if (type === "toggle" && enableDisableActive) {
       if (value) {
-        setDescription("".concat(__("Enabled", "betterdocs"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
+        setDescription(sprintf(__("Enabled %s", "betterdocs"), descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
       } else {
-        setDescription("".concat(__("Disabled", "betterdocs"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
+        setDescription(sprintf(__("Disabled %s", "betterdocs"), descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
       }
     }
   }, [value]);

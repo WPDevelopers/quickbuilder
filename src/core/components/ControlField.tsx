@@ -1,5 +1,6 @@
-import { __ } from "@wordpress/i18n";
 import React, { useEffect, useState } from "react";
+import { __, sprintf } from "@wordpress/i18n";
+
 const ControlField = ({
 	position,
 	description: descriptionText,
@@ -15,11 +16,17 @@ const ControlField = ({
 		if (type === "toggle" && enableDisableActive) {
 			if (value) {
 				setDescription(
-					`${__(`Enabled`, "betterdocs")} ${descriptionText ?? ""}`
+					sprintf(
+						__("Enabled %s", "betterdocs"),
+						descriptionText ?? ""
+					)
 				);
 			} else {
 				setDescription(
-					`${__(`Disabled`, "betterdocs")} ${descriptionText ?? ""}`
+					sprintf(
+						__("Disabled %s", "betterdocs"),
+						descriptionText ?? ""
+					)
 				);
 			}
 		}
@@ -53,4 +60,5 @@ const ControlField = ({
 		</div>
 	);
 };
+
 export default ControlField;

@@ -1664,9 +1664,9 @@
     React.useEffect(function () {
       if (type === "toggle" && enableDisableActive) {
         if (value) {
-          setDescription("".concat(i18n.__("Enabled", "betterdocs"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
+          setDescription(i18n.sprintf(i18n.__("Enabled %s", "betterdocs"), descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
         } else {
-          setDescription("".concat(i18n.__("Disabled", "betterdocs"), " ").concat(descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
+          setDescription(i18n.sprintf(i18n.__("Disabled %s", "betterdocs"), descriptionText !== null && descriptionText !== void 0 ? descriptionText : ""));
         }
       }
     }, [value]);

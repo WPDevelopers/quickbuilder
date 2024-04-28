@@ -48,6 +48,10 @@ const Select = (props) => {
     }
 
     useEffect(() => {
+		if(name === "first_param") {
+			console.log('sOption', sOption);
+		}
+
         if (!isArray(sOption) && isObject(sOption)) {
             onChange({
                 target: {
@@ -82,6 +86,12 @@ const Select = (props) => {
         }
     }, [props?.menuOpen])
 
+	if(name === "first_param") {
+		console.log('sOption', sOption);
+		console.log('selectedOption', selectedOption);
+	}
+
+
     return (
         <div className="wprf-select-wrapper">
             <ReactSelect
@@ -98,7 +108,17 @@ const Select = (props) => {
                 onMenuOpen={handleMenuOpen}
                 onMenuClose={handleMenuClose}
                 isOptionDisabled={(option) => option?.disabled}
-                onChange={(option) => setSOption(option)} // option or options
+                onChange={(option) => {
+					if (!isArray(option) && isObject(option)) {
+						setSOption({...option});
+					}
+					else if (isArray(option)) {
+						setSOption([...option]);
+					}
+					else{
+						setSOption(option);
+					}
+				}} // option or options
             />
         </div>
     )

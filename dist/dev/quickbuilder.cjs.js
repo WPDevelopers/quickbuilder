@@ -53,24 +53,24 @@ function _typeof$1(o) {
   }, _typeof$1(o);
 }
 
-function _toPrimitive(input, hint) {
-  if (_typeof$1(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (_typeof$1(res) !== "object") return res;
+function toPrimitive(t, r) {
+  if ("object" != _typeof$1(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != _typeof$1(i)) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
-  return (hint === "string" ? String : Number)(input);
+  return ("string" === r ? String : Number)(t);
 }
 
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
-  return _typeof$1(key) === "symbol" ? key : String(key);
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof$1(i) ? i : i + "";
 }
 
 function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
+  key = toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -115,10 +115,10 @@ function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread();
 }
 
-function ownKeys$f(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$f(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$f(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$f(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$g(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$g(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$g(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var wpFetch = function wpFetch(params) {
-  var args = _objectSpread$f(_objectSpread$f({}, params), {}, {
+  var args = _objectSpread$g(_objectSpread$g({}, params), {}, {
     method: "POST"
   });
   return apiFetch__default["default"](args);
@@ -510,8 +510,8 @@ var when = function when(conditions, data) {
   return validate$1(conditions, data);
 };
 
-function ownKeys$e(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$e(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$e(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$e(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$f(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$f(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$f(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$f(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var DEFAULT_STATE = {
   savedValues: {
     type: "conversions",
@@ -577,8 +577,8 @@ var store = {
     switch (action.type) {
       case "SET_SAVED_VALUES":
         {
-          var _updatedState = _objectSpread$e({}, state);
-          _updatedState = _objectSpread$e(_objectSpread$e({}, _updatedState), {}, {
+          var _updatedState = _objectSpread$f({}, state);
+          _updatedState = _objectSpread$f(_objectSpread$f({}, _updatedState), {}, {
             values: action.payload,
             savedValues: action.payload
           });
@@ -587,17 +587,17 @@ var store = {
       case "FIELD_VALUE":
         {
           var _updatedState3;
-          var _updatedState2 = _objectSpread$e({}, state);
+          var _updatedState2 = _objectSpread$f({}, state);
           var payload = action.payload;
-          _updatedState2 = _objectSpread$e(_objectSpread$e({}, _updatedState2), {}, {
-            values: _objectSpread$e(_objectSpread$e({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
+          _updatedState2 = _objectSpread$f(_objectSpread$f({}, _updatedState2), {}, {
+            values: _objectSpread$f(_objectSpread$f({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
           });
           return _updatedState2;
         }
       case "REMOVE_FIELD_VALUE":
         {
           var _updatedState4$values;
-          var _updatedState4 = _objectSpread$e({}, state);
+          var _updatedState4 = _objectSpread$f({}, state);
           var _payload = action.payload;
           if ((_updatedState4$values = _updatedState4.values) !== null && _updatedState4$values !== void 0 && _updatedState4$values[_payload]) {
             delete _updatedState4.values[_payload];
@@ -607,7 +607,7 @@ var store = {
       case "RESET_FIELD_VALUE":
         {
           var _updatedState5$values;
-          var _updatedState5 = _objectSpread$e({}, state);
+          var _updatedState5 = _objectSpread$f({}, state);
           if ((_updatedState5$values = _updatedState5.values) !== null && _updatedState5$values !== void 0 && _updatedState5$values[action.payload]) {
             var _updatedState5$savedV;
             delete _updatedState5.values[action.payload];
@@ -618,16 +618,16 @@ var store = {
           return _updatedState5;
         }
       case "FIELD_ERROR":
-        return _objectSpread$e(_objectSpread$e({}, state), {}, {
-          errors: _objectSpread$e(_objectSpread$e({}, state.errors), action.payload)
+        return _objectSpread$f(_objectSpread$f({}, state), {}, {
+          errors: _objectSpread$f(_objectSpread$f({}, state.errors), action.payload)
         });
       case "REMOVE_FIELD_ERROR":
-        var updatedState = _objectSpread$e({}, state);
+        var updatedState = _objectSpread$f({}, state);
         delete updatedState.errors[action.payload];
         return updatedState;
       case "FIELD_TOUCHED":
-        return _objectSpread$e(_objectSpread$e({}, state), {}, {
-          touched: _objectSpread$e(_objectSpread$e({}, state.touched), action.payload)
+        return _objectSpread$f(_objectSpread$f({}, state), {}, {
+          touched: _objectSpread$f(_objectSpread$f({}, state.touched), action.payload)
         });
     }
     return state;
@@ -973,14 +973,14 @@ var useDefaults = function useDefaults(parentName, helpers, value, trigger) {
   }
 };
 
-function ownKeys$d(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$d(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$d(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$d(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$e(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$e(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$e(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$e(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 // import store from "../store";
 
 var SweetAlert = function SweetAlert() {
   var _args$target, _args$type, _args$title, _args$text, _args$icon, _args$timer;
   var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Swal__default["default"].fire(_objectSpread$d({
+  return Swal__default["default"].fire(_objectSpread$e({
     target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#notificationx",
     type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
     html: args === null || args === void 0 ? void 0 : args.html,
@@ -1103,21 +1103,21 @@ function _extends() {
 //     return (number < 10 ? '0' : '') + number
 // }
 
-function ownKeys$c(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$c(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$c(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$c(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$d(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$d(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$d(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$d(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var builderReducer = function builderReducer(state, action) {
   switch (action.type) {
     case 'SET_CONTEXT':
       return _extends({}, state, setIn(state, action.payload.field, action.payload.value));
     case 'SET_ACTIVE_TAB':
-      return _objectSpread$c(_objectSpread$c({}, state), {}, {
-        config: _objectSpread$c(_objectSpread$c({}, state.config), {}, {
+      return _objectSpread$d(_objectSpread$d({}, state), {}, {
+        config: _objectSpread$d(_objectSpread$d({}, state.config), {}, {
           active: action.payload
         })
       });
     case 'SET_REDIRECT':
-      return _objectSpread$c(_objectSpread$c({}, state), {}, {
-        redirect: _objectSpread$c(_objectSpread$c({}, state.redirect), action.payload)
+      return _objectSpread$d(_objectSpread$d({}, state), {}, {
+        redirect: _objectSpread$d(_objectSpread$d({}, state.redirect), action.payload)
       });
     case 'SET_VALUES':
       return _extends({}, state, setIn(state, 'values', action.payload));
@@ -1144,7 +1144,7 @@ var builderReducer = function builderReducer(state, action) {
         status: action.payload
       });
     case 'SET_ISSUBMITTING':
-      return _objectSpread$c(_objectSpread$c({}, state), {}, {
+      return _objectSpread$d(_objectSpread$d({}, state), {}, {
         isSubmitting: action.payload
       });
     case 'SET_ISVALIDATING':
@@ -1152,8 +1152,8 @@ var builderReducer = function builderReducer(state, action) {
         isValidating: action.payload
       });
     case 'SET_FIELD_TOUCHED':
-      return _objectSpread$c(_objectSpread$c({}, state), {}, {
-        touched: _objectSpread$c(_objectSpread$c({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
+      return _objectSpread$d(_objectSpread$d({}, state), {}, {
+        touched: _objectSpread$d(_objectSpread$d({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
       });
 
     // return _extends({}, state, {
@@ -1206,8 +1206,8 @@ var builderReducer = function builderReducer(state, action) {
   }
 };
 
-function ownKeys$b(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$b(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$b(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$c(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$c(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$c(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$c(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var useBuilder = function useBuilder(props) {
   // Set is Mounted or NOT
   var isMounted = React.useRef(false);
@@ -1217,7 +1217,7 @@ var useBuilder = function useBuilder(props) {
       isMounted.current = false;
     };
   }, []);
-  var _useReducer = React.useReducer(builderReducer, _objectSpread$b(_objectSpread$b({}, props), {}, {
+  var _useReducer = React.useReducer(builderReducer, _objectSpread$c(_objectSpread$c({}, props), {}, {
       savedValues: props.savedValues || {},
       values: props.values || {},
       errors: props.initialErrors || {},
@@ -1292,7 +1292,6 @@ var useBuilder = function useBuilder(props) {
     // var willValidate = shouldValidate === undefined ? validateOnBlur : shouldValidate;
     // return willValidate ? validateFormWithHighPriority(state.values) : Promise.resolve();
   });
-
   var executeBlur = React.useCallback(function (event) {
     var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (event.persist) {
@@ -1332,7 +1331,6 @@ var useBuilder = function useBuilder(props) {
       (_state$alerts = state.alerts) === null || _state$alerts === void 0 || (_state$alerts = _state$alerts.pro_alert(validProps === null || validProps === void 0 ? void 0 : validProps.popup)) === null || _state$alerts === void 0 || _state$alerts.fire();
       // return false;
     }
-
     if (typeof eventOrString === 'string') {
       return function (event) {
         return executeChange$1(eventOrString, event, validProps);
@@ -1342,7 +1340,7 @@ var useBuilder = function useBuilder(props) {
     }
   });
   var getFieldProps = React.useCallback(function (args) {
-    var defaultProps = _objectSpread$b({}, args);
+    var defaultProps = _objectSpread$c({}, args);
     var validProps = validFieldProps(defaultProps);
     var name = validProps.name;
     var type = validProps.type;
@@ -1413,7 +1411,7 @@ var useBuilder = function useBuilder(props) {
       var _props$meta;
       value = getIn(state.values, name) || ((_props$meta = props.meta) === null || _props$meta === void 0 ? void 0 : _props$meta["default"]);
     }
-    return _objectSpread$b(_objectSpread$b({}, props.meta), {}, {
+    return _objectSpread$c(_objectSpread$c({}, props.meta), {}, {
       value: value,
       error: getIn(state.errors, name),
       touched: !!getIn(state.touched, name),
@@ -1524,7 +1522,7 @@ var useBuilder = function useBuilder(props) {
       }
     });
   });
-  var context = _objectSpread$b(_objectSpread$b(_objectSpread$b({}, props), state), {}, {
+  var context = _objectSpread$c(_objectSpread$c(_objectSpread$c({}, props), state), {}, {
     setContext: setContext,
     values: state.values,
     savedValues: state.savedValues,
@@ -1726,8 +1724,8 @@ var ControlField = function ControlField(_ref) {
 };
 
 var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge"];
-function ownKeys$a(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$a(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$a(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$a(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$b(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$b(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$b(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
 // import { useInstanceId } from "@wordpress/compose";
 
@@ -1747,7 +1745,7 @@ var withLabel = function withLabel(WrappedComponent) {
     if (id == undefined) {
       id = name;
     }
-    var styles = _objectSpread$a({
+    var styles = _objectSpread$b({
       description: {
         position: "right"
       }
@@ -1890,12 +1888,12 @@ var withProps = function withProps(WrappedComponent) {
 function _createForOfIteratorHelper$1(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
 function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function ownKeys$9(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$9(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$9(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$9(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$a(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$a(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$a(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$a(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function GenericCheckbox(props) {
   var _styles$label, _styles$label2;
   var prevStyles = props.style;
-  var styles = _objectSpread$9({
+  var styles = _objectSpread$a({
     type: "",
     // card
     label: {
@@ -1917,7 +1915,7 @@ function GenericCheckbox(props) {
   var componentClasses = classNames__default["default"]("wprf-checkbox-wrap", _defineProperty(_defineProperty(_defineProperty({}, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), "wprf-checked", Boolean(isChecked)), "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), props === null || props === void 0 ? void 0 : props.classes);
   return React.createElement("div", {
     className: componentClasses
-  }, React.createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
+  }, React.createElement(GenericInput, _objectSpread$a(_objectSpread$a({}, props), {}, {
     type: 'checkbox'
   })), React.createElement("label", {
     htmlFor: props.id
@@ -1929,7 +1927,7 @@ function Checkbox(props) {
     multiple = props.multiple,
     prevStyles = props.style;
   var options = sortingFields(passedOptions);
-  var styles = _objectSpread$9({
+  var styles = _objectSpread$a({
     column: 4
   }, prevStyles);
   if (multiple) {
@@ -1940,7 +1938,7 @@ function Checkbox(props) {
     var handleChange = function handleChange(event) {
       var target = event.target ? event.target : event.currentTarget;
       setLocalState(function (prevState) {
-        return _objectSpread$9(_objectSpread$9({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+        return _objectSpread$a(_objectSpread$a({}, prevState), {}, _defineProperty({}, target.value, target.checked));
       });
     };
     React.useEffect(function () {
@@ -1979,7 +1977,7 @@ function Checkbox(props) {
       return React.createElement(Column, {
         key: item.value,
         column: styles.column
-      }, React.createElement(GenericCheckbox, _objectSpread$9(_objectSpread$9({}, item), {}, {
+      }, React.createElement(GenericCheckbox, _objectSpread$a(_objectSpread$a({}, item), {}, {
         context: props === null || props === void 0 ? void 0 : props.context,
         id: item.value,
         checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
@@ -1989,7 +1987,7 @@ function Checkbox(props) {
       })));
     })));
   }
-  return React.createElement(GenericInput, _objectSpread$9(_objectSpread$9({}, props), {}, {
+  return React.createElement(GenericInput, _objectSpread$a(_objectSpread$a({}, props), {}, {
     type: 'checkbox'
   }));
 }
@@ -2122,11 +2120,11 @@ var DateControl = function DateControl(props) {
 };
 var Date$1 = withLabel(DateControl);
 
-function ownKeys$8(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$8(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$8(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$8(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$9(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$9(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$9(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$9(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Input = function Input(props, ref) {
   var type = props.type ? props.type : 'text';
-  var validProps = validFieldProps(_objectSpread$8(_objectSpread$8({}, props), {}, {
+  var validProps = validFieldProps(_objectSpread$9(_objectSpread$9({}, props), {}, {
     type: type
   }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
   var handleChange = function handleChange(event) {
@@ -2170,7 +2168,7 @@ var Input = function Input(props, ref) {
     };
     return React.createElement("span", {
       className: "wprf-clipboard-wrapper"
-    }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$8(_objectSpread$8({}, validProps), {}, {
+    }, /*#__PURE__*/React__default["default"].createElement("input", _objectSpread$9(_objectSpread$9({}, validProps), {}, {
       onChange: handleChange
     })), React.createElement("span", {
       className: "wprf-clipboard-tooltip"
@@ -2183,7 +2181,7 @@ var Input = function Input(props, ref) {
       }
     }, "Copy")));
   }
-  return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
+  return /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$9(_objectSpread$9({}, validProps), {}, {
     onChange: handleChange,
     ref: inputRef
   }));
@@ -2191,8 +2189,8 @@ var Input = function Input(props, ref) {
 var GenericInput = /*#__PURE__*/React__default["default"].memo( /*#__PURE__*/React__default["default"].forwardRef(Input));
 var Input$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Input));
 
-function ownKeys$7(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$7(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$7(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$7(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$8(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$8(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$8(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$8(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Textarea = function Textarea(props) {
   var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
   var handleChange = React.useCallback(function (event) {
@@ -2200,15 +2198,15 @@ var Textarea = function Textarea(props) {
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-  return /*#__PURE__*/React__default["default"].createElement('textarea', _objectSpread$7(_objectSpread$7({}, validProps), {}, {
+  return /*#__PURE__*/React__default["default"].createElement('textarea', _objectSpread$8(_objectSpread$8({}, validProps), {}, {
     onChange: handleChange,
     rows: 5
   }));
 };
 var Textarea$1 = withLabel( /*#__PURE__*/React__default["default"].memo(Textarea));
 
-function ownKeys$6(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$6(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$6(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$6(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$7(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$7(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$7(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$7(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var CodeViewer = function CodeViewer(props) {
   var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
   var handleChange = React.useCallback(function (event) {
@@ -2234,7 +2232,7 @@ var CodeViewer = function CodeViewer(props) {
   var ButtonText = props !== null && props !== void 0 && props.button_text ? props.button_text : i18n.__("Click to Copy", "notificationx");
   return React.createElement("span", {
     className: "wprf-code-viewer"
-  }, /*#__PURE__*/React__default["default"].createElement("textarea", _objectSpread$6(_objectSpread$6({}, validProps), extraProps)), React.createElement(components.Button, {
+  }, /*#__PURE__*/React__default["default"].createElement("textarea", _objectSpread$7(_objectSpread$7({}, validProps), extraProps)), React.createElement(components.Button, {
     className: "wprf-copy-button"
   }, ButtonText));
 };
@@ -2354,6 +2352,8 @@ var Group = function Group(props) {
 };
 var Group$1 = withLabel(Group);
 
+function ownKeys$6(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$6(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$6(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$6(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Select = function Select(props) {
   var builderContext = useBuilderContext();
   var id = props.id,
@@ -2416,6 +2416,9 @@ var Select = function Select(props) {
     setIsLoading(false);
   };
   React.useEffect(function () {
+    if (name === "first_param") {
+      console.log('sOption', sOption);
+    }
     if (!isArray(sOption) && isObject(sOption)) {
       onChange({
         target: {
@@ -2449,6 +2452,10 @@ var Select = function Select(props) {
       handleMenuOpen();
     }
   }, [props === null || props === void 0 ? void 0 : props.menuOpen]);
+  if (name === "first_param") {
+    console.log('sOption', sOption);
+    console.log('selectedOption', selectedOption);
+  }
   return React.createElement("div", {
     className: "wprf-select-wrapper"
   }, React.createElement(ReactSelect__default["default"], {
@@ -2468,11 +2475,16 @@ var Select = function Select(props) {
       return option === null || option === void 0 ? void 0 : option.disabled;
     },
     onChange: function onChange(option) {
-      return setSOption(option);
+      if (!isArray(option) && isObject(option)) {
+        setSOption(_objectSpread$6({}, option));
+      } else if (isArray(option)) {
+        setSOption(_toConsumableArray(option));
+      } else {
+        setSOption(option);
+      }
     } // option or options
   }));
 };
-
 var Select$1 = withLabel(Select);
 
 /**
@@ -3271,7 +3283,6 @@ var SelectAsync = function SelectAsync(props) {
     } // option or options
   }));
 };
-
 var SelectAsync$1 = withLabel(SelectAsync);
 
 var ColorPicker = function ColorPicker(props) {

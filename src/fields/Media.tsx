@@ -1,6 +1,7 @@
 import { MediaUpload } from "@wordpress/media-utils";
 import React, { useEffect, useState } from "react";
 import { withLabel } from "../core/hooks";
+import { __ } from "@wordpress/i18n";
 
 const Media = (props) => {
 	const [imageData, setImageData] = useState(
@@ -71,11 +72,10 @@ const Media = (props) => {
 											<i className="btd-icon btd-upload"></i>
 										</span>
 										<span className="title">
-											Click to upload
+											{__('Click to upload', 'betterdocs')}
 										</span>
 										<span className="info">
-											SVG, PNG, JPG or GIF (max.
-											800x400px)
+											{__("SVG, PNG, JPG or GIF (max.800x400px)", "betterdocs") }
 										</span>
 									</button>
 								)}

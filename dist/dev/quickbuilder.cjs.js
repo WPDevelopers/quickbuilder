@@ -21,6 +21,7 @@ var draftJs = require('draft-js');
 var draftToHtml = require('draftjs-to-html');
 var htmlToDraft = require('html-to-draftjs');
 require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css');
+var compose = require('@wordpress/compose');
 var mediaUtils = require('@wordpress/media-utils');
 var SweetAlert$1 = require('react-bootstrap-sweetalert');
 var reactSortablejs = require('react-sortablejs');
@@ -54,24 +55,24 @@ function _typeof$1(o) {
   }, _typeof$1(o);
 }
 
-function _toPrimitive(input, hint) {
-  if (_typeof$1(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (_typeof$1(res) !== "object") return res;
+function toPrimitive(t, r) {
+  if ("object" != _typeof$1(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != _typeof$1(i)) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
-  return (hint === "string" ? String : Number)(input);
+  return ("string" === r ? String : Number)(t);
 }
 
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
-  return _typeof$1(key) === "symbol" ? key : String(key);
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof$1(i) ? i : i + "";
 }
 
 function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
+  key = toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -736,12 +737,11 @@ function _slicedToArray(arr, i) {
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
   }
   return target;
 }
@@ -1259,7 +1259,6 @@ var useBuilder = function useBuilder(props) {
     // var willValidate = shouldValidate === undefined ? validateOnBlur : shouldValidate;
     // return willValidate ? validateFormWithHighPriority(state.values) : Promise.resolve();
   });
-
   var executeBlur = React.useCallback(function (event) {
     var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (event.persist) {
@@ -1299,7 +1298,6 @@ var useBuilder = function useBuilder(props) {
       (_state$alerts = state.alerts) === null || _state$alerts === void 0 || (_state$alerts = _state$alerts.pro_alert(validProps === null || validProps === void 0 ? void 0 : validProps.popup)) === null || _state$alerts === void 0 || _state$alerts.fire();
       // return false;
     }
-
     if (typeof eventOrString === 'string') {
       return function (event) {
         return executeChange$1(eventOrString, event, validProps);
@@ -1545,8 +1543,7 @@ var Row = function Row(props) {
 };
 
 var Column = function Column(props) {
-  var _classNames;
-  var componentClasses = classNames__default["default"]("wprf-column", props === null || props === void 0 ? void 0 : props.className, (_classNames = {}, _defineProperty(_classNames, "wprf-column-".concat(12 / (props === null || props === void 0 ? void 0 : props.column)), (props === null || props === void 0 ? void 0 : props.column) && props.column !== 12), _defineProperty(_classNames, "wprf-column-12", props.column === 12), _classNames));
+  var componentClasses = classNames__default["default"]("wprf-column", props === null || props === void 0 ? void 0 : props.className, _defineProperty(_defineProperty({}, "wprf-column-".concat(12 / (props === null || props === void 0 ? void 0 : props.column)), (props === null || props === void 0 ? void 0 : props.column) && props.column !== 12), "wprf-column-12", props.column === 12));
   return React.createElement("div", {
     className: componentClasses
   }, props === null || props === void 0 ? void 0 : props.children);
@@ -1722,7 +1719,7 @@ function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t
 
 var withLabel = function withLabel(WrappedComponent) {
   var WithLabel = function WithLabel(props) {
-    var _styles$label, _styles$label$positio, _styles$label2, _classNames, _styles$description2;
+    var _styles$label, _styles$label$positio, _styles$label2, _styles$description2;
     var label = props.label,
       id = props.id,
       name = props.name,
@@ -1744,7 +1741,7 @@ var withLabel = function withLabel(WrappedComponent) {
         position: "right"
       }
     }, prevStyle);
-    var styleClasses = classNames__default["default"]((_classNames = {}, _defineProperty(_classNames, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), _defineProperty(_classNames, "wprf-label-none", label === undefined || label === "" || label.length === 0), _defineProperty(_classNames, "wprf-".concat((styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined), _classNames));
+    var styleClasses = classNames__default["default"](_defineProperty(_defineProperty(_defineProperty({}, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), "wprf-label-none", label === undefined || label === "" || label.length === 0), "wprf-".concat((styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined));
     if (type === "hidden") {
       return React.createElement(WrappedComponent, _extends$1({}, props, {
         id: id
@@ -2451,50 +2448,6 @@ var DateControl = function DateControl(props) {
 };
 var Date$1 = withLabel(DateControl);
 
-/**
- * WordPress dependencies
- */
-const instanceMap = new WeakMap();
-/**
- * Creates a new id for a given object.
- *
- * @param  object Object reference to create an id for.
- * @return The instance id (index).
- */
-
-function createId(object) {
-  const instances = instanceMap.get(object) || 0;
-  instanceMap.set(object, instances + 1);
-  return instances;
-}
-/**
- * Specify the useInstanceId *function* signatures.
- *
- * More accurately, useInstanceId distinguishes between three different
- * signatures:
- *
- * 1. When only object is given, the returned value is a number
- * 2. When object and prefix is given, the returned value is a string
- * 3. When preferredId is given, the returned value is the type of preferredId
- */
-
-
-/**
- * Provides a unique instance ID.
- *
- * @param  object        Object reference to create an id for.
- * @param  [prefix]      Prefix for the unique id.
- * @param  [preferredId] Default ID to use.
- * @return The unique instance id.
- */
-function useInstanceId(object, prefix, preferredId) {
-  return React.useMemo(() => {
-    if (preferredId) return preferredId;
-    const id = createId(object);
-    return prefix ? `${prefix}-${id}` : id;
-  }, [object]);
-}
-
 var RepeaterField = function RepeaterField(props) {
   var _builderContext$value;
   var builderContext = useBuilderContext();
@@ -2506,7 +2459,7 @@ var RepeaterField = function RepeaterField(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isCollapsed = _useState2[0],
     setIsCollapsed = _useState2[1];
-  var instanceId = useInstanceId(RepeaterField);
+  var instanceId = compose.useInstanceId(RepeaterField);
   // onClick={() => setIsCollapse(!isCollapse)}
   var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 || (_builderContext$value = _builderContext$value[parent]) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[index];
   var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
@@ -2559,7 +2512,7 @@ var RepeaterField = function RepeaterField(props) {
 function ownKeys$8(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$8(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$8(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$8(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var GenericToggle = function GenericToggle(props) {
-  var _styles$label, _styles$label2, _classNames;
+  var _styles$label, _styles$label2;
   var prevStyles = props.style;
   var styles = _objectSpread$8({
     type: "",
@@ -2580,7 +2533,7 @@ var GenericToggle = function GenericToggle(props) {
     }
     return _isChecked;
   }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-  var componentClasses = classNames__default["default"]("wprf-toggle-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+  var componentClasses = classNames__default["default"]("wprf-toggle-wrap", _defineProperty(_defineProperty(_defineProperty({}, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), "wprf-checked", Boolean(isChecked)), "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), props === null || props === void 0 ? void 0 : props.classes);
   return React.createElement("div", {
     className: componentClasses
   }, React.createElement(GenericInput, _objectSpread$8(_objectSpread$8({}, props), {}, {
@@ -2694,7 +2647,7 @@ function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) le
 function ownKeys$7(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$7(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$7(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$7(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function GenericCheckbox(props) {
-  var _styles$label, _styles$label2, _classNames;
+  var _styles$label, _styles$label2;
   var prevStyles = props.style;
   var styles = _objectSpread$7({
     type: "",
@@ -2715,7 +2668,7 @@ function GenericCheckbox(props) {
     }
     return _isChecked;
   }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
-  var componentClasses = classNames__default["default"]("wprf-checkbox-wrap", (_classNames = {}, _defineProperty(_classNames, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), _defineProperty(_classNames, "wprf-checked", Boolean(isChecked)), _defineProperty(_classNames, "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), _classNames), props === null || props === void 0 ? void 0 : props.classes);
+  var componentClasses = classNames__default["default"]("wprf-checkbox-wrap", _defineProperty(_defineProperty(_defineProperty({}, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), "wprf-checked", Boolean(isChecked)), "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), props === null || props === void 0 ? void 0 : props.classes);
   return React.createElement("div", {
     className: componentClasses
   }, React.createElement(GenericInput, _objectSpread$7(_objectSpread$7({}, props), {}, {
@@ -3110,9 +3063,9 @@ var Media = function Media(props) {
         className: "btd-icon btd-upload"
       })), React.createElement("span", {
         className: "title"
-      }, "Click to upload"), React.createElement("span", {
+      }, i18n.__('Click to upload', 'betterdocs')), React.createElement("span", {
         className: "info"
-      }, "SVG, PNG, JPG or GIF (max. 800x400px)")));
+      }, i18n.__("SVG, PNG, JPG or GIF (max.800x400px)", "betterdocs"))));
     }
   })));
 };
@@ -3234,7 +3187,7 @@ var RadioCard = function RadioCard(props) {
   if (!options) {
     throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'betterdocs'));
   }
-  var instanceId = useInstanceId(RadioCard);
+  var instanceId = compose.useInstanceId(RadioCard);
   var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
   var styles = _objectSpread$5({}, props === null || props === void 0 ? void 0 : props.style);
   var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
@@ -3812,7 +3765,6 @@ var Select = function Select(props) {
     onChange: handleOptionChange // option or options
   }));
 };
-
 var Select$1 = withLabel(Select);
 
 var SelectAsync = function SelectAsync(props) {
@@ -3950,7 +3902,6 @@ var SelectAsync = function SelectAsync(props) {
     } // option or options
   }));
 };
-
 var SelectAsync$1 = withLabel(SelectAsync);
 
 var Slider = function Slider(props) {
@@ -4267,9 +4218,9 @@ var Menu = function Menu(props) {
   }, React.createElement("ul", {
     className: "wprf-tab-nav"
   }, tabsFields.map(function (tab, index) {
-    var _classNames, _context$icons, _tab$icon, _tab$icon2;
+    var _context$icons, _tab$icon, _tab$icon2;
     return React.createElement("li", {
-      className: classNames__default["default"]("wprf-tab-nav-item", (_classNames = {}, _defineProperty(_classNames, "".concat(tab.classes), tab.classes), _defineProperty(_classNames, "wprf-active-nav", active === tab.id), _defineProperty(_classNames, "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false), _classNames)),
+      className: classNames__default["default"]("wprf-tab-nav-item", _defineProperty(_defineProperty(_defineProperty({}, "".concat(tab.classes), tab.classes), "wprf-active-nav", active === tab.id), "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false)),
       "data-key": tab.id,
       key: tab.id,
       onClick: function onClick() {

@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/i18n'), require('intersect'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/compose'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('uuid'), require('html-react-parser'), require('react-select/async')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/i18n', 'intersect', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/compose', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'uuid', 'html-react-parser', 'react-select/async'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpI18n, global.intersect, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.compose, global.wpMedia, global.sweetalert, global.reactSortablejs, global.uuid, global.parse, global.AsyncSelect));
-})(this, (function (exports, React, data, i18n, intersect, apiFetch, lodashEs, date, moment, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, compose, mediaUtils, SweetAlert$1, reactSortablejs, uuid, parse, AsyncSelect) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/i18n'), require('intersect'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('uuid'), require('html-react-parser'), require('react-select/async')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/i18n', 'intersect', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'uuid', 'html-react-parser', 'react-select/async'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpI18n, global.intersect, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.wpMedia, global.sweetalert, global.reactSortablejs, global.uuid, global.parse, global.AsyncSelect));
+})(this, (function (exports, React, data, i18n, intersect, apiFetch, lodashEs, date, moment, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, mediaUtils, SweetAlert$1, reactSortablejs, uuid, parse, AsyncSelect) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -712,11 +712,12 @@
   function _objectWithoutPropertiesLoose(source, excluded) {
     if (source == null) return {};
     var target = {};
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-      }
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
     }
     return target;
   }
@@ -1960,9 +1961,11 @@
       onChange = props.onChange,
       parentIndex = props.parentIndex;
     var _useOptions = useOptions(props, "options"),
-      options = _useOptions.options,
-      selectedOption = _useOptions.selectedOption,
-      setData = _useOptions.setData,
+      options = _useOptions.options;
+      _useOptions.option;
+      var selectedOption = _useOptions.selectedOption;
+      _useOptions.setOptions;
+      var setData = _useOptions.setData,
       setSelectedOption = _useOptions.setSelectedOption;
     var _useState = React.useState(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2423,6 +2426,50 @@
   };
   var Date$1 = withLabel(DateControl);
 
+  /**
+   * WordPress dependencies
+   */
+  const instanceMap = new WeakMap();
+  /**
+   * Creates a new id for a given object.
+   *
+   * @param  object Object reference to create an id for.
+   * @return The instance id (index).
+   */
+
+  function createId(object) {
+    const instances = instanceMap.get(object) || 0;
+    instanceMap.set(object, instances + 1);
+    return instances;
+  }
+  /**
+   * Specify the useInstanceId *function* signatures.
+   *
+   * More accurately, useInstanceId distinguishes between three different
+   * signatures:
+   *
+   * 1. When only object is given, the returned value is a number
+   * 2. When object and prefix is given, the returned value is a string
+   * 3. When preferredId is given, the returned value is the type of preferredId
+   */
+
+
+  /**
+   * Provides a unique instance ID.
+   *
+   * @param  object        Object reference to create an id for.
+   * @param  [prefix]      Prefix for the unique id.
+   * @param  [preferredId] Default ID to use.
+   * @return The unique instance id.
+   */
+  function useInstanceId(object, prefix, preferredId) {
+    return React.useMemo(() => {
+      if (preferredId) return preferredId;
+      const id = createId(object);
+      return prefix ? `${prefix}-${id}` : id;
+    }, [object]);
+  }
+
   var RepeaterField = function RepeaterField(props) {
     var _builderContext$value;
     var builderContext = useBuilderContext();
@@ -2434,7 +2481,7 @@
       _useState2 = _slicedToArray(_useState, 2),
       isCollapsed = _useState2[0],
       setIsCollapsed = _useState2[1];
-    var instanceId = compose.useInstanceId(RepeaterField);
+    var instanceId = useInstanceId(RepeaterField);
     // onClick={() => setIsCollapse(!isCollapse)}
     var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 || (_builderContext$value = _builderContext$value[parent]) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[index];
     var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
@@ -3162,7 +3209,7 @@
     if (!options) {
       throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'betterdocs'));
     }
-    var instanceId = compose.useInstanceId(RadioCard);
+    var instanceId = useInstanceId(RadioCard);
     var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
     var styles = _objectSpread$5({}, props === null || props === void 0 ? void 0 : props.style);
     var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
@@ -3614,8 +3661,9 @@
       parentIndex = props.parentIndex;
     var _useOptions = useOptions(props, 'options'),
       options = _useOptions.options,
-      selectedOption = _useOptions.selectedOption,
-      setData = _useOptions.setData;
+      selectedOption = _useOptions.selectedOption;
+      _useOptions.setOptions;
+      var setData = _useOptions.setData;
     var _useState = React.useState(null),
       _useState2 = _slicedToArray(_useState, 2),
       sOption = _useState2[0],
@@ -4362,6 +4410,7 @@
   exports.useBuilder = useBuilder;
   exports.useBuilderContext = useBuilderContext;
   exports.useDefaults = useDefaults;
+  exports.useOptions = useOptions;
   exports.validFieldProps = validFieldProps;
   exports.valueExists = valueExists;
   exports.when = when;

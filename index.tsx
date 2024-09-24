@@ -13,6 +13,7 @@ export {
     BuilderConsumer,
     useDefaults,
     withProps,
+    useOptions,
     withLabel
 } from './src/core/hooks';
 

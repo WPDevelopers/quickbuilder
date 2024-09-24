@@ -17,7 +17,6 @@ import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { useInstanceId } from '@wordpress/compose';
 import { MediaUpload } from '@wordpress/media-utils';
 import SweetAlert$1 from 'react-bootstrap-sweetalert';
 import { ReactSortable } from 'react-sortablejs';
@@ -717,11 +716,12 @@ function _slicedToArray(arr, i) {
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0) continue;
-      target[key] = source[key];
-    }
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
   }
   return target;
 }
@@ -1965,9 +1965,11 @@ var CheckboxSelect = function CheckboxSelect(props) {
     onChange = props.onChange,
     parentIndex = props.parentIndex;
   var _useOptions = useOptions(props, "options"),
-    options = _useOptions.options,
-    selectedOption = _useOptions.selectedOption,
-    setData = _useOptions.setData,
+    options = _useOptions.options;
+    _useOptions.option;
+    var selectedOption = _useOptions.selectedOption;
+    _useOptions.setOptions;
+    var setData = _useOptions.setData,
     setSelectedOption = _useOptions.setSelectedOption;
   var _useState = useState(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -2427,6 +2429,50 @@ var DateControl = function DateControl(props) {
   });
 };
 var Date$1 = withLabel(DateControl);
+
+/**
+ * WordPress dependencies
+ */
+const instanceMap = new WeakMap();
+/**
+ * Creates a new id for a given object.
+ *
+ * @param  object Object reference to create an id for.
+ * @return The instance id (index).
+ */
+
+function createId(object) {
+  const instances = instanceMap.get(object) || 0;
+  instanceMap.set(object, instances + 1);
+  return instances;
+}
+/**
+ * Specify the useInstanceId *function* signatures.
+ *
+ * More accurately, useInstanceId distinguishes between three different
+ * signatures:
+ *
+ * 1. When only object is given, the returned value is a number
+ * 2. When object and prefix is given, the returned value is a string
+ * 3. When preferredId is given, the returned value is the type of preferredId
+ */
+
+
+/**
+ * Provides a unique instance ID.
+ *
+ * @param  object        Object reference to create an id for.
+ * @param  [prefix]      Prefix for the unique id.
+ * @param  [preferredId] Default ID to use.
+ * @return The unique instance id.
+ */
+function useInstanceId(object, prefix, preferredId) {
+  return useMemo(() => {
+    if (preferredId) return preferredId;
+    const id = createId(object);
+    return prefix ? `${prefix}-${id}` : id;
+  }, [object]);
+}
 
 var RepeaterField = function RepeaterField(props) {
   var _builderContext$value;
@@ -3619,8 +3665,9 @@ var Select = function Select(props) {
     parentIndex = props.parentIndex;
   var _useOptions = useOptions(props, 'options'),
     options = _useOptions.options,
-    selectedOption = _useOptions.selectedOption,
-    setData = _useOptions.setData;
+    selectedOption = _useOptions.selectedOption;
+    _useOptions.setOptions;
+    var setData = _useOptions.setData;
   var _useState = useState(null),
     _useState2 = _slicedToArray(_useState, 2),
     sOption = _useState2[0],
@@ -4306,4 +4353,4 @@ var FormBuilder = function FormBuilder(props) {
   return createElement(Fragment, null, createElement(Tab, tabs));
 };
 
-export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CheckboxSelect$1 as CheckboxSelect, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, CopyToClipboard$1 as CopyToClipboard, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };
+export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CheckboxSelect$1 as CheckboxSelect, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, CopyToClipboard$1 as CopyToClipboard, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };

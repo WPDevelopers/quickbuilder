@@ -21,7 +21,6 @@ var draftJs = require('draft-js');
 var draftToHtml = require('draftjs-to-html');
 var htmlToDraft = require('html-to-draftjs');
 require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css');
-var compose = require('@wordpress/compose');
 var mediaUtils = require('@wordpress/media-utils');
 var SweetAlert$1 = require('react-bootstrap-sweetalert');
 var reactSortablejs = require('react-sortablejs');
@@ -737,11 +736,12 @@ function _slicedToArray(arr, i) {
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0) continue;
-      target[key] = source[key];
-    }
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
   }
   return target;
 }
@@ -1985,9 +1985,11 @@ var CheckboxSelect = function CheckboxSelect(props) {
     onChange = props.onChange,
     parentIndex = props.parentIndex;
   var _useOptions = useOptions(props, "options"),
-    options = _useOptions.options,
-    selectedOption = _useOptions.selectedOption,
-    setData = _useOptions.setData,
+    options = _useOptions.options;
+    _useOptions.option;
+    var selectedOption = _useOptions.selectedOption;
+    _useOptions.setOptions;
+    var setData = _useOptions.setData,
     setSelectedOption = _useOptions.setSelectedOption;
   var _useState = React.useState(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -2448,6 +2450,50 @@ var DateControl = function DateControl(props) {
 };
 var Date$1 = withLabel(DateControl);
 
+/**
+ * WordPress dependencies
+ */
+const instanceMap = new WeakMap();
+/**
+ * Creates a new id for a given object.
+ *
+ * @param  object Object reference to create an id for.
+ * @return The instance id (index).
+ */
+
+function createId(object) {
+  const instances = instanceMap.get(object) || 0;
+  instanceMap.set(object, instances + 1);
+  return instances;
+}
+/**
+ * Specify the useInstanceId *function* signatures.
+ *
+ * More accurately, useInstanceId distinguishes between three different
+ * signatures:
+ *
+ * 1. When only object is given, the returned value is a number
+ * 2. When object and prefix is given, the returned value is a string
+ * 3. When preferredId is given, the returned value is the type of preferredId
+ */
+
+
+/**
+ * Provides a unique instance ID.
+ *
+ * @param  object        Object reference to create an id for.
+ * @param  [prefix]      Prefix for the unique id.
+ * @param  [preferredId] Default ID to use.
+ * @return The unique instance id.
+ */
+function useInstanceId(object, prefix, preferredId) {
+  return React.useMemo(() => {
+    if (preferredId) return preferredId;
+    const id = createId(object);
+    return prefix ? `${prefix}-${id}` : id;
+  }, [object]);
+}
+
 var RepeaterField = function RepeaterField(props) {
   var _builderContext$value;
   var builderContext = useBuilderContext();
@@ -2459,7 +2505,7 @@ var RepeaterField = function RepeaterField(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isCollapsed = _useState2[0],
     setIsCollapsed = _useState2[1];
-  var instanceId = compose.useInstanceId(RepeaterField);
+  var instanceId = useInstanceId(RepeaterField);
   // onClick={() => setIsCollapse(!isCollapse)}
   var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 || (_builderContext$value = _builderContext$value[parent]) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[index];
   var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
@@ -3187,7 +3233,7 @@ var RadioCard = function RadioCard(props) {
   if (!options) {
     throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'betterdocs'));
   }
-  var instanceId = compose.useInstanceId(RadioCard);
+  var instanceId = useInstanceId(RadioCard);
   var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
   var styles = _objectSpread$5({}, props === null || props === void 0 ? void 0 : props.style);
   var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
@@ -3639,8 +3685,9 @@ var Select = function Select(props) {
     parentIndex = props.parentIndex;
   var _useOptions = useOptions(props, 'options'),
     options = _useOptions.options,
-    selectedOption = _useOptions.selectedOption,
-    setData = _useOptions.setData;
+    selectedOption = _useOptions.selectedOption;
+    _useOptions.setOptions;
+    var setData = _useOptions.setData;
   var _useState = React.useState(null),
     _useState2 = _slicedToArray(_useState, 2),
     sOption = _useState2[0],
@@ -4387,6 +4434,7 @@ exports.triggerDefaults = triggerDefaults;
 exports.useBuilder = useBuilder;
 exports.useBuilderContext = useBuilderContext;
 exports.useDefaults = useDefaults;
+exports.useOptions = useOptions;
 exports.validFieldProps = validFieldProps;
 exports.valueExists = valueExists;
 exports.when = when;

@@ -48,10 +48,6 @@ const Select = (props) => {
     }
 
     useEffect(() => {
-		if(name === "first_param") {
-			console.log('sOption', sOption);
-		}
-
         if (!isArray(sOption) && isObject(sOption)) {
             onChange({
                 target: {
@@ -85,12 +81,6 @@ const Select = (props) => {
             handleMenuOpen();
         }
     }, [props?.menuOpen])
-
-	if(name === "first_param") {
-		console.log('sOption', sOption);
-		console.log('selectedOption', selectedOption);
-	}
-
 
     return (
         <div className="wprf-select-wrapper">

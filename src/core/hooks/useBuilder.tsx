@@ -133,6 +133,11 @@ const useBuilder = (props) => {
 			// return false;
 		}
 
+		if (validProps?.isLicenseActive && Boolean(state.is_license_active) === false) {
+			state.alerts?.licenseInactiveAlert(validProps?.popup)?.fire();
+			return;
+		}
+
 		if (typeof eventOrString === 'string') {
 			return (event) => executeChange(eventOrString, event, validProps);
 		} else {

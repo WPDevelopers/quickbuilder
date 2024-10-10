@@ -5,6 +5,7 @@ import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
 const Input = (props) => {
 	const validProps = validFieldProps(props, [
+		"is_license_active",
 		"is_pro",
 		"visible",
 		"trigger",
@@ -21,6 +22,7 @@ const Input = (props) => {
 			validProps.onChange(event, {
 				popup: props?.popup,
 				isPro: !!props.is_pro,
+				isLicenseActive: !!props.is_license_active,
 				originProps: props,
 			}),
 		[validProps?.value]

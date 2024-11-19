@@ -59,6 +59,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
     "@wordpress/api-fetch": "^6.19.0",
     "@wordpress/components": "^22.1.0",
     "@wordpress/core-data": "5.5.0",

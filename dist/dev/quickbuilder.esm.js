@@ -6,7 +6,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { toPath, clone } from 'lodash-es';
 import { __experimentalGetSettings, date } from '@wordpress/date';
 import moment from 'moment';
-import { applyFilters, doAction } from '@wordpress/hooks';
+import { doAction, applyFilters } from '@wordpress/hooks';
 import classNames from 'classnames';
 import Swal from 'sweetalert2';
 import ReactSelect from 'react-select';
@@ -17,7 +17,6 @@ import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { useInstanceId } from '@wordpress/compose';
 import { MediaUpload } from '@wordpress/media-utils';
 import SweetAlert$1 from 'react-bootstrap-sweetalert';
 import { ReactSortable } from 'react-sortablejs';
@@ -61,25 +60,25 @@ function _defineProperty(e, r, t) {
   }) : e[r] = t, e;
 }
 
-function _arrayLikeToArray$2(r, a) {
+function _arrayLikeToArray$3(r, a) {
   (null == a || a > r.length) && (a = r.length);
   for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
   return n;
 }
 
 function _arrayWithoutHoles(r) {
-  if (Array.isArray(r)) return _arrayLikeToArray$2(r);
+  if (Array.isArray(r)) return _arrayLikeToArray$3(r);
 }
 
 function _iterableToArray(r) {
   if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
 }
 
-function _unsupportedIterableToArray$2(r, a) {
+function _unsupportedIterableToArray$3(r, a) {
   if (r) {
-    if ("string" == typeof r) return _arrayLikeToArray$2(r, a);
+    if ("string" == typeof r) return _arrayLikeToArray$3(r, a);
     var t = {}.toString.call(r).slice(8, -1);
-    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$2(r, a) : void 0;
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$3(r, a) : void 0;
   }
 }
 
@@ -88,7 +87,7 @@ function _nonIterableSpread() {
 }
 
 function _toConsumableArray(r) {
-  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray$2(r) || _nonIterableSpread();
+  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray$3(r) || _nonIterableSpread();
 }
 
 function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -249,19 +248,19 @@ var setIn = function setIn(obj, path, value) {
   }
   return res;
 };
-var validFieldProps = function validFieldProps(defaultParams) {
+var validFieldProps = function validFieldProps(defaultProps) {
   var exclude = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  var type = defaultParams.type;
+  var type = defaultProps.type;
   var filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch'].concat(_toConsumableArray(exclude));
-  if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultParams.multiple) {
+  if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
     filterOutArray.push('options');
   }
   if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {
     filterOutArray.push('fields');
   }
-  var validProps = objectWithoutPropertiesLoose(defaultParams, filterOutArray);
-  if (defaultParams !== null && defaultParams !== void 0 && defaultParams.label && !(defaultParams !== null && defaultParams !== void 0 && defaultParams.placeholder)) {
-    validProps.placeholder = defaultParams.label;
+  var validProps = objectWithoutPropertiesLoose(defaultProps, filterOutArray);
+  if (defaultProps !== null && defaultProps !== void 0 && defaultProps.label && !(defaultProps !== null && defaultProps !== void 0 && defaultProps.placeholder)) {
+    validProps.placeholder = defaultProps.label;
   }
   return validProps;
 };
@@ -700,7 +699,7 @@ function _nonIterableRest() {
 }
 
 function _slicedToArray(r, e) {
-  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray$2(r, e) || _nonIterableRest();
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray$3(r, e) || _nonIterableRest();
 }
 
 function _objectWithoutPropertiesLoose$1(r, e) {
@@ -1251,7 +1250,7 @@ var useBuilder = function useBuilder(props) {
       field = _eChange.field,
       value = _eChange.val;
     if (field) {
-      setFieldValue(field, applyFilters('quickBuilder_fieldValue', value, field));
+      setFieldValue(field, value);
       doAction('quickBuilder_setFieldValue', field, value, validProps);
     }
   }, [setFieldValue, state.values]);
@@ -1568,9 +1567,7 @@ var Badge = function Badge(props) {
     _props$position = props.position,
     position = _props$position === void 0 ? "right" : _props$position,
     renderLabel = props.renderLabel,
-    renderComponent = props.renderComponent,
-    _props$disabled = props.disabled,
-    disabled = _props$disabled === void 0 ? false : _props$disabled;
+    renderComponent = props.renderComponent;
   if (label === undefined) {
     label = "Pro";
   }
@@ -1588,7 +1585,7 @@ var Badge = function Badge(props) {
   }
   return createElement("div", _extends$1({
     className: classNames("wprf-badge-wrapper", {
-      "pro-deactivated": !builderContext.is_pro_active || disabled
+      "pro-deactivated": !builderContext.is_pro_active
     })
   }, componentProps), position === "left" && label.length > 0 && createElement(Fragment, null, renderLabel(createElement(BadgeComp, {
     componentClasses: componentClasses,
@@ -1681,7 +1678,7 @@ var ControlField = function ControlField(_ref) {
   }));
 };
 
-var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "disabled", "enable_disable_text_active"];
+var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "enable_disable_text_active"];
 function ownKeys$b(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$b(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$b(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
@@ -1698,8 +1695,6 @@ var withLabel = function withLabel(WrappedComponent) {
       is_pro = props.is_pro,
       badge = props.badge,
       value = props.value,
-      _props$disabled = props.disabled,
-      disabled = _props$disabled === void 0 ? false : _props$disabled,
       _props$enable_disable = props.enable_disable_text_active,
       enable_disable_text_active = _props$enable_disable === void 0 ? false : _props$enable_disable,
       rest = _objectWithoutProperties(props, _excluded$3);
@@ -1719,12 +1714,11 @@ var withLabel = function withLabel(WrappedComponent) {
         id: id
       }));
     }
-    var validProps = validFieldProps(props, ["description", "label", "help", "style", "disabled"]);
+    var validProps = validFieldProps(props, ["description", "label", "help", "style"]);
     var componentClasses = classNames("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
     return createElement("div", {
       className: componentClasses
-    }, (is_pro == true || disabled == true) && createElement(Fragment, null, createElement(Badge, _extends$1({}, badge, rest, {
-      disabled: disabled,
+    }, is_pro == true && createElement(Fragment, null, createElement(Badge, _extends$1({}, badge, rest, {
       renderLabel: function renderLabel(badge, position) {
         return createElement(ControlLabel, _extends$1({}, validProps, {
           context: rest === null || rest === void 0 ? void 0 : rest.context,
@@ -1762,7 +1756,7 @@ var withLabel = function withLabel(WrappedComponent) {
       dangerouslySetInnerHTML: {
         __html: props.help
       }
-    })))), (is_pro == false || is_pro == undefined) && disabled == false && createElement(Fragment, null, label && label.length > 0 && createElement(ControlLabel, _extends$1({}, validProps, {
+    })))), (is_pro == false || is_pro == undefined) && createElement(Fragment, null, label && label.length > 0 && createElement(ControlLabel, _extends$1({}, validProps, {
       context: rest === null || rest === void 0 ? void 0 : rest.context,
       label: label,
       id: id
@@ -2194,11 +2188,7 @@ var ColorPicker = function ColorPicker(props) {
     setDefaultColor = _useState6[1];
   var closeRef = useRef(null);
   useEffect(function () {
-    if (value) {
-      setDefaultColor(value);
-    } else {
-      setDefaultColor("#ffffff00");
-    }
+    if (value) setDefaultColor(value);else setDefaultColor("#ffffff00");
   }, []);
   var handleCloseRef = function handleCloseRef(ref) {
     useEffect(function () {
@@ -2427,6 +2417,50 @@ var DateControl = function DateControl(props) {
 };
 var Date$1 = withLabel(DateControl);
 
+/**
+ * WordPress dependencies
+ */
+const instanceMap = new WeakMap();
+/**
+ * Creates a new id for a given object.
+ *
+ * @param  object Object reference to create an id for.
+ * @return The instance id (index).
+ */
+
+function createId(object) {
+  const instances = instanceMap.get(object) || 0;
+  instanceMap.set(object, instances + 1);
+  return instances;
+}
+/**
+ * Specify the useInstanceId *function* signatures.
+ *
+ * More accurately, useInstanceId distinguishes between three different
+ * signatures:
+ *
+ * 1. When only object is given, the returned value is a number
+ * 2. When object and prefix is given, the returned value is a string
+ * 3. When preferredId is given, the returned value is the type of preferredId
+ */
+
+
+/**
+ * Provides a unique instance ID.
+ *
+ * @param  object        Object reference to create an id for.
+ * @param  [prefix]      Prefix for the unique id.
+ * @param  [preferredId] Default ID to use.
+ * @return The unique instance id.
+ */
+function useInstanceId(object, prefix, preferredId) {
+  return useMemo(() => {
+    if (preferredId) return preferredId;
+    const id = createId(object);
+    return prefix ? `${prefix}-${id}` : id;
+  }, [object]);
+}
+
 var _RepeaterField = function RepeaterField(props) {
   var _builderContext$value;
   var builderContext = useBuilderContext();
@@ -2620,9 +2654,9 @@ var Editor = function Editor(props) {
 };
 var Editor$1 = withLabel(Editor);
 
-function _createForOfIteratorHelper$1(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray$1(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray$1(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray$1(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$1(r, a) : void 0; } }
-function _arrayLikeToArray$1(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _createForOfIteratorHelper$2(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray$2(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray$2(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray$2(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$2(r, a) : void 0; } }
+function _arrayLikeToArray$2(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function ownKeys$7(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$7(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$7(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$7(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function GenericCheckbox(props) {
@@ -2689,7 +2723,7 @@ function Checkbox(props) {
     useEffect(function () {
       if (!isObject(value)) {
         var lState = {};
-        var _iterator = _createForOfIteratorHelper$1(options),
+        var _iterator = _createForOfIteratorHelper$2(options),
           _step;
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -2908,11 +2942,9 @@ var Input = function Input(props) {
     disabled: (props === null || props === void 0 ? void 0 : props.is_pro) || false
   }));
 };
-
-// Input.defaultProps = {
-// 	type: "text",
-// };
-
+Input.defaultProps = {
+  type: "text"
+};
 var GenericInput = /*#__PURE__*/React.memo(Input);
 var Input$1 = withLabel(/*#__PURE__*/React.memo(Input));
 
@@ -3421,7 +3453,12 @@ ResponsiveNumber.defaultProps = {
 };
 var ResponsiveNumber$1 = withLabel(/*#__PURE__*/React.memo(ResponsiveNumber));
 
+function _createForOfIteratorHelper$1(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray$1(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray$1(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray$1(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$1(r, a) : void 0; } }
+function _arrayLikeToArray$1(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 var SteppedButton = function SteppedButton(props) {
+  var _builderContext$getFi;
+  var builderContext = useBuilderContext(); // Access builder context
   var _useState = useState(undefined),
     _useState2 = _slicedToArray(_useState, 2),
     nextTab = _useState2[0],
@@ -3430,7 +3467,35 @@ var SteppedButton = function SteppedButton(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     prevTab = _useState4[0],
     setPrevTab = _useState4[1];
-  var builderContext = useBuilderContext();
+  var _useState5 = useState(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    disablePrev = _useState6[0],
+    setDisablePrev = _useState6[1];
+
+  // Retrieve `isStartClicked` from the context
+  var isStartClicked = (_builderContext$getFi = builderContext.getFieldValue("isStartClicked")) !== null && _builderContext$getFi !== void 0 ? _builderContext$getFi : false;
+  var getCookie = function getCookie(cookieName) {
+    var cookies = document.cookie.split("; ");
+    var _iterator = _createForOfIteratorHelper$1(cookies),
+      _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var cookie = _step.value;
+        var _cookie$split = cookie.split("="),
+          _cookie$split2 = _slicedToArray(_cookie$split, 2),
+          name = _cookie$split2[0],
+          value = _cookie$split2[1];
+        if (name === cookieName) {
+          return decodeURIComponent(value);
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+    return null;
+  };
   useEffect(function () {
     var tabIds = props.fields.map(function (tab) {
       return tab.id;
@@ -3438,17 +3503,46 @@ var SteppedButton = function SteppedButton(props) {
     var currentTabIndex = tabIds.findIndex(function (tab) {
       return tab === props.active;
     });
-    if (currentTabIndex != -1) {
+
+    // Set previous and next tabs
+    if (currentTabIndex !== -1) {
       setPrevTab(tabIds[currentTabIndex - 1]);
     }
     if (currentTabIndex <= tabIds.length) {
       setNextTab(tabIds[currentTabIndex + 1]);
     }
-  }, [props.active, props.fields]);
+
+    // Check if `prev` button should be disabled
+    var isSetupPage = tabIds[currentTabIndex] === "setup-page";
+    var betterdocsInsightsAllowed = getCookie("betterdocs_insights_allowed") == "1";
+    setDisablePrev(isSetupPage && (isStartClicked || betterdocsInsightsAllowed));
+  }, [props.active, props.fields, isStartClicked]);
   useEffect(function () {
     var _builderContext$confi;
     builderContext.setFieldValue("active_tab", builderContext === null || builderContext === void 0 || (_builderContext$confi = builderContext.config) === null || _builderContext$confi === void 0 ? void 0 : _builderContext$confi.active);
   }, [props.active]);
+  var handleButtonClick = function handleButtonClick(button) {
+    var tabIds = props.fields.map(function (tab) {
+      return tab.id;
+    });
+    var currentTabIndex = tabIds.findIndex(function (tab) {
+      return tab === props.active;
+    });
+    var targetTab;
+    if (button === "start") {
+      builderContext.setFieldValue("isStartClicked", true); // Update context
+      targetTab = tabIds[currentTabIndex + 1];
+    } else if (button === "next" || button === "skip") {
+      targetTab = tabIds[currentTabIndex + 1];
+    } else if (button === "prev" && !disablePrev) {
+      targetTab = tabIds[currentTabIndex - 1];
+    }
+
+    // Navigate to the target tab if it exists
+    if (targetTab) {
+      props.setActive(targetTab);
+    }
+  };
   return createElement("div", {
     className: "wprf-stepped-button"
   }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
@@ -3458,29 +3552,30 @@ var SteppedButton = function SteppedButton(props) {
     }, button === "skip" && nextTab !== undefined && createElement(Button$2, {
       className: "wprf-btn wprf-step-btn-".concat(button),
       onClick: function onClick() {
-        return props.setActive(nextTab);
+        return handleButtonClick(button);
       }
-    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), button === "start" && prevTab == undefined && createElement("div", {
+    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), button === "start" && prevTab === undefined && createElement("div", {
       className: "wprf-btn wprf-step-btn-next"
     }, createElement(Field$1, {
       type: "button",
       ajax: (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 || (_props$config$buttons2 = _props$config$buttons2[button]) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2.ajax,
       name: "step-button",
       onClick: function onClick() {
-        return props.setActive(button === "start" ? nextTab : prevTab);
+        return handleButtonClick(button);
       },
       text: _typeof$1((_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 || (_props$config$buttons4 = _props$config$buttons4[button]) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4.condition) ? (_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 || (_props$config$buttons5 = _props$config$buttons5[button]) === null || _props$config$buttons5 === void 0 ? void 0 : _props$config$buttons5.customName : (_props$config$buttons6 = props.config.buttons) === null || _props$config$buttons6 === void 0 || (_props$config$buttons6 = _props$config$buttons6[button]) === null || _props$config$buttons6 === void 0 ? void 0 : _props$config$buttons6.name : (_props$config$buttons7 = props.config.buttons) === null || _props$config$buttons7 === void 0 ? void 0 : _props$config$buttons7[button]
     })), (button === "next" && nextTab !== undefined && prevTab !== undefined || button === "prev" && prevTab !== undefined) && createElement("div", {
-      className: "wprf-btn wprf-step-btn-".concat(button)
+      className: "wprf-btn wprf-step-btn-".concat(button, " ").concat(button === "prev" && disablePrev ? "disabled" : "")
     }, createElement(Field$1, {
       type: "button",
       ajax: (_props$config$buttons8 = props.config.buttons) === null || _props$config$buttons8 === void 0 || (_props$config$buttons8 = _props$config$buttons8[button]) === null || _props$config$buttons8 === void 0 ? void 0 : _props$config$buttons8.ajax,
       name: "step-button",
+      disabled: button === "prev" && disablePrev,
       onClick: function onClick() {
-        return props.setActive(button === "next" ? nextTab : prevTab);
+        return handleButtonClick(button);
       },
       text: _typeof$1((_props$config$buttons9 = props.config.buttons) === null || _props$config$buttons9 === void 0 ? void 0 : _props$config$buttons9[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons10 = props.config.buttons) === null || _props$config$buttons10 === void 0 || (_props$config$buttons10 = _props$config$buttons10[button]) === null || _props$config$buttons10 === void 0 ? void 0 : _props$config$buttons10.condition) ? (_props$config$buttons11 = props.config.buttons) === null || _props$config$buttons11 === void 0 || (_props$config$buttons11 = _props$config$buttons11[button]) === null || _props$config$buttons11 === void 0 ? void 0 : _props$config$buttons11.customName : (_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 || (_props$config$buttons12 = _props$config$buttons12[button]) === null || _props$config$buttons12 === void 0 ? void 0 : _props$config$buttons12.name : (_props$config$buttons13 = props.config.buttons) === null || _props$config$buttons13 === void 0 ? void 0 : _props$config$buttons13[button]
-    })), nextTab == undefined && ((_props$config$buttons14 = props.config.buttons) === null || _props$config$buttons14 === void 0 || (_props$config$buttons14 = _props$config$buttons14[button]) === null || _props$config$buttons14 === void 0 ? void 0 : _props$config$buttons14.type) && createElement(Field$1, (_props$config$buttons15 = props.config.buttons) === null || _props$config$buttons15 === void 0 ? void 0 : _props$config$buttons15[button]));
+    })), nextTab === undefined && ((_props$config$buttons14 = props.config.buttons) === null || _props$config$buttons14 === void 0 || (_props$config$buttons14 = _props$config$buttons14[button]) === null || _props$config$buttons14 === void 0 ? void 0 : _props$config$buttons14.type) && createElement(Field$1, (_props$config$buttons15 = props.config.buttons) === null || _props$config$buttons15 === void 0 ? void 0 : _props$config$buttons15[button]));
   }));
 };
 var SteppedButton$1 = /*#__PURE__*/React.memo(SteppedButton);

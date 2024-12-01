@@ -183,19 +183,19 @@ export const setIn = (obj, path, value) => {
 	return res;
 }
 
-export const validFieldProps = (defaultProps, exclude: string[] = []) => {
-	const type = defaultProps.type;
+export const validFieldProps = (defaultParams: any, exclude: string[] = []) => {
+	const type = defaultParams.type;
 	let filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch', ...exclude];
-	if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && (type !== 'toggle' && defaultProps.multiple)) {
+	if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && (type !== 'toggle' && defaultParams.multiple)) {
 		filterOutArray.push('options');
 	}
 	if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {
 		filterOutArray.push('fields');
 	}
 
-	let validProps: any = objectWithoutPropertiesLoose(defaultProps, filterOutArray);
-	if (defaultProps?.label && !defaultProps?.placeholder) {
-		validProps.placeholder = defaultProps.label;
+	let validProps: any = objectWithoutPropertiesLoose(defaultParams, filterOutArray);
+	if (defaultParams?.label && !defaultParams?.placeholder) {
+		validProps.placeholder = defaultParams.label;
 	}
 	return validProps;
 }

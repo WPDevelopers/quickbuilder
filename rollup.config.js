@@ -79,7 +79,7 @@ export default {
 			sourceMap: !isProduction,
 			include: ["**/*.scss", "*.css", "node_modules/**/*.css"],
 			failOnError: true,
-			sass: require("node-sass"),
+			sass: require("sass"),
 			plugins: postcssPlugins,
 			// processor: () => postcss([autoprefixer({ overrideBrowserslist: "Edge 18" })]),
 		}),
@@ -95,7 +95,7 @@ export default {
 			babelHelpers: "runtime",
 			plugins: [
 				"@babel/plugin-transform-runtime",
-				"@babel/plugin-proposal-class-properties",
+				"@babel/plugin-transform-class-properties",
 			],
 		}),
 		isProduction ? uglify() : null,

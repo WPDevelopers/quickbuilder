@@ -3,7 +3,7 @@ import copy from "copy-to-clipboard";
 import React, { useCallback, useEffect, useState } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
-const Input = (props) => {
+const Input = ( props ) => {
 	const validProps = validFieldProps(props, [
 		"is_license_active",
 		"is_pro",
@@ -86,9 +86,9 @@ const Input = (props) => {
 	});
 };
 
-Input.defaultProps = {
-	type: "text",
-};
+// Input.defaultProps = {
+// 	type: "text",
+// };
 
 export const GenericInput = React.memo(Input);
 export default withLabel(React.memo(Input));

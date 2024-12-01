@@ -21,6 +21,7 @@ const Badge = (props) => {
 		position = "right",
 		renderLabel,
 		renderComponent,
+		disabled = false
 	} = props;
 	if (label === undefined) {
 		label = "Pro";
@@ -44,7 +45,7 @@ const Badge = (props) => {
 	return (
 		<div
 			className={classNames("wprf-badge-wrapper", {
-				"pro-deactivated": !builderContext.is_pro_active,
+				"pro-deactivated": !builderContext.is_pro_active || disabled,
 			})}
 			{...componentProps}
 		>

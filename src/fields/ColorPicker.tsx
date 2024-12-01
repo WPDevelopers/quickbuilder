@@ -11,8 +11,11 @@ const ColorPicker = (props) => {
 	const closeRef = useRef(null);
 
 	useEffect(() => {
-		if (value) setDefaultColor(value);
-		else setDefaultColor("#ffffff00");
+		if (value) {
+			setDefaultColor(value)
+		} else {
+			setDefaultColor("#ffffff00")
+		}
 	}, []);
 
 	const handleCloseRef = (ref) => {

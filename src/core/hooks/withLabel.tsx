@@ -16,6 +16,7 @@ const withLabel = (WrappedComponent) => {
 			is_pro,
 			badge,
 			value,
+			disabled = false,
 			enable_disable_text_active = false,
 			...rest
 		} = props;
@@ -49,6 +50,7 @@ const withLabel = (WrappedComponent) => {
 			"label",
 			"help",
 			"style",
+			"disabled",
 		]);
 		const componentClasses = classNames(
 			"wprf-control-wrapper",
@@ -62,11 +64,12 @@ const withLabel = (WrappedComponent) => {
 
 		return (
 			<div className={componentClasses}>
-				{is_pro == true && (
+				{(is_pro == true || disabled == true) && (
 					<>
 						<Badge
 							{...badge}
 							{...rest}
+							disabled={disabled}
 							renderLabel={(badge, position) => (
 								<ControlLabel
 									{...validProps}
@@ -112,7 +115,7 @@ const withLabel = (WrappedComponent) => {
 						)}
 					</>
 				)}
-				{(is_pro == false || is_pro == undefined) && (
+				{(is_pro == false || is_pro == undefined) && disabled == false && (
 					<>
 						{label && label.length > 0 && (
 							<ControlLabel

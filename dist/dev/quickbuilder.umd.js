@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/i18n'), require('intersect'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('uuid'), require('html-react-parser'), require('react-select/async'), require('react-dom')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/i18n', 'intersect', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'uuid', 'html-react-parser', 'react-select/async', 'react-dom'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpI18n, global.intersect, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.wpMedia, global.sweetalert, global.reactSortablejs, global.uuid, global.parse, global.AsyncSelect, global.ReactDOM));
-})(this, (function (exports, React, data, i18n, intersect, apiFetch, lodashEs, date, moment, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, mediaUtils, SweetAlert$1, reactSortablejs, uuid, parse, AsyncSelect, reactDom) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/i18n'), require('intersect'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/compose'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('uuid'), require('html-react-parser'), require('react-select/async'), require('react-dom')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/i18n', 'intersect', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/compose', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'uuid', 'html-react-parser', 'react-select/async', 'react-dom'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpI18n, global.intersect, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.compose, global.wpMedia, global.sweetalert, global.reactSortablejs, global.uuid, global.parse, global.AsyncSelect, global.ReactDOM));
+})(this, (function (exports, React, data, i18n, intersect, apiFetch, lodashEs, date, moment, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, compose, mediaUtils, SweetAlert$1, reactSortablejs, uuid, parse, AsyncSelect, reactDom) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -30,66 +30,59 @@
     }, _typeof$1(o);
   }
 
-  function _toPrimitive(input, hint) {
-    if (_typeof$1(input) !== "object" || input === null) return input;
-    var prim = input[Symbol.toPrimitive];
-    if (prim !== undefined) {
-      var res = prim.call(input, hint || "default");
-      if (_typeof$1(res) !== "object") return res;
+  function toPrimitive(t, r) {
+    if ("object" != _typeof$1(t) || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != _typeof$1(i)) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return (hint === "string" ? String : Number)(input);
+    return ("string" === r ? String : Number)(t);
   }
 
-  function _toPropertyKey(arg) {
-    var key = _toPrimitive(arg, "string");
-    return _typeof$1(key) === "symbol" ? key : String(key);
+  function toPropertyKey(t) {
+    var i = toPrimitive(t, "string");
+    return "symbol" == _typeof$1(i) ? i : i + "";
   }
 
-  function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
+  function _defineProperty(e, r, t) {
+    return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
+
+  function _arrayLikeToArray$2(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
+  }
+
+  function _arrayWithoutHoles(r) {
+    if (Array.isArray(r)) return _arrayLikeToArray$2(r);
+  }
+
+  function _iterableToArray(r) {
+    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+  }
+
+  function _unsupportedIterableToArray$2(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray$2(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$2(r, a) : void 0;
     }
-    return obj;
-  }
-
-  function _arrayLikeToArray$2(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-    return arr2;
-  }
-
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
-  }
-
-  function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-  }
-
-  function _unsupportedIterableToArray$2(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
   }
 
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread();
+  function _toConsumableArray(r) {
+    return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray$2(r) || _nonIterableSpread();
   }
 
   function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -250,19 +243,19 @@
     }
     return res;
   };
-  var validFieldProps = function validFieldProps(defaultProps) {
+  var validFieldProps = function validFieldProps(defaultParams) {
     var exclude = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    var type = defaultProps.type;
+    var type = defaultParams.type;
     var filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch'].concat(_toConsumableArray(exclude));
-    if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
+    if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultParams.multiple) {
       filterOutArray.push('options');
     }
     if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {
       filterOutArray.push('fields');
     }
-    var validProps = objectWithoutPropertiesLoose(defaultProps, filterOutArray);
-    if (defaultProps !== null && defaultProps !== void 0 && defaultProps.label && !(defaultProps !== null && defaultProps !== void 0 && defaultProps.placeholder)) {
-      validProps.placeholder = defaultProps.label;
+    var validProps = objectWithoutPropertiesLoose(defaultParams, filterOutArray);
+    if (defaultParams !== null && defaultParams !== void 0 && defaultParams.label && !(defaultParams !== null && defaultParams !== void 0 && defaultParams.placeholder)) {
+      validProps.placeholder = defaultParams.label;
     }
     return validProps;
   };
@@ -655,22 +648,17 @@
   };
 
   function _extends$1() {
-    _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
+    return _extends$1 = Object.assign ? Object.assign.bind() : function (n) {
+      for (var e = 1; e < arguments.length; e++) {
+        var t = arguments[e];
+        for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
       }
-      return target;
-    };
-    return _extends$1.apply(this, arguments);
+      return n;
+    }, _extends$1.apply(null, arguments);
   }
 
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
+  function _arrayWithHoles(r) {
+    if (Array.isArray(r)) return r;
   }
 
   function _iterableToArrayLimit(r, l) {
@@ -705,37 +693,30 @@
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest();
+  function _slicedToArray(r, e) {
+    return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray$2(r, e) || _nonIterableRest();
   }
 
-  function _objectWithoutPropertiesLoose$1(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      target[key] = source[key];
+  function _objectWithoutPropertiesLoose$1(r, e) {
+    if (null == r) return {};
+    var t = {};
+    for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+      if (e.includes(n)) continue;
+      t[n] = r[n];
     }
-    return target;
+    return t;
   }
 
-  function _objectWithoutProperties(source, excluded) {
-    if (source == null) return {};
-    var target = _objectWithoutPropertiesLoose$1(source, excluded);
-    var key, i;
+  function _objectWithoutProperties(e, t) {
+    if (null == e) return {};
+    var o,
+      r,
+      i = _objectWithoutPropertiesLoose$1(e, t);
     if (Object.getOwnPropertySymbols) {
-      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-      for (i = 0; i < sourceSymbolKeys.length; i++) {
-        key = sourceSymbolKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-        target[key] = source[key];
-      }
+      var s = Object.getOwnPropertySymbols(e);
+      for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
     }
-    return target;
+    return i;
   }
 
   var BuilderContext = /*#__PURE__*/React.createContext(undefined);
@@ -1264,7 +1245,7 @@
         field = _eChange.field,
         value = _eChange.val;
       if (field) {
-        setFieldValue(field, value);
+        setFieldValue(field, hooks.applyFilters('quickBuilder_fieldValue', value, field));
         hooks.doAction('quickBuilder_setFieldValue', field, value, validProps);
       }
     }, [setFieldValue, state.values]);
@@ -1581,7 +1562,9 @@
       _props$position = props.position,
       position = _props$position === void 0 ? "right" : _props$position,
       renderLabel = props.renderLabel,
-      renderComponent = props.renderComponent;
+      renderComponent = props.renderComponent,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled;
     if (label === undefined) {
       label = "Pro";
     }
@@ -1599,7 +1582,7 @@
     }
     return React.createElement("div", _extends$1({
       className: classNames__default["default"]("wprf-badge-wrapper", {
-        "pro-deactivated": !builderContext.is_pro_active
+        "pro-deactivated": !builderContext.is_pro_active || disabled
       })
     }, componentProps), position === "left" && label.length > 0 && React.createElement(React.Fragment, null, renderLabel(React.createElement(BadgeComp, {
       componentClasses: componentClasses,
@@ -1692,7 +1675,7 @@
     }));
   };
 
-  var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "enable_disable_text_active"];
+  var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "disabled", "enable_disable_text_active"];
   function ownKeys$b(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
   function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$b(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$b(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
@@ -1709,6 +1692,8 @@
         is_pro = props.is_pro,
         badge = props.badge,
         value = props.value,
+        _props$disabled = props.disabled,
+        disabled = _props$disabled === void 0 ? false : _props$disabled,
         _props$enable_disable = props.enable_disable_text_active,
         enable_disable_text_active = _props$enable_disable === void 0 ? false : _props$enable_disable,
         rest = _objectWithoutProperties(props, _excluded$3);
@@ -1728,11 +1713,12 @@
           id: id
         }));
       }
-      var validProps = validFieldProps(props, ["description", "label", "help", "style"]);
+      var validProps = validFieldProps(props, ["description", "label", "help", "style", "disabled"]);
       var componentClasses = classNames__default["default"]("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
       return React.createElement("div", {
         className: componentClasses
-      }, is_pro == true && React.createElement(React.Fragment, null, React.createElement(Badge, _extends$1({}, badge, rest, {
+      }, (is_pro == true || disabled == true) && React.createElement(React.Fragment, null, React.createElement(Badge, _extends$1({}, badge, rest, {
+        disabled: disabled,
         renderLabel: function renderLabel(badge, position) {
           return React.createElement(ControlLabel, _extends$1({}, validProps, {
             context: rest === null || rest === void 0 ? void 0 : rest.context,
@@ -1770,7 +1756,7 @@
         dangerouslySetInnerHTML: {
           __html: props.help
         }
-      })))), (is_pro == false || is_pro == undefined) && React.createElement(React.Fragment, null, label && label.length > 0 && React.createElement(ControlLabel, _extends$1({}, validProps, {
+      })))), (is_pro == false || is_pro == undefined) && disabled == false && React.createElement(React.Fragment, null, label && label.length > 0 && React.createElement(ControlLabel, _extends$1({}, validProps, {
         context: rest === null || rest === void 0 ? void 0 : rest.context,
         label: label,
         id: id
@@ -2202,7 +2188,11 @@
       setDefaultColor = _useState6[1];
     var closeRef = React.useRef(null);
     React.useEffect(function () {
-      if (value) setDefaultColor(value);else setDefaultColor("#ffffff00");
+      if (value) {
+        setDefaultColor(value);
+      } else {
+        setDefaultColor("#ffffff00");
+      }
     }, []);
     var handleCloseRef = function handleCloseRef(ref) {
       React.useEffect(function () {
@@ -2431,50 +2421,6 @@
   };
   var Date$1 = withLabel(DateControl);
 
-  /**
-   * WordPress dependencies
-   */
-  const instanceMap = new WeakMap();
-  /**
-   * Creates a new id for a given object.
-   *
-   * @param  object Object reference to create an id for.
-   * @return The instance id (index).
-   */
-
-  function createId(object) {
-    const instances = instanceMap.get(object) || 0;
-    instanceMap.set(object, instances + 1);
-    return instances;
-  }
-  /**
-   * Specify the useInstanceId *function* signatures.
-   *
-   * More accurately, useInstanceId distinguishes between three different
-   * signatures:
-   *
-   * 1. When only object is given, the returned value is a number
-   * 2. When object and prefix is given, the returned value is a string
-   * 3. When preferredId is given, the returned value is the type of preferredId
-   */
-
-
-  /**
-   * Provides a unique instance ID.
-   *
-   * @param  object        Object reference to create an id for.
-   * @param  [prefix]      Prefix for the unique id.
-   * @param  [preferredId] Default ID to use.
-   * @return The unique instance id.
-   */
-  function useInstanceId(object, prefix, preferredId) {
-    return React.useMemo(() => {
-      if (preferredId) return preferredId;
-      const id = createId(object);
-      return prefix ? `${prefix}-${id}` : id;
-    }, [object]);
-  }
-
   var _RepeaterField = function RepeaterField(props) {
     var _builderContext$value;
     var builderContext = useBuilderContext();
@@ -2486,7 +2432,7 @@
       _useState2 = _slicedToArray(_useState, 2),
       isCollapsed = _useState2[0],
       setIsCollapsed = _useState2[1];
-    var instanceId = useInstanceId(_RepeaterField);
+    var instanceId = compose.useInstanceId(_RepeaterField);
     // onClick={() => setIsCollapse(!isCollapse)}
     var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 || (_builderContext$value = _builderContext$value[parent]) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[index];
     var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
@@ -2956,9 +2902,11 @@
       disabled: (props === null || props === void 0 ? void 0 : props.is_pro) || false
     }));
   };
-  Input.defaultProps = {
-    type: "text"
-  };
+
+  // Input.defaultProps = {
+  // 	type: "text",
+  // };
+
   var GenericInput = /*#__PURE__*/React__default["default"].memo(Input);
   var Input$1 = withLabel(/*#__PURE__*/React__default["default"].memo(Input));
 
@@ -3215,7 +3163,7 @@
     if (!options) {
       throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'betterdocs'));
     }
-    var instanceId = useInstanceId(_RadioCard);
+    var instanceId = compose.useInstanceId(_RadioCard);
     var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
     var styles = _objectSpread$5({}, props === null || props === void 0 ? void 0 : props.style);
     var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
@@ -3531,8 +3479,8 @@
   };
   var SteppedButton$1 = /*#__PURE__*/React__default["default"].memo(SteppedButton);
 
-  function _objectDestructuringEmpty(obj) {
-    if (obj == null) throw new TypeError("Cannot destructure " + obj);
+  function _objectDestructuringEmpty(t) {
+    if (null == t) throw new TypeError("Cannot destructure " + t);
   }
 
   var Submit = function Submit(_ref) {

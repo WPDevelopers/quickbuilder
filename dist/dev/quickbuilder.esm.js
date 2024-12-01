@@ -6,7 +6,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { toPath, clone } from 'lodash-es';
 import { __experimentalGetSettings, date } from '@wordpress/date';
 import moment from 'moment';
-import { doAction, applyFilters } from '@wordpress/hooks';
+import { applyFilters, doAction } from '@wordpress/hooks';
 import classNames from 'classnames';
 import Swal from 'sweetalert2';
 import ReactSelect from 'react-select';
@@ -248,19 +248,19 @@ var setIn = function setIn(obj, path, value) {
   }
   return res;
 };
-var validFieldProps = function validFieldProps(defaultProps) {
+var validFieldProps = function validFieldProps(defaultParams) {
   var exclude = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  var type = defaultProps.type;
+  var type = defaultParams.type;
   var filterOutArray = ['validation_rules', 'default', 'rules', 'meta', 'switch'].concat(_toConsumableArray(exclude));
-  if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultProps.multiple) {
+  if (type !== 'select' && type !== 'checkbox-select' && type !== 'select-async' && type !== 'radio-card' && type !== 'checkbox' && type !== 'toggle' && defaultParams.multiple) {
     filterOutArray.push('options');
   }
   if (type !== 'tab' && type !== 'group' && type !== 'repeater' && type !== 'section' && type !== 'button') {
     filterOutArray.push('fields');
   }
-  var validProps = objectWithoutPropertiesLoose(defaultProps, filterOutArray);
-  if (defaultProps !== null && defaultProps !== void 0 && defaultProps.label && !(defaultProps !== null && defaultProps !== void 0 && defaultProps.placeholder)) {
-    validProps.placeholder = defaultProps.label;
+  var validProps = objectWithoutPropertiesLoose(defaultParams, filterOutArray);
+  if (defaultParams !== null && defaultParams !== void 0 && defaultParams.label && !(defaultParams !== null && defaultParams !== void 0 && defaultParams.placeholder)) {
+    validProps.placeholder = defaultParams.label;
   }
   return validProps;
 };
@@ -1250,7 +1250,7 @@ var useBuilder = function useBuilder(props) {
       field = _eChange.field,
       value = _eChange.val;
     if (field) {
-      setFieldValue(field, value);
+      setFieldValue(field, applyFilters('quickBuilder_fieldValue', value, field));
       doAction('quickBuilder_setFieldValue', field, value, validProps);
     }
   }, [setFieldValue, state.values]);
@@ -1567,7 +1567,9 @@ var Badge = function Badge(props) {
     _props$position = props.position,
     position = _props$position === void 0 ? "right" : _props$position,
     renderLabel = props.renderLabel,
-    renderComponent = props.renderComponent;
+    renderComponent = props.renderComponent,
+    _props$disabled = props.disabled,
+    disabled = _props$disabled === void 0 ? false : _props$disabled;
   if (label === undefined) {
     label = "Pro";
   }
@@ -1585,7 +1587,7 @@ var Badge = function Badge(props) {
   }
   return createElement("div", _extends$1({
     className: classNames("wprf-badge-wrapper", {
-      "pro-deactivated": !builderContext.is_pro_active
+      "pro-deactivated": !builderContext.is_pro_active || disabled
     })
   }, componentProps), position === "left" && label.length > 0 && createElement(Fragment, null, renderLabel(createElement(BadgeComp, {
     componentClasses: componentClasses,
@@ -1678,7 +1680,7 @@ var ControlField = function ControlField(_ref) {
   }));
 };
 
-var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "enable_disable_text_active"];
+var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "disabled", "enable_disable_text_active"];
 function ownKeys$b(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$b(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$b(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
@@ -1695,6 +1697,8 @@ var withLabel = function withLabel(WrappedComponent) {
       is_pro = props.is_pro,
       badge = props.badge,
       value = props.value,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
       _props$enable_disable = props.enable_disable_text_active,
       enable_disable_text_active = _props$enable_disable === void 0 ? false : _props$enable_disable,
       rest = _objectWithoutProperties(props, _excluded$3);
@@ -1714,11 +1718,12 @@ var withLabel = function withLabel(WrappedComponent) {
         id: id
       }));
     }
-    var validProps = validFieldProps(props, ["description", "label", "help", "style"]);
+    var validProps = validFieldProps(props, ["description", "label", "help", "style", "disabled"]);
     var componentClasses = classNames("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
     return createElement("div", {
       className: componentClasses
-    }, is_pro == true && createElement(Fragment, null, createElement(Badge, _extends$1({}, badge, rest, {
+    }, (is_pro == true || disabled == true) && createElement(Fragment, null, createElement(Badge, _extends$1({}, badge, rest, {
+      disabled: disabled,
       renderLabel: function renderLabel(badge, position) {
         return createElement(ControlLabel, _extends$1({}, validProps, {
           context: rest === null || rest === void 0 ? void 0 : rest.context,
@@ -1756,7 +1761,7 @@ var withLabel = function withLabel(WrappedComponent) {
       dangerouslySetInnerHTML: {
         __html: props.help
       }
-    })))), (is_pro == false || is_pro == undefined) && createElement(Fragment, null, label && label.length > 0 && createElement(ControlLabel, _extends$1({}, validProps, {
+    })))), (is_pro == false || is_pro == undefined) && disabled == false && createElement(Fragment, null, label && label.length > 0 && createElement(ControlLabel, _extends$1({}, validProps, {
       context: rest === null || rest === void 0 ? void 0 : rest.context,
       label: label,
       id: id
@@ -2188,7 +2193,11 @@ var ColorPicker = function ColorPicker(props) {
     setDefaultColor = _useState6[1];
   var closeRef = useRef(null);
   useEffect(function () {
-    if (value) setDefaultColor(value);else setDefaultColor("#ffffff00");
+    if (value) {
+      setDefaultColor(value);
+    } else {
+      setDefaultColor("#ffffff00");
+    }
   }, []);
   var handleCloseRef = function handleCloseRef(ref) {
     useEffect(function () {
@@ -2942,9 +2951,11 @@ var Input = function Input(props) {
     disabled: (props === null || props === void 0 ? void 0 : props.is_pro) || false
   }));
 };
-Input.defaultProps = {
-  type: "text"
-};
+
+// Input.defaultProps = {
+// 	type: "text",
+// };
+
 var GenericInput = /*#__PURE__*/React.memo(Input);
 var Input$1 = withLabel(/*#__PURE__*/React.memo(Input));
 

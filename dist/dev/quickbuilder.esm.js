@@ -49,50 +49,43 @@ function toPropertyKey(t) {
   return "symbol" == _typeof$1(i) ? i : i + "";
 }
 
-function _defineProperty(obj, key, value) {
-  key = toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
+function _defineProperty(e, r, t) {
+  return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[r] = t, e;
+}
+
+function _arrayLikeToArray$2(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
+}
+
+function _arrayWithoutHoles(r) {
+  if (Array.isArray(r)) return _arrayLikeToArray$2(r);
+}
+
+function _iterableToArray(r) {
+  if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+}
+
+function _unsupportedIterableToArray$2(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray$2(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$2(r, a) : void 0;
   }
-  return obj;
-}
-
-function _arrayLikeToArray$2(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
-}
-
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-
-function _unsupportedIterableToArray$2(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
 }
 
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread();
+function _toConsumableArray(r) {
+  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray$2(r) || _nonIterableSpread();
 }
 
 function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -648,22 +641,17 @@ var store = {
 };
 
 function _extends$1() {
-  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return _extends$1 = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
     }
-    return target;
-  };
-  return _extends$1.apply(this, arguments);
+    return n;
+  }, _extends$1.apply(null, arguments);
 }
 
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
 }
 
 function _iterableToArrayLimit(r, l) {
@@ -698,10 +686,24 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest();
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray$2(r, e) || _nonIterableRest();
 }
 
+var addCookiesListItemCount = function addCookiesListItemCount(context, tabs) {
+  var keys = tabs === null || tabs === void 0 ? void 0 : tabs.reduce(function (carry, item) {
+    return [].concat(_toConsumableArray(carry), _toConsumableArray(item.fields.map(function (f) {
+      return f.name;
+    })));
+  }, []);
+  var result = keys.map(function (key) {
+    var _context$values$key;
+    return Array.isArray(context === null || context === void 0 ? void 0 : context.values[key]) ? context === null || context === void 0 || (_context$values$key = context.values[key]) === null || _context$values$key === void 0 ? void 0 : _context$values$key.length : 0;
+  });
+  tabs.forEach(function (obj, index) {
+    obj['count'] = result[index];
+  });
+};
 var Menu = function Menu(props) {
   var _context$values, _context$values2;
   if (props.fields === undefined) {
@@ -715,6 +717,9 @@ var Menu = function Menu(props) {
     _useState2 = _slicedToArray(_useState, 2),
     tabsFields = _useState2[0],
     setTabsFields = _useState2[1];
+  if (props !== null && props !== void 0 && props.dataShare) {
+    addCookiesListItemCount(context, tabs);
+  }
   useEffect(function () {
     var filteredTabs = tabs.filter(function (tab) {
       return isVisible(context === null || context === void 0 ? void 0 : context.values, tab);
@@ -744,37 +749,32 @@ var Menu = function Menu(props) {
     }, (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? createElement("img", {
       src: tab.icon,
       alt: tab === null || tab === void 0 ? void 0 : tab.label
-    }) : isObject(tab.icon) ? context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 || (_context$icons = _context$icons[tab === null || tab === void 0 || (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons === void 0 ? void 0 : _context$icons[tab === null || tab === void 0 || (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), createElement("span", null, tab.label));
+    }) : isObject(tab.icon) ? context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 || (_context$icons = _context$icons[tab === null || tab === void 0 || (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons === void 0 ? void 0 : _context$icons[tab === null || tab === void 0 || (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ''), createElement("span", null, tab.label), (props === null || props === void 0 ? void 0 : props.dataShare) && createElement("span", {
+      className: "list-count"
+    }, (tab === null || tab === void 0 ? void 0 : tab.count) < 10 ? "0".concat(tab === null || tab === void 0 ? void 0 : tab.count) : tab === null || tab === void 0 ? void 0 : tab.count));
   })));
 };
 
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
+function _objectWithoutPropertiesLoose(r, e) {
+  if (null == r) return {};
+  var t = {};
+  for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+    if (e.includes(n)) continue;
+    t[n] = r[n];
   }
-  return target;
+  return t;
 }
 
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
+function _objectWithoutProperties(e, t) {
+  if (null == e) return {};
+  var o,
+    r,
+    i = _objectWithoutPropertiesLoose(e, t);
   if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
+    var s = Object.getOwnPropertySymbols(e);
+    for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
   }
-  return target;
+  return i;
 }
 
 var BuilderContext = /*#__PURE__*/createContext(undefined);
@@ -1865,9 +1865,9 @@ var withProps = function withProps(WrappedComponent) {
   return WithProps;
 };
 
-function _createForOfIteratorHelper$1(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
-function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _createForOfIteratorHelper$1(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray$1(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray$1(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray$1(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$1(r, a) : void 0; } }
+function _arrayLikeToArray$1(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function ownKeys$a(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$a(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$a(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$a(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function GenericCheckbox(props) {
@@ -2103,6 +2103,7 @@ var Date$1 = withLabel(DateControl);
 function ownKeys$9(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$9(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$9(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$9(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Input = function Input(props, ref) {
+  var _validProps$suggestio;
   var type = props.type ? props.type : 'text';
   var validProps = validFieldProps(_objectSpread$9(_objectSpread$9({}, props), {}, {
     type: type
@@ -2115,6 +2116,7 @@ var Input = function Input(props, ref) {
   };
   var localRef = useRef(null);
   var inputRef = ref !== null && ref !== void 0 && ref.current ? ref : localRef;
+  var builderContext = useBuilderContext();
   if (validProps.type === 'checkbox') {
     if (validProps !== null && validProps !== void 0 && validProps.name) {
       validProps.checked = (validProps === null || validProps === void 0 ? void 0 : validProps.checked) || (validProps === null || validProps === void 0 ? void 0 : validProps.value);
@@ -2135,6 +2137,11 @@ var Input = function Input(props, ref) {
       return CopyInterval && clearTimeout(CopyInterval);
     };
   }, [isCopied]);
+  var handleNumSuggestion = useCallback(function (e) {
+    var _e$target;
+    var value = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.getAttribute("data-num-sug");
+    builderContext.setFieldValue(validProps.name, value);
+  }, [validProps]);
   if (!props.is_pro && props !== null && props !== void 0 && props.copyOnClick && props !== null && props !== void 0 && props.value) {
     var copyMessage = (props === null || props === void 0 ? void 0 : props.copyMessage) || "Click To Copy!";
     var copiedMessage = (props === null || props === void 0 ? void 0 : props.copiedMessage) || "Copied!";
@@ -2161,13 +2168,20 @@ var Input = function Input(props, ref) {
       }
     }, "Copy")));
   }
-  return /*#__PURE__*/React.createElement('input', _objectSpread$9(_objectSpread$9({}, validProps), {}, {
+  return createElement("span", null, /*#__PURE__*/React.createElement('input', _objectSpread$9(_objectSpread$9({}, validProps), {}, {
     onChange: handleChange,
     ref: inputRef
-  }));
+  })), createElement("div", {
+    className: "wprf-num-suggestions"
+  }, validProps === null || validProps === void 0 || (_validProps$suggestio = validProps.suggestions) === null || _validProps$suggestio === void 0 ? void 0 : _validProps$suggestio.map(function (item, index) {
+    return createElement("span", {
+      onClick: handleNumSuggestion,
+      "data-num-sug": item.value
+    }, item.value + ' ' + item.unit);
+  })));
 };
-var GenericInput = /*#__PURE__*/React.memo( /*#__PURE__*/React.forwardRef(Input));
-var Input$1 = withLabel( /*#__PURE__*/React.memo(Input));
+var GenericInput = /*#__PURE__*/React.memo(/*#__PURE__*/React.forwardRef(Input));
+var Input$1 = withLabel(/*#__PURE__*/React.memo(Input));
 
 function ownKeys$8(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$8(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$8(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$8(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -2183,7 +2197,7 @@ var Textarea = function Textarea(props) {
     rows: 5
   }));
 };
-var Textarea$1 = withLabel( /*#__PURE__*/React.memo(Textarea));
+var Textarea$1 = withLabel(/*#__PURE__*/React.memo(Textarea));
 
 function ownKeys$7(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$7(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$7(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$7(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -2216,7 +2230,7 @@ var CodeViewer = function CodeViewer(props) {
     className: "wprf-copy-button"
   }, ButtonText));
 };
-var CodeViewer$1 = withLabel( /*#__PURE__*/React.memo(CodeViewer));
+var CodeViewer$1 = withLabel(/*#__PURE__*/React.memo(CodeViewer));
 
 var JsonUploader = function JsonUploader(props) {
   validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
@@ -2285,7 +2299,7 @@ var JsonUploader = function JsonUploader(props) {
     onClick: removeFile
   }, "x")));
 };
-var JsonUploader$1 = withLabel( /*#__PURE__*/React.memo(JsonUploader));
+var JsonUploader$1 = withLabel(/*#__PURE__*/React.memo(JsonUploader));
 
 var _excluded$2 = ["name", "fields"];
 var Group = function Group(props) {
@@ -2396,9 +2410,6 @@ var Select = function Select(props) {
     setIsLoading(false);
   };
   useEffect(function () {
-    if (name === "first_param") {
-      console.log('sOption', sOption);
-    }
     if (!isArray(sOption) && isObject(sOption)) {
       onChange({
         target: {
@@ -2432,10 +2443,6 @@ var Select = function Select(props) {
       handleMenuOpen();
     }
   }, [props === null || props === void 0 ? void 0 : props.menuOpen]);
-  if (name === "first_param") {
-    console.log('sOption', sOption);
-    console.log('selectedOption', selectedOption);
-  }
   return createElement("div", {
     className: "wprf-select-wrapper"
   }, createElement(ReactSelect, {
@@ -2511,7 +2518,7 @@ function useInstanceId(object, prefix, preferredId) {
   }, [object]);
 }
 
-var RepeaterField = function RepeaterField(props) {
+var _RepeaterField = function RepeaterField(props) {
   var _builderContext$value;
   var builderContext = useBuilderContext();
   var fields = props.fields,
@@ -2522,7 +2529,7 @@ var RepeaterField = function RepeaterField(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isCollapsed = _useState2[0],
     setIsCollapsed = _useState2[1];
-  var instanceId = useInstanceId(RepeaterField);
+  var instanceId = useInstanceId(_RepeaterField);
   // onClick={() => setIsCollapse(!isCollapse)}
   var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 || (_builderContext$value = _builderContext$value[parent]) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[index];
   var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
@@ -2667,9 +2674,9 @@ var toolbarOptions = {
   }
 };
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function ownKeys$4(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$4(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$4(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$4(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Toggle = function Toggle(props) {
@@ -2743,7 +2750,7 @@ var Toggle = function Toggle(props) {
 var _excluded$1 = ["label", "value", "icon", "is_pro"];
 function ownKeys$3(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$3(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$3(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$3(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-var RadioCard = function RadioCard(props) {
+var _RadioCard = function RadioCard(props) {
   var builderContext = useBuilderContext();
   var _useOptions = useOptions(props, 'options'),
     options = _useOptions.options,
@@ -2751,7 +2758,7 @@ var RadioCard = function RadioCard(props) {
   if (!options) {
     throw new Error(__('#options is a required arguments for RadioCard field.', 'notificationx'));
   }
-  var instanceId = useInstanceId(RadioCard);
+  var instanceId = useInstanceId(_RadioCard);
   var componentClasses = classNames(["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
   var styles = _objectSpread$3({}, props === null || props === void 0 ? void 0 : props.style);
   var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
@@ -2803,7 +2810,7 @@ var RadioCard = function RadioCard(props) {
     }))));
   })));
 };
-var Radio = withLabel(RadioCard);
+var Radio = withLabel(_RadioCard);
 
 var Section = function Section(props) {
   var _props$collapsed;
@@ -3027,7 +3034,7 @@ var Repeater = function Repeater(props) {
     filter: '.wprf-repeater-field-controls',
     forceFallback: true
   }, localMemoizedValue.map(function (value, index) {
-    return createElement(RepeaterField, {
+    return createElement(_RepeaterField, {
       isCollapsed: value === null || value === void 0 ? void 0 : value.isCollapsed,
       key: (value === null || value === void 0 ? void 0 : value.index) || index,
       fields: fields,
@@ -3150,7 +3157,7 @@ var SelectAsync = function SelectAsync(props) {
     setIsAjaxRunning = _useState6[1];
   // const [lastRequest, setLastRequest] = useState("");
 
-  var handleMenuOpen = function handleMenuOpen(inputValue, callback) {
+  var _handleMenuOpen = function handleMenuOpen(inputValue, callback) {
     // AJAX
     if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
       var _Object$keys;
@@ -3199,7 +3206,7 @@ var SelectAsync = function SelectAsync(props) {
             // console.log("recursive call: ", lr, callback);
 
             // @ts-ignore
-            handleMenuOpen.apply(void 0, _toConsumableArray(lr));
+            _handleMenuOpen.apply(void 0, _toConsumableArray(lr));
           }
 
           // @ts-ignore
@@ -3228,7 +3235,7 @@ var SelectAsync = function SelectAsync(props) {
     className: "wprf-async-select-wrapper"
   }, createElement(AsyncSelect, {
     cacheOptions: true,
-    loadOptions: handleMenuOpen,
+    loadOptions: _handleMenuOpen,
     defaultOptions: options,
     isDisabled: props === null || props === void 0 ? void 0 : props.disable,
     isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
@@ -3593,7 +3600,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
 ResponsiveNumber.defaultProps = {
   type: "number"
 };
-var ResponsiveNumber$1 = withLabel( /*#__PURE__*/React.memo(ResponsiveNumber));
+var ResponsiveNumber$1 = withLabel(/*#__PURE__*/React.memo(ResponsiveNumber));
 
 var eligibleMessage = function eligibleMessage(props) {
   if (props !== null && props !== void 0 && props.messages) {
@@ -3743,8 +3750,8 @@ var InnerContent = function InnerContent(_ref) {
   return createElement(Fragment, null, fieldViews);
 };
 
-function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure " + obj);
+function _objectDestructuringEmpty(t) {
+  if (null == t) throw new TypeError("Cannot destructure " + t);
 }
 
 var Submit = function Submit(_ref) {

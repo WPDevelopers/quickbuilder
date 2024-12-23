@@ -4,6 +4,19 @@ import { Fields, TabMenuConfig } from "../../types/Tabs";
 import { isString, isObject, isVisible } from "../../core/utils";
 import { __ } from '@wordpress/i18n';
 
+const addCookiesListItemCount = (context, tabs) => {
+    const keys = tabs?.reduce(( carry, item ) => {
+        return [...carry, ...(item.fields.map( f => f.name  ))]
+    }, []);
+
+    const result = keys.map(key => 
+        Array.isArray(context?.values[key]) ? context?.values[key]?.length : 0
+    );
+    tabs.forEach((obj, index) => {
+        obj['count'] = result[index];
+    });
+}
+
 const Menu: React.FC<TabMenuConfig> = (props) => {
     if (props.fields === undefined) {
         throw new Error(__("There are no tabs defined!", 'notificationx'));
@@ -12,7 +25,9 @@ const Menu: React.FC<TabMenuConfig> = (props) => {
     const { active, setActive, fields: tabs, context } = props;
 
     const [tabsFields, setTabsFields] = useState<Fields>([]);
-
+    if(props?.dataShare) {
+        addCookiesListItemCount(context, tabs);
+    }
     useEffect(() => {
 
         const filteredTabs = tabs.filter(tab => isVisible(context?.values, tab));
@@ -50,6 +65,9 @@ const Menu: React.FC<TabMenuConfig> = (props) => {
                                 )
                             }
                             <span>{tab.label}</span>
+                            {props?.dataShare && 
+                                <span className="list-count">{tab?.count <10 ? `0${tab?.count}` : tab?.count}</span>
+                            }
                         </li>
                     ))
                 }

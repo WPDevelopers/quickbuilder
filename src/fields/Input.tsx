@@ -1,7 +1,7 @@
 import { Button } from "@wordpress/components";
 import copy from "copy-to-clipboard";
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { withLabel } from '../core/hooks';
+import { useBuilderContext, withLabel } from '../core/hooks';
 import { validFieldProps } from '../core/utils';
 const Input = (props, ref?) => {
 	const type = props.type ? props.type : 'text';
@@ -9,6 +9,7 @@ const Input = (props, ref?) => {
 	const handleChange = (event) => validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro });
 	const localRef = useRef(null);
 	const inputRef = ref?.current ? ref : localRef;
+	const builderContext = useBuilderContext();
 
 	if (validProps.type === 'checkbox') {
 		if (validProps?.name) {
@@ -27,6 +28,11 @@ const Input = (props, ref?) => {
 		}
 		return () => CopyInterval && clearTimeout(CopyInterval);
 	}, [isCopied])
+
+	const handleNumSuggestion = useCallback((e) => {
+		const value = e?.target?.getAttribute("data-num-sug");
+		builderContext.setFieldValue( validProps.name, value);
+	}, [validProps]);
 
 
 
@@ -51,9 +57,16 @@ const Input = (props, ref?) => {
 		</span>;
 	}
 
-	return React.createElement('input', {
-		...validProps, onChange: handleChange, ref: inputRef,
-	})
+	return <span>
+		{React.createElement('input', {
+			...validProps, onChange: handleChange, ref: inputRef
+		})}
+		<div className="wprf-num-suggestions">
+			{validProps?.suggestions?.map((item, index) => {
+				return <span onClick={handleNumSuggestion} data-num-sug={item.value}>{item.value + ' ' + item.unit}</span>
+			})}
+		</div>
+	</span>;
 }
 
 

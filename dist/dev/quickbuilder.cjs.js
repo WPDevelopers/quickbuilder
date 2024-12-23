@@ -2191,7 +2191,7 @@ var Input = function Input(props, ref) {
   return React.createElement("span", null, /*#__PURE__*/React__default["default"].createElement('input', _objectSpread$9(_objectSpread$9({}, validProps), {}, {
     onChange: handleChange,
     ref: inputRef
-  })), React.createElement("div", {
+  })), (validProps === null || validProps === void 0 ? void 0 : validProps.suggestions) && (validProps === null || validProps === void 0 ? void 0 : validProps.suggestions.length) > 0 && React.createElement("div", {
     className: "wprf-num-suggestions"
   }, validProps === null || validProps === void 0 || (_validProps$suggestio = validProps.suggestions) === null || _validProps$suggestio === void 0 ? void 0 : _validProps$suggestio.map(function (item, index) {
     return React.createElement("span", {

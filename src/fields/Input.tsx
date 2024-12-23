@@ -61,11 +61,13 @@ const Input = (props, ref?) => {
 		{React.createElement('input', {
 			...validProps, onChange: handleChange, ref: inputRef
 		})}
-		<div className="wprf-num-suggestions">
-			{validProps?.suggestions?.map((item, index) => {
-				return <span onClick={handleNumSuggestion} data-num-sug={item.value}>{item.value + ' ' + item.unit}</span>
-			})}
-		</div>
+		{validProps?.suggestions && validProps?.suggestions.length > 0 &&
+			<div className="wprf-num-suggestions">
+				{validProps?.suggestions?.map((item, index) => {
+					return <span onClick={handleNumSuggestion} data-num-sug={item.value}>{item.value + ' ' + item.unit}</span>
+				})}
+			</div>
+		}
 	</span>;
 }
 

@@ -711,11 +711,10 @@ function _slicedToArray(r, e) {
 }
 
 var addCookiesListItemCount = function addCookiesListItemCount(context, tabs) {
-  var keys = tabs === null || tabs === void 0 ? void 0 : tabs.reduce(function (carry, item) {
-    return [].concat(_toConsumableArray(carry), _toConsumableArray(item.fields.map(function (f) {
-      return f.name;
-    })));
-  }, []);
+  // const keys = tabs?.reduce(( carry, item ) => {
+  //     return [...carry, ...(item.fields.map( f => f.name  ))]
+  // }, []);
+  var keys = ["necessary_cookie_lists", "functional_cookie_lists", "analytics_cookie_lists", "performance_cookie_lists", "uncategorized_cookie_lists"];
   var result = keys.map(function (key) {
     var _context$values$key;
     return Array.isArray(context === null || context === void 0 ? void 0 : context.values[key]) ? context === null || context === void 0 || (_context$values$key = context.values[key]) === null || _context$values$key === void 0 ? void 0 : _context$values$key.length : 0;

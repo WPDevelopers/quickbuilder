@@ -5,10 +5,16 @@ import { isString, isObject, isVisible } from "../../core/utils";
 import { __ } from '@wordpress/i18n';
 
 const addCookiesListItemCount = (context, tabs) => {
-    const keys = tabs?.reduce(( carry, item ) => {
-        return [...carry, ...(item.fields.map( f => f.name  ))]
-    }, []);
-
+    // const keys = tabs?.reduce(( carry, item ) => {
+    //     return [...carry, ...(item.fields.map( f => f.name  ))]
+    // }, []);
+    const keys = [
+        "necessary_cookie_lists",
+        "functional_cookie_lists",
+        "analytics_cookie_lists",
+        "performance_cookie_lists",
+        "uncategorized_cookie_lists",
+    ];
     const result = keys.map(key => 
         Array.isArray(context?.values[key]) ? context?.values[key]?.length : 0
     );

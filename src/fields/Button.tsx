@@ -102,6 +102,11 @@ const Button = (props) => {
                 onClick={props?.onClick ?? handleClick}
                 className={classNames('wprf-control wprf-button wprf-btn', props?.classes)}>
                 {
+                    props?.icon && (
+                        (isObject(props.icon) ? props?.context?.icons?.[props?.icon?.type]?.[props?.icon?.name] : '')
+                    )
+                }
+                {
                     isObject(props?.text) && props?.ajax ?
                         (isLoading ? props?.text?.loading : (props.value ? props?.text?.saved : (props?.text?.normal)))
                         : props?.text

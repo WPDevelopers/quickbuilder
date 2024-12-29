@@ -3438,7 +3438,7 @@
   var Editor$1 = withLabel(Editor);
 
   var Button = function Button(props) {
-    var _props$onClick, _props$text, _props$text2, _props$text3;
+    var _props$onClick, _props$context, _props$icon, _props$icon2, _props$text, _props$text2, _props$text3;
     if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
       throw new Error(i18n.__('Button has a required params #text.', 'notificationx'));
     }
@@ -3520,7 +3520,7 @@
       disabled: isLoading,
       onClick: (_props$onClick = props === null || props === void 0 ? void 0 : props.onClick) !== null && _props$onClick !== void 0 ? _props$onClick : handleClick,
       className: classNames__default["default"]('wprf-control wprf-button wprf-btn', props === null || props === void 0 ? void 0 : props.classes)
-    }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 || (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 || (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 || (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
+    }), (props === null || props === void 0 ? void 0 : props.icon) && (isObject(props.icon) ? props === null || props === void 0 || (_props$context = props.context) === null || _props$context === void 0 || (_props$context = _props$context.icons) === null || _props$context === void 0 || (_props$context = _props$context[props === null || props === void 0 || (_props$icon = props.icon) === null || _props$icon === void 0 ? void 0 : _props$icon.type]) === null || _props$context === void 0 ? void 0 : _props$context[props === null || props === void 0 || (_props$icon2 = props.icon) === null || _props$icon2 === void 0 ? void 0 : _props$icon2.name] : ''), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 || (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 || (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 || (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
   };
   var Button$1 = withLabel(Button);
 

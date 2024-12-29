@@ -130,6 +130,10 @@ const useBuilder = (props) => {
 			state.alerts?.pro_alert(validProps?.popup)?.fire();
 			// return false;
 		}
+		if (validProps?.nx_has_permission) {
+			state.alerts?.has_permission_alert(validProps?.permission_popup)?.fire();
+			return;
+		}
 
 		if (typeof eventOrString === 'string') {
 			return (event) => executeChange(eventOrString, event, validProps);

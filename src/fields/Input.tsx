@@ -5,8 +5,8 @@ import { useBuilderContext, withLabel } from '../core/hooks';
 import { validFieldProps } from '../core/utils';
 const Input = (props, ref?) => {
 	const type = props.type ? props.type : 'text';
-	const validProps = validFieldProps({...props, type}, ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
-	const handleChange = (event) => validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro });
+	const validProps = validFieldProps({...props, type}, ['is_pro', 'nx_has_permission', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
+	const handleChange = (event) => validProps.onChange(event, { popup: props?.popup, isPro: !!props.is_pro, nx_has_permission: !!props.nx_has_permission, permission_popup: props?.nx_has_permission });
 	const localRef = useRef(null);
 	const inputRef = ref?.current ? ref : localRef;
 	const builderContext = useBuilderContext();

@@ -38,11 +38,11 @@ const Modal = (props) => {
                     {props?.body?.fields?.map((item) => {
                         if (item.type === "text") {
                             return <div className='wprf-control wprf-modal-body-value-heading'>
-                                    <h4 key={item.name}>{props.context.values?.[item.name]}</h4>
+                                    <h4 key={item.name}>{ props.context.values?.[item.name] || item?.default }</h4>
                                     { props?.close_on_body && <GenericField type="button" {...props?.button} onClick={openModal} /> }
                                 </div>;
                         } else if (item.type === "textarea") {
-                            return <p key={item.name}>{props.context.values?.[item.name]}</p>;
+                            return <p key={item.name}>{props.context.values?.[item.name]  || item?.default }</p>;
                         }
                         return null;
                     })}

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GenericField } from '.';
 import { ModalContent, ModalHeader } from './helpers';
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -16,9 +16,38 @@ const Modal = (props) => {
     const closeModal = () => setOpen(false);
     const onConfirm = useCallback(() => { }, []);
 
+
+    const prevCancelValueRef = useRef();
+    useEffect(() => {
+        prevCancelValueRef.current = props.context.values?.[props.cancel];
+    });
+    const prevCancelValue = prevCancelValueRef.current;
+
+    const afterUpdate = () => {
+        const currentCancelValue = props.context.values?.[props.cancel];
+        if (props?.cancel && currentCancelValue && currentCancelValue !== prevCancelValue) {
+            closeModal();
+        }
+    }
+
     return (
         <div className="wprf-control wprf-modal" id={`wprf-modal-${props.name}`}>
-            <GenericField type="button" {...props?.button} onClick={openModal} />
+            { !props?.close_on_body && <GenericField type="button" {...props?.button} onClick={openModal} /> }
+            { props?.show_body &&
+                <div className='wprf-control wprf-modal-show-body'>
+                    {props?.body?.fields?.map((item) => {
+                        if (item.type === "text") {
+                            return <div className='wprf-control wprf-modal-body-value-heading'>
+                                    <h4 key={item.name}>{props.context.values?.[item.name]}</h4>
+                                    { props?.close_on_body && <GenericField type="button" {...props?.button} onClick={openModal} /> }
+                                </div>;
+                        } else if (item.type === "textarea") {
+                            return <p key={item.name}>{props.context.values?.[item.name]}</p>;
+                        }
+                        return null;
+                    })}
+                </div>
+            }
             {isOpen &&
                 <SweetAlert
                     customClass="wprf-modal-inner"
@@ -47,13 +76,7 @@ const Modal = (props) => {
                     showCloseButton={true}
                     closeOnClickOutside={true}
                     onCancel={closeModal}
-                    afterUpdate={() => {
-                        if (props?.cancel) {
-                            if (props.context.values?.[props.cancel]) {
-                                closeModal();
-                            }
-                        }
-                    }}
+                    afterUpdate={() => afterUpdate}
                 >
                     <ModalContent
                         {...props}

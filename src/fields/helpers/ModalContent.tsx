@@ -32,7 +32,8 @@ const ModalContent = (props) => {
                     <div className="wprf-modal-footer clearfix">
                         <div className="wprf-modal-footer-left">
                             {props.body?.footer && isString(props.body.footer) && <p>{props.body.footer}</p>}
-                            <GenericField type="button" {...props?.confirm_button} />
+                            { (props?.confirm_button && !props?.confirm_button?.close_action) ?  <GenericField type="button" {...props.confirm_button} /> : '' }
+                            { (props?.confirm_button && props?.confirm_button?.close_action) ?  <GenericField type="button" onClick={ closeModal } text={props?.confirm_button?.text} /> : '' }
                         </div>
                     </div>
                 </>

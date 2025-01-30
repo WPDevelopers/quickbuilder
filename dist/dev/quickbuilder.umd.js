@@ -1307,6 +1307,11 @@
         (_state$alerts = state.alerts) === null || _state$alerts === void 0 || (_state$alerts = _state$alerts.pro_alert(validProps === null || validProps === void 0 ? void 0 : validProps.popup)) === null || _state$alerts === void 0 || _state$alerts.fire();
         // return false;
       }
+      if (validProps !== null && validProps !== void 0 && validProps.nx_has_permission) {
+        var _state$alerts2;
+        (_state$alerts2 = state.alerts) === null || _state$alerts2 === void 0 || (_state$alerts2 = _state$alerts2.has_permission_alert(validProps === null || validProps === void 0 ? void 0 : validProps.permission_popup)) === null || _state$alerts2 === void 0 || _state$alerts2.fire();
+        return;
+      }
       if (typeof eventOrString === 'string') {
         return function (event) {
           return executeChange$1(eventOrString, event, validProps);
@@ -2103,11 +2108,13 @@
     var type = props.type ? props.type : 'text';
     var validProps = validFieldProps(_objectSpread$9(_objectSpread$9({}, props), {}, {
       type: type
-    }), ['is_pro', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
+    }), ['is_pro', 'nx_has_permission', 'visible', 'trigger', 'copyOnClick', 'disable', 'parentIndex', 'context', 'badge', 'popup', 'tags']);
     var handleChange = function handleChange(event) {
       return validProps.onChange(event, {
         popup: props === null || props === void 0 ? void 0 : props.popup,
-        isPro: !!props.is_pro
+        isPro: !!props.is_pro,
+        nx_has_permission: !!props.nx_has_permission,
+        permission_popup: props === null || props === void 0 ? void 0 : props.nx_has_permission
       });
     };
     var localRef = React.useRef(null);
@@ -2612,9 +2619,9 @@
   var GenericToggle$1 = withLabel(GenericToggle);
 
   var ModalContent = function ModalContent(props) {
-    var _props$body;
-    var isLoading = props.isLoading;
-      props.closeModal;
+    var _props$body, _props$confirm_button, _props$confirm_button2, _props$confirm_button3;
+    var isLoading = props.isLoading,
+      closeModal = props.closeModal;
     var _useState = React.useState([]),
       _useState2 = _slicedToArray(_useState, 2),
       fields = _useState2[0],
@@ -2640,9 +2647,13 @@
       className: "wprf-modal-footer clearfix"
     }, React.createElement("div", {
       className: "wprf-modal-footer-left"
-    }, ((_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.footer) && isString(props.body.footer) && React.createElement("p", null, props.body.footer), React.createElement(GenericField, _extends$1({
+    }, ((_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.footer) && isString(props.body.footer) && React.createElement("p", null, props.body.footer), props !== null && props !== void 0 && props.confirm_button && !(props !== null && props !== void 0 && (_props$confirm_button = props.confirm_button) !== null && _props$confirm_button !== void 0 && _props$confirm_button.close_action) ? React.createElement(GenericField, _extends$1({
       type: "button"
-    }, props === null || props === void 0 ? void 0 : props.confirm_button))))));
+    }, props.confirm_button)) : '', props !== null && props !== void 0 && props.confirm_button && props !== null && props !== void 0 && (_props$confirm_button2 = props.confirm_button) !== null && _props$confirm_button2 !== void 0 && _props$confirm_button2.close_action ? React.createElement(GenericField, {
+      type: "button",
+      onClick: closeModal,
+      text: props === null || props === void 0 || (_props$confirm_button3 = props.confirm_button) === null || _props$confirm_button3 === void 0 ? void 0 : _props$confirm_button3.text
+    }) : ''))));
   };
 
   var ModalHeader = function ModalHeader(_ref) {
@@ -3632,7 +3643,7 @@
   };
 
   var Modal = function Modal(props) {
-    var _props$body;
+    var _props$body, _props$body2;
     if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
       throw new Error(i18n.__('Modal needs button/body with it.', 'notificationx'));
     }
@@ -3651,13 +3662,47 @@
       return setOpen(false);
     };
     var onConfirm = React.useCallback(function () {}, []);
+    var prevCancelValueRef = React.useRef();
+    React.useEffect(function () {
+      var _props$context$values;
+      prevCancelValueRef.current = (_props$context$values = props.context.values) === null || _props$context$values === void 0 ? void 0 : _props$context$values[props.cancel];
+    });
+    var prevCancelValue = prevCancelValueRef.current;
+    var _afterUpdate = function afterUpdate() {
+      var _props$context$values2;
+      var currentCancelValue = (_props$context$values2 = props.context.values) === null || _props$context$values2 === void 0 ? void 0 : _props$context$values2[props.cancel];
+      if (props !== null && props !== void 0 && props.cancel && currentCancelValue && currentCancelValue !== prevCancelValue) {
+        closeModal();
+      }
+    };
     return React.createElement("div", {
       className: "wprf-control wprf-modal",
       id: "wprf-modal-".concat(props.name)
-    }, React.createElement(GenericField, _extends$1({
+    }, !(props !== null && props !== void 0 && props.close_on_body) && React.createElement(GenericField, _extends$1({
       type: "button"
     }, props === null || props === void 0 ? void 0 : props.button, {
       onClick: openModal
+    })), (props === null || props === void 0 ? void 0 : props.show_body) && React.createElement("div", {
+      className: "wprf-control wprf-modal-show-body"
+    }, props === null || props === void 0 || (_props$body = props.body) === null || _props$body === void 0 || (_props$body = _props$body.fields) === null || _props$body === void 0 ? void 0 : _props$body.map(function (item) {
+      if (item.type === "text") {
+        var _props$context$values3;
+        return React.createElement("div", {
+          className: "wprf-control wprf-modal-body-value-heading"
+        }, React.createElement("h4", {
+          key: item.name
+        }, ((_props$context$values3 = props.context.values) === null || _props$context$values3 === void 0 ? void 0 : _props$context$values3[item.name]) || (item === null || item === void 0 ? void 0 : item["default"])), (props === null || props === void 0 ? void 0 : props.close_on_body) && React.createElement(GenericField, _extends$1({
+          type: "button"
+        }, props === null || props === void 0 ? void 0 : props.button, {
+          onClick: openModal
+        })));
+      } else if (item.type === "textarea") {
+        var _props$context$values4;
+        return React.createElement("p", {
+          key: item.name
+        }, ((_props$context$values4 = props.context.values) === null || _props$context$values4 === void 0 ? void 0 : _props$context$values4[item.name]) || (item === null || item === void 0 ? void 0 : item["default"]));
+      }
+      return null;
     })), isOpen && React.createElement(SweetAlert__default["default"], {
       customClass: "wprf-modal-inner",
       style: {
@@ -3680,7 +3725,7 @@
         justifyContent: 'center'
       },
       title: React.createElement(ModalHeader, {
-        content: props === null || props === void 0 || (_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.header
+        content: props === null || props === void 0 || (_props$body2 = props.body) === null || _props$body2 === void 0 ? void 0 : _props$body2.header
       }),
       onConfirm: onConfirm,
       showConfirm: false,
@@ -3688,12 +3733,7 @@
       closeOnClickOutside: true,
       onCancel: closeModal,
       afterUpdate: function afterUpdate() {
-        if (props !== null && props !== void 0 && props.cancel) {
-          var _props$context$values;
-          if ((_props$context$values = props.context.values) !== null && _props$context$values !== void 0 && _props$context$values[props.cancel]) {
-            closeModal();
-          }
-        }
+        return _afterUpdate;
       }
     }, React.createElement(ModalContent, _extends$1({}, props, {
       isLoading: isLoading,

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { MediaUpload } from '@wordpress/media-utils';
-import { withLabel } from '../core/hooks';
+import { withLabel, useBuilderContext } from '../core/hooks';
 
 const Media = (props) => {
     const [imageData, setImageData] = useState(props.value?.url ? props.value : null)
-
+    const builderContext = useBuilderContext();
     useEffect(() => {
         props.onChange({
             target: {
@@ -39,13 +39,25 @@ const Media = (props) => {
                         return <>
                             {
                                 imageData != null &&
-                                <button className="wprf-btn wprf-image-remove-btn" onClick={() => setImageData(null)}>
+                                <button className="wprf-btn wprf-image-remove-btn" onClick={() => {
+                                    if ( props?.is_pro && !builderContext.is_pro_active ) {
+                                        builderContext.alerts.pro_alert(props?.popup).fire();
+                                    } else {
+                                        setImageData(null); 
+                                    }
+                                }}>
                                     {props?.remove || 'Remove'}
                                 </button>
                             }
                             <button
                                 className="wprf-btn wprf-image-upload-btn"
-                                onClick={open}
+                                onClick={() => {
+                                    if ( props?.is_pro && !builderContext.is_pro_active ) {
+                                        builderContext.alerts.pro_alert(props?.popup).fire();
+                                    } else {
+                                        open();
+                                    }
+                                }}
                             >
                                 {imageData != null ? (props?.reset || 'Change Image') : (props?.button || 'Upload')}
                             </button>

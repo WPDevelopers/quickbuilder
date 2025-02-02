@@ -3369,6 +3369,7 @@ var Media = function Media(props) {
     _useState2 = _slicedToArray(_useState, 2),
     imageData = _useState2[0],
     setImageData = _useState2[1];
+  var builderContext = useBuilderContext();
   useEffect(function () {
     props.onChange({
       target: {
@@ -3403,11 +3404,21 @@ var Media = function Media(props) {
       return createElement(Fragment, null, imageData != null && createElement("button", {
         className: "wprf-btn wprf-image-remove-btn",
         onClick: function onClick() {
-          return setImageData(null);
+          if (props !== null && props !== void 0 && props.is_pro && !builderContext.is_pro_active) {
+            builderContext.alerts.pro_alert(props === null || props === void 0 ? void 0 : props.popup).fire();
+          } else {
+            setImageData(null);
+          }
         }
       }, (props === null || props === void 0 ? void 0 : props.remove) || 'Remove'), createElement("button", {
         className: "wprf-btn wprf-image-upload-btn",
-        onClick: open
+        onClick: function onClick() {
+          if (props !== null && props !== void 0 && props.is_pro && !builderContext.is_pro_active) {
+            builderContext.alerts.pro_alert(props === null || props === void 0 ? void 0 : props.popup).fire();
+          } else {
+            open();
+          }
+        }
       }, imageData != null ? (props === null || props === void 0 ? void 0 : props.reset) || 'Change Image' : (props === null || props === void 0 ? void 0 : props.button) || 'Upload'));
     }
   })));

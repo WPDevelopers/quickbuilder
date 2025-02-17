@@ -74,19 +74,63 @@ const Select = (props) => {
         if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
             setIsLoading(true);
             let data = {};
-            Object.keys(props?.ajax.data).map(singleData => {
-                if (props?.ajax.data[singleData].indexOf('@') > -1) {
-                    let eligibleKey = props?.ajax.data[singleData].substr(1);
-                    data[singleData] = builderContext.values?.[eligibleKey];
-                } else {
-                    data[singleData] = props?.ajax.data[singleData];
-                }
-            });
+			if( props?.ajax.data != null && props?.ajax.data != undefined && Object.keys(props?.ajax.data)?.length > 0 ) { // for POST data support
+				Object.keys(props?.ajax.data).map(singleData => {
+					if (props?.ajax.data[singleData].indexOf('@') > -1) {
+						let eligibleKey = props?.ajax.data[singleData].substr(1);
+						data[singleData] = builderContext.values?.[eligibleKey];
+					} else {
+						data[singleData] = props?.ajax.data[singleData];
+					}
+				});
+			}
+			if( props?.ajax?.query_params != null && props?.ajax?.query_params != undefined && Object?.keys(props?.ajax?.query_params)?.length > 0 ) { //for GET query param support
+				Object.keys(props?.ajax?.query_params).map(singlekey => {
+					if( props?.ajax?.repeater != null && props?.ajax?.repeater != undefined && Object.keys(props?.ajax?.repeater)?.length > 0 ) { //make sure to get data for repeater
+						let propKey 	    = props?.ajax?.repeater?.repeater_field_name; //repeater field key
+						let queryParamsKey  = props?.ajax?.query_params[singlekey]; //data key
+						let parentValues    = builderContext.values[propKey][props?.index][queryParamsKey] != undefined ? builderContext.values[propKey][props?.index][queryParamsKey] : []; //only single repeater field support added now
+
+						if( parentValues?.length > 0 ) {
+							parentValues?.map((value, index) => { //different values are being appended on the same key, generating same keys multiple times
+								if( data[singlekey] == undefined ) {
+									data[singlekey] = [value];
+								} else {
+									data[singlekey].push(value);
+								}
+							});
+						}
+					} else if ( props?.ajax?.query_params[singlekey]?.indexOf('@') > -1 ) { //make sure to get data without repeater
+						let eligibleKey = props?.ajax?.query_params[singlekey]?.substr(1);
+						data[singlekey] = builderContext?.values?.[eligibleKey];
+					} else {
+						data[singlekey] = props?.ajax?.query_params[singlekey];
+					}
+				});
+			}
             if (!isAjaxComplete) {
-                return wpFetch({
+				let params = {
                     path: props?.ajax.api,
-                    data: data
-                }).then((response) => {
+                    data: data,
+					method:"POST"
+                };
+
+				if( props?.ajax?.method == 'GET') {
+					let queryParams = '';
+					delete params['data'];
+					Object.keys(data)?.map((key, index) => {
+						data[key]?.map((value) => {
+							queryParams += key +'='+ value + '&';
+						});
+						if( index == Object.keys(data)?.length - 1 ) {
+							queryParams = queryParams.replace(/&$/, '')
+						}
+					});
+					params['path'] = `${params['path']}${queryParams?.length > 0 ? '?'+queryParams : ''}`;
+					params['method'] = props?.ajax?.method;
+				}
+
+                return wpFetch(params).then((response) => {
                     setIsLoading(false);
                     const arrayMerge = merge(props.options, response, 'value');
                     builderContext.setFormField([...parentIndex, 'options'], arrayMerge);

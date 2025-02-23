@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ReactSelect, { components } from "react-select";
 import { when } from '../core';
 import { useBuilderContext, useOptions, withLabel } from '../core/hooks';
-import { isArray, isObject, merge, valueExists, wpFetch } from '../core/utils';
+import { getDeepData, isArray, isObject, merge, removeTagsFromString, valueExists, wpFetch } from '../core/utils';
+import { decodeEntities } from '@wordpress/html-entities';
 import Tippy from '@tippyjs/react'; // Install with `npm install @tippyjs/react`
 import 'tippy.js/dist/tippy.css'; // Tippy.js styles
+import { addQueryArgs } from '@wordpress/url';
 
 // Custom Option Component with Tooltip
 const CustomOption = (props) => {
@@ -76,19 +78,63 @@ const Select = (props) => {
             let data = {};
             Object.keys(props?.ajax.data).map(singleData => {
                 if (props?.ajax.data[singleData].indexOf('@') > -1) {
-                    let eligibleKey = props?.ajax.data[singleData].substr(1);
-                    data[singleData] = builderContext.values?.[eligibleKey];
+                    let eligibleKey  = props?.ajax.data[singleData].substr(1);
+					eligibleKey 	 = eligibleKey.includes('.') ? eligibleKey.split('.') : eligibleKey;
+					if( Array.isArray(eligibleKey) ) {
+						let repeaterDatas = builderContext.values[eligibleKey[0]];
+						repeaterDatas?.map((value) => {
+							data[singleData] = value[eligibleKey[1]]?.join(',');
+							if( value[eligibleKey[1]]?.length == 0 ) {
+								delete data[singleData];
+							}
+						});
+					} else {
+                    	data[singleData] = builderContext.values?.[eligibleKey];
+					}
                 } else {
                     data[singleData] = props?.ajax.data[singleData];
                 }
             });
             if (!isAjaxComplete) {
-                return wpFetch({
+				let payload = {
                     path: props?.ajax.api,
-                    data: data
-                }).then((response) => {
+                    data: data,
+					method: "POST"
+                };
+				if( props?.ajax?.method == 'GET' ) {
+					payload.method = 'GET';
+					delete payload.data;
+					payload.path = addQueryArgs( payload.path, data );
+				}
+
+                return wpFetch(payload).then((response) => {
+					let options = [];
+					if( Object.keys(props?.ajax?.response_mapper)?.length >  0 ) {
+						response?.map((doc) => {
+							let keyLabel = props?.ajax?.response_mapper?.label?.includes('.') ? props?.ajax?.response_mapper?.label?.split('.') : props?.ajax?.response_mapper?.label;
+							let keyValue = props?.ajax?.response_mapper?.value?.includes('.') ? props?.ajax?.response_mapper?.value?.split('.') : props?.ajax?.response_mapper?.value;
+
+							let option  = {};
+
+							if( Array.isArray( keyLabel ) ) {
+								let lastKeyLabel = keyLabel[keyLabel?.length - 1];
+								option['label'] = decodeEntities( removeTagsFromString( getDeepData(doc, lastKeyLabel) ));
+							} else{
+								option['label'] =  decodeEntities( removeTagsFromString( doc[keyLabel] ) );
+							}
+
+							if( Array.isArray( keyValue ) ) {
+								let lastKeyValue = keyValue[keyValue?.length - 1];
+								option['value'] = getDeepData(doc, lastKeyValue);
+							} else {
+								option['value'] = doc[keyValue];
+							}
+
+							options.push(option);
+						});
+					}
                     setIsLoading(false);
-                    const arrayMerge = merge(props.options, response, 'value');
+                    const arrayMerge = merge(props.options, (options?.length > 0 ? options : response), 'value');
                     builderContext.setFormField([...parentIndex, 'options'], arrayMerge);
                     setData({
                         options: arrayMerge,

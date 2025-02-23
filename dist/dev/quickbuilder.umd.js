@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/i18n'), require('intersect'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('uuid'), require('html-react-parser'), require('react-select/async'), require('react-dom')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/i18n', 'intersect', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'uuid', 'html-react-parser', 'react-select/async', 'react-dom'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpI18n, global.intersect, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.wpMedia, global.sweetalert, global.reactSortablejs, global.uuid, global.parse, global.AsyncSelect, global.ReactDOM));
-})(this, (function (exports, React, data, i18n, intersect, apiFetch, lodashEs, date, moment, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, mediaUtils, SweetAlert$1, reactSortablejs, uuid, parse, AsyncSelect, reactDom) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('@wordpress/data'), require('@wordpress/i18n'), require('intersect'), require('@wordpress/api-fetch'), require('lodash-es'), require('@wordpress/date'), require('moment'), require('@wordpress/hooks'), require('classnames'), require('sweetalert2'), require('react-select'), require('@wordpress/components'), require('copy-to-clipboard'), require('react-draft-wysiwyg'), require('draft-js'), require('draftjs-to-html'), require('html-to-draftjs'), require('react-draft-wysiwyg/dist/react-draft-wysiwyg.css'), require('@wordpress/compose'), require('@wordpress/media-utils'), require('react-bootstrap-sweetalert'), require('react-sortablejs'), require('uuid'), require('html-react-parser'), require('react-select/async'), require('react-dom')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', '@wordpress/data', '@wordpress/i18n', 'intersect', '@wordpress/api-fetch', 'lodash-es', '@wordpress/date', 'moment', '@wordpress/hooks', 'classnames', 'sweetalert2', 'react-select', '@wordpress/components', 'copy-to-clipboard', 'react-draft-wysiwyg', 'draft-js', 'draftjs-to-html', 'html-to-draftjs', 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css', '@wordpress/compose', '@wordpress/media-utils', 'react-bootstrap-sweetalert', 'react-sortablejs', 'uuid', 'html-react-parser', 'react-select/async', 'react-dom'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.quickbuilder = {}, global.React, global.wpData, global.wpI18n, global.intersect, global.wpApiFetch, global.lodashEs, global.wpDate, global.momentLib, global.wpHooks, global.classNames, global.sweetalert2, global.reactSelect, global.wpComponents, global.copy, global.reactDraftWysiwyg, global.draftJs, global.draftjsToHtml, global.htmlToDraftjs, null, global.compose, global.wpMedia, global.sweetalert, global.reactSortablejs, global.uuid, global.parse, global.AsyncSelect, global.ReactDOM));
+})(this, (function (exports, React, data, i18n, intersect, apiFetch, lodashEs, date, moment, hooks, classNames, Swal, ReactSelect, components, copy, reactDraftWysiwyg, draftJs, draftToHtml, htmlToDraft, reactDraftWysiwyg_css, compose, mediaUtils, SweetAlert$1, reactSortablejs, uuid, parse, AsyncSelect, reactDom) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -88,9 +88,7 @@
   function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
   function _objectSpread$g(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$g(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$g(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
   var wpFetch = function wpFetch(params) {
-    var args = _objectSpread$g(_objectSpread$g({}, params), {}, {
-      method: "POST"
-    });
+    var args = _objectSpread$g({}, params);
     return apiFetch__default["default"](args);
   };
   var isString = function isString(args) {
@@ -128,6 +126,28 @@
   };
   var withState = function withState(type) {
     return Boolean(["group", "section"].includes(type));
+  };
+  var _getDeepData = function getDeepData(data, filterKey) {
+    var _Object$keys;
+    var found = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+    (_Object$keys = Object.keys(data)) === null || _Object$keys === void 0 || _Object$keys.map(function (key) {
+      if (_typeof$1(data[key]) == 'object') {
+        found = _getDeepData(data[key], filterKey, found);
+      } else {
+        if (filterKey == key) {
+          found = data[key];
+        }
+      }
+    });
+    return found;
+  };
+  var removeTagsFromString = function removeTagsFromString(str) {
+    if (str === null || str === '') {
+      return false;
+    } else {
+      str = str.toString();
+    }
+    return str.replace(/(<([^>]+)>)/ig, '');
   };
   var isEmptyObj = function isEmptyObj(obj) {
     for (var k in obj) {
@@ -2421,50 +2441,6 @@
   };
   var Date$1 = withLabel(DateControl);
 
-  /**
-   * WordPress dependencies
-   */
-  const instanceMap = new WeakMap();
-  /**
-   * Creates a new id for a given object.
-   *
-   * @param  object Object reference to create an id for.
-   * @return The instance id (index).
-   */
-
-  function createId(object) {
-    const instances = instanceMap.get(object) || 0;
-    instanceMap.set(object, instances + 1);
-    return instances;
-  }
-  /**
-   * Specify the useInstanceId *function* signatures.
-   *
-   * More accurately, useInstanceId distinguishes between three different
-   * signatures:
-   *
-   * 1. When only object is given, the returned value is a number
-   * 2. When object and prefix is given, the returned value is a string
-   * 3. When preferredId is given, the returned value is the type of preferredId
-   */
-
-
-  /**
-   * Provides a unique instance ID.
-   *
-   * @param  object        Object reference to create an id for.
-   * @param  [prefix]      Prefix for the unique id.
-   * @param  [preferredId] Default ID to use.
-   * @return The unique instance id.
-   */
-  function useInstanceId(object, prefix, preferredId) {
-    return React.useMemo(() => {
-      if (preferredId) return preferredId;
-      const id = createId(object);
-      return prefix ? `${prefix}-${id}` : id;
-    }, [object]);
-  }
-
   var _RepeaterField = function RepeaterField(props) {
     var _builderContext$value;
     var builderContext = useBuilderContext();
@@ -2476,7 +2452,7 @@
       _useState2 = _slicedToArray(_useState, 2),
       isCollapsed = _useState2[0],
       setIsCollapsed = _useState2[1];
-    var instanceId = useInstanceId(_RepeaterField);
+    var instanceId = compose.useInstanceId(_RepeaterField);
     // onClick={() => setIsCollapse(!isCollapse)}
     var values = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 || (_builderContext$value = _builderContext$value[parent]) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[index];
     var title = (values === null || values === void 0 ? void 0 : values.title) || (values === null || values === void 0 ? void 0 : values.post_title) || (values === null || values === void 0 ? void 0 : values.username) || (values === null || values === void 0 ? void 0 : values.plugin_theme_name);
@@ -3207,7 +3183,7 @@
     if (!options) {
       throw new Error(i18n.__('#options is a required arguments for RadioCard field.', 'betterdocs'));
     }
-    var instanceId = useInstanceId(_RadioCard);
+    var instanceId = compose.useInstanceId(_RadioCard);
     var componentClasses = classNames__default["default"](["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
     var styles = _objectSpread$5({}, props === null || props === void 0 ? void 0 : props.style);
     var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
@@ -3719,6 +3695,62 @@
     }));
   };
   var Section$1 = /*#__PURE__*/React__default["default"].memo(Section);
+
+  /** @type {HTMLTextAreaElement} */
+  let _decodeTextArea;
+
+  /**
+   * Decodes the HTML entities from a given string.
+   *
+   * @param {string} html String that contain HTML entities.
+   *
+   * @example
+   * ```js
+   * import { decodeEntities } from '@wordpress/html-entities';
+   *
+   * const result = decodeEntities( '&aacute;' );
+   * console.log( result ); // result will be "á"
+   * ```
+   *
+   * @return {string} The decoded string.
+   */
+  function decodeEntities(html) {
+    // Not a string, or no entities to decode.
+    if ('string' !== typeof html || -1 === html.indexOf('&')) {
+      return html;
+    }
+
+    // Create a textarea for decoding entities, that we can reuse.
+    if (undefined === _decodeTextArea) {
+      if (document.implementation && document.implementation.createHTMLDocument) {
+        _decodeTextArea = document.implementation.createHTMLDocument('').createElement('textarea');
+      } else {
+        _decodeTextArea = document.createElement('textarea');
+      }
+    }
+    _decodeTextArea.innerHTML = html;
+    const decoded = _decodeTextArea.textContent;
+    _decodeTextArea.innerHTML = '';
+
+    /**
+     * Cast to string, HTMLTextAreaElement should always have `string` textContent.
+     *
+     * > The `textContent` property of the `Node` interface represents the text content of the
+     * > node and its descendants.
+     * >
+     * > Value: A string or `null`
+     * >
+     * > * If the node is a `document` or a Doctype, `textContent` returns `null`.
+     * > * If the node is a CDATA section, comment, processing instruction, or text node,
+     * >   textContent returns the text inside the node, i.e., the `Node.nodeValue`.
+     * > * For other node types, `textContent returns the concatenation of the textContent of
+     * >   every child node, excluding comments and processing instructions. (This is an empty
+     * >   string if the node has no children.)
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+     */
+    return /** @type {string} */decoded;
+  }
 
   var top = 'top';
   var bottom = 'bottom';
@@ -7541,6 +7573,225 @@
 
   var Tippy = index;
 
+  /* wp:polyfill */
+  /**
+   * Returns the query string part of the URL.
+   *
+   * @param {string} url The full URL.
+   *
+   * @example
+   * ```js
+   * const queryString = getQueryString( 'http://localhost:8080/this/is/a/test?query=true#fragment' ); // 'query=true'
+   * ```
+   *
+   * @return {string|void} The query string part of the URL.
+   */
+  function getQueryString(url) {
+    let query;
+    try {
+      query = new URL(url, 'http://example.com').search.substring(1);
+    } catch (error) {}
+    if (query) {
+      return query;
+    }
+  }
+
+  /**
+   * Generates URL-encoded query string using input query data.
+   *
+   * It is intended to behave equivalent as PHP's `http_build_query`, configured
+   * with encoding type PHP_QUERY_RFC3986 (spaces as `%20`).
+   *
+   * @example
+   * ```js
+   * const queryString = buildQueryString( {
+   *    simple: 'is ok',
+   *    arrays: [ 'are', 'fine', 'too' ],
+   *    objects: {
+   *       evenNested: {
+   *          ok: 'yes',
+   *       },
+   *    },
+   * } );
+   * // "simple=is%20ok&arrays%5B0%5D=are&arrays%5B1%5D=fine&arrays%5B2%5D=too&objects%5BevenNested%5D%5Bok%5D=yes"
+   * ```
+   *
+   * @param {Record<string,*>} data Data to encode.
+   *
+   * @return {string} Query string.
+   */
+  function buildQueryString(data) {
+    let string = '';
+    const stack = Object.entries(data);
+    let pair;
+    while (pair = stack.shift()) {
+      let [key, value] = pair;
+
+      // Support building deeply nested data, from array or object values.
+      const hasNestedData = Array.isArray(value) || value && value.constructor === Object;
+      if (hasNestedData) {
+        // Push array or object values onto the stack as composed of their
+        // original key and nested index or key, retaining order by a
+        // combination of Array#reverse and Array#unshift onto the stack.
+        const valuePairs = Object.entries(value).reverse();
+        for (const [member, memberValue] of valuePairs) {
+          stack.unshift([`${key}[${member}]`, memberValue]);
+        }
+      } else if (value !== undefined) {
+        // Null is treated as special case, equivalent to empty string.
+        if (value === null) {
+          value = '';
+        }
+        string += '&' + [key, value].map(encodeURIComponent).join('=');
+      }
+    }
+
+    // Loop will concatenate with leading `&`, but it's only expected for all
+    // but the first query parameter. This strips the leading `&`, while still
+    // accounting for the case that the string may in-fact be empty.
+    return string.substr(1);
+  }
+
+  /**
+   * Safely decodes a URI component with `decodeURIComponent`. Returns the URI component unmodified if
+   * `decodeURIComponent` throws an error.
+   *
+   * @param {string} uriComponent URI component to decode.
+   *
+   * @return {string} Decoded URI component if possible.
+   */
+  function safeDecodeURIComponent(uriComponent) {
+    try {
+      return decodeURIComponent(uriComponent);
+    } catch (uriComponentError) {
+      return uriComponent;
+    }
+  }
+
+  /**
+   * Internal dependencies
+   */
+
+  /** @typedef {import('./get-query-arg').QueryArgParsed} QueryArgParsed */
+
+  /**
+   * @typedef {Record<string,QueryArgParsed>} QueryArgs
+   */
+
+  /**
+   * Sets a value in object deeply by a given array of path segments. Mutates the
+   * object reference.
+   *
+   * @param {Record<string,*>} object Object in which to assign.
+   * @param {string[]}         path   Path segment at which to set value.
+   * @param {*}                value  Value to set.
+   */
+  function setPath(object, path, value) {
+    const length = path.length;
+    const lastIndex = length - 1;
+    for (let i = 0; i < length; i++) {
+      let key = path[i];
+      if (!key && Array.isArray(object)) {
+        // If key is empty string and next value is array, derive key from
+        // the current length of the array.
+        key = object.length.toString();
+      }
+      key = ['__proto__', 'constructor', 'prototype'].includes(key) ? key.toUpperCase() : key;
+
+      // If the next key in the path is numeric (or empty string), it will be
+      // created as an array. Otherwise, it will be created as an object.
+      const isNextKeyArrayIndex = !isNaN(Number(path[i + 1]));
+      object[key] = i === lastIndex ?
+      // If at end of path, assign the intended value.
+      value :
+      // Otherwise, advance to the next object in the path, creating
+      // it if it does not yet exist.
+      object[key] || (isNextKeyArrayIndex ? [] : {});
+      if (Array.isArray(object[key]) && !isNextKeyArrayIndex) {
+        // If we current key is non-numeric, but the next value is an
+        // array, coerce the value to an object.
+        object[key] = {
+          ...object[key]
+        };
+      }
+
+      // Update working reference object to the next in the path.
+      object = object[key];
+    }
+  }
+
+  /**
+   * Returns an object of query arguments of the given URL. If the given URL is
+   * invalid or has no querystring, an empty object is returned.
+   *
+   * @param {string} url URL.
+   *
+   * @example
+   * ```js
+   * const foo = getQueryArgs( 'https://wordpress.org?foo=bar&bar=baz' );
+   * // { "foo": "bar", "bar": "baz" }
+   * ```
+   *
+   * @return {QueryArgs} Query args object.
+   */
+  function getQueryArgs(url) {
+    return (getQueryString(url) || ''
+    // Normalize space encoding, accounting for PHP URL encoding
+    // corresponding to `application/x-www-form-urlencoded`.
+    //
+    // See: https://tools.ietf.org/html/rfc1866#section-8.2.1
+    ).replace(/\+/g, '%20').split('&').reduce((accumulator, keyValue) => {
+      const [key, value = ''] = keyValue.split('=')
+      // Filtering avoids decoding as `undefined` for value, where
+      // default is restored in destructuring assignment.
+      .filter(Boolean).map(safeDecodeURIComponent);
+      if (key) {
+        const segments = key.replace(/\]/g, '').split('[');
+        setPath(accumulator, segments, value);
+      }
+      return accumulator;
+    }, Object.create(null));
+  }
+
+  /**
+   * Internal dependencies
+   */
+
+  /**
+   * Appends arguments as querystring to the provided URL. If the URL already
+   * includes query arguments, the arguments are merged with (and take precedent
+   * over) the existing set.
+   *
+   * @param {string} [url=''] URL to which arguments should be appended. If omitted,
+   *                          only the resulting querystring is returned.
+   * @param {Object} [args]   Query arguments to apply to URL.
+   *
+   * @example
+   * ```js
+   * const newURL = addQueryArgs( 'https://google.com', { q: 'test' } ); // https://google.com/?q=test
+   * ```
+   *
+   * @return {string} URL with arguments applied.
+   */
+  function addQueryArgs(url = '', args) {
+    // If no arguments are to be appended, return original URL.
+    if (!args || !Object.keys(args).length) {
+      return url;
+    }
+    let baseUrl = url;
+
+    // Determine whether URL already had query arguments.
+    const queryStringIndex = url.indexOf('?');
+    if (queryStringIndex !== -1) {
+      // Merge into existing query arguments.
+      args = Object.assign(getQueryArgs(url), args);
+
+      // Change working base URL to omit previous query arguments.
+      baseUrl = baseUrl.substr(0, queryStringIndex);
+    }
+    return baseUrl + '?' + buildQueryString(args);
+  }
+
   // Custom Option Component with Tooltip
   var CustomOption = function CustomOption(props) {
     var data = props.data,
@@ -7616,20 +7867,63 @@
         var data = {};
         Object.keys(props === null || props === void 0 ? void 0 : props.ajax.data).map(function (singleData) {
           if ((props === null || props === void 0 ? void 0 : props.ajax.data[singleData].indexOf('@')) > -1) {
-            var _builderContext$value;
             var eligibleKey = props === null || props === void 0 ? void 0 : props.ajax.data[singleData].substr(1);
-            data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];
+            eligibleKey = eligibleKey.includes('.') ? eligibleKey.split('.') : eligibleKey;
+            if (Array.isArray(eligibleKey)) {
+              var repeaterDatas = builderContext.values[eligibleKey[0]];
+              repeaterDatas === null || repeaterDatas === void 0 || repeaterDatas.map(function (value) {
+                var _value$eligibleKey$, _value$eligibleKey$2;
+                data[singleData] = (_value$eligibleKey$ = value[eligibleKey[1]]) === null || _value$eligibleKey$ === void 0 ? void 0 : _value$eligibleKey$.join(',');
+                if (((_value$eligibleKey$2 = value[eligibleKey[1]]) === null || _value$eligibleKey$2 === void 0 ? void 0 : _value$eligibleKey$2.length) == 0) {
+                  delete data[singleData];
+                }
+              });
+            } else {
+              var _builderContext$value;
+              data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];
+            }
           } else {
             data[singleData] = props === null || props === void 0 ? void 0 : props.ajax.data[singleData];
           }
         });
         if (!isAjaxComplete) {
-          return wpFetch({
+          var _props$ajax;
+          var payload = {
             path: props === null || props === void 0 ? void 0 : props.ajax.api,
-            data: data
-          }).then(function (response) {
+            data: data,
+            method: "POST"
+          };
+          if ((props === null || props === void 0 || (_props$ajax = props.ajax) === null || _props$ajax === void 0 ? void 0 : _props$ajax.method) == 'GET') {
+            payload.method = 'GET';
+            delete payload.data;
+            payload.path = addQueryArgs(payload.path, data);
+          }
+          return wpFetch(payload).then(function (response) {
+            var _Object$keys, _props$ajax2;
+            var options = [];
+            if (((_Object$keys = Object.keys(props === null || props === void 0 || (_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : _props$ajax2.response_mapper)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0) {
+              response === null || response === void 0 || response.map(function (doc) {
+                var _props$ajax3, _props$ajax4, _props$ajax5, _props$ajax6, _props$ajax7, _props$ajax8;
+                var keyLabel = props !== null && props !== void 0 && (_props$ajax3 = props.ajax) !== null && _props$ajax3 !== void 0 && (_props$ajax3 = _props$ajax3.response_mapper) !== null && _props$ajax3 !== void 0 && (_props$ajax3 = _props$ajax3.label) !== null && _props$ajax3 !== void 0 && _props$ajax3.includes('.') ? props === null || props === void 0 || (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.response_mapper) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.label) === null || _props$ajax4 === void 0 ? void 0 : _props$ajax4.split('.') : props === null || props === void 0 || (_props$ajax5 = props.ajax) === null || _props$ajax5 === void 0 || (_props$ajax5 = _props$ajax5.response_mapper) === null || _props$ajax5 === void 0 ? void 0 : _props$ajax5.label;
+                var keyValue = props !== null && props !== void 0 && (_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.response_mapper) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.value) !== null && _props$ajax6 !== void 0 && _props$ajax6.includes('.') ? props === null || props === void 0 || (_props$ajax7 = props.ajax) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.response_mapper) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.value) === null || _props$ajax7 === void 0 ? void 0 : _props$ajax7.split('.') : props === null || props === void 0 || (_props$ajax8 = props.ajax) === null || _props$ajax8 === void 0 || (_props$ajax8 = _props$ajax8.response_mapper) === null || _props$ajax8 === void 0 ? void 0 : _props$ajax8.value;
+                var option = {};
+                if (Array.isArray(keyLabel)) {
+                  var lastKeyLabel = keyLabel[(keyLabel === null || keyLabel === void 0 ? void 0 : keyLabel.length) - 1];
+                  option['label'] = decodeEntities(removeTagsFromString(_getDeepData(doc, lastKeyLabel)));
+                } else {
+                  option['label'] = decodeEntities(removeTagsFromString(doc[keyLabel]));
+                }
+                if (Array.isArray(keyValue)) {
+                  var lastKeyValue = keyValue[(keyValue === null || keyValue === void 0 ? void 0 : keyValue.length) - 1];
+                  option['value'] = _getDeepData(doc, lastKeyValue);
+                } else {
+                  option['value'] = doc[keyValue];
+                }
+                options.push(option);
+              });
+            }
             setIsLoading(false);
-            var arrayMerge = merge(props.options, response, 'value');
+            var arrayMerge = merge(props.options, (options === null || options === void 0 ? void 0 : options.length) > 0 ? options : response, 'value');
             builderContext.setFormField([].concat(_toConsumableArray(parentIndex), ['options']), arrayMerge);
             setData({
               options: arrayMerge,
@@ -8294,6 +8588,7 @@
   exports._extends = _extends;
   exports.builderReducer = builderReducer;
   exports.executeChange = executeChange;
+  exports.getDeepData = _getDeepData;
   exports.getIn = getIn;
   exports.getSelectedValues = getSelectedValues;
   exports.getStoreData = getStoreData;
@@ -8310,6 +8605,7 @@
   exports.merge = merge;
   exports.objectWithoutPropertiesLoose = objectWithoutPropertiesLoose;
   exports.processAjaxData = processAjaxData;
+  exports.removeTagsFromString = removeTagsFromString;
   exports.setIn = setIn;
   exports.setStoreData = setStoreData;
   exports.sortingFields = sortingFields;

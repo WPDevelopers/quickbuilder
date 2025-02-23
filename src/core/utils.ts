@@ -6,7 +6,7 @@ import { __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
 
 export const wpFetch = (params) => {
-	let args = { ...params, method: "POST" };
+	let args = { ...params };
 	return apiFetch(args);
 };
 
@@ -53,6 +53,30 @@ export const isVisible = (values, props) => {
 
 export const withState = (type) => {
 	return Boolean(["group", "section"].includes(type))
+}
+
+export const getDeepData = ( data, filterKey, found = '' )  => {
+	Object.keys(data)?.map((key) => {
+		if(typeof data[key] == 'object'){
+			found = getDeepData(data[key], filterKey, found);
+		} else {
+			if( filterKey == key ) {
+				found = data[key];
+			}
+		}
+	});
+
+	return found;
+}
+
+export const removeTagsFromString = (str) => {
+    if ((str === null) || (str === '')) {
+        return false;
+	} else {
+        str = str.toString();
+	}
+
+    return str.replace(/(<([^>]+)>)/ig, '');
 }
 
 export const isEmptyObj = (obj) => {

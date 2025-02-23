@@ -6,7 +6,7 @@ import { __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
 
 export const wpFetch = (params) => {
-	let args = { ...params };
+	let args = { ...params, method: "POST" };
 	return apiFetch(args);
 };
 

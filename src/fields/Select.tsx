@@ -83,7 +83,7 @@ const Select = (props) => {
 					if( Array.isArray(eligibleKey) ) {
 						let repeaterDatas = builderContext.values[eligibleKey[0]];
 						repeaterDatas?.map((value) => {
-							data[singleData] = value[eligibleKey[1]]?.join(',');
+							data[singleData] = Array.isArray( value[eligibleKey[1]] ) ? value[eligibleKey[1]]?.join(',') : value[eligibleKey[1]];
 							if( value[eligibleKey[1]]?.length == 0 ) {
 								delete data[singleData];
 							}
@@ -110,7 +110,7 @@ const Select = (props) => {
                 return wpFetch(payload).then((response) => {
 					let options = [];
 					if( Object.keys(props?.ajax?.response_mapper)?.length >  0 ) {
-						response?.map((doc) => {
+						response?.map((data) => {
 							let keyLabel = props?.ajax?.response_mapper?.label?.includes('.') ? props?.ajax?.response_mapper?.label?.split('.') : props?.ajax?.response_mapper?.label;
 							let keyValue = props?.ajax?.response_mapper?.value?.includes('.') ? props?.ajax?.response_mapper?.value?.split('.') : props?.ajax?.response_mapper?.value;
 
@@ -118,16 +118,16 @@ const Select = (props) => {
 
 							if( Array.isArray( keyLabel ) ) {
 								let lastKeyLabel = keyLabel[keyLabel?.length - 1];
-								option['label'] = decodeEntities( removeTagsFromString( getDeepData(doc, lastKeyLabel) ));
+								option['label'] = decodeEntities( removeTagsFromString( getDeepData(data, lastKeyLabel) ));
 							} else{
-								option['label'] =  decodeEntities( removeTagsFromString( doc[keyLabel] ) );
+								option['label'] =  decodeEntities( removeTagsFromString( data[keyLabel] ) );
 							}
 
 							if( Array.isArray( keyValue ) ) {
 								let lastKeyValue = keyValue[keyValue?.length - 1];
-								option['value'] = getDeepData(doc, lastKeyValue);
+								option['value'] = getDeepData(data, lastKeyValue);
 							} else {
-								option['value'] = doc[keyValue];
+								option['value'] = data[keyValue];
 							}
 
 							options.push(option);

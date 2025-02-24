@@ -7879,7 +7879,7 @@ var Select = function Select(props) {
             var repeaterDatas = builderContext.values[eligibleKey[0]];
             repeaterDatas === null || repeaterDatas === void 0 || repeaterDatas.map(function (value) {
               var _value$eligibleKey$, _value$eligibleKey$2;
-              data[singleData] = (_value$eligibleKey$ = value[eligibleKey[1]]) === null || _value$eligibleKey$ === void 0 ? void 0 : _value$eligibleKey$.join(',');
+              data[singleData] = Array.isArray(value[eligibleKey[1]]) ? (_value$eligibleKey$ = value[eligibleKey[1]]) === null || _value$eligibleKey$ === void 0 ? void 0 : _value$eligibleKey$.join(',') : value[eligibleKey[1]];
               if (((_value$eligibleKey$2 = value[eligibleKey[1]]) === null || _value$eligibleKey$2 === void 0 ? void 0 : _value$eligibleKey$2.length) == 0) {
                 delete data[singleData];
               }
@@ -7908,22 +7908,22 @@ var Select = function Select(props) {
           var _Object$keys, _props$ajax2;
           var options = [];
           if (((_Object$keys = Object.keys(props === null || props === void 0 || (_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : _props$ajax2.response_mapper)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0) {
-            response === null || response === void 0 || response.map(function (doc) {
+            response === null || response === void 0 || response.map(function (data) {
               var _props$ajax3, _props$ajax4, _props$ajax5, _props$ajax6, _props$ajax7, _props$ajax8;
               var keyLabel = props !== null && props !== void 0 && (_props$ajax3 = props.ajax) !== null && _props$ajax3 !== void 0 && (_props$ajax3 = _props$ajax3.response_mapper) !== null && _props$ajax3 !== void 0 && (_props$ajax3 = _props$ajax3.label) !== null && _props$ajax3 !== void 0 && _props$ajax3.includes('.') ? props === null || props === void 0 || (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.response_mapper) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.label) === null || _props$ajax4 === void 0 ? void 0 : _props$ajax4.split('.') : props === null || props === void 0 || (_props$ajax5 = props.ajax) === null || _props$ajax5 === void 0 || (_props$ajax5 = _props$ajax5.response_mapper) === null || _props$ajax5 === void 0 ? void 0 : _props$ajax5.label;
               var keyValue = props !== null && props !== void 0 && (_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.response_mapper) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.value) !== null && _props$ajax6 !== void 0 && _props$ajax6.includes('.') ? props === null || props === void 0 || (_props$ajax7 = props.ajax) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.response_mapper) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.value) === null || _props$ajax7 === void 0 ? void 0 : _props$ajax7.split('.') : props === null || props === void 0 || (_props$ajax8 = props.ajax) === null || _props$ajax8 === void 0 || (_props$ajax8 = _props$ajax8.response_mapper) === null || _props$ajax8 === void 0 ? void 0 : _props$ajax8.value;
               var option = {};
               if (Array.isArray(keyLabel)) {
                 var lastKeyLabel = keyLabel[(keyLabel === null || keyLabel === void 0 ? void 0 : keyLabel.length) - 1];
-                option['label'] = decodeEntities(removeTagsFromString(_getDeepData(doc, lastKeyLabel)));
+                option['label'] = decodeEntities(removeTagsFromString(_getDeepData(data, lastKeyLabel)));
               } else {
-                option['label'] = decodeEntities(removeTagsFromString(doc[keyLabel]));
+                option['label'] = decodeEntities(removeTagsFromString(data[keyLabel]));
               }
               if (Array.isArray(keyValue)) {
                 var lastKeyValue = keyValue[(keyValue === null || keyValue === void 0 ? void 0 : keyValue.length) - 1];
-                option['value'] = _getDeepData(doc, lastKeyValue);
+                option['value'] = _getDeepData(data, lastKeyValue);
               } else {
-                option['value'] = doc[keyValue];
+                option['value'] = data[keyValue];
               }
               options.push(option);
             });

@@ -1,6 +1,6 @@
 import React, { useContext, createContext, useState, useEffect, useRef, useReducer, useCallback, useLayoutEffect, createElement, Fragment, useMemo, forwardRef as forwardRef$1, cloneElement } from 'react';
 import { select, dispatch, registerStore } from '@wordpress/data';
-import { sprintf, __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import intersect from 'intersect';
 import apiFetch from '@wordpress/api-fetch';
 import { toPath, clone } from 'lodash-es';
@@ -127,6 +127,10 @@ var isVisible = function isVisible(values, props) {
   if (!(props !== null && props !== void 0 && props.rules) || props.name == undefined) {
     return true;
   }
+  if (Object.hasOwnProperty.call(props, 'index')) {
+    var newRules = _replaceIndex(props === null || props === void 0 ? void 0 : props.rules, props);
+    props.rules = newRules;
+  }
   var whenVar = when(props.rules, values);
   return Boolean(whenVar);
 };
@@ -146,6 +150,34 @@ var _getDeepData = function getDeepData(data, filterKey) {
     }
   });
   return found;
+};
+var processRule$1 = function processRule(_ref, index) {
+  var condition = _ref[0],
+    key = _ref[1],
+    value = _ref[2];
+  key = key.replace("[index]", "[".concat(index, "]"));
+  return [condition, key, value];
+};
+var _replaceIndex = function replaceIndex(conditions, props, data) {
+  if (!isValidCondition(conditions)) {
+    return processRule$1(conditions, props === null || props === void 0 ? void 0 : props.index);
+  }
+  var logicalRule = conditions.slice(0, 1)[0];
+  var comparisonRules = conditions.slice(1);
+  var result = comparisonRules.map(function (condition, index) {
+    if (isValidCondition(condition)) {
+      return _replaceIndex(condition, props);
+    }
+    return processRule$1(condition, props === null || props === void 0 ? void 0 : props.index);
+  });
+  return [logicalRule].concat(_toConsumableArray(result));
+};
+var insertDefaultRepeaterValues = function insertDefaultRepeaterValues(fields) {
+  var newDefaultFields = {};
+  fields === null || fields === void 0 || fields.map(function (field) {
+    newDefaultFields[field === null || field === void 0 ? void 0 : field.name] = field === null || field === void 0 ? void 0 : field["default"];
+  });
+  return newDefaultFields;
 };
 var removeTagsFromString = function removeTagsFromString(str) {
   if (str === null || str === '') {
@@ -367,10 +399,10 @@ var merge = function merge(array_one, array_two, key) {
   });
   return [].concat(_toConsumableArray(data), _toConsumableArray(_array_two));
 };
-var downloadFile = function downloadFile(_ref) {
-  var data = _ref.data,
-    fileName = _ref.fileName,
-    fileType = _ref.fileType;
+var downloadFile = function downloadFile(_ref2) {
+  var data = _ref2.data,
+    fileName = _ref2.fileName,
+    fileType = _ref2.fileType;
   // Create a blob with the data we want to download as a file
   var blob = new Blob([data], {
     type: fileType
@@ -3320,9 +3352,9 @@ var Repeater = function Repeater(props) {
   }, [localMemoizedValue]);
   useEffect(function () {
     if (localMemoizedValue == undefined || localMemoizedValue == '') {
-      setLocalMemoizedValue([{
+      setLocalMemoizedValue([_objectSpread$4({
         index: v4()
-      }]);
+      }, insertDefaultRepeaterValues(fields))]);
     } else {
       setLocalMemoizedValue(function (items) {
         return items.map(function (item) {
@@ -3360,9 +3392,9 @@ var Repeater = function Repeater(props) {
   }, createElement("button", {
     className: "wprf-repeater-button",
     onClick: function onClick() {
-      return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [{
+      return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [_objectSpread$4({
         index: v4()
-      }]));
+      }, insertDefaultRepeaterValues(fields))]));
     }
   }, button === null || button === void 0 ? void 0 : button.label)));
 };
@@ -8556,4 +8588,4 @@ var FormBuilder = function FormBuilder(props) {
   return createElement(Fragment, null, createElement(Tab, tabs));
 };
 
-export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CheckboxSelect$1 as CheckboxSelect, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, CopyToClipboard$1 as CopyToClipboard, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, _getDeepData as getDeepData, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, removeTagsFromString, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };
+export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CheckboxSelect$1 as CheckboxSelect, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, CopyToClipboard$1 as CopyToClipboard, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, _getDeepData as getDeepData, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, insertDefaultRepeaterValues, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, removeTagsFromString, _replaceIndex as replaceIndex, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };

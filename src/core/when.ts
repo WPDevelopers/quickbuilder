@@ -109,7 +109,7 @@ const logicalRules = {
 	},
 };
 
-const isValidCondition = (conditions) => {
+export const isValidCondition = (conditions) => {
 	if (
 		Array.isArray(conditions) &&
 		Array.isArray(conditions[1]) &&

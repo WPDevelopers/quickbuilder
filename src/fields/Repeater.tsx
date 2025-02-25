@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import { useBuilderContext } from '../core/hooks';
 import { RepeaterField } from './helpers';
-import { executeChange } from '../core/utils';
+import { executeChange, insertDefaultRepeaterValues } from '../core/utils';
 import { ReactSortable } from "react-sortablejs";
 import { v4 } from "uuid";
 
@@ -64,7 +64,8 @@ const Repeater = (props) => {
 
     useEffect(() => {
         if (localMemoizedValue == undefined || localMemoizedValue == '') {
-            setLocalMemoizedValue([{index: v4()}]);
+			insertDefaultRepeaterValues
+            setLocalMemoizedValue([{index: v4(), ...insertDefaultRepeaterValues(fields)}]);
         }
         else{
             setLocalMemoizedValue((items) => items.map((item) => {
@@ -96,7 +97,7 @@ const Repeater = (props) => {
             }
             <div className="wprf-repeater-label">
                 <button className="wprf-repeater-button"
-                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {index: v4()}])}>
+                    onClick={() => builderContext.setFieldValue(fieldName, [...localMemoizedValue, {index: v4(), ...insertDefaultRepeaterValues(fields)}])}>
                     {button?.label}
                 </button>
             </div>

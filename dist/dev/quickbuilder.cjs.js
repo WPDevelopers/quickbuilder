@@ -147,6 +147,10 @@ var isVisible = function isVisible(values, props) {
   if (!(props !== null && props !== void 0 && props.rules) || props.name == undefined) {
     return true;
   }
+  if (Object.hasOwnProperty.call(props, 'index')) {
+    var newRules = _replaceIndex(props === null || props === void 0 ? void 0 : props.rules, props);
+    props.rules = newRules;
+  }
   var whenVar = when(props.rules, values);
   return Boolean(whenVar);
 };
@@ -166,6 +170,34 @@ var _getDeepData = function getDeepData(data, filterKey) {
     }
   });
   return found;
+};
+var processRule$1 = function processRule(_ref, index) {
+  var condition = _ref[0],
+    key = _ref[1],
+    value = _ref[2];
+  key = key.replace("[index]", "[".concat(index, "]"));
+  return [condition, key, value];
+};
+var _replaceIndex = function replaceIndex(conditions, props, data) {
+  if (!isValidCondition(conditions)) {
+    return processRule$1(conditions, props === null || props === void 0 ? void 0 : props.index);
+  }
+  var logicalRule = conditions.slice(0, 1)[0];
+  var comparisonRules = conditions.slice(1);
+  var result = comparisonRules.map(function (condition, index) {
+    if (isValidCondition(condition)) {
+      return _replaceIndex(condition, props);
+    }
+    return processRule$1(condition, props === null || props === void 0 ? void 0 : props.index);
+  });
+  return [logicalRule].concat(_toConsumableArray(result));
+};
+var insertDefaultRepeaterValues = function insertDefaultRepeaterValues(fields) {
+  var newDefaultFields = {};
+  fields === null || fields === void 0 || fields.map(function (field) {
+    newDefaultFields[field === null || field === void 0 ? void 0 : field.name] = field === null || field === void 0 ? void 0 : field["default"];
+  });
+  return newDefaultFields;
 };
 var removeTagsFromString = function removeTagsFromString(str) {
   if (str === null || str === '') {
@@ -387,10 +419,10 @@ var merge = function merge(array_one, array_two, key) {
   });
   return [].concat(_toConsumableArray(data), _toConsumableArray(_array_two));
 };
-var downloadFile = function downloadFile(_ref) {
-  var data = _ref.data,
-    fileName = _ref.fileName,
-    fileType = _ref.fileType;
+var downloadFile = function downloadFile(_ref2) {
+  var data = _ref2.data,
+    fileName = _ref2.fileName,
+    fileType = _ref2.fileType;
   // Create a blob with the data we want to download as a file
   var blob = new Blob([data], {
     type: fileType
@@ -3340,9 +3372,9 @@ var Repeater = function Repeater(props) {
   }, [localMemoizedValue]);
   React.useEffect(function () {
     if (localMemoizedValue == undefined || localMemoizedValue == '') {
-      setLocalMemoizedValue([{
+      setLocalMemoizedValue([_objectSpread$4({
         index: uuid.v4()
-      }]);
+      }, insertDefaultRepeaterValues(fields))]);
     } else {
       setLocalMemoizedValue(function (items) {
         return items.map(function (item) {
@@ -3380,9 +3412,9 @@ var Repeater = function Repeater(props) {
   }, React.createElement("button", {
     className: "wprf-repeater-button",
     onClick: function onClick() {
-      return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [{
+      return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [_objectSpread$4({
         index: uuid.v4()
-      }]));
+      }, insertDefaultRepeaterValues(fields))]));
     }
   }, button === null || button === void 0 ? void 0 : button.label)));
 };
@@ -8620,6 +8652,7 @@ exports.getSelectedValues = getSelectedValues;
 exports.getStoreData = getStoreData;
 exports.getTime = getTime;
 exports.hitAAJX = hitAAJX;
+exports.insertDefaultRepeaterValues = insertDefaultRepeaterValues;
 exports.isArray = isArray;
 exports.isEmptyObj = isEmptyObj;
 exports.isExists = isExists;
@@ -8632,6 +8665,7 @@ exports.merge = merge;
 exports.objectWithoutPropertiesLoose = objectWithoutPropertiesLoose;
 exports.processAjaxData = processAjaxData;
 exports.removeTagsFromString = removeTagsFromString;
+exports.replaceIndex = _replaceIndex;
 exports.setIn = setIn;
 exports.setStoreData = setStoreData;
 exports.sortingFields = sortingFields;

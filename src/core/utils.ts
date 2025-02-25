@@ -1,6 +1,6 @@
 import apiFetch from "@wordpress/api-fetch";
-import { clone, toPath } from "lodash-es";
-import when from "./when";
+import { clone, map, toPath } from "lodash-es";
+import when, { isValidCondition } from "./when";
 // @ts-ignore
 import { __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
@@ -47,6 +47,11 @@ export const isVisible = (values, props) => {
 		return true;
 	}
 
+	if(Object.hasOwnProperty.call(props, 'index')) {
+		let newRules = replaceIndex(props?.rules, props, values);
+		props.rules = newRules
+	}
+
 	let whenVar = when(props.rules, values);
 	return Boolean(whenVar);
 }
@@ -67,6 +72,39 @@ export const getDeepData = ( data, filterKey, found = '' )  => {
 	});
 
 	return found;
+}
+
+const processRule = (_ref, index) => {
+	let condition = _ref[0],
+		key = _ref[1],
+		value = _ref[2];
+	key = key.replace("[index]", `[${index}]`);
+	return [condition, key, value];
+};
+
+export const replaceIndex = (conditions, props, data) => {
+	if (!isValidCondition(conditions)) {
+		return processRule(conditions, props?.index);
+	}
+
+	let logicalRule = conditions.slice(0, 1)[0];
+	let comparisonRules = conditions.slice(1);
+
+	let result = comparisonRules.map(function (condition, index) {
+		if (isValidCondition(condition)) {
+			return replaceIndex(condition, props, data);
+		}
+		return processRule(condition,  props?.index);
+	});
+	return [logicalRule, ...result];
+}
+
+export const insertDefaultRepeaterValues = (fields) => {
+	let newDefaultFields = {}
+	fields?.map((field) => {
+		newDefaultFields[field?.name] = field?.default;
+	});
+	return newDefaultFields;
 }
 
 export const removeTagsFromString = (str) => {

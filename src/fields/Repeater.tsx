@@ -90,6 +90,7 @@ const Repeater = (props) => {
                             clone={handleClone}
                             remove={handleRemove}
                             onChange={(event: any) => handleChange(event, index)}
+							parentIndex={props.parentIndex}
                         />
                     })
                 }

@@ -6,7 +6,7 @@ import { useBuilderContext } from '../../core/hooks';
 
 const RepeaterField = (props) => {
     const builderContext = useBuilderContext();
-    const { fields, onChange, index, parent } = props;
+    const { fields, onChange, index, parent, parentIndex } = props;
     const [isCollapsed, setIsCollapsed] = useState(props.isCollapsed);
     const instanceId = useInstanceId(RepeaterField);
     // onClick={() => setIsCollapse(!isCollapse)}
@@ -40,6 +40,7 @@ const RepeaterField = (props) => {
             { !isCollapsed &&
                 <div className="wprf-repeater-inner-field">
                     {fields.map((field, fieldIndex) => {
+						let parentIndex = [...props.parentIndex, 'fields', fieldIndex];
                         return <GenericField
                             key={`field-${index}-${fieldIndex}`}
                             {...field}
@@ -48,6 +49,7 @@ const RepeaterField = (props) => {
                             parenttype='repeater'
                             parent={parent}
                             onChange={(event) => onChange(event, index)}
+							parentIndex={parentIndex}
                         />
                     })}
                 </div>

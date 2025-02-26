@@ -2480,6 +2480,7 @@
       _onChange = props.onChange,
       index = props.index,
       parent = props.parent;
+      props.parentIndex;
     var _useState = React.useState(props.isCollapsed),
       _useState2 = _slicedToArray(_useState, 2),
       isCollapsed = _useState2[0],
@@ -2520,6 +2521,7 @@
     }))), !isCollapsed && React.createElement("div", {
       className: "wprf-repeater-inner-field"
     }, fields.map(function (field, fieldIndex) {
+      var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', fieldIndex]);
       return React.createElement(GenericField, _extends$1({
         key: "field-".concat(index, "-").concat(fieldIndex)
       }, field, {
@@ -2529,7 +2531,8 @@
         parent: parent,
         onChange: function onChange(event) {
           return _onChange(event, index);
-        }
+        },
+        parentIndex: parentIndex
       }));
     })));
   };
@@ -3379,7 +3382,8 @@
         remove: handleRemove,
         onChange: function onChange(event) {
           return handleChange(event, index);
-        }
+        },
+        parentIndex: props.parentIndex
       });
     })), React.createElement("div", {
       className: "wprf-repeater-label"

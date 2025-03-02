@@ -137,19 +137,11 @@ var isVisible = function isVisible(values, props) {
 var withState = function withState(type) {
   return Boolean(["group", "section"].includes(type));
 };
-var _getDeepData = function getDeepData(data, filterKey) {
-  var _Object$keys;
-  var found = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  (_Object$keys = Object.keys(data)) === null || _Object$keys === void 0 || _Object$keys.map(function (key) {
-    if (_typeof$1(data[key]) == 'object') {
-      found = _getDeepData(data[key], filterKey, found);
-    } else {
-      if (filterKey == key) {
-        found = data[key];
-      }
-    }
-  });
-  return found;
+var getDeepData = function getDeepData(data, filterKey) {
+  var finalValue = filterKey === null || filterKey === void 0 ? void 0 : filterKey.reduce(function (subject, currentProperty, currentIndex) {
+    return subject[currentProperty] != undefined ? subject[currentProperty] : {};
+  }, data);
+  return finalValue;
 };
 var processRule$1 = function processRule(_ref, index) {
   var condition = _ref[0],
@@ -7950,14 +7942,13 @@ var Select = function Select(props) {
               var keyValue = props !== null && props !== void 0 && (_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.response_mapper) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.value) !== null && _props$ajax6 !== void 0 && _props$ajax6.includes('.') ? props === null || props === void 0 || (_props$ajax7 = props.ajax) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.response_mapper) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.value) === null || _props$ajax7 === void 0 ? void 0 : _props$ajax7.split('.') : props === null || props === void 0 || (_props$ajax8 = props.ajax) === null || _props$ajax8 === void 0 || (_props$ajax8 = _props$ajax8.response_mapper) === null || _props$ajax8 === void 0 ? void 0 : _props$ajax8.value;
               var option = {};
               if (Array.isArray(keyLabel)) {
-                var lastKeyLabel = keyLabel[(keyLabel === null || keyLabel === void 0 ? void 0 : keyLabel.length) - 1];
-                option['label'] = decodeEntities(removeTagsFromString(_getDeepData(data, lastKeyLabel)));
+                option['label'] = decodeEntities(removeTagsFromString(getDeepData(data, keyLabel)));
               } else {
                 option['label'] = decodeEntities(removeTagsFromString(data[keyLabel]));
               }
               if (Array.isArray(keyValue)) {
                 var lastKeyValue = keyValue[(keyValue === null || keyValue === void 0 ? void 0 : keyValue.length) - 1];
-                option['value'] = _getDeepData(data, lastKeyValue);
+                option['value'] = getDeepData(data, lastKeyValue);
               } else {
                 option['value'] = data[keyValue];
               }
@@ -8592,4 +8583,4 @@ var FormBuilder = function FormBuilder(props) {
   return createElement(Fragment, null, createElement(Tab, tabs));
 };
 
-export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CheckboxSelect$1 as CheckboxSelect, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, CopyToClipboard$1 as CopyToClipboard, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, _getDeepData as getDeepData, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, insertDefaultRepeaterValues, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, removeTagsFromString, _replaceIndex as replaceIndex, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };
+export { Action, BuilderConsumer, BuilderProvider, Button$1 as Button, CheckboxSelect$1 as CheckboxSelect, CodeViewer$1 as CodeViewer, ColorPicker$1 as ColorPicker, Column, CopyToClipboard$1 as CopyToClipboard, Date$1 as Date, Editor$1 as Editor, Field$1 as Field, FormBuilder, GenericField, GenericInput, Group$1 as Group, Image, Input$1 as Input, JsonUploader$1 as JsonUploader, Label, Media$1 as Media, Message, Modal, ObjectFilter, Radio, Repeater, ResponsiveNumber$1 as ResponsiveNumber, Row, Section$1 as Section, Select$1 as Select, SelectAsync$1 as SelectAsync, Slider, SweetAlert, Textarea$1 as Textarea, Toggle, _extends, builderReducer, executeChange, getDeepData, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, insertDefaultRepeaterValues, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, removeTagsFromString, _replaceIndex as replaceIndex, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };

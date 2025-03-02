@@ -60,18 +60,11 @@ export const withState = (type) => {
 	return Boolean(["group", "section"].includes(type))
 }
 
-export const getDeepData = ( data, filterKey, found = '' )  => {
-	Object.keys(data)?.map((key) => {
-		if(typeof data[key] == 'object'){
-			found = getDeepData(data[key], filterKey, found);
-		} else {
-			if( filterKey == key ) {
-				found = data[key];
-			}
-		}
-	});
-
-	return found;
+export const getDeepData = ( data, filterKey )  => {
+	let finalValue = filterKey?.reduce((subject, currentProperty, currentIndex) => {
+		return subject[currentProperty] != undefined ? subject[currentProperty] : {};
+	}, data );
+	return finalValue
 }
 
 const processRule = (_ref, index) => {

@@ -117,8 +117,7 @@ const Select = (props) => {
 							let option  = {};
 
 							if( Array.isArray( keyLabel ) ) {
-								let lastKeyLabel = keyLabel[keyLabel?.length - 1];
-								option['label'] = decodeEntities( removeTagsFromString( getDeepData(data, lastKeyLabel) ));
+								option['label'] = decodeEntities( removeTagsFromString( getDeepData(data, keyLabel) ));
 							} else{
 								option['label'] =  decodeEntities( removeTagsFromString( data[keyLabel] ) );
 							}

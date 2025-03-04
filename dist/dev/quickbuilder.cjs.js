@@ -144,12 +144,16 @@ var valueExists = function valueExists(arrayOptions, needles) {
   return arrayOptions.includes(needles);
 };
 var isVisible = function isVisible(values, props) {
-  if (!(props !== null && props !== void 0 && props.rules) || props.name == undefined) {
+  var _props;
+  if (!((_props = props) !== null && _props !== void 0 && _props.rules) || props.name == undefined) {
     return true;
   }
   if (Object.hasOwnProperty.call(props, 'index')) {
-    var newRules = _replaceIndex(props === null || props === void 0 ? void 0 : props.rules, props);
-    props.rules = newRules;
+    var _props2;
+    var newRules = _replaceIndex((_props2 = props) === null || _props2 === void 0 ? void 0 : _props2.rules, props);
+    props = _objectSpread$g(_objectSpread$g({}, props), {}, {
+      rules: newRules
+    });
   }
   var whenVar = when(props.rules, values);
   return Boolean(whenVar);
@@ -7975,6 +7979,7 @@ var Select = function Select(props) {
               options.push(option);
             });
           }
+          console.log(12);
           setIsLoading(false);
           var arrayMerge = merge(props.options, (options === null || options === void 0 ? void 0 : options.length) > 0 ? options : response, 'value');
           builderContext.setFormField([].concat(_toConsumableArray(parentIndex), ['options']), arrayMerge);

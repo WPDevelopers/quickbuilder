@@ -49,7 +49,7 @@ export const isVisible = (values, props) => {
 
 	if(Object.hasOwnProperty.call(props, 'index')) {
 		let newRules = replaceIndex(props?.rules, props, values);
-		props.rules = newRules
+		props = {...props, rules:newRules};
 	}
 
 	let whenVar = when(props.rules, values);

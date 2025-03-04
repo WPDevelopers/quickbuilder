@@ -132,6 +132,7 @@ const Select = (props) => {
 							options.push(option);
 						});
 					}
+					console.log(12);
                     setIsLoading(false);
                     const arrayMerge = merge(props.options, (options?.length > 0 ? options : response), 'value');
                     builderContext.setFormField([...parentIndex, 'options'], arrayMerge);

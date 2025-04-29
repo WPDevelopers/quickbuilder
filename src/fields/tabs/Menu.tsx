@@ -13,6 +13,7 @@ const addCookiesListItemCount = (context, tabs) => {
         "functional_cookie_lists",
         "analytics_cookie_lists",
         "performance_cookie_lists",
+        "advertising_cookie_lists",
         "uncategorized_cookie_lists",
     ];
     const result = keys.map(key => 

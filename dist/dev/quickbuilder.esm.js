@@ -694,7 +694,7 @@ var addCookiesListItemCount = function addCookiesListItemCount(context, tabs) {
   // const keys = tabs?.reduce(( carry, item ) => {
   //     return [...carry, ...(item.fields.map( f => f.name  ))]
   // }, []);
-  var keys = ["necessary_cookie_lists", "functional_cookie_lists", "analytics_cookie_lists", "performance_cookie_lists", "uncategorized_cookie_lists"];
+  var keys = ["necessary_cookie_lists", "functional_cookie_lists", "analytics_cookie_lists", "performance_cookie_lists", "advertising_cookie_lists", "uncategorized_cookie_lists"];
   var result = keys.map(function (key) {
     var _context$values$key;
     return Array.isArray(context === null || context === void 0 ? void 0 : context.values[key]) ? context === null || context === void 0 || (_context$values$key = context.values[key]) === null || _context$values$key === void 0 ? void 0 : _context$values$key.length : 0;
@@ -758,7 +758,7 @@ function _objectWithoutPropertiesLoose(r, e) {
   if (null == r) return {};
   var t = {};
   for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
-    if (e.includes(n)) continue;
+    if (-1 !== e.indexOf(n)) continue;
     t[n] = r[n];
   }
   return t;
@@ -770,8 +770,8 @@ function _objectWithoutProperties(e, t) {
     r,
     i = _objectWithoutPropertiesLoose(e, t);
   if (Object.getOwnPropertySymbols) {
-    var s = Object.getOwnPropertySymbols(e);
-    for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+    var n = Object.getOwnPropertySymbols(e);
+    for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
   }
   return i;
 }

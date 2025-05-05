@@ -426,6 +426,19 @@ var _typeof = function _typeof(obj) {
 };
 var get = function get(obj, path) {
   var defaultValue = (arguments.length <= 2 ? 0 : arguments.length - 2) > 2 && (arguments.length <= 4 ? undefined : arguments[4]) !== undefined ? arguments.length <= 4 ? undefined : arguments[4] : undefined;
+  // if( path == 'betterdocs_access_control_repeater[1].control_access_restrict_doc_category' ) {
+  // 	String.prototype.split
+  // 	.call(path, /[,[\].]+?/)
+  // 	.filter(Boolean)
+  // 	.reduce(function (a, c) {
+  // 		console.log(a);
+  // 		console.log(c);
+  // 		console.log(Object.hasOwnProperty.call(a, c) ? a[c] : defaultValue);
+  // 		console.log('---xx---');
+  // 		return a && Object.hasOwnProperty.call(a, c) ? a[c] : defaultValue;
+  // 		// return a && Object.hasOwnProperty.call(a, c) ? a[c] : defaultValue;
+  // 	}, obj)
+  // }
   return String.prototype.split.call(path, /[,[\].]+?/).filter(Boolean).reduce(function (a, c) {
     return a && Object.hasOwnProperty.call(a, c) ? a[c] : defaultValue;
   }, obj);
@@ -7872,6 +7885,7 @@ var CustomOption = function CustomOption(props) {
   })))));
 };
 var Select = function Select(props) {
+  var _props$show_selected_;
   var builderContext = useBuilderContext();
   var id = props.id,
     name = props.name,
@@ -7998,6 +8012,13 @@ var Select = function Select(props) {
       });
     }
   }, [name, options, onChange, multiple]);
+  var removeSelection = function removeSelection(item) {
+    // @ts-ignore
+    var newSelectedOptions = selectedOption.filter(function (option) {
+      return (option === null || option === void 0 ? void 0 : option.value) != (item === null || item === void 0 ? void 0 : item.value);
+    });
+    setSOption(newSelectedOptions);
+  };
   useEffect(function () {
     handleMenuOpen();
   }, []);
@@ -8024,8 +8045,24 @@ var Select = function Select(props) {
     onMenuOpen: handleMenuOpen,
     components: selectComponents // Conditional rendering of tooltip-enabled options
     ,
-    onChange: handleOptionChange
-  }));
+    onChange: handleOptionChange,
+    controlShouldRenderValue: (_props$show_selected_ = props === null || props === void 0 ? void 0 : props.show_selected_values) !== null && _props$show_selected_ !== void 0 ? _props$show_selected_ : true
+  }), selectedOption !== null && selectedOption !== void 0 && selectedOption.length ? createElement("ul", {
+    className: "wprf-selected-options"
+  }, selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.map(function (item, index) {
+    return createElement("li", {
+      key: item === null || item === void 0 ? void 0 : item.label,
+      className: "wprf-selected-option wprf-selected-option-".concat(index % 6 + 1)
+    }, item === null || item === void 0 ? void 0 : item.label, createElement("button", {
+      type: "button",
+      className: "wprf-remove-button",
+      onClick: function onClick() {
+        return removeSelection(item);
+      }
+    }, createElement("i", {
+      className: "btd-icon btd-close-fill"
+    })));
+  })) : "");
 };
 var Select$1 = withLabel(Select);
 

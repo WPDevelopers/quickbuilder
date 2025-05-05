@@ -17,6 +17,19 @@ const _typeof = (obj) => {
 
 const get = (obj, path, ...restParams) => {
 	let defaultValue = restParams.length > 2 && restParams[2] !== undefined ? restParams[2] : undefined;
+	// if( path == 'betterdocs_access_control_repeater[1].control_access_restrict_doc_category' ) {
+	// 	String.prototype.split
+	// 	.call(path, /[,[\].]+?/)
+	// 	.filter(Boolean)
+	// 	.reduce(function (a, c) {
+	// 		console.log(a);
+	// 		console.log(c);
+	// 		console.log(Object.hasOwnProperty.call(a, c) ? a[c] : defaultValue);
+	// 		console.log('---xx---');
+	// 		return a && Object.hasOwnProperty.call(a, c) ? a[c] : defaultValue;
+	// 		// return a && Object.hasOwnProperty.call(a, c) ? a[c] : defaultValue;
+	// 	}, obj)
+	// }
 	return String.prototype.split
 		.call(path, /[,[\].]+?/)
 		.filter(Boolean)

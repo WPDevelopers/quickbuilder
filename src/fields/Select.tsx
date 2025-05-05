@@ -128,7 +128,6 @@ const Select = (props) => {
 							} else {
 								option['value'] = data[keyValue];
 							}
-
 							options.push(option);
 						});
 					}
@@ -171,6 +170,14 @@ const Select = (props) => {
         }
     }, [name, options, onChange, multiple]);
 
+	const removeSelection = (item) => {
+		// @ts-ignore
+		let newSelectedOptions = selectedOption.filter(
+			(option) => option?.value != item?.value
+		);
+		setSOption(newSelectedOptions);
+	};
+
     useEffect(() => {
         handleMenuOpen();
     }, []);
@@ -198,7 +205,32 @@ const Select = (props) => {
                 onMenuOpen={handleMenuOpen}
                 components={selectComponents} // Conditional rendering of tooltip-enabled options
                 onChange={handleOptionChange}
+				controlShouldRenderValue={props?.show_selected_values ?? true}
             />
+			{( selectedOption?.length  ) ? (
+				<ul className="wprf-selected-options">
+					{/* @ts-ignore */}
+					{selectedOption?.map((item, index) => (
+						<li
+							key={item?.label}
+							className={`wprf-selected-option wprf-selected-option-${
+								index%6 + 1
+							}`}
+						>
+							{item?.label}
+							<button
+								type="button"
+								className="wprf-remove-button"
+								onClick={() => removeSelection(item)}
+							>
+								<i className="btd-icon btd-close-fill"></i>
+							</button>
+						</li>
+					))}
+				</ul>
+			) : (
+				""
+			)}
         </div>
     );
 };

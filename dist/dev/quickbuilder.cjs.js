@@ -7919,7 +7919,8 @@ var Select = function Select(props) {
     options = _useOptions.options,
     selectedOption = _useOptions.selectedOption;
     _useOptions.setOptions;
-    var setData = _useOptions.setData;
+    var setSelectedOption = _useOptions.setSelectedOption,
+    setData = _useOptions.setData;
   var _useState = React.useState(null),
     _useState2 = _slicedToArray(_useState, 2);
     _useState2[0];
@@ -8038,6 +8039,7 @@ var Select = function Select(props) {
       return (option === null || option === void 0 ? void 0 : option.value) != (item === null || item === void 0 ? void 0 : item.value);
     });
     setSOption(newSelectedOptions);
+    setSelectedOption(newSelectedOptions);
   };
   React.useEffect(function () {
     handleMenuOpen();

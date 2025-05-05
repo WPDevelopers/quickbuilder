@@ -66,7 +66,7 @@ const CustomOption = (props) => {
 const Select = (props) => {
     const builderContext = useBuilderContext();
     let { id, name, multiple, placeholder, search = false, onChange, parentIndex } = props;
-    const { options, selectedOption, setOptions, setData } = useOptions(props, 'options');
+    const { options, selectedOption, setOptions, setSelectedOption, setData } = useOptions(props, 'options');
     const [sOption, setSOption] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isAjaxComplete, setIsAjaxComplete] = useState(false);
@@ -176,6 +176,7 @@ const Select = (props) => {
 			(option) => option?.value != item?.value
 		);
 		setSOption(newSelectedOptions);
+		setSelectedOption(newSelectedOptions);
 	};
 
     useEffect(() => {

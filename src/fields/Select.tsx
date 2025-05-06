@@ -183,6 +183,34 @@ const Select = (props) => {
         handleMenuOpen();
     }, []);
 
+
+	useEffect(() => {
+		if (!isArray(sOption) && isObject(sOption)) {
+			onChange({
+				target: {
+					type: "select",
+					name,
+					// @ts-ignore
+					value: sOption.value,
+					options,
+					multiple,
+				},
+			});
+		}
+		if (isArray(sOption)) {
+			onChange({
+				target: {
+					type: "select",
+					name,
+					// @ts-ignore
+					value: sOption.map((item) => item.value),
+					options,
+					multiple,
+				},
+			});
+		}
+	}, [sOption]);
+
     // Conditional components prop
     const selectComponents = props.options_tooltip
         ? { Option: CustomOption }

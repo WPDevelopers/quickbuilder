@@ -7896,9 +7896,9 @@
       var setSelectedOption = _useOptions.setSelectedOption,
       setData = _useOptions.setData;
     var _useState = React.useState(null),
-      _useState2 = _slicedToArray(_useState, 2);
-      _useState2[0];
-      var setSOption = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      sOption = _useState2[0],
+      setSOption = _useState2[1];
     var _useState3 = React.useState(false),
       _useState4 = _slicedToArray(_useState3, 2),
       isLoading = _useState4[0],
@@ -8018,6 +8018,34 @@
     React.useEffect(function () {
       handleMenuOpen();
     }, []);
+    React.useEffect(function () {
+      if (!isArray(sOption) && isObject(sOption)) {
+        onChange({
+          target: {
+            type: "select",
+            name: name,
+            // @ts-ignore
+            value: sOption.value,
+            options: options,
+            multiple: multiple
+          }
+        });
+      }
+      if (isArray(sOption)) {
+        onChange({
+          target: {
+            type: "select",
+            name: name,
+            // @ts-ignore
+            value: sOption.map(function (item) {
+              return item.value;
+            }),
+            options: options,
+            multiple: multiple
+          }
+        });
+      }
+    }, [sOption]);
 
     // Conditional components prop
     var selectComponents = props.options_tooltip ? {

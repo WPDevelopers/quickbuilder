@@ -7,6 +7,7 @@ import { decodeEntities } from '@wordpress/html-entities';
 import Tippy from '@tippyjs/react'; // Install with `npm install @tippyjs/react`
 import 'tippy.js/dist/tippy.css'; // Tippy.js styles
 import { addQueryArgs } from '@wordpress/url';
+import { __ } from '@wordpress/i18n';
 
 // Custom Option Component with Tooltip
 const CustomOption = (props) => {
@@ -131,9 +132,15 @@ const Select = (props) => {
 							options.push(option);
 						});
 					}
-					console.log(12);
+
                     setIsLoading(false);
                     const arrayMerge = merge(props.options, (options?.length > 0 ? options : response), 'value');
+					if( arrayMerge?.find((data) => data?.value == 'all') == undefined && props?.include_all_in_options == true && response?.length > 0 ) {
+						arrayMerge?.unshift({
+						 	label:__('All', 'betterdocs'),
+						 	value:'all'
+						});
+					}
                     builderContext.setFormField([...parentIndex, 'options'], arrayMerge);
                     setData({
                         options: arrayMerge,

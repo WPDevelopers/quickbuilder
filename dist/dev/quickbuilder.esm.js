@@ -7974,9 +7974,16 @@ var Select = function Select(props) {
               options.push(option);
             });
           }
-          console.log(12);
           setIsLoading(false);
           var arrayMerge = merge(props.options, (options === null || options === void 0 ? void 0 : options.length) > 0 ? options : response, 'value');
+          if ((arrayMerge === null || arrayMerge === void 0 ? void 0 : arrayMerge.find(function (data) {
+            return (data === null || data === void 0 ? void 0 : data.value) == 'all';
+          })) == undefined && (props === null || props === void 0 ? void 0 : props.include_all_in_options) == true && (response === null || response === void 0 ? void 0 : response.length) > 0) {
+            arrayMerge === null || arrayMerge === void 0 || arrayMerge.unshift({
+              label: __('All', 'betterdocs'),
+              value: 'all'
+            });
+          }
           builderContext.setFormField([].concat(_toConsumableArray(parentIndex), ['options']), arrayMerge);
           setData({
             options: arrayMerge,

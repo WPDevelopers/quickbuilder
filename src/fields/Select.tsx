@@ -66,7 +66,7 @@ const CustomOption = (props) => {
 
 const Select = (props) => {
     const builderContext = useBuilderContext();
-    let { id, name, multiple, placeholder, search = false, onChange, parentIndex } = props;
+    let { id, name, multiple, placeholder, search = false, onChange, parentIndex, index } = props;
     const { options, selectedOption, setOptions, setSelectedOption, setData } = useOptions(props, 'options');
     const [sOption, setSOption] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -82,13 +82,17 @@ const Select = (props) => {
                     let eligibleKey  = props?.ajax.data[singleData].substr(1);
 					eligibleKey 	 = eligibleKey.includes('.') ? eligibleKey.split('.') : eligibleKey;
 					if( Array.isArray(eligibleKey) ) {
-						let repeaterDatas = builderContext.values[eligibleKey[0]];
-						repeaterDatas?.map((value) => {
-							data[singleData] = Array.isArray( value[eligibleKey[1]] ) ? value[eligibleKey[1]]?.join(',') : value[eligibleKey[1]];
-							if( value[eligibleKey[1]]?.length == 0 ) {
-								delete data[singleData];
-							}
-						});
+						let repeaterDatas = index != undefined ? builderContext.values[eligibleKey[0]][index] :  builderContext.values[eligibleKey[0]];
+						if( ! Array.isArray( repeaterDatas ) && typeof repeaterDatas == 'object' ) {
+							data[singleData] = Array.isArray( repeaterDatas[eligibleKey[1]] ) ? repeaterDatas[eligibleKey[1]]?.join(',') : repeaterDatas[eligibleKey[1]];
+						} else {
+							repeaterDatas?.map((value) => {
+								data[singleData] = Array.isArray( value[eligibleKey[1]] ) ? value[eligibleKey[1]]?.join(',') : value[eligibleKey[1]];
+								if( value[eligibleKey[1]]?.length == 0 ) {
+									delete data[singleData];
+								}
+							});
+						}
 					} else {
                     	data[singleData] = builderContext.values?.[eligibleKey];
 					}

@@ -7919,7 +7919,8 @@ var Select = function Select(props) {
     _props$search = props.search,
     search = _props$search === void 0 ? false : _props$search,
     onChange = props.onChange,
-    parentIndex = props.parentIndex;
+    parentIndex = props.parentIndex,
+    index = props.index;
   var _useOptions = useOptions(props, 'options'),
     options = _useOptions.options,
     selectedOption = _useOptions.selectedOption;
@@ -7948,14 +7949,19 @@ var Select = function Select(props) {
           var eligibleKey = props === null || props === void 0 ? void 0 : props.ajax.data[singleData].substr(1);
           eligibleKey = eligibleKey.includes('.') ? eligibleKey.split('.') : eligibleKey;
           if (Array.isArray(eligibleKey)) {
-            var repeaterDatas = builderContext.values[eligibleKey[0]];
-            repeaterDatas === null || repeaterDatas === void 0 || repeaterDatas.map(function (value) {
-              var _value$eligibleKey$, _value$eligibleKey$2;
-              data[singleData] = Array.isArray(value[eligibleKey[1]]) ? (_value$eligibleKey$ = value[eligibleKey[1]]) === null || _value$eligibleKey$ === void 0 ? void 0 : _value$eligibleKey$.join(',') : value[eligibleKey[1]];
-              if (((_value$eligibleKey$2 = value[eligibleKey[1]]) === null || _value$eligibleKey$2 === void 0 ? void 0 : _value$eligibleKey$2.length) == 0) {
-                delete data[singleData];
-              }
-            });
+            var repeaterDatas = index != undefined ? builderContext.values[eligibleKey[0]][index] : builderContext.values[eligibleKey[0]];
+            if (!Array.isArray(repeaterDatas) && _typeof$1(repeaterDatas) == 'object') {
+              var _repeaterDatas$eligib;
+              data[singleData] = Array.isArray(repeaterDatas[eligibleKey[1]]) ? (_repeaterDatas$eligib = repeaterDatas[eligibleKey[1]]) === null || _repeaterDatas$eligib === void 0 ? void 0 : _repeaterDatas$eligib.join(',') : repeaterDatas[eligibleKey[1]];
+            } else {
+              repeaterDatas === null || repeaterDatas === void 0 || repeaterDatas.map(function (value) {
+                var _value$eligibleKey$, _value$eligibleKey$2;
+                data[singleData] = Array.isArray(value[eligibleKey[1]]) ? (_value$eligibleKey$ = value[eligibleKey[1]]) === null || _value$eligibleKey$ === void 0 ? void 0 : _value$eligibleKey$.join(',') : value[eligibleKey[1]];
+                if (((_value$eligibleKey$2 = value[eligibleKey[1]]) === null || _value$eligibleKey$2 === void 0 ? void 0 : _value$eligibleKey$2.length) == 0) {
+                  delete data[singleData];
+                }
+              });
+            }
           } else {
             var _builderContext$value;
             data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];

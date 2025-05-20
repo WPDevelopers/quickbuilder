@@ -88,7 +88,12 @@
   function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
   function _objectSpread$g(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$g(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$g(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
   var wpFetch = function wpFetch(params) {
-    var args = _objectSpread$g({}, params);
+    var _params$method;
+    var args = _objectSpread$g(_objectSpread$g({}, params), (params === null || params === void 0 ? void 0 : params.method) == undefined || (params === null || params === void 0 ? void 0 : params.method) == null || (params === null || params === void 0 || (_params$method = params.method) === null || _params$method === void 0 ? void 0 : _params$method.length) == 0 ? {
+      'method': 'POST'
+    } : {
+      'method': params === null || params === void 0 ? void 0 : params.method
+    });
     return apiFetch__default["default"](args);
   };
   var isString = function isString(args) {

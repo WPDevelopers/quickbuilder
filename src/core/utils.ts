@@ -1,12 +1,12 @@
 import apiFetch from "@wordpress/api-fetch";
-import { clone, map, toPath } from "lodash-es";
+import { clone, map, method, toPath } from "lodash-es";
 import when, { isValidCondition } from "./when";
 // @ts-ignore
 import { __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
 
 export const wpFetch = (params) => {
-	let args = { ...params };
+	let args = { ...params, ...( ( params?.method == undefined || params?.method == null || params?.method?.length == 0 ) ? {'method': 'POST'} : {'method': params?.method } ) };
 	return apiFetch(args);
 };
 

@@ -68,7 +68,7 @@ const Select = (props) => {
     const builderContext = useBuilderContext();
     let { id, name, multiple, placeholder, search = false, onChange, parentIndex, index } = props;
     const { options, selectedOption, setOptions, setSelectedOption, setData } = useOptions(props, 'options');
-    const [sOption, setSOption] = useState(null);
+    const [sOption, setSOption] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isAjaxComplete, setIsAjaxComplete] = useState(false);
 
@@ -101,7 +101,7 @@ const Select = (props) => {
                 }
             });
             if (!isAjaxComplete) {
-				let payload = {
+				let payload: { path: any; data?: any; method: string } = {
                     path: props?.ajax.api,
                     data: data,
 					method: "POST"
@@ -112,14 +112,14 @@ const Select = (props) => {
 					payload.path = addQueryArgs( payload.path, data );
 				}
 
-                return wpFetch(payload).then((response) => {
-					let options = [];
+                return wpFetch(payload).then((response: any) => {
+					let options: any[] = [];
 					if( Object.keys(props?.ajax?.response_mapper)?.length >  0 ) {
 						response?.map((data) => {
 							let keyLabel = props?.ajax?.response_mapper?.label?.includes('.') ? props?.ajax?.response_mapper?.label?.split('.') : props?.ajax?.response_mapper?.label;
 							let keyValue = props?.ajax?.response_mapper?.value?.includes('.') ? props?.ajax?.response_mapper?.value?.split('.') : props?.ajax?.response_mapper?.value;
 
-							let option  = {};
+							let option: any = {};
 
 							if( Array.isArray( keyLabel ) ) {
 								option['label'] = decodeEntities( removeTagsFromString( getDeepData(data, keyLabel) ));

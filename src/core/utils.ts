@@ -324,7 +324,7 @@ export const getTime = (value?, keepLocalTime: boolean = false) => {
 	return _value;
 }
 
-export const merge = (array_one: Array<object>, array_two: Array<object>, key: string) => {
+export const merge = (array_one: Array<object>, array_two: Array<object>, key: string): any[] => {
 	// if( ! isArray(array_one) && ! isArray( array_two ) && isObject( array_one ) && isObject( array_two ) ) {
 	//     return { ...array_one, ...array_two }
 	// }

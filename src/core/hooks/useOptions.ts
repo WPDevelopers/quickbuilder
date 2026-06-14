@@ -10,10 +10,10 @@ const useOptions = ( props: any, propertyName: string = 'fields' ) => {
     const { value: savedValue, multiple }  = props;
     const builderContext = useBuilderContext();
     const [fieldOptions, setFieldOptions] = useState(props[propertyName]);
-    const [lOptions, setOptions] = useState([])
-    const [isData, setData] = useState({ options: null, parentIndex: null })
-    const [selectedOption, setSelectedOption] = useState(null)
-    const [option, setOption] = useState(null)
+    const [lOptions, setOptions] = useState<any[]>([])
+    const [isData, setData] = useState<{ options: any; parentIndex: any }>({ options: null, parentIndex: null })
+    const [selectedOption, setSelectedOption] = useState<any>(null)
+    const [option, setOption] = useState<any>(null)
 
     useEffect(() => {
         let newFieldsOptions = props.ajax ? builderContext.getTabFields( props?.parentIndex )?.[propertyName] || fieldOptions : fieldOptions;

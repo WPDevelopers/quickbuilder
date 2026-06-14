@@ -23,7 +23,9 @@
         "prepkg": "rimraf dist/src",
         "pkg": "npm run prepkg && rollup -c --bundleConfigAsCjs --environment NODE_ENV:production",
         "build": "npm run dev && npm run pkg",
-        "lint": "eslint index.tsx src --ext .ts,.tsx,.js,.jsx"
+        "lint": "eslint index.tsx src --ext .ts,.tsx,.js,.jsx",
+        "typecheck": "tsc --noEmit",
+        "typecheck:strict": "tsc -p tsconfig.strict.json --noEmit"
     },
     "devDependencies": {
         "@babel/plugin-transform-class-properties": "^7.25.9",

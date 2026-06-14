@@ -137,6 +137,39 @@ export interface FieldInputProps<Value> {
     onBlur: BuilderHandlers['handleBlur'];
 }
 
-// export type FormBuilderContextType<Values> = FormBuilderState<Values> & BuilderHandlers & BuilderHelper<Values>;
-export type FormBuilderContextType<Values> = any;
+/**
+ * The builder context value consumed via `useBuilderContext`.
+ *
+ * Kept as `any` until refactor Phase 4: typing it requires its consumers (the
+ * field components and hooks) to be typed first — otherwise their currently
+ * untyped usage regresses the typecheck baseline. The intended target is
+ * `FormBuilderState<Values> & BuilderHandlers & BuilderHelper<Values>`.
+ */
+export type FormBuilderContextType<Values = FormBuilderValues> = any;
+
+/**
+ * Discriminated union of all actions handled by `builderReducer`. Wired into the
+ * reducer in Phase 4; declared here as the shared contract.
+ */
+export type BuilderAction =
+    | { type: 'SET_CONTEXT'; payload: { field: string | Array<string | number>; value: any } }
+    | { type: 'SET_ACTIVE_TAB'; payload: any }
+    | { type: 'SET_REDIRECT'; payload: any }
+    | { type: 'SET_VALUES'; payload: any }
+    | { type: 'SET_SAVED_VALUES'; payload: any }
+    | { type: 'SET_FIELD_VALUE'; payload: { field: string | Array<string | number>; value: any } }
+    | { type: 'SET_TOUCHED'; payload: any }
+    | { type: 'SET_ERRORS'; payload: any }
+    | { type: 'SET_STATUS'; payload: any }
+    | { type: 'SET_ISSUBMITTING'; payload: boolean }
+    | { type: 'SET_ISVALIDATING'; payload: boolean }
+    | { type: 'SET_FIELD_TOUCHED'; payload: { field: string; value: boolean } }
+    | { type: 'RESET_FORM'; payload: any }
+    | { type: 'SUBMIT_ATTEMPT'; payload?: any }
+    | { type: 'SUBMIT_FAILURE'; payload?: any }
+    | { type: 'SUBMIT_SUCCESS'; payload?: any }
+    | { type: 'SET_FORM_FIELD'; payload: { field: string | Array<string | number> | null; value: any } }
+    | { type: 'SET_ICONS'; payload: { name: string; icons: any } }
+    | { type: 'SET_ALERTS'; payload: { name: string; value: any } }
+    | { type: 'SET_COMMONS'; payload: { name: string; value: any } };
 

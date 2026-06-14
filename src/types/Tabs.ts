@@ -1,3 +1,7 @@
+/**
+ * @deprecated Loose legacy field shape. Prefer the typed `FieldConfig` union
+ * from `src/types/field-config.ts` (added in refactor Phase 2) for new code.
+ */
 export interface Field {
     label        ?: string,
     name         ?: string,
@@ -7,6 +11,7 @@ export interface Field {
     [key: string] : any,
 }
 
+/** @deprecated Prefer `FieldConfig[]` from `src/types/field-config.ts`. */
 export type Fields = Array<Field>;
 
 interface Step {

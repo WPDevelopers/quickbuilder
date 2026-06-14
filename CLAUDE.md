@@ -25,8 +25,6 @@ Consumers install this package from the GitHub repo, not npm. `dist/` is therefo
 
 Rollup marks React, ReactDOM, lodash, and all `@wordpress/*` packages as externals — consumers provide them (as `wp.*` / window globals in WordPress). Never bundle these. If you add a dependency that consumers should provide, add it to the externals/globals in `rollup.config.js` AND to `peerDependencies`. React is pinned to 17.x.
 
-`webpack.config.js` is legacy; Rollup (`rollup.config.js`) is the real build.
-
 ## Conventions
 
 - Commit subjects use Title Case prefixes: `Fix:`, `Added:`, `Improved:` (see git log)

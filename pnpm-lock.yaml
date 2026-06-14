@@ -32,6 +32,9 @@ importers:
       '@wordpress/element':
         specifier: 6.19.1
         version: 6.19.1
+      '@wordpress/hooks':
+        specifier: 4.19.1
+        version: 4.19.1
       '@wordpress/html-entities':
         specifier: 4.19.1
         version: 4.19.1
@@ -2147,6 +2150,10 @@ packages:
   '@wordpress/hooks@3.58.0':
     resolution: {integrity: sha512-9LB0ZHnZRQlORttux9t/xbAskF+dk2ujqzPGsVzc92mSKpQP3K2a5Wy74fUnInguB1vLUNHT6nrNdkVom5qX1Q==}
     engines: {node: '>=12'}
+
+  '@wordpress/hooks@4.19.1':
+    resolution: {integrity: sha512-aZOf50V6+j1s+0pq/WZ37PZxu8Dn76ww2WJRYCXtk0sAO6EG2KoX2Gc9bKv0PKwOMss5aiza8pZgIYJFuxZMOw==}
+    engines: {node: '>=18.12.0', npm: '>=8.19.2'}
 
   '@wordpress/hooks@4.48.0':
     resolution: {integrity: sha512-rU1yGEy0Mb+2oRG5QX/bKIIwKQmYAvATfUQeXIF20/mbR0qutYeVTCIvWEyb4pf71tvnQFiN18RWRXWsvKrDbQ==}
@@ -8060,6 +8067,10 @@ snapshots:
   '@wordpress/hooks@3.58.0':
     dependencies:
       '@babel/runtime': 7.29.7
+
+  '@wordpress/hooks@4.19.1':
+    dependencies:
+      '@babel/runtime': 7.25.7
 
   '@wordpress/hooks@4.48.0': {}
 

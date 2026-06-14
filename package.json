@@ -73,6 +73,7 @@
         "@wordpress/data": "10.19.2",
         "@wordpress/date": "5.19.1",
         "@wordpress/element": "6.19.1",
+        "@wordpress/hooks": "4.19.1",
         "@wordpress/html-entities": "4.19.1",
         "@wordpress/i18n": "5.19.1",
         "@wordpress/icons": "10.19.1",

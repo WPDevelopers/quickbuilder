@@ -93,7 +93,7 @@ const useBuilder = (props) => {
 		// return willValidate ? validateFormWithHighPriority(state.values) : Promise.resolve();
 	});
 
-	const executeBlur = useCallback((event, path = false) => {
+	const executeBlur = useCallback((event: any, path: string | boolean = false) => {
 		if (event.persist) {
 			event.persist();
 		}

@@ -64,7 +64,7 @@ const ColorPicker = (props) => {
 					<div className="wprf-colorpicker">
 						<WPColorPicker
 							color={value || defaultColor}
-							onChangeComplete={(event) => setColor(event.hex)}
+							onChangeComplete={(event) => setColor((event as any).hex)}
 						/>
 						<div className="wprf-colorpicker-reset-wrap">
 							<button

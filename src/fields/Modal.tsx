@@ -20,6 +20,7 @@ const Modal = (props) => {
         <div className="wprf-control wprf-modal" id={`wprf-modal-${props.name}`}>
             <GenericField type="button" {...props?.button} onClick={openModal} />
             {isOpen &&
+                // @ts-ignore - react-bootstrap-sweetalert's types omit valid runtime props (customClass, style, closeBtnStyle, children, ...)
                 <SweetAlert
                     customClass="wprf-modal-inner"
                     style={{

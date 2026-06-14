@@ -3323,7 +3323,10 @@
         type: "button"
       }, props === null || props === void 0 ? void 0 : props.button), {}, {
         onClick: openModal
-      })), isOpen && /*#__PURE__*/jsxRuntime.jsx(SweetAlert$1, {
+      })), isOpen &&
+      /*#__PURE__*/
+      // @ts-ignore - react-bootstrap-sweetalert's types omit valid runtime props (customClass, style, closeBtnStyle, children, ...)
+      jsxRuntime.jsx(SweetAlert$1, {
         customClass: "wprf-modal-inner",
         style: {
           maxWidth: '900px',

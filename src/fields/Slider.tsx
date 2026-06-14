@@ -11,7 +11,7 @@ const Slider = (props) => {
 
     useEffect(() => {
         if (isValue) {
-            let finalValue: number | string;
+            let finalValue!: number | string;
 
             if (isNumber(isValue)) {
                 if (sunit) {

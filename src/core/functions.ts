@@ -62,7 +62,7 @@ export const triggerDefaults = (defaults, checkType, value = null) => {
 						checkType
 					);
 					if (eligibleKey != "" && eligibleDataToSet != "") {
-						setStoreData().setFieldValue({
+						(setStoreData() as any).setFieldValue({
 							name: eligibleKey,
 							value: {
 								[eligibleKey]: eligibleDefaultData
@@ -105,7 +105,7 @@ export const processAjaxData = (data) => {
 	return newData;
 };
 
-export function _extends(...rest) {
+export function _extends(this: any, ...rest: any[]) {
 	const _extends = Object.assign || function (target) {
 		for (let i = 1; i < rest.length; i++) {
 			let source = rest[i];
@@ -118,7 +118,7 @@ export function _extends(...rest) {
 		return target;
 	};
 
-	return _extends.apply(this, rest);
+	return (_extends as any).apply(this, rest);
 }
 
 // export const timezoneString = ($offset) => {

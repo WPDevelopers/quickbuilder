@@ -14,11 +14,11 @@ const RepeaterField = (props) => {
     const title = values?.title || values?.post_title || values?.username || values?.plugin_theme_name;
     const _title = title ? ((title.length < 40 ? title : title.substr(0, 40) + "...")) : '';
 
-    const onClone = (event:Event) => {
+    const onClone = (event: any) => {
         event?.stopPropagation();
         props.clone(props.index);
     }
-    const onDelete = (event:Event) => {
+    const onDelete = (event: any) => {
         event?.stopPropagation();
         props.remove(props.index);
     }

@@ -1,5 +1,4 @@
-import builtins from "rollup-plugin-node-builtins";
-import { uglify } from "rollup-plugin-uglify";
+import terser from "@rollup/plugin-terser";
 import ignoreImport from "rollup-plugin-ignore-import";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import babel from "@rollup/plugin-babel";
@@ -66,7 +65,6 @@ export default {
 	external: Object.keys(globalKeys),
 	plugins: [
 		peerDepsExternal(),
-		builtins(),
 		nodeResolve({
 			mainFields: ["browser", "module", "main"],
 			extensions,
@@ -75,7 +73,12 @@ export default {
 			exclude: ["node_modules/draft-js/**", "dist/**"],
 		}),
 		scss({
-			output: `${styleFolder}index.css`,
+			// rollup-plugin-scss@4 emits a hashed asset for a string `output`
+			// (its `typeof` check is broken), so write the compiled CSS to the
+			// fixed `dist/index.css` path directly — matches the v3 behavior.
+			output(styles) {
+				require("fs").writeFileSync(`${styleFolder}index.css`, styles);
+			},
 			sourceMap: !isProduction,
 			include: ["**/*.scss", "*.css", "node_modules/**/*.css"],
 			failOnError: true,
@@ -98,6 +101,6 @@ export default {
 				"@babel/plugin-transform-class-properties",
 			],
 		}),
-		isProduction ? uglify() : null,
+		isProduction ? terser() : null,
 	],
 };

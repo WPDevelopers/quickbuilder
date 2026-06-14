@@ -353,7 +353,6 @@ button.wprf-btn {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 0;
-  box-sizing: border-box;
 }
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label.wprf-label-has-image {
   padding: 0;
@@ -365,6 +364,9 @@ button.wprf-btn {
 .wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label.wprf-label-has-image.wprf-size-medium > img {
   width: 50px;
   height: 50px;
+}
+.wprf-input-radio-set-wrap.wprf-radio-card .wprf-input-radio-option .wprf-input-label {
+  box-sizing: border-box;
 }
 
 .wprf-control-section .wprf-section-title {
@@ -482,9 +484,6 @@ button.wprf-btn {
 .wprf-control-datetime .components-button.is-tertiary:focus {
   outline: none;
   border: none;
-}
-.wprf-control-datetime .components-datetime {
-  /*rtl:end:ignore*/
 }
 .wprf-control-datetime .components-datetime .PresetDateRangePicker_panel {
   padding: 0 22px 11px;
@@ -1311,6 +1310,9 @@ button.wprf-btn {
   width: 15px;
   fill: #cacccd;
 }
+.wprf-control-datetime .components-datetime {
+  /*rtl:end:ignore*/
+}
 .wprf-control-datetime .components-datetime .components-datetime {
   padding: 0;
 }
@@ -1634,12 +1636,6 @@ button.wprf-btn {
   flex: 1;
 }
 
-.wprf-colorpicker-wrap {
-  /* CURRENT COLOR COMPONENT */
-  /* SATURATION COMPONENT */
-  /* HUE & ALPHA BARS */
-  /* INPUTS COMPONENT */
-}
 .wprf-colorpicker-wrap .components-color-picker {
   width: 100%;
 }
@@ -1666,6 +1662,9 @@ button.wprf-btn {
   box-shadow: none;
   border: none;
 }
+.wprf-colorpicker-wrap {
+  /* CURRENT COLOR COMPONENT */
+}
 .wprf-colorpicker-wrap .components-color-picker__swatch {
   margin-right: 8px;
   width: 32px;
@@ -1691,6 +1690,9 @@ button.wprf-btn {
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   z-index: 2;
+}
+.wprf-colorpicker-wrap {
+  /* SATURATION COMPONENT */
 }
 .wprf-colorpicker-wrap .components-color-picker__saturation-color,
 .wprf-colorpicker-wrap .components-color-picker__saturation-white,
@@ -1722,6 +1724,9 @@ button.wprf-btn {
 }
 .wprf-colorpicker-wrap .components-button.components-color-picker__saturation-pointer:focus:not(:disabled) {
   box-shadow: 0 0 0 2px #FFF, inset 0 0 0 1px #000, 0 0 0 3px #000;
+}
+.wprf-colorpicker-wrap {
+  /* HUE & ALPHA BARS */
 }
 .wprf-colorpicker-wrap .components-color-picker__toggles {
   flex: 1;
@@ -1788,6 +1793,9 @@ button.wprf-btn {
   box-shadow: 0 0 0 2px var(--wp-admin-theme-color), 0 0 3px 0 var(--wp-admin-theme-color);
   outline: 2px solid transparent;
   outline-offset: -2px;
+}
+.wprf-colorpicker-wrap {
+  /* INPUTS COMPONENT */
 }
 .wprf-colorpicker-wrap .components-color-picker__inputs-wrapper {
   margin: 0 -4px;

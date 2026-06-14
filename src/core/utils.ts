@@ -130,7 +130,7 @@ export const getIn = (obj, key, def?, p?) => {
 	return obj === undefined ? def : obj;
 }
 
-export const sortingFields = (fields) => [].concat(fields).sort(function (a, b) {
+export const sortingFields = (fields: any): any[] => [].concat(fields).sort(function (a: any, b: any) {
 	if (a.priority == undefined || b.priority == undefined) return 0;
 	return a.priority > b.priority ? 1 : -1;
 });
@@ -255,7 +255,7 @@ export const validFieldProps = (defaultParams: any, exclude: string[] = []) => {
 	return validProps;
 }
 
-export const hitAAJX = (ajax, context = null) => {
+export const hitAAJX = (ajax: any, context: any = null) => {
 	if (context !== null && ajax) {
 		let isEligible = true;
 		if (ajax?.rules) {

@@ -14,8 +14,8 @@ const Section = (props) => {
 	} = props;
 	const builderContext = useBuilderContext();
 	const [isCollapse, setCollapse] = useState(props.collapsed ?? false);
-	const [fields, setFields] = useState([]);
-	const [filteredFields, setFilteredFields] = useState([]);
+	const [fields, setFields] = useState<React.ReactElement[]>([]);
+	const [filteredFields, setFilteredFields] = useState<React.ReactElement[]>([]);
 	const [searchString, setSearchString] = useState("");
 
 	useEffect(() => {

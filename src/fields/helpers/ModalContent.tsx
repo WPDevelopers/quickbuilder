@@ -6,7 +6,7 @@ import { Loading } from '.';
 const ModalContent = (props) => {
     const { isLoading, closeModal } = props;
 
-    const [fields, setFields] = useState([]);
+    const [fields, setFields] = useState<React.ReactElement[]>([]);
 
     useEffect(() => {
         const newFields = sortingFields(props.body.fields);

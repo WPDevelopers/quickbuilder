@@ -18,6 +18,8 @@ const styleFolder = "dist/";
 const globalKeys = {
 	react: "React",
 	"react-dom": "ReactDOM",
+	"react/jsx-runtime": "ReactJSXRuntime",
+	"react/jsx-dev-runtime": "ReactJSXRuntime",
 	lodash: "lodash",
 	"lodash-es": "lodashEs",
 	moment: "momentLib",

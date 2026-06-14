@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useRef, useReducer, useCallback, useLayoutEffect, createElement, Fragment, useMemo, forwardRef as forwardRef$1, cloneElement } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useReducer, useCallback, useLayoutEffect, useMemo, createElement, forwardRef as forwardRef$1, cloneElement } from 'react';
 import { select, dispatch, registerStore } from '@wordpress/data';
 import { sprintf, __ } from '@wordpress/i18n';
 import intersect from 'intersect';
@@ -9,6 +9,7 @@ import moment from 'moment';
 import { applyFilters, doAction } from '@wordpress/hooks';
 import classNames from 'classnames';
 import Swal from 'sweetalert2';
+import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import ReactSelect from 'react-select';
 import { Button as Button$2, ColorPicker as ColorPicker$2, Dropdown, DateTimePicker, Icon, RangeControl } from '@wordpress/components';
 import copy from 'copy-to-clipboard';
@@ -17,7 +18,6 @@ import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { useInstanceId } from '@wordpress/compose';
 import { MediaUpload } from '@wordpress/media-utils';
 import SweetAlert$1 from 'react-bootstrap-sweetalert';
 import { ReactSortable } from 'react-sortablejs';
@@ -91,11 +91,11 @@ function _toConsumableArray(r) {
   return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray$3(r) || _nonIterableSpread();
 }
 
-function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$g(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$g(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$g(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$u(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$u(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$u(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$u(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var wpFetch = function wpFetch(params) {
   var _params$method;
-  var args = _objectSpread$g(_objectSpread$g({}, params), (params === null || params === void 0 ? void 0 : params.method) == undefined || (params === null || params === void 0 ? void 0 : params.method) == null || (params === null || params === void 0 || (_params$method = params.method) === null || _params$method === void 0 ? void 0 : _params$method.length) == 0 ? {
+  var args = _objectSpread$u(_objectSpread$u({}, params), (params === null || params === void 0 ? void 0 : params.method) == undefined || (params === null || params === void 0 ? void 0 : params.method) == null || (params === null || params === void 0 || (_params$method = params.method) === null || _params$method === void 0 ? void 0 : _params$method.length) == 0 ? {
     'method': 'POST'
   } : {
     'method': params === null || params === void 0 ? void 0 : params.method
@@ -136,7 +136,7 @@ var isVisible = function isVisible(values, props) {
   if (Object.hasOwnProperty.call(props, 'index')) {
     var _props2;
     var newRules = _replaceIndex((_props2 = props) === null || _props2 === void 0 ? void 0 : _props2.rules, props);
-    props = _objectSpread$g(_objectSpread$g({}, props), {}, {
+    props = _objectSpread$u(_objectSpread$u({}, props), {}, {
       rules: newRules
     });
   }
@@ -562,8 +562,8 @@ var when = function when(conditions, data) {
   return validate(conditions, data);
 };
 
-function ownKeys$f(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$f(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$f(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$f(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$t(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$t(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$t(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$t(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var DEFAULT_STATE = {
   savedValues: {
     type: "conversions",
@@ -629,8 +629,8 @@ var store = {
     switch (action.type) {
       case "SET_SAVED_VALUES":
         {
-          var _updatedState = _objectSpread$f({}, state);
-          _updatedState = _objectSpread$f(_objectSpread$f({}, _updatedState), {}, {
+          var _updatedState = _objectSpread$t({}, state);
+          _updatedState = _objectSpread$t(_objectSpread$t({}, _updatedState), {}, {
             values: action.payload,
             savedValues: action.payload
           });
@@ -639,17 +639,17 @@ var store = {
       case "FIELD_VALUE":
         {
           var _updatedState3;
-          var _updatedState2 = _objectSpread$f({}, state);
+          var _updatedState2 = _objectSpread$t({}, state);
           var payload = action.payload;
-          _updatedState2 = _objectSpread$f(_objectSpread$f({}, _updatedState2), {}, {
-            values: _objectSpread$f(_objectSpread$f({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
+          _updatedState2 = _objectSpread$t(_objectSpread$t({}, _updatedState2), {}, {
+            values: _objectSpread$t(_objectSpread$t({}, (_updatedState3 = _updatedState2) === null || _updatedState3 === void 0 ? void 0 : _updatedState3.values), payload)
           });
           return _updatedState2;
         }
       case "REMOVE_FIELD_VALUE":
         {
           var _updatedState4$values;
-          var _updatedState4 = _objectSpread$f({}, state);
+          var _updatedState4 = _objectSpread$t({}, state);
           var _payload = action.payload;
           if ((_updatedState4$values = _updatedState4.values) !== null && _updatedState4$values !== void 0 && _updatedState4$values[_payload]) {
             delete _updatedState4.values[_payload];
@@ -659,7 +659,7 @@ var store = {
       case "RESET_FIELD_VALUE":
         {
           var _updatedState5$values;
-          var _updatedState5 = _objectSpread$f({}, state);
+          var _updatedState5 = _objectSpread$t({}, state);
           if ((_updatedState5$values = _updatedState5.values) !== null && _updatedState5$values !== void 0 && _updatedState5$values[action.payload]) {
             var _updatedState5$savedV;
             delete _updatedState5.values[action.payload];
@@ -670,16 +670,16 @@ var store = {
           return _updatedState5;
         }
       case "FIELD_ERROR":
-        return _objectSpread$f(_objectSpread$f({}, state), {}, {
-          errors: _objectSpread$f(_objectSpread$f({}, state.errors), action.payload)
+        return _objectSpread$t(_objectSpread$t({}, state), {}, {
+          errors: _objectSpread$t(_objectSpread$t({}, state.errors), action.payload)
         });
       case "REMOVE_FIELD_ERROR":
-        var updatedState = _objectSpread$f({}, state);
+        var updatedState = _objectSpread$t({}, state);
         delete updatedState.errors[action.payload];
         return updatedState;
       case "FIELD_TOUCHED":
-        return _objectSpread$f(_objectSpread$f({}, state), {}, {
-          touched: _objectSpread$f(_objectSpread$f({}, state.touched), action.payload)
+        return _objectSpread$t(_objectSpread$t({}, state), {}, {
+          touched: _objectSpread$t(_objectSpread$t({}, state.touched), action.payload)
         });
     }
     return state;
@@ -718,16 +718,6 @@ var store = {
     }
   }
 };
-
-function _extends$1() {
-  return _extends$1 = Object.assign ? Object.assign.bind() : function (n) {
-    for (var e = 1; e < arguments.length; e++) {
-      var t = arguments[e];
-      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
-    }
-    return n;
-  }, _extends$1.apply(null, arguments);
-}
 
 function _arrayWithHoles(r) {
   if (Array.isArray(r)) return r;
@@ -965,14 +955,14 @@ var useDefaults = function useDefaults(parentName, helpers, value, trigger) {
   }
 };
 
-function ownKeys$e(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$e(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$e(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$e(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$s(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$s(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$s(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$s(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 // import store from "../store";
 
 var SweetAlert = function SweetAlert() {
   var _args$target, _args$type, _args$title, _args$text, _args$icon, _args$timer;
   var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Swal.fire(_objectSpread$e({
+  return Swal.fire(_objectSpread$s({
     target: (_args$target = args === null || args === void 0 ? void 0 : args.target) !== null && _args$target !== void 0 ? _args$target : "#betterdocs",
     type: (_args$type = args === null || args === void 0 ? void 0 : args.type) !== null && _args$type !== void 0 ? _args$type : "success",
     html: args === null || args === void 0 ? void 0 : args.html,
@@ -1063,7 +1053,7 @@ var processAjaxData = function processAjaxData(data) {
   });
   return newData;
 };
-function _extends() {
+function _extends$1() {
   for (var _len = arguments.length, rest = new Array(_len), _key = 0; _key < _len; _key++) {
     rest[_key] = arguments[_key];
   }
@@ -1095,32 +1085,32 @@ function _extends() {
 //     return (number < 10 ? '0' : '') + number
 // }
 
-function ownKeys$d(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$d(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$d(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$d(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$r(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$r(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$r(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$r(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var builderReducer = function builderReducer(state, action) {
   switch (action.type) {
     case 'SET_CONTEXT':
-      return _extends({}, state, setIn(state, action.payload.field, action.payload.value));
+      return _extends$1({}, state, setIn(state, action.payload.field, action.payload.value));
     case 'SET_ACTIVE_TAB':
-      return _objectSpread$d(_objectSpread$d({}, state), {}, {
-        config: _objectSpread$d(_objectSpread$d({}, state.config), {}, {
+      return _objectSpread$r(_objectSpread$r({}, state), {}, {
+        config: _objectSpread$r(_objectSpread$r({}, state.config), {}, {
           active: action.payload
         })
       });
     case 'SET_REDIRECT':
-      return _objectSpread$d(_objectSpread$d({}, state), {}, {
-        redirect: _objectSpread$d(_objectSpread$d({}, state.redirect), action.payload)
+      return _objectSpread$r(_objectSpread$r({}, state), {}, {
+        redirect: _objectSpread$r(_objectSpread$r({}, state.redirect), action.payload)
       });
     case 'SET_VALUES':
-      return _extends({}, state, setIn(state, 'values', action.payload));
+      return _extends$1({}, state, setIn(state, 'values', action.payload));
     case 'SET_SAVED_VALUES':
-      return _extends({}, state, setIn(state, 'savedValues', action.payload));
+      return _extends$1({}, state, setIn(state, 'savedValues', action.payload));
     case 'SET_FIELD_VALUE':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         values: setIn(state.values, action.payload.field, action.payload.value)
       });
     case 'SET_TOUCHED':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         touched: action.payload
       });
     case 'SET_ERRORS':
@@ -1128,24 +1118,24 @@ var builderReducer = function builderReducer(state, action) {
       //     return state;
       // }
 
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         errors: action.payload
       });
     case 'SET_STATUS':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         status: action.payload
       });
     case 'SET_ISSUBMITTING':
-      return _objectSpread$d(_objectSpread$d({}, state), {}, {
+      return _objectSpread$r(_objectSpread$r({}, state), {}, {
         isSubmitting: action.payload
       });
     case 'SET_ISVALIDATING':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         isValidating: action.payload
       });
     case 'SET_FIELD_TOUCHED':
-      return _objectSpread$d(_objectSpread$d({}, state), {}, {
-        touched: _objectSpread$d(_objectSpread$d({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
+      return _objectSpread$r(_objectSpread$r({}, state), {}, {
+        touched: _objectSpread$r(_objectSpread$r({}, state.touched), {}, _defineProperty({}, action.payload.field, action.payload.value))
       });
 
     // return _extends({}, state, {
@@ -1158,39 +1148,39 @@ var builderReducer = function builderReducer(state, action) {
     // });
 
     case 'RESET_FORM':
-      return _extends({}, state, action.payload);
+      return _extends$1({}, state, action.payload);
     case 'SUBMIT_ATTEMPT':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         // touched: setNestedObjectValues(state.values, true),
         isSubmitting: true,
         submitCount: state.submitCount + 1
       });
     case 'SUBMIT_FAILURE':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         isSubmitting: false
       });
     case 'SUBMIT_SUCCESS':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         isSubmitting: false
       });
     // Tabs Fields SET
     case 'SET_FORM_FIELD':
       if (action.payload.field === null) {
-        return _extends({}, state, setIn(state, 'tabs', action.payload.value));
+        return _extends$1({}, state, setIn(state, 'tabs', action.payload.value));
       }
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         tabs: setIn(state.tabs, action.payload.field, action.payload.value)
       });
     case 'SET_ICONS':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         icons: setIn(state.icons, action.payload.name, action.payload.icons)
       });
     case 'SET_ALERTS':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         alerts: setIn(state.alerts, action.payload.name, action.payload.value)
       });
     case 'SET_COMMONS':
-      return _extends({}, state, {
+      return _extends$1({}, state, {
         common: setIn(state.common, action.payload.name, action.payload.value)
       });
     default:
@@ -1198,8 +1188,8 @@ var builderReducer = function builderReducer(state, action) {
   }
 };
 
-function ownKeys$c(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$c(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$c(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$c(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$q(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$q(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$q(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$q(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var useBuilder = function useBuilder(props) {
   var _state$isSubmitting;
   // Set is Mounted or NOT
@@ -1210,7 +1200,7 @@ var useBuilder = function useBuilder(props) {
       isMounted.current = false;
     };
   }, []);
-  var _useReducer = useReducer(builderReducer, _objectSpread$c(_objectSpread$c({}, props), {}, {
+  var _useReducer = useReducer(builderReducer, _objectSpread$q(_objectSpread$q({}, props), {}, {
       savedValues: props.savedValues || {},
       values: props.values || {},
       errors: props.initialErrors || {},
@@ -1338,7 +1328,7 @@ var useBuilder = function useBuilder(props) {
     }
   });
   var getFieldProps = useCallback(function (args) {
-    var defaultProps = _objectSpread$c({}, args);
+    var defaultProps = _objectSpread$q({}, args);
     var validProps = validFieldProps(defaultProps);
     var name = validProps.name;
     var type = validProps.type;
@@ -1409,7 +1399,7 @@ var useBuilder = function useBuilder(props) {
       var _props$meta;
       value = getIn(state.values, name) || ((_props$meta = props.meta) === null || _props$meta === void 0 ? void 0 : _props$meta["default"]);
     }
-    return _objectSpread$c(_objectSpread$c({}, props.meta), {}, {
+    return _objectSpread$q(_objectSpread$q({}, props.meta), {}, {
       value: value,
       error: getIn(state.errors, name),
       touched: !!getIn(state.touched, name),
@@ -1520,7 +1510,7 @@ var useBuilder = function useBuilder(props) {
       }
     });
   });
-  var context = _objectSpread$c(_objectSpread$c(_objectSpread$c({}, props), state), {}, {
+  var context = _objectSpread$q(_objectSpread$q(_objectSpread$q({}, props), state), {}, {
     setContext: setContext,
     values: state.values,
     savedValues: state.savedValues,
@@ -1568,61 +1558,73 @@ var useEventCallback = function useEventCallback(fn) {
 
 var Row = function Row(props) {
   var componentClasses = classNames("wprf-row clearfix wprf-flex", props === null || props === void 0 ? void 0 : props.className);
-  return createElement("div", {
-    className: componentClasses
-  }, props === null || props === void 0 ? void 0 : props.children);
+  return /*#__PURE__*/jsx("div", {
+    className: componentClasses,
+    children: props === null || props === void 0 ? void 0 : props.children
+  });
 };
 
 var Column = function Column(props) {
   var componentClasses = classNames("wprf-column", props === null || props === void 0 ? void 0 : props.className, _defineProperty(_defineProperty({}, "wprf-column-".concat(12 / (props === null || props === void 0 ? void 0 : props.column)), (props === null || props === void 0 ? void 0 : props.column) && props.column !== 12), "wprf-column-12", props.column === 12));
-  return createElement("div", {
-    className: componentClasses
-  }, props === null || props === void 0 ? void 0 : props.children);
+  return /*#__PURE__*/jsx("div", {
+    className: componentClasses,
+    children: props === null || props === void 0 ? void 0 : props.children
+  });
 };
 
 var Label = function Label(props) {
   var _props$badge, _props$badge2, _props$badge3;
   var componentClasses = classNames("wprf-input-label", props === null || props === void 0 ? void 0 : props.className);
-  return createElement("label", {
+  return /*#__PURE__*/jsxs("label", {
     htmlFor: props === null || props === void 0 ? void 0 : props.htmlFor,
-    className: componentClasses
-  }, (props === null || props === void 0 || (_props$badge = props.badge) === null || _props$badge === void 0 ? void 0 : _props$badge.value) && createElement("div", {
-    className: "wprf-badge"
-  }, createElement("sup", {
-    className: classNames("wprf-badge-item", {
-      'wprf-badge-active': props === null || props === void 0 || (_props$badge2 = props.badge) === null || _props$badge2 === void 0 ? void 0 : _props$badge2.active
-    })
-  }, props === null || props === void 0 || (_props$badge3 = props.badge) === null || _props$badge3 === void 0 ? void 0 : _props$badge3.label)), !(props !== null && props !== void 0 && props.src) && (props === null || props === void 0 ? void 0 : props.children), (props === null || props === void 0 ? void 0 : props.src) && createElement(Image, {
-    className: "wprf-label-image",
-    src: props.src,
-    alt: props === null || props === void 0 ? void 0 : props.label
-  }));
+    className: componentClasses,
+    children: [(props === null || props === void 0 || (_props$badge = props.badge) === null || _props$badge === void 0 ? void 0 : _props$badge.value) && /*#__PURE__*/jsx("div", {
+      className: "wprf-badge",
+      children: /*#__PURE__*/jsx("sup", {
+        className: classNames("wprf-badge-item", {
+          'wprf-badge-active': props === null || props === void 0 || (_props$badge2 = props.badge) === null || _props$badge2 === void 0 ? void 0 : _props$badge2.active
+        }),
+        children: props === null || props === void 0 || (_props$badge3 = props.badge) === null || _props$badge3 === void 0 ? void 0 : _props$badge3.label
+      })
+    }), !(props !== null && props !== void 0 && props.src) && (props === null || props === void 0 ? void 0 : props.children), (props === null || props === void 0 ? void 0 : props.src) && /*#__PURE__*/jsx(Image, {
+      className: "wprf-label-image",
+      src: props.src,
+      alt: props === null || props === void 0 ? void 0 : props.label
+    })]
+  });
 };
 
 var Image = function Image(props) {
   if (!(props !== null && props !== void 0 && props.src)) {
-    return createElement("p", null, "No Source( src ) Defined");
+    return /*#__PURE__*/jsx("p", {
+      children: "No Source( src ) Defined"
+    });
   }
   var componentClasses = classNames(["wprf-input-image", props === null || props === void 0 ? void 0 : props.className]);
-  return createElement("img", {
+  return /*#__PURE__*/jsx("img", {
     className: componentClasses,
     src: props === null || props === void 0 ? void 0 : props.src,
     alt: props === null || props === void 0 ? void 0 : props.alt
   });
 };
 
+function ownKeys$p(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$p(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$p(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$p(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var BadgeComp = function BadgeComp(_ref) {
   var componentClasses = _ref.componentClasses,
     label = _ref.label;
-  return createElement("div", {
-    className: "wprf-badge"
-  }, createElement("span", {
-    className: "wprf-badge-icon"
-  }, createElement("i", {
-    className: "btd-icon btd-crown"
-  })), createElement("span", {
-    className: componentClasses
-  }, label));
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-badge",
+    children: [/*#__PURE__*/jsx("span", {
+      className: "wprf-badge-icon",
+      children: /*#__PURE__*/jsx("i", {
+        className: "btd-icon btd-crown"
+      })
+    }), /*#__PURE__*/jsx("span", {
+      className: componentClasses,
+      children: label
+    })]
+  });
 };
 var Badge = function Badge(props) {
   var builderContext = useBuilderContext();
@@ -1649,17 +1651,23 @@ var Badge = function Badge(props) {
       }
     };
   }
-  return createElement("div", _extends$1({
+  return /*#__PURE__*/jsxs("div", _objectSpread$p(_objectSpread$p({
     className: classNames("wprf-badge-wrapper", {
       "pro-deactivated": !builderContext.is_pro_active || disabled
     })
-  }, componentProps), position === "left" && label.length > 0 && createElement(Fragment, null, renderLabel(createElement(BadgeComp, {
-    componentClasses: componentClasses,
-    label: label
-  }), "left")), position === "right" && label.length > 0 && createElement(Fragment, null, renderLabel(createElement(BadgeComp, {
-    componentClasses: componentClasses,
-    label: label
-  }), "right")), renderComponent());
+  }, componentProps), {}, {
+    children: [position === "left" && label.length > 0 && /*#__PURE__*/jsx(Fragment, {
+      children: renderLabel(/*#__PURE__*/jsx(BadgeComp, {
+        componentClasses: componentClasses,
+        label: label
+      }), "left")
+    }), position === "right" && label.length > 0 && /*#__PURE__*/jsx(Fragment, {
+      children: renderLabel(/*#__PURE__*/jsx(BadgeComp, {
+        componentClasses: componentClasses,
+        label: label
+      }), "right")
+    }), renderComponent()]
+  }));
 };
 
 var _excluded$4 = ["id", "label", "badge", "badgePosition", "context"];
@@ -1680,24 +1688,29 @@ var ControlLabel = function ControlLabel(props) {
    * context?.icons?.[rest?.icon] through context
    */
 
-  return createElement("div", {
-    className: "wprf-control-label"
-  }, badge ? createElement("div", {
-    className: "wprf-label-with-badge"
-  }, badgePosition == "left" && badge, createElement("label", {
-    htmlFor: id
-  }, label), badgePosition == "right" && badge) : createElement("label", {
-    htmlFor: id
-  }, label), (rest === null || rest === void 0 ? void 0 : rest.label_subtitle) && createElement("p", {
-    className: "wprf-label-subtitle",
-    dangerouslySetInnerHTML: {
-      __html: rest === null || rest === void 0 ? void 0 : rest.label_subtitle
-    }
-  }), (rest === null || rest === void 0 ? void 0 : rest.link) && createElement("a", {
-    rel: "nofollow",
-    target: "_blank",
-    href: rest.link
-  }, context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link));
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-control-label",
+    children: [badge ? /*#__PURE__*/jsxs("div", {
+      className: "wprf-label-with-badge",
+      children: [badgePosition == "left" && badge, /*#__PURE__*/jsx("label", {
+        htmlFor: id,
+        children: label
+      }), badgePosition == "right" && badge]
+    }) : /*#__PURE__*/jsx("label", {
+      htmlFor: id,
+      children: label
+    }), (rest === null || rest === void 0 ? void 0 : rest.label_subtitle) && /*#__PURE__*/jsx("p", {
+      className: "wprf-label-subtitle",
+      dangerouslySetInnerHTML: {
+        __html: rest === null || rest === void 0 ? void 0 : rest.label_subtitle
+      }
+    }), (rest === null || rest === void 0 ? void 0 : rest.link) && /*#__PURE__*/jsx("a", {
+      rel: "nofollow",
+      target: "_blank",
+      href: rest.link,
+      children: context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 ? void 0 : _context$icons.link
+    })]
+  });
 };
 
 var ControlField = function ControlField(_ref) {
@@ -1724,32 +1737,30 @@ var ControlField = function ControlField(_ref) {
       }
     }
   }, [value]);
-  return createElement("div", {
-    className: "wprf-control-field"
-  }, position === "left" && description && createElement("p", {
-    className: "wprf-description",
-    dangerouslySetInnerHTML: {
-      __html: description
-    }
-  }), renderComponent(), position === "right" && description && createElement("p", {
-    className: "wprf-description",
-    dangerouslySetInnerHTML: {
-      __html: description
-    }
-  }), help && createElement("p", {
-    className: "wprf-help",
-    dangerouslySetInnerHTML: {
-      __html: help
-    }
-  }));
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-control-field",
+    children: [position === "left" && description && /*#__PURE__*/jsx("p", {
+      className: "wprf-description",
+      dangerouslySetInnerHTML: {
+        __html: description
+      }
+    }), renderComponent(), position === "right" && description && /*#__PURE__*/jsx("p", {
+      className: "wprf-description",
+      dangerouslySetInnerHTML: {
+        __html: description
+      }
+    }), help && /*#__PURE__*/jsx("p", {
+      className: "wprf-help",
+      dangerouslySetInnerHTML: {
+        __html: help
+      }
+    })]
+  });
 };
 
 var _excluded$3 = ["label", "id", "name", "type", "style", "is_pro", "badge", "value", "disabled", "enable_disable_text_active"];
-function ownKeys$b(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$b(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$b(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-
-// import { useInstanceId } from "@wordpress/compose";
-
+function ownKeys$o(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$o(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$o(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$o(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var withLabel = function withLabel(WrappedComponent) {
   var WithLabel = function WithLabel(props) {
     var _styles$label, _styles$label$positio, _styles$label2, _styles$description2;
@@ -1771,81 +1782,90 @@ var withLabel = function withLabel(WrappedComponent) {
     if (id == undefined) {
       id = name;
     }
-    var styles = _objectSpread$b({
+    var styles = _objectSpread$o({
       description: {
         position: "right"
       }
     }, prevStyle);
     var styleClasses = classNames(_defineProperty(_defineProperty(_defineProperty({}, "wprf-style-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type) || false), "wprf-label-none", label === undefined || label === "" || label.length === 0), "wprf-".concat((styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position) || "inline", "-label"), ((_styles$label$positio = styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position) !== null && _styles$label$positio !== void 0 ? _styles$label$positio : true) && label != undefined));
     if (type === "hidden") {
-      return createElement(WrappedComponent, _extends$1({}, props, {
+      return /*#__PURE__*/jsx(WrappedComponent, _objectSpread$o(_objectSpread$o({}, props), {}, {
         id: id
       }));
     }
     var validProps = validFieldProps(props, ["description", "label", "help", "style", "disabled"]);
     var componentClasses = classNames("wprf-control-wrapper", "wprf-type-".concat(type), styleClasses, props === null || props === void 0 ? void 0 : props.classes, _defineProperty({}, "wprf-name-".concat(name), name));
-    return createElement("div", {
-      className: componentClasses
-    }, (is_pro == true || disabled == true) && createElement(Fragment, null, createElement(Badge, _extends$1({}, badge, rest, {
-      disabled: disabled,
-      renderLabel: function renderLabel(badge, position) {
-        return createElement(ControlLabel, _extends$1({}, validProps, {
+    return /*#__PURE__*/jsxs("div", {
+      className: componentClasses,
+      children: [(is_pro == true || disabled == true) && /*#__PURE__*/jsxs(Fragment, {
+        children: [/*#__PURE__*/jsx(Badge, _objectSpread$o(_objectSpread$o(_objectSpread$o({}, badge), rest), {}, {
+          disabled: disabled,
+          renderLabel: function renderLabel(badge, position) {
+            return /*#__PURE__*/jsx(ControlLabel, _objectSpread$o(_objectSpread$o({}, validProps), {}, {
+              context: rest === null || rest === void 0 ? void 0 : rest.context,
+              id: id,
+              label: label,
+              badge: badge,
+              badgePosition: position
+            }));
+          },
+          renderComponent: function renderComponent() {
+            var _styles$description;
+            return /*#__PURE__*/jsx(ControlField, {
+              help: null,
+              description: props === null || props === void 0 ? void 0 : props.description,
+              position: styles === null || styles === void 0 || (_styles$description = styles.description) === null || _styles$description === void 0 ? void 0 : _styles$description.position,
+              type: type,
+              value: value,
+              enableDisableActive: enable_disable_text_active,
+              renderComponent: function renderComponent() {
+                return /*#__PURE__*/jsx(WrappedComponent, _objectSpread$o(_objectSpread$o({}, validProps), {}, {
+                  disable: true,
+                  id: id
+                }));
+              }
+            });
+          }
+        })), (props === null || props === void 0 ? void 0 : props.help) && /*#__PURE__*/jsxs("div", {
+          className: "wprf-badge-wrapper",
+          children: [/*#__PURE__*/jsx("div", {
+            className: "wprf-control-label"
+          }), /*#__PURE__*/jsx("div", {
+            className: "wprf-control-field",
+            children: /*#__PURE__*/jsx("p", {
+              className: "wprf-help",
+              dangerouslySetInnerHTML: {
+                __html: props.help
+              }
+            })
+          })]
+        })]
+      }), (is_pro == false || is_pro == undefined) && disabled == false && /*#__PURE__*/jsxs(Fragment, {
+        children: [label && label.length > 0 && /*#__PURE__*/jsx(ControlLabel, _objectSpread$o(_objectSpread$o({}, validProps), {}, {
           context: rest === null || rest === void 0 ? void 0 : rest.context,
-          id: id,
           label: label,
-          badge: badge,
-          badgePosition: position
-        }));
-      },
-      renderComponent: function renderComponent() {
-        var _styles$description;
-        return createElement(ControlField, {
-          help: null,
+          id: id
+        })), /*#__PURE__*/jsx(ControlField, {
+          help: props === null || props === void 0 ? void 0 : props.help,
           description: props === null || props === void 0 ? void 0 : props.description,
-          position: styles === null || styles === void 0 || (_styles$description = styles.description) === null || _styles$description === void 0 ? void 0 : _styles$description.position,
+          position: styles === null || styles === void 0 || (_styles$description2 = styles.description) === null || _styles$description2 === void 0 ? void 0 : _styles$description2.position,
           type: type,
           value: value,
           enableDisableActive: enable_disable_text_active,
           renderComponent: function renderComponent() {
-            return createElement(WrappedComponent, _extends$1({}, validProps, {
-              disable: true,
+            return /*#__PURE__*/jsx(WrappedComponent, _objectSpread$o(_objectSpread$o({}, validProps), {}, {
               id: id
             }));
           }
-        });
-      }
-    })), (props === null || props === void 0 ? void 0 : props.help) && createElement("div", {
-      className: "wprf-badge-wrapper"
-    }, createElement("div", {
-      className: "wprf-control-label"
-    }), createElement("div", {
-      className: "wprf-control-field"
-    }, createElement("p", {
-      className: "wprf-help",
-      dangerouslySetInnerHTML: {
-        __html: props.help
-      }
-    })))), (is_pro == false || is_pro == undefined) && disabled == false && createElement(Fragment, null, label && label.length > 0 && createElement(ControlLabel, _extends$1({}, validProps, {
-      context: rest === null || rest === void 0 ? void 0 : rest.context,
-      label: label,
-      id: id
-    })), createElement(ControlField, {
-      help: props === null || props === void 0 ? void 0 : props.help,
-      description: props === null || props === void 0 ? void 0 : props.description,
-      position: styles === null || styles === void 0 || (_styles$description2 = styles.description) === null || _styles$description2 === void 0 ? void 0 : _styles$description2.position,
-      type: type,
-      value: value,
-      enableDisableActive: enable_disable_text_active,
-      renderComponent: function renderComponent() {
-        return createElement(WrappedComponent, _extends$1({}, validProps, {
-          id: id
-        }));
-      }
-    })));
+        })]
+      })]
+    });
   };
   return WithLabel;
 };
 
+function ownKeys$n(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$n(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$n(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$n(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var withProps = function withProps(WrappedComponent) {
   var isGeneric = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var WithProps = function WithProps(props) {
@@ -1908,17 +1928,21 @@ var withProps = function withProps(WrappedComponent) {
       }
     }, [field.value, meta.visible]);
     if (!meta.visible) {
-      return createElement(Fragment, null);
+      return /*#__PURE__*/jsx(Fragment, {});
     }
-    return createElement(WrappedComponent, field);
+    return /*#__PURE__*/jsx(WrappedComponent, _objectSpread$n({}, field));
   };
   return WithProps;
 };
 
 var Action = function Action(props) {
-  return createElement(Fragment, null, applyFilters(props.action, '', props));
+  return /*#__PURE__*/jsx(Fragment, {
+    children: applyFilters(props.action, '', props)
+  });
 };
 
+function ownKeys$m(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$m(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$m(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$m(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Button$1 = function Button(props) {
   var _props$text, _props$text2, _props$text3;
   if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
@@ -1982,31 +2006,34 @@ var Button$1 = function Button(props) {
     props !== null && props !== void 0 && props.onClick ? props === null || props === void 0 ? void 0 : props.onClick(event) : useTrigger(props);
   };
   if (props !== null && props !== void 0 && props.href) {
-    return createElement("a", {
+    return /*#__PURE__*/jsx("a", {
       href: (props === null || props === void 0 ? void 0 : props.href) === -1 ? props === null || props === void 0 ? void 0 : props.value : props === null || props === void 0 ? void 0 : props.href,
       target: props === null || props === void 0 ? void 0 : props.target,
-      className: classNames("wprf-control wprf-button wprf-href-btn", props === null || props === void 0 ? void 0 : props.classes)
-    }, props === null || props === void 0 ? void 0 : props.text);
+      className: classNames("wprf-control wprf-button wprf-href-btn", props === null || props === void 0 ? void 0 : props.classes),
+      children: props === null || props === void 0 ? void 0 : props.text
+    });
   }
   if (props !== null && props !== void 0 && props.group) {
     var allFields = props.fields.map(function (item, index) {
       var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ["fields", index]);
-      return createElement(Field, _extends$1({
-        key: item.name
-      }, item, {
+      return /*#__PURE__*/jsx(Field, _objectSpread$m(_objectSpread$m({}, item), {}, {
         parentIndex: parentIndex
-      }));
+      }), item.name);
     });
-    return createElement("div", {
-      className: "wprf-control wprf-button-group wprf-flex"
-    }, allFields);
+    return /*#__PURE__*/jsx("div", {
+      className: "wprf-control wprf-button-group wprf-flex",
+      children: allFields
+    });
   }
-  return createElement(Fragment, null, createElement("button", _extends$1({}, validProps, {
-    name: props.name,
-    disabled: isLoading,
-    onClick: handleClick,
-    className: classNames("wprf-control wprf-button wprf-btn", props === null || props === void 0 ? void 0 : props.classes)
-  }), isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 || (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 || (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 || (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text));
+  return /*#__PURE__*/jsx(Fragment, {
+    children: /*#__PURE__*/jsx("button", _objectSpread$m(_objectSpread$m({}, validProps), {}, {
+      name: props.name,
+      disabled: isLoading,
+      onClick: handleClick,
+      className: classNames("wprf-control wprf-button wprf-btn", props === null || props === void 0 ? void 0 : props.classes),
+      children: isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 || (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 || (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 || (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text
+    }))
+  });
 };
 var Button = withLabel(Button$1);
 
@@ -2142,53 +2169,56 @@ var CheckboxSelect$1 = function CheckboxSelect(props) {
     setSOption(newSelectedOptions);
     setSelectedOption(newSelectedOptions);
   };
-  return createElement("div", {
-    className: "wprf-checkbox-select-wrapper"
-  }, createElement(ReactSelect, {
-    isDisabled: props === null || props === void 0 ? void 0 : props.disable,
-    className: "wprf-checkbox-select",
-    classNamePrefix: "wprf-checkbox-select",
-    isSearchable: search !== null && search !== void 0 ? search : false,
-    id: id,
-    isClearable: false,
-    name: name,
-    isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
-    placeholder: placeholder,
-    isLoading: isLoading,
-    options: options,
-    value: selectedOption,
-    onMenuOpen: handleMenuOpen,
-    onMenuClose: handleMenuClose,
-    isOptionDisabled: function isOptionDisabled(option) {
-      return option === null || option === void 0 ? void 0 : option.disabled;
-    },
-    onChange: handleOptionChange // option or options
-    ,
-    closeMenuOnSelect: false,
-    hideSelectedOptions: false,
-    autoFocus: false,
-    controlShouldRenderValue: false
-  }), selectedOption !== null && selectedOption !== void 0 && selectedOption.length ? createElement("ul", {
-    className: "wprf-selected-options"
-  }, selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.map(function (item, index) {
-    return createElement("li", {
-      key: item === null || item === void 0 ? void 0 : item.label,
-      className: "wprf-selected-option wprf-selected-option-".concat(index % 6 + 1)
-    }, item === null || item === void 0 ? void 0 : item.label, createElement("button", {
-      type: "button",
-      className: "wprf-remove-button",
-      onClick: function onClick() {
-        return removeSelection(item);
-      }
-    }, createElement("i", {
-      className: "btd-icon btd-close-fill"
-    })));
-  })) : "");
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-checkbox-select-wrapper",
+    children: [/*#__PURE__*/jsx(ReactSelect, {
+      isDisabled: props === null || props === void 0 ? void 0 : props.disable,
+      className: "wprf-checkbox-select",
+      classNamePrefix: "wprf-checkbox-select",
+      isSearchable: search !== null && search !== void 0 ? search : false,
+      id: id,
+      isClearable: false,
+      name: name,
+      isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
+      placeholder: placeholder,
+      isLoading: isLoading,
+      options: options,
+      value: selectedOption,
+      onMenuOpen: handleMenuOpen,
+      onMenuClose: handleMenuClose,
+      isOptionDisabled: function isOptionDisabled(option) {
+        return option === null || option === void 0 ? void 0 : option.disabled;
+      },
+      onChange: handleOptionChange // option or options
+      ,
+      closeMenuOnSelect: false,
+      hideSelectedOptions: false,
+      autoFocus: false,
+      controlShouldRenderValue: false
+    }), selectedOption !== null && selectedOption !== void 0 && selectedOption.length ? /*#__PURE__*/jsx("ul", {
+      className: "wprf-selected-options",
+      children: selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.map(function (item, index) {
+        return /*#__PURE__*/jsxs("li", {
+          className: "wprf-selected-option wprf-selected-option-".concat(index % 6 + 1),
+          children: [item === null || item === void 0 ? void 0 : item.label, /*#__PURE__*/jsx("button", {
+            type: "button",
+            className: "wprf-remove-button",
+            onClick: function onClick() {
+              return removeSelection(item);
+            },
+            children: /*#__PURE__*/jsx("i", {
+              className: "btd-icon btd-close-fill"
+            })
+          })]
+        }, item === null || item === void 0 ? void 0 : item.label);
+      })
+    }) : ""]
+  });
 };
 var CheckboxSelect = withLabel(CheckboxSelect$1);
 
-function ownKeys$a(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$a(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$a(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$a(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$l(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$l(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$l(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$l(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var CodeViewer$1 = function CodeViewer(props) {
   var _props$code2;
   var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "disable", "parentIndex", "context", "copyOnClick"]);
@@ -2216,24 +2246,32 @@ var CodeViewer$1 = function CodeViewer(props) {
       }
     });
   };
-  return createElement("span", {
-    className: "wprf-code-viewer"
-  }, createElement("span", {
-    className: "wprf-code-viewer-header"
-  }, props === null || props === void 0 ? void 0 : props.label), createElement("span", {
-    className: "wprf-code-viewer-body"
-  }, /*#__PURE__*/React.createElement("pre", _objectSpread$a({}, validProps), (_props$code2 = props === null || props === void 0 ? void 0 : props.code) !== null && _props$code2 !== void 0 ? _props$code2 : (props === null || props === void 0 ? void 0 : props["default"]) || (props === null || props === void 0 ? void 0 : props.value)), createElement("span", {
-    className: "wprf-clipboard-tooltip ".concat(isCopied ? "active" : "")
-  }, createElement("span", {
-    className: "wprf-clipboard-tooltip-text"
-  }, createElement("span", null, "Copied")), createElement(Button$2, {
-    className: "wprf-copy-icon",
-    onClick: function onClick() {
-      return handleCopy();
-    }
-  }, createElement("i", {
-    className: "btd-icon btd-duplicate"
-  })))));
+  return /*#__PURE__*/jsxs("span", {
+    className: "wprf-code-viewer",
+    children: [/*#__PURE__*/jsx("span", {
+      className: "wprf-code-viewer-header",
+      children: props === null || props === void 0 ? void 0 : props.label
+    }), /*#__PURE__*/jsxs("span", {
+      className: "wprf-code-viewer-body",
+      children: [/*#__PURE__*/React.createElement("pre", _objectSpread$l({}, validProps), (_props$code2 = props === null || props === void 0 ? void 0 : props.code) !== null && _props$code2 !== void 0 ? _props$code2 : (props === null || props === void 0 ? void 0 : props["default"]) || (props === null || props === void 0 ? void 0 : props.value)), /*#__PURE__*/jsxs("span", {
+        className: "wprf-clipboard-tooltip ".concat(isCopied ? "active" : ""),
+        children: [/*#__PURE__*/jsx("span", {
+          className: "wprf-clipboard-tooltip-text",
+          children: /*#__PURE__*/jsx("span", {
+            children: "Copied"
+          })
+        }), /*#__PURE__*/jsx(Button$2, {
+          className: "wprf-copy-icon",
+          onClick: function onClick() {
+            return handleCopy();
+          },
+          children: /*#__PURE__*/jsx("i", {
+            className: "btd-icon btd-duplicate"
+          })
+        })]
+      })]
+    })]
+  });
 };
 var CodeViewer = /*#__PURE__*/React.memo(CodeViewer$1);
 
@@ -2286,48 +2324,56 @@ var ColorPicker$1 = function ColorPicker(props) {
     });
   }, [color]);
   handleCloseRef(closeRef);
-  return createElement(Fragment, null, createElement("div", {
-    className: "wprf-colorpicker-wrap",
-    ref: closeRef
-  }, createElement("div", {
-    className: "wprf-colorpicker-screen",
-    onClick: function onClick() {
-      return setShowPicker(!showPicker);
-    }
-  }, createElement("input", {
-    type: "hidden",
-    value: value,
-    name: name,
-    id: id
-  }), createElement("span", {
-    className: "wprf-picker-code"
-  }, value || defaultColor), createElement("span", {
-    className: "wprf-picker-display",
-    style: {
-      backgroundColor: value
-    }
-  })), showPicker && createElement("div", {
-    className: "wprf-colorpicker"
-  }, createElement(ColorPicker$2, {
-    color: value || defaultColor,
-    onChangeComplete: function onChangeComplete(event) {
-      return setColor(event.hex);
-    }
-  }), createElement("div", {
-    className: "wprf-colorpicker-reset-wrap"
-  }, createElement("button", {
-    className: "wprf-colorpicker-reset",
-    onClick: function onClick(e) {
-      e.preventDefault();
-      setColor(defaultColor);
-      setShowPicker(false);
-    }
-  }, (_props$reset_text = props === null || props === void 0 ? void 0 : props.reset_text) !== null && _props$reset_text !== void 0 ? _props$reset_text : __("Reset", "betterdocs"))))));
+  return /*#__PURE__*/jsx(Fragment, {
+    children: /*#__PURE__*/jsxs("div", {
+      className: "wprf-colorpicker-wrap",
+      ref: closeRef,
+      children: [/*#__PURE__*/jsxs("div", {
+        className: "wprf-colorpicker-screen",
+        onClick: function onClick() {
+          return setShowPicker(!showPicker);
+        },
+        children: [/*#__PURE__*/jsx("input", {
+          type: "hidden",
+          value: value,
+          name: name,
+          id: id
+        }), /*#__PURE__*/jsx("span", {
+          className: "wprf-picker-code",
+          children: value || defaultColor
+        }), /*#__PURE__*/jsx("span", {
+          className: "wprf-picker-display",
+          style: {
+            backgroundColor: value
+          }
+        })]
+      }), showPicker && /*#__PURE__*/jsxs("div", {
+        className: "wprf-colorpicker",
+        children: [/*#__PURE__*/jsx(ColorPicker$2, {
+          color: value || defaultColor,
+          onChangeComplete: function onChangeComplete(event) {
+            return setColor(event.hex);
+          }
+        }), /*#__PURE__*/jsx("div", {
+          className: "wprf-colorpicker-reset-wrap",
+          children: /*#__PURE__*/jsx("button", {
+            className: "wprf-colorpicker-reset",
+            onClick: function onClick(e) {
+              e.preventDefault();
+              setColor(defaultColor);
+              setShowPicker(false);
+            },
+            children: (_props$reset_text = props === null || props === void 0 ? void 0 : props.reset_text) !== null && _props$reset_text !== void 0 ? _props$reset_text : __("Reset", "betterdocs")
+          })
+        })]
+      })]
+    })
+  });
 };
 var ColorPicker = withLabel(ColorPicker$1);
 
-function ownKeys$9(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$9(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$9(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$9(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$k(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$k(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$k(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$k(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var CopyToClipboard$1 = function CopyToClipboard(props) {
   var validProps = validFieldProps(props, ["is_pro", "visible", "trigger", "descriptionCopyable", "disable", "parentIndex", "context", "badge", "popup", "type", 'descriptionLabel']);
   var handleChange = useCallback(function (event) {
@@ -2383,51 +2429,64 @@ var CopyToClipboard$1 = function CopyToClipboard(props) {
       }
     });
   };
-  return createElement("span", {
-    className: "wprf-copy-to-clipboard-wrapper"
-  }, createElement("div", {
-    className: "wprf-copy-to-clipboard-header"
-  }, createElement(ControlLabel, props), createElement("span", {
-    className: "wprf-clipboard-tooltip ".concat(isCopied ? "active" : "")
-  }, createElement("span", {
-    className: "wprf-clipboard-tooltip-text"
-  }, createElement("span", null, "Copied")), createElement(Button$2, {
-    className: "wprf-copy-icon",
-    onClick: function onClick() {
-      return handleCopy();
-    }
-  }, createElement("i", {
-    className: "btd-icon btd-copy"
-  })))), createElement("div", {
-    className: "wprf-copy-to-clipboard-body"
-  }, /*#__PURE__*/React.createElement("input", _objectSpread$9(_objectSpread$9({}, validProps), {}, {
-    type: "text",
-    onChange: handleChange,
-    disabled: true
-  }))), createElement("div", {
-    className: "wprf-copy-to-clipboard-footer"
-  }, (props === null || props === void 0 ? void 0 : props.description) && (props === null || props === void 0 ? void 0 : props.descriptionLabel) && createElement("i", {
-    dangerouslySetInnerHTML: {
-      __html: props === null || props === void 0 ? void 0 : props.descriptionLabel
-    }
-  }), props !== null && props !== void 0 && props.description ? props !== null && props !== void 0 && props.descriptionCopyable ? createElement("div", {
-    className: "wprf-clipboard-tooltip ".concat(isDescriptionCopied ? "active" : "")
-  }, createElement("span", {
-    className: "wprf-clipboard-tooltip-text"
-  }, createElement("span", null, "Copied")), createElement("p", {
-    className: "wprf-description",
-    onClick: function onClick() {
-      return handleDescriptionCopy();
-    },
-    dangerouslySetInnerHTML: {
-      __html: props === null || props === void 0 ? void 0 : props.description
-    }
-  })) : createElement("p", {
-    className: "wprf-description",
-    dangerouslySetInnerHTML: {
-      __html: props === null || props === void 0 ? void 0 : props.description
-    }
-  }) : ""));
+  return /*#__PURE__*/jsxs("span", {
+    className: "wprf-copy-to-clipboard-wrapper",
+    children: [/*#__PURE__*/jsxs("div", {
+      className: "wprf-copy-to-clipboard-header",
+      children: [/*#__PURE__*/jsx(ControlLabel, _objectSpread$k({}, props)), /*#__PURE__*/jsxs("span", {
+        className: "wprf-clipboard-tooltip ".concat(isCopied ? "active" : ""),
+        children: [/*#__PURE__*/jsx("span", {
+          className: "wprf-clipboard-tooltip-text",
+          children: /*#__PURE__*/jsx("span", {
+            children: "Copied"
+          })
+        }), /*#__PURE__*/jsx(Button$2, {
+          className: "wprf-copy-icon",
+          onClick: function onClick() {
+            return handleCopy();
+          },
+          children: /*#__PURE__*/jsx("i", {
+            className: "btd-icon btd-copy"
+          })
+        })]
+      })]
+    }), /*#__PURE__*/jsx("div", {
+      className: "wprf-copy-to-clipboard-body",
+      children: /*#__PURE__*/React.createElement("input", _objectSpread$k(_objectSpread$k({}, validProps), {}, {
+        type: "text",
+        onChange: handleChange,
+        disabled: true
+      }))
+    }), /*#__PURE__*/jsxs("div", {
+      className: "wprf-copy-to-clipboard-footer",
+      children: [(props === null || props === void 0 ? void 0 : props.description) && (props === null || props === void 0 ? void 0 : props.descriptionLabel) && /*#__PURE__*/jsx("i", {
+        dangerouslySetInnerHTML: {
+          __html: props === null || props === void 0 ? void 0 : props.descriptionLabel
+        }
+      }), props !== null && props !== void 0 && props.description ? props !== null && props !== void 0 && props.descriptionCopyable ? /*#__PURE__*/jsxs("div", {
+        className: "wprf-clipboard-tooltip ".concat(isDescriptionCopied ? "active" : ""),
+        children: [/*#__PURE__*/jsx("span", {
+          className: "wprf-clipboard-tooltip-text",
+          children: /*#__PURE__*/jsx("span", {
+            children: "Copied"
+          })
+        }), /*#__PURE__*/jsx("p", {
+          className: "wprf-description",
+          onClick: function onClick() {
+            return handleDescriptionCopy();
+          },
+          dangerouslySetInnerHTML: {
+            __html: props === null || props === void 0 ? void 0 : props.description
+          }
+        })]
+      }) : /*#__PURE__*/jsx("p", {
+        className: "wprf-description",
+        dangerouslySetInnerHTML: {
+          __html: props === null || props === void 0 ? void 0 : props.description
+        }
+      }) : ""]
+    })]
+  });
 };
 var CopyToClipboard = /*#__PURE__*/React.memo(CopyToClipboard$1);
 
@@ -2453,22 +2512,23 @@ var DateControl = function DateControl(props) {
     //     // helpers.setValue(name, date('c', value))
     // }
   }, []);
-  return createElement(Dropdown, {
+  return /*#__PURE__*/jsx(Dropdown, {
     className: "wprf-control-datetime",
     contentClassName: "wprf-control-datetime-content",
     position: position ? position : "bottom right",
     renderToggle: function renderToggle(_ref) {
       _ref.isOpen;
         var onToggle = _ref.onToggle;
-      return createElement(Button$2, {
+      return /*#__PURE__*/jsx(Button$2, {
         isTertiary: true,
-        onClick: onToggle
-      }, date(format, _value, -new Date().getTimezoneOffset()));
+        onClick: onToggle,
+        children: date(format, _value, -new Date().getTimezoneOffset())
+      });
     },
     renderContent: function renderContent() {
       // console.log(getTime(value), getTime(value).toDate());
 
-      return createElement(DateTimePicker
+      return /*#__PURE__*/jsx(DateTimePicker
       // @ts-ignore
       , {
         __nextRemoveHelpButton: true,
@@ -2490,6 +2550,53 @@ var DateControl = function DateControl(props) {
 };
 var Date$1 = withLabel(DateControl);
 
+/**
+ * WordPress dependencies
+ */
+const instanceMap = new WeakMap();
+
+/**
+ * Creates a new id for a given object.
+ *
+ * @param object Object reference to create an id for.
+ * @return The instance id (index).
+ */
+function createId(object) {
+  const instances = instanceMap.get(object) || 0;
+  instanceMap.set(object, instances + 1);
+  return instances;
+}
+
+/**
+ * Specify the useInstanceId *function* signatures.
+ *
+ * More accurately, useInstanceId distinguishes between three different
+ * signatures:
+ *
+ * 1. When only object is given, the returned value is a number
+ * 2. When object and prefix is given, the returned value is a string
+ * 3. When preferredId is given, the returned value is the type of preferredId
+ *
+ * @param object Object reference to create an id for.
+ */
+
+/**
+ * Provides a unique instance ID.
+ *
+ * @param object        Object reference to create an id for.
+ * @param [prefix]      Prefix for the unique id.
+ * @param [preferredId] Default ID to use.
+ * @return The unique instance id.
+ */
+function useInstanceId(object, prefix, preferredId) {
+  return useMemo(() => {
+    const id = createId(object);
+    return id;
+  }, [object, preferredId, prefix]);
+}
+
+function ownKeys$j(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$j(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$j(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$j(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var _RepeaterField = function RepeaterField(props) {
   var _builderContext$value;
   var builderContext = useBuilderContext();
@@ -2518,48 +2625,52 @@ var _RepeaterField = function RepeaterField(props) {
   useEffect(function () {
     builderContext.setFieldValue([parent, index, 'isCollapsed'], isCollapsed);
   }, [isCollapsed]);
-  return createElement("div", {
-    className: "wprf-repeater-field"
-  }, createElement("div", {
-    className: "wprf-repeater-field-title",
-    onClick: function onClick() {
-      return setIsCollapsed(!isCollapsed);
-    }
-  }, createElement("h4", null, createElement(Icon, {
-    icon: "move"
-  }), props.index + 1, ": ", _title), createElement("div", {
-    className: "wprf-repeater-field-controls"
-  }, createElement(Icon, {
-    onClick: onClone,
-    icon: "admin-page"
-  }), createElement(Icon, {
-    onClick: onDelete,
-    icon: "trash"
-  }))), !isCollapsed && createElement("div", {
-    className: "wprf-repeater-inner-field"
-  }, fields.map(function (field, fieldIndex) {
-    var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', fieldIndex]);
-    return createElement(GenericField, _extends$1({
-      key: "field-".concat(index, "-").concat(fieldIndex)
-    }, field, {
-      id: "field-".concat(instanceId, "-").concat(index, "-").concat(fieldIndex),
-      index: index,
-      parenttype: "repeater",
-      parent: parent,
-      onChange: function onChange(event) {
-        return _onChange(event, index);
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-repeater-field",
+    children: [/*#__PURE__*/jsxs("div", {
+      className: "wprf-repeater-field-title",
+      onClick: function onClick() {
+        return setIsCollapsed(!isCollapsed);
       },
-      parentIndex: parentIndex
-    }));
-  })));
+      children: [/*#__PURE__*/jsxs("h4", {
+        children: [/*#__PURE__*/jsx(Icon, {
+          icon: "move"
+        }), props.index + 1, ": ", _title]
+      }), /*#__PURE__*/jsxs("div", {
+        className: "wprf-repeater-field-controls",
+        children: [/*#__PURE__*/jsx(Icon, {
+          onClick: onClone,
+          icon: "admin-page"
+        }), /*#__PURE__*/jsx(Icon, {
+          onClick: onDelete,
+          icon: "trash"
+        })]
+      })]
+    }), !isCollapsed && /*#__PURE__*/jsx("div", {
+      className: "wprf-repeater-inner-field",
+      children: fields.map(function (field, fieldIndex) {
+        var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', fieldIndex]);
+        return /*#__PURE__*/jsx(GenericField, _objectSpread$j(_objectSpread$j({}, field), {}, {
+          id: "field-".concat(instanceId, "-").concat(index, "-").concat(fieldIndex),
+          index: index,
+          parenttype: "repeater",
+          parent: parent,
+          onChange: function onChange(event) {
+            return _onChange(event, index);
+          },
+          parentIndex: parentIndex
+        }), "field-".concat(index, "-").concat(fieldIndex));
+      })
+    })]
+  });
 };
 
-function ownKeys$8(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$8(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$8(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$8(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$i(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$i(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$i(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$i(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var GenericToggle$1 = function GenericToggle(props) {
   var _styles$label, _styles$label2;
   var prevStyles = props.style;
-  var styles = _objectSpread$8({
+  var styles = _objectSpread$i({
     type: "",
     // card
     label: {
@@ -2579,17 +2690,20 @@ var GenericToggle$1 = function GenericToggle(props) {
     return _isChecked;
   }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
   var componentClasses = classNames("wprf-toggle-wrap", _defineProperty(_defineProperty(_defineProperty({}, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), "wprf-checked", Boolean(isChecked)), "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), props === null || props === void 0 ? void 0 : props.classes);
-  return createElement("div", {
-    className: componentClasses
-  }, createElement(GenericInput, _objectSpread$8(_objectSpread$8({}, props), {}, {
-    type: 'checkbox',
-    placeholder: undefined
-  })), createElement(Label, {
-    htmlFor: props.id
-  }));
+  return /*#__PURE__*/jsxs("div", {
+    className: componentClasses,
+    children: [/*#__PURE__*/jsx(GenericInput, _objectSpread$i({}, _objectSpread$i(_objectSpread$i({}, props), {}, {
+      type: 'checkbox',
+      placeholder: undefined
+    }))), /*#__PURE__*/jsx(Label, {
+      htmlFor: props.id
+    })]
+  });
 };
 var GenericToggle = withLabel(GenericToggle$1);
 
+function ownKeys$h(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$h(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$h(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$h(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var ModalContent = function ModalContent(props) {
   var _props$body;
   var isLoading = props.isLoading;
@@ -2603,36 +2717,47 @@ var ModalContent = function ModalContent(props) {
     // context.setFormField([...props.parentIndex, 'fields'], newFields);
     var allFields = newFields.map(function (item, index) {
       var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
-      return createElement(Field, _extends$1({
-        key: item.name
-      }, item, {
+      return /*#__PURE__*/jsx(Field, _objectSpread$h(_objectSpread$h({}, item), {}, {
         parentIndex: parentIndex
-      }));
+      }), item.name);
     });
     setFields(allFields);
   }, []);
-  return createElement("div", {
-    className: "wprf-modal-body"
-  }, isLoading && createElement(Loading, null), !isLoading && createElement(Fragment, null, createElement("div", {
-    className: "wprf-modal-content"
-  }, fields.length > 0 && fields), createElement("div", {
-    className: "wprf-modal-footer clearfix"
-  }, createElement("div", {
-    className: "wprf-modal-footer-left"
-  }, ((_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.footer) && isString(props.body.footer) && createElement("p", null, props.body.footer), createElement(GenericField, _extends$1({
-    type: "button"
-  }, props === null || props === void 0 ? void 0 : props.confirm_button))))));
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-modal-body",
+    children: [isLoading && /*#__PURE__*/jsx(Loading, {}), !isLoading && /*#__PURE__*/jsxs(Fragment, {
+      children: [/*#__PURE__*/jsx("div", {
+        className: "wprf-modal-content",
+        children: fields.length > 0 && fields
+      }), /*#__PURE__*/jsx("div", {
+        className: "wprf-modal-footer clearfix",
+        children: /*#__PURE__*/jsxs("div", {
+          className: "wprf-modal-footer-left",
+          children: [((_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.footer) && isString(props.body.footer) && /*#__PURE__*/jsx("p", {
+            children: props.body.footer
+          }), /*#__PURE__*/jsx(GenericField, _objectSpread$h({
+            type: "button"
+          }, props === null || props === void 0 ? void 0 : props.confirm_button))]
+        })
+      })]
+    })]
+  });
 };
 
 var ModalHeader = function ModalHeader(_ref) {
   var content = _ref.content;
-  return createElement("div", {
-    className: "wprf-modal-header"
-  }, content && isString(content) && createElement("h3", null, content));
+  return /*#__PURE__*/jsx("div", {
+    className: "wprf-modal-header",
+    children: content && isString(content) && /*#__PURE__*/jsx("h3", {
+      children: content
+    })
+  });
 };
 
 var Loading = function Loading(props) {
-  return createElement("p", null, __('Loading...', 'betterdocs'));
+  return /*#__PURE__*/jsx("p", {
+    children: __('Loading...', 'betterdocs')
+  });
 };
 
 var toolbarOptions = {
@@ -2674,7 +2799,7 @@ var Editor$1 = function Editor(props) {
       }
     });
   }, [editorState]);
-  return createElement(Editor$2, {
+  return /*#__PURE__*/jsx(Editor$2, {
     placeholder: props === null || props === void 0 ? void 0 : props.placeholder,
     toolbar: toolbarOptions,
     editorState: editorState,
@@ -2689,12 +2814,12 @@ var Editor = withLabel(Editor$1);
 function _createForOfIteratorHelper$2(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray$2(r)) || e) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: true } : { done: false, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = true, u = false; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = true, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function _unsupportedIterableToArray$2(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray$2(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$2(r, a) : void 0; } }
 function _arrayLikeToArray$2(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function ownKeys$7(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$7(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$7(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$7(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$g(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$g(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$g(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$g(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function GenericCheckbox(props) {
   var _styles$label, _styles$label2;
   var prevStyles = props.style;
-  var styles = _objectSpread$7({
+  var styles = _objectSpread$g({
     type: "",
     // card
     label: {
@@ -2714,13 +2839,15 @@ function GenericCheckbox(props) {
     return _isChecked;
   }, [props === null || props === void 0 ? void 0 : props.checked, props.value]);
   var componentClasses = classNames("wprf-checkbox-wrap", _defineProperty(_defineProperty(_defineProperty({}, "wprf-".concat(styles === null || styles === void 0 ? void 0 : styles.type), (styles === null || styles === void 0 ? void 0 : styles.type.length) > 0), "wprf-checked", Boolean(isChecked)), "wprf-label-position-".concat(styles === null || styles === void 0 || (_styles$label = styles.label) === null || _styles$label === void 0 ? void 0 : _styles$label.position), styles === null || styles === void 0 || (_styles$label2 = styles.label) === null || _styles$label2 === void 0 ? void 0 : _styles$label2.position), props === null || props === void 0 ? void 0 : props.classes);
-  return createElement("div", {
-    className: componentClasses
-  }, createElement(GenericInput, _objectSpread$7(_objectSpread$7({}, props), {}, {
-    type: 'checkbox'
-  })), createElement("label", {
-    htmlFor: props.id
-  }, props.label));
+  return /*#__PURE__*/jsxs("div", {
+    className: componentClasses,
+    children: [/*#__PURE__*/jsx(GenericInput, _objectSpread$g({}, _objectSpread$g(_objectSpread$g({}, props), {}, {
+      type: 'checkbox'
+    }))), /*#__PURE__*/jsx("label", {
+      htmlFor: props.id,
+      children: props.label
+    })]
+  });
 }
 function Checkbox$1(props) {
   var passedOptions = props.options,
@@ -2728,7 +2855,7 @@ function Checkbox$1(props) {
     multiple = props.multiple,
     prevStyles = props.style;
   var options = sortingFields(passedOptions);
-  var styles = _objectSpread$7({
+  var styles = _objectSpread$g({
     column: 4
   }, prevStyles);
   if (multiple) {
@@ -2739,7 +2866,7 @@ function Checkbox$1(props) {
     var handleChange = function handleChange(event) {
       var target = event.target ? event.target : event.currentTarget;
       setLocalState(function (prevState) {
-        return _objectSpread$7(_objectSpread$7({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+        return _objectSpread$g(_objectSpread$g({}, prevState), {}, _defineProperty({}, target.value, target.checked));
       });
     };
     useEffect(function () {
@@ -2772,28 +2899,33 @@ function Checkbox$1(props) {
         setLocalState(value);
       }
     }, []);
-    return createElement("div", {
-      className: "wprf-checkbox-wrapper wprf-control"
-    }, createElement(Row, null, options.map(function (item) {
-      return createElement(Column, {
-        key: item.value,
-        column: styles.column
-      }, createElement(GenericCheckbox, _objectSpread$7(_objectSpread$7({}, item), {}, {
-        context: props === null || props === void 0 ? void 0 : props.context,
-        id: item.value,
-        checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
-        type: 'checkbox',
-        onChange: handleChange,
-        style: styles
-      })));
-    })));
+    return /*#__PURE__*/jsx("div", {
+      className: "wprf-checkbox-wrapper wprf-control",
+      children: /*#__PURE__*/jsx(Row, {
+        children: options.map(function (item) {
+          return /*#__PURE__*/jsx(Column, {
+            column: styles.column,
+            children: /*#__PURE__*/jsx(GenericCheckbox, _objectSpread$g({}, _objectSpread$g(_objectSpread$g({}, item), {}, {
+              context: props === null || props === void 0 ? void 0 : props.context,
+              id: item.value,
+              checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
+              type: 'checkbox',
+              onChange: handleChange,
+              style: styles
+            })))
+          }, item.value);
+        })
+      })
+    });
   }
-  return createElement(GenericInput, _objectSpread$7(_objectSpread$7({}, props), {}, {
+  return /*#__PURE__*/jsx(GenericInput, _objectSpread$g({}, _objectSpread$g(_objectSpread$g({}, props), {}, {
     type: 'checkbox'
-  }));
+  })));
 }
 var Checkbox = withLabel(Checkbox$1);
 
+function ownKeys$f(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$f(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$f(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$f(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Field$1 = function Field(props) {
   if (!props.type || props.type.length === 0) {
     console.error(props);
@@ -2807,66 +2939,70 @@ var Field$1 = function Field(props) {
     case "range":
     case "number":
     case "hidden":
-      return createElement(Input_default, props);
+      return /*#__PURE__*/jsx(Input_default, _objectSpread$f({}, props));
     case "checkbox":
-      return createElement(Checkbox, props);
+      return /*#__PURE__*/jsx(Checkbox, _objectSpread$f({}, props));
     case "textarea":
-      return createElement(Textarea_default, props);
+      return /*#__PURE__*/jsx(Textarea_default, _objectSpread$f({}, props));
     case "codeviewer":
-      return createElement(CodeViewer, props);
+      return /*#__PURE__*/jsx(CodeViewer, _objectSpread$f({}, props));
     case "copy-to-clipboard":
-      return createElement(CopyToClipboard, props);
+      return /*#__PURE__*/jsx(CopyToClipboard, _objectSpread$f({}, props));
     case "message":
-      return createElement(Message, props);
+      return /*#__PURE__*/jsx(Message, _objectSpread$f({}, props));
     case "select":
-      return createElement(Select_default, props);
+      return /*#__PURE__*/jsx(Select_default, _objectSpread$f({}, props));
     case "checkbox-select":
-      return createElement(CheckboxSelect, props);
+      return /*#__PURE__*/jsx(CheckboxSelect, _objectSpread$f({}, props));
     case "select-async":
-      return createElement(SelectAsync_default, props);
+      return /*#__PURE__*/jsx(SelectAsync_default, _objectSpread$f({}, props));
     case "slider":
-      return createElement(Slider, props);
+      return /*#__PURE__*/jsx(Slider, _objectSpread$f({}, props));
     case "group":
-      return createElement(Group_default, props);
+      return /*#__PURE__*/jsx(Group_default, _objectSpread$f({}, props));
     case "radio-card":
-      return createElement(RadioCard, props);
+      return /*#__PURE__*/jsx(RadioCard, _objectSpread$f({}, props));
     case "section":
-      return createElement(Section_default, props);
+      return /*#__PURE__*/jsx(Section_default, _objectSpread$f({}, props));
     case "date":
-      return createElement(Date$1, props);
+      return /*#__PURE__*/jsx(Date$1, _objectSpread$f({}, props));
     case "toggle":
-      return createElement(Toggle, props);
+      return /*#__PURE__*/jsx(Toggle, _objectSpread$f({}, props));
     case "colorpicker":
-      return createElement(ColorPicker, props);
+      return /*#__PURE__*/jsx(ColorPicker, _objectSpread$f({}, props));
     case "jsonuploader":
-      return createElement(JsonUploader_default, props);
+      return /*#__PURE__*/jsx(JsonUploader_default, _objectSpread$f({}, props));
     case "repeater":
-      return createElement(Repeater, props);
+      return /*#__PURE__*/jsx(Repeater, _objectSpread$f({}, props));
     case "media":
-      return createElement(Media_default, props);
+      return /*#__PURE__*/jsx(Media_default, _objectSpread$f({}, props));
     case "editor":
-      return createElement(Editor, props);
+      return /*#__PURE__*/jsx(Editor, _objectSpread$f({}, props));
     case "action":
-      return createElement(Action, props);
+      return /*#__PURE__*/jsx(Action, _objectSpread$f({}, props));
     case "button":
-      return createElement(Button, props);
+      return /*#__PURE__*/jsx(Button, _objectSpread$f({}, props));
     case "modal":
-      return createElement(Modal, props);
+      return /*#__PURE__*/jsx(Modal, _objectSpread$f({}, props));
     case "tab":
-      return createElement(Tab, props);
+      return /*#__PURE__*/jsx(Tab, _objectSpread$f({}, props));
     // case "test":
     //     return <Test {...props} />;
     case "responsive-number":
-      return createElement(ResponsiveNumber_default, props);
+      return /*#__PURE__*/jsx(ResponsiveNumber_default, _objectSpread$f({}, props));
     default:
       var customField = applyFilters("custom_field", "", props.type, props);
-      return createElement(Fragment, null, customField);
+      return /*#__PURE__*/jsx(Fragment, {
+        children: customField
+      });
   }
 };
 var GenericField = withProps(Field$1, true);
 var Field = withProps(Field$1);
 
 var _excluded$2 = ["name", "fields"];
+function ownKeys$e(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$e(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$e(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$e(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Group = function Group(props) {
   var fieldName = props.name,
     fields = props.fields,
@@ -2890,11 +3026,11 @@ var Group = function Group(props) {
   }, []);
   var allFields = newFields.map(function (item, index) {
     var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ['fields', index]);
-    return createElement(GenericField, _extends$1({}, rest, {
+    return /*#__PURE__*/createElement(GenericField, _objectSpread$e(_objectSpread$e(_objectSpread$e({}, rest), {}, {
       key: item.name,
       index: props.index,
       onChange: handleChange
-    }, item, {
+    }, item), {}, {
       parenttype: "group",
       parent: fieldName,
       parentIndex: parentIndex
@@ -2903,16 +3039,18 @@ var Group = function Group(props) {
   var innerClasses = classNames('wprf-group-control-inner', {
     'wprf-display-inline': (props === null || props === void 0 ? void 0 : props.display) === 'inline'
   });
-  return createElement("div", {
-    className: "wprf-group-control"
-  }, createElement("div", {
-    className: innerClasses
-  }, allFields));
+  return /*#__PURE__*/jsx("div", {
+    className: "wprf-group-control",
+    children: /*#__PURE__*/jsx("div", {
+      className: innerClasses,
+      children: allFields
+    })
+  });
 };
 var Group_default = withLabel(Group);
 
-function ownKeys$6(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$6(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$6(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$6(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$d(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$d(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$d(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$d(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Input = function Input(props) {
   var validProps = validFieldProps(props, ["is_license_active", "is_pro", "visible", "trigger", "copyOnClick", "disable", "parentIndex", "context", "badge", "popup", "enable_disable_text_active"]);
   var handleChange = useCallback(function (event) {
@@ -2954,22 +3092,26 @@ var Input = function Input(props) {
         }
       });
     };
-    return createElement("span", {
-      className: "wprf-clipboard-wrapper"
-    }, /*#__PURE__*/React.createElement("input", _objectSpread$6(_objectSpread$6({}, validProps), {}, {
-      onChange: handleChange
-    })), createElement("span", {
-      className: "wprf-clipboard-tooltip"
-    }, createElement("span", {
-      className: "wprf-clipboard-tooltip-text"
-    }, isCopied ? copiedMessage : copyMessage), createElement(Button$2, {
-      className: "wprf-copy-icon",
-      onClick: function onClick() {
-        return handleCopy();
-      }
-    }, "Copy")));
+    return /*#__PURE__*/jsxs("span", {
+      className: "wprf-clipboard-wrapper",
+      children: [/*#__PURE__*/React.createElement("input", _objectSpread$d(_objectSpread$d({}, validProps), {}, {
+        onChange: handleChange
+      })), /*#__PURE__*/jsxs("span", {
+        className: "wprf-clipboard-tooltip",
+        children: [/*#__PURE__*/jsx("span", {
+          className: "wprf-clipboard-tooltip-text",
+          children: isCopied ? copiedMessage : copyMessage
+        }), /*#__PURE__*/jsx(Button$2, {
+          className: "wprf-copy-icon",
+          onClick: function onClick() {
+            return handleCopy();
+          },
+          children: "Copy"
+        })]
+      })]
+    });
   }
-  return /*#__PURE__*/React.createElement("input", _objectSpread$6(_objectSpread$6({}, validProps), {}, {
+  return /*#__PURE__*/React.createElement("input", _objectSpread$d(_objectSpread$d({}, validProps), {}, {
     onChange: handleChange,
     disabled: (props === null || props === void 0 ? void 0 : props.is_pro) || false
   }));
@@ -3030,24 +3172,31 @@ var JsonUploader = function JsonUploader(props) {
       setUploadedFile(null);
     }
   }, [props === null || props === void 0 ? void 0 : props.value]);
-  return createElement("span", {
-    className: "wprf-json-uploader"
-  }, !uploadedFile && createElement("label", {
-    className: "wprf-json-uploaderButton"
-  }, createElement("span", null, __("Upload")), createElement("input", {
-    type: "file",
-    accept: "application/JSON",
-    onChange: function onChange(e) {
-      handleChange(e);
-    }
-  })), uploadedFile && (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name) && createElement("span", {
-    className: "wpfr-json-file-name-wrapper"
-  }, createElement("span", {
-    className: "wpfr-json-file-name"
-  }, (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) > 20 ? "".concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr(0, 9), "...").concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr((uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) - 7)) : uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name), createElement("span", {
-    className: "wprf-json-file-delete-button",
-    onClick: removeFile
-  }, "x")));
+  return /*#__PURE__*/jsxs("span", {
+    className: "wprf-json-uploader",
+    children: [!uploadedFile && /*#__PURE__*/jsxs("label", {
+      className: "wprf-json-uploaderButton",
+      children: [/*#__PURE__*/jsx("span", {
+        children: __("Upload")
+      }), /*#__PURE__*/jsx("input", {
+        type: "file",
+        accept: "application/JSON",
+        onChange: function onChange(e) {
+          handleChange(e);
+        }
+      })]
+    }), uploadedFile && (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name) && /*#__PURE__*/jsxs("span", {
+      className: "wpfr-json-file-name-wrapper",
+      children: [/*#__PURE__*/jsx("span", {
+        className: "wpfr-json-file-name",
+        children: (uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) > 20 ? "".concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr(0, 9), "...").concat(uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.substr((uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name.length) - 7)) : uploadedFile === null || uploadedFile === void 0 ? void 0 : uploadedFile.name
+      }), /*#__PURE__*/jsx("span", {
+        className: "wprf-json-file-delete-button",
+        onClick: removeFile,
+        children: "x"
+      })]
+    })]
+  });
 };
 var JsonUploader_default = withLabel(/*#__PURE__*/React.memo(JsonUploader));
 
@@ -3066,56 +3215,68 @@ var Media = function Media(props) {
       }
     });
   }, [imageData]);
-  return createElement("div", {
-    className: "wprf-control wprf-media"
-  }, imageData != null && !(props !== null && props !== void 0 && props.notImage) && createElement("div", {
-    className: "wprf-image-preview"
-  }, imageData != null && (imageData === null || imageData === void 0 ? void 0 : imageData.url) && createElement("img", {
-    src: imageData.url,
-    alt: imageData.title
-  })), createElement("div", {
-    className: "wprf-image-uploader ".concat(imageData != null && !(props !== null && props !== void 0 && props.notImage) ? "uploaded" : "")
-  }, createElement(MediaUpload, {
-    onSelect: function onSelect(media) {
-      setImageData({
-        id: media.id,
-        title: media.title,
-        url: media.url
-      });
-    },
-    multiple: false,
-    allowedTypes: ["image"],
-    value: imageData,
-    render: function render(_ref) {
-      var open = _ref.open;
-      return createElement(Fragment, null, imageData != null ? createElement("div", {
-        className: "wprf_image_overlay"
-      }, createElement("button", {
-        className: "wprf-btn wprf-image-change-btn",
-        onClick: open
-      }, createElement("i", {
-        className: "btd-icon btd-upload"
-      })), createElement("button", {
-        className: "wprf-btn wprf-image-remove-btn",
-        onClick: function onClick() {
-          return setImageData(null);
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-control wprf-media",
+    children: [imageData != null && !(props !== null && props !== void 0 && props.notImage) && /*#__PURE__*/jsx("div", {
+      className: "wprf-image-preview",
+      children: imageData != null && (imageData === null || imageData === void 0 ? void 0 : imageData.url) && /*#__PURE__*/jsx("img", {
+        src: imageData.url,
+        alt: imageData.title
+      })
+    }), /*#__PURE__*/jsx("div", {
+      className: "wprf-image-uploader ".concat(imageData != null && !(props !== null && props !== void 0 && props.notImage) ? "uploaded" : ""),
+      children: /*#__PURE__*/jsx(MediaUpload, {
+        onSelect: function onSelect(media) {
+          setImageData({
+            id: media.id,
+            title: media.title,
+            url: media.url
+          });
+        },
+        multiple: false,
+        allowedTypes: ["image"],
+        value: imageData,
+        render: function render(_ref) {
+          var open = _ref.open;
+          return /*#__PURE__*/jsx(Fragment, {
+            children: imageData != null ? /*#__PURE__*/jsxs("div", {
+              className: "wprf_image_overlay",
+              children: [/*#__PURE__*/jsx("button", {
+                className: "wprf-btn wprf-image-change-btn",
+                onClick: open,
+                children: /*#__PURE__*/jsx("i", {
+                  className: "btd-icon btd-upload"
+                })
+              }), /*#__PURE__*/jsx("button", {
+                className: "wprf-btn wprf-image-remove-btn",
+                onClick: function onClick() {
+                  return setImageData(null);
+                },
+                children: (props === null || props === void 0 ? void 0 : props.remove) || /*#__PURE__*/jsx("i", {
+                  className: "btd-icon btd-delete"
+                })
+              })]
+            }) : /*#__PURE__*/jsxs("button", {
+              className: "wprf-btn wprf-image-upload-btn",
+              onClick: open,
+              children: [/*#__PURE__*/jsx("span", {
+                className: "icon",
+                children: /*#__PURE__*/jsx("i", {
+                  className: "btd-icon btd-upload"
+                })
+              }), /*#__PURE__*/jsx("span", {
+                className: "title",
+                children: __('Click to upload', 'betterdocs')
+              }), /*#__PURE__*/jsx("span", {
+                className: "info",
+                children: __("SVG, PNG, JPG or GIF (max.800x400px)", "betterdocs")
+              })]
+            })
+          });
         }
-      }, (props === null || props === void 0 ? void 0 : props.remove) || createElement("i", {
-        className: "btd-icon btd-delete"
-      }))) : createElement("button", {
-        className: "wprf-btn wprf-image-upload-btn",
-        onClick: open
-      }, createElement("span", {
-        className: "icon"
-      }, createElement("i", {
-        className: "btd-icon btd-upload"
-      })), createElement("span", {
-        className: "title"
-      }, __('Click to upload', 'betterdocs')), createElement("span", {
-        className: "info"
-      }, __("SVG, PNG, JPG or GIF (max.800x400px)", "betterdocs"))));
-    }
-  })));
+      })
+    })]
+  });
 };
 var Media_default = withLabel(Media);
 
@@ -3141,17 +3302,22 @@ var Message = function Message(props) {
     _eligibleMessage$type = _eligibleMessage.type,
     type = _eligibleMessage$type === void 0 ? 'warning' : _eligibleMessage$type;
   if (!message) {
-    return createElement(Fragment, null);
+    return /*#__PURE__*/jsx(Fragment, {});
   }
-  return createElement("div", {
-    className: classNames('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"), props === null || props === void 0 ? void 0 : props.classes)
-  }, html && createElement("p", {
-    dangerouslySetInnerHTML: {
-      __html: message
-    }
-  }), !html && createElement("p", null, message));
+  return /*#__PURE__*/jsxs("div", {
+    className: classNames('wprf-control', 'wprf-message', "wprf-".concat(type, "-message"), "wprf-".concat(props.name, "-message"), props === null || props === void 0 ? void 0 : props.classes),
+    children: [html && /*#__PURE__*/jsx("p", {
+      dangerouslySetInnerHTML: {
+        __html: message
+      }
+    }), !html && /*#__PURE__*/jsx("p", {
+      children: message
+    })]
+  });
 };
 
+function ownKeys$c(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$c(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$c(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$c(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Modal = function Modal(props) {
   var _props$body;
   if ((props === null || props === void 0 ? void 0 : props.body) == undefined || (props === null || props === void 0 ? void 0 : props.button) == undefined) {
@@ -3172,61 +3338,63 @@ var Modal = function Modal(props) {
     return setOpen(false);
   };
   var onConfirm = useCallback(function () {}, []);
-  return createElement("div", {
+  return /*#__PURE__*/jsxs("div", {
     className: "wprf-control wprf-modal",
-    id: "wprf-modal-".concat(props.name)
-  }, createElement(GenericField, _extends$1({
-    type: "button"
-  }, props === null || props === void 0 ? void 0 : props.button, {
-    onClick: openModal
-  })), isOpen && createElement(SweetAlert$1, {
-    customClass: "wprf-modal-inner",
-    style: {
-      maxWidth: '900px',
-      width: '100%',
-      overflowY: 'scroll',
-      margin: '50px auto'
-    },
-    closeBtnStyle: {
-      top: '5px',
-      right: '5px',
-      color: '#f78c8c',
-      fontSize: '18px',
-      border: '1px solid #f78c8c',
-      borderRadius: '50%',
-      width: '30px',
-      height: '30px',
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    title: createElement(ModalHeader, {
-      content: props === null || props === void 0 || (_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.header
-    }),
-    onConfirm: onConfirm,
-    showConfirm: false,
-    showCloseButton: true,
-    closeOnClickOutside: true,
-    onCancel: closeModal,
-    afterUpdate: function afterUpdate() {
-      if (props !== null && props !== void 0 && props.cancel) {
-        var _props$context$values;
-        if ((_props$context$values = props.context.values) !== null && _props$context$values !== void 0 && _props$context$values[props.cancel]) {
-          closeModal();
+    id: "wprf-modal-".concat(props.name),
+    children: [/*#__PURE__*/jsx(GenericField, _objectSpread$c(_objectSpread$c({
+      type: "button"
+    }, props === null || props === void 0 ? void 0 : props.button), {}, {
+      onClick: openModal
+    })), isOpen && /*#__PURE__*/jsx(SweetAlert$1, {
+      customClass: "wprf-modal-inner",
+      style: {
+        maxWidth: '900px',
+        width: '100%',
+        overflowY: 'scroll',
+        margin: '50px auto'
+      },
+      closeBtnStyle: {
+        top: '5px',
+        right: '5px',
+        color: '#f78c8c',
+        fontSize: '18px',
+        border: '1px solid #f78c8c',
+        borderRadius: '50%',
+        width: '30px',
+        height: '30px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      title: /*#__PURE__*/jsx(ModalHeader, {
+        content: props === null || props === void 0 || (_props$body = props.body) === null || _props$body === void 0 ? void 0 : _props$body.header
+      }),
+      onConfirm: onConfirm,
+      showConfirm: false,
+      showCloseButton: true,
+      closeOnClickOutside: true,
+      onCancel: closeModal,
+      afterUpdate: function afterUpdate() {
+        if (props !== null && props !== void 0 && props.cancel) {
+          var _props$context$values;
+          if ((_props$context$values = props.context.values) !== null && _props$context$values !== void 0 && _props$context$values[props.cancel]) {
+            closeModal();
+          }
         }
-      }
-    }
-  }, createElement(ModalContent, _extends$1({}, props, {
-    isLoading: isLoading,
-    closeModal: closeModal,
-    context: props.context,
-    onConfirm: onConfirm
-  }))));
+      },
+      children: /*#__PURE__*/jsx(ModalContent, _objectSpread$c(_objectSpread$c({}, props), {}, {
+        isLoading: isLoading,
+        closeModal: closeModal,
+        context: props.context,
+        onConfirm: onConfirm
+      }))
+    })]
+  });
 };
 
 var _excluded$1 = ["label", "value", "icon", "is_pro"];
-function ownKeys$5(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$5(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$5(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$5(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$b(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$b(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$b(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$b(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var _RadioCard = function RadioCard(props) {
   var builderContext = useBuilderContext();
   var _useOptions = useOptions(props, 'options'),
@@ -3237,7 +3405,7 @@ var _RadioCard = function RadioCard(props) {
   }
   var instanceId = useInstanceId(_RadioCard);
   var componentClasses = classNames(["wprf-control", "wprf-radio-card", "wprf-input-radio-set-wrap", props === null || props === void 0 ? void 0 : props.className]);
-  var styles = _objectSpread$5({}, props === null || props === void 0 ? void 0 : props.style);
+  var styles = _objectSpread$b({}, props === null || props === void 0 ? void 0 : props.style);
   var validProps = validFieldProps(props, ['options', 'placeholder', 'style', 'trigger']);
   useEffect(function () {
     if (option) {
@@ -3250,47 +3418,52 @@ var _RadioCard = function RadioCard(props) {
       });
     }
   }, [option]);
-  return createElement("div", {
-    className: componentClasses
-  }, createElement(Row, null, options.map(function (_ref, index) {
-    var _ref2;
-    var label = _ref.label,
-      value = _ref.value,
-      icon = _ref.icon,
-      is_pro = _ref.is_pro,
-      rest = _objectWithoutProperties(_ref, _excluded$1);
-    return createElement(Column, {
-      column: +(rest === null || rest === void 0 ? void 0 : rest.column) || 4,
-      key: index
-    }, createElement("div", {
-      className: classNames("wprf-input-radio-option", {
-        "wprf-option-has-image": icon !== null && icon !== void 0 ? icon : false,
-        "wprf-option-selected": value == option
+  return /*#__PURE__*/jsx("div", {
+    className: componentClasses,
+    children: /*#__PURE__*/jsx(Row, {
+      children: options.map(function (_ref, index) {
+        var _ref2;
+        var label = _ref.label,
+          value = _ref.value,
+          icon = _ref.icon,
+          is_pro = _ref.is_pro,
+          rest = _objectWithoutProperties(_ref, _excluded$1);
+        return /*#__PURE__*/jsx(Column, {
+          column: +(rest === null || rest === void 0 ? void 0 : rest.column) || 4,
+          children: /*#__PURE__*/jsxs("div", {
+            className: classNames("wprf-input-radio-option", {
+              "wprf-option-has-image": icon !== null && icon !== void 0 ? icon : false,
+              "wprf-option-selected": value == option
+            }),
+            children: [/*#__PURE__*/jsx(Label, {
+              className: classNames(_defineProperty({
+                "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false
+              }, "wprf-size-".concat(styles.size), (_ref2 = icon && (styles === null || styles === void 0 ? void 0 : styles.size)) !== null && _ref2 !== void 0 ? _ref2 : false)),
+              htmlFor: "wprf-input-radio-".concat(instanceId, "-").concat(index),
+              src: icon,
+              badge: {
+                label: is_pro ? 'Pro' : 'Free',
+                value: is_pro,
+                active: Boolean(builderContext.is_pro_active)
+              },
+              children: label
+            }), /*#__PURE__*/jsx(GenericInput, _objectSpread$b(_objectSpread$b(_objectSpread$b({}, rest), validProps), {}, {
+              is_pro: is_pro,
+              type: "radio",
+              value: value,
+              checked: value === option,
+              id: "wprf-input-radio-".concat(instanceId, "-").concat(index)
+            }))]
+          })
+        }, index);
       })
-    }, createElement(Label, {
-      className: classNames(_defineProperty({
-        "wprf-label-has-image": icon !== null && icon !== void 0 ? icon : false
-      }, "wprf-size-".concat(styles.size), (_ref2 = icon && (styles === null || styles === void 0 ? void 0 : styles.size)) !== null && _ref2 !== void 0 ? _ref2 : false)),
-      htmlFor: "wprf-input-radio-".concat(instanceId, "-").concat(index),
-      src: icon,
-      badge: {
-        label: is_pro ? 'Pro' : 'Free',
-        value: is_pro,
-        active: Boolean(builderContext.is_pro_active)
-      }
-    }, label), createElement(GenericInput, _extends$1({}, rest, validProps, {
-      is_pro: is_pro,
-      type: "radio",
-      value: value,
-      checked: value === option,
-      id: "wprf-input-radio-".concat(instanceId, "-").concat(index)
-    }))));
-  })));
+    })
+  });
 };
 var RadioCard = withLabel(_RadioCard);
 
-function ownKeys$4(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$4(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$4(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$4(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$a(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$a(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$a(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$a(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Repeater = function Repeater(props) {
   var _builderContext$value, _builderContext$value4;
   var fieldName = props.name;
@@ -3338,26 +3511,26 @@ var Repeater = function Repeater(props) {
       var _indexedCopy, _indexedCopy2, _indexedCopy3, _indexedCopy4;
       var indexedCopy = (lValue === null || lValue === void 0 ? void 0 : lValue[index]) || {};
       if ((_indexedCopy = indexedCopy) !== null && _indexedCopy !== void 0 && _indexedCopy.title) {
-        indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$a(_objectSpread$a({}, indexedCopy), {}, {
           title: indexedCopy.title + ' - Copy'
         });
       }
       if ((_indexedCopy2 = indexedCopy) !== null && _indexedCopy2 !== void 0 && _indexedCopy2.post_title) {
-        indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$a(_objectSpread$a({}, indexedCopy), {}, {
           post_title: indexedCopy.post_title + ' - Copy'
         });
       }
       if ((_indexedCopy3 = indexedCopy) !== null && _indexedCopy3 !== void 0 && _indexedCopy3.username) {
-        indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$a(_objectSpread$a({}, indexedCopy), {}, {
           username: indexedCopy.username + ' - Copy'
         });
       }
       if ((_indexedCopy4 = indexedCopy) !== null && _indexedCopy4 !== void 0 && _indexedCopy4.plugin_theme_name) {
-        indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+        indexedCopy = _objectSpread$a(_objectSpread$a({}, indexedCopy), {}, {
           plugin_theme_name: indexedCopy.plugin_theme_name + ' - Copy'
         });
       }
-      indexedCopy = _objectSpread$4(_objectSpread$4({}, indexedCopy), {}, {
+      indexedCopy = _objectSpread$a(_objectSpread$a({}, indexedCopy), {}, {
         index: v4(),
         isCollapsed: false
       });
@@ -3366,56 +3539,59 @@ var Repeater = function Repeater(props) {
   }, [localMemoizedValue]);
   useEffect(function () {
     if (localMemoizedValue == undefined || localMemoizedValue == '') {
-      setLocalMemoizedValue([_objectSpread$4({
+      setLocalMemoizedValue([_objectSpread$a({
         index: v4()
       }, insertDefaultRepeaterValues(fields))]);
     } else {
       setLocalMemoizedValue(function (items) {
         return items.map(function (item) {
-          return _objectSpread$4(_objectSpread$4({}, item), {}, {
+          return _objectSpread$a(_objectSpread$a({}, item), {}, {
             index: v4()
           });
         });
       });
     }
   }, []);
-  return createElement("div", {
-    className: "wprf-repeater-control"
-  }, localMemoizedValue && (localMemoizedValue === null || localMemoizedValue === void 0 ? void 0 : localMemoizedValue.length) > 0 && createElement(ReactSortable, {
-    className: "wprf-repeater-content",
-    list: localMemoizedValue,
-    setList: handleSort,
-    handle: '.wprf-repeater-field-title',
-    filter: '.wprf-repeater-field-controls',
-    forceFallback: true
-  }, localMemoizedValue.map(function (value, index) {
-    return createElement(_RepeaterField, {
-      isCollapsed: value === null || value === void 0 ? void 0 : value.isCollapsed,
-      key: (value === null || value === void 0 ? void 0 : value.index) || index,
-      fields: fields,
-      index: index,
-      parent: fieldName,
-      clone: handleClone,
-      remove: handleRemove,
-      onChange: function onChange(event) {
-        return handleChange(event, index);
-      },
-      parentIndex: props.parentIndex
-    });
-  })), createElement("div", {
-    className: "wprf-repeater-label"
-  }, createElement("button", {
-    className: "wprf-repeater-button",
-    onClick: function onClick() {
-      return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [_objectSpread$4({
-        index: v4()
-      }, insertDefaultRepeaterValues(fields))]));
-    }
-  }, button === null || button === void 0 ? void 0 : button.label)));
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-repeater-control",
+    children: [localMemoizedValue && (localMemoizedValue === null || localMemoizedValue === void 0 ? void 0 : localMemoizedValue.length) > 0 && /*#__PURE__*/jsx(ReactSortable, {
+      className: "wprf-repeater-content",
+      list: localMemoizedValue,
+      setList: handleSort,
+      handle: '.wprf-repeater-field-title',
+      filter: '.wprf-repeater-field-controls',
+      forceFallback: true,
+      children: localMemoizedValue.map(function (value, index) {
+        return /*#__PURE__*/jsx(_RepeaterField, {
+          isCollapsed: value === null || value === void 0 ? void 0 : value.isCollapsed,
+          fields: fields,
+          index: index,
+          parent: fieldName,
+          clone: handleClone,
+          remove: handleRemove,
+          onChange: function onChange(event) {
+            return handleChange(event, index);
+          },
+          parentIndex: props.parentIndex
+        }, (value === null || value === void 0 ? void 0 : value.index) || index);
+      })
+    }), /*#__PURE__*/jsx("div", {
+      className: "wprf-repeater-label",
+      children: /*#__PURE__*/jsx("button", {
+        className: "wprf-repeater-button",
+        onClick: function onClick() {
+          return builderContext.setFieldValue(fieldName, [].concat(_toConsumableArray(localMemoizedValue), [_objectSpread$a({
+            index: v4()
+          }, insertDefaultRepeaterValues(fields))]));
+        },
+        children: button === null || button === void 0 ? void 0 : button.label
+      })
+    })]
+  });
 };
 
-function ownKeys$3(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$3(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$3(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$3(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$9(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$9(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$9(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$9(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var ResponsiveNumber = function ResponsiveNumber(props) {
   var _Object$keys;
   var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
@@ -3428,7 +3604,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
   var value = validProps.value;
   if (!isObject(validProps.value)) {
     Object.keys(props.controls).reduce(function (acc, key) {
-      return _objectSpread$3(_objectSpread$3({}, acc), {}, _defineProperty({}, key, validProps.value));
+      return _objectSpread$9(_objectSpread$9({}, acc), {}, _defineProperty({}, key, validProps.value));
     }, {});
   }
   var _useState3 = useState(value),
@@ -3436,7 +3612,7 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
     responsiveSize = _useState4[0],
     setResponsiveSize = _useState4[1];
   var handleChange = function handleChange(event) {
-    setResponsiveSize(_objectSpread$3(_objectSpread$3({}, responsiveSize), {}, _defineProperty({}, responsive, event.target.value)));
+    setResponsiveSize(_objectSpread$9(_objectSpread$9({}, responsiveSize), {}, _defineProperty({}, responsive, event.target.value)));
   };
   useEffect(function () {
     validProps.onChange({
@@ -3449,45 +3625,49 @@ var ResponsiveNumber = function ResponsiveNumber(props) {
       }
     });
   }, [responsiveSize]);
-  return createElement("div", {
+  return /*#__PURE__*/jsxs("div", {
     style: {
       display: "flex",
       alignItems: "center",
       rowGap: 5,
       columnGap: 10,
       flexWrap: "wrap"
-    }
-  }, /*#__PURE__*/React.createElement("input", _objectSpread$3(_objectSpread$3({}, validProps), {}, {
-    type: "number",
-    value: responsiveSize === null || responsiveSize === void 0 ? void 0 : responsiveSize[responsive],
-    onChange: handleChange
-  })), createElement("div", {
-    style: {
-      display: "flex",
-      alignItems: "center"
-    }
-  }, (_Object$keys = Object.keys(props.controls)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (key) {
-    return createElement("button", {
-      type: "button",
-      key: key,
-      className: "responsive-button ".concat(responsive === key ? "active" : ""),
-      onClick: function onClick() {
-        return setResponsive(key);
-      }
-    }, createElement("img", {
-      src: props.controls[key].icon,
-      alt: "desktop",
+    },
+    children: [/*#__PURE__*/React.createElement("input", _objectSpread$9(_objectSpread$9({}, validProps), {}, {
+      type: "number",
+      value: responsiveSize === null || responsiveSize === void 0 ? void 0 : responsiveSize[responsive],
+      onChange: handleChange
+    })), /*#__PURE__*/jsx("div", {
       style: {
-        width: props.controls[key].size
-      }
-    }));
-  })));
+        display: "flex",
+        alignItems: "center"
+      },
+      children: (_Object$keys = Object.keys(props.controls)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (key) {
+        return /*#__PURE__*/jsx("button", {
+          type: "button",
+          className: "responsive-button ".concat(responsive === key ? "active" : ""),
+          onClick: function onClick() {
+            return setResponsive(key);
+          },
+          children: /*#__PURE__*/jsx("img", {
+            src: props.controls[key].icon,
+            alt: "desktop",
+            style: {
+              width: props.controls[key].size
+            }
+          })
+        }, key);
+      })
+    })]
+  });
 };
 ResponsiveNumber.defaultProps = {
   type: "number"
 };
 var ResponsiveNumber_default = withLabel(/*#__PURE__*/React.memo(ResponsiveNumber));
 
+function ownKeys$8(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$8(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$8(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$8(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _createForOfIteratorHelper$1(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray$1(r)) || e) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: true } : { done: false, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = true, u = false; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = true, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function _unsupportedIterableToArray$1(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray$1(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray$1(r, a) : void 0; } }
 function _arrayLikeToArray$1(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
@@ -3578,40 +3758,44 @@ var SteppedButton$1 = function SteppedButton(props) {
       props.setActive(targetTab);
     }
   };
-  return createElement("div", {
-    className: "wprf-stepped-button"
-  }, props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
-    var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4, _props$config$buttons5, _props$config$buttons6, _props$config$buttons7, _props$config$buttons8, _props$config$buttons9, _props$config$buttons0, _props$config$buttons1, _props$config$buttons10, _props$config$buttons11, _props$config$buttons12, _props$config$buttons13;
-    return createElement(React.Fragment, {
-      key: "button_".concat(button, "_").concat(index)
-    }, button === "skip" && nextTab !== undefined && createElement(Button$2, {
-      className: "wprf-btn wprf-step-btn-".concat(button),
-      onClick: function onClick() {
-        return handleButtonClick(button);
-      }
-    }, (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]), button === "start" && prevTab === undefined && createElement("div", {
-      className: "wprf-btn wprf-step-btn-next"
-    }, createElement(Field, {
-      type: "button",
-      ajax: (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 || (_props$config$buttons2 = _props$config$buttons2[button]) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2.ajax,
-      name: "step-button",
-      onClick: function onClick() {
-        return handleButtonClick(button);
-      },
-      text: _typeof$1((_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 || (_props$config$buttons4 = _props$config$buttons4[button]) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4.condition) ? (_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 || (_props$config$buttons5 = _props$config$buttons5[button]) === null || _props$config$buttons5 === void 0 ? void 0 : _props$config$buttons5.customName : (_props$config$buttons6 = props.config.buttons) === null || _props$config$buttons6 === void 0 || (_props$config$buttons6 = _props$config$buttons6[button]) === null || _props$config$buttons6 === void 0 ? void 0 : _props$config$buttons6.name : (_props$config$buttons7 = props.config.buttons) === null || _props$config$buttons7 === void 0 ? void 0 : _props$config$buttons7[button]
-    })), (button === "next" && nextTab !== undefined && prevTab !== undefined || button === "prev" && prevTab !== undefined) && createElement("div", {
-      className: "wprf-btn wprf-step-btn-".concat(button, " ").concat(button === "prev" && disablePrev ? "disabled" : "")
-    }, createElement(Field, {
-      type: "button",
-      ajax: (_props$config$buttons8 = props.config.buttons) === null || _props$config$buttons8 === void 0 || (_props$config$buttons8 = _props$config$buttons8[button]) === null || _props$config$buttons8 === void 0 ? void 0 : _props$config$buttons8.ajax,
-      name: "step-button",
-      disabled: button === "prev" && disablePrev,
-      onClick: function onClick() {
-        return handleButtonClick(button);
-      },
-      text: _typeof$1((_props$config$buttons9 = props.config.buttons) === null || _props$config$buttons9 === void 0 ? void 0 : _props$config$buttons9[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons0 = props.config.buttons) === null || _props$config$buttons0 === void 0 || (_props$config$buttons0 = _props$config$buttons0[button]) === null || _props$config$buttons0 === void 0 ? void 0 : _props$config$buttons0.condition) ? (_props$config$buttons1 = props.config.buttons) === null || _props$config$buttons1 === void 0 || (_props$config$buttons1 = _props$config$buttons1[button]) === null || _props$config$buttons1 === void 0 ? void 0 : _props$config$buttons1.customName : (_props$config$buttons10 = props.config.buttons) === null || _props$config$buttons10 === void 0 || (_props$config$buttons10 = _props$config$buttons10[button]) === null || _props$config$buttons10 === void 0 ? void 0 : _props$config$buttons10.name : (_props$config$buttons11 = props.config.buttons) === null || _props$config$buttons11 === void 0 ? void 0 : _props$config$buttons11[button]
-    })), nextTab === undefined && ((_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 || (_props$config$buttons12 = _props$config$buttons12[button]) === null || _props$config$buttons12 === void 0 ? void 0 : _props$config$buttons12.type) && createElement(Field, (_props$config$buttons13 = props.config.buttons) === null || _props$config$buttons13 === void 0 ? void 0 : _props$config$buttons13[button]));
-  }));
+  return /*#__PURE__*/jsx("div", {
+    className: "wprf-stepped-button",
+    children: props.config.buttons && Object.keys(props.config.buttons).map(function (button, index) {
+      var _props$config$buttons, _props$config$buttons2, _props$config$buttons3, _props$config$buttons4, _props$config$buttons5, _props$config$buttons6, _props$config$buttons7, _props$config$buttons8, _props$config$buttons9, _props$config$buttons0, _props$config$buttons1, _props$config$buttons10, _props$config$buttons11, _props$config$buttons12, _props$config$buttons13;
+      return /*#__PURE__*/jsxs(React.Fragment, {
+        children: [button === "skip" && nextTab !== undefined && /*#__PURE__*/jsx(Button$2, {
+          className: "wprf-btn wprf-step-btn-".concat(button),
+          onClick: function onClick() {
+            return handleButtonClick(button);
+          },
+          children: (_props$config$buttons = props.config.buttons) === null || _props$config$buttons === void 0 ? void 0 : _props$config$buttons[button]
+        }), button === "start" && prevTab === undefined && /*#__PURE__*/jsx("div", {
+          className: "wprf-btn wprf-step-btn-next",
+          children: /*#__PURE__*/jsx(Field, {
+            type: "button",
+            ajax: (_props$config$buttons2 = props.config.buttons) === null || _props$config$buttons2 === void 0 || (_props$config$buttons2 = _props$config$buttons2[button]) === null || _props$config$buttons2 === void 0 ? void 0 : _props$config$buttons2.ajax,
+            name: "step-button",
+            onClick: function onClick() {
+              return handleButtonClick(button);
+            },
+            text: _typeof$1((_props$config$buttons3 = props.config.buttons) === null || _props$config$buttons3 === void 0 ? void 0 : _props$config$buttons3[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons4 = props.config.buttons) === null || _props$config$buttons4 === void 0 || (_props$config$buttons4 = _props$config$buttons4[button]) === null || _props$config$buttons4 === void 0 ? void 0 : _props$config$buttons4.condition) ? (_props$config$buttons5 = props.config.buttons) === null || _props$config$buttons5 === void 0 || (_props$config$buttons5 = _props$config$buttons5[button]) === null || _props$config$buttons5 === void 0 ? void 0 : _props$config$buttons5.customName : (_props$config$buttons6 = props.config.buttons) === null || _props$config$buttons6 === void 0 || (_props$config$buttons6 = _props$config$buttons6[button]) === null || _props$config$buttons6 === void 0 ? void 0 : _props$config$buttons6.name : (_props$config$buttons7 = props.config.buttons) === null || _props$config$buttons7 === void 0 ? void 0 : _props$config$buttons7[button]
+          })
+        }), (button === "next" && nextTab !== undefined && prevTab !== undefined || button === "prev" && prevTab !== undefined) && /*#__PURE__*/jsx("div", {
+          className: "wprf-btn wprf-step-btn-".concat(button, " ").concat(button === "prev" && disablePrev ? "disabled" : ""),
+          children: /*#__PURE__*/jsx(Field, {
+            type: "button",
+            ajax: (_props$config$buttons8 = props.config.buttons) === null || _props$config$buttons8 === void 0 || (_props$config$buttons8 = _props$config$buttons8[button]) === null || _props$config$buttons8 === void 0 ? void 0 : _props$config$buttons8.ajax,
+            name: "step-button",
+            disabled: button === "prev" && disablePrev,
+            onClick: function onClick() {
+              return handleButtonClick(button);
+            },
+            text: _typeof$1((_props$config$buttons9 = props.config.buttons) === null || _props$config$buttons9 === void 0 ? void 0 : _props$config$buttons9[button]) === "object" ? (props === null || props === void 0 ? void 0 : props.active) === ((_props$config$buttons0 = props.config.buttons) === null || _props$config$buttons0 === void 0 || (_props$config$buttons0 = _props$config$buttons0[button]) === null || _props$config$buttons0 === void 0 ? void 0 : _props$config$buttons0.condition) ? (_props$config$buttons1 = props.config.buttons) === null || _props$config$buttons1 === void 0 || (_props$config$buttons1 = _props$config$buttons1[button]) === null || _props$config$buttons1 === void 0 ? void 0 : _props$config$buttons1.customName : (_props$config$buttons10 = props.config.buttons) === null || _props$config$buttons10 === void 0 || (_props$config$buttons10 = _props$config$buttons10[button]) === null || _props$config$buttons10 === void 0 ? void 0 : _props$config$buttons10.name : (_props$config$buttons11 = props.config.buttons) === null || _props$config$buttons11 === void 0 ? void 0 : _props$config$buttons11[button]
+          })
+        }), nextTab === undefined && ((_props$config$buttons12 = props.config.buttons) === null || _props$config$buttons12 === void 0 || (_props$config$buttons12 = _props$config$buttons12[button]) === null || _props$config$buttons12 === void 0 ? void 0 : _props$config$buttons12.type) && /*#__PURE__*/jsx(Field, _objectSpread$8({}, (_props$config$buttons13 = props.config.buttons) === null || _props$config$buttons13 === void 0 ? void 0 : _props$config$buttons13[button]))]
+      }, "button_".concat(button, "_").concat(index));
+    })
+  });
 };
 var SteppedButton = /*#__PURE__*/React.memo(SteppedButton$1);
 
@@ -3619,8 +3803,18 @@ function _objectDestructuringEmpty(t) {
   if (null == t) throw new TypeError("Cannot destructure " + t);
 }
 
+function _extends() {
+  return _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
+    }
+    return n;
+  }, _extends.apply(null, arguments);
+}
+
 var Submit = function Submit(_ref) {
-  var props = _extends$1({}, (_objectDestructuringEmpty(_ref), _ref));
+  var props = _extends({}, (_objectDestructuringEmpty(_ref), _ref));
   var context = useBuilderContext();
   var label = (props === null || props === void 0 ? void 0 : props.label) || __('Save Changes', 'betterdocs');
   if (context.isSubmitting) {
@@ -3634,15 +3828,19 @@ var Submit = function Submit(_ref) {
       return;
     }
   }, [context]);
-  return createElement("div", {
-    className: "wprf-submit wprf-control"
-  }, createElement(Button$2, {
-    disabled: context === null || context === void 0 ? void 0 : context.isSubmitting,
-    className: "wprf-submit-button",
-    onClick: handleSubmit
-  }, label));
+  return /*#__PURE__*/jsx("div", {
+    className: "wprf-submit wprf-control",
+    children: /*#__PURE__*/jsx(Button$2, {
+      disabled: context === null || context === void 0 ? void 0 : context.isSubmitting,
+      className: "wprf-submit-button",
+      onClick: handleSubmit,
+      children: label
+    })
+  });
 };
 
+function ownKeys$7(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$7(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$7(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$7(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Section = function Section(props) {
   var _props$collapsed, _builderContext$confi;
   var _props$searchable = props.searchable,
@@ -3678,11 +3876,9 @@ var Section = function Section(props) {
     // builderContext.setFormField([...props.parentIndex, 'sorted'], true);
     var allFields = newFields.map(function (item, index) {
       var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ["fields", index]);
-      return createElement(Field, _extends$1({
-        key: item.name
-      }, item, {
+      return /*#__PURE__*/jsx(Field, _objectSpread$7(_objectSpread$7({}, item), {}, {
         parentIndex: parentIndex
-      }));
+      }), item.name);
     });
     setFields(allFields);
     setFilteredFields(allFields);
@@ -3705,67 +3901,114 @@ var Section = function Section(props) {
   var componentClasses = classNames("wprf-control-section", props === null || props === void 0 ? void 0 : props.classes, props === null || props === void 0 ? void 0 : props.name, {
     "wprf-section-collapsed": (props === null || props === void 0 ? void 0 : props.collapsible) && isCollapse
   });
-  return createElement("div", {
+  return /*#__PURE__*/jsxs("div", {
     id: props === null || props === void 0 ? void 0 : props.name,
-    className: componentClasses
-  }, props.placeholder && createElement("div", {
-    className: "wprf-section-title"
-  }, createElement("h4", null, props.placeholder), props.collapsible && createElement("button", {
-    onClick: function onClick() {
-      return setCollapse(!isCollapse);
-    }
-  }, "Icon")), searchable ? createElement("div", {
-    className: "wprf-section-fields"
-  }, createElement("div", {
-    className: "wprf-section-search-form"
-  }, createElement("span", {
-    className: "wprf-section-search"
-  }, createElement("input", {
-    type: "text",
-    name: "",
-    id: "",
-    placeholder: searchPlaceholder,
-    onChange: function onChange(e) {
-      return handleSearchString(e);
-    },
-    value: searchString
-  }))), createElement("div", {
-    className: "wprf-section-search-results"
-  }, filteredFields !== null && filteredFields !== void 0 && filteredFields.length ? filteredFields : createElement("div", {
-    className: "wprf-result-not-found",
-    dangerouslySetInnerHTML: {
-      __html: searchNotFoundMessage !== null && searchNotFoundMessage !== void 0 ? searchNotFoundMessage : "Not found!"
-    }
-  }))) : createElement("div", {
-    className: "wprf-section-fields"
-  }, filteredFields), props.showSubmit && createElement(Submit, builderContext.submit), props.showSteps && createElement(SteppedButton, {
-    fields: builderContext.tabs,
-    active: builderContext.config.active,
-    setActive: builderContext.setActiveTab,
-    config: (_builderContext$confi = builderContext.config.step) !== null && _builderContext$confi !== void 0 ? _builderContext$confi : {
-      show: false
-    }
-  }));
+    className: componentClasses,
+    children: [props.placeholder && /*#__PURE__*/jsxs("div", {
+      className: "wprf-section-title",
+      children: [/*#__PURE__*/jsx("h4", {
+        children: props.placeholder
+      }), props.collapsible && /*#__PURE__*/jsx("button", {
+        onClick: function onClick() {
+          return setCollapse(!isCollapse);
+        },
+        children: "Icon"
+      })]
+    }), searchable ? /*#__PURE__*/jsxs("div", {
+      className: "wprf-section-fields",
+      children: [/*#__PURE__*/jsx("div", {
+        className: "wprf-section-search-form",
+        children: /*#__PURE__*/jsx("span", {
+          className: "wprf-section-search",
+          children: /*#__PURE__*/jsx("input", {
+            type: "text",
+            name: "",
+            id: "",
+            placeholder: searchPlaceholder,
+            onChange: function onChange(e) {
+              return handleSearchString(e);
+            },
+            value: searchString
+          })
+        })
+      }), /*#__PURE__*/jsx("div", {
+        className: "wprf-section-search-results",
+        children: filteredFields !== null && filteredFields !== void 0 && filteredFields.length ? filteredFields : /*#__PURE__*/jsx("div", {
+          className: "wprf-result-not-found",
+          dangerouslySetInnerHTML: {
+            __html: searchNotFoundMessage !== null && searchNotFoundMessage !== void 0 ? searchNotFoundMessage : "Not found!"
+          }
+        })
+      })]
+    }) : /*#__PURE__*/jsx("div", {
+      className: "wprf-section-fields",
+      children: filteredFields
+    }), props.showSubmit && /*#__PURE__*/jsx(Submit, _objectSpread$7({}, builderContext.submit)), props.showSteps && /*#__PURE__*/jsx(SteppedButton, {
+      fields: builderContext.tabs,
+      active: builderContext.config.active,
+      setActive: builderContext.setActiveTab,
+      config: (_builderContext$confi = builderContext.config.step) !== null && _builderContext$confi !== void 0 ? _builderContext$confi : {
+        show: false
+      }
+    })]
+  });
 };
 var Section_default = /*#__PURE__*/React.memo(Section);
 
-// packages/html-entities/src/index.ts
-var _decodeTextArea;
+/** @type {HTMLTextAreaElement} */
+let _decodeTextArea;
+
+/**
+ * Decodes the HTML entities from a given string.
+ *
+ * @param {string} html String that contain HTML entities.
+ *
+ * @example
+ * ```js
+ * import { decodeEntities } from '@wordpress/html-entities';
+ *
+ * const result = decodeEntities( '&aacute;' );
+ * console.log( result ); // result will be "á"
+ * ```
+ *
+ * @return {string} The decoded string.
+ */
 function decodeEntities(html) {
-  if ("string" !== typeof html || -1 === html.indexOf("&")) {
+  // Not a string, or no entities to decode.
+  if ('string' !== typeof html || -1 === html.indexOf('&')) {
     return html;
   }
-  if (void 0 === _decodeTextArea) {
+
+  // Create a textarea for decoding entities, that we can reuse.
+  if (undefined === _decodeTextArea) {
     if (document.implementation && document.implementation.createHTMLDocument) {
-      _decodeTextArea = document.implementation.createHTMLDocument("").createElement("textarea");
+      _decodeTextArea = document.implementation.createHTMLDocument('').createElement('textarea');
     } else {
-      _decodeTextArea = document.createElement("textarea");
+      _decodeTextArea = document.createElement('textarea');
     }
   }
   _decodeTextArea.innerHTML = html;
-  const decoded = _decodeTextArea.textContent ?? "";
-  _decodeTextArea.innerHTML = "";
-  return decoded;
+  const decoded = _decodeTextArea.textContent;
+  _decodeTextArea.innerHTML = '';
+
+  /**
+   * Cast to string, HTMLTextAreaElement should always have `string` textContent.
+   *
+   * > The `textContent` property of the `Node` interface represents the text content of the
+   * > node and its descendants.
+   * >
+   * > Value: A string or `null`
+   * >
+   * > * If the node is a `document` or a Doctype, `textContent` returns `null`.
+   * > * If the node is a CDATA section, comment, processing instruction, or text node,
+   * >   textContent returns the text inside the node, i.e., the `Node.nodeValue`.
+   * > * For other node types, `textContent returns the concatenation of the textContent of
+   * >   every child node, excluding comments and processing instructions. (This is an empty
+   * >   string if the node has no children.)
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+   */
+  return /** @type {string} */decoded;
 }
 
 var top = 'top';
@@ -7585,42 +7828,98 @@ var forwardRef = (function (Tippy, defaultProps) {
 });
 var index = /*#__PURE__*/forwardRef( /*#__PURE__*/TippyGenerator(tippy));
 
-// packages/url/src/get-query-string.ts
+/* wp:polyfill */
+/**
+ * Returns the query string part of the URL.
+ *
+ * @param {string} url The full URL.
+ *
+ * @example
+ * ```js
+ * const queryString = getQueryString( 'http://localhost:8080/this/is/a/test?query=true#fragment' ); // 'query=true'
+ * ```
+ *
+ * @return {string|void} The query string part of the URL.
+ */
 function getQueryString(url) {
   let query;
   try {
-    query = new URL(url, "http://example.com").search.substring(1);
-  } catch {
-  }
+    query = new URL(url, 'http://example.com').search.substring(1);
+  } catch (error) {}
   if (query) {
     return query;
   }
 }
 
-// packages/url/src/build-query-string.ts
+/**
+ * Generates URL-encoded query string using input query data.
+ *
+ * It is intended to behave equivalent as PHP's `http_build_query`, configured
+ * with encoding type PHP_QUERY_RFC3986 (spaces as `%20`).
+ *
+ * @example
+ * ```js
+ * const queryString = buildQueryString( {
+ *    simple: 'is ok',
+ *    arrays: [ 'are', 'fine', 'too' ],
+ *    objects: {
+ *       evenNested: {
+ *          ok: 'yes',
+ *       },
+ *    },
+ * } );
+ * // "simple=is%20ok&arrays%5B0%5D=are&arrays%5B1%5D=fine&arrays%5B2%5D=too&objects%5BevenNested%5D%5Bok%5D=yes"
+ * ```
+ *
+ * @param {Record<string,*>} data Data to encode.
+ *
+ * @return {string} Query string.
+ */
 function buildQueryString(data) {
-  let string = "";
+  let string = '';
   const stack = Object.entries(data);
   let pair;
   while (pair = stack.shift()) {
     let [key, value] = pair;
+
+    // Support building deeply nested data, from array or object values.
     const hasNestedData = Array.isArray(value) || value && value.constructor === Object;
     if (hasNestedData) {
+      // Push array or object values onto the stack as composed of their
+      // original key and nested index or key, retaining order by a
+      // combination of Array#reverse and Array#unshift onto the stack.
       const valuePairs = Object.entries(value).reverse();
       for (const [member, memberValue] of valuePairs) {
         stack.unshift([`${key}[${member}]`, memberValue]);
       }
-    } else if (value !== void 0) {
+    } else if (value !== undefined) {
+      // Null is treated as special case, equivalent to empty string.
       if (value === null) {
-        value = "";
+        value = '';
       }
-      string += "&" + [key, String(value)].map(encodeURIComponent).join("=");
+      string += '&' + [key, value].map(encodeURIComponent).join('=');
     }
   }
+
+  // Loop will concatenate with leading `&`, but it's only expected for all
+  // but the first query parameter. This strips the leading `&`, while still
+  // accounting for the case that the string may in-fact be empty.
   return string.substr(1);
 }
 
-// packages/url/src/get-fragment.ts
+/**
+ * Returns the fragment part of the URL.
+ *
+ * @param {string} url The full URL
+ *
+ * @example
+ * ```js
+ * const fragment1 = getFragment( 'http://localhost:8080/this/is/a/test?query=true#fragment' ); // '#fragment'
+ * const fragment2 = getFragment( 'https://wordpress.org#another-fragment?query=true' ); // '#another-fragment'
+ * ```
+ *
+ * @return {string|void} The fragment part of the URL.
+ */
 function getFragment(url) {
   const matches = /^\S+?(#[^\s\?]*)/.exec(url);
   if (matches) {
@@ -7628,67 +7927,149 @@ function getFragment(url) {
   }
 }
 
-// packages/url/src/safe-decode-uri-component.ts
+/**
+ * Safely decodes a URI component with `decodeURIComponent`. Returns the URI component unmodified if
+ * `decodeURIComponent` throws an error.
+ *
+ * @param {string} uriComponent URI component to decode.
+ *
+ * @return {string} Decoded URI component if possible.
+ */
 function safeDecodeURIComponent(uriComponent) {
   try {
     return decodeURIComponent(uriComponent);
-  } catch {
+  } catch (uriComponentError) {
     return uriComponent;
   }
 }
 
-// packages/url/src/get-query-args.ts
+/**
+ * Internal dependencies
+ */
+
+/** @typedef {import('./get-query-arg').QueryArgParsed} QueryArgParsed */
+
+/**
+ * @typedef {Record<string,QueryArgParsed>} QueryArgs
+ */
+
+/**
+ * Sets a value in object deeply by a given array of path segments. Mutates the
+ * object reference.
+ *
+ * @param {Record<string,*>} object Object in which to assign.
+ * @param {string[]}         path   Path segment at which to set value.
+ * @param {*}                value  Value to set.
+ */
 function setPath(object, path, value) {
   const length = path.length;
   const lastIndex = length - 1;
   for (let i = 0; i < length; i++) {
     let key = path[i];
     if (!key && Array.isArray(object)) {
+      // If key is empty string and next value is array, derive key from
+      // the current length of the array.
       key = object.length.toString();
     }
-    key = ["__proto__", "constructor", "prototype"].includes(key) ? key.toUpperCase() : key;
+    key = ['__proto__', 'constructor', 'prototype'].includes(key) ? key.toUpperCase() : key;
+
+    // If the next key in the path is numeric (or empty string), it will be
+    // created as an array. Otherwise, it will be created as an object.
     const isNextKeyArrayIndex = !isNaN(Number(path[i + 1]));
-    object[key] = i === lastIndex ? (
-      // If at end of path, assign the intended value.
-      value
-    ) : (
-      // Otherwise, advance to the next object in the path, creating
-      // it if it does not yet exist.
-      object[key] || (isNextKeyArrayIndex ? [] : {})
-    );
+    object[key] = i === lastIndex ?
+    // If at end of path, assign the intended value.
+    value :
+    // Otherwise, advance to the next object in the path, creating
+    // it if it does not yet exist.
+    object[key] || (isNextKeyArrayIndex ? [] : {});
     if (Array.isArray(object[key]) && !isNextKeyArrayIndex) {
-      object[key] = { ...object[key] };
+      // If we current key is non-numeric, but the next value is an
+      // array, coerce the value to an object.
+      object[key] = {
+        ...object[key]
+      };
     }
+
+    // Update working reference object to the next in the path.
     object = object[key];
   }
 }
+
+/**
+ * Returns an object of query arguments of the given URL. If the given URL is
+ * invalid or has no querystring, an empty object is returned.
+ *
+ * @param {string} url URL.
+ *
+ * @example
+ * ```js
+ * const foo = getQueryArgs( 'https://wordpress.org?foo=bar&bar=baz' );
+ * // { "foo": "bar", "bar": "baz" }
+ * ```
+ *
+ * @return {QueryArgs} Query args object.
+ */
 function getQueryArgs(url) {
-  return (getQueryString(url) || "").replace(/\+/g, "%20").split("&").reduce((accumulator, keyValue) => {
-    const [key, value = ""] = keyValue.split("=").filter(Boolean).map(safeDecodeURIComponent);
+  return (getQueryString(url) || ''
+  // Normalize space encoding, accounting for PHP URL encoding
+  // corresponding to `application/x-www-form-urlencoded`.
+  //
+  // See: https://tools.ietf.org/html/rfc1866#section-8.2.1
+  ).replace(/\+/g, '%20').split('&').reduce((accumulator, keyValue) => {
+    const [key, value = ''] = keyValue.split('=')
+    // Filtering avoids decoding as `undefined` for value, where
+    // default is restored in destructuring assignment.
+    .filter(Boolean).map(safeDecodeURIComponent);
     if (key) {
-      const segments = key.replace(/\]/g, "").split("[");
+      const segments = key.replace(/\]/g, '').split('[');
       setPath(accumulator, segments, value);
     }
     return accumulator;
-  }, /* @__PURE__ */ Object.create(null));
+  }, Object.create(null));
 }
 
-// packages/url/src/add-query-args.ts
-function addQueryArgs(url = "", args) {
+/**
+ * Internal dependencies
+ */
+
+/**
+ * Appends arguments as querystring to the provided URL. If the URL already
+ * includes query arguments, the arguments are merged with (and take precedent
+ * over) the existing set.
+ *
+ * @param {string} [url=''] URL to which arguments should be appended. If omitted,
+ *                          only the resulting querystring is returned.
+ * @param {Object} [args]   Query arguments to apply to URL.
+ *
+ * @example
+ * ```js
+ * const newURL = addQueryArgs( 'https://google.com', { q: 'test' } ); // https://google.com/?q=test
+ * ```
+ *
+ * @return {string} URL with arguments applied.
+ */
+function addQueryArgs(url = '', args) {
+  // If no arguments are to be appended, return original URL.
   if (!args || !Object.keys(args).length) {
     return url;
   }
-  const fragment = getFragment(url) || "";
-  let baseUrl = url.replace(fragment, "");
-  const queryStringIndex = url.indexOf("?");
+  const fragment = getFragment(url) || '';
+  let baseUrl = url.replace(fragment, '');
+
+  // Determine whether URL already had query arguments.
+  const queryStringIndex = url.indexOf('?');
   if (queryStringIndex !== -1) {
+    // Merge into existing query arguments.
     args = Object.assign(getQueryArgs(url), args);
+
+    // Change working base URL to omit previous query arguments.
     baseUrl = baseUrl.substr(0, queryStringIndex);
   }
-  return baseUrl + "?" + buildQueryString(args) + fragment;
+  return baseUrl + '?' + buildQueryString(args) + fragment;
 }
 
-// Custom Option Component with Tooltip
+function ownKeys$6(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$6(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$6(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$6(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var CustomOption = function CustomOption(props) {
   var data = props.data,
     innerRef = props.innerRef,
@@ -7702,32 +8083,38 @@ var CustomOption = function CustomOption(props) {
   var optionClassName = "".concat(prefix, "__option");
   var focusedClassName = isFocused ? "".concat(optionClassName, "--is-focused") : '';
   var selectedClassName = isSelected ? "".concat(optionClassName, "--is-selected") : '';
-  return createElement("div", _extends$1({
+  return /*#__PURE__*/jsxs("div", _objectSpread$6(_objectSpread$6({
     ref: innerRef
-  }, innerProps, {
+  }, innerProps), {}, {
     className: "".concat(optionClassName, " ").concat(focusedClassName, " ").concat(selectedClassName, " custom-option"),
     style: {
       padding: '10px',
       backgroundColor: isFocused ? '#f0f0f0' : 'white',
       cursor: 'pointer'
-    }
-  }), createElement("span", null, data.label), data.tooltip && createElement(index, {
-    content: data.tooltip
-  }, createElement("span", {
-    className: "tooltip-icon",
-    style: {
-      marginLeft: '10px'
-    }
-  }, createElement("svg", {
-    width: "14",
-    height: "14",
-    viewBox: "0 0 14 14",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, createElement("path", {
-    d: "M6.33203 10.332H7.66536V6.33203H6.33203V10.332ZM6.9987 4.9987C7.18759 4.9987 7.34592 4.93481 7.4737 4.80703C7.60148 4.67925 7.66536 4.52092 7.66536 4.33203C7.66536 4.14314 7.60148 3.98481 7.4737 3.85703C7.34592 3.72925 7.18759 3.66536 6.9987 3.66536C6.80981 3.66536 6.65148 3.72925 6.5237 3.85703C6.39592 3.98481 6.33203 4.14314 6.33203 4.33203C6.33203 4.52092 6.39592 4.67925 6.5237 4.80703C6.65148 4.93481 6.80981 4.9987 6.9987 4.9987ZM6.9987 13.6654C6.07648 13.6654 5.20981 13.4904 4.3987 13.1404C3.58759 12.7904 2.88203 12.3154 2.28203 11.7154C1.68203 11.1154 1.20703 10.4098 0.857031 9.5987C0.507031 8.78759 0.332031 7.92092 0.332031 6.9987C0.332031 6.07648 0.507031 5.20981 0.857031 4.3987C1.20703 3.58759 1.68203 2.88203 2.28203 2.28203C2.88203 1.68203 3.58759 1.20703 4.3987 0.857031C5.20981 0.507031 6.07648 0.332031 6.9987 0.332031C7.92092 0.332031 8.78759 0.507031 9.5987 0.857031C10.4098 1.20703 11.1154 1.68203 11.7154 2.28203C12.3154 2.88203 12.7904 3.58759 13.1404 4.3987C13.4904 5.20981 13.6654 6.07648 13.6654 6.9987C13.6654 7.92092 13.4904 8.78759 13.1404 9.5987C12.7904 10.4098 12.3154 11.1154 11.7154 11.7154C11.1154 12.3154 10.4098 12.7904 9.5987 13.1404C8.78759 13.4904 7.92092 13.6654 6.9987 13.6654ZM6.9987 12.332C8.48759 12.332 9.7487 11.8154 10.782 10.782C11.8154 9.7487 12.332 8.48759 12.332 6.9987C12.332 5.50981 11.8154 4.2487 10.782 3.21536C9.7487 2.18203 8.48759 1.66536 6.9987 1.66536C5.50981 1.66536 4.2487 2.18203 3.21536 3.21536C2.18203 4.2487 1.66536 5.50981 1.66536 6.9987C1.66536 8.48759 2.18203 9.7487 3.21536 10.782C4.2487 11.8154 5.50981 12.332 6.9987 12.332Z",
-    fill: "#667085"
-  })))));
+    },
+    children: [/*#__PURE__*/jsx("span", {
+      children: data.label
+    }), data.tooltip && /*#__PURE__*/jsx(index, {
+      content: data.tooltip,
+      children: /*#__PURE__*/jsx("span", {
+        className: "tooltip-icon",
+        style: {
+          marginLeft: '10px'
+        },
+        children: /*#__PURE__*/jsx("svg", {
+          width: "14",
+          height: "14",
+          viewBox: "0 0 14 14",
+          fill: "none",
+          xmlns: "http://www.w3.org/2000/svg",
+          children: /*#__PURE__*/jsx("path", {
+            d: "M6.33203 10.332H7.66536V6.33203H6.33203V10.332ZM6.9987 4.9987C7.18759 4.9987 7.34592 4.93481 7.4737 4.80703C7.60148 4.67925 7.66536 4.52092 7.66536 4.33203C7.66536 4.14314 7.60148 3.98481 7.4737 3.85703C7.34592 3.72925 7.18759 3.66536 6.9987 3.66536C6.80981 3.66536 6.65148 3.72925 6.5237 3.85703C6.39592 3.98481 6.33203 4.14314 6.33203 4.33203C6.33203 4.52092 6.39592 4.67925 6.5237 4.80703C6.65148 4.93481 6.80981 4.9987 6.9987 4.9987ZM6.9987 13.6654C6.07648 13.6654 5.20981 13.4904 4.3987 13.1404C3.58759 12.7904 2.88203 12.3154 2.28203 11.7154C1.68203 11.1154 1.20703 10.4098 0.857031 9.5987C0.507031 8.78759 0.332031 7.92092 0.332031 6.9987C0.332031 6.07648 0.507031 5.20981 0.857031 4.3987C1.20703 3.58759 1.68203 2.88203 2.28203 2.28203C2.88203 1.68203 3.58759 1.20703 4.3987 0.857031C5.20981 0.507031 6.07648 0.332031 6.9987 0.332031C7.92092 0.332031 8.78759 0.507031 9.5987 0.857031C10.4098 1.20703 11.1154 1.68203 11.7154 2.28203C12.3154 2.88203 12.7904 3.58759 13.1404 4.3987C13.4904 5.20981 13.6654 6.07648 13.6654 6.9987C13.6654 7.92092 13.4904 8.78759 13.1404 9.5987C12.7904 10.4098 12.3154 11.1154 11.7154 11.7154C11.1154 12.3154 10.4098 12.7904 9.5987 13.1404C8.78759 13.4904 7.92092 13.6654 6.9987 13.6654ZM6.9987 12.332C8.48759 12.332 9.7487 11.8154 10.782 10.782C11.8154 9.7487 12.332 8.48759 12.332 6.9987C12.332 5.50981 11.8154 4.2487 10.782 3.21536C9.7487 2.18203 8.48759 1.66536 6.9987 1.66536C5.50981 1.66536 4.2487 2.18203 3.21536 3.21536C2.18203 4.2487 1.66536 5.50981 1.66536 6.9987C1.66536 8.48759 2.18203 9.7487 3.21536 10.782C4.2487 11.8154 5.50981 12.332 6.9987 12.332Z",
+            fill: "#667085"
+          })
+        })
+      })
+    })]
+  }));
 };
 var Select = function Select(props) {
   var _props$show_selected_;
@@ -7915,42 +8302,45 @@ var Select = function Select(props) {
   var selectComponents = props.options_tooltip ? {
     Option: CustomOption
   } : undefined;
-  return createElement("div", {
-    className: "wprf-select-wrapper"
-  }, createElement(ReactSelect, {
-    isDisabled: props === null || props === void 0 ? void 0 : props.disable,
-    className: "wprf-select",
-    classNamePrefix: "wprf-select",
-    isSearchable: search !== null && search !== void 0 ? search : false,
-    id: id,
-    name: name,
-    menuIsOpen: props.menuIsOpen,
-    isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
-    placeholder: placeholder,
-    isLoading: isLoading,
-    options: options,
-    value: selectedOption,
-    onMenuOpen: handleMenuOpen,
-    components: selectComponents // Conditional rendering of tooltip-enabled options
-    ,
-    onChange: handleOptionChange,
-    controlShouldRenderValue: (_props$show_selected_ = props === null || props === void 0 ? void 0 : props.show_selected_values) !== null && _props$show_selected_ !== void 0 ? _props$show_selected_ : true
-  }), selectedOption !== null && selectedOption !== void 0 && selectedOption.length ? createElement("ul", {
-    className: "wprf-selected-options"
-  }, selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.map(function (item, index) {
-    return createElement("li", {
-      key: item === null || item === void 0 ? void 0 : item.label,
-      className: "wprf-selected-option wprf-selected-option-".concat(index % 6 + 1)
-    }, item === null || item === void 0 ? void 0 : item.label, createElement("button", {
-      type: "button",
-      className: "wprf-remove-button",
-      onClick: function onClick() {
-        return removeSelection(item);
-      }
-    }, createElement("i", {
-      className: "btd-icon btd-close-fill"
-    })));
-  })) : "");
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-select-wrapper",
+    children: [/*#__PURE__*/jsx(ReactSelect, {
+      isDisabled: props === null || props === void 0 ? void 0 : props.disable,
+      className: "wprf-select",
+      classNamePrefix: "wprf-select",
+      isSearchable: search !== null && search !== void 0 ? search : false,
+      id: id,
+      name: name,
+      menuIsOpen: props.menuIsOpen,
+      isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
+      placeholder: placeholder,
+      isLoading: isLoading,
+      options: options,
+      value: selectedOption,
+      onMenuOpen: handleMenuOpen,
+      components: selectComponents // Conditional rendering of tooltip-enabled options
+      ,
+      onChange: handleOptionChange,
+      controlShouldRenderValue: (_props$show_selected_ = props === null || props === void 0 ? void 0 : props.show_selected_values) !== null && _props$show_selected_ !== void 0 ? _props$show_selected_ : true
+    }), selectedOption !== null && selectedOption !== void 0 && selectedOption.length ? /*#__PURE__*/jsx("ul", {
+      className: "wprf-selected-options",
+      children: selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.map(function (item, index) {
+        return /*#__PURE__*/jsxs("li", {
+          className: "wprf-selected-option wprf-selected-option-".concat(index % 6 + 1),
+          children: [item === null || item === void 0 ? void 0 : item.label, /*#__PURE__*/jsx("button", {
+            type: "button",
+            className: "wprf-remove-button",
+            onClick: function onClick() {
+              return removeSelection(item);
+            },
+            children: /*#__PURE__*/jsx("i", {
+              className: "btd-icon btd-close-fill"
+            })
+          })]
+        }, item === null || item === void 0 ? void 0 : item.label);
+      })
+    }) : ""]
+  });
 };
 var Select_default = withLabel(Select);
 
@@ -8050,44 +8440,59 @@ var SelectAsync = function SelectAsync(props) {
       }
     });
   }, [sOption]);
-  return createElement("div", {
-    className: "wprf-async-select-wrapper"
-  }, createElement(AsyncSelect, {
-    cacheOptions: true,
-    loadOptions: _handleMenuOpen,
-    defaultOptions: options,
-    isDisabled: props === null || props === void 0 ? void 0 : props.disable,
-    isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
-    classNamePrefix: "wprf-async-select"
-    // defaultMenuIsOpen={true}
-    ,
-    id: id,
-    name: name,
-    placeholder: placeholder,
-    formatOptionLabel: function formatOptionLabel(option, meta) {
-      var _meta$inputValue;
-      if (meta !== null && meta !== void 0 && (_meta$inputValue = meta.inputValue) !== null && _meta$inputValue !== void 0 && _meta$inputValue.length && option.name) {
-        var _meta$inputValue2;
-        if (option.name.toLowerCase().includes(meta === null || meta === void 0 || (_meta$inputValue2 = meta.inputValue) === null || _meta$inputValue2 === void 0 ? void 0 : _meta$inputValue2.toLowerCase())) {
-          var _option$name, _option$address;
-          option === null || option === void 0 ? void 0 : option.name;
-          var regX = new RegExp("(".concat(meta === null || meta === void 0 ? void 0 : meta.inputValue, ")"), "gi");
-          var _name = (_option$name = option.name) === null || _option$name === void 0 ? void 0 : _option$name.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
-          var address = (_option$address = option.address) === null || _option$address === void 0 ? void 0 : _option$address.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
-          return createElement(Fragment, null, parse(_name || ""), " ", createElement("small", null, parse(address || "")));
+  return /*#__PURE__*/jsx("div", {
+    className: "wprf-async-select-wrapper",
+    children: /*#__PURE__*/jsx(AsyncSelect, {
+      cacheOptions: true,
+      loadOptions: _handleMenuOpen,
+      defaultOptions: options,
+      isDisabled: props === null || props === void 0 ? void 0 : props.disable,
+      isMulti: multiple !== null && multiple !== void 0 ? multiple : false,
+      classNamePrefix: "wprf-async-select"
+      // defaultMenuIsOpen={true}
+      ,
+      id: id,
+      name: name,
+      placeholder: placeholder,
+      formatOptionLabel: function formatOptionLabel(option, meta) {
+        var _meta$inputValue;
+        if (meta !== null && meta !== void 0 && (_meta$inputValue = meta.inputValue) !== null && _meta$inputValue !== void 0 && _meta$inputValue.length && option.name) {
+          var _meta$inputValue2;
+          if (option.name.toLowerCase().includes(meta === null || meta === void 0 || (_meta$inputValue2 = meta.inputValue) === null || _meta$inputValue2 === void 0 ? void 0 : _meta$inputValue2.toLowerCase())) {
+            var _option$name, _option$address;
+            option === null || option === void 0 ? void 0 : option.name;
+            var regX = new RegExp("(".concat(meta === null || meta === void 0 ? void 0 : meta.inputValue, ")"), "gi");
+            var _name = (_option$name = option.name) === null || _option$name === void 0 ? void 0 : _option$name.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
+            var address = (_option$address = option.address) === null || _option$address === void 0 ? void 0 : _option$address.replace(regX, "<strong style={font-weight: 900}>$1</strong>");
+            return /*#__PURE__*/jsxs(Fragment, {
+              children: [parse(_name || ""), " ", /*#__PURE__*/jsx("small", {
+                children: parse(address || "")
+              })]
+            });
+          }
         }
-      }
-      return createElement(Fragment, null, option.name ? createElement(Fragment, null, createElement("b", null, option.name), " ") : createElement(Fragment, null, option.label, " "), option.address && createElement("small", null, option.address));
-    },
-    value: sOption,
-    isClearable: true,
-    isOptionDisabled: function isOptionDisabled(option) {
-      return option === null || option === void 0 ? void 0 : option.disabled;
-    },
-    onChange: function onChange(option) {
-      return setSOption(option);
-    } // option or options
-  }));
+        return /*#__PURE__*/jsxs(Fragment, {
+          children: [option.name ? /*#__PURE__*/jsxs(Fragment, {
+            children: [/*#__PURE__*/jsx("b", {
+              children: option.name
+            }), " "]
+          }) : /*#__PURE__*/jsxs(Fragment, {
+            children: [option.label, " "]
+          }), option.address && /*#__PURE__*/jsx("small", {
+            children: option.address
+          })]
+        });
+      },
+      value: sOption,
+      isClearable: true,
+      isOptionDisabled: function isOptionDisabled(option) {
+        return option === null || option === void 0 ? void 0 : option.disabled;
+      },
+      onChange: function onChange(option) {
+        return setSOption(option);
+      } // option or options
+    })
+  });
 };
 var SelectAsync_default = withLabel(SelectAsync);
 
@@ -8135,41 +8540,46 @@ var Slider = function Slider(props) {
       });
     }
   }, [isValue, sunit]);
-  return createElement("div", {
-    className: "wprf-slider-wrap"
-  }, createElement("div", {
-    className: "wprf-slider-control-head"
-  }, createElement(Label, {
-    htmlFor: id || name
-  }, label), isArray(units) && units.length > 0 && createElement("div", {
-    className: "wprf-slider-units"
-  }, units.map(function (unit, index) {
-    return createElement(Button$2, {
-      key: index,
-      isSmall: true,
-      isPrimary: true,
-      onClick: function onClick() {
-        return setSunit(unit);
-      },
-      className: unit == sunit ? "unit-active" : ""
-    }, unit);
-  }))), createElement("div", {
-    className: "wprf-slider-control"
-  }, createElement(RangeControl, {
-    allowReset: reset !== null && reset !== void 0 ? reset : true,
-    value: parseInt(isValue),
-    min: min,
-    max: max
-    // showTooltip={tooltip ?? false}
-    ,
-    onChange: function onChange(value) {
-      return setValue(value);
-    }
-  })));
+  return /*#__PURE__*/jsxs("div", {
+    className: "wprf-slider-wrap",
+    children: [/*#__PURE__*/jsxs("div", {
+      className: "wprf-slider-control-head",
+      children: [/*#__PURE__*/jsx(Label, {
+        htmlFor: id || name,
+        children: label
+      }), isArray(units) && units.length > 0 && /*#__PURE__*/jsx("div", {
+        className: "wprf-slider-units",
+        children: units.map(function (unit, index) {
+          return /*#__PURE__*/jsx(Button$2, {
+            isSmall: true,
+            isPrimary: true,
+            onClick: function onClick() {
+              return setSunit(unit);
+            },
+            className: unit == sunit ? "unit-active" : "",
+            children: unit
+          }, index);
+        })
+      })]
+    }), /*#__PURE__*/jsx("div", {
+      className: "wprf-slider-control",
+      children: /*#__PURE__*/jsx(RangeControl, {
+        allowReset: reset !== null && reset !== void 0 ? reset : true,
+        value: parseInt(isValue),
+        min: min,
+        max: max
+        // showTooltip={tooltip ?? false}
+        ,
+        onChange: function onChange(value) {
+          return setValue(value);
+        }
+      })
+    })]
+  });
 };
 
-function ownKeys$2(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$2(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$2(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$2(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$5(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$5(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$5(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$5(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Textarea = function Textarea(props) {
   var validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context']);
   var handleChange = useCallback(function (event) {
@@ -8177,7 +8587,7 @@ var Textarea = function Textarea(props) {
       isPro: !!props.is_pro
     });
   }, [validProps === null || validProps === void 0 ? void 0 : validProps.value]);
-  return /*#__PURE__*/React.createElement('textarea', _objectSpread$2(_objectSpread$2({}, validProps), {}, {
+  return /*#__PURE__*/React.createElement('textarea', _objectSpread$5(_objectSpread$5({}, validProps), {}, {
     onChange: handleChange,
     rows: 2
   }));
@@ -8187,15 +8597,15 @@ var Textarea_default = withLabel(/*#__PURE__*/React.memo(Textarea));
 function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: true } : { done: false, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = true, u = false; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = true, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function ownKeys$1(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread$1(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$1(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$1(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function ownKeys$4(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$4(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$4(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$4(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Toggle = function Toggle(props) {
   var passedOptions = props.options,
     value = props.value,
     multiple = props.multiple,
     prevStyles = props.style;
   var options = sortingFields(passedOptions);
-  var styles = _objectSpread$1({
+  var styles = _objectSpread$4({
     column: 4
   }, prevStyles);
   if (multiple) {
@@ -8206,7 +8616,7 @@ var Toggle = function Toggle(props) {
     var handleChange = function handleChange(event) {
       var target = event.target ? event.target : event.currentTarget;
       setLocalState(function (prevState) {
-        return _objectSpread$1(_objectSpread$1({}, prevState), {}, _defineProperty({}, target.value, target.checked));
+        return _objectSpread$4(_objectSpread$4({}, prevState), {}, _defineProperty({}, target.value, target.checked));
       });
     };
     useEffect(function () {
@@ -8238,25 +8648,30 @@ var Toggle = function Toggle(props) {
         setLocalState(value);
       }
     }, []);
-    return createElement("div", {
-      className: "wprf-toggle-wrapper wprf-control"
-    }, createElement(Row, null, options.map(function (item) {
-      return createElement(Column, {
-        key: item.value,
-        column: styles.column
-      }, createElement(GenericToggle, _objectSpread$1(_objectSpread$1({}, item), {}, {
-        context: props === null || props === void 0 ? void 0 : props.context,
-        id: item.value,
-        checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
-        type: 'checkbox',
-        onChange: handleChange,
-        style: styles
-      })));
-    })));
+    return /*#__PURE__*/jsx("div", {
+      className: "wprf-toggle-wrapper wprf-control",
+      children: /*#__PURE__*/jsx(Row, {
+        children: options.map(function (item) {
+          return /*#__PURE__*/jsx(Column, {
+            column: styles.column,
+            children: /*#__PURE__*/jsx(GenericToggle, _objectSpread$4({}, _objectSpread$4(_objectSpread$4({}, item), {}, {
+              context: props === null || props === void 0 ? void 0 : props.context,
+              id: item.value,
+              checked: typeof localState[item.value] === 'undefined' ? true : localState !== null && localState !== void 0 && localState[item.value] ? value : !!(localState !== null && localState !== void 0 && localState[item.value]),
+              type: 'checkbox',
+              onChange: handleChange,
+              style: styles
+            })))
+          }, item.value);
+        })
+      })
+    });
   }
-  return createElement(GenericToggle, props);
+  return /*#__PURE__*/jsx(GenericToggle, _objectSpread$4({}, props));
 };
 
+function ownKeys$3(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$3(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$3(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$3(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var InnerContent = function InnerContent(_ref) {
   var fields = _ref.fields,
     parentIndex = _ref.parentIndex,
@@ -8280,27 +8695,27 @@ var InnerContent = function InnerContent(_ref) {
       var allFields = _fields.map(function (item, index) {
         var pIndex = [].concat(_toConsumableArray(parentIndex), ['fields', index]);
         if ((item === null || item === void 0 ? void 0 : item.type) === 'section') {
-          return createElement(GenericField, _extends$1({
-            key: "input-".concat(item.name, "-").concat(index)
-          }, item, {
+          return /*#__PURE__*/jsx(GenericField, _objectSpread$3(_objectSpread$3({}, item), {}, {
             parentIndex: pIndex
-          }));
+          }), "input-".concat(item.name, "-").concat(index));
         } else if (item) {
-          return createElement(Field, _extends$1({
-            key: "input-".concat(item.name, "-").concat(index)
-          }, item, {
+          return /*#__PURE__*/jsx(Field, _objectSpread$3(_objectSpread$3({}, item), {}, {
             parentIndex: pIndex
-          }));
+          }), "input-".concat(item.name, "-").concat(index));
         }
-        return createElement(Fragment, null);
+        return /*#__PURE__*/jsx(Fragment, {});
       });
       setFieldViews(allFields);
     }
   }, [_fields]);
-  return createElement(Fragment, null, fieldViews);
+  return /*#__PURE__*/jsx(Fragment, {
+    children: fieldViews
+  });
 };
 
 var _excluded = ["fields", "active", "setActive", "submit"];
+function ownKeys$2(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$2(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$2(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$2(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Content = function Content(_ref) {
   var _builderContext$value, _builderContext$value2, _builderContext$value3, _rest$step, _rest$step2, _rest$step3, _rest$step4, _submit$show;
   var tabs = _ref.fields,
@@ -8326,53 +8741,61 @@ var Content = function Content(_ref) {
     });
     setTabsFields(filteredTabs);
   }, [tabs, builderContext === null || builderContext === void 0 || (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value.source]);
-  return createElement("div", {
-    className: classNames("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 || (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 || (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes)
-  }, createElement("div", {
-    className: "wprf-tab-flex"
-  }, createElement("div", {
-    className: "wprf-tab-contents"
-  }, tabs.map(function (tab, index) {
-    var _rest$title;
-    if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
-      return "";
-    }
-    var componentClasses = classNames("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
-      "wprf-active": active === tab.id
-    });
-    return createElement("div", {
-      id: tab === null || tab === void 0 ? void 0 : tab.id,
-      className: componentClasses,
-      key: tab === null || tab === void 0 ? void 0 : tab.id
-    }, createElement("div", {
-      className: "wprf-tab-heading-wrapper"
-    }, (tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) && createElement("h4", null, tab.label), createElement("div", null, (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
-      return createElement(React.Fragment, {
-        key: "button_".concat(button, "_").concat(index)
-      }, createElement(Field, rest.content_heading[button]));
-    }))), createElement(InnerContent, {
-      context: builderContext,
-      fields: tab === null || tab === void 0 ? void 0 : tab.fields,
-      parentIndex: [].concat(_toConsumableArray(parentIndex), [index])
-    }));
-  })), applyFilters("wprf_tab_content", "", rest)), (rest === null || rest === void 0 || (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && (rest !== null && rest !== void 0 && (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 && _rest$step2.rules ? when(rest === null || rest === void 0 || (_rest$step3 = rest.step) === null || _rest$step3 === void 0 ? void 0 : _rest$step3.rules, {
-    rest: rest,
-    config: {
-      active: active
-    }
-  }) : true) && createElement(SteppedButton, _extends$1({
-    fields: tabsFields,
-    active: active,
-    setActive: setActive,
-    config: (_rest$step4 = rest.step) !== null && _rest$step4 !== void 0 ? _rest$step4 : {
-      show: false
-    }
-  }, rest)), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
-    rest: rest,
-    config: {
-      active: active
-    }
-  }) : true) && createElement(Submit, submit));
+  return /*#__PURE__*/jsxs("div", {
+    className: classNames("wprf-tab-content-wrapper", builderContext === null || builderContext === void 0 || (_builderContext$value2 = builderContext.values) === null || _builderContext$value2 === void 0 ? void 0 : _builderContext$value2.source, builderContext === null || builderContext === void 0 || (_builderContext$value3 = builderContext.values) === null || _builderContext$value3 === void 0 ? void 0 : _builderContext$value3.themes),
+    children: [/*#__PURE__*/jsxs("div", {
+      className: "wprf-tab-flex",
+      children: [/*#__PURE__*/jsx("div", {
+        className: "wprf-tab-contents",
+        children: tabs.map(function (tab, index) {
+          var _rest$title;
+          if (!isVisible(builderContext === null || builderContext === void 0 ? void 0 : builderContext.values, tab)) {
+            return "";
+          }
+          var componentClasses = classNames("wprf-tab-content", "wprf-tab-".concat(tab === null || tab === void 0 ? void 0 : tab.id), {
+            "wprf-active": active === tab.id
+          });
+          return /*#__PURE__*/jsxs("div", {
+            id: tab === null || tab === void 0 ? void 0 : tab.id,
+            className: componentClasses,
+            children: [/*#__PURE__*/jsxs("div", {
+              className: "wprf-tab-heading-wrapper",
+              children: [(tab === null || tab === void 0 ? void 0 : tab.label) && ((_rest$title = rest === null || rest === void 0 ? void 0 : rest.title) !== null && _rest$title !== void 0 ? _rest$title : true) && /*#__PURE__*/jsx("h4", {
+                children: tab.label
+              }), /*#__PURE__*/jsx("div", {
+                children: (rest === null || rest === void 0 ? void 0 : rest.content_heading) && Object.keys(rest.content_heading).map(function (button, index) {
+                  return /*#__PURE__*/jsx(React.Fragment, {
+                    children: /*#__PURE__*/jsx(Field, _objectSpread$2({}, rest.content_heading[button]))
+                  }, "button_".concat(button, "_").concat(index));
+                })
+              })]
+            }), /*#__PURE__*/jsx(InnerContent, {
+              context: builderContext,
+              fields: tab === null || tab === void 0 ? void 0 : tab.fields,
+              parentIndex: [].concat(_toConsumableArray(parentIndex), [index])
+            })]
+          }, tab === null || tab === void 0 ? void 0 : tab.id);
+        })
+      }), applyFilters("wprf_tab_content", "", rest)]
+    }), (rest === null || rest === void 0 || (_rest$step = rest.step) === null || _rest$step === void 0 ? void 0 : _rest$step.show) && (rest !== null && rest !== void 0 && (_rest$step2 = rest.step) !== null && _rest$step2 !== void 0 && _rest$step2.rules ? when(rest === null || rest === void 0 || (_rest$step3 = rest.step) === null || _rest$step3 === void 0 ? void 0 : _rest$step3.rules, {
+      rest: rest,
+      config: {
+        active: active
+      }
+    }) : true) && /*#__PURE__*/jsx(SteppedButton, _objectSpread$2({
+      fields: tabsFields,
+      active: active,
+      setActive: setActive,
+      config: (_rest$step4 = rest.step) !== null && _rest$step4 !== void 0 ? _rest$step4 : {
+        show: false
+      }
+    }, rest)), ((_submit$show = submit === null || submit === void 0 ? void 0 : submit.show) !== null && _submit$show !== void 0 ? _submit$show : true) && (submit !== null && submit !== void 0 && submit.rules ? when(submit === null || submit === void 0 ? void 0 : submit.rules, {
+      rest: rest,
+      config: {
+        active: active
+      }
+    }) : true) && /*#__PURE__*/jsx(Submit, _objectSpread$2({}, submit))]
+  });
 };
 
 var Menu = function Menu(props) {
@@ -8400,34 +8823,42 @@ var Menu = function Menu(props) {
   var currentTabIndex = tabsFields.findIndex(function (tab) {
     return tab.id === active;
   });
-  return createElement("div", {
-    className: componentClasses
-  }, createElement("ul", {
-    className: "wprf-tab-nav"
-  }, tabsFields.map(function (tab, index) {
-    var _context$icons, _tab$icon, _tab$icon2;
-    return createElement("li", {
-      className: classNames("wprf-tab-nav-item", _defineProperty(_defineProperty(_defineProperty({}, "".concat(tab.classes), tab.classes), "wprf-active-nav", active === tab.id), "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false)),
-      "data-key": tab.id,
-      key: tab.id,
-      onClick: function onClick() {
-        var _props$clickable;
-        return ((_props$clickable = props === null || props === void 0 ? void 0 : props.clickable) !== null && _props$clickable !== void 0 ? _props$clickable : true) && setActive(tab.id);
-      }
-    }, props !== null && props !== void 0 && props.tab_number ? createElement("span", {
-      className: "icon"
-    }, createElement("span", {
-      className: "count"
-    }, index + 1)) : "", (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? createElement("img", {
-      src: tab.icon,
-      alt: tab === null || tab === void 0 ? void 0 : tab.label
-    }) : isObject(tab.icon) ? context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 || (_context$icons = _context$icons[tab === null || tab === void 0 || (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons === void 0 ? void 0 : _context$icons[tab === null || tab === void 0 || (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ""), createElement("span", null, tab.label), tab !== null && tab !== void 0 && tab.is_pro ? createElement(BadgeComp, {
-      componentClasses: "wprf-badge-item",
-      label: "Pro"
-    }) : createElement(Fragment, null));
-  })));
+  return /*#__PURE__*/jsx("div", {
+    className: componentClasses,
+    children: /*#__PURE__*/jsx("ul", {
+      className: "wprf-tab-nav",
+      children: tabsFields.map(function (tab, index) {
+        var _context$icons, _tab$icon, _tab$icon2;
+        return /*#__PURE__*/jsxs("li", {
+          className: classNames("wprf-tab-nav-item", _defineProperty(_defineProperty(_defineProperty({}, "".concat(tab.classes), tab.classes), "wprf-active-nav", active === tab.id), "wprf-tab-complete", props !== null && props !== void 0 && props.completionTrack ? index <= currentTabIndex : false)),
+          "data-key": tab.id,
+          onClick: function onClick() {
+            var _props$clickable;
+            return ((_props$clickable = props === null || props === void 0 ? void 0 : props.clickable) !== null && _props$clickable !== void 0 ? _props$clickable : true) && setActive(tab.id);
+          },
+          children: [props !== null && props !== void 0 && props.tab_number ? /*#__PURE__*/jsx("span", {
+            className: "icon",
+            children: /*#__PURE__*/jsx("span", {
+              className: "count",
+              children: index + 1
+            })
+          }) : "", (tab === null || tab === void 0 ? void 0 : tab.icon) && (isString(tab.icon) && !isObject(tab.icon) ? /*#__PURE__*/jsx("img", {
+            src: tab.icon,
+            alt: tab === null || tab === void 0 ? void 0 : tab.label
+          }) : isObject(tab.icon) ? context === null || context === void 0 || (_context$icons = context.icons) === null || _context$icons === void 0 || (_context$icons = _context$icons[tab === null || tab === void 0 || (_tab$icon = tab.icon) === null || _tab$icon === void 0 ? void 0 : _tab$icon.type]) === null || _context$icons === void 0 ? void 0 : _context$icons[tab === null || tab === void 0 || (_tab$icon2 = tab.icon) === null || _tab$icon2 === void 0 ? void 0 : _tab$icon2.name] : ""), /*#__PURE__*/jsx("span", {
+            children: tab.label
+          }), tab !== null && tab !== void 0 && tab.is_pro ? /*#__PURE__*/jsx(BadgeComp, {
+            componentClasses: "wprf-badge-item",
+            label: "Pro"
+          }) : /*#__PURE__*/jsx(Fragment, {})]
+        }, tab.id);
+      })
+    })
+  });
 };
 
+function ownKeys$1(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$1(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$1(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$1(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Tab = function Tab(props) {
   var _props$save;
   // const builderContextState = useBuilder(props);
@@ -8471,23 +8902,24 @@ var Tab = function Tab(props) {
       });
     }
   }, [activeTab]);
-  return createElement("div", {
-    className: componentClasses
-  }, createElement(Menu, _extends$1({}, props, {
-    active: activeTab,
-    setActive: function setActive(tabId) {
-      return setActiveTab(tabId);
-    },
-    fields: props.fields,
-    context: builderContext
-  })), createElement(Content, _extends$1({}, props, {
-    fields: props.fields,
-    active: activeTab,
-    setActive: function setActive(tabId) {
-      return setActiveTab(tabId);
-    },
-    submit: props === null || props === void 0 ? void 0 : props.submit
-  })));
+  return /*#__PURE__*/jsxs("div", {
+    className: componentClasses,
+    children: [/*#__PURE__*/jsx(Menu, _objectSpread$1(_objectSpread$1({}, props), {}, {
+      active: activeTab,
+      setActive: function setActive(tabId) {
+        return setActiveTab(tabId);
+      },
+      fields: props.fields,
+      context: builderContext
+    })), /*#__PURE__*/jsx(Content, _objectSpread$1(_objectSpread$1({}, props), {}, {
+      fields: props.fields,
+      active: activeTab,
+      setActive: function setActive(tabId) {
+        return setActiveTab(tabId);
+      },
+      submit: props === null || props === void 0 ? void 0 : props.submit
+    }))]
+  });
 };
 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -8510,7 +8942,9 @@ var FormBuilder = function FormBuilder(props) {
       }
     });
   }
-  return createElement(Fragment, null, createElement(Tab, tabs));
+  return /*#__PURE__*/jsx(Fragment, {
+    children: /*#__PURE__*/jsx(Tab, _objectSpread({}, tabs))
+  });
 };
 
-export { Action, BuilderConsumer, BuilderProvider, Button, CheckboxSelect, CodeViewer, ColorPicker, Column, CopyToClipboard, Date$1 as Date, Editor, Field, FormBuilder, GenericField, GenericInput, Group_default as Group, Image, Input_default as Input, JsonUploader_default as JsonUploader, Label, Media_default as Media, Message, Modal, ObjectFilter, RadioCard as Radio, Repeater, ResponsiveNumber_default as ResponsiveNumber, Row, Section_default as Section, Select_default as Select, SelectAsync_default as SelectAsync, Slider, SweetAlert, Textarea_default as Textarea, Toggle, _extends, builderReducer, executeChange, getDeepData, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, insertDefaultRepeaterValues, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, removeTagsFromString, _replaceIndex as replaceIndex, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };
+export { Action, BuilderConsumer, BuilderProvider, Button, CheckboxSelect, CodeViewer, ColorPicker, Column, CopyToClipboard, Date$1 as Date, Editor, Field, FormBuilder, GenericField, GenericInput, Group_default as Group, Image, Input_default as Input, JsonUploader_default as JsonUploader, Label, Media_default as Media, Message, Modal, ObjectFilter, RadioCard as Radio, Repeater, ResponsiveNumber_default as ResponsiveNumber, Row, Section_default as Section, Select_default as Select, SelectAsync_default as SelectAsync, Slider, SweetAlert, Textarea_default as Textarea, Toggle, _extends$1 as _extends, builderReducer, executeChange, getDeepData, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, insertDefaultRepeaterValues, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, removeTagsFromString, _replaceIndex as replaceIndex, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };

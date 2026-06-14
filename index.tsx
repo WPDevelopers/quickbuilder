@@ -6,6 +6,9 @@ export * from './src/core/utils';
 export * from './src/fields';
 export * from './src/core/functions';
 
+// Public type surface (field-config schema, primitives, builder types).
+export * from './src/types';
+
 export {
     useBuilder,
     useBuilderContext,

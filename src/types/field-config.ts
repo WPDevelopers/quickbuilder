@@ -39,6 +39,8 @@ export interface BaseFieldConfig {
 	name?: string;
 	/** Human-readable label rendered above/beside the control. */
 	label?: string;
+	/** Secondary label / subtitle rendered next to the label. */
+	label_subtitle?: string;
 	/** Default value applied when the field has no saved value. */
 	default?: any;
 	/** Placeholder text (falls back to `label` when omitted). */
@@ -63,6 +65,13 @@ export interface BaseFieldConfig {
 	trigger?: Record<string, unknown>;
 	/** Layout / presentation overrides. */
 	style?: FieldStyle;
+	/**
+	 * Tolerated escape hatch for real-world configs. Production configs carry
+	 * extra props no component reads (legacy/grid hints, occasional typos); this
+	 * keeps them type-checking while the named props above drive autocomplete.
+	 * Annotate a single field with its specific `*FieldConfig` for strict checks.
+	 */
+	[key: string]: any;
 }
 
 /* ------------------------------------------------------------------ *
@@ -193,12 +202,12 @@ export interface MediaFieldConfig extends BaseFieldConfig {
 
 /** JSON file uploader. */
 export interface JsonUploaderFieldConfig extends BaseFieldConfig {
-	type: 'json-uploader';
+	type: 'jsonuploader';
 }
 
 /** Read-only code display with copy support. */
 export interface CodeViewerFieldConfig extends BaseFieldConfig {
-	type: 'code-viewer';
+	type: 'codeviewer';
 }
 
 /** Copy-to-clipboard utility field. */

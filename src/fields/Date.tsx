@@ -5,8 +5,9 @@ import { date, __experimentalGetSettings } from "@wordpress/date";
 import moment from "moment";
 import { withLabel } from "../core/hooks";
 import { getTime } from "../core/utils";
+import type { DateProps } from "../types";
 
-const DateControl = (props) => {
+const DateControl = (props: DateProps) => {
     const { name, value, onChange, position } = props;
 
     const settings: any = __experimentalGetSettings();

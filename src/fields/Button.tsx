@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import { Field } from ".";
 import { useTrigger, withLabel } from "../core/hooks";
 import { hitAAJX, isObject, validFieldProps } from "../core/utils";
+import type { ButtonProps } from "../types";
 
-const Button = (props) => {
-	if (!props?.text && props?.group !== true) {
+const Button = (props: ButtonProps) => {
+	const ajax: any = (props as any).ajax;
+	const text: any = (props as any).text;
+	if (!text && props?.group !== true) {
 		throw new Error(
 			__("Button has a required params #text.", "betterdocs")
 		);
@@ -26,9 +29,9 @@ const Button = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleClick = (event) => {
-		if (props?.ajax) {
+		if (ajax) {
 			setIsLoading(true);
-			hitAAJX(props.ajax, props.context)
+			hitAAJX(ajax, props.context)
 				.then((res) => {
 					setIsLoading(false);
 
@@ -44,21 +47,21 @@ const Button = (props) => {
 						},
 					});
 
-					if (!props.ajax?.hideSwal) {
-						const type = props.ajax?.swal?.icon || "success";
-						const message = props.ajax?.swal?.text || "Complete";
+					if (!ajax?.hideSwal) {
+						const type = ajax?.swal?.icon || "success";
+						const message = ajax?.swal?.text || "Complete";
 						props.context.alerts.toast(type, message, {
-							autoClose: props.ajax?.swal?.autoClose,
+							autoClose: ajax?.swal?.autoClose,
 						});
 					}
-					if (props.ajax?.reload) {
+					if (ajax?.reload) {
 						if (
-							typeof props.ajax.reload === "boolean" &&
-							props.ajax.reload
+							typeof ajax.reload === "boolean" &&
+							ajax.reload
 						) {
 							setTimeout(() => window.location.reload(), 1000);
-						} else if (typeof props.ajax.reload === "string") {
-							window.location.href = props.ajax.reload;
+						} else if (typeof ajax.reload === "string") {
+							window.location.href = ajax.reload;
 						}
 					}
 				})
@@ -73,7 +76,7 @@ const Button = (props) => {
 							value: false,
 						},
 					});
-					if (!props.ajax?.hideSwal) {
+					if (!ajax?.hideSwal) {
 						props.context.alerts.toast(
 							"error",
 							err?.message ||
@@ -95,13 +98,13 @@ const Button = (props) => {
 					props?.classes
 				)}
 			>
-				{props?.text}
+				{text}
 			</a>
 		);
 	}
 
 	if (props?.group) {
-		let allFields = props.fields.map((item, index) => {
+		let allFields = (props.fields ?? []).map((item, index) => {
 			let parentIndex = [...props.parentIndex, "fields", index];
 			return (
 				<Field key={item.name} {...item} parentIndex={parentIndex} />
@@ -127,13 +130,13 @@ const Button = (props) => {
 					props?.classes
 				)}
 			>
-				{isObject(props?.text) && props?.ajax
+				{isObject(text) && ajax
 					? isLoading
-						? props?.text?.loading
+						? text?.loading
 						: props.value
-						? props?.text?.saved
-						: props?.text?.normal
-					: props?.text}
+						? text?.saved
+						: text?.normal
+					: text}
 			</button>
 		</>
 	);

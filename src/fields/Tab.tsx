@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TabConfig } from "../types/Tabs";
+import type { TabFieldProps } from "../types";
 import Content from "./tabs/Content";
 import Menu from "./tabs/Menu";
 // import { BuilderProvider } from '../core/hooks/useBuilderContext';
@@ -9,7 +9,7 @@ import classNames from "classnames";
 import { useBuilderContext } from "../core/hooks";
 import "../scss/index.scss";
 
-const Tab: React.FC<TabConfig> = (props) => {
+const Tab: React.FC<TabFieldProps> = (props) => {
 	// const builderContextState = useBuilder(props);
 
 	const builderContext = useBuilderContext();

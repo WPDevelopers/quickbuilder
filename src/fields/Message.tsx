@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react'
 import { when } from '../core';
+import type { MessageProps } from '../types';
 
 const eligibleMessage = (props) => {
     if (props?.messages) {
@@ -18,7 +19,7 @@ const eligibleMessage = (props) => {
     };
 }
 
-const Message = (props) => {
+const Message = (props: MessageProps) => {
     let { html, message, type = 'warning' } = eligibleMessage(props);
 
     if (!message) {

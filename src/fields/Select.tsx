@@ -8,6 +8,7 @@ import Tippy from '@tippyjs/react'; // Install with `npm install @tippyjs/react`
 import 'tippy.js/dist/tippy.css'; // Tippy.js styles
 import { addQueryArgs } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
+import type { SelectProps } from '../types';
 
 // Custom Option Component with Tooltip
 const CustomOption = (props) => {
@@ -64,7 +65,7 @@ const CustomOption = (props) => {
 
 
 
-const Select = (props) => {
+const Select = (props: SelectProps) => {
     const builderContext = useBuilderContext();
     let { id, name, multiple, placeholder, search = false, onChange, parentIndex, index } = props;
     const { options, selectedOption, setOptions, setSelectedOption, setData } = useOptions(props, 'options');
@@ -73,13 +74,14 @@ const Select = (props) => {
     const [isAjaxComplete, setIsAjaxComplete] = useState(false);
 
     const handleMenuOpen = () => {
+        const ajax: any = (props as any).ajax;
         // AJAX
-        if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
+        if (ajax && (!ajax.rules || when(ajax.rules, builderContext.values))) {
             setIsLoading(true);
             let data = {};
-            Object.keys(props?.ajax.data).map(singleData => {
-                if (props?.ajax.data[singleData].indexOf('@') > -1) {
-                    let eligibleKey  = props?.ajax.data[singleData].substr(1);
+            Object.keys(ajax.data).map(singleData => {
+                if (ajax.data[singleData].indexOf('@') > -1) {
+                    let eligibleKey  = ajax.data[singleData].substr(1);
 					eligibleKey 	 = eligibleKey.includes('.') ? eligibleKey.split('.') : eligibleKey;
 					if( Array.isArray(eligibleKey) ) {
 						let repeaterDatas = index != undefined ? builderContext.values[eligibleKey[0]][index] :  builderContext.values[eligibleKey[0]];
@@ -97,16 +99,16 @@ const Select = (props) => {
                     	data[singleData] = builderContext.values?.[eligibleKey];
 					}
                 } else {
-                    data[singleData] = props?.ajax.data[singleData];
+                    data[singleData] = ajax.data[singleData];
                 }
             });
             if (!isAjaxComplete) {
 				let payload: { path: any; data?: any; method: string } = {
-                    path: props?.ajax.api,
+                    path: ajax.api,
                     data: data,
 					method: "POST"
                 };
-				if( props?.ajax?.method == 'GET' ) {
+				if( ajax?.method == 'GET' ) {
 					payload.method = 'GET';
 					delete payload.data;
 					payload.path = addQueryArgs( payload.path, data );
@@ -114,10 +116,10 @@ const Select = (props) => {
 
                 return wpFetch(payload).then((response: any) => {
 					let options: any[] = [];
-					if( Object.keys(props?.ajax?.response_mapper)?.length >  0 ) {
+					if( Object.keys(ajax?.response_mapper)?.length >  0 ) {
 						response?.map((data) => {
-							let keyLabel = props?.ajax?.response_mapper?.label?.includes('.') ? props?.ajax?.response_mapper?.label?.split('.') : props?.ajax?.response_mapper?.label;
-							let keyValue = props?.ajax?.response_mapper?.value?.includes('.') ? props?.ajax?.response_mapper?.value?.split('.') : props?.ajax?.response_mapper?.value;
+							let keyLabel = ajax?.response_mapper?.label?.includes('.') ? ajax?.response_mapper?.label?.split('.') : ajax?.response_mapper?.label;
+							let keyValue = ajax?.response_mapper?.value?.includes('.') ? ajax?.response_mapper?.value?.split('.') : ajax?.response_mapper?.value;
 
 							let option: any = {};
 
@@ -138,7 +140,7 @@ const Select = (props) => {
 					}
 
                     setIsLoading(false);
-                    const arrayMerge = merge(props.options, (options?.length > 0 ? options : response), 'value');
+                    const arrayMerge = merge(props.options as any, (options?.length > 0 ? options : response), 'value');
 					if( arrayMerge?.find((data) => data?.value == 'all') == undefined && props?.include_all_in_options == true && response?.length > 0 ) {
 						arrayMerge?.unshift({
 						 	label:__('All', 'betterdocs'),

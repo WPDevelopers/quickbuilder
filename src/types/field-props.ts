@@ -55,8 +55,8 @@ export interface InjectedFieldProps {
 	visible?: boolean;
 	/** The builder context (typed precisely in Phase 4). */
 	context?: any;
-	/** Path of this field within nested containers. */
-	parentIndex?: Array<string | number>;
+	/** Path of this field within nested containers. Always injected by `withProps`. */
+	parentIndex: Array<string | number>;
 	/** Name of the enclosing container field. */
 	parent?: string;
 	/** Kind of the enclosing container (`group` | `repeater` | …). */

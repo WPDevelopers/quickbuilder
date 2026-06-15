@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Button, RangeControl } from '@wordpress/components';
 import { Label } from '../core/components';
 import { isArray, isNumber, isString } from '../core/utils';
+import type { SliderProps } from '../types';
 
-const Slider = (props) => {
+const Slider = (props: SliderProps) => {
     const { name, id, label, units, value, min, max, unit, tooltip, reset } = props;
 
     const [isValue, setValue] = useState(value || 0);

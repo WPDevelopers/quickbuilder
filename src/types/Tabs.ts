@@ -24,7 +24,7 @@ export interface TabConfig extends Field {
     active          : string,
     completionTrack?: boolean,
     sidebar        ?: boolean,
-    title          ?: boolean,
+    title          ?: boolean | string,
     submit         ?: any,
     fields          : Fields,
     step           ?: Step,

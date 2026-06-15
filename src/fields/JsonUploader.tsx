@@ -2,8 +2,9 @@ import { __ } from "@wordpress/i18n";
 import React, { useEffect, useState } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
+import type { JsonUploaderProps } from "../types";
 
-const JsonUploader = (props) => {
+const JsonUploader = (props: JsonUploaderProps) => {
 	const validProps = validFieldProps(props, [
 		"is_pro",
 		"visible",

@@ -4,10 +4,11 @@ import { RepeaterField } from './helpers';
 import { executeChange, insertDefaultRepeaterValues } from '../core/utils';
 import { ReactSortable } from "react-sortablejs";
 import { v4 } from "uuid";
+import type { RepeaterProps } from '../types';
 
 
-const Repeater = (props) => {
-    const { name: fieldName, value: fieldValue, button, fields } = props;
+const Repeater = (props: RepeaterProps) => {
+    const { name: fieldName = '', value: fieldValue, button, fields } = props;
     const builderContext = useBuilderContext();
     const [localMemoizedValue, setLocalMemoizedValue] = useState(builderContext.values?.[fieldName])
 

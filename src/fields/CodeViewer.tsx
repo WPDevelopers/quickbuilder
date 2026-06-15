@@ -3,8 +3,9 @@ import copy from "copy-to-clipboard";
 import React, { useEffect, useState } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
+import type { CodeViewerProps } from "../types";
 
-const CodeViewer = (props) => {
+const CodeViewer = (props: CodeViewerProps) => {
 	const validProps = validFieldProps(props, [
 		"is_pro",
 		"visible",

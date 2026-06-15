@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { Column, Row } from '../core/components';
 import { isObject, sortingFields } from '../core/utils';
 import { GenericToggle } from './helpers'
+import type { ToggleProps } from '../types';
 
-export const Toggle = (props) => {
+export const Toggle = (props: ToggleProps) => {
     const { options: passedOptions, value, multiple, style: prevStyles } = props;
     const options = sortingFields(passedOptions);
 

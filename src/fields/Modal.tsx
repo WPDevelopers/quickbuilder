@@ -3,8 +3,9 @@ import React, { useCallback, useState } from 'react';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { GenericField } from '.';
 import { ModalContent, ModalHeader } from './helpers';
+import type { ModalProps } from '../types';
 
-const Modal = (props) => {
+const Modal = (props: ModalProps) => {
     if (props?.body == undefined || props?.button == undefined) {
         throw new Error(__('Modal needs button/body with it.', 'betterdocs'));
     }

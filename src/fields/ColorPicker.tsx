@@ -2,8 +2,9 @@ import { ColorPicker as WPColorPicker } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import React, { useEffect, useRef, useState } from "react";
 import { withLabel } from "../core/hooks";
+import type { ColorPickerProps } from "../types";
 
-const ColorPicker = (props) => {
+const ColorPicker = (props: ColorPickerProps) => {
 	const { value, name, id, onChange } = props;
 	const [showPicker, setShowPicker] = useState(false);
 	const [color, setColor] = useState(value || null);

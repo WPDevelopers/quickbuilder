@@ -8,9 +8,10 @@ import { GenericInput } from ".";
 import { useBuilderContext, withLabel } from "../core/hooks";
 import useOptions from "../core/hooks/useOptions";
 import { validFieldProps } from "../core/utils";
+import type { RadioCardProps } from "../types";
 
 
-const RadioCard = (props) => {
+const RadioCard = (props: RadioCardProps) => {
     const builderContext = useBuilderContext();
     const { options, option } = useOptions(props, 'options');
 

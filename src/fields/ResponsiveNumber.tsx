@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { withLabel } from "../core/hooks";
 import { isObject, validFieldProps } from "../core/utils";
+import type { ResponsiveNumberProps } from "../types";
 
-const ResponsiveNumber = (props) => {
+const ResponsiveNumber = (props: ResponsiveNumberProps) => {
 	const validProps = validFieldProps(props, ['is_pro', 'visible', 'trigger', 'disable', 'parentIndex', 'context', 'badge', 'popup']);
 	const [responsive, setResponsive] = useState(Object.keys(props.controls)[0]);
 

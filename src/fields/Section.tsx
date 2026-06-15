@@ -5,8 +5,9 @@ import { sortingFields } from "../core/utils";
 import { Field } from "../fields";
 import SteppedButton from "./tabs/SteppedButton";
 import Submit from "./tabs/Submit";
+import type { SectionProps } from "../types";
 
-const Section = (props) => {
+const Section = (props: SectionProps) => {
 	const {
 		searchable = false,
 		searchNotFoundMessage,

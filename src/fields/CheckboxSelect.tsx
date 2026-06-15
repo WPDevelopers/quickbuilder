@@ -3,8 +3,9 @@ import ReactSelect from "react-select";
 import { when } from "../core";
 import { useBuilderContext, useOptions, withLabel } from "../core/hooks";
 import { isArray, isObject, merge, valueExists, wpFetch } from "../core/utils";
+import type { CheckboxSelectProps } from "../types";
 
-const CheckboxSelect = (props) => {
+const CheckboxSelect = (props: CheckboxSelectProps) => {
 	const builderContext = useBuilderContext();
 	let {
 		id,
@@ -28,28 +29,29 @@ const CheckboxSelect = (props) => {
 	const [isAjaxComplete, setIsAjaxComplete] = useState(false);
 
 	const handleMenuOpen = () => {
+		const ajax: any = (props as any).ajax;
 		// AJAX
 		if (
-			props.ajax &&
-			(!props.ajax.rules || when(props.ajax.rules, builderContext.values))
+			ajax &&
+			(!ajax.rules || when(ajax.rules, builderContext.values))
 		) {
 			setIsLoading(true);
 			let data = {};
-			Object.keys(props?.ajax.data).map((singleData) => {
-				if (props?.ajax.data[singleData].indexOf("@") > -1) {
-					let eligibleKey = props?.ajax.data[singleData].substr(1);
+			Object.keys(ajax.data).map((singleData) => {
+				if (ajax.data[singleData].indexOf("@") > -1) {
+					let eligibleKey = ajax.data[singleData].substr(1);
 					data[singleData] = builderContext.values?.[eligibleKey];
 				} else {
-					data[singleData] = props?.ajax.data[singleData];
+					data[singleData] = ajax.data[singleData];
 				}
 			});
 			if (!isAjaxComplete) {
 				return wpFetch({
-					path: props?.ajax.api,
+					path: ajax.api,
 					data: data,
 				}).then((response: any) => {
 					setIsLoading(false);
-					const arrayMerge = merge(props.options, response, "value");
+					const arrayMerge = merge(props.options as any, response, "value");
 					builderContext.setFormField(
 						[...parentIndex, "options"],
 						arrayMerge

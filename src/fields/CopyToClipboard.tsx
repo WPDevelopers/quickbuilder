@@ -4,7 +4,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ControlLabel } from "../core/components";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
-const CopyToClipboard = (props) => {
+import type { CopyToClipboardProps } from "../types";
+const CopyToClipboard = (props: CopyToClipboardProps) => {
 	const validProps = validFieldProps(props, [
 		"is_pro",
 		"visible",
@@ -63,7 +64,7 @@ const CopyToClipboard = (props) => {
 	};
 
 	const handleDescriptionCopy = () => {
-		copy(props.description, {
+		copy(props.description ?? '', {
 			format: "text/plain",
 			onCopy: () => {
 				setIsDescriptionCopied(true);

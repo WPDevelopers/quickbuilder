@@ -116,7 +116,8 @@ export interface ValidationRules {
 /** The synthetic event target that fields emit through `onChange`. */
 export interface FieldChangeTarget {
 	type: string;
-	name: string;
+	/** Field name. Optional: some fields emit synthetic events before a name is resolved. */
+	name?: string;
 	value: any;
 	checked?: boolean;
 	multiple?: boolean;

@@ -4,6 +4,7 @@ import { GenericInput, Input } from ".";
 import { Column, Row } from "../core/components";
 import { withLabel } from "../core/hooks";
 import { isObject, isString, sortingFields } from "../core/utils";
+import type { CheckboxProps } from "../types";
 
 function GenericCheckbox(props) {
     const { style: prevStyles } = props;
@@ -49,7 +50,7 @@ function GenericCheckbox(props) {
     );
 }
 
-function Checkbox(props) {
+function Checkbox(props: CheckboxProps) {
     const { options: passedOptions, value, multiple, style: prevStyles } = props;
     const options: {label: string, value: string, rules?:{}[]}[] = sortingFields(passedOptions);
 
@@ -113,7 +114,7 @@ function Checkbox(props) {
         </div>
     }
 
-    return <GenericInput {...{...props, type: 'checkbox'}} />;
+    return <GenericInput {...{ ...props, type: 'checkbox' } as any} />;
 }
 
 export default withLabel(Checkbox);

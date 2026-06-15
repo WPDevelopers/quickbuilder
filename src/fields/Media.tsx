@@ -2,8 +2,9 @@ import { MediaUpload } from "@wordpress/media-utils";
 import React, { useEffect, useState } from "react";
 import { withLabel } from "../core/hooks";
 import { __ } from "@wordpress/i18n";
+import type { MediaProps } from "../types";
 
-const Media = (props) => {
+const Media = (props: MediaProps) => {
 	const [imageData, setImageData] = useState(
 		props.value?.url ? props.value : null
 	);

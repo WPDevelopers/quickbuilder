@@ -7,8 +7,9 @@ import htmlToDraft from 'html-to-draftjs';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { toolbarOptions } from './helpers';
 import { withLabel } from '../core/hooks';
+import type { EditorProps } from '../types';
 
-const Editor = (props) => {
+const Editor = (props: EditorProps) => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
     useEffect(() => {

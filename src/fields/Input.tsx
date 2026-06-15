@@ -3,7 +3,8 @@ import copy from "copy-to-clipboard";
 import React, { useCallback, useEffect, useState } from "react";
 import { withLabel } from "../core/hooks";
 import { validFieldProps } from "../core/utils";
-const Input = ( props ) => {
+import type { InputProps } from "../types";
+const Input = ( props: InputProps ) => {
 	const validProps = validFieldProps(props, [
 		"is_license_active",
 		"is_pro",

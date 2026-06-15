@@ -5,9 +5,10 @@ import { __ } from '@wordpress/i18n';
 import { GenericField } from '.';
 import { useBuilderContext, withLabel } from '../core/hooks';
 import { executeChange, isArray, sortingFields } from '../core/utils';
+import type { GroupProps } from '../types';
 
 
-const Group = (props) => {
+const Group = (props: GroupProps) => {
     const { name: fieldName, fields, ...rest } = props;
 
     if (!fields || !isArray(fields) || fields.length === 0) {

@@ -1936,16 +1936,18 @@ var withProps = function withProps(WrappedComponent) {
 };
 
 var Action = function Action(props) {
+  var _props$action;
   return /*#__PURE__*/jsx(Fragment, {
-    children: applyFilters(props.action, '', props)
+    children: applyFilters((_props$action = props.action) !== null && _props$action !== void 0 ? _props$action : '', '', props)
   });
 };
 
 function ownKeys$m(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$m(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$m(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$m(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Button$1 = function Button(props) {
-  var _props$text, _props$text2, _props$text3;
-  if (!(props !== null && props !== void 0 && props.text) && (props === null || props === void 0 ? void 0 : props.group) !== true) {
+  var ajax = props.ajax;
+  var text = props.text;
+  if (!text && (props === null || props === void 0 ? void 0 : props.group) !== true) {
     throw new Error(__("Button has a required params #text.", "betterdocs"));
   }
   var validProps = validFieldProps(props, ["is_pro", "visible", "disable", "parentIndex", "context", "onBlur", "value", "ajax", "text"]);
@@ -1954,10 +1956,9 @@ var Button$1 = function Button(props) {
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
   var handleClick = function handleClick(event) {
-    if (props !== null && props !== void 0 && props.ajax) {
+    if (ajax) {
       setIsLoading(true);
-      hitAAJX(props.ajax, props.context).then(function (res) {
-        var _props$ajax, _props$ajax5;
+      hitAAJX(ajax, props.context).then(function (res) {
         setIsLoading(false);
         if ((res === null || res === void 0 ? void 0 : res.status) == "error") {
           throw new Error(res === null || res === void 0 ? void 0 : res.message);
@@ -1969,25 +1970,24 @@ var Button$1 = function Button(props) {
             value: true
           }
         });
-        if (!((_props$ajax = props.ajax) !== null && _props$ajax !== void 0 && _props$ajax.hideSwal)) {
-          var _props$ajax2, _props$ajax3, _props$ajax4;
-          var type = ((_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 || (_props$ajax2 = _props$ajax2.swal) === null || _props$ajax2 === void 0 ? void 0 : _props$ajax2.icon) || "success";
-          var message = ((_props$ajax3 = props.ajax) === null || _props$ajax3 === void 0 || (_props$ajax3 = _props$ajax3.swal) === null || _props$ajax3 === void 0 ? void 0 : _props$ajax3.text) || "Complete";
+        if (!(ajax !== null && ajax !== void 0 && ajax.hideSwal)) {
+          var _ajax$swal, _ajax$swal2, _ajax$swal3;
+          var type = (ajax === null || ajax === void 0 || (_ajax$swal = ajax.swal) === null || _ajax$swal === void 0 ? void 0 : _ajax$swal.icon) || "success";
+          var message = (ajax === null || ajax === void 0 || (_ajax$swal2 = ajax.swal) === null || _ajax$swal2 === void 0 ? void 0 : _ajax$swal2.text) || "Complete";
           props.context.alerts.toast(type, message, {
-            autoClose: (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.swal) === null || _props$ajax4 === void 0 ? void 0 : _props$ajax4.autoClose
+            autoClose: ajax === null || ajax === void 0 || (_ajax$swal3 = ajax.swal) === null || _ajax$swal3 === void 0 ? void 0 : _ajax$swal3.autoClose
           });
         }
-        if ((_props$ajax5 = props.ajax) !== null && _props$ajax5 !== void 0 && _props$ajax5.reload) {
-          if (typeof props.ajax.reload === "boolean" && props.ajax.reload) {
+        if (ajax !== null && ajax !== void 0 && ajax.reload) {
+          if (typeof ajax.reload === "boolean" && ajax.reload) {
             setTimeout(function () {
               return window.location.reload();
             }, 1000);
-          } else if (typeof props.ajax.reload === "string") {
-            window.location.href = props.ajax.reload;
+          } else if (typeof ajax.reload === "string") {
+            window.location.href = ajax.reload;
           }
         }
       })["catch"](function (err) {
-        var _props$ajax6;
         console.error("Error In Button Called", props.name, err);
         setIsLoading(false);
         //TODO: need to be fixed.
@@ -1998,7 +1998,7 @@ var Button$1 = function Button(props) {
             value: false
           }
         });
-        if (!((_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && _props$ajax6.hideSwal)) {
+        if (!(ajax !== null && ajax !== void 0 && ajax.hideSwal)) {
           props.context.alerts.toast("error", (err === null || err === void 0 ? void 0 : err.message) || __("Something went wrong.", "betterdocs"));
         }
       });
@@ -2010,11 +2010,12 @@ var Button$1 = function Button(props) {
       href: (props === null || props === void 0 ? void 0 : props.href) === -1 ? props === null || props === void 0 ? void 0 : props.value : props === null || props === void 0 ? void 0 : props.href,
       target: props === null || props === void 0 ? void 0 : props.target,
       className: classNames("wprf-control wprf-button wprf-href-btn", props === null || props === void 0 ? void 0 : props.classes),
-      children: props === null || props === void 0 ? void 0 : props.text
+      children: text
     });
   }
   if (props !== null && props !== void 0 && props.group) {
-    var allFields = props.fields.map(function (item, index) {
+    var _props$fields;
+    var allFields = ((_props$fields = props.fields) !== null && _props$fields !== void 0 ? _props$fields : []).map(function (item, index) {
       var parentIndex = [].concat(_toConsumableArray(props.parentIndex), ["fields", index]);
       return /*#__PURE__*/jsx(Field, _objectSpread$m(_objectSpread$m({}, item), {}, {
         parentIndex: parentIndex
@@ -2031,7 +2032,7 @@ var Button$1 = function Button(props) {
       disabled: isLoading,
       onClick: handleClick,
       className: classNames("wprf-control wprf-button wprf-btn", props === null || props === void 0 ? void 0 : props.classes),
-      children: isObject(props === null || props === void 0 ? void 0 : props.text) && props !== null && props !== void 0 && props.ajax ? isLoading ? props === null || props === void 0 || (_props$text = props.text) === null || _props$text === void 0 ? void 0 : _props$text.loading : props.value ? props === null || props === void 0 || (_props$text2 = props.text) === null || _props$text2 === void 0 ? void 0 : _props$text2.saved : props === null || props === void 0 || (_props$text3 = props.text) === null || _props$text3 === void 0 ? void 0 : _props$text3.normal : props === null || props === void 0 ? void 0 : props.text
+      children: isObject(text) && ajax ? isLoading ? text === null || text === void 0 ? void 0 : text.loading : props.value ? text === null || text === void 0 ? void 0 : text.saved : text === null || text === void 0 ? void 0 : text.normal : text
     }))
   });
 };
@@ -2067,22 +2068,23 @@ var CheckboxSelect$1 = function CheckboxSelect(props) {
     isAjaxComplete = _useState6[0];
     _useState6[1];
   var handleMenuOpen = function handleMenuOpen() {
+    var ajax = props.ajax;
     // AJAX
-    if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
+    if (ajax && (!ajax.rules || when(ajax.rules, builderContext.values))) {
       setIsLoading(true);
       var data = {};
-      Object.keys(props === null || props === void 0 ? void 0 : props.ajax.data).map(function (singleData) {
-        if ((props === null || props === void 0 ? void 0 : props.ajax.data[singleData].indexOf("@")) > -1) {
+      Object.keys(ajax.data).map(function (singleData) {
+        if (ajax.data[singleData].indexOf("@") > -1) {
           var _builderContext$value;
-          var eligibleKey = props === null || props === void 0 ? void 0 : props.ajax.data[singleData].substr(1);
+          var eligibleKey = ajax.data[singleData].substr(1);
           data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];
         } else {
-          data[singleData] = props === null || props === void 0 ? void 0 : props.ajax.data[singleData];
+          data[singleData] = ajax.data[singleData];
         }
       });
       if (!isAjaxComplete) {
         return wpFetch({
-          path: props === null || props === void 0 ? void 0 : props.ajax.api,
+          path: ajax.api,
           data: data
         }).then(function (response) {
           setIsLoading(false);
@@ -2422,7 +2424,8 @@ var CopyToClipboard$1 = function CopyToClipboard(props) {
     });
   };
   var handleDescriptionCopy = function handleDescriptionCopy() {
-    copy(props.description, {
+    var _props$description;
+    copy((_props$description = props.description) !== null && _props$description !== void 0 ? _props$description : '', {
       format: "text/plain",
       onCopy: function onCopy() {
         setIsDescriptionCopied(true);
@@ -3469,7 +3472,8 @@ function ownKeys$a(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymb
 function _objectSpread$a(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$a(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$a(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var Repeater = function Repeater(props) {
   var _builderContext$value, _builderContext$value4;
-  var fieldName = props.name;
+  var _props$name = props.name,
+    fieldName = _props$name === void 0 ? '' : _props$name;
     props.value;
     var button = props.button,
     fields = props.fields;
@@ -8073,6 +8077,7 @@ function addQueryArgs(url = '', args) {
 
 function ownKeys$6(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread$6(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$6(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$6(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+// Custom Option Component with Tooltip
 var CustomOption = function CustomOption(props) {
   var data = props.data,
     innerRef = props.innerRef,
@@ -8150,13 +8155,14 @@ var Select = function Select(props) {
     isAjaxComplete = _useState6[0];
     _useState6[1];
   var handleMenuOpen = function handleMenuOpen() {
+    var ajax = props.ajax;
     // AJAX
-    if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
+    if (ajax && (!ajax.rules || when(ajax.rules, builderContext.values))) {
       setIsLoading(true);
       var data = {};
-      Object.keys(props === null || props === void 0 ? void 0 : props.ajax.data).map(function (singleData) {
-        if ((props === null || props === void 0 ? void 0 : props.ajax.data[singleData].indexOf('@')) > -1) {
-          var eligibleKey = props === null || props === void 0 ? void 0 : props.ajax.data[singleData].substr(1);
+      Object.keys(ajax.data).map(function (singleData) {
+        if (ajax.data[singleData].indexOf('@') > -1) {
+          var eligibleKey = ajax.data[singleData].substr(1);
           eligibleKey = eligibleKey.includes('.') ? eligibleKey.split('.') : eligibleKey;
           if (Array.isArray(eligibleKey)) {
             var repeaterDatas = index != undefined ? builderContext.values[eligibleKey[0]][index] : builderContext.values[eligibleKey[0]];
@@ -8177,29 +8183,28 @@ var Select = function Select(props) {
             data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];
           }
         } else {
-          data[singleData] = props === null || props === void 0 ? void 0 : props.ajax.data[singleData];
+          data[singleData] = ajax.data[singleData];
         }
       });
       if (!isAjaxComplete) {
-        var _props$ajax;
         var payload = {
-          path: props === null || props === void 0 ? void 0 : props.ajax.api,
+          path: ajax.api,
           data: data,
           method: "POST"
         };
-        if ((props === null || props === void 0 || (_props$ajax = props.ajax) === null || _props$ajax === void 0 ? void 0 : _props$ajax.method) == 'GET') {
+        if ((ajax === null || ajax === void 0 ? void 0 : ajax.method) == 'GET') {
           payload.method = 'GET';
           delete payload.data;
           payload.path = addQueryArgs(payload.path, data);
         }
         return wpFetch(payload).then(function (response) {
-          var _Object$keys, _props$ajax2;
+          var _Object$keys;
           var options = [];
-          if (((_Object$keys = Object.keys(props === null || props === void 0 || (_props$ajax2 = props.ajax) === null || _props$ajax2 === void 0 ? void 0 : _props$ajax2.response_mapper)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0) {
+          if (((_Object$keys = Object.keys(ajax === null || ajax === void 0 ? void 0 : ajax.response_mapper)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0) {
             response === null || response === void 0 || response.map(function (data) {
-              var _props$ajax3, _props$ajax4, _props$ajax5, _props$ajax6, _props$ajax7, _props$ajax8;
-              var keyLabel = props !== null && props !== void 0 && (_props$ajax3 = props.ajax) !== null && _props$ajax3 !== void 0 && (_props$ajax3 = _props$ajax3.response_mapper) !== null && _props$ajax3 !== void 0 && (_props$ajax3 = _props$ajax3.label) !== null && _props$ajax3 !== void 0 && _props$ajax3.includes('.') ? props === null || props === void 0 || (_props$ajax4 = props.ajax) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.response_mapper) === null || _props$ajax4 === void 0 || (_props$ajax4 = _props$ajax4.label) === null || _props$ajax4 === void 0 ? void 0 : _props$ajax4.split('.') : props === null || props === void 0 || (_props$ajax5 = props.ajax) === null || _props$ajax5 === void 0 || (_props$ajax5 = _props$ajax5.response_mapper) === null || _props$ajax5 === void 0 ? void 0 : _props$ajax5.label;
-              var keyValue = props !== null && props !== void 0 && (_props$ajax6 = props.ajax) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.response_mapper) !== null && _props$ajax6 !== void 0 && (_props$ajax6 = _props$ajax6.value) !== null && _props$ajax6 !== void 0 && _props$ajax6.includes('.') ? props === null || props === void 0 || (_props$ajax7 = props.ajax) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.response_mapper) === null || _props$ajax7 === void 0 || (_props$ajax7 = _props$ajax7.value) === null || _props$ajax7 === void 0 ? void 0 : _props$ajax7.split('.') : props === null || props === void 0 || (_props$ajax8 = props.ajax) === null || _props$ajax8 === void 0 || (_props$ajax8 = _props$ajax8.response_mapper) === null || _props$ajax8 === void 0 ? void 0 : _props$ajax8.value;
+              var _ajax$response_mapper, _ajax$response_mapper2, _ajax$response_mapper3, _ajax$response_mapper4, _ajax$response_mapper5, _ajax$response_mapper6;
+              var keyLabel = ajax !== null && ajax !== void 0 && (_ajax$response_mapper = ajax.response_mapper) !== null && _ajax$response_mapper !== void 0 && (_ajax$response_mapper = _ajax$response_mapper.label) !== null && _ajax$response_mapper !== void 0 && _ajax$response_mapper.includes('.') ? ajax === null || ajax === void 0 || (_ajax$response_mapper2 = ajax.response_mapper) === null || _ajax$response_mapper2 === void 0 || (_ajax$response_mapper2 = _ajax$response_mapper2.label) === null || _ajax$response_mapper2 === void 0 ? void 0 : _ajax$response_mapper2.split('.') : ajax === null || ajax === void 0 || (_ajax$response_mapper3 = ajax.response_mapper) === null || _ajax$response_mapper3 === void 0 ? void 0 : _ajax$response_mapper3.label;
+              var keyValue = ajax !== null && ajax !== void 0 && (_ajax$response_mapper4 = ajax.response_mapper) !== null && _ajax$response_mapper4 !== void 0 && (_ajax$response_mapper4 = _ajax$response_mapper4.value) !== null && _ajax$response_mapper4 !== void 0 && _ajax$response_mapper4.includes('.') ? ajax === null || ajax === void 0 || (_ajax$response_mapper5 = ajax.response_mapper) === null || _ajax$response_mapper5 === void 0 || (_ajax$response_mapper5 = _ajax$response_mapper5.value) === null || _ajax$response_mapper5 === void 0 ? void 0 : _ajax$response_mapper5.split('.') : ajax === null || ajax === void 0 || (_ajax$response_mapper6 = ajax.response_mapper) === null || _ajax$response_mapper6 === void 0 ? void 0 : _ajax$response_mapper6.value;
               var option = {};
               if (Array.isArray(keyLabel)) {
                 option['label'] = decodeEntities(removeTagsFromString(getDeepData(data, keyLabel)));
@@ -8370,8 +8375,9 @@ var SelectAsync = function SelectAsync(props) {
   // const [lastRequest, setLastRequest] = useState("");
 
   var _handleMenuOpen = function handleMenuOpen(inputValue, callback) {
+    var ajax = props.ajax;
     // AJAX
-    if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
+    if (ajax && (!ajax.rules || when(ajax.rules, builderContext.values))) {
       var _Object$keys;
       if (!inputValue) {
         callback(options);
@@ -8388,13 +8394,13 @@ var SelectAsync = function SelectAsync(props) {
       var data = {
         inputValue: inputValue
       };
-      (_Object$keys = Object.keys(props.ajax.data)) === null || _Object$keys === void 0 || _Object$keys.map(function (singleData) {
-        if (props.ajax.data[singleData].indexOf("@") > -1) {
+      (_Object$keys = Object.keys(ajax.data)) === null || _Object$keys === void 0 || _Object$keys.map(function (singleData) {
+        if (ajax.data[singleData].indexOf("@") > -1) {
           var _builderContext$value;
-          var eligibleKey = props.ajax.data[singleData].substr(1);
+          var eligibleKey = ajax.data[singleData].substr(1);
           data[singleData] = (_builderContext$value = builderContext.values) === null || _builderContext$value === void 0 ? void 0 : _builderContext$value[eligibleKey];
         } else {
-          data[singleData] = props.ajax.data[singleData];
+          data[singleData] = ajax.data[singleData];
         }
       });
       if (!isAjaxRunning && inputValue) {
@@ -8402,7 +8408,7 @@ var SelectAsync = function SelectAsync(props) {
         // @ts-ignore
         window.lastRequest = null;
         return wpFetch({
-          path: props.ajax.api,
+          path: ajax.api,
           data: data
         }).then(function (response) {
           callback(response);
@@ -8929,25 +8935,24 @@ function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbol
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), true).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 registerStore("formbuilder", store);
 var FormBuilder = function FormBuilder(props) {
-  var _tabs;
+  var _props$tabs, _props$config;
   var builderContext = useBuilderContext();
-  var tabs = props.tabs;
-  if (!((_tabs = tabs) !== null && _tabs !== void 0 && _tabs.type)) {
-    var _props$config;
-    tabs = _objectSpread(_objectSpread({}, props.config), {}, {
-      value: props === null || props === void 0 || (_props$config = props.config) === null || _props$config === void 0 ? void 0 : _props$config.active,
-      fields: props.tabs,
-      tabs: undefined,
-      submit: props === null || props === void 0 ? void 0 : props.submit,
-      onChange: function onChange(event) {
-        var _event$target;
-        builderContext.setActiveTab(event === null || event === void 0 || (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.value);
-      }
-    });
-  }
-  return /*#__PURE__*/jsx(Fragment, {
-    children: /*#__PURE__*/jsx(Tab, _objectSpread({}, tabs))
+
+  // Accept either a ready-made tab config (it already carries `type`), or a
+  // bare list of tab fields plus builder config that we assemble into one.
+  var tabs = (_props$tabs = props.tabs) !== null && _props$tabs !== void 0 && _props$tabs.type ? props.tabs : _objectSpread(_objectSpread({}, props.config), {}, {
+    type: "tab",
+    parentIndex: [],
+    value: props === null || props === void 0 || (_props$config = props.config) === null || _props$config === void 0 ? void 0 : _props$config.active,
+    fields: props.tabs,
+    tabs: undefined,
+    submit: props === null || props === void 0 ? void 0 : props.submit,
+    onChange: function onChange(event) {
+      var _event$target;
+      return builderContext.setActiveTab(event === null || event === void 0 || (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.value);
+    }
   });
+  return /*#__PURE__*/jsx(Tab, _objectSpread({}, tabs));
 };
 
 export { Action, BuilderConsumer, BuilderProvider, Button, CheckboxSelect, CodeViewer, ColorPicker, Column, CopyToClipboard, Date$1 as Date, Editor, Field, FormBuilder, GenericField, GenericInput, Group_default as Group, Image, Input_default as Input, JsonUploader_default as JsonUploader, Label, Media_default as Media, Message, Modal, ObjectFilter, RadioCard as Radio, Repeater, ResponsiveNumber_default as ResponsiveNumber, Row, Section_default as Section, Select_default as Select, SelectAsync_default as SelectAsync, Slider, SweetAlert, Textarea_default as Textarea, Toggle, _extends$1 as _extends, builderReducer, executeChange, getDeepData, getIn, getSelectedValues, getStoreData, getTime, hitAAJX, insertDefaultRepeaterValues, isArray, isEmptyObj, isExists, isFunction, isNumber, isObject, isString, isVisible, merge, objectWithoutPropertiesLoose, processAjaxData, removeTagsFromString, _replaceIndex as replaceIndex, setIn, setStoreData, sortingFields, triggerDefaults, useBuilder, useBuilderContext, useDefaults, useOptions, validFieldProps, valueExists, when, withLabel, withProps, withState, wpFetch };

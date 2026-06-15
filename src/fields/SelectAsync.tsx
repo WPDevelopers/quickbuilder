@@ -5,8 +5,9 @@ import { when } from "../core";
 import { useBuilderContext, withLabel } from "../core/hooks";
 import { wpFetch } from "../core/utils";
 import { __ } from "@wordpress/i18n";
+import type { SelectAsyncProps } from "../types";
 
-const SelectAsync = (props) => {
+const SelectAsync = (props: SelectAsyncProps) => {
 	const builderContext = useBuilderContext();
 	let { id, name, multiple, placeholder, onChange, parentIndex } = props;
 
@@ -19,8 +20,9 @@ const SelectAsync = (props) => {
 		inputValue: string,
 		callback: (options: any[]) => void
 	) => {
+		const ajax: any = (props as any).ajax;
 		// AJAX
-		if (props.ajax && (!props.ajax.rules || when(props.ajax.rules, builderContext.values))) {
+		if (ajax && (!ajax.rules || when(ajax.rules, builderContext.values))) {
 			if (!inputValue) {
 				callback(options);
 				return;
@@ -37,12 +39,12 @@ const SelectAsync = (props) => {
 			}
 
 			let data = { inputValue };
-			Object.keys(props.ajax.data)?.map((singleData) => {
-				if (props.ajax.data[singleData].indexOf("@") > -1) {
-					let eligibleKey = props.ajax.data[singleData].substr(1);
+			Object.keys(ajax.data)?.map((singleData) => {
+				if (ajax.data[singleData].indexOf("@") > -1) {
+					let eligibleKey = ajax.data[singleData].substr(1);
 					data[singleData] = builderContext.values?.[eligibleKey];
 				} else {
-					data[singleData] = props.ajax.data[singleData];
+					data[singleData] = ajax.data[singleData];
 				}
 			});
 
@@ -51,7 +53,7 @@ const SelectAsync = (props) => {
 				// @ts-ignore
 				window.lastRequest = null;
 				return wpFetch({
-					path: props.ajax.api,
+					path: ajax.api,
 					data: data,
 				})
 					.then((response: any) => {

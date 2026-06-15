@@ -1,7 +1,8 @@
 import { _extends } from "./functions";
 import { setIn } from "./utils";
+import type { BuilderAction } from "./types";
 
-export const builderReducer = (state: any, action: any) => {
+export const builderReducer = (state: any, action: BuilderAction) => {
     switch (action.type) {
         case 'SET_CONTEXT':
             return _extends({}, state, setIn(state, action.payload.field, action.payload.value));

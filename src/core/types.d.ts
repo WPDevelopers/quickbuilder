@@ -140,12 +140,13 @@ export interface FieldInputProps<Value> {
 /**
  * The builder context value consumed via `useBuilderContext`.
  *
- * Kept as `any` until refactor Phase 4: typing it requires its consumers (the
- * field components and hooks) to be typed first — otherwise their currently
- * untyped usage regresses the typecheck baseline. The intended target is
- * `FormBuilderState<Values> & BuilderHandlers & BuilderHelper<Values>`.
+ * Types the form-state slice (`values`, `errors`, `touched`, `isSubmitting`).
+ * The many imperative members the builder attaches (`setFieldValue`,
+ * `setFormField`, `alerts`, `tabs`, `config`, …) stay open via the index
+ * signature — they are genuinely dynamic and accessed loosely throughout.
  */
-export type FormBuilderContextType<Values = FormBuilderValues> = any;
+export type FormBuilderContextType<Values = FormBuilderValues> =
+    FormBuilderState<Values> & Record<string, any>;
 
 /**
  * Discriminated union of all actions handled by `builderReducer`. Wired into the
@@ -160,6 +161,7 @@ export type BuilderAction =
     | { type: 'SET_FIELD_VALUE'; payload: { field: string | Array<string | number>; value: any } }
     | { type: 'SET_TOUCHED'; payload: any }
     | { type: 'SET_ERRORS'; payload: any }
+    | { type: 'SET_FIELD_ERROR'; payload: { field: string; value: any } }
     | { type: 'SET_STATUS'; payload: any }
     | { type: 'SET_ISSUBMITTING'; payload: boolean }
     | { type: 'SET_ISVALIDATING'; payload: boolean }

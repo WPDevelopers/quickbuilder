@@ -14,8 +14,16 @@ Use pnpm. **Node 24+ is required** (`engines: node >=24`, pinned in `.nvmrc`; `.
 - `pnpm start` — development build in watch mode
 - `pnpm build` — full build: dev + minified production outputs (run this before shipping)
 - `pnpm lint` — ESLint over `index.tsx` and `src/` (@wordpress/eslint-plugin; many pre-existing violations remain — don't fix unrelated ones)
+- `pnpm typecheck` — `tsc --noEmit` type gate (currently **0 errors — keep it green**); `pnpm typecheck:strict` enforces `noImplicitAny`/`noUnusedLocals` on `src/types/**`
 
-There is no test suite. Verify changes by running `pnpm build`, then linking the package into a consuming WordPress plugin and testing in a WordPress install.
+There is no unit-test suite. Run `pnpm typecheck` for types, then `pnpm build` and link the package into a consuming WordPress plugin to verify runtime behavior in a WordPress install.
+
+## Documentation
+
+Developer docs live in [`docs/`](./docs/README.md): architecture, a field-authoring
+guide, the per-field reference, and a custom-field extension guide. The field/config
+types live in `src/types/` (`FieldConfig` discriminated union, per-component `*Props`).
+Planning docs are under `docs/plans/`.
 
 ## Shipping a change — dist/ is committed
 
@@ -23,7 +31,7 @@ Consumers install this package from the GitHub repo, not npm. `dist/` is therefo
 
 ## Build externals gotcha
 
-Rollup marks React, ReactDOM, lodash, and all `@wordpress/*` packages as externals — consumers provide them (as `wp.*` / window globals in WordPress). Never bundle these. If you add a dependency that consumers should provide, add it to the externals/globals in `rollup.config.js` AND to `peerDependencies`. React is pinned to 17.x.
+Rollup marks React, ReactDOM, lodash, and all `@wordpress/*` packages as externals — consumers provide them (as `wp.*` / window globals in WordPress). Never bundle these. If you add a dependency that consumers should provide, add it to the externals/globals in `rollup.config.js` AND to `peerDependencies`. React is pinned to 18.x (the version current WordPress ships).
 
 ## Conventions
 

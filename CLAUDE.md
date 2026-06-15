@@ -38,3 +38,8 @@ Rollup marks React, ReactDOM, lodash, and all `@wordpress/*` packages as externa
 - Commit subjects use Title Case prefixes: `Fix:`, `Added:`, `Improved:` (see git log)
 - PRs target `master`
 - Tabs for indentation in `.ts`/`.tsx`/`.js`/`.jsx`; spaces in JSON/YAML (per `.editorconfig`)
+
+
+## Remember
+
+- Don't commit to git until I say

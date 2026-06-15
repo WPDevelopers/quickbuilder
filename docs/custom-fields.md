@@ -88,6 +88,54 @@ const fields: AnyFieldConfig[] = [
 For strict checking of a single custom field, annotate it with your own config
 interface (e.g. `RatingFieldConfig`) directly.
 
+## Real-world example (betterdocs)
+
+The betterdocs plugin registers several custom field types this way — e.g.
+`better-repeater`, `embed_model_select`, `github-repo-settings`, `html`,
+`importerupload`, `min_token_number`, `permalink_structure`, `settingsuploader`,
+`title`. Each is typed in the **consumer** (betterdocs), not in quickbuilder core:
+
+```ts
+import type { CustomFieldConfig } from 'quickbuilder';
+
+export interface BetterRepeaterFieldConfig extends CustomFieldConfig {
+  type: 'better-repeater';
+  _fields: AnyFieldConfig[];
+  visible_fields?: string[];
+  empty_rules_message?: string;
+  placeholder_img?: string;
+}
+```
+
+Then type the settings tree with `AnyFieldConfig[]` (or a union that includes
+your custom interfaces) so built-in and custom fields coexist.
+
+## Deriving the property pattern from a real config
+
+To type a field set accurately, derive the property pattern from an actual
+config rather than guessing. Extract the per-type property keys with `jq`, then
+confirm each against the component source before adding it to an interface:
+
+```bash
+# distinct field types in a config
+jq '[.. | objects | select(has("type")) | .type] | unique' config.json
+
+# union of property keys per field type
+jq '[.. | objects | select(has("type"))] | group_by(.type)
+    | map({type: .[0].type, props: ([.[] | keys[]] | unique)})' config.json
+
+# is a prop actually read by a component? (genuine vs dead config data)
+grep -rl "label_subtitle" src/
+```
+
+Add genuine props (read by source) to the per-type interface; leave dead/legacy
+keys to `BaseFieldConfig`'s tolerant index signature.
+
+> **Storage vs runtime shape.** Some hosts persist `fields`/`tabs` as **keyed
+> objects** (PHP associative arrays → JSON objects, e.g. `{ "tab-general": {…} }`).
+> The builder consumes **arrays** (it maps/sorts them), so convert keyed storage
+> with `Object.values(...)` before passing it to `FormBuilder`.
+
 ## Reusing built-in field types
 
 You don't need a custom component to reuse a built-in control inside your own

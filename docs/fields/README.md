@@ -3,7 +3,9 @@
 Every built-in field type, its `type` value(s), the config interface, and the
 **type-specific** props it adds on top of the shared
 [`BaseFieldConfig`](../field-authoring-guide.md#shared-properties-basefieldconfig)
-(`name`, `label`, `default`, `rules`, `validation_rules`, `is_pro`, …).
+(`name`, `label`, `label_subtitle`, `default`, `rules`, `validation_rules`, `is_pro`, …).
+`BaseFieldConfig` also tolerates extra/legacy props (real configs carry props no
+component reads), so unknown keys don't error.
 
 All interfaces are importable from the package root, e.g.
 `import type { SelectFieldConfig } from 'quickbuilder'`.
@@ -38,10 +40,13 @@ All interfaces are importable from the package root, e.g.
 
 | Prop | Type | Notes |
 |---|---|---|
-| `options` | `FieldOption[]` | Static choices. |
+| `options` | `FieldOptions` | Static choices (array **or** keyed object). |
 | `multiple` | `boolean` | Multi-select. |
 | `search` | `boolean` | Searchable. |
 | `ajax` | `AjaxConfig` | Async option loading. |
+| `include_all_in_options` | `boolean` | Prepend an "All" option. |
+| `show_selected_values` | `boolean` | Render selected values inline. |
+| `filterValue` | `any` | Pre-filter options by another field's value. |
 
 ```ts
 { type: 'select', name: 'src', label: 'Source', multiple: true,
@@ -52,43 +57,43 @@ All interfaces are importable from the package root, e.g.
 `type: 'checkbox'` · `options?`, `multiple?` — single checkbox or a group.
 
 ### Checkbox select — `CheckboxSelectFieldConfig`
-`type: 'checkbox-select'` · `options?`, `multiple?`, `ajax?`
+`type: 'checkbox-select'` · `options?`, `multiple?`, `search?`, `ajax?`, `filterValue?`
 
 ### Async select — `SelectAsyncFieldConfig`
 `type: 'select-async'` · `ajax?`, `options?`, `multiple?` — react-select async loader.
 
 ### Radio cards — `RadioCardFieldConfig`
-`type: 'radio-card'` · `options?: FieldOption[]` — card-style single choice.
+`type: 'radio-card'` · `options?`, `multiple?`, `search?`, `filterValue?` — card-style choice.
 Options may carry `icon`, `column`, and per-option `rules`.
 
 ### Toggle — `ToggleFieldConfig`
-`type: 'toggle'` · `options?`, `default?: boolean`
+`type: 'toggle'` · `options?`, `disabled?`, `enable_disable_text_active?`
 
 ## Rich / specialized
 
 ### Slider — `SliderFieldConfig`
-`type: 'slider'` · `min` / `max` / `step` / `default: number` — WP `RangeControl`.
+`type: 'slider'` · `min` / `max` / `step` — WP `RangeControl`.
 
 ### Date — `DateFieldConfig`
-`type: 'date'` · `default?: string` — date/datetime picker.
+`type: 'date'` — date/datetime picker.
 
 ### Color picker — `ColorPickerFieldConfig`
-`type: 'colorpicker'` · `reset_text?: string`, `default?: string`.
+`type: 'colorpicker'` · `reset_text?: string`.
 
 ### Editor — `EditorFieldConfig`
-`type: 'editor'` · `default?: string` — Draft.js rich-text editor (HTML value).
+`type: 'editor'` — Draft.js rich-text editor (HTML value).
 
 ### Media — `MediaFieldConfig`
-`type: 'media'` · `multiple?: boolean` — WordPress media uploader.
+`type: 'media'` · `multiple?: boolean`, `value?` — WordPress media uploader.
 
 ### JSON uploader — `JsonUploaderFieldConfig`
-`type: 'json-uploader'` — upload/parse a JSON file.
+`type: 'jsonuploader'` — upload/parse a JSON file.
 
 ### Code viewer — `CodeViewerFieldConfig`
-`type: 'code-viewer'` — read-only code block with copy.
+`type: 'codeviewer'` · `code?`, `copyOnClick?`, `readOnly?` — read-only code block with copy.
 
 ### Copy to clipboard — `CopyToClipboardFieldConfig`
-`type: 'copy-to-clipboard'` — copy utility.
+`type: 'copy-to-clipboard'` · `readOnly?`, `descriptionLabel?`, `descriptionCopyable?` — copy utility.
 
 ### Message — `MessageFieldConfig`
 `type: 'message'` — static informational text.
@@ -102,24 +107,27 @@ Options may carry `icon`, `column`, and per-option `rules`.
 |---|---|---|
 | `text` | `string \| { normal?; saved?; … }` | Label (object form for AJAX states). |
 | `ajax` | `AjaxConfig` | Run a request on click. |
-| `href` / `target` | `string` / `string` | Render as a link. |
-| `fields` | `FieldConfig[]` | Button group. |
+| `href` / `target` | `string \| number` / `string` | Render as a link. |
+| `fields` | `AnyFieldConfig[]` | Button group. |
 
 ### Action — `ActionFieldConfig`
-`type: 'action'` — defers to a WordPress filter (no UI of its own).
+`type: 'action'` · `action?`, `url?`, `button?` — defers to a WordPress filter.
 
 ### Modal — `ModalFieldConfig`
 `type: 'modal'` · `fields?: FieldConfig[]` — dialog containing fields.
 
 ## Containers (nest `fields`)
 
+Containers nest `fields: AnyFieldConfig[]` so both built-in **and** custom field
+types can be nested. Note: some hosts (e.g. betterdocs) store `fields`/`tabs` as
+**keyed objects** in their saved data (PHP associative arrays) — convert those to
+arrays (`Object.values`) before passing to the builder, which renders/sorts arrays.
+
 ### Group — `GroupFieldConfig`
-`type: 'group'` · `fields: FieldConfig[]`, `display?: 'inline' | 'block'` —
-stored as a flat object under the group's `name`.
+`type: 'group'` · `fields`, `display?: 'inline' | 'block'` — stored as a flat object.
 
 ### Repeater — `RepeaterFieldConfig`
-`type: 'repeater'` · `fields: FieldConfig[]`, `button?: { label?: string }` —
-stored as an **array of objects**.
+`type: 'repeater'` · `fields`, `button?: { label?: string }` — stored as an **array of objects**.
 
 ```ts
 { type: 'repeater', name: 'items', button: { label: 'Add' },
@@ -127,10 +135,12 @@ stored as an **array of objects**.
 ```
 
 ### Section — `SectionFieldConfig`
-`type: 'section'` · `fields: FieldConfig[]`, `collapsed?: boolean` — collapsible group.
+`type: 'section'` · `fields`, `id?`, `collapsed?`, `searchable?`, `searchPlaceholder?`,
+`searchNotFoundMessage?`, `showSubmit?`, `submit?`, `save?` — collapsible group.
 
 ### Tab — `TabFieldConfig`
-`type: 'tab'` · `fields: FieldConfig[]`, `icon?: string` — a single tab.
+`type: 'tab'` · `fields`, `id?`, `icon?`, `title?`, `active?`, `config?`, `step?`,
+`submit?`, `sidebar?`, `completionTrack?`, `save?` — a single tab.
 
 ---
 

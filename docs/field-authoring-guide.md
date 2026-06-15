@@ -35,6 +35,7 @@ Every field type supports these (all optional except `type`):
 | `type` | `FieldType` | **Required.** The field type discriminator. |
 | `name` | `string` | Field identifier and key in `values`. |
 | `label` | `string` | Rendered label. |
+| `label_subtitle` | `string` | Secondary label/subtitle next to the label. |
 | `default` | `any` | Initial value when none is saved. |
 | `placeholder` | `string` | Placeholder (falls back to `label`). |
 | `description` / `help` | `string` | Helper text (help may contain HTML). |
@@ -64,7 +65,15 @@ Static options are `FieldOption[]`:
 ```
 
 `FieldOption` supports `label`, `value`, and optional `rules`, `is_pro`,
-`column`, `icon`, `tooltip`.
+`column`, `icon`, `tooltip`. Options may also be supplied as a **keyed object**
+(`{ "0": { label, value }, … }`) — the `FieldOptions` type accepts either form,
+since real configs use both.
+
+> **Tolerant by design.** `BaseFieldConfig` carries an index signature, so a
+> field config may include extra props beyond those documented (real configs
+> carry legacy/host-specific keys). Known props still autocomplete; unknown keys
+> are accepted, not flagged. Annotate a field with its specific `*FieldConfig`
+> for the strictest checks.
 
 ## Async options (AJAX)
 

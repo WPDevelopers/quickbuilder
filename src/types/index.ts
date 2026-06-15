@@ -5,3 +5,4 @@
 export * from './primitives';
 export * from './field-config';
 export * from './field-props';
+export * from './field-values';

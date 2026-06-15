@@ -178,3 +178,40 @@ const fields: AnyFieldConfig[] = [
 ```
 
 See [Custom Fields](./custom-fields.md) for registering the component.
+
+## Typing the form values
+
+Beyond the config schema, the saved **values** map can be typed too (instead of
+`any`). The value shapes per field type are exported:
+
+| Field types | Value type |
+|---|---|
+| text / textarea / editor / colorpicker / date / codeviewer | `string` (`TextValue`) |
+| number / range / slider | `number \| string` (`NumberValue`) |
+| toggle / single checkbox | `boolean` (`BooleanValue`) |
+| select / radio / radio-card | `string \| number` (`OptionValue`) |
+| multi-select / checkbox-select | `Array<string \| number>` (`MultiOptionValue`) |
+| media | id / url / object (`MediaValue`) |
+| repeater | `Array<Record<string, any>>` (`RepeaterValue`) |
+| group | `Record<string, any>` (`GroupValue`) |
+
+- `FieldValueOf<'select'>` — looks up the value type for a field type.
+- `ConfigValue<SelectFieldConfig>` — the value type for a config.
+- `FormValues` — a tolerant `{ [name]: FieldValue }` map.
+
+For full precision, author a values interface and pass it to the builder hooks:
+
+```ts
+import { useBuilderContext } from 'quickbuilder';
+
+interface DocsSettings {
+  docs_slug: string;          // text
+  multiple_kb: boolean;       // toggle
+  supported_heading_tag: string[];  // checkbox-select
+}
+
+const ctx = useBuilderContext<DocsSettings>();
+ctx.values.docs_slug;        // string
+ctx.values.multiple_kb;      // boolean
+```
+
